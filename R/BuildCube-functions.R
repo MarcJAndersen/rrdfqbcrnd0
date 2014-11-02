@@ -2,11 +2,11 @@
 ##' .. content for \description{} (no empty lines) ..
 ##'
 ##' .. content for \details{} ..
-##' @title 
-##' @param s 
-##' @param strict 
-##' @return 
-##' @author ResultMetaData@Phuse
+##' @title Capitalize string for use in rdfs definitons (not good version)
+##' @param s
+##' @param strict
+##' @return s capitalized
+##' @author Result MetaData Team
 
 capitalize <- function(s, strict = FALSE) {
 # suggested R online help /library/base/html/chartr.html
@@ -30,7 +30,7 @@ ph.recode<- function( s, l ) {
     'CODING ERROR- no decode value'
   }
 }
-  
+
 
 
 buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName)
@@ -49,18 +49,18 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
   }
   if (codeType=="SDTM")
   {
-    query = paste0(' prefix : <http://rdf.cdisc.org/sdtm-terminology#> 
-      prefix cts:   <http://rdf.cdisc.org/ct/schema#> 
+    query = paste0(' prefix : <http://rdf.cdisc.org/sdtm-terminology#>
+      prefix cts:   <http://rdf.cdisc.org/ct/schema#>
 		  prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
-		  prefix mms:   <http://rdf.cdisc.org/mms#> 
+		  prefix mms:   <http://rdf.cdisc.org/mms#>
 		  select ?nciDomain ?cdiscDefinition ?code ?cdiscSynonyms ?nciCode
-             ?nciPreferredTerm 
+             ?nciPreferredTerm
   		where
-		  { 
+		  {
          ?nciDomain mms:inValueDomain :', nciDomainValue, '  .
        	 ?nciDomain cts:cdiscDefinition      ?cdiscDefinition .
     		 ?nciDomain cts:cdiscSubmissionValue ?code .
-         OPTIONAL 
+         OPTIONAL
          {
             ?nciDomain cts:cdiscSynonyms        ?cdiscSynonyms .
          }
@@ -68,8 +68,8 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
          ?nciDomain cts:nciPreferredTerm     ?nciPreferredTerm
 		  }'
       )
-      
-    codeSource = as.data.frame(sparql.remote(endpoint, query)) 
+
+    codeSource = as.data.frame(sparql.remote(endpoint, query))
   }
 #  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
   for (i in 1:nrow(codeSource)) {   codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"])) }
@@ -77,79 +77,79 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
   #############################################################################
   # SKELETON
   # --------- Class ---------
-  add.triple(store, 
+  add.triple(store,
              paste0(prefixlist$prefixCODE, capDimName),
-             paste0(prefixlist$prefixRDF,"type" ), 
+             paste0(prefixlist$prefixRDF,"type" ),
              paste0(prefixlist$prefixOWL, "Class"))
-  add.triple(store, 
+  add.triple(store,
              paste0(prefixlist$prefixCODE, capDimName),
-             paste0(prefixlist$prefixRDF,"type" ), 
+             paste0(prefixlist$prefixRDF,"type" ),
              paste0(prefixlist$prefixRDFS, "Class"))
-  add.triple(store, 
+  add.triple(store,
              paste0(prefixlist$prefixCODE, capDimName),
-             paste0(prefixlist$prefixRDFS, "subClassOf"), 
+             paste0(prefixlist$prefixRDFS, "subClassOf"),
              paste0(prefixlist$prefixSKOS, "Concept"))
   # Cross reference between the Class (capDimName) and the codelist (dimName)
-  add.triple(store, 
+  add.triple(store,
              paste0(prefixlist$prefixCODE, capDimName),
-             paste0(prefixlist$prefixRDFS, "seeAlso"), 
+             paste0(prefixlist$prefixRDFS, "seeAlso"),
              paste0(prefixlist$prefixCODE, dimName))
-  add.data.triple(store, 
+  add.data.triple(store,
                   paste0(prefixlist$prefixCODE, capDimName),
                   paste0(prefixlist$prefixRDFS,"label"),
                   paste0("Class for code list: ", dimName),
                   lang="en")
-  add.data.triple(store, 
+  add.data.triple(store,
                   paste0(prefixlist$prefixCODE, capDimName),
                   paste0(prefixlist$prefixRDFS,"comment"),
                   paste0("Specifies the ", dimName, " for each observation"),
                   lang="en")
 
    # --------- ConceptScheme ---------
-   add.triple(store, 
+   add.triple(store,
               paste0(prefixlist$prefixCODE,dimName),
-              paste0(prefixlist$prefixRDF,"type" ), 
+              paste0(prefixlist$prefixRDF,"type" ),
               paste0(prefixlist$prefixSKOS, "ConceptScheme"))
-   add.data.triple(store, 
+   add.data.triple(store,
                    paste0(prefixlist$prefixCODE,dimName),
                    paste0(prefixlist$prefixSKOS,"prefLabel"),
                    paste0("Codelist scheme: ", dimName),
                    lang="en")
-   add.data.triple(store, 
+   add.data.triple(store,
                    paste0(prefixlist$prefixCODE,dimName),
                    paste0(prefixlist$prefixRDFS,"label"),
                    paste0("Codelist scheme: ", dimName),
                    lang="en")
-   add.data.triple(store, 
+   add.data.triple(store,
                    paste0(prefixlist$prefixCODE,dimName),
                    paste0(prefixlist$prefixSKOS,"note"),
                    paste0("Specifies the ", dimName, " for each observation, group of obs. or all categories (_ALL_)label "),
                    lang="en")
    # skos:notation is uppercase by convention. Eg: CL_SEX, CL_RACE
-   add.data.triple(store, 
+   add.data.triple(store,
                    paste0(prefixlist$prefixCODE,dimName),
                    paste0(prefixlist$prefixSKOS,"notation"),
                    paste0("CL_",toupper(dimName)))
 
-  # --------- hasTopConcept ---------  
+  # --------- hasTopConcept ---------
   # For each unique code
   for (i in 1:nrow(codeSource))
   {
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixCODE,dimName),
                paste0(prefixlist$prefixSKOS, "hasTopConcept"),
                paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]))
   }
   # _ALL_  - topConcept for SUM of non-missing values.
-  #        Example: race-_ALL_,  sex-_ALL_ etc.   
+  #        Example: race-_ALL_,  sex-_ALL_ etc.
   #        Cross reference: _ALL_ below for each code value
-  # TODO: Create function that creates _ALL_ based on either presence in data 
-  #       or function parameter. 
-  #       It is merely concidental that the Terminology values in the current 
+  # TODO: Create function that creates _ALL_ based on either presence in data
+  #       or function parameter.
+  #       It is merely concidental that the Terminology values in the current
   #       example both have _ALL_ .  This logic MUST change.
   if (codeType=="SDTM")
   {
-    add.triple(store, 
+    add.triple(store,
               paste0(prefixlist$prefixCODE,dimName),
               paste0(prefixlist$prefixSKOS, "hasTopConcept"),
               paste0(prefixlist$prefixCODE,dimName,"-_ALL_"))
@@ -158,23 +158,23 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
   # Code values
   for (i in 1:nrow(codeSource))
   {
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixSKOS, "Concept"))
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixCODE, capDimName))
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                paste0(prefixlist$prefixSKOS,"topConceptOf"),
                paste0(prefixlist$prefixCODE, dimName))
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                paste0(prefixlist$prefixSKOS,"inScheme"),
                paste0(prefixlist$prefixCODE, dimName))
-    add.data.triple(store, 
+    add.data.triple(store,
                       paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
                     paste0(codeSource[i,"code"]))
@@ -183,9 +183,9 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
     #   against other sources.
     if (codeType=="DATA")
     {
-       add.data.triple(store, 
+       add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                    paste0(prefixlist$prefixRDFS, "comment"), 
+                    paste0(prefixlist$prefixRDFS, "comment"),
                     "Coded values from data source. No reconciliation against another source",
                     lang="en")
     }
@@ -193,61 +193,61 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
     #  Additional triples availble from the SDTM Terminology file.
     if (codeType=="SDTM")
     {
-      add.data.triple(store, 
+      add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                     paste0(prefixlist$prefixCTS,"cdiscSynonyms"),
                     paste0(codeSource[i,"cdiscSynonyms"]))
-   
+
       # Remove the prefix colon to specify the value directly (without prefix)
       nciDomain<-gsub(":","",codeSource[i,"nciDomain"])
-            
+
       # ?  MMS may be incorrect here. How refer back to sdtm-terminology?
-      add.data.triple(store, 
+      add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                     paste0(prefixlist$prefixMMS,"nciDomain"),
                     paste(nciDomain))
-     add.data.triple(store, 
+     add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                     paste0(prefixlist$prefixSKOS,"prefLabel"),
                     paste0(codeSource[i,"code"]))
-     add.data.triple(store, 
+     add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                     paste0(prefixlist$prefixCTS,"cdiscDefinition"),
                     paste0(codeSource[i,"cdiscDefinition"]))
-   
-     add.data.triple(store, 
+
+     add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                     paste0(prefixlist$prefixCTS,"cdiscSubmissionValue"),
                     paste0(codeSource[i,"code"]))
-     # _ALL_  
-     #   Cross reference:  _ALL_ creation for TopConcept. 
-     # TODO: Create function that creates _ALL_ based on either presence in data 
-     #       or function parameter. 
-     #       It is merely concidental that the Terminology values in the current 
+     # _ALL_
+     #   Cross reference:  _ALL_ creation for TopConcept.
+     # TODO: Create function that creates _ALL_ based on either presence in data
+     #       or function parameter.
+     #       It is merely concidental that the Terminology values in the current
      #       example both have _ALL_ .  This logic MUST change.
-      add.triple(store, 
+      add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
-                 paste0(prefixlist$prefixRDF,"type" ), 
+                 paste0(prefixlist$prefixRDF,"type" ),
                  paste0(prefixlist$prefixSKOS,"Concept"))
-      add.triple(store, 
+      add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
-                 paste0(prefixlist$prefixRDF,"type" ), 
+                 paste0(prefixlist$prefixRDF,"type" ),
                  paste0(prefixlist$prefixCODE, capDimName))
-     add.triple(store, 
+     add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                  paste0(prefixlist$prefixSKOS,"topConceptOf"),
                  paste0(prefixlist$prefixCODE, dimName))
-      add.data.triple(store, 
+      add.data.triple(store,
                       paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
                       "_ALL_")
-      add.triple(store, 
+      add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                  paste0(prefixlist$prefixSKOS,"inScheme"),
                  paste0(prefixlist$prefixCODE, dimName))
-      add.data.triple(store, 
+      add.data.triple(store,
                       paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
-                      paste0(prefixlist$prefixRDFS, "comment"), 
+                      paste0(prefixlist$prefixRDFS, "comment"),
                       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values.",
                      lang="en")
     }
@@ -258,9 +258,9 @@ qb.addprefix<- function(prefixSource) {
 for (i in 1:nrow(prefixSource))
 {
   tempName <-paste0("prefix",toupper(prefixSource[i,"prefix"]))
-  assign(tempName,as.character(prefixSource[i,"namespace"]), envir=globalenv()) # MJA 2014-10-13 
-  # Use as.character to get the enquoting needed by the function 
-  add.prefix(store,as.character(prefixSource[i,"prefix"]), 
+  assign(tempName,as.character(prefixSource[i,"namespace"]), envir=globalenv()) # MJA 2014-10-13
+  # Use as.character to get the enquoting needed by the function
+  add.prefix(store,as.character(prefixSource[i,"prefix"]),
              as.character(prefixSource[i,"namespace"]))
 }
 invisible(TRUE)
@@ -275,8 +275,8 @@ for (i in 1:nrow(prefixSource))
   pl[[ paste0("prefix",toupper(prefixSource[i,"prefix"])) ]] <-
       as.character(prefixSource[i,"namespace"])
 
-  # Use as.character to get the enquoting needed by the function 
-  add.prefix(store, as.character(prefixSource[i,"prefix"]), 
+  # Use as.character to get the enquoting needed by the function
+  add.prefix(store, as.character(prefixSource[i,"prefix"]),
                     as.character(prefixSource[i,"namespace"]))
 }
 return(pl)
@@ -295,98 +295,98 @@ for (i in 1:nrow(skeletonSource))
   #------------------  Dimensions ---------------------------------------------
   if (component == "dimension")
   {
-    # Class name is the compName with an uppercase first letter. 
+    # Class name is the compName with an uppercase first letter.
     compNameClass <- capitalize(toString(skeletonSource[i,"compName"]))
     ##DEBUG message ("Building: Dimension")
-    #  Example: prop:trt01a a qb:DimensionProperty    
-    add.triple(store, 
+    #  Example: prop:trt01a a qb:DimensionProperty
+    add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "DimensionProperty"))
 
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
-    
+
     # Label for property. Example:   rdfs:label "Treatment Arm"@en .
-    add.data.triple(store, 
-                    paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]), 
+    add.data.triple(store,
+                    paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
-    
+
     # CODELIST triples for when codelist is present. Currently hardcoded for race,sex
-    
+
     ##DEBUG message ("DEBUG: Skeleton compName:",skeletonSource[i,"compName"] )
-    
+
     # qb:codeList and range to  dimensions. If some dimensions do not have codelists
     # then invoke IF logic as per earlier development code when only sex and race
     # had codelists.
     #if (skeletonSource[i,"compName"] %in% c("sex", "race"))
-    #{ 
-    
+    #{
+
     # Add qb:codelist and rdfs:range
-      add.triple(store, 
-                 paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]), 
+      add.triple(store,
+                 paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                  paste0(prefixlist$prefixQB, "codeList"),
                 paste0(prefixlist$prefixCODE,skeletonSource[i,"compName"]))
-            
-      add.triple(store, 
-                      paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]), 
+
+      add.triple(store,
+                      paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                       "http://www.w3.org/2000/01/rdf-schema#range",
                       paste0(prefixlist$prefixCODE,compNameClass))
     #}
     # qb:ComponentSpecification
     #     Example: dccs:trt01a a qb:ComponentSpecification ;
     #                          qb:dimension prop:trt01a .
-    add.triple(store, 
-               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]), 
-               paste0(prefixlist$prefixRDF,"type" ), 
+    add.triple(store,
+               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "ComponentSpecification"))
-    add.triple(store, 
-               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]), 
-               paste0(prefixlist$prefixQB, "dimension"), 
+    add.triple(store,
+               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
+               paste0(prefixlist$prefixQB, "dimension"),
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]))
-    
-    add.data.triple(store, 
-               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]), 
+
+    add.data.triple(store,
+               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                "http://www.w3.org/2000/01/rdf-schema#label",
                paste0(skeletonSource[i,"compLabel"]))
-  } 
+  }
   #------------------  Measure ------------------------------------------------
   else if (component =="measure")
   {
     ##DEBUG message ("Building: Measure")
     # Property
-    #  Example: prop:trt01a a qb:DimensionProperty    
-    add.triple(store, 
+    #  Example: prop:trt01a a qb:DimensionProperty
+    add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "MeasureProperty"))
-    
-    add.triple(store, 
+
+    add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
-    # Label for property 
+    # Label for property
     # Example: prop:measure a qb:MeasureProperty ;
     #                      rdfs:label "Value of the statistical measure"@en .
-    add.data.triple(store, 
+    add.data.triple(store,
                     paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
     # ComponentSpecification
-    add.triple(store, 
-               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]), 
-               paste0(prefixlist$prefixRDF,"type" ), 
+    add.triple(store,
+               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "ComponentSpecification"))
-    
-    add.triple(store, 
-               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]), 
-               paste0(prefixlist$prefixQB, "measure"), 
+
+    add.triple(store,
+               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
+               paste0(prefixlist$prefixQB, "measure"),
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]))
-    
-    add.data.triple(store, 
+
+    add.data.triple(store,
                     paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
@@ -396,28 +396,28 @@ for (i in 1:nrow(skeletonSource))
   {
     ##DEBUG message ("Building: Attribute")
     # Property
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "AttributeProperty") )
-    add.triple(store, 
+    add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
-               paste0(prefixlist$prefixRDF,"type" ), 
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
-    
-    # Label for property 
-    add.data.triple(store, 
-                    paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]), 
+
+    # Label for property
+    add.data.triple(store,
+                    paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
     # ComponentSpecification
-    add.triple(store, 
-               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]), 
-               paste0(prefixlist$prefixRDF,"type" ), 
+    add.triple(store,
+               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "ComponentSpecification"))
-    add.triple(store, 
-               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]), 
-               paste0(prefixlist$prefixQB, "attribute"), 
+    add.triple(store,
+               paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
+               paste0(prefixlist$prefixQB, "attribute"),
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]))
   }
   else
@@ -450,30 +450,30 @@ providedBy="PhUSE Results Metadata Working Group"
 # For XSD format: add colon before minutes
 # ?needed MA issuedTime<-gsub("(\\d\\d)$", ":\\1",issuedTime)
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixPAV, "createdOn"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "createdOn"),
                 PAVnode$createdOn,
                 "dateTime")
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixPAV, "createdBy"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "createdBy"),
                 PAVnode$createdBy,
                 "string")
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixPAV, "version"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "version"),
                 pavVersion)
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "createdWith"),
                 PAVnodes$createdWith)
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "createdBy"),
                 PAVnodes$createdBy,
                 "string"  )
@@ -496,31 +496,31 @@ title="Demographics Analysis Results"
 ) {
 # -------------  DSD Component ------------------------------------------------
 # Loop through to create the dsd component for each dimension, measure, attribute
-# Written as a separate loop to keep the dsd more concise in the output file 
-# Example triple:  ds:dsd-demog qb:component dccs:race 
-add.triple(store, 
-           paste0(prefixlist$prefixDS, dsdName), 
-           paste0(prefixlist$prefixRDF,"type" ), 
+# Written as a separate loop to keep the dsd more concise in the output file
+# Example triple:  ds:dsd-demog qb:component dccs:race
+add.triple(store,
+           paste0(prefixlist$prefixDS, dsdName),
+           paste0(prefixlist$prefixRDF,"type" ),
            paste0(prefixlist$prefixQB, "DataStructureDefinition"))
 
 for (i in 1:nrow(skeletonSource))
 {
   component <- skeletonSource[i,"compType"]
-  add.triple(store, 
-             paste0(prefixlist$prefixDS, dsdName), 
-             paste0(prefixlist$prefixQB, "component"), 
+  add.triple(store,
+             paste0(prefixlist$prefixDS, dsdName),
+             paste0(prefixlist$prefixQB, "component"),
              paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]))
-}  
+}
 #########################
 # qb:DataSet definition #
 ###############################################################################
 
-add.triple(store, 
-           paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-           paste0(prefixlist$prefixQB, "structure"), 
+add.triple(store,
+           paste0(prefixlist$prefixDS, dsdURIwoprefix),
+           paste0(prefixlist$prefixQB, "structure"),
            paste0(prefixlist$prefixDS, dsdName))
-add.triple(store, 
-           paste0(prefixlist$prefixDS, dsdURIwoprefix), 
+add.triple(store,
+           paste0(prefixlist$prefixDS, dsdURIwoprefix),
            paste0(prefixlist$prefixRDF,"type" ),
            paste0(prefixlist$prefixQB, "DataSet"))
 
@@ -529,35 +529,35 @@ add.triple(store,
 # have to solve how the prefix is included - when generating the list or by
 # resolving the prefixes in the list
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixDCT, "title"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixDCT, "title"),
                 extra$title,
                 "string")
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixDCT, "description"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixDCT, "description"),
                 extra$description,
                 lang="en")
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixRDFS, "comment"),
                 extra$comment,
                 lang="en")
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixRDFS, "label"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixRDFS, "label"),
                 extra$label,
                 lang="en")
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixDCAT, "distribution"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixDCAT, "distribution"),
                 extra$distribution)
 
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixPROV, "wasDerivedFrom"), 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPROV, "wasDerivedFrom"),
                 extra$obsfilename
                 )  # The source .CSV data file
 
@@ -575,7 +575,7 @@ buildCodelist(store,
               nciDomainValue=skeletonSource[i,"nciDomainValue"],
               dimName=skeletonSource[i,"compName"] )
 }
-  
+
 }
 
 }
@@ -588,34 +588,34 @@ colnames(obsData) <- tolower(colnames(obsData))  # Convert column names to lower
 for (i in 1:nrow(obsData))
 {
   obsNum <- paste0("obs",i) # consider this being the rownames
-  
-  add.triple(store, 
-             paste0(prefixlist$prefixDS, obsNum), 
-             paste0(prefixlist$prefixRDF,"type" ), 
+
+  add.triple(store,
+             paste0(prefixlist$prefixDS, obsNum),
+             paste0(prefixlist$prefixRDF,"type" ),
              paste0(prefixlist$prefixQB, "Observation"))
   # Tie dimension to dataset
-  add.triple(store, 
-             paste0(prefixlist$prefixDS, obsNum), 
-             paste0(prefixlist$prefixQB, "dataSet"), 
+  add.triple(store,
+             paste0(prefixlist$prefixDS, obsNum),
+             paste0(prefixlist$prefixQB, "dataSet"),
              paste0(prefixlist$prefixDS, dsdURIwoprefix))  #TODO : CHange to declared var
   # Label
-  add.data.triple(store, 
+  add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixRDFS, "label"), 
+                   paste0(prefixlist$prefixRDFS, "label"),
                    paste0(i))
 
 for (qbdim in skeletonSource[ skeletonSource$compType=="dimension", "compName" ]) {
 #   print(paste0("qbdim :   ", qbdim))
 #   print(paste0("recode.list[[qbdim]]: ", names(recode.list[[qbdim]]), "=", recode.list[[qbdim]]))
-  
+
   vCoded <-  ph.recode( obsData[i,qbdim], recode.list[[qbdim]] )
   # b. Create coded triple
-  add.triple(store, 
+  add.triple(store,
                 paste0(prefixlist$prefixDS, obsNum),
-                paste0(prefixlist$prefixPROP, qbdim), 
+                paste0(prefixlist$prefixPROP, qbdim),
                 paste0(prefixlist$prefixCODE,vCoded))
 }
-    
+
 
 
   #--------------- Measure ----------------------------------------------------
@@ -624,20 +624,20 @@ for (qbdim in skeletonSource[ skeletonSource$compType=="dimension", "compName" ]
   procedure <- paste0(obsData[i,"procedure"])
   xsdFormat= procedure2format[[ procedure ]]
 
-   add.data.triple(store, 
+   add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixPROP, "measure"), 
+                   paste0(prefixlist$prefixPROP, "measure"),
                    paste0(obsData[i,"measure"]),
                    xsdFormat)
    #--------------- Attributes -------------------------------------------------
-   add.data.triple(store, 
+   add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixPROP, "unit"), 
+                   paste0(prefixlist$prefixPROP, "unit"),
                    paste0(obsData[i,"unit"]),
                    "string")
-   add.data.triple(store, 
+   add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixPROP, "denominator"), 
+                   paste0(prefixlist$prefixPROP, "denominator"),
                    paste0(obsData[i,"denominator"]))
 }
 
