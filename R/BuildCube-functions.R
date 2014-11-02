@@ -6,7 +6,7 @@
 ##' @param s 
 ##' @param strict 
 ##' @return 
-##' @author Marc Andersen
+##' @author ResultMetaData@Phuse
 
 capitalize <- function(s, strict = FALSE) {
 # suggested R online help /library/base/html/chartr.html
