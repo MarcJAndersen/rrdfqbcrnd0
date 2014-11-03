@@ -158,6 +158,7 @@ DMoutcube = save.rdf(storeDM, filename=DMdataCubeFile, format="TURTLE")
 
 Now look at the cube. Note: by specifying prefix the output contains is shown using the prefixes.
 Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.
+
 ```{r, echo=FALSE, results='asis'}
 
 checkDM = new.rdf(ontology=FALSE)  # Initialize

@@ -9,8 +9,54 @@ Marc Andersen
 
 Introduction
 ------------
+
+You will need to install some packages for developmen
+
+```
+install.packages(c("devtools", "roxygen2", "testthat", "knitr"))
+```
+
+
+
+To install the package use
+
+```
+library(devtools)
+install_github("rrdfqbcrnd0", "MarcJAndersen", subdir="rrdfqbcrnd0")
+```
+
+For example of usage look in the vignettes directory.
+
+Developing
+----------
+
+Here are the commands I use for developing (see also ggplot2 in references).
+
+```r
+require(devtools)
+devtools::load_all()
+devtools::document()
+devtools::test()
+devtools::check()
+```
+
+Here is what I use while developing to populate directories with files:
+
+```
+devtools::use_testthat() 
+devtools::use_vignette("my-vignette")
+```
  
- 
+References, hints and acknowlegements
+-------------------------------------
+
+[R](http://www.r-project.org/)
+[Writing R Extensions](http://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+[R packages by Hadley Wickham, to be published with O'Reilly around June 2015]( http://r-pkgs.had.co.nz)
+[rrdf](https://github.com/egonw/rrdf)
+
+[Contributing to ggplot2 development](http://cran.r-project.org/web/packages/ggplot2/vignettes/development.html)
+
 History
 -------
  
