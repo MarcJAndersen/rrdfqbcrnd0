@@ -15,7 +15,7 @@ Introduction
 You will need to install some packages for developmen
 
 ```
-install.packages(c("devtools", "roxygen2", "testthat", "knitr"))
+install.packages(c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown"))
 ```
 
 
@@ -24,8 +24,12 @@ To install the package use
 
 ```
 library(devtools)
-install_github("rrdfqbcrnd0", "MarcJAndersen", subdir="rrdfqbcrnd0")
+install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= TRUE)
 ```
+
+Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
+
+For building the vignettes Fuseki endpoint serving CDISC rdf.cdisc.org and the rdf data cube must be running - see vignette for "Demograhics table from CSV file". This is not a good idea. Suggest changing endpoint to (http://www.datadriven.jp:3030/) or create local turtle file with CDISC rdf.cdisc.org and the rdf data cube definiton.
 
 For example of usage look in the vignettes directory.
 
@@ -40,6 +44,7 @@ devtools::load_all()
 devtools::document()
 devtools::test()
 devtools::check()
+devtools::install()
 ```
 
 Here is what I use while developing to populate directories with files:
