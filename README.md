@@ -58,8 +58,11 @@ References, hints and acknowlegements
 -------------------------------------
 
 [R](http://www.r-project.org/)
+
 [Writing R Extensions](http://cran.r-project.org/doc/manuals/r-release/R-exts.html)
+
 [R packages by Hadley Wickham, to be published with O'Reilly around June 2015]( http://r-pkgs.had.co.nz)
+
 [rrdf](https://github.com/egonw/rrdf)
 
 [Contributing to ggplot2 development](http://cran.r-project.org/web/packages/ggplot2/vignettes/development.html)
