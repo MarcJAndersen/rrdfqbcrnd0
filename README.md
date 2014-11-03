@@ -5,7 +5,7 @@ R code for presenting Analysis Results Model - work from a subgroup of FDA/PhUSE
 
 This is a private repository until I get comfortable with publishing code in the open :-)
 
-Please note: thinks like author, contributors etc are now not correct. Some place I have just filled in an author, most often using my own e-mail.
+Please note: fields like author, contributors etc are presently not correct. 
 
 Marc Andersen
 

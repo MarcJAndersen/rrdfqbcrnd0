@@ -1,6 +1,6 @@
 ---
 title: AE table from CSV file"
-author: "mja@statgroup.dk"
+author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
