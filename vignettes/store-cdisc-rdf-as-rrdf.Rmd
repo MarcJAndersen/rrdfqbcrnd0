@@ -1,0 +1,56 @@
+---
+title: "Store CDISC RDF as RRDF data model"
+author: "PhuseSubTeamAnalysisResults@example.org"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+
+## Prelimnaries
+write more here
+
+## Code
+
+Finding the files
+
+```
+find ~/projects/phrmwg-cdisc/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
+```
+
+```{r, results='asis', eval=FALSE}
+
+library (rrdf)
+
+cdisc_rdf = new.rdf(ontology=FALSE)
+cdisc_files_dir= "/home/ma/projects/phrmwg-cdisc/"
+
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/resources/w3.org/skos.rdf", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/resources/dublincore.org/dcam.rdf", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/resources/dublincore.org/dcelements.rdf", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/resources/dublincore.org/dcterms.rdf", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/terminology-2013-06-28/glossary-terminology.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/terminology-2013-06-28/cdash-terminology.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/terminology-2013-06-28/sdtm-terminology.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/terminology-2013-06-28/qs-terminology.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/terminology-2013-06-28/send-terminology.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/terminology-2013-06-28/adam-terminology.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/sdtm-1-2.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/all-standards.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/cdash-1-1.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/sdtmig-3-1-3.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/sdtmig-3-1-2.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/adamig-1-0.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/sendig-3-0.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/sdtm-1-3.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/std/adam-2-1.ttl", sep=""), format="TURTLE", appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/schemas/ct-schema.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/schemas/meta-model-schema.owl", sep=""), appendTo= cdisc_rdf )
+load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/schemas/cdisc-schema.owl", sep=""), appendTo= cdisc_rdf )
+
+cdisc_out = save.rdf(cdisc_rdf, filename="cdisc-rdf.ttl", format="TURTLE")
+
+```

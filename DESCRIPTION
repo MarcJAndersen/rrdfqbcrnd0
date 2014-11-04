@@ -7,7 +7,7 @@ Authors@R: c(
     person("Tim", "Williams", email="xx@xx.dk", role=c("aut", "cre") )
     )
 Description: Creates and operates on RDF Data cube using rdf.cdisc.org
-    definitins
+    definitions
 Depends:
     R (>= 3.1.1)
 Imports:

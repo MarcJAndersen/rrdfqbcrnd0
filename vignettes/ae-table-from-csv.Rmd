@@ -1,5 +1,5 @@
 ---
-title: AE table from CSV file"
+title: "AE table from CSV file"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
