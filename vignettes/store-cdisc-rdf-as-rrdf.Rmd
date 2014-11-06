@@ -16,7 +16,7 @@ write more here
 ## Code
 
 Finding the files replace directory for find with the appropriate directory for your setup.
-Also change below.
+Also change below in R code.
 
 ```
 find ~/projects/phrmwg-cdisc/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
