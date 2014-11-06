@@ -15,18 +15,23 @@ write more here
 
 ## Code
 
-Finding the files
+Finding the files replace directory for find with the appropriate directory for your setup.
+Also change below.
 
 ```
 find ~/projects/phrmwg-cdisc/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
 ```
 
-```{r, results='asis', eval=FALSE}
+```{r, results='asis', eval=TRUE}
 
 library (rrdf)
 
 cdisc_rdf = new.rdf(ontology=FALSE)
+# change as appropriate
 cdisc_files_dir= "/home/ma/projects/phrmwg-cdisc/"
+cdisc_files_dir= "/home/ma/projects/phrmwg/rdf-cdisc-org-store/"
+
+
 
 load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/resources/w3.org/skos.rdf", sep=""), appendTo= cdisc_rdf )
 load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/resources/dublincore.org/dcam.rdf", sep=""), appendTo= cdisc_rdf )
@@ -52,5 +57,7 @@ load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/schemas/meta-model-schema.owl", 
 load.rdf(paste0(cdisc_files_dir, "rdf.cdisc.org/schemas/cdisc-schema.owl", sep=""), appendTo= cdisc_rdf )
 
 cdisc_out = save.rdf(cdisc_rdf, filename="cdisc-rdf.ttl", format="TURTLE")
+
+print(summarize.rdf(cdisc_rdf))
 
 ```

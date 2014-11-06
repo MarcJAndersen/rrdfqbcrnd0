@@ -78,7 +78,8 @@ output$queryresult= renderTable(doquery(input$query,input$endpoint));
 ```
 
 Here it comes - the code should be enabled - but it hangs.
+Use eval=TRUE to get it run. Note that it looks like that it should run in a browser.
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 do_sparql("aa")
 ```
