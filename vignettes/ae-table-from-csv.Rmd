@@ -120,7 +120,9 @@ label="Adverse events results data set.",
 distribution=AEdataCubeFileName,
 obsfilename=AEobsFileName,
 title="Adverse Event Analysis Results"
- )            )
+ ),
+remote.endpoint=endpoint
+            )
 
 qb.buildObservations( store=storeAE, prefixlist=AEprefixlist, obsData=AEobsData, skeletonSource=AEskeletonSource, dsdURIwoprefix="dataset-ae", recode.list=AE.recode.list, procedure2format=procedure2format )
 

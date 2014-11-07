@@ -143,7 +143,9 @@ label="Demographics results data set.",
 distribution=DMdataCubeFileName,
 obsfilename=DMobsFileName,
 title="Demographics Analysis Results"
- )            )
+ ),
+remote.endpoint=endpoint
+            )
 
 qb.buildObservations( store=storeDM, prefixlist=DMprefixlist, obsData=DMobsData, skeletonSource=DMskeletonSource, dsdURIwoprefix="dataset-demog", recode.list=DMrecode.list, procedure2format=procedure2format )
 

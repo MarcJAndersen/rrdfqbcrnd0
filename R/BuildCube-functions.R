@@ -33,7 +33,7 @@ ph.recode<- function( s, l ) {
 
 
 
-buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName)
+buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, remote.endpoint)
 {
   dimName <- tolower(dimName)        # dimName in all lower case is default
   capDimName <- capitalize(dimName)  # capDim used in Class name
@@ -69,7 +69,7 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
 		  }'
       )
 
-    codeSource = as.data.frame(sparql.remote(endpoint, query))
+    codeSource = as.data.frame(sparql.remote(remote.endpoint, query))
   }
 #  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
   for (i in 1:nrow(codeSource)) {   codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"])) }
@@ -492,7 +492,8 @@ label="Demographics results data set.",
 distribution=dataCubeFileName,
 obsfilename="the name of the input file",
 title="Demographics Analysis Results"
- )
+ ),
+remote.endpoint="http://localhost:3030/cdisc/query"
 ) {
 # -------------  DSD Component ------------------------------------------------
 # Loop through to create the dsd component for each dimension, measure, attribute
@@ -573,7 +574,8 @@ buildCodelist(store,
               obsData,
               codeType=skeletonSource[i,"codeType"],
               nciDomainValue=skeletonSource[i,"nciDomainValue"],
-              dimName=skeletonSource[i,"compName"] )
+              dimName=skeletonSource[i,"compName"],
+              remote.endpoint=remote.endpoint)
 }
 
 }
