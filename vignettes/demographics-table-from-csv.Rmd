@@ -15,9 +15,12 @@ The present version uses Apache Fuseki to access CDISC in RDF from rdf.cdisc.org
 
 Here is how to make a local copy of the rdf.cdisc.org - with Bash Shell on Linux.
 
-```
-export CDISCRDF_HOME=~/projects/phrmwg-cdisc # change to suit your setup
-mkdir -p ${CDISCRDF_HOME}  # only if directory does not exist 
+
+```{r get-rdf-cdisc-org.sh, eval=FALSE, engine='bash'}
+echo change below to suit your setup
+export CDISCRDF_HOME=~/projects/phrmwg-cdisc 
+echo only if directory does not exist 
+mkdir -p ${CDISCRDF_HOME}  
 cd ${CDISCRDF_HOME}
 
 git clone https://github.com/phuse-org/rdf.cdisc.org.git
@@ -34,10 +37,48 @@ ${JENA_HOME}/bin/tdbloader2 --loc tdb rdf.cdisc.org/*/*.{ttl,owl} rdf-data-cube/
 ```
 
 Start fuseki pointing to the TDB store created - note the update option makes it possible to upload triples as, say, turtle files.
-```
+
+
+```{r start-fuseki.sh, eval=FALSE, engine='bash'}
 cd ${CDISCRDF_HOME}
 export FUSEKI_HOME=/opt/jena-fuseki-1.1.1
 ${FUSEKI_HOME}/fuseki-server --pages=${FUSEKI_HOME}/pages --update --loc=tdb /cdisc
+```
+
+### How to run from command prompt when developing
+
+Start in the package root directory
+
+Devtools should reply reply Loading rrdfqbcrnd0.
+
+The knit command should generate .md file in the present work directory - the package root directory
+
+
+```{r, eval=FALSE}
+require(devtools)
+devtools::load_all()
+
+require(knitr)
+knit("vignettes/demographics-table-from-csv.Rmd")
+```
+
+Generate the pdf file using the following command
+```{r makepdf.sh, eval=FALSE, engine='bash'}
+pandoc demographics-table-from-csv.md -o xx.pdf
+```
+
+The knitr::knit2html should generate a .html file in the present work directory - the package root directory
+
+Generating HTML works nicely
+```{r, eval=FALSE} 
+knitr::knit2html("vignettes/demographics-table-from-csv.Rmd")
+```
+
+The following does not work as the texi2dvi can not handle the dollar signs in the bash code above.
+I suppose some other options have to be given. The work around is to use pandoc on the .md file generated as mentioned above.
+
+```{r, eval=FALSE}
+knitr::knit2pdf("vignettes/demographics-table-from-csv.Rmd")
 ```
 
 ## Code
