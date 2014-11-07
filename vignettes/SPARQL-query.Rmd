@@ -77,9 +77,10 @@ output$queryresult= renderTable(doquery(input$query,input$endpoint));
 
 ```
 
-Here it comes - the code should be enabled - but it hangs.
+When creating vignettes the code hangs. Hence the code is disabled.
+
 Use eval=TRUE to get it to run. Note that it the shiny app does not respond, try to run it in a browser.
 
-```{r eval=TRUE}
+```{r eval=FALSE}
 do_sparql("aa")
 ```
