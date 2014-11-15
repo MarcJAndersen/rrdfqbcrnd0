@@ -39,6 +39,7 @@ Developing
 Here are the commands I use for developing (see also ggplot2 in references).
 
 ```r
+require(knitr)
 require(devtools)
 devtools::load_all()
 devtools::document()
@@ -47,11 +48,38 @@ devtools::check()
 devtools::install()
 ```
 
-Here is what I use while developing to populate directories with files:
+Here is what I use while developing.
+
+Creating vignettes
+##################
+
+The command below creates the vignette my-vignette.Rmd.
+
+```
+devtools::use_vignette("my-vignette")
+```
+ 
+Setup test directories
+######################
+
+The command below creates the test directories for the testhat environment.
 
 ```
 devtools::use_testthat() 
-devtools::use_vignette("my-vignette")
+```
+ 
+Setup data-raw directory
+########################
+
+The command below creates the data-raw directories for the reproducing the datasets environment.
+
+```
+devtools::use_data_raw() 
+```
+
+In a script to actually add a foo use:
+```
+devtools::use_data(foo) 
 ```
  
 References, hints and acknowlegements

@@ -80,6 +80,7 @@ cube.observations2= sparql.rdf(cubeData,
    );
 # print(cube.observations2)
 
+
 ## get the dimensions
 
 cube.dimensionsattr= sparql.rdf(cubeData,
@@ -468,3 +469,6 @@ cube.check
 check.dm.cube()
 
 check.ae.cube()
+
+```
+
