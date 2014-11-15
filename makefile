@@ -2,13 +2,16 @@ PACKAGENAME=rrdfqbcrnd0
 
 all: rbuildforce rcheck rbuild
 
+cleantempemacs:
+	rm -f .#* */.#*
+
 rbuildforce: 
 	cd ..; R CMD build --force ${PACKAGENAME}
 
-rcheck:
+rcheck: 
 	cd ..; R CMD check --as-cran ${PACKAGENAME}
 
-rbuild:
+rbuild: 
 	cd ..; R CMD build  ${PACKAGENAME}
 
 
