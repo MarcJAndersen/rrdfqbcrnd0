@@ -37,6 +37,8 @@ adDataSet=read.xport(fnadDataSet)
 
 
 require(rrdf)
+library(rrdfqbcrnd0)
+
 cubeData = new.rdf(ontology=FALSE)
 
 data(qbCDISCprefixes)
