@@ -21,8 +21,8 @@ create-r-data-contents: qbIClist
 
 qbIClist: data/qbIClist.rda
 
-data/qbIClist.rda: data-raw/create-qb-IC-dataset.Rmd
-	Rscript -e 'library(knitr);knit("data-raw/create-qb-IC-dataset.Rmd")'
+data/qbIClist.rda: inst/data-raw/create-qb-IC-dataset.Rmd
+	Rscript -e 'library(knitr);knit("inst/data-raw/create-qb-IC-dataset.Rmd")'
 
 
 # To start fuseki endpoint - should be a script. 
