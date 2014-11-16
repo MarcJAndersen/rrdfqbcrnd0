@@ -1,6 +1,6 @@
 ##' @title Capitalize string for use in rdfs definitions (not good version)
-##' @param s
-##' @param strict
+##' @param s input string
+##' @param strict if all character should be capitalized
 ##' @return s capitalized
 
 capitalize <- function(s, strict = FALSE) {
