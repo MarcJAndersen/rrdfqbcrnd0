@@ -111,16 +111,25 @@ if (! file.exists(specificprefixSourceFile) ) {
   stop( paste0("Expected file ", specificprefixSourceFile, " does not exist" ))
   }
 
+############
+# Prefixes #
+###############################################################################
+# Construct list to hold the prefix namespaces, using format:prefixPREFIXNAME with key .
+# Columns in source file: prefix,namespace
+# Vars. used  later in the construction of cube skeleton and cube obs.
+#   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
+#             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
 generalprefixSource = read.csv(generalprefixSourceFile) 
 specificprefixSource= read.csv(specificprefixSourceFile)
 prefixSource= rbind(generalprefixSource, specificprefixSource)
+
 
 DMskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-DM.csv", package="rrdfqbcrnd0")
 
 DMdsdName <- "dsd-demog"
 
 # Cube Observation data       
-DMobsFileName<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+DMobsFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
 
 
 # should maybe get that from some other data - eg. stored in the cube
@@ -167,15 +176,7 @@ DMdataCubeFile      <- paste0(dataDir,DMdataCubeFileName) # Full path to cube
   
 storeDM = new.rdf(ontology=FALSE)  # Initialize
 
-############
-# Prefixes #
-###############################################################################
-# Construct vars. to hold the prefix namespaces, using format:prefixPREFIXNAME.
-# Columns in source file: prefix,namespace
-# Vars. used  later in the construction of cube skeleton and cube obs.
-#   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
-#             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
-prefixSource = read.csv(prefixSourceFile) 
+# register prefixes
 DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
 
 ############
@@ -199,7 +200,7 @@ qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMskeletonSource,
 comment="Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a",
 label="Demographics results data set.",
 distribution=DMdataCubeFileName,
-obsfilename=DMobsFileName,
+obsfilename=DMobsFile,
 title="Demographics Analysis Results"
  ),
 remote.endpoint=endpoint
@@ -222,7 +223,7 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 ```{r, echo=FALSE, results='asis'}
 
 checkDM = new.rdf(ontology=FALSE)  # Initialize
-load.rdf("DC-Demog-R-V-0-5-2.TTL", format="TURTLE", appendTo= checkDM)
+load.rdf(DMdataCubeFile, format="TURTLE", appendTo= checkDM)
 summarize.rdf(checkDM)
 
 

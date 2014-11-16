@@ -176,7 +176,7 @@ qb.buildObservations( store=storeAE, prefixlist=AEprefixlist, obsData=AEobsData,
 # Output #
 ###############################################################################
 AEoutcube = save.rdf(storeAE, filename=AEdataCubeFile, format="TURTLE")
-print(paste0("Wrote file ", AEoutcube ))
+print(paste0("Wrote file ", AEoutcube, " to ", AEdataCubeFile ))
 
 ```
 
@@ -190,7 +190,7 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 ```{r, echo=FALSE, results='asis'}
 
 checkAE = new.rdf(ontology=FALSE)  # Initialize
-load.rdf("DC-AE-R-V-0-5-2.TTL", format="TURTLE", appendTo= checkAE)
+load.rdf( AEdataCubeFile, format="TURTLE", appendTo= checkAE)
 summarize.rdf(checkAE)
 
 
