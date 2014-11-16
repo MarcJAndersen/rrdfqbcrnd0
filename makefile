@@ -1,6 +1,6 @@
 PACKAGENAME=rrdfqbcrnd0
 
-all: rbuildforce rcheck rbuild
+all: qbIClist rbuildforce rcheck rbuild
 
 cleantempemacs:
 	rm -f .#* */.#*
@@ -13,6 +13,13 @@ rcheck:
 
 rbuild: 
 	cd ..; R CMD build  ${PACKAGENAME}
+
+create-r-data-contents: qbIClist
+
+qbIClist: data/qbIClist.rda
+
+data/qbIClist.rda: data-raw/create-qb-IC-dataset.Rmd
+	Rscript -e 'require(knitr);knit("data-raw/create-qb-IC-dataset.Rmd")'
 
 
 # To start fuseki endpoint - should be a script. 
