@@ -45,7 +45,7 @@ knitr::knit2html("vignettes/ae-table-from-csv.Rmd")
 ## Code
 
 
-```{r, results='asis', eval=TRUE}}
+```{r, results='asis', eval=TRUE}
 
 library (rrdf)
 library(rrdfqbcrnd0)
