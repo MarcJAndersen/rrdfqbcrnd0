@@ -48,7 +48,6 @@ knitr::knit2html("vignettes/ae-table-from-csv.Rmd")
 ```{r}
 
 library (rrdf)
-
 library(rrdfqbcrnd0)
 
 
@@ -56,27 +55,48 @@ library(rrdfqbcrnd0)
 endpoint<- "http://localhost:3030/cdisc/query"
 
 cubeVersion <- "0-5-2"  # For pav:Version (dot, notdash) and output file name
-# dataDir <- "C:/_Sandbox/r/semanticWeb/data/"  # Input and output files
-dataDir <- "./"  # Input and output files
-prefixSourceFile  <- paste0(dataDir,"CubePrefixes.csv")    
+
+# dataDir <- "."  # Directory for output files
+
+dataDir <- tempdir()  # Directory for output files
+
+
+generalprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package="rrdfqbcrnd0")
+if (! file.exists(generalprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", generalprefixSourceFile, " does not exist" ))
+  }
+specificprefixSourceFile<- system.file("extdata/sample-cfg", "AECubePrefixes.csv", package="rrdfqbcrnd0")
+if (! file.exists(specificprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", specificprefixSourceFile, " does not exist" ))
+  }
+
+generalprefixSource = read.csv(generalprefixSourceFile) 
+specificprefixSource= read.csv(specificprefixSourceFile)
+prefixSource= rbind(generalprefixSource, specificprefixSource)
+
+AEskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-AE.csv", package="rrdfqbcrnd0")
 
 AEdsdName <- "dsd-ae"
-AEskeletonSourceFile <- paste0(dataDir,"skeletonSource-AE.csv") 
 
 # Cube Observation data       
-AEobsFileName <-"ae.AR.csv" # Source of obs. Filename needed for cube metadata
-AEobsFile     <- paste0(dataDir,AEobsFileName)  # Full path to obs. file
+AEobsFileName<- system.file("extdata/sample-cfg", "ae.AR.csv", package="rrdfqbcrnd0")
+if (! file.exists(AEobsFileName) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", AEobsFileName, " does not exist" ))
+  }
 
 
 # These codelist could also go in a RDF codelists instead of CSV files
-AE.recode.aesoc.list<- read.csv(file="ae.aesoc.AR.csv")
+AE.recode.aesoc.list<- read.csv(file=system.file("extdata/sample-cfg", "ae.aesoc.AR.csv", package="rrdfqbcrnd0"))
 aesoc.list= list();
 for (i in 1:nrow(AE.recode.aesoc.list)) {
   aesoc.list[[ as.character(AE.recode.aesoc.list[i,1]) ]]=
        encodetouri( paste0("aesoc-",as.character(AE.recode.aesoc.list[i,2])) )
 }
 
-AE.recode.aedecod.list<- read.csv(file="ae.aedecod.AR.csv")
+AE.recode.aedecod.list<- read.csv(file=system.file("extdata/sample-cfg", "ae.aedecod.AR.csv", package="rrdfqbcrnd0"))
 aedecod.list= list();
 for (i in 1:nrow(AE.recode.aedecod.list)) {
   aedecod.list[[ as.character(AE.recode.aedecod.list[i,1]) ]]= encodetouri( paste0("aedecod-",as.character(AE.recode.aedecod.list[i,2])) )
@@ -127,13 +147,11 @@ AEdataCubeFile      <- paste0(dataDir,AEdataCubeFileName) # Full path to cube
   
 storeAE = new.rdf(ontology=FALSE)  # Initialize
 
-prefixSource = read.csv(prefixSourceFile) 
-
 AEprefixlist= qb.def.prefixlist(storeAE, prefixSource)
 
 AEskeletonSource = read.csv(AEskeletonSourceFile) 
 
-AEobsData = read.csv(AEobsFile) 
+AEobsData = read.csv(AEobsFileName) 
 names(AEobsData)= tolower(names(AEobsData))
 
 
@@ -158,11 +176,15 @@ qb.buildObservations( store=storeAE, prefixlist=AEprefixlist, obsData=AEobsData,
 # Output #
 ###############################################################################
 AEoutcube = save.rdf(storeAE, filename=AEdataCubeFile, format="TURTLE")
+print(paste0("Wrote file ", AEoutcube ))
 
 ```
 
 
-Now look at the cube. Note: by specifying prefix the output contains is shown using the prefixes.
+Now look at the cube. 
+
+Note: by specifying prefix the output is shown using the prefixes.
+
 Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.
 
 ```{r, echo=FALSE, results='asis'}
@@ -174,25 +196,14 @@ summarize.rdf(checkAE)
 
 ## ------------------------------------------------------------------------
 
-myprefixes= list(
- "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
- "skos"="http://www.w3.org/2004/02/skos/core#" ,
- "prov"="http://www.w3.org/ns/prov#" ,
- "rdfs"="http://www.w3.org/2000/01/rdf-schema#" ,
- "dcat"="http://www.w3.org/ns/dcat#" ,
- "owl"= "http://www.w3.org/2002/07/owl#" ,
- "xsd"= "http://www.w3.org/2001/XMLSchema#" ,
- "qb"=  "http://purl.org/linked-data/cube#" ,
- "pav"= "http://purl.org/pav" ,
- "dct"= "http://purl.org/dc/terms/" ,
- "mms"= "http://rdf.cdisc.org/mms#" ,
- "cts"= "http://rdf.cdisc.org/ct/schema#" ,
- "dccs"="http://www.example.org/dc/demog/dccs/" ,
+myprefixes= c( qbCDISCprefixes,
+  list(
+ "dccs"="http://www.example.org/dc/ae/dccs/" ,
  "code"="http://www.example.org/dc/code/" ,
- "ds"=  "http://www.example.org/dc/demog/dataset/" ,
- "prop"="http://www.example.org/dc/demog/prop/",
- "valid"="http://www.example.org/dc/demog/valid/"
-)  ;
+ "ds"=  "http://www.example.org/dc/ae/dataset/" ,
+ "prop"="http://www.example.org/dc/ae/prop/",
+ "valid"="http://www.example.org/dc/ae/valid/"
+)  )
 
 
 forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
