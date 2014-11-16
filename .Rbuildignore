@@ -4,3 +4,11 @@
 ^\.Rhistory$
 ^\.gitignore$
 ^\.#.*$
+^\vignettes/.#.*$
+^\.Rbuildignore~
+^\.Rhistory
+^\.gitignore
+^\R/.Rhistory
+^\vignettes/.Rhistory
+^\.git.*$
+
