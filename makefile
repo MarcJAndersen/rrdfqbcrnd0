@@ -15,7 +15,7 @@ rbuild:
 	cd ..; R CMD build  ${PACKAGENAME}
 
 createRD:
-	Rscript -e 'library(devtools); devtools::document()'
+	# does not work MJA 2014-11-16 Rscript -e 'library(devtools); devtools::document()'
 
 create-r-data-contents: qbIClist
 
