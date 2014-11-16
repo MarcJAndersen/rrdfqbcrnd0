@@ -17,7 +17,8 @@ LazyData: true
 Suggests:
     knitr,
     testthat,
-    foreign
+    foreign,
+    shiny
 VignetteBuilder: knitr
 Packaged: 2014-11-02 22:35:08 UTC; ma
 Author: Marc Andersen [aut, cre],
