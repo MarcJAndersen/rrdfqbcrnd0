@@ -1,10 +1,10 @@
 ---
-title: "SPARQL query"
+title: "SPARQL query using Shiny to build interface"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{SPARQL query}
+  %\VignetteIndexEntry{SPARQL query using Shiny to build interface}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
