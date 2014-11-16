@@ -1,15 +1,16 @@
 ##' Add RDF data cube codelist to RDF store
 ##'
 ##' This function could be split into two function corresponding to the usage.
-##' @param store The name for the \package{rrdf} store
+##' @param store The name for the rrdf store
 ##' @param prefixlist R list of the prefixes
 ##' @param obsData Data Frame with the data for which the code list is to be generated
-##' @param codeType Character "DATA" or "SDTM". "DATA" to derive code list from the data. "SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query
+##' @param codeType Character "DATA" or "SDTM".
+##' "DATA" to derive code list from the data.
+##' "SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query
 ##' @param nciDomainValue When codetype="DATA" the nciDomain used for identifying the codelist
 ##' @param dimName the name of the dimension - for codeType="DATA" the name of the variable in the data frame ObsData
 ##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint
 ##' @return Alway TRUE - to be corrected
-##' @examples
 ##' @author Tim Williams, Marc Andersen
 buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, remote.endpoint)
 {
