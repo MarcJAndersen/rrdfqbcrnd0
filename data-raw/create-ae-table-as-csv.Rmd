@@ -9,7 +9,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-# AE sample table as CSV file and other files
+# Create AE sample table as CSV file and other files
 
 This script creates the result and codelist for a simple AE table.
 
