@@ -8,8 +8,7 @@
 ##' @param dsdURIwoprefix 
 ##' @param recode.list A list of lists specifying how to recode the value in the data frame
 ##' @param procedure2format A list specifying the format for the descriptive statistics
-##' @return 
-##' @examples 
+##' @return Always TRUE
 qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix, recode.list, procedure2format ) {
 
 colnames(obsData) <- tolower(colnames(obsData))  # Convert column names to lowercase for later matching
@@ -70,4 +69,5 @@ for (qbdim in skeletonSource[ skeletonSource$compType=="dimension", "compName" ]
                    paste0(obsData[i,"denominator"]))
 }
 
+invisible(TRUE)
 }

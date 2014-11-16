@@ -4,7 +4,6 @@
 ##' @param store A rrdf store
 ##' @param prefixSource A data.frame with column prexi and namespace
 ##' @return The list with member names prefixUPPERCASEPREFIX and namespace as value
-##' @examples 
 qb.def.prefixlist<- function(store, prefixSource) {
 pl<- list();
 

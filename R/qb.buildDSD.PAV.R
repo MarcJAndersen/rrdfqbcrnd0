@@ -10,7 +10,6 @@
 ##' @param PAVnodes A list with member names createdOn, createdBy, pavVersion, createdWith, providedBy
 ##' @return Always TRUE
 ##' @author Tim Williams, Marc Andersen
-##' @examples 
 qb.buildDSD.PAV<- function(
 store, prefixlist,
 obsData,

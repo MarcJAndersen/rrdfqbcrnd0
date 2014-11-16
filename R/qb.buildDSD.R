@@ -10,7 +10,6 @@
 ##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title 
 ##' @param remote.endpoint 
 ##' @return Always TRUE
-##' @examples 
 qb.buildDSD<- function(store,
 prefixlist,
 obsData,

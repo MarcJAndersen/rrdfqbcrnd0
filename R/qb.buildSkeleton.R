@@ -8,7 +8,6 @@
 ##' @param obsData 
 ##' @param skeletonSource A data.frame with columns compType, compName, compLabel
 ##' @return always TRUE
-##' @examples 
 ##' @author Tim Williams, Marc Andersen
 qb.buildSkeleton<- function(store, prefixlist,obsData, skeletonSource) {
 # Loop through to create Property and Component specs
