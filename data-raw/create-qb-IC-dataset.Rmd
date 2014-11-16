@@ -70,6 +70,8 @@ knit runs the script in the data-raw directory, so it would be
 expected to use pkg=".." to store the qbIClist in the data directory
 However, it did not work - hence the setwd below-
 
+Data are stored in the data directory, following [R packages by Hadley Wickham](http://r-pkgs.had.co.nz/data.html) and [Writing R Extensions](http://cran.r-project.org/doc/manuals/R-exts.pdf).
+
 ```
 devtools::use_data(qbIClist,pgk="..",overwrite=TRUE)
 ```
