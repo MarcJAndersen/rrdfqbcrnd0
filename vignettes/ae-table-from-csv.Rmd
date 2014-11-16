@@ -23,10 +23,10 @@ The knit command should generate .md file in the present work directory - the pa
 
 
 ```{r, eval=FALSE}
-require(devtools)
+library(devtools)
 devtools::load_all()
 
-require(knitr)
+library(knitr)
 knit("vignettes/ae-table-from-csv.Rmd")
 ```
 

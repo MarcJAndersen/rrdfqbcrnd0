@@ -11,7 +11,7 @@ vignette: >
 
 ```{r, results='asis', eval=TRUE}
 
-require(rrdf)
+library(rrdf)
 library(rrdfqbcrnd0)
 
 cubeData = new.rdf(ontology=FALSE)

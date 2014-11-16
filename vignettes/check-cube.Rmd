@@ -19,7 +19,7 @@ knit("vignettes/check-cube.Rmd")
 
 check.dm.cube<- function() {
 
-require(foreign)
+library(foreign)
 # xptdirectory= "."
 xptdirectory= tempdir()
 fnadDataSet=paste(xptdirectory,"/", "adsl", ".xpt",sep="")
@@ -27,7 +27,7 @@ download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/dat
 
 
 adDataSet=read.xport(fnadDataSet)
-## require(Hmisc)
+## library(Hmisc)
 ## adDataSet <- sasxport.get(fnadDataSet)
 ## # --- see what have got:
 ## contents(adDataSet)
@@ -36,7 +36,7 @@ adDataSet=read.xport(fnadDataSet)
 # str(adDataSet)
 
 
-require(rrdf)
+library(rrdf)
 library(rrdfqbcrnd0)
 
 cubeData = new.rdf(ontology=FALSE)
@@ -229,7 +229,7 @@ cube.check
 
 check.ae.cube<- function() {
 
-require(foreign)
+library(foreign)
 # xptdirectory= "."
 xptdirectory= tempdir()
 
@@ -238,7 +238,7 @@ fnadDataSet=paste(xptdirectory,"/", "adae", ".xpt",sep="")
 download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt", fnadDataSet)
 
 adDataSet=read.xport(fnadDataSet)
-## require(Hmisc)
+## library(Hmisc)
 ## adDataSet <- sasxport.get(fnadDataSet)
 ## # --- see what have got:
 ## contents(adDataSet)
@@ -247,7 +247,7 @@ adDataSet=read.xport(fnadDataSet)
 # str(adDataSet)
 # print(names(adDataSet))
 
-require(rrdf)
+library(rrdf)
 cubeData = new.rdf(ontology=FALSE)
 
 myprefixes= c(qbCDISCprefixes, list(
