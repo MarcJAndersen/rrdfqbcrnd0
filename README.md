@@ -40,6 +40,7 @@ Here are the commands I use for developing (see also ggplot2 in references).
 
 ```r
 require(devtools)
+require(knitr)
 devtools::load_all()
 devtools::document()
 devtools::test()
