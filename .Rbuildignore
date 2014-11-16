@@ -11,4 +11,5 @@
 ^\R/.Rhistory
 ^\vignettes/.Rhistory
 ^\.git.*$
+^\.git/.*$
 
