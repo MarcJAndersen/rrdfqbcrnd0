@@ -59,14 +59,25 @@ print(qbIClist)
 ##    close(fileConn)
 ##  }
 
-# Consider making it internal
-# The script is intented to run from the package root as
-# knit("data-raw/create-qb-IC-dataset.Rmd")
-# knit runs the script in the data-raw directory, so it would be
-# expected to use pkg=".." to store the qbIClist in the data directory
-# However, it did not work - hence the setwd below
+```
 
- # devtools::use_data(qbIClist,pgk="..",overwrite=TRUE)
+The script is intented to run from the package root as
+```
+knit("data-raw/create-qb-IC-dataset.Rmd")
+```
+
+knit runs the script in the data-raw directory, so it would be
+expected to use pkg=".." to store the qbIClist in the data directory
+However, it did not work - hence the setwd below-
+
+```
+devtools::use_data(qbIClist,pgk="..",overwrite=TRUE)
+```
+
+```{r, results='asis', eval=TRUE}
+
+# This stores the qbIClist in the data directory
+# Consider making it internal
 
 setwd("..")
 devtools::use_data(qbIClist,overwrite=TRUE)
