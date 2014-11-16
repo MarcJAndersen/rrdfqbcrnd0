@@ -1,0 +1,268 @@
+---
+title: "Demograhics table from CSV file"
+author: "PhuseSubTeamAnalysisResults@example.org"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Demograhics table from CSV file}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+
+## Prelimnaries
+The present version uses Apache Fuseki to access CDISC in RDF from rdf.cdisc.org.
+
+Here is how to make a local copy of the rdf.cdisc.org - with Bash Shell on Linux.
+
+
+```{r get-rdf-cdisc-org.sh, eval=FALSE, engine='bash'}
+echo change below to suit your setup
+export CDISCRDF_HOME=~/projects/phrmwg-cdisc 
+echo only if directory does not exist 
+mkdir -p ${CDISCRDF_HOME}  
+cd ${CDISCRDF_HOME}
+
+git clone https://github.com/phuse-org/rdf.cdisc.org.git
+
+mkdir rdf-data-cube
+cd rdf-data-cube
+wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab/cube.ttl
+cd ..
+
+mkdir tdb
+
+export JENA_HOME=/opt/apache-jena-2.12.1
+${JENA_HOME}/bin/tdbloader2 --loc tdb rdf.cdisc.org/*/*.{ttl,owl} rdf-data-cube/*.ttl 
+```
+
+Start fuseki pointing to the TDB store created - note the update option makes it possible to upload triples as, say, turtle files.
+
+
+```{r start-fuseki.sh, eval=FALSE, engine='bash'}
+cd ${CDISCRDF_HOME}
+export FUSEKI_HOME=/opt/jena-fuseki-1.1.1
+${FUSEKI_HOME}/fuseki-server --pages=${FUSEKI_HOME}/pages --update --loc=tdb /cdisc
+```
+
+### How to run from command prompt when developing
+
+Start in the package root directory
+
+Devtools should reply reply Loading rrdfqbcrnd0.
+
+The knit command should generate .md file in the present work directory - the package root directory
+
+
+```{r, eval=FALSE}
+require(devtools)
+devtools::load_all()
+
+require(knitr)
+knit("vignettes/demographics-table-from-csv.Rmd")
+```
+
+Generate the pdf file using the following command
+```{r makepdf.sh, eval=FALSE, engine='bash'}
+pandoc demographics-table-from-csv.md -o xx.pdf
+```
+
+The knitr::knit2html should generate a .html file in the present work directory - the package root directory
+
+Generating HTML works nicely
+```{r, eval=FALSE} 
+knitr::knit2html("vignettes/demographics-table-from-csv.Rmd")
+```
+
+The following does not work as the texi2dvi can not handle the dollar signs in the bash code above.
+I suppose some other options have to be given. The work around is to use pandoc on the .md file generated as mentioned above.
+
+```{r, eval=FALSE}
+knitr::knit2pdf("vignettes/demographics-table-from-csv.Rmd")
+```
+
+## Code
+
+
+```{r}
+
+library (rrdf)
+
+library(rrdfqbcrnd0)
+
+
+#------------  Declarations    ------------------------------------------------
+endpoint<- "http://localhost:3030/cdisc/query"
+
+cubeVersion <- "0-5-2"  # For pav:Version (dot, notdash) and output file name
+# dataDir <- "C:/_Sandbox/r/semanticWeb/data/"  # Input and output files
+# dataDir <- "."  # Input and output files
+dataDir <- tempdir()  # Input and output files
+
+
+generalprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package="rrdfqbcrnd0")
+if (! file.exists(generalprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", generalprefixSourceFile, " does not exist" ))
+  }
+specificprefixSourceFile<- system.file("extdata/sample-cfg", "AECubePrefixes.csv", package="rrdfqbcrnd0")
+if (! file.exists(specificprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", specificprefixSourceFile, " does not exist" ))
+  }
+
+generalprefixSource = read.csv(generalprefixSourceFile) 
+specificprefixSource= read.csv(specificprefixSourceFile)
+prefixSource= rbind(generalprefixSource, specificprefixSource)
+
+DMskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-DM.csv", package="rrdfqbcrnd0")
+
+DMdsdName <- "dsd-demog"
+
+# Cube Observation data       
+DMobsFileName<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+
+
+# should maybe get that from some other data - eg. stored in the cube
+DMrecode.list= list(
+    "sex"=list( 'F'='sex-F','M'='sex-M', '_ALL_'='sex-_ALL_' ),
+    "race"= list('WHITE'='race-WHITE',
+                       'BLACK OR AFRICAN AMERICAN'='race-BLACK_OR_AFRICAN_AMERICAN',
+                       'AMERICAN INDIAN OR ALASKA NATIVE'='race-AMERICAN_INDIAN_OR_ALASKA_NATIVE',
+                       '_ALL_'='race-_ALL_' ),
+    "trt01a"=list('Placebo'='trt01a-Placebo',
+                  'Xanomeline High Dose'='trt01a-Xanomeline_High_Dose',
+                  'Xanomeline Low Dose'='trt01a-Xanomeline_Low_Dose',
+                  '_ALL_'='trt01a-_ALL_' ),
+    "saffl"=list('Y'='saffl-Y',
+                        'N'='saffl-N',
+                        '_ALL_'='saffl-_ALL_'),
+    "factor"=list('quantity'='factor-QUANTITY',
+                         'proportion'='factor-PROPORTION', 
+                         'AGE'='factor-AGE' ),
+    "procedure"= list('count'='procedure-COUNT',
+                      'countdistinct'='procedure-COUNTDISTINCT',
+                      'percent'='procedure-PERCENT', 
+                      'mean'='procedure-MEAN', 
+                      'stdev'='procedure-STDDEV', 
+                      'min'='procedure-MIN', 
+                      'median'='procedure-MEDIAN', 
+                      'max'='procedure-MAX' )                        
+     );
+
+  procedure2format= list("count"="int",
+                         "countdistinct"="int",
+                            'percent'='double', 
+                            'mean'='double', 
+                            'stdev'='double', 
+                            'min'='double', 
+                            'median'='double', 
+                            'max'='double'                         
+     );
+
+
+# Output file : DC-Demog-R-Vn-n-(n).TTL . Also used in dcat:distribution
+DMdataCubeFileName  <- paste0("DC-Demog-R-V-",cubeVersion,".TTL")   
+DMdataCubeFile      <- paste0(dataDir,DMdataCubeFileName) # Full path to cube
+  
+storeDM = new.rdf(ontology=FALSE)  # Initialize
+
+############
+# Prefixes #
+###############################################################################
+# Construct vars. to hold the prefix namespaces, using format:prefixPREFIXNAME.
+# Columns in source file: prefix,namespace
+# Vars. used  later in the construction of cube skeleton and cube obs.
+#   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
+#             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
+prefixSource = read.csv(prefixSourceFile) 
+DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
+
+############
+# Skeleton #
+###############################################################################
+# Read the skeleton  specifications from CSV to dataframe
+# Source in file: compType, compName, compLabel
+# TODO: Replace some use of compLabel with a var : compNameClass, formed by
+#     : Upcase of first letter of the compName value.
+DMskeletonSource = read.csv(DMskeletonSourceFile) 
+
+DMobsData = read.csv(DMobsFile) 
+names(DMobsData)= tolower(names(DMobsData))
+
+qb.buildSkeleton(storeDM, DMprefixlist, DMobsData, DMskeletonSource)
+
+qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMskeletonSource,
+            dsdURIwoprefix="dataset-demog",
+            dsdName=DMdsdName,
+            extra=list(description="Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)",
+comment="Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a",
+label="Demographics results data set.",
+distribution=DMdataCubeFileName,
+obsfilename=DMobsFileName,
+title="Demographics Analysis Results"
+ ),
+remote.endpoint=endpoint
+            )
+
+qb.buildObservations( store=storeDM, prefixlist=DMprefixlist, obsData=DMobsData, skeletonSource=DMskeletonSource, dsdURIwoprefix="dataset-demog", recode.list=DMrecode.list, procedure2format=procedure2format )
+
+##########
+# Output #
+###############################################################################
+DMoutcube = save.rdf(storeDM, filename=DMdataCubeFile, format="TURTLE")
+
+###############################################################################
+```
+
+
+Now look at the cube. Note: by specifying prefix the output contains is shown using the prefixes.
+Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.
+
+```{r, echo=FALSE, results='asis'}
+
+checkDM = new.rdf(ontology=FALSE)  # Initialize
+load.rdf("DC-Demog-R-V-0-5-2.TTL", format="TURTLE", appendTo= checkDM)
+summarize.rdf(checkDM)
+
+
+## ------------------------------------------------------------------------
+
+myprefixes= list(
+ "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
+ "skos"="http://www.w3.org/2004/02/skos/core#" ,
+ "prov"="http://www.w3.org/ns/prov#" ,
+ "rdfs"="http://www.w3.org/2000/01/rdf-schema#" ,
+ "dcat"="http://www.w3.org/ns/dcat#" ,
+ "owl"= "http://www.w3.org/2002/07/owl#" ,
+ "xsd"= "http://www.w3.org/2001/XMLSchema#" ,
+ "qb"=  "http://purl.org/linked-data/cube#" ,
+ "pav"= "http://purl.org/pav" ,
+ "dct"= "http://purl.org/dc/terms/" ,
+ "mms"= "http://rdf.cdisc.org/mms#" ,
+ "cts"= "http://rdf.cdisc.org/ct/schema#" ,
+ "dccs"="http://www.example.org/dc/demog/dccs/" ,
+ "code"="http://www.example.org/dc/code/" ,
+ "ds"=  "http://www.example.org/dc/demog/dataset/" ,
+ "prop"="http://www.example.org/dc/demog/prop/",
+ "valid"="http://www.example.org/dc/demog/valid/"
+)  ;
+
+
+forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
+
+cube.observations1= sparql.rdf(checkDM,
+   paste( forsparqlprefix,
+     "select * where {?s ?p ?o .} limit 10"
+     )
+   );
+knitr::kable(head(cube.observations1, 10))
+
+
+cube.observations2= sparql.rdf(checkDM,
+   paste( forsparqlprefix,
+     "select * where { ?s a qb:Observation ; ?p ?o .}"
+     )
+   );
+knitr::kable(head(cube.observations2, 10))
+```
