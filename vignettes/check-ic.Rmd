@@ -15,7 +15,7 @@ require(rrdf)
 cubeData = new.rdf(ontology=FALSE)
 
 data(qbCDISCprefixes)
-
+ 
 myprefixes= c(qbCDISCprefixes, list(
  "dccs"="http://www.example.org/dc/demog/dccs/" ,
  "code"="http://www.example.org/dc/code/" ,
