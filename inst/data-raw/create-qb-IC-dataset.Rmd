@@ -11,9 +11,9 @@ vignette: >
 
 ```{r, results='asis', eval=TRUE}
 
-require(RCurl)
-require(XML)
-require(devtools)
+library(RCurl)
+library(XML)
+library(devtools)
 
 qbURL<-"http://www.w3.org/TR/2014/REC-vocab-data-cube-20140116/"
 if (! url.exists(qbURL) ) {
