@@ -59,26 +59,26 @@ library(devtools)
 devtools::load_all()
 
 library(knitr)
-knit("vignettes/demographics-table-from-csv.Rmd")
+knit("vignettes/dm-table-from-csv.Rmd")
 ```
 
 Generate the pdf file using the following command
 ```{r makepdf.sh, eval=FALSE, engine='bash'}
-pandoc demographics-table-from-csv.md -o xx.pdf
+pandoc dm-table-from-csv.md -o xx.pdf
 ```
 
 The knitr::knit2html should generate a .html file in the present work directory - the package root directory
 
 Generating HTML works nicely
 ```{r, eval=FALSE} 
-knitr::knit2html("vignettes/demographics-table-from-csv.Rmd")
+knitr::knit2html("vignettes/dm-table-from-csv.Rmd")
 ```
 
 The following does not work as the texi2dvi can not handle the dollar signs in the bash code above.
 I suppose some other options have to be given. The work around is to use pandoc on the .md file generated as mentioned above.
 
 ```{r, eval=FALSE}
-knitr::knit2pdf("vignettes/demographics-table-from-csv.Rmd")
+knitr::knit2pdf("vignettes/dm-table-from-csv.Rmd")
 ```
 
 ## Code
