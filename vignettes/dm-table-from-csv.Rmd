@@ -87,6 +87,7 @@ knitr::knit2pdf("vignettes/demographics-table-from-csv.Rmd")
 ```{r}
 
 library (rrdf)
+library (xlsx)
 
 library(rrdfqbcrnd0)
 
@@ -94,11 +95,12 @@ library(rrdfqbcrnd0)
 #------------  Declarations    ------------------------------------------------
 endpoint<- "http://localhost:3030/cdisc/query"
 
-cubeVersion <- "0-5-2"  # For pav:Version (dot, notdash) and output file name
-# dataDir <- "C:/_Sandbox/r/semanticWeb/data/"  # Input and output files
-# dataDir <- "."  # Input and output files
-dataDir <- tempdir()  # Input and output files
+# NOTE: For pav:Version (dot, notdash) and output file name
+cubeVersion <- "0-5-3"  # 0-5-3 using .XLSX for DM Skeleton  
 
+# TODO: Differences between systems for tempdir() usage??
+# dataDir <- "C:/_gitHub/rrdfqbcrnd0/inst/extdata/"  # TW requires this.  
+dataDir <- tempdir()  # Input and output files: Used by MJA
 
 generalprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package="rrdfqbcrnd0")
 if (! file.exists(generalprefixSourceFile) ) {
@@ -124,9 +126,9 @@ specificprefixSource= read.csv(specificprefixSourceFile)
 prefixSource= rbind(generalprefixSource, specificprefixSource)
 
 
-DMskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-DM.csv", package="rrdfqbcrnd0")
-
-DMdsdName <- "dsd-demog"
+#TW DMskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-DM.csv", package="rrdfqbcrnd0")
+# SWitching over from .csv to .XLSX
+RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkBook.xlsx", package="rrdfqbcrnd0")
 
 # Cube Observation data       
 DMobsFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
@@ -186,7 +188,11 @@ DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
 # Source in file: compType, compName, compLabel
 # TODO: Replace some use of compLabel with a var : compNameClass, formed by
 #     : Upcase of first letter of the compName value.
-DMskeletonSource = read.csv(DMskeletonSourceFile) 
+#TW DMskeletonSource = read.csv(DMskeletonSourceFile) 
+#TODO: Convert "DM-Components" to parameter. Sheet name to match cube name "demog"?
+DMCubeMetadata = read.xlsx(RDFCubeWorkbook,sheetName="DM-Components")
+# Subset to the dimensions, attributes, and measure used to construct the skeleton
+DMSkeletonSource <-DMCubeMetadata[grep("dimension|attribute|measure", DMCubeMetadata$compType),]
 
 DMobsData = read.csv(DMobsFile) 
 names(DMobsData)= tolower(names(DMobsData))
