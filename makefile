@@ -17,13 +17,18 @@ rbuild:
 createRD:
 	# does not work MJA 2014-11-16 Rscript -e 'library(devtools); devtools::document()'
 
-create-r-data-contents: qbIClist
+create-r-data-contents: qbIClist data/qbCDISCprefixes.rda AEtable
 
 qbIClist: data/qbIClist.rda
 
 data/qbIClist.rda: inst/data-raw/create-qb-IC-dataset.Rmd
 	Rscript -e 'library(knitr);knit("inst/data-raw/create-qb-IC-dataset.Rmd")'
 
+data/qbCDISCprefixes.rda: inst/data-raw/create-qb-CDISC-prefix.Rmd
+	Rscript -e 'library(knitr);knit("inst/data-raw/create-qb-CDISC-prefix.Rmd")'
+
+AEtable: inst/data-raw/create-ae-table-as-csv.Rmd
+	Rscript -e 'library(knitr);knit("inst/data-raw/create-ae-table-as-csv.Rmd")'
 
 # To start fuseki endpoint - should be a script. 
 # Problem that location is configuration dependent

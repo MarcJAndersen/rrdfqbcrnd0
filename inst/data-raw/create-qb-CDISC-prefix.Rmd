@@ -16,7 +16,7 @@ The prefix corresponds to the usual values.
 
 ```{r, results='asis', eval=TRUE}
 
-require(devtools)
+library(devtools)
 
 qbCDISCprefixes<-  list(
  "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
