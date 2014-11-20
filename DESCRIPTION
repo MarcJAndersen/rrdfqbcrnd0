@@ -19,7 +19,9 @@ Suggests:
     testthat,
     foreign,
     shiny,
-    xlsx
+    xlsx,
+    XML,
+    RCurl
 VignetteBuilder: knitr
 Packaged: 2014-11-02 22:35:08 UTC; ma
 Author: Marc Andersen [aut, cre],

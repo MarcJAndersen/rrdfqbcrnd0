@@ -18,6 +18,7 @@ You will need to install some packages for development
 install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "xlsx" ) )
 ```
 
+This package uses the [rrdf](https://github.com/egonw/rrdf) package, which currently must be installed accoding to the instructions on the packages github page.
 
 
 To install the package use
