@@ -12,6 +12,7 @@ vignette: >
 ### Devloping
 Use
 ```{r eval=FALSE}
+library(knitr)
 knit("vignettes/check-cube.Rmd")
 ``` 
 
@@ -20,11 +21,17 @@ knit("vignettes/check-cube.Rmd")
 check.dm.cube<- function() {
 
 library(foreign)
+library(RCurl)
+
 # xptdirectory= "."
 xptdirectory= tempdir()
 fnadDataSet=paste(xptdirectory,"/", "adsl", ".xpt",sep="")
-download.file("https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadDataSet)
-
+dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt"
+# if (! url.exists(dsURL) ) {
+#   stop(paste0("Can not access URL ",dsURL))
+# }
+# write(getBinaryURL( dsURL ), file=fnadDataSet)
+download.file( dsURL, fnadDataSet, method="curl")
 
 adDataSet=read.xport(fnadDataSet)
 ## library(Hmisc)
@@ -236,7 +243,12 @@ xptdirectory= tempdir()
 
 
 fnadDataSet=paste(xptdirectory,"/", "adae", ".xpt",sep="")
-download.file("https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt", fnadDataSet)
+dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt"
+# if (! url.exists(dsURL) ) {
+#   stop(paste0("Can not access URL ",dsURL))
+# }
+# write(getBinaryURL( dsURL ), file=fnadDataSet)
+download.file( dsURL, fnadDataSet, method="curl")
 
 adDataSet=read.xport(fnadDataSet)
 ## library(Hmisc)
