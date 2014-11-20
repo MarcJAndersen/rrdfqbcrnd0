@@ -36,9 +36,9 @@ qbCDISCprefixes<-  list(
 
 ```
 
-The script is intented to run from the package root as
-```
-knit("data-raw/create-qb-CDISC-prefix.Rmd")
+When developing, the script is intented to run from the package root as
+```{r, results='asis', eval=FALSE}
+knit("inst/data-raw/create-qb-CDISC-prefix.Rmd")
 ```
 
 knit runs the script in the data-raw directory, so it would be
