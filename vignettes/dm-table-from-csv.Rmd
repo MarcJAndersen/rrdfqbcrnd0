@@ -95,7 +95,7 @@ library(rrdfqbcrnd0)
 endpoint<- "http://localhost:3030/cdisc/query"
 
 # NOTE: For pav:Version (dot, notdash) and output file name
-cubeVersion <- "0-5-3"  # 0-5-3 using .XLSX for DM Skeleton  
+cubeVersion <- "0-5-3a"  # 0-5-3 using .XLSX for DM Skeleton  
 
 # TODO: Differences between systems for tempdir() usage??
 # dataDir <- "C:/_gitHub/rrdfqbcrnd0/inst/extdata/"  # TW requires this.  
