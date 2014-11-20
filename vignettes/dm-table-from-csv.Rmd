@@ -88,7 +88,6 @@ knitr::knit2pdf("vignettes/dm-table-from-csv.Rmd")
 
 library (rrdf)
 library (xlsx)
-
 library(rrdfqbcrnd0)
 
 
