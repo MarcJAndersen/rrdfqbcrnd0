@@ -55,30 +55,30 @@ The knit command should generate .md file in the present work directory - the pa
 
 
 ```{r, eval=FALSE}
-require(devtools)
+library(devtools)
 devtools::load_all()
 
-require(knitr)
-knit("vignettes/demographics-table-from-csv.Rmd")
+library(knitr)
+knit("vignettes/dm-table-from-csv.Rmd")
 ```
 
 Generate the pdf file using the following command
 ```{r makepdf.sh, eval=FALSE, engine='bash'}
-pandoc demographics-table-from-csv.md -o xx.pdf
+pandoc dm-table-from-csv.md -o xx.pdf
 ```
 
 The knitr::knit2html should generate a .html file in the present work directory - the package root directory
 
 Generating HTML works nicely
 ```{r, eval=FALSE} 
-knitr::knit2html("vignettes/demographics-table-from-csv.Rmd")
+knitr::knit2html("vignettes/dm-table-from-csv.Rmd")
 ```
 
 The following does not work as the texi2dvi can not handle the dollar signs in the bash code above.
 I suppose some other options have to be given. The work around is to use pandoc on the .md file generated as mentioned above.
 
 ```{r, eval=FALSE}
-knitr::knit2pdf("vignettes/demographics-table-from-csv.Rmd")
+knitr::knit2pdf("vignettes/dm-table-from-csv.Rmd")
 ```
 
 ## Code
@@ -87,6 +87,7 @@ knitr::knit2pdf("vignettes/demographics-table-from-csv.Rmd")
 ```{r}
 
 library (rrdf)
+library (xlsx)
 
 library(rrdfqbcrnd0)
 
@@ -94,17 +95,44 @@ library(rrdfqbcrnd0)
 #------------  Declarations    ------------------------------------------------
 endpoint<- "http://localhost:3030/cdisc/query"
 
-cubeVersion <- "0-5-2"  # For pav:Version (dot, notdash) and output file name
-# dataDir <- "C:/_Sandbox/r/semanticWeb/data/"  # Input and output files
-dataDir <- "./"  # Input and output files
-prefixSourceFile  <- paste0(dataDir,"CubePrefixes.csv")    
+# NOTE: For pav:Version (dot, notdash) and output file name
+cubeVersion <- "0-5-3"  # 0-5-3 using .XLSX for DM Skeleton  
 
-DMskeletonSourceFile <- paste0(dataDir,"skeletonSource.csv") 
-DMdsdName <- "dsd-demog"
+# TODO: Differences between systems for tempdir() usage??
+# dataDir <- "C:/_gitHub/rrdfqbcrnd0/inst/extdata/"  # TW requires this.  
+dataDir <- tempdir()  # Input and output files: Used by MJA
+
+generalprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package="rrdfqbcrnd0")
+if (! file.exists(generalprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", generalprefixSourceFile, " does not exist" ))
+  }
+specificprefixSourceFile<- system.file("extdata/sample-cfg", "AECubePrefixes.csv", package="rrdfqbcrnd0")
+if (! file.exists(specificprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", specificprefixSourceFile, " does not exist" ))
+  }
+
+############
+# Prefixes #
+###############################################################################
+# Construct list to hold the prefix namespaces, using format:prefixPREFIXNAME with key .
+# Columns in source file: prefix,namespace
+# Vars. used  later in the construction of cube skeleton and cube obs.
+#   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
+#             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
+generalprefixSource = read.csv(generalprefixSourceFile) 
+specificprefixSource= read.csv(specificprefixSourceFile)
+prefixSource= rbind(generalprefixSource, specificprefixSource)
+
+
+#TW DMskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-DM.csv", package="rrdfqbcrnd0")
+# SWitching over from .csv to .XLSX
+RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkBook.xlsx", package="rrdfqbcrnd0")
 
 # Cube Observation data       
-DMobsFileName <-"demog.AR.csv" # Source of obs. Filename needed for cube metadata
-DMobsFile     <- paste0(dataDir,DMobsFileName)  # Full path to obs. file
+DMobsFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+
 
 # should maybe get that from some other data - eg. stored in the cube
 DMrecode.list= list(
@@ -150,15 +178,7 @@ DMdataCubeFile      <- paste0(dataDir,DMdataCubeFileName) # Full path to cube
   
 storeDM = new.rdf(ontology=FALSE)  # Initialize
 
-############
-# Prefixes #
-###############################################################################
-# Construct vars. to hold the prefix namespaces, using format:prefixPREFIXNAME.
-# Columns in source file: prefix,namespace
-# Vars. used  later in the construction of cube skeleton and cube obs.
-#   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
-#             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
-prefixSource = read.csv(prefixSourceFile) 
+# register prefixes
 DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
 
 ############
@@ -168,7 +188,11 @@ DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
 # Source in file: compType, compName, compLabel
 # TODO: Replace some use of compLabel with a var : compNameClass, formed by
 #     : Upcase of first letter of the compName value.
-DMskeletonSource = read.csv(DMskeletonSourceFile) 
+#TW DMskeletonSource = read.csv(DMskeletonSourceFile) 
+#TODO: Convert "DM-Components" to parameter. Sheet name to match cube name "demog"?
+DMCubeMetadata = read.xlsx(RDFCubeWorkbook,sheetName="DM-Components")
+# Subset to the dimensions, attributes, and measure used to construct the skeleton
+DMSkeletonSource <-DMCubeMetadata[grep("dimension|attribute|measure", DMCubeMetadata$compType),]
 
 DMobsData = read.csv(DMobsFile) 
 names(DMobsData)= tolower(names(DMobsData))
@@ -182,7 +206,7 @@ qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMskeletonSource,
 comment="Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a",
 label="Demographics results data set.",
 distribution=DMdataCubeFileName,
-obsfilename=DMobsFileName,
+obsfilename=DMobsFile,
 title="Demographics Analysis Results"
  ),
 remote.endpoint=endpoint
@@ -205,7 +229,7 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 ```{r, echo=FALSE, results='asis'}
 
 checkDM = new.rdf(ontology=FALSE)  # Initialize
-load.rdf("DC-Demog-R-V-0-5-2.TTL", format="TURTLE", appendTo= checkDM)
+load.rdf(DMdataCubeFile, format="TURTLE", appendTo= checkDM)
 summarize.rdf(checkDM)
 
 

@@ -12,12 +12,13 @@ Depends:
     R (>= 3.0.2)
 Imports:
     rrdf
-License: MIT
+License: MIT + file LICENSE
 LazyData: true
 Suggests:
     knitr,
     testthat,
-    foreign
+    foreign,
+    shiny
 VignetteBuilder: knitr
 Packaged: 2014-11-02 22:35:08 UTC; ma
 Author: Marc Andersen [aut, cre],

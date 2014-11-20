@@ -5,3 +5,11 @@
 ^\.gitignore$
 ^\.#.*$
 ^data-raw$
+^\vignettes/.#.*$
+^\.Rbuildignore~
+^\.Rhistory
+^\R/.Rhistory
+^\vignettes/.Rhistory
+^\.git.*$
+^\.git/.*$
+^.*~$

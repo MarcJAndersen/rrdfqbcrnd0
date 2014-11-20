@@ -39,8 +39,8 @@ Developing
 Here are the commands I use for developing (see also ggplot2 in references).
 
 ```r
-require(knitr)
-require(devtools)
+library(devtools)
+library(knitr)
 devtools::load_all()
 devtools::document()
 devtools::test()

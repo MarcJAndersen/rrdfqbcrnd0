@@ -1,4 +1,12 @@
+# RStudio files
 .Rproj.user
+.Rproj.user/
+# History files
 .Rhistory
 .RData
 inst/doc
+*.Rmd~
+*.R~
+.#*
+*~
+

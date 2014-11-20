@@ -9,19 +9,25 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
+### Devloping
+Use
+```{r eval=FALSE}
+knit("vignettes/check-cube.Rmd")
+``` 
+
 ```{r, results='asis', eval=TRUE}
 
 check.dm.cube<- function() {
 
-require(foreign)
-xptdirectory= "./"
-
+library(foreign)
+# xptdirectory= "."
+xptdirectory= tempdir()
 fnadDataSet=paste(xptdirectory,"/", "adsl", ".xpt",sep="")
 download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadDataSet)
 
 
 adDataSet=read.xport(fnadDataSet)
-## require(Hmisc)
+## library(Hmisc)
 ## adDataSet <- sasxport.get(fnadDataSet)
 ## # --- see what have got:
 ## contents(adDataSet)
@@ -30,37 +36,25 @@ adDataSet=read.xport(fnadDataSet)
 # str(adDataSet)
 
 
-require(rrdf)
+library(rrdf)
+library(rrdfqbcrnd0)
+
 cubeData = new.rdf(ontology=FALSE)
 
-myprefixes= list(
- "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
- "skos"="http://www.w3.org/2004/02/skos/core#" ,
- "prov"="http://www.w3.org/ns/prov#" ,
- "rdfs"="http://www.w3.org/2000/01/rdf-schema#" ,
- "dcat"="http://www.w3.org/ns/dcat#" ,
- "owl"= "http://www.w3.org/2002/07/owl#" ,
- "xsd"= "http://www.w3.org/2001/XMLSchema#" ,
- "qb"=  "http://purl.org/linked-data/cube#" ,
- "pav"= "http://purl.org/pav" ,
- "dct"= "http://purl.org/dc/terms/" ,
- "mms"= "http://rdf.cdisc.org/mms#" ,
- "cts"= "http://rdf.cdisc.org/ct/schema#" ,
+data(qbCDISCprefixes)
+
+myprefixes= c(qbCDISCprefixes, list(
  "dccs"="http://www.example.org/dc/demog/dccs/" ,
  "code"="http://www.example.org/dc/code/" ,
  "ds"=  "http://www.example.org/dc/demog/dataset/" ,
  "prop"="http://www.example.org/dc/demog/prop/",
  "valid"="http://www.example.org/dc/demog/valid/"
-)  ;
-
+  ))
 
 forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
 
-
-load.rdf("DC-Demog-R-V-0-5-2.TTL", format="N3", appendTo= cubeData)
-
-# load.rdf("DC-AE-R-V-0-5-2.TTL", format="N3", appendTo= cubeData)
-
+qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
+load.rdf( qbfile, format="N3", appendTo= cubeData)
 # summarize.rdf(cubeData)
 
 
@@ -236,15 +230,16 @@ cube.check
 
 check.ae.cube<- function() {
 
-require(foreign)
-xptdirectory= "./"
+library(foreign)
+# xptdirectory= "."
+xptdirectory= tempdir()
 
 
 fnadDataSet=paste(xptdirectory,"/", "adae", ".xpt",sep="")
 download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt", fnadDataSet)
 
 adDataSet=read.xport(fnadDataSet)
-## require(Hmisc)
+## library(Hmisc)
 ## adDataSet <- sasxport.get(fnadDataSet)
 ## # --- see what have got:
 ## contents(adDataSet)
@@ -253,34 +248,24 @@ adDataSet=read.xport(fnadDataSet)
 # str(adDataSet)
 # print(names(adDataSet))
 
-require(rrdf)
+library(rrdf)
 cubeData = new.rdf(ontology=FALSE)
 
-myprefixes= list(
- "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
- "skos"="http://www.w3.org/2004/02/skos/core#" ,
- "prov"="http://www.w3.org/ns/prov#" ,
- "rdfs"="http://www.w3.org/2000/01/rdf-schema#" ,
- "dcat"="http://www.w3.org/ns/dcat#" ,
- "owl"= "http://www.w3.org/2002/07/owl#" ,
- "xsd"= "http://www.w3.org/2001/XMLSchema#" ,
- "qb"=  "http://purl.org/linked-data/cube#" ,
- "pav"= "http://purl.org/pav" ,
- "dct"= "http://purl.org/dc/terms/" ,
- "mms"= "http://rdf.cdisc.org/mms#" ,
- "cts"= "http://rdf.cdisc.org/ct/schema#" ,
- "dccs"="http://www.example.org/dc/demog/dccs/" ,
+myprefixes= c(qbCDISCprefixes, list(
+ "dccs"="http://www.example.org/dc/ae/dccs/" ,
  "code"="http://www.example.org/dc/code/" ,
- "ds"=  "http://www.example.org/dc/demog/dataset/" ,
- "prop"="http://www.example.org/dc/demog/prop/",
- "valid"="http://www.example.org/dc/demog/valid/"
-)  ;
+ "ds"=  "http://www.example.org/dc/ae/dataset/" ,
+ "prop"="http://www.example.org/dc/ae/prop/",
+ "valid"="http://www.example.org/dc/ae/valid/"
+)  )
 
 
-forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
+forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse="\n")
 
+print(forsparqlprefix)
 
-load.rdf("DC-AE-R-V-0-5-2.TTL", format="N3", appendTo= cubeData)
+qbfile<- system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0")
+load.rdf( qbfile, format="N3", appendTo= cubeData)
 
 # summarize.rdf(cubeData)
 
@@ -291,7 +276,7 @@ cube.observations1= sparql.rdf(cubeData,
      "select * where {?s ?p ?o .} limit 10"
      )
    );
-# print(cube.observations1)
+print(nrow(cube.observations1))
 
 
 cube.observations2= sparql.rdf(cubeData,
@@ -299,7 +284,7 @@ cube.observations2= sparql.rdf(cubeData,
      "select * where { ?s a qb:Observation ; ?p ?o .} limit 10"
      )
    );
-# print(cube.observations2)
+print(nrow(cube.observations2))
 
 ## get the dimensions
 
@@ -326,7 +311,7 @@ selectexpr=  paste(  "select * where {",
            " ",
            sub("prop:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
-           sep=" ",collapse=" "),
+           sep=" ",collapse="\n"),
     "} " );
 ### print(selectexpr)
 

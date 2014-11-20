@@ -1,0 +1,89 @@
+---
+title: "Create Integrity Contraints SPARQL Queries from RDF data qubce definition"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create Integrity Contraints SPARQL Queries from RDF data qubce definition}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, results='asis', eval=TRUE}
+
+library(RCurl)
+library(XML)
+library(devtools)
+
+qbURL<-"http://www.w3.org/TR/2014/REC-vocab-data-cube-20140116/"
+if (! url.exists(qbURL) ) {
+  stop(paste0("Can not access URL ",qbURL))
+}
+
+
+# Acknowledgement: I got the approach from
+# http://stackoverflow.com/questions/1395528/scraping-html-tables-into-r-data-frames-using-the-xml-package?lq=1
+
+webpage <- getURL(qbURL)
+# The following two lines is suggested in the stackoverflow post
+# Apparantly not needed here
+## Process escape characters
+## webpage <- readLines(tc <- textConnection(webpage)); close(tc)
+
+# Parse the html tree, ignoring errors on the page
+pagetree <- htmlTreeParse(webpage, error=function(...){}, useInternalNodes = TRUE)
+
+# appears that integrity checks starte with h3 and then a table with class bordered-table
+# so that's what we look for
+both<- getNodeSet(pagetree,"//*/h3[@id]|//*/table[@class='bordered-table']/tbody/tr/td/pre")
+
+qbIClist<- list()
+
+for (i in 1:(length(both)-1)) {
+  icname<- xmlGetAttr(both[[i]],"id",default="none")
+  if (grepl('ic-[1-9]([0-9])*', icname ) ) {
+   ictitle<- xmlValue(xmlChildren(both[[i]])$text )
+   print(paste0( "Node ", i, ", IC name ", icname, " - ", ictitle ))
+   qbIClist[[icname]]<- paste0(
+     paste0("# ", ictitle ),
+     xmlValue(xmlChildren(both[[i+1]])$text),
+     sep="\n"
+     )
+  }
+  }
+
+print(qbIClist)
+## for (icname in names(qbIClist)) {
+##    fileConn<-file(paste0(icname, ".rq"))
+##    writeLines( qbIClist[[icname]], fileConn )
+##    close(fileConn)
+##  }
+
+```
+
+The script is intented to run from the package root as
+```
+knit("data-raw/create-qb-IC-dataset.Rmd")
+```
+
+knit runs the script in the data-raw directory, so it would be
+expected to use pkg=".." to store the qbIClist in the data directory
+However, it did not work - hence the setwd below-
+
+Data are stored in the data directory, following [R packages by Hadley Wickham](http://r-pkgs.had.co.nz/data.html) and [Writing R Extensions](http://cran.r-project.org/doc/manuals/R-exts.pdf).
+
+```
+devtools::use_data(qbIClist,pgk="..",overwrite=TRUE)
+```
+
+```{r, results='asis', eval=TRUE}
+
+# This stores the qbIClist in the data directory
+# Consider making it internal
+
+setwd("..")
+devtools::use_data(qbIClist,overwrite=TRUE)
+
+print("Done")
+
+```
