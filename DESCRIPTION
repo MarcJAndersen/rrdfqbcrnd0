@@ -18,7 +18,8 @@ Suggests:
     knitr,
     testthat,
     foreign,
-    shiny
+    shiny,
+    xlsx
 VignetteBuilder: knitr
 Packaged: 2014-11-02 22:35:08 UTC; ma
 Author: Marc Andersen [aut, cre],

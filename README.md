@@ -12,10 +12,10 @@ Marc Andersen
 Introduction
 ------------
 
-You will need to install some packages for developmen
+You will need to install some packages for development
 
 ```
-install.packages(c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown"))
+install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "xlsx" ) )
 ```
 
 
@@ -29,7 +29,14 @@ install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= T
 
 Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
 
-For building the vignettes Fuseki endpoint serving CDISC rdf.cdisc.org and the rdf data cube must be running - see vignette for "Demograhics table from CSV file". This is not a good idea. Suggest changing endpoint to (http://www.datadriven.jp:3030/) or create local turtle file with CDISC rdf.cdisc.org and the rdf data cube definiton.
+For building the vignettes Fuseki endpoint serving CDISC rdf.cdisc.org
+and the rdf data cube must be running - see vignette for "Demograhics
+table from CSV file". This is not a good idea, as it yet another layer
+of complexity to get a local fuseki SPARQL server running.
+
+Suggest changing endpoint to (http://www.datadriven.jp:3030/) or
+create local turtle file with CDISC rdf.cdisc.org and the rdf data
+cube definiton. Having a local CDISC later is marked as issue, for a start see the vignette store-cdisc-rdf-as-rrdf.Rmd.
 
 For example of usage look in the vignettes directory.
 
@@ -82,6 +89,12 @@ In a script to actually add a foo use:
 devtools::use_data(foo) 
 ```
  
+Makefile in root directory
+########################
+
+The makefile in the root directory is used for keeping track of the tasks to do before releasing the package. It would make sense to split the file into several makefiles going into the applicable subdirectories - that will be done when it is agreed on how to do it.
+
+
 References, hints and acknowlegements
 -------------------------------------
 
