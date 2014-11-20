@@ -23,7 +23,7 @@ library(foreign)
 # xptdirectory= "."
 xptdirectory= tempdir()
 fnadDataSet=paste(xptdirectory,"/", "adsl", ".xpt",sep="")
-download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadDataSet)
+download.file("https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadDataSet)
 
 
 adDataSet=read.xport(fnadDataSet)
@@ -236,7 +236,7 @@ xptdirectory= tempdir()
 
 
 fnadDataSet=paste(xptdirectory,"/", "adae", ".xpt",sep="")
-download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt", fnadDataSet)
+download.file("https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt", fnadDataSet)
 
 adDataSet=read.xport(fnadDataSet)
 ## library(Hmisc)
