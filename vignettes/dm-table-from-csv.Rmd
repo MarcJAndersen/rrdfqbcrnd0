@@ -103,6 +103,7 @@ cubeVersion <- "0-5-3"  # 0-5-3 using .XLSX for DM Skeleton
 dataDir <- tempdir()  # Input and output files: Used by MJA
 
 generalprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package="rrdfqbcrnd0")
+print(paste0("Reading from ", generalprefixSourceFile ))
 if (! file.exists(generalprefixSourceFile) ) {
   # consider using try instead
   stop( paste0("Expected file ", generalprefixSourceFile, " does not exist" ))
