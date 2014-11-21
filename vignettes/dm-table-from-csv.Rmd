@@ -91,15 +91,20 @@ library (xlsx)
 library(rrdfqbcrnd0)
 
 
+#TW: To pass in as a parameter. Will have values: demog, ae, etc.
+#   Must match the name in the workbook sheet (demog-components), etc.
+#   Also used in cube name, dsd-<name> etc.
+domainName="demog"
+
 #------------  Declarations    ------------------------------------------------
 endpoint<- "http://localhost:3030/cdisc/query"
 
 # NOTE: For pav:Version (dot, notdash) and output file name
-cubeVersion <- "0-5b"  # 0-5-3 using .XLSX for DM Skeleton  
+cubeVersion <- "0-5-3c"  # 0-5-3 using .XLSX for DM Skeleton  
 
-# TODO: Differences between systems for tempdir() usage??
-#TW dataDir <- "C:/_gitHub/rrdfqbcrnd0/inst/extdata/"  # TW requires this.  
-dataDir <- tempdir()  # Input and output files: Used by MJA
+# tempdir() not working on TW system. CHanged to getwd() plus added path to data folder
+# dataOut <- tempdir()  # Input and output files: Used by MJA
+dataOut <- paste0(getwd(), "/data/"  )
 
 generalprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package="rrdfqbcrnd0")
 print(paste0("Reading from ", generalprefixSourceFile ))
@@ -126,8 +131,7 @@ specificprefixSource= read.csv(specificprefixSourceFile)
 prefixSource= rbind(generalprefixSource, specificprefixSource)
 
 
-#TW DMskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-DM.csv", package="rrdfqbcrnd0")
-# SWitching over from .csv to .XLSX
+# Workbook as source of skeleton components and cube metadata
 RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkBook.xlsx", package="rrdfqbcrnd0")
 
 # Cube Observation data       
@@ -171,26 +175,24 @@ DMrecode.list= list(
                             'max'='double'                         
      );
 
-
-# Output file : DC-Demog-R-Vn-n-(n).TTL . Also used in dcat:distribution
-DMdataCubeFileName  <- paste0("DC-Demog-R-V-",cubeVersion,".TTL")   
-DMdataCubeFile      <- paste0(dataDir,DMdataCubeFileName) # Full path to cube
+# Output file format: DC-<domain>-R-Vn-n-(n).TTL . Also used in dcat:distribution
+DMdataCubeFileName  <- paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL")   
+DMdataCubeFile      <- paste0(dataOut,DMdataCubeFileName) # Full path to cube
   
 storeDM = new.rdf(ontology=FALSE)  # Initialize
 
 # register prefixes
 DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
 
+
 ############
 # Skeleton #
 ###############################################################################
-# Read the skeleton  specifications from CSV to dataframe
+# Read the skeleton  specifications to dataframe
 # Source in file: compType, compName, compLabel
 # TODO: Replace some use of compLabel with a var : compNameClass, formed by
 #     : Upcase of first letter of the compName value.
-#TW DMskeletonSource = read.csv(DMskeletonSourceFile) 
-#TODO: Convert "DM-Components" to parameter. Sheet name to match cube name "demog"?
-DMCubeMetadata = read.xlsx(RDFCubeWorkbook,sheetName="DM-Components")
+DMCubeMetadata = read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"))
 # Subset to the dimensions, attributes, and measure used to construct the skeleton
 DMSkeletonSource <-DMCubeMetadata[grep("dimension|attribute|measure", DMCubeMetadata$compType),]
 
@@ -199,10 +201,10 @@ names(DMobsData)= tolower(names(DMobsData))
 
 qb.buildSkeleton(storeDM, DMprefixlist, DMobsData, DMSkeletonSource)
 
-#TODO: Remove the hard coding for "demog" in the statements below
+#TODO: Cube description, able and title from Workbook
 qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMSkeletonSource,
-            dsdURIwoprefix="dataset-demog",
-            dsdName="dsd-demog",
+            dsdURIwoprefix=paste0("dataset-", domainName),
+            dsdName=paste0("dsd-", domainName),
             extra=list(description="Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)",
 comment="Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a",
 label="Demographics results data set.",
@@ -213,7 +215,7 @@ title="Demographics Analysis Results"
 remote.endpoint=endpoint
             )
 
-qb.buildObservations( store=storeDM, prefixlist=DMprefixlist, obsData=DMobsData, skeletonSource=DMSkeletonSource, dsdURIwoprefix="dataset-demog", recode.list=DMrecode.list, procedure2format=procedure2format )
+qb.buildObservations( store=storeDM, prefixlist=DMprefixlist, obsData=DMobsData, skeletonSource=DMSkeletonSource, dsdURIwoprefix=paste0("dataset-", domainName), recode.list=DMrecode.list, procedure2format=procedure2format )
 
 ##########
 # Output #
