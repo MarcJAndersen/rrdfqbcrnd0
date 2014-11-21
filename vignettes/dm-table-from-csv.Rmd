@@ -100,7 +100,7 @@ domainName="demog"
 endpoint<- "http://localhost:3030/cdisc/query"
 
 # NOTE: For pav:Version (dot, notdash) and output file name
-cubeVersion <- "0-5-3c"  # 0-5-3 using .XLSX for DM Skeleton  
+cubeVersion <- "0-5-3d"  # 0-5-3 using .XLSX for DM Skeleton  
 
 # tempdir() not working on TW system. CHanged to getwd() plus added path to data folder
 # dataOut <- tempdir()  # Input and output files: Used by MJA
@@ -184,7 +184,6 @@ storeDM = new.rdf(ontology=FALSE)  # Initialize
 # register prefixes
 DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
 
-
 ############
 # Skeleton #
 ###############################################################################
@@ -196,24 +195,39 @@ DMCubeMetadata = read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Compone
 # Subset to the dimensions, attributes, and measure used to construct the skeleton
 DMSkeletonSource <-DMCubeMetadata[grep("dimension|attribute|measure", DMCubeMetadata$compType),]
 
+#TW Cube metadata. Show me a more efficient way to get the metadata values from the Workbook 
+# and pass them into the fucntion as a string.
+
+dfcubeDescription<-DMCubeMetadata[grep("description", DMCubeMetadata$compName),]
+cubeDescription <- toString(dfcubeDescription$compLabel)
+
+dfcubeComment<-DMCubeMetadata[grep("comment", DMCubeMetadata$compName),]
+cubeComment<- toString(dfcubeComment$compLabel)
+
+dfcubeLabel<-DMCubeMetadata[grep("label", DMCubeMetadata$compName),]
+cubeLabel<-toString(dfcubeLabel$compLabel)
+
+
+dfcubeTitle<-DMCubeMetadata[grep("title", DMCubeMetadata$compName),]
+cubeTitle<-toString(dfcubeTitle$compLabel)
+
 DMobsData = read.csv(DMobsFile) 
 names(DMobsData)= tolower(names(DMobsData))
 
 qb.buildSkeleton(storeDM, DMprefixlist, DMobsData, DMSkeletonSource)
 
-#TODO: Cube description, able and title from Workbook
 qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMSkeletonSource,
-            dsdURIwoprefix=paste0("dataset-", domainName),
-            dsdName=paste0("dsd-", domainName),
-            extra=list(description="Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)",
-comment="Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a",
-label="Demographics results data set.",
-distribution=DMdataCubeFileName,
-obsfilename=DMobsFile,
-title="Demographics Analysis Results"
- ),
-remote.endpoint=endpoint
-            )
+            dsdURIwoprefix=paste0("dataset-",domainName),
+            dsdName=paste0("dsd-",domainName),
+            extra=list(description=cubeDescription,
+              comment=cubeComment,
+              label=cubeLabel,
+              distribution=DMdataCubeFileName,
+              obsfilename=DMobsFile,
+              title=cubeTitle
+               ),
+            remote.endpoint=endpoint
+          )
 
 qb.buildObservations( store=storeDM, prefixlist=DMprefixlist, obsData=DMobsData, skeletonSource=DMSkeletonSource, dsdURIwoprefix=paste0("dataset-", domainName), recode.list=DMrecode.list, procedure2format=procedure2format )
 
