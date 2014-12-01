@@ -1,0 +1,138 @@
+---
+title: "Store CDISC RDF as RRDF data model"
+author: "PhuseSubTeamAnalysisResults@example.org"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+
+## Prelimnaries
+write more here
+
+## Download the CDISC standards in RDF
+
+The code below assumes that the CDISC standards in RDF are downloaded to the directory ~/projects/phrmwg-cdisc.
+
+```
+cd ~/projects/phrmwg-cdisc
+git clone https://github.com/phuse-org/rdf.cdisc.org.git
+```
+
+## Code
+
+Finding the files replace directory for find with the appropriate directory for your setup.
+Also change below in R code.
+
+```
+find ~/projects/phrmwg-cdisc/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
+```
+
+### Create dataset with files to import
+
+
+### Create local version using RRDF from local directory
+
+
+```{r, results='asis', eval=TRUE}
+
+CDISCfilelist<- c( "rdf.cdisc.org/resources/w3.org/skos.rdf", 
+"rdf.cdisc.org/resources/dublincore.org/dcam.rdf", 
+"rdf.cdisc.org/resources/dublincore.org/dcelements.rdf", 
+"rdf.cdisc.org/resources/dublincore.org/dcterms.rdf", 
+"rdf.cdisc.org/terminology-2013-06-28/glossary-terminology.owl", 
+"rdf.cdisc.org/terminology-2013-06-28/cdash-terminology.owl", 
+"rdf.cdisc.org/terminology-2013-06-28/sdtm-terminology.owl", 
+"rdf.cdisc.org/terminology-2013-06-28/qs-terminology.owl", 
+"rdf.cdisc.org/terminology-2013-06-28/send-terminology.owl", 
+"rdf.cdisc.org/terminology-2013-06-28/adam-terminology.owl", 
+"rdf.cdisc.org/std/sdtm-1-2.ttl",
+"rdf.cdisc.org/std/all-standards.ttl",
+"rdf.cdisc.org/std/cdash-1-1.ttl",
+"rdf.cdisc.org/std/sdtmig-3-1-3.ttl",
+"rdf.cdisc.org/std/sdtmig-3-1-2.ttl",
+"rdf.cdisc.org/std/adamig-1-0.ttl",
+"rdf.cdisc.org/std/sendig-3-0.ttl",
+"rdf.cdisc.org/std/sdtm-1-3.ttl",
+"rdf.cdisc.org/std/adam-2-1.ttl", 
+"rdf.cdisc.org/schemas/ct-schema.owl", 
+"rdf.cdisc.org/schemas/meta-model-schema.owl", 
+"rdf.cdisc.org/schemas/cdisc-schema.owl"
+                  )
+
+format_from_ext<- list("ttl"="TURTLE", "rdf"="RDF/XML", "owl"="RDF/XML", "n3"="N3")
+
+```
+
+```{r, results='asis', eval=TRUE}
+
+library (rrdf)
+
+cdisc_rdf = new.rdf(ontology=FALSE)
+# change as appropriate
+cdisc_files_dir= "/home/ma/projects/phrmwg-cdisc/"
+cdisc_files_dir= "/home/ma/projects/phrmwg/rdf-cdisc-org-store/"
+cdisc_files_dir= "/home/ma/projects/phrmwg/"
+
+for (fn in CDISCfilelist) {
+  print(fn)
+  load.rdf(paste0(cdisc_files_dir, fn, sep=""), format=format_from_ext[[ file_ext(fn) ]], appendTo=cdisc_rdf )
+}
+
+cdisc_out = save.rdf(cdisc_rdf, filename="cdisc-rdf.ttl", format="TURTLE")
+zipfile<- "cdisc-rdf.zip"
+zip( zipfile, files=c("cdisc-rdf.ttl") )
+
+    
+
+print(summarize.rdf(cdisc_rdf))
+
+cdisc_test_rdf = new.rdf(ontology=FALSE)
+
+unzip( zipfile, files=c("cdisc-rdf.ttl") )
+
+load.rdf("cdisc-rdf.ttl", format="TURTLE", appendTo=cdisc_test_rdf )
+
+```
+
+
+### Create local version using SPARQL
+
+```{r, results='asis', eval=TRUE}
+
+library (rrdf)
+library (RCurl)
+
+cdisc_rdf = new.rdf(ontology=FALSE)
+# change as appropriate
+
+URLstem<- "https://github.com/phuse-org/rdf.cdisc.org/raw/master"
+
+
+
+cdisc_out = save.rdf(cdisc_rdf, filename="cdisc-rdf.ttl", format="TURTLE")
+
+print(summarize.rdf(cdisc_rdf))
+
+store = construct.remote("http://rdf.farmbio.uu.se/chembl/sparql",
+  paste(
+    "CONSTRUCT { ?instance a <http://example.org/Article> } ",
+    "WHERE { ?instance a <http://purl.org/ontology/bibo/Article> }",
+    "LIMIT 5"
+  ))
+
+store = new.rdf()
+results = construct.rdf(store, paste(
+  "CONSTRUCT { ?s ?p ?o }",
+  "FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl>",
+  "FROM <https://github.com/phuse-org/rdf.cdisc.org/schemas/meta-model-schema.owl>", 
+  "FROM <https://github.com/phuse-org/rdf.cdisc.org/schemas/cdisc-schema.owl>",
+  "WHERE { ?s ?p ?o }"
+))
+str(results)
+print(results)
+
+```
