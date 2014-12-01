@@ -1,10 +1,10 @@
 ---
-title: "Demograhics table from CSV file"
+title: "Demograhics (DM) table from CSV file"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Demograhics table from CSV file}
+  %\VignetteIndexEntry{Demograhics (DM) table from CSV file}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -91,16 +91,16 @@ library (xlsx)
 library(rrdfqbcrnd0)
 
 
-#TW: To pass in as a parameter. Will have values: demog, ae, etc.
-#   Must match the name in the workbook sheet (demog-components), etc.
+#TW: To pass in as a parameter. Will have values: DM, AE, etc.
+#   Must match the name in the workbook sheet (DM-components), etc.
 #   Also used in cube name, dsd-<name> etc.
-domainName="demog"
+domainName="DM"
 
 #------------  Declarations    ------------------------------------------------
 endpoint<- "http://localhost:3030/cdisc/query"
 
 # NOTE: For pav:Version (dot, notdash) and output file name
-cubeVersion <- "0-5-3d"  # 0-5-3 using .XLSX for DM Skeleton  
+cubeVersion <- "0-5-3e"  # 0-5-3 using .XLSX for DM Skeleton  
 
 # tempdir() not working on TW system. CHanged to getwd() plus added path to data folder
 # dataOut <- tempdir()  # Input and output files: Used by MJA
@@ -265,11 +265,11 @@ myprefixes= list(
  "dct"= "http://purl.org/dc/terms/" ,
  "mms"= "http://rdf.cdisc.org/mms#" ,
  "cts"= "http://rdf.cdisc.org/ct/schema#" ,
- "dccs"="http://www.example.org/dc/demog/dccs/" ,
+ "dccs"="http://www.example.org/dc/DM/dccs/" ,
  "code"="http://www.example.org/dc/code/" ,
- "ds"=  "http://www.example.org/dc/demog/dataset/" ,
- "prop"="http://www.example.org/dc/demog/prop/",
- "valid"="http://www.example.org/dc/demog/valid/"
+ "ds"=  "http://www.example.org/dc/DM/dataset/" ,
+ "prop"="http://www.example.org/dc/DM/prop/",
+ "valid"="http://www.example.org/dc/DM/valid/"
 )  ;
 
 
