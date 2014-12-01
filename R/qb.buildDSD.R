@@ -91,12 +91,29 @@ add.data.triple(store,
                 paste0(prefixlist$prefixDCAT, "distribution"),
                 extra$distribution)
 
+(now_ct <- Sys.time())
+## Reformat for xsd:timestamp as 2014-09-04T16:34:27-0400
+issuedTime <-strftime(now_ct,"%Y-%m-%dT%H:%M:%S%z")
+## For XSD format: add colon before minutes
+issuedTime<-gsub("(\\d\\d)$", ":\\1",issuedTime)
+
+add.data.triple(store, 
+                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
+                paste0(prefixlist$prefixPAV, "createdOn"), 
+                issuedTime,
+                "dateTime")
+
+# Need parameter for creator program
+add.data.triple(store, 
+                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
+                paste0(prefixlist$prefixPAV, "createdWith"), 
+                paste0("R Version", R.version$major, ".", R.version$minor, " Platform:", R.version$platform, " Program: dm-table-from-csv.Rmd and dependencies")
+                )
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPROV, "wasDerivedFrom"),
                 extra$obsfilename
                 )  # The source .CSV data file
-
 
 # print(str(obsData))
 

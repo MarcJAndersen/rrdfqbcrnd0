@@ -93,29 +93,18 @@ library(rrdfqbcrnd0)
 
 #TW: To pass in as a parameter. Will have values: DM, AE, etc.
 #   Must match the name in the workbook sheet (DM-components), etc.
-#   Also used in cube name, dsd-<name> etc.
+#   Also used in cube name, dsd-<name>, and other places.
 domainName="DM"
 
 #------------  Declarations    ------------------------------------------------
 endpoint<- "http://localhost:3030/cdisc/query"
 
 # NOTE: For pav:Version (dot, notdash) and output file name
-cubeVersion <- "0-5-3f"  # 0-5-3 using .XLSX for DM Skeleton  
+cubeVersion <- "0-5-3g"  # 0-5-3 using .XLSX for DM Skeleton  
 
 # tempdir() not working on TW system. CHanged to getwd() plus added path to data folder
 # dataOut <- tempdir()  # Input and output files: Used by MJA
 dataOut <- paste0(getwd(), "/data/"  )
-
-#DELgeneralprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package#DEL="rrdfqbcrnd0")
-#DELprint(paste0("Reading from ", generalprefixSourceFile ))
-#DELif (! file.exists(generalprefixSourceFile) ) {
-#DEL  # consider using try instead
-#DEL  stop( paste0("Expected file ", generalprefixSourceFile, " does not exist" ))
-#DEL  }
-#TW add in a check of the workbookif (! file.exists(specificprefixSourceFile) ) {
-#  # consider using try instead
-#  stop( paste0("Expected file ", specificprefixSourceFile, " does not exist" ))
-#  }
 
 ############
 # Prefixes #
@@ -126,10 +115,13 @@ dataOut <- paste0(getwd(), "/data/"  )
 # Vars. used  later in the construction of cube skeleton and cube obs.
 #   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
 #             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
-
 RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkBook.xlsx", package="rrdfqbcrnd0")
+if (! file.exists(RDFCubeWorkbook) ) {
+     # consider using try instead
+    stop( paste0("Expected file ", RDFCubeWorkbook, " does not exist" ))
+}
 
-# Get the prefixes
+# Prefixes common to all cubes (regardless of domain) 
 common.prefixes = read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
 
 # Create the domain-specific prefixes:for /prop/, /dccs/ and /dataset/
@@ -138,9 +130,11 @@ custom.prefixes <-data.frame(prefix=c("prop", "dccs", "ds"),
                     paste0("http://www.example.org/dc/",domainName,"/dccs/"),
                     paste0("http://www.example.org/dc/",domainName,"/dataset/")
                     ))
-prefixSource=rbind(common.prefixes, custom.prefixes)                                                
+prefixes=rbind(common.prefixes, custom.prefixes)                                                
 
-# Cube Observation data       
+# Cube Observation data 
+# TODO: File name should become a parameter, not hard coded as DM.AR.CSV
+#       Or name files using domainName?  <domainName>.AR.CSV.......
 DMobsFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
 
 # should maybe get that from some other data - eg. stored in the cube
@@ -187,7 +181,7 @@ DMdataCubeFile      <- paste0(dataOut,DMdataCubeFileName) # Full path to cube
 storeDM = new.rdf(ontology=FALSE)  # Initialize
 
 # register prefixes
-DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
+DMprefixlist= qb.def.prefixlist(storeDM, prefixes)
 
 ############
 # Skeleton #
@@ -256,7 +250,7 @@ summarize.rdf(checkDM)
 
 
 ## ------------------------------------------------------------------------
-
+#TW Need to change the following to use <domainName> instead of DM
 myprefixes= list(
  "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
  "skos"="http://www.w3.org/2004/02/skos/core#" ,
