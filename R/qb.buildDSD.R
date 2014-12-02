@@ -11,24 +11,24 @@
 ##' @param remote.endpoint 
 ##' @return Always TRUE
 qb.buildDSD<- function(store,
-prefixlist,
-obsData,
-skeletonSource,
-dsdURIwoprefix="dataset-demog",
-dsdName="dsd-demog",
-extra=list(
-   description=paste0("Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a),",
+  prefixlist,
+  obsData,
+  skeletonSource,
+  dsdURIwoprefix="dataset-demog",
+  dsdName="dsd-demog",
+  extra=list(
+    description=paste0("Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a),",
                       "2 Attributes (denominator, unit) and 1 measure (measure)"),
     comment=paste0("Example Demographics data supplied by Ian Fleming via R. ",
       "All dimensions have a Codelist and Range specified. ",
       "Attributes applied from source data. ",
       "Attributes as VALUES instead of URIs."),
-label="Demographics results data set.",
-distribution=dataCubeFileName,
-obsfilename="the name of the input file",
-title="Demographics Analysis Results"
- ),
-codelist.source
+    label="Demographics results data set.",
+    distribution=dataCubeFileName,
+    obsfilename="the name of the input file",
+    title="Demographics Analysis Results"
+  ),
+  codelist.source
 ) {
 # -------------  DSD Component ------------------------------------------------
 # Loop through to create the dsd component for each dimension, measure, attribute
@@ -39,8 +39,7 @@ add.triple(store,
            paste0(prefixlist$prefixRDF,"type" ),
            paste0(prefixlist$prefixQB, "DataStructureDefinition"))
 
-for (i in 1:nrow(skeletonSource))
-{
+for (i in 1:nrow(skeletonSource)){
   component <- skeletonSource[i,"compType"]
   add.triple(store,
              paste0(prefixlist$prefixDS, dsdName),
@@ -59,7 +58,6 @@ add.triple(store,
            paste0(prefixlist$prefixDS, dsdURIwoprefix),
            paste0(prefixlist$prefixRDF,"type" ),
            paste0(prefixlist$prefixQB, "DataSet"))
-
 
 # turn this into a for looping over all values in the list extra -
 # have to solve how the prefix is included - when generating the list or by
@@ -107,7 +105,7 @@ add.data.triple(store,
 add.data.triple(store, 
                 paste0(prefixlist$prefixDS, dsdURIwoprefix), 
                 paste0(prefixlist$prefixPAV, "createdWith"), 
-                paste0("R Version", R.version$major, ".", R.version$minor, " Platform:", R.version$platform, " Program: dm-table-from-csv.Rmd and dependencies")
+                paste0("R Version ", R.version$major, ".", R.version$minor, " Platform:", R.version$platform, " Program: dm-table-from-csv.Rmd and dependencies")
                 )
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
@@ -115,10 +113,7 @@ add.data.triple(store,
                 extra$obsfilename
                 )  # The source .CSV data file
 
-# print(str(obsData))
-
 for (i in 1:nrow(skeletonSource)){
-
   if (skeletonSource[i,"compType"]=="dimension") {
   buildCodelist(store,
                 prefixlist,
@@ -131,4 +126,3 @@ for (i in 1:nrow(skeletonSource)){
 }
 invisible(TRUE)
 }
-

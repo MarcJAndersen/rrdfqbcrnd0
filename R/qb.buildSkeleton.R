@@ -12,15 +12,11 @@
 qb.buildSkeleton<- function(store, prefixlist,obsData, skeletonSource) {
 # Loop through to create Property and Component specs
 
-# print(skeletonSource)
-
-for (i in 1:nrow(skeletonSource))
-{
+for (i in 1:nrow(skeletonSource)){
    component <- tolower(skeletonSource[i,"compType"])
    ##DEBUG message ("Component:", component)
   #------------------  Dimensions ---------------------------------------------
-  if (component == "dimension")
-  {
+  if (component == "dimension"){
     # Class name is the compName with an uppercase first letter.
     compNameClass <- capitalize(toString(skeletonSource[i,"compName"]))
     ##DEBUG message ("Building: Dimension")
@@ -80,9 +76,7 @@ for (i in 1:nrow(skeletonSource))
                paste0(skeletonSource[i,"compLabel"]))
   }
   #------------------  Measure ------------------------------------------------
-  else if (component =="measure")
-  {
-    ##DEBUG message ("Building: Measure")
+  else if (component =="measure"){
     # Property
     #  Example: prop:trt01a a qb:DimensionProperty
     add.triple(store,
@@ -118,8 +112,7 @@ for (i in 1:nrow(skeletonSource))
                     paste0(skeletonSource[i,"compLabel"]))
   }
   #------------------ Attributes ----------------------------------------------
-  else if (component == "attribute")
-  {
+  else if (component == "attribute"){
     ##DEBUG message ("Building: Attribute")
     # Property
     add.triple(store,
@@ -130,7 +123,6 @@ for (i in 1:nrow(skeletonSource))
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
-
     # Label for property
     add.data.triple(store,
                     paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
@@ -145,13 +137,10 @@ for (i in 1:nrow(skeletonSource))
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixQB, "attribute"),
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]))
-  }
-  else
-  {
-    message ("***ERROR: Undefined Component Type in compType column. Check source file")
+    }else{
+      message ("***ERROR: Undefined Component Type in compType column. Check source file")
   }
 }# End looping through each component
 
 invisible(TRUE)
 }
-
