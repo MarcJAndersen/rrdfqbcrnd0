@@ -97,10 +97,14 @@ library(rrdfqbcrnd0)
 domainName="DM"
 
 #------------  Declarations    ------------------------------------------------
-endpoint<- "http://localhost:3030/cdisc/query"
+#DEL endpoint<- "http://localhost:3030/cdisc/query"
 
 # NOTE: For pav:Version (dot, notdash) and output file name
-cubeVersion <- "0-5-3g"  # 0-5-3 using .XLSX for DM Skeleton  
+cubeVersion <- "0-5-3h"  # 0-5-3 using .XLSX for DM Skeleton  
+
+#TODO TW  : Change to use system.file so it picks it up from the package.
+     # system.file("extdata/sample-cfg", "RDFCubeWorkBook.xlsx", package="rrdfqbcrnd0")
+sdtm.terminology.file= load.rdf("C:/_gitHub/rrdfqbcrnd0/inst/extdata/sample-cfg/sdtm-terminology-2013-06-28.ttl", format="N3")
 
 # tempdir() not working on TW system. CHanged to getwd() plus added path to data folder
 # dataOut <- tempdir()  # Input and output files: Used by MJA
@@ -215,6 +219,7 @@ names(DMobsData)= tolower(names(DMobsData))
 
 qb.buildSkeleton(storeDM, DMprefixlist, DMobsData, DMSkeletonSource)
 
+# Issue How to handle multiple terminlogy files for code list generation?
 qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMSkeletonSource,
             dsdURIwoprefix=paste0("dataset-",domainName),
             dsdName=paste0("dsd-",domainName),
@@ -225,7 +230,7 @@ qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMSkeletonSource,
               obsfilename=DMobsFile,
               title=cubeTitle
                ),
-            remote.endpoint=endpoint
+            codelist.source=sdtm.terminology.file
           )
 
 qb.buildObservations( store=storeDM, prefixlist=DMprefixlist, obsData=DMobsData, skeletonSource=DMSkeletonSource, dsdURIwoprefix=paste0("dataset-", domainName), recode.list=DMrecode.list, procedure2format=procedure2format )

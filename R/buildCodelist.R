@@ -9,10 +9,10 @@
 ##' "SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query
 ##' @param nciDomainValue When codetype="DATA" the nciDomain used for identifying the codelist
 ##' @param dimName the name of the dimension - for codeType="DATA" the name of the variable in the data frame ObsData
-##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint
+##' @param codelist.source Used when codetype="SDTM" to give the source of the terminology file
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
-buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, remote.endpoint)
+buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, codelist.source)
 {
   dimName <- tolower(dimName)        # dimName in all lower case is default
   capDimName <- capitalize(dimName)  # capDim used in Class name
@@ -48,7 +48,9 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
 		  }'
       )
 
-    codeSource = as.data.frame(sparql.remote(remote.endpoint, query))
+    #DEL codeSource = as.data.frame(sparql.remote(codelist.source, query))
+    codeSource = as.data.frame(sparql.rdf(codelist.source, query))
+    
   }
 #  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
   for (i in 1:nrow(codeSource)) {   codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"])) }

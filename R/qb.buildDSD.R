@@ -28,7 +28,7 @@ distribution=dataCubeFileName,
 obsfilename="the name of the input file",
 title="Demographics Analysis Results"
  ),
-remote.endpoint="http://localhost:3030/cdisc/query"
+codelist.source
 ) {
 # -------------  DSD Component ------------------------------------------------
 # Loop through to create the dsd component for each dimension, measure, attribute
@@ -117,21 +117,18 @@ add.data.triple(store,
 
 # print(str(obsData))
 
-for (i in 1:nrow(skeletonSource))
-{
+for (i in 1:nrow(skeletonSource)){
 
-if (skeletonSource[i,"compType"]=="dimension") {
-buildCodelist(store,
-              prefixlist,
-              obsData,
-              codeType=skeletonSource[i,"codeType"],
-              nciDomainValue=skeletonSource[i,"nciDomainValue"],
-              dimName=skeletonSource[i,"compName"],
-              remote.endpoint=remote.endpoint)
+  if (skeletonSource[i,"compType"]=="dimension") {
+  buildCodelist(store,
+                prefixlist,
+                obsData,
+                codeType=skeletonSource[i,"codeType"],
+                nciDomainValue=skeletonSource[i,"nciDomainValue"],
+                dimName=skeletonSource[i,"compName"],
+                codelist.source=codelist.source)
+  }
 }
-
-}
-
 invisible(TRUE)
 }
 
