@@ -15,26 +15,24 @@ write more here
 
 ## Download the CDISC standards in RDF
 
-The code below assumes that the CDISC standards in RDF are downloaded to the directory ~/projects/phrmwg-cdisc.
+The code below assumes that the CDISC standards in RDF are downloaded to the directory ~/projects/phrmwg.
 
 ```
-cd ~/projects/phrmwg-cdisc
+cd ~/projects/phrmwg
 git clone https://github.com/phuse-org/rdf.cdisc.org.git
 ```
 
-## Code
+## Finding the files
 
 Finding the files replace directory for find with the appropriate directory for your setup.
 Also change below in R code.
 
 ```
-find ~/projects/phrmwg-cdisc/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
+find ~/projects/phrmwg/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
 ```
 
-### Create dataset with files to import
+## Create dataset with files to import
 
-
-### Create local version using RRDF from local directory
 
 
 ```{r, results='asis', eval=TRUE}
@@ -63,73 +61,71 @@ CDISCfilelist<- c( "rdf.cdisc.org/resources/w3.org/skos.rdf",
 "rdf.cdisc.org/schemas/cdisc-schema.owl"
                   )
 
-format_from_ext<- list("ttl"="TURTLE", "rdf"="RDF/XML", "owl"="RDF/XML", "n3"="N3")
+format.from.ext<- list("ttl"="TURTLE", "rdf"="RDF/XML", "owl"="RDF/XML", "n3"="N3")
+
+```
+
+### Create local version using RRDF from local directory conting rdf.cdisc.org
+
+First load the files in a rrdf store.
+
+```{r, results='asis', eval=TRUE}
+
+library(rrdf)
+library(tools)
+
+cdisc.rdf <- new.rdf(ontology=FALSE)
+# change as appropriate
+# in my setup the phrmwg directory contains a git pull of rdf.cdisc.org
+cdisc.files.dir<- "/home/ma/projects/phrmwg/"
+
+for (fn in CDISCfilelist) {
+  cat(paste0("Loading ", fn, " ..", sep=""))
+  load.rdf(paste0(cdisc.files.dir, fn, sep=""), format=format.from.ext[[ file_ext(fn) ]], appendTo=cdisc.rdf )
+  cat(" done\n",sep="");
+}
+
+cat("Stored rdf.cdisc.org: ", summarize.rdf(cdisc.rdf),"\n")
+
+cdisc.save.ttl<- "cdisc-rdf.ttl"
+cdisc.out <- save.rdf(cdisc.rdf, filename=cdisc.save.ttl, format="TURTLE")
+cdisc.save.zip<- paste0(file_path_sans_ext(cdisc.save.ttl),".zip",sep="")
+zip( cdisc.save.zip, files=c(cdisc.save.ttl) )
 
 ```
 
 ```{r, results='asis', eval=TRUE}
 
-library (rrdf)
+cdisc.test.rdf = new.rdf(ontology=FALSE)
+unzip( cdisc.save.zip, files=c(cdisc.save.ttl) )
+load.rdf(cdisc.save.ttl, format="TURTLE", appendTo=cdisc.test.rdf )
 
-cdisc_rdf = new.rdf(ontology=FALSE)
-# change as appropriate
-cdisc_files_dir= "/home/ma/projects/phrmwg-cdisc/"
-cdisc_files_dir= "/home/ma/projects/phrmwg/rdf-cdisc-org-store/"
-cdisc_files_dir= "/home/ma/projects/phrmwg/"
+cat("Loaded rdf.cdisc.org: ", summarize.rdf(cdisc.test.rdf),"\n")
 
-for (fn in CDISCfilelist) {
-  print(fn)
-  load.rdf(paste0(cdisc_files_dir, fn, sep=""), format=format_from_ext[[ file_ext(fn) ]], appendTo=cdisc_rdf )
-}
-
-cdisc_out = save.rdf(cdisc_rdf, filename="cdisc-rdf.ttl", format="TURTLE")
-zipfile<- "cdisc-rdf.zip"
-zip( zipfile, files=c("cdisc-rdf.ttl") )
-
-    
-
-print(summarize.rdf(cdisc_rdf))
-
-cdisc_test_rdf = new.rdf(ontology=FALSE)
-
-unzip( zipfile, files=c("cdisc-rdf.ttl") )
-
-load.rdf("cdisc-rdf.ttl", format="TURTLE", appendTo=cdisc_test_rdf )
+# need more code to compare the two models ...
 
 ```
 
 
 ### Create local version using SPARQL
 
-```{r, results='asis', eval=TRUE}
+The code below does not work.
+
+```{r, results='asis', eval=FALSE}
 
 library (rrdf)
-library (RCurl)
+# library (RCurl)
 
-cdisc_rdf = new.rdf(ontology=FALSE)
 # change as appropriate
 
 URLstem<- "https://github.com/phuse-org/rdf.cdisc.org/raw/master"
 
-
-
-cdisc_out = save.rdf(cdisc_rdf, filename="cdisc-rdf.ttl", format="TURTLE")
-
-print(summarize.rdf(cdisc_rdf))
-
-store = construct.remote("http://rdf.farmbio.uu.se/chembl/sparql",
-  paste(
-    "CONSTRUCT { ?instance a <http://example.org/Article> } ",
-    "WHERE { ?instance a <http://purl.org/ontology/bibo/Article> }",
-    "LIMIT 5"
-  ))
-
-store = new.rdf()
-results = construct.rdf(store, paste(
+cdisc.rdf.store = new.rdf(ontology=FALSE)
+results = construct.rdf(cdisc.rdf.store, paste(
   "CONSTRUCT { ?s ?p ?o }",
   "FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl>",
-  "FROM <https://github.com/phuse-org/rdf.cdisc.org/schemas/meta-model-schema.owl>", 
-  "FROM <https://github.com/phuse-org/rdf.cdisc.org/schemas/cdisc-schema.owl>",
+  "FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/meta-model-schema.owl>", 
+  "FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl>",
   "WHERE { ?s ?p ?o }"
 ))
 str(results)
