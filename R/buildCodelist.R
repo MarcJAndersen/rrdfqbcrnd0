@@ -12,7 +12,7 @@
 ##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
-buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, remote.endpoint)
+buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, codelist.source)
 {
   dimName <- tolower(dimName)        # dimName in all lower case is default
   capDimName <- capitalize(dimName)  # capDim used in Class name
@@ -21,13 +21,11 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
   #############################################################################
   # codeNoBlank - used in URI formation
   # SDTM: cdiscSumbissionValue -> code  (the term to be coded)
-  if (codeType=="DATA")
-  {
+  if (codeType=="DATA"){
     codeSource <- as.data.frame(unique(obsData[,dimName])) #Unique values as dataframe
     colnames(codeSource) <- ("code")  # Rename to match SDTM approach
   }
-  if (codeType=="SDTM")
-  {
+  if (codeType=="SDTM"){
     query = paste0(' prefix : <http://rdf.cdisc.org/sdtm-terminology#>
       prefix cts:   <http://rdf.cdisc.org/ct/schema#>
 		  prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
@@ -127,8 +125,7 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
 
   # --------- hasTopConcept ---------
   # For each unique code
-  for (i in 1:nrow(codeSource))
-  {
+  for (i in 1:nrow(codeSource)){
     add.triple(store,
                paste0(prefixlist$prefixCODE,dimName),
                paste0(prefixlist$prefixSKOS, "hasTopConcept"),
@@ -141,8 +138,7 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
   #       or function parameter.
   #       It is merely concidental that the Terminology values in the current
   #       example both have _ALL_ .  This logic MUST change.
-  if (codeType=="SDTM")
-  {
+  if (codeType=="SDTM"){
     add.triple(store,
               paste0(prefixlist$prefixCODE,dimName),
               paste0(prefixlist$prefixSKOS, "hasTopConcept"),
@@ -150,8 +146,7 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
   }
   #############################################################################
   # Code values
-  for (i in 1:nrow(codeSource))
-  {
+  for (i in 1:nrow(codeSource)){
     add.triple(store,
                paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                paste0(prefixlist$prefixRDF,"type" ),
@@ -175,8 +170,7 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
 
     # Document when the codes come from the source data without reconciliation
     #   against other sources.
-    if (codeType=="DATA")
-    {
+    if (codeType=="DATA"){
        add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                     paste0(prefixlist$prefixRDFS, "comment"),
@@ -185,8 +179,7 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
     }
     # SDTM Terminology
     #  Additional triples availble from the SDTM Terminology file.
-    if (codeType=="SDTM")
-    {
+    if (codeType=="SDTM"){
       add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
                     paste0(prefixlist$prefixCTS,"cdiscSynonyms"),
@@ -246,7 +239,5 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
                      lang="en")
     }
   }
-
   invisible(TRUE)
 } 
-

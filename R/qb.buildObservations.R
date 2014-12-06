@@ -13,8 +13,7 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
 
 colnames(obsData) <- tolower(colnames(obsData))  # Convert column names to lowercase for later matching
 
-for (i in 1:nrow(obsData))
-{
+for (i in 1:nrow(obsData)){
   obsNum <- paste0("obs",i) # consider this being the rownames
 
   add.triple(store,
@@ -32,23 +31,20 @@ for (i in 1:nrow(obsData))
                    paste0(prefixlist$prefixRDFS, "label"),
                    paste0(i))
 
-for (qbdim in skeletonSource[ skeletonSource$compType=="dimension", "compName" ]) {
-#   print(paste0("qbdim :   ", qbdim))
-#   print(paste0("recode.list[[qbdim]]: ", names(recode.list[[qbdim]]), "=", recode.list[[qbdim]]))
-
-  vCoded <-  ph.recode( obsData[i,qbdim], recode.list[[qbdim]] )
-  # b. Create coded triple
-  add.triple(store,
-                paste0(prefixlist$prefixDS, obsNum),
-                paste0(prefixlist$prefixPROP, qbdim),
-                paste0(prefixlist$prefixCODE,vCoded))
-}
-
-
+  for (qbdim in skeletonSource[ skeletonSource$compType=="dimension", "compName" ]){
+  #   print(paste0("qbdim :   ", qbdim))
+  #   print(paste0("recode.list[[qbdim]]: ", names(recode.list[[qbdim]]), "=", recode.list[[qbdim]]))
+  
+    vCoded <-  ph.recode( obsData[i,qbdim], recode.list[[qbdim]] )
+    # b. Create coded triple
+    add.triple(store,
+                  paste0(prefixlist$prefixDS, obsNum),
+                  paste0(prefixlist$prefixPROP, qbdim),
+                  paste0(prefixlist$prefixCODE,vCoded))
+  }
 
   #--------------- Measure ----------------------------------------------------
   # Set the format of the Measure based on the Procedure value
-
   procedure <- paste0(obsData[i,"procedure"])
   xsdFormat= procedure2format[[ procedure ]]
 

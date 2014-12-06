@@ -30,6 +30,9 @@ install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= T
 
 Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
 
+### Not current 
+The following is updated.
+
 For building the vignettes Fuseki endpoint serving CDISC rdf.cdisc.org
 and the rdf data cube must be running - see vignette for "Demograhics
 table from CSV file". This is not a good idea, as it yet another layer

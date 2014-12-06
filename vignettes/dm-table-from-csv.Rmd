@@ -1,10 +1,10 @@
 ---
-title: "Demograhics table from CSV file"
+title: "Demograhics (DM) table from CSV file"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Demograhics table from CSV file}
+  %\VignetteIndexEntry{Demograhics (DM) table from CSV file}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -53,12 +53,13 @@ knitr::knit2pdf("vignettes/dm-table-from-csv.Rmd")
 
 library (rrdf)
 library (xlsx)
-
 library(rrdfqbcrnd0)
 
 
-#------------  Declarations    ------------------------------------------------
-endpoint<- "http://localhost:3030/cdisc/query"
+#TODO: To pass in as a parameter. Will have values: DM, AE, etc.
+#   NOTE: Must match the name in the workbook sheet (DM-components), etc.
+#     Also used in cube name, dsd-<name>, and other places.
+domainName="DM"
 
 endpoint<- NULL # for using internal rdf.cdisc.org store
 
@@ -84,8 +85,9 @@ if (! file.exists(specificprefixSourceFile) ) {
 ############
 # Prefixes #
 ###############################################################################
-# Construct list to hold the prefix namespaces, using format:prefixPREFIXNAME with key .
-# Columns in source file: prefix,namespace
+# Construct list to hold the prefix namespaces, 
+# using format:prefixPREFIXNAME with key .
+# Sources: 1. Workbook sheet CubePrefixes 2. custom built on domain name
 # Vars. used  later in the construction of cube skeleton and cube obs.
 #   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
 #             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
@@ -139,55 +141,68 @@ DMrecode.list= list(
                             'max'='double'                         
      );
 
-
-# Output file : DC-Demog-R-Vn-n-(n).TTL . Also used in dcat:distribution
-DMdataCubeFileName  <- paste0("DC-Demog-R-V-",cubeVersion,".TTL")   
-DMdataCubeFile      <- paste0(dataDir,DMdataCubeFileName) # Full path to cube
+# Output file format: DC-<domain>-R-Vn-n-(n).TTL . Also used in dcat:distribution
+dataCubeFileName  <- paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL")   
+dataCubeFile      <- paste0(dataOut,dataCubeFileName) # Full path to cube
   
-storeDM = new.rdf(ontology=FALSE)  # Initialize
+store = new.rdf(ontology=FALSE)  # Initialize
 
-# register prefixes
-DMprefixlist= qb.def.prefixlist(storeDM, prefixSource)
+# Register prefixes
+prefixlist= qb.def.prefixlist(store, prefixes)
 
 ############
 # Skeleton #
 ###############################################################################
-# Read the skeleton  specifications from CSV to dataframe
-# Source in file: compType, compName, compLabel
+# Read the skeleton  specifications to dataframe
+# Source workbook: compType, compName, compLabel
 # TODO: Replace some use of compLabel with a var : compNameClass, formed by
-#     : Upcase of first letter of the compName value.
-#TW DMskeletonSource = read.csv(DMskeletonSourceFile) 
-#TODO: Convert "DM-Components" to parameter. Sheet name to match cube name "demog"?
-DMCubeMetadata = read.xlsx(RDFCubeWorkbook,sheetName="DM-Components")
+#       Upcase of first letter of the compName value.
+cubeMetadata = read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"))
 # Subset to the dimensions, attributes, and measure used to construct the skeleton
-DMSkeletonSource <-DMCubeMetadata[grep("dimension|attribute|measure", DMCubeMetadata$compType),]
+skeletonSource <-cubeMetadata[grep("dimension|attribute|measure", cubeMetadata$compType),]
 
-DMdsdName <- "dsd-demog"
+#Cube metadata. Inefficient but works
+dfcubeDescription<-cubeMetadata[grep("description", cubeMetadata$compName),]
+cubeDescription <- toString(dfcubeDescription$compLabel)
 
-DMobsData = read.csv(DMobsFile) 
-names(DMobsData)= tolower(names(DMobsData))
+dfcubeComment<-cubeMetadata[grep("comment", cubeMetadata$compName),]
+cubeComment<- toString(dfcubeComment$compLabel)
 
-qb.buildSkeleton(storeDM, DMprefixlist, DMobsData, DMSkeletonSource)
+dfcubeLabel<-cubeMetadata[grep("label", cubeMetadata$compName),]
+cubeLabel<-toString(dfcubeLabel$compLabel)
 
-qb.buildDSD(storeDM, DMprefixlist, DMobsData, DMSkeletonSource,
-            dsdURIwoprefix="dataset-demog",
-            dsdName=DMdsdName,
-            extra=list(description="Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)",
-comment="Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a",
-label="Demographics results data set.",
-distribution=DMdataCubeFileName,
-obsfilename=DMobsFile,
-title="Demographics Analysis Results"
- ),
+
+dfcubeTitle<-cubeMetadata[grep("title", cubeMetadata$compName),]
+cubeTitle<-toString(dfcubeTitle$compLabel)
+
+obsData = read.csv(obsFile) 
+names(obsData)= tolower(names(obsData))
+
+qb.buildSkeleton(store, prefixlist, obsData, skeletonSource)
+
+# Issue How to handle multiple terminlogy files for code list generation?
+qb.buildDSD(store, prefixlist, obsData, skeletonSource,
+            dsdURIwoprefix=paste0("dataset-",domainName),
+            dsdName=paste0("dsd-",domainName),
+            extra=list(description=cubeDescription,
+              comment=cubeComment,
+              label=cubeLabel,
+              distribution=dataCubeFileName,
+              obsfilename=obsFile,
+              title=cubeTitle
+               ),
 remote.endpoint=endpoint
-            )
+#            codelist.source=sdtm.terminology
+          )
 
-qb.buildObservations( store=storeDM, prefixlist=DMprefixlist, obsData=DMobsData, skeletonSource=DMSkeletonSource, dsdURIwoprefix="dataset-demog", recode.list=DMrecode.list, procedure2format=procedure2format )
+qb.buildObservations( store=store, prefixlist=prefixlist, obsData=obsData, skeletonSource=skeletonSource, dsdURIwoprefix=paste0("dataset-", domainName), recode.list=recode.list, procedure2format=procedure2format )
+
+
 
 ##########
 # Output #
 ###############################################################################
-DMoutcube = save.rdf(storeDM, filename=DMdataCubeFile, format="TURTLE")
+outcube = save.rdf(store, filename=dataCubeFile, format="TURTLE")
 
 ###############################################################################
 ```
@@ -198,13 +213,13 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 
 ```{r, echo=FALSE, results='asis'}
 
-checkDM = new.rdf(ontology=FALSE)  # Initialize
-load.rdf(DMdataCubeFile, format="TURTLE", appendTo= checkDM)
-summarize.rdf(checkDM)
+checkCube = new.rdf(ontology=FALSE)  # Initialize
+load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
+summarize.rdf(checkCube)
 
 
 ## ------------------------------------------------------------------------
-
+#TW Need to change the following to use <domainName> instead of DM
 myprefixes= list(
  "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
  "skos"="http://www.w3.org/2004/02/skos/core#" ,
@@ -218,17 +233,17 @@ myprefixes= list(
  "dct"= "http://purl.org/dc/terms/" ,
  "mms"= "http://rdf.cdisc.org/mms#" ,
  "cts"= "http://rdf.cdisc.org/ct/schema#" ,
- "dccs"="http://www.example.org/dc/demog/dccs/" ,
+ "dccs"="http://www.example.org/dc/DM/dccs/" ,
  "code"="http://www.example.org/dc/code/" ,
- "ds"=  "http://www.example.org/dc/demog/dataset/" ,
- "prop"="http://www.example.org/dc/demog/prop/",
- "valid"="http://www.example.org/dc/demog/valid/"
+ "ds"=  "http://www.example.org/dc/DM/dataset/" ,
+ "prop"="http://www.example.org/dc/DM/prop/",
+ "valid"="http://www.example.org/dc/DM/valid/"
 )  ;
 
 
 forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
 
-cube.observations1= sparql.rdf(checkDM,
+cube.observations1= sparql.rdf(checkCube,
    paste( forsparqlprefix,
      "select * where {?s ?p ?o .} limit 10"
      )
@@ -236,7 +251,7 @@ cube.observations1= sparql.rdf(checkDM,
 knitr::kable(head(cube.observations1, 10))
 
 
-cube.observations2= sparql.rdf(checkDM,
+cube.observations2= sparql.rdf(checkCube,
    paste( forsparqlprefix,
      "select * where { ?s a qb:Observation ; ?p ?o .}"
      )

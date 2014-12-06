@@ -1,14 +1,14 @@
 
 
 ## removing function qb.addprefix, as the functions uses assign, which is not recommended MJA 2014-11-16
-## qb.addprefix<- function(prefixSource) {
-## for (i in 1:nrow(prefixSource))
+## qb.addprefix<- function(prefixes) {
+## for (i in 1:nrow(prefixes))
 ## {
-##   tempName <-paste0("prefix",toupper(prefixSource[i,"prefix"]))
-##   assign(tempName,as.character(prefixSource[i,"namespace"]), envir=globalenv()) # MJA 2014-10-13
+##   tempName <-paste0("prefix",toupper(prefixes[i,"prefix"]))
+##   assign(tempName,as.character(prefixes[i,"namespace"]), envir=globalenv()) # MJA 2014-10-13
 ##   # Use as.character to get the enquoting needed by the function
-##   add.prefix(store,as.character(prefixSource[i,"prefix"]),
-##              as.character(prefixSource[i,"namespace"]))
+##   add.prefix(store,as.character(prefixes[i,"prefix"]),
+##              as.character(prefixes[i,"namespace"]))
 ## }
 ## invisible(TRUE)
 ## }
