@@ -10,17 +10,50 @@ vignette: >
 ---
 
 
+
 ## Prelimnaries
-write more here
 
-## Download the CDISC standards in RDF
+### Make local copy of the rdf.cdisc.org
+Here is how to make a local copy of the rdf.cdisc.org - with Bash Shell on Linux.
 
-The code below assumes that the CDISC standards in RDF are downloaded to the directory ~/projects/phrmwg.
 
-```
-cd ~/projects/phrmwg
+```{r get-rdf-cdisc-org.sh, eval=FALSE, engine='bash'}
+echo change below to suit your setup
+export CDISCRDF_HOME=~/projects/phrmwg
+echo only if directory does not exist 
+mkdir -p ${CDISCRDF_HOME}  
+cd ${CDISCRDF_HOME}
+
 git clone https://github.com/phuse-org/rdf.cdisc.org.git
+
+mkdir rdf-data-cube
+cd rdf-data-cube
+wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab/cube.ttl
+cd ..
 ```
+
+
+### Make apache jena TDB store
+
+
+```{r load-into-tdb.sh, eval=FALSE, engine='bash'}
+mkdir tdb
+
+export JENA_HOME=/opt/apache-jena-2.12.1
+${JENA_HOME}/bin/tdbloader2 --loc tdb rdf.cdisc.org/*/*.{ttl,owl} rdf-data-cube/*.ttl 
+```
+
+### Start fuseki using TDB store
+
+Start fuseki pointing to the TDB store created - note the update option makes it possible to upload triples as, say, turtle files.
+
+
+```{r start-fuseki.sh, eval=FALSE, engine='bash'}
+cd ${CDISCRDF_HOME}
+export FUSEKI_HOME=/opt/jena-fuseki-1.1.1
+${FUSEKI_HOME}/fuseki-server --pages=${FUSEKI_HOME}/pages --update --loc=tdb /cdisc
+```
+
 
 ## Finding the files
 
@@ -31,87 +64,43 @@ Also change below in R code.
 find ~/projects/phrmwg/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
 ```
 
-## Create dataset with files to import
-
-
-
-```{r, results='asis', eval=TRUE}
-
-CDISCfilelist<- c( "rdf.cdisc.org/resources/w3.org/skos.rdf", 
-"rdf.cdisc.org/resources/dublincore.org/dcam.rdf", 
-"rdf.cdisc.org/resources/dublincore.org/dcelements.rdf", 
-"rdf.cdisc.org/resources/dublincore.org/dcterms.rdf", 
-"rdf.cdisc.org/terminology-2013-06-28/glossary-terminology.owl", 
-"rdf.cdisc.org/terminology-2013-06-28/cdash-terminology.owl", 
-"rdf.cdisc.org/terminology-2013-06-28/sdtm-terminology.owl", 
-"rdf.cdisc.org/terminology-2013-06-28/qs-terminology.owl", 
-"rdf.cdisc.org/terminology-2013-06-28/send-terminology.owl", 
-"rdf.cdisc.org/terminology-2013-06-28/adam-terminology.owl", 
-"rdf.cdisc.org/std/sdtm-1-2.ttl",
-"rdf.cdisc.org/std/all-standards.ttl",
-"rdf.cdisc.org/std/cdash-1-1.ttl",
-"rdf.cdisc.org/std/sdtmig-3-1-3.ttl",
-"rdf.cdisc.org/std/sdtmig-3-1-2.ttl",
-"rdf.cdisc.org/std/adamig-1-0.ttl",
-"rdf.cdisc.org/std/sendig-3-0.ttl",
-"rdf.cdisc.org/std/sdtm-1-3.ttl",
-"rdf.cdisc.org/std/adam-2-1.ttl", 
-"rdf.cdisc.org/schemas/ct-schema.owl", 
-"rdf.cdisc.org/schemas/meta-model-schema.owl", 
-"rdf.cdisc.org/schemas/cdisc-schema.owl"
-                  )
-
-format.from.ext<- list("ttl"="TURTLE", "rdf"="RDF/XML", "owl"="RDF/XML", "n3"="N3")
-
 ```
 
-### Create local version using RRDF from local directory conting rdf.cdisc.org
+## Create local version using RRDF from local directory conting rdf.cdisc.org
 
 First load the files in a rrdf store.
 
 ```{r, results='asis', eval=TRUE}
 
+# change as appropriate
+# in my setup the phrmwg directory contains a git pull of rdf.cdisc.org
+
 library(rrdf)
 library(tools)
 
-cdisc.rdf <- new.rdf(ontology=FALSE)
-# change as appropriate
-# in my setup the phrmwg directory contains a git pull of rdf.cdisc.org
-cdisc.files.dir<- "/home/ma/projects/phrmwg/"
-
-for (fn in CDISCfilelist) {
-  cat(paste0("Loading ", fn, " ..", sep=""))
-  load.rdf(paste0(cdisc.files.dir, fn, sep=""), format=format.from.ext[[ file_ext(fn) ]], appendTo=cdisc.rdf )
-  cat(" done\n",sep="");
-}
-
-cat("Stored rdf.cdisc.org: ", summarize.rdf(cdisc.rdf),"\n")
-
-cdisc.save.ttl<- "cdisc-rdf.ttl"
-cdisc.out <- save.rdf(cdisc.rdf, filename=cdisc.save.ttl, format="TURTLE")
-cdisc.save.zip<- paste0(file_path_sans_ext(cdisc.save.ttl),".zip",sep="")
-zip( cdisc.save.zip, files=c(cdisc.save.ttl) )
-
+cdisc.save.zip<- Create.cdisc.standards.from.local()
+cdisc.save.zip.info<- file.info(cdisc.save.zip)
+message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size ", cdisc.save.zip.info$size, " bytes")
 ```
+
+
+The code below shows the call for loading the zipped rdf file and store in triple store.
+This is currently handled in the .onLoad function for the package. The rrdf model is then stored in the package environment.
 
 ```{r, results='asis', eval=TRUE}
 
-cdisc.test.rdf = new.rdf(ontology=FALSE)
-unzip( cdisc.save.zip, files=c(cdisc.save.ttl) )
-load.rdf(cdisc.save.ttl, format="TURTLE", appendTo=cdisc.test.rdf )
-
-cat("Loaded rdf.cdisc.org: ", summarize.rdf(cdisc.test.rdf),"\n")
+cdisc.rdf<- Load.cdisc.standards()
 
 # need more code to compare the two models ...
 
 ```
 
 
-### Create local version using SPARQL
+## Create local version using SPARQL
 
 The code below does not work.
 
-```{r, results='asis', eval=FALSE}
+```{r, results='asis', eval=TRUE}
 
 library (rrdf)
 # library (RCurl)
@@ -120,15 +109,34 @@ library (rrdf)
 
 URLstem<- "https://github.com/phuse-org/rdf.cdisc.org/raw/master"
 
-cdisc.rdf.store = new.rdf(ontology=FALSE)
-results = construct.rdf(cdisc.rdf.store, paste(
+SPARQLscript<- paste(
   "CONSTRUCT { ?s ?p ?o }",
-  "FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl>",
-  "FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/meta-model-schema.owl>", 
-  "FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl>",
-  "WHERE { ?s ?p ?o }"
-))
-str(results)
-print(results)
+paste0( "FROM ", "<", URLstem, "/", Get.filenames.for.cdisc.standards(), ">", collapse="\n" )
+  ,
+  "WHERE { ?s ?p ?o }", sep="\n", collapse="\n"
+)
+
+cat(SPARQLscript,"\n")
+writeLines( SPARQLscript, con=file.path(system.file("extdata/CDISC-standards-rdf", package="rrdfqbcrnd0"), "get-rdf.disc.org.rq" ) )
 
 ```
+
+
+The code below does not work with rrdf.
+
+```{r, results='asis', eval=FALSE}
+cdisc.rdf.store <- new.rdf(ontology=FALSE)
+results <- construct.rdf(cdisc.rdf.store, SPARQLscript )
+summarize.rdf(results)
+```
+
+But the generated SPARQL query works with arq:
+```
+export JENAROOT=/opt/apache-jena-2.12.1
+export PATH=$PATH:$JENAROOT/bin
+arq --query=get-rdf.disc.org.rq > construct-rdf.disc.org.ttl
+```
+
+Next step: compare the two models.
+
+
