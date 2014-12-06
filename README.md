@@ -46,6 +46,10 @@ Developing
 
 Here are the commands I use for developing (see also ggplot2 in references).
 
+TIP: Using ESS it is easy to single step the lines.
+
+TIP: Using rstudy it is easy to single step the lines.
+
 ```r
 library(devtools)
 library(knitr)
