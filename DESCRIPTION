@@ -11,7 +11,11 @@ Description: Creates and operates on RDF Data cube using rdf.cdisc.org
 Depends:
     R (>= 3.0.2)
 Imports:
-    rrdf
+    rrdf,
+    tools,
+    xlsx,
+    RCurl,
+    rJava
 License: MIT + file LICENSE
 LazyData: true
 Suggests:
@@ -19,9 +23,7 @@ Suggests:
     testthat,
     foreign,
     shiny,
-    xlsx,
-    XML,
-    RCurl
+    XML
 VignetteBuilder: knitr
 Packaged: 2014-11-02 22:35:08 UTC; ma
 Author: Marc Andersen [aut, cre],
