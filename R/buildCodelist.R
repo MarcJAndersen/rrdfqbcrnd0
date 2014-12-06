@@ -9,7 +9,7 @@
 ##' "SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query
 ##' @param nciDomainValue When codetype="DATA" the nciDomain used for identifying the codelist
 ##' @param dimName the name of the dimension - for codeType="DATA" the name of the variable in the data frame ObsData
-##' @param codelist.source Used when codetype="SDTM" to give the source of the terminology file
+##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
 buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, codelist.source)
@@ -46,11 +46,25 @@ buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimNa
 		  }'
       )
 
-    #DEL codeSource = as.data.frame(sparql.remote(codelist.source, query))
-    codeSource = as.data.frame(sparql.rdf(codelist.source, query))
+    if (! is.null(remote.endpoint) ) {
+    codeSource = as.data.frame(sparql.remote(remote.endpoint, query))
+  } else {
+    Get.env.cdiscstandards.R() # this is only needed first time the local environment is used
+    codeSource = as.data.frame(sparql.rdf(env$cdiscstandards, query))
+    ## message("Result of sparql using local store")
+    ## print(codeSource)
+    ## print(str(codeSource))
+    ## print(typeof(codeSource))
+    ## print(is.data.frame(codeSource))
+  }
   }
 #  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
-  for (i in 1:nrow(codeSource)) {   codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"])) }
+##    print(codeSource)
+##  print(names(codeSource))
+  for (i in 1:nrow(codeSource)) {
+##    message( i, ": ", codeSource[i,"code"] )
+    codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"]))
+  }
 
   #############################################################################
   # SKELETON

@@ -28,7 +28,8 @@ qb.buildDSD<- function(store,
     obsfilename="the name of the input file",
     title="Demographics Analysis Results"
   ),
-  codelist.source
+remote.endpoint=NULL
+#  codelist.source
 ) {
 # -------------  DSD Component ------------------------------------------------
 # Loop through to create the dsd component for each dimension, measure, attribute
@@ -121,7 +122,9 @@ for (i in 1:nrow(skeletonSource)){
                 codeType=skeletonSource[i,"codeType"],
                 nciDomainValue=skeletonSource[i,"nciDomainValue"],
                 dimName=skeletonSource[i,"compName"],
-                codelist.source=codelist.source)
+                remote.endpoint=remote.endpoint                
+#                codelist.source=codelist.source
+                )
   }
 }
 invisible(TRUE)

@@ -10,42 +10,6 @@ vignette: >
 ---
 
 
-## Prelimnaries
-The present version uses a local version of the SDTM-Terminlogy file from 
-rdf.cdisc.org. converted from OWL to TTL 
-
-Here is how to make a local copy of the rdf.cdisc.org - with Bash Shell on Linux.
-
-
-```{r get-rdf-cdisc-org.sh, eval=FALSE, engine='bash'}
-echo change below to suit your setup
-export CDISCRDF_HOME=~/projects/phrmwg-cdisc 
-echo only if directory does not exist 
-mkdir -p ${CDISCRDF_HOME}  
-cd ${CDISCRDF_HOME}
-
-git clone https://github.com/phuse-org/rdf.cdisc.org.git
-
-mkdir rdf-data-cube
-cd rdf-data-cube
-wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab/cube.ttl
-cd ..
-
-mkdir tdb
-
-export JENA_HOME=/opt/apache-jena-2.12.1
-${JENA_HOME}/bin/tdbloader2 --loc tdb rdf.cdisc.org/*/*.{ttl,owl} rdf-data-cube/*.ttl 
-```
-
-Start fuseki pointing to the TDB store created - note the update option makes it possible to upload triples as, say, turtle files.
-
-
-```{r start-fuseki.sh, eval=FALSE, engine='bash'}
-cd ${CDISCRDF_HOME}
-export FUSEKI_HOME=/opt/jena-fuseki-1.1.1
-${FUSEKI_HOME}/fuseki-server --pages=${FUSEKI_HOME}/pages --update --loc=tdb /cdisc
-```
-
 ### How to run from command prompt when developing
 
 Start in the package root directory
@@ -85,7 +49,7 @@ knitr::knit2pdf("vignettes/dm-table-from-csv.Rmd")
 ## Code
 
 
-```{r}
+```{r, eval=TRUE}
 
 library (rrdf)
 library (xlsx)
@@ -97,17 +61,26 @@ library(rrdfqbcrnd0)
 #     Also used in cube name, dsd-<name>, and other places.
 domainName="DM"
 
-#------------  Declarations    ------------------------------------------------
-# NOTE: For pav:Version (dot, notdash) and output file name
-cubeVersion <- "0-5-3h"  # 0-5-3 using .XLSX for DM Skeleton  
+endpoint<- NULL # for using internal rdf.cdisc.org store
 
-sdtm.terminology.file = system.file("extdata/sample-cfg", 
-                                    "sdtm-terminology-2013-06-28.ttl", 
-                                    package="rrdfqbcrnd0")
-sdtm.terminology= load.rdf(sdtm.terminology.file, format="N3")
-# tempdir() not working on TW system. CHanged to getwd() + data subfolder
-# dataOut <- tempdir()  # Input and output files: Used by MJA
-dataOut <- paste0(getwd(), "/data/"  )  # Input and output files
+# NOTE: For pav:Version (dot, notdash) and output file name
+cubeVersion <- "0-5-3"  # 0-5-3 using .XLSX for DM Skeleton  
+
+# TODO: Differences between systems for tempdir() usage??
+# dataDir <- "C:/_gitHub/rrdfqbcrnd0/inst/extdata/"  # TW requires this.  
+dataDir <- tempdir()  # Input and output files: Used by MJA
+
+generalprefixSourceFile<- system.file("extdata/sample-cfg", "CommonCubePrefixes.csv", package="rrdfqbcrnd0")
+message("Reading from ", generalprefixSourceFile )
+if (! file.exists(generalprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", generalprefixSourceFile, " does not exist" ))
+  }
+specificprefixSourceFile<- system.file("extdata/sample-cfg", "AECubePrefixes.csv", package="rrdfqbcrnd0")
+if (! file.exists(specificprefixSourceFile) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", specificprefixSourceFile, " does not exist" ))
+  }
 
 ############
 # Prefixes #
@@ -118,31 +91,21 @@ dataOut <- paste0(getwd(), "/data/"  )  # Input and output files
 # Vars. used  later in the construction of cube skeleton and cube obs.
 #   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
 #             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
-RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkBook.xlsx", 
-                              package="rrdfqbcrnd0")
-if (! file.exists(RDFCubeWorkbook) ) {
-     # consider using try instead
-    stop( paste0("Expected file ", RDFCubeWorkbook, " does not exist" ))
-}
+generalprefixSource = read.csv(generalprefixSourceFile) 
+specificprefixSource= read.csv(specificprefixSourceFile)
+prefixSource= rbind(generalprefixSource, specificprefixSource)
 
-# Prefixes common to all cubes (regardless of domain) 
-common.prefixes = read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
 
-# Domain-specific prefixes:for /prop/, /dccs/ and /dataset/
-custom.prefixes <-data.frame(prefix=c("prop", "dccs", "ds"),
-        namespace=c(paste0("http://www.example.org/dc/",domainName,"/prop/"),
-                    paste0("http://www.example.org/dc/",domainName,"/dccs/"),
-                    paste0("http://www.example.org/dc/",domainName,"/dataset/")
-                    ))
-prefixes=rbind(common.prefixes, custom.prefixes)                                                
+#TW DMskeletonSourceFile <- system.file("extdata/sample-cfg", "skeletonSource-DM.csv", package="rrdfqbcrnd0")
+# SWitching over from .csv to .XLSX
+RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
 
-# Cube Observation data 
-# TODO: File name should become a parameter, not hard coded as DM.AR.CSV
-# Naming files using domainName?  <domainName>.AR.CSV may be too restrictive
-obsFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+# Cube Observation data       
+DMobsFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
 
-#TODO: Get the following from some other data - eg. stored in the cube?
-recode.list= list(
+
+# should maybe get that from some other data - eg. stored in the cube
+DMrecode.list= list(
     "sex"=list( 'F'='sex-F','M'='sex-M', '_ALL_'='sex-_ALL_' ),
     "race"= list('WHITE'='race-WHITE',
                        'BLACK OR AFRICAN AMERICAN'='race-BLACK_OR_AFRICAN_AMERICAN',
@@ -228,10 +191,13 @@ qb.buildDSD(store, prefixlist, obsData, skeletonSource,
               obsfilename=obsFile,
               title=cubeTitle
                ),
-            codelist.source=sdtm.terminology
+remote.endpoint=endpoint
+#            codelist.source=sdtm.terminology
           )
 
 qb.buildObservations( store=store, prefixlist=prefixlist, obsData=obsData, skeletonSource=skeletonSource, dsdURIwoprefix=paste0("dataset-", domainName), recode.list=recode.list, procedure2format=procedure2format )
+
+
 
 ##########
 # Output #
