@@ -12,7 +12,16 @@
 ##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
-buildCodelist <- function(store,prefixlist,obsData,codeType,nciDomainValue,dimName, codelist.source)
+buildCodelist <- function(
+  store,
+  prefixlist,
+  obsData,
+  codeType,
+  nciDomainValue,
+  dimName,
+remote.endpoint  
+#  codelist.source
+  )
 {
   dimName <- tolower(dimName)        # dimName in all lower case is default
   capDimName <- capitalize(dimName)  # capDim used in Class name
