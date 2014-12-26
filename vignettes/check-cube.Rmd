@@ -57,6 +57,13 @@ check.cube<- function(
   
 ) {
 
+  obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep="")
+  dsURL= NULL
+  ds.dataset= "ds:dataset-demog"
+  qbfiledir= system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
+  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
+  domainName="demog"
+  RDFCubeWorkbook = NULL
 
 if (!is.null(RDFCubeWorkbook)) {
   common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
@@ -106,7 +113,8 @@ DataSet<-read.xport(obsFile)
 custom.prefixes <-Get.qb.crnd.prefixes(domainName)
 
 # Prefix for storing the results of check each measure in the data cube
-validation.mesure.prefix<- data.frame(prefix=c("validmeas"),
+
+  validation.mesure.prefix<- data.frame(prefix=c("validmeas"),
         namespace=c(paste0("http://www.example.org/dc/",domainName,"/validmeas/")
                             ))
 
@@ -162,7 +170,7 @@ select ?p ?cl ?prefLabel where {
 
 # cat(codelists.rq)
 
-cube.codelists= as.data.frame(sparql.rdf(cubeData, codelists.rq));
+cube.codelists<- as.data.frame(sparql.rdf(cubeData, codelists.rq));
 # print(cube.codelists)
 
 
@@ -187,7 +195,7 @@ cube.dimensionsattr<- sparql.rdf(cubeData,
 ));
 # print(cube.dimensionsattr)
 
-selectexpr=  paste(  "select * where {",
+selectexpr<-  paste(  "select * where {",
     "    ?s a qb:Observation  ;",
     paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
     paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";",sep=" ",collapse=" "),
@@ -200,7 +208,7 @@ selectexpr=  paste(  "select * where {",
            " . ", "}",
            sep=" ",collapse="\n"),
     "} " );
-# print(selectexpr)
+# cat(selectexpr)
 # print(  paste(forsparqlprefix, selectexpr ) )
 
 cube.observations<- sparql.rdf(cubeData,
