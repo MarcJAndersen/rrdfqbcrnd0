@@ -17,8 +17,8 @@ Get.qb.crnd.prefixes<- function(
 custom.prefixes <-data.frame(
   prefix=c(general.prefixes, domain.prefixes),
   namespace=c(
-    paste0(namespaceStem,general.prefixes) ,
-    paste0(namespaceStem,domainName,"/",domain.prefixes)
+    paste0(namespaceStem,general.prefixes,"/") ,
+    paste0(namespaceStem,domainName,"/",domain.prefixes,"/")
     )
   )
 
