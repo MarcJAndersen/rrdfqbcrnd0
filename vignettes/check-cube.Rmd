@@ -59,21 +59,17 @@ check.cube<- function(
 
 
 if (!is.null(RDFCubeWorkbook)) {
-  print(RDFCubeWorkbook)
   common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
   cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"))
   metadataSource <-cubeMetadata[grep("metadata", cubeMetadata$compType),]
   if (is.null(obsFile)) {
     obsFile<- metadataSource[ metadataSource$compName=="wasDerivedFrom", "compLabel" ]
-    print(obsFile)
   }
   if (is.null(qbfile)) {
     qbfile<-  file.path(qbfiledir,metadataSource[ metadataSource$compName=="dataCubeFileName", "dataCubeFileName"] ) 
-    print(qbfile)
   }
   if (is.null(dsURL)) {
     dsURL<-  metadataSource[ metadataSource$compName=="obsURL", "dataCubeFileName" ]
-    print(dsURL)
   }
 } else {
   data(qbCDISCprefixes)
@@ -81,7 +77,6 @@ if (!is.null(RDFCubeWorkbook)) {
     prefix=gsub("^prefix","",names(qbCDISCprefixes)),
     namespace=as.character(qbCDISCprefixes )
     )
-  common.prefixes
 }  
 
 
@@ -108,14 +103,9 @@ DataSet<-read.xport(obsFile)
 
 
 # Domain-specific prefixes:for /code/, /prop/, /dccs/ and /dataset/
-custom.prefixes <-data.frame(prefix=c("code", "prop", "dccs", "ds"),
-        namespace=c(paste0("http://www.example.org/dc/","code/"),
-                    paste0("http://www.example.org/dc/",domainName,"/prop/"),
-                    paste0("http://www.example.org/dc/",domainName,"/dccs/"),
-                    paste0("http://www.example.org/dc/",domainName,"/dataset/")
-                    ))
+custom.prefixes <-Get.qb.crnd.prefixes(domainName)
 
-# Prefix for doing the check of the data cube
+# Prefix for storing the results of check each measure in the data cube
 validation.mesure.prefix<- data.frame(prefix=c("validmeas"),
         namespace=c(paste0("http://www.example.org/dc/",domainName,"/validmeas/")
                             ))
@@ -125,7 +115,6 @@ prefixes<- rbind(common.prefixes, custom.prefixes, validation.mesure.prefix)
 forsparqlprefix<- paste("prefix", paste(prefixes$prefix,":",sep=""), paste("<",prefixes$namespace,">",sep=""),sep=" ",collapse="\n")
 
 # cat(forsparqlprefix)
-
 # The qbfile also contains prefixes, which are part of the model
 # So not adding the prefixes to the model, but using them for adding further
 # information to the model when deriving statistics
