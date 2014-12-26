@@ -18,20 +18,38 @@ knit("vignettes/check-cube.Rmd")
 
 ```{r, results='asis', eval=TRUE}
 
+options(width=200) # long lines
+
+library (xlsx)
 library(foreign)
 library(RCurl)
 
 library(rrdf)
 library(rrdfqbcrnd0)
 
+debug.add.data.triple<- function( cubeData,
+subject,
+predicate,
+data, type) {
 
+print(cbind(subject=subject,predicate=predicate,data=data,type=type))
+      
+add.data.triple( cubeData,
+subject=subject,
+predicate=predicate,
+data=data, type=type)
+
+} 
+ 
 check.cube<- function(
-  fnxptDataSet=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
+  obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
   dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt",
   ds.dataset= "ds:dataset-demog",
+  qbfiledir= system.file("extdata/sample-rdf", package="rrdfqbcrnd0"),
   qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
-  domainName="demog"
-#  fnxptDataSet=paste(tempdir(),"/", "adae", ".xpt",sep=""),
+  domainName="demog",
+  RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+#  obsFile=paste(tempdir(),"/", "adae", ".xpt",sep=""),
 #  dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt",
 #  ds.dataset= "ds:dataset-ae",
 #  qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0")
@@ -40,14 +58,42 @@ check.cube<- function(
 ) {
 
 
+if (!is.null(RDFCubeWorkbook)) {
+  print(RDFCubeWorkbook)
+common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
+cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"))
+metadataSource <-cubeMetadata[grep("metadata", cubeMetadata$compType),]
+if (is.null(obsFile)) {
+obsFile<- metadataSource[ metadataSource$compName=="wasDerivedFrom", "compLabel" ]
+print(obsFile)
+}
+if (is.null(qbfile)) {
+qbfile<-  file.path(qbfiledir,metadataSource[ metadataSource$compName=="dataCubeFileName", "dataCubeFileName"] ) 
+print(qbfile)
+}
+if (is.null(dsURL)) {
+dsURL<-  metadataSource[ metadataSource$compName=="obsURL", "dataCubeFileName" ]
+print(dsURL)
+}
+} else {
+
+data(qbCDISCprefixes)
+common.prefixes <- data.frame(prefix=gsub("^prefix","",names(qbCDISCprefixes)),namespace=as.character(qbCDISCprefixes ))
+common.prefixes
+}  
+
+
 if (! is.null(dsURL) ) {
    if (! url.exists(dsURL) ) {
       stop(paste0("Can not access URL ",dsURL))
    }
-   download.file( dsURL, fnxptDataSet, method="curl")
+   download.file( dsURL, obsFile, method="curl")
 }
 
-DataSet=read.xport(fnxptDataSet)
+if (! file.exists(obsFile)) {
+  stop(paste0("Expected file ", obsFile, " does not exist"))
+  }
+DataSet<-read.xport(obsFile)
 
 ## library(Hmisc)
 ## DataSet <- sasxport.get(fnDataSet)
@@ -58,30 +104,32 @@ DataSet=read.xport(fnxptDataSet)
 # str(DataSet)
 
 
-cubeData = new.rdf(ontology=FALSE)
 
-data(qbCDISCprefixes)
-
-RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-common.prefixes = read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
-# Domain-specific prefixes:for /prop/, /dccs/ and /dataset/
-custom.prefixes <-data.frame(prefix=c("prop", "dccs", "ds"),
-        namespace=c(paste0("http://www.example.org/dc/",domainName,"/prop/"),
+# Domain-specific prefixes:for /code/, /prop/, /dccs/ and /dataset/
+custom.prefixes <-data.frame(prefix=c("code", "prop", "dccs", "ds"),
+        namespace=c(paste0("http://www.example.org/dc/","code/"),
+                    paste0("http://www.example.org/dc/",domainName,"/prop/"),
                     paste0("http://www.example.org/dc/",domainName,"/dccs/"),
                     paste0("http://www.example.org/dc/",domainName,"/dataset/")
                     ))
+
 # Prefix for doing the check of the data cube
-check.prefix<- data.frame(prefix=c("valid"),
-        namespace=c(paste0("http://www.example.org/dc/",domainName,"/valid/")
+validation.mesure.prefix<- data.frame(prefix=c("validmeas"),
+        namespace=c(paste0("http://www.example.org/dc/",domainName,"/validmeas/")
                             ))
 
-prefixes<- rbind(common.prefixes, custom.prefixes, check.prefix)
-
-# print(prefixes)
-
+prefixes<- rbind(common.prefixes, custom.prefixes, validation.mesure.prefix)
 
 forsparqlprefix<- paste("prefix", paste(prefixes$prefix,":",sep=""), paste("<",prefixes$namespace,">",sep=""),sep=" ",collapse="\n")
 
+cat(forsparqlprefix)
+
+# The qbfile also contains prefixes, which are part of the model
+# So not adding the prefixes to the model, but using them for adding further
+# information to the model when deriving statistics
+
+cubeData = new.rdf(ontology=FALSE)
+myprefixes<- qb.def.prefixlist(cubeData, prefixes )
 load.rdf( qbfile, format="N3", appendTo= cubeData)
 # summarize.rdf(cubeData)
 
@@ -92,10 +140,6 @@ cube.observations1<- sparql.rdf(cubeData,
      "select * where {?s ?p ?o .} limit 10"
      )
    );
-print(   paste( forsparqlprefix,
-     "select * where {?s ?p ?o .} limit 10"
-     )
-)
 # print(cube.observations1)
 
 
@@ -107,31 +151,14 @@ cube.observations2<- sparql.rdf(cubeData,
 # print(cube.observations2)
 
 ## get the dimensions
-cube.dimensions= sparql.rdf(cubeData,
+cube.dimensions<- sparql.rdf(cubeData,
   paste(forsparqlprefix,
 "select * where { [] qb:dimension ?p .  }"
 ));
 # print(cube.dimensions)
 
-## prop:trt01a  a       rdf:Property , qb:DimensionProperty ;
-##         rdfs:label   "Treatment Arm" ;
-##         rdfs:range   code:Trt01a ;
-##         qb:codeList  code:trt01a .
-
-
-
-# this will be made generic based on the dimensions in the cube
-## subsetting.dimensions<- list(
-##   "saffl"="code:saffl-_ALL_",
-##   "trt01a"="code:trt01a-_ALL_",
-##   "race"="code:race-_ALL_",
-##   "sex"="code:sex-_ALL_"
-##   )
-
-
 ## get the codelist
-cube.codelists= as.data.frame(sparql.rdf(cubeData,
-  paste(forsparqlprefix,
+codelists.rq<-   paste(forsparqlprefix,
 '
 select ?p ?cl ?prefLabel where {
 [] qb:dimension ?p.
@@ -140,7 +167,11 @@ select ?p ?cl ?prefLabel where {
 ?cl skos:prefLabel ?prefLabel.
 }
 '
-)));
+)
+
+cat(codelists.rq)
+
+cube.codelists= as.data.frame(sparql.rdf(cubeData, codelists.rq));
 # print(cube.codelists)
 
 
@@ -186,7 +217,8 @@ cube.observations<- sparql.rdf(cubeData,
   );
 
 # print(head(cube.observations))
-# str(cube.observations)
+str(cube.observations)
+
 
 # cts:cdiscSubmissionValue could also be used instead of skos:prefLabel
 # by code:saffl-Y does not have cts:cdiscSubmissionValue
@@ -206,16 +238,16 @@ univfunc2= list(
   )
 
 
-for (r in  1: nrow(cube.observations )  ) {
+for (r in  1:nrow(cube.observations )  ) {
 thisrow<-  cube.observations[r,]
 # print(thisrow)
 
 data.subset.logical= rep(TRUE, nrow(DataSet))
 for (v in names(subsetting.dimensions)) {
-  # print( c(v, thisrow[v ],  subsetting.dimensions[[ v ]] ) )
+#   print( c(v, thisrow[v ],  subsetting.dimensions[[ v ]] ) )
   if ( thisrow[v ] != subsetting.dimensions[[ v ]] ) {
-  # print( paste0(v, ": ", thisrow[v ], " = ", thisrow[ paste0(v,"value") ]))
-  # print( DataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
+#   print( paste0(v, ": ", thisrow[v ], " = ", thisrow[ paste0(v,"value") ]))
+#   print( DataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
     data.subset.logical= data.subset.logical & ( DataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
   }
 }
@@ -262,23 +294,21 @@ for (v in names(denom.def)) {
 }
 
 
-# print( gsub("ds:", myprefixes$ds, thisrow["s"]) )
-# print( gsub("valid:", myprefixes$valid, "valid:result") )
-# print( paste(result) )
 
 if (has.result) {
-# print(paste0("result", result, sep=" "))
-add.data.triple( cubeData,
-subject=gsub("ds:", myprefixes$ds, thisrow["s"]), # add triple does not resolve prefix
-predicate=gsub("valid:", myprefixes$valid, "valid:result"),
+print(paste("result", result, sep=" "))
+debug.add.data.triple( cubeData,
+subject=gsub("ds:", myprefixes$prefixDS, thisrow["s"]), # add triple does not resolve prefix
+predicate=gsub("validmeas:", myprefixes$prefixVALIDMEAS, "validmeas:result"),
 data=paste(result), type="float")
 } else {
-#  print( paste( thisrow["s"], ifelse(has.result, result, "No result determined") ) )
+ print( paste( thisrow["s"], ifelse(has.result, result, "No result determined") ) )
 }
 
 
 } # for
-cube.check= sparql.rdf(cubeData,
+
+cube.measure.result<-  sparql.rdf(cubeData,
   paste(forsparqlprefix,
     "select * where {",
     "    ?s a qb:Observation  ;",
@@ -292,7 +322,29 @@ cube.check= sparql.rdf(cubeData,
 #    "       prop:denominator  ?denominator ;",
 #    "       prop:factor       ?factor ;       ",
     "       prop:measure      ?measure ;      ",
-    "      optional{ ?s valid:result      ?result }      ",
+    "      optional{ ?s validmeas:result      ?result }      ",
+    "} order by ?s"
+                )
+  );
+
+print(cube.measure.result)
+
+
+cube.check<- sparql.rdf(cubeData,
+  paste(forsparqlprefix,
+    "select * where {",
+    "    ?s a qb:Observation  ;",
+    paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
+#    "       prop:saffl        ?saffl ;        ",
+#    "       prop:trt01a       ?trt01a ;       ",
+#    "       prop:race         ?race ;         ",
+#    "       prop:sex          ?sex ;          ",
+#    "       prop:procedure    code:procedure-PERCENT ;",
+#    "       prop:procedure    ?procedure ;    ",
+#    "       prop:denominator  ?denominator ;",
+#    "       prop:factor       ?factor ;       ",
+    "       prop:measure      ?measure ;      ",
+    "      optional{ ?s validmeas:result      ?result }      ",
     " filter ( ?measure != ?result ) ",
     "} order by ?s"
                 )
@@ -307,37 +359,42 @@ cube.check
 
 
 check.cube(
-   fnxptDataSet=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
+   obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
    dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt",
    ds.dataset= "ds:dataset-demog",
  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
- domain="demog"
- )
-
- check.cube(
- fnxptDataSet=paste(tempdir(),"/", "adae", ".xpt",sep=""),
- dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt",
- ds.dataset= "ds:dataset-ae",
- qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0"),
- domain="ae"
+ domain="demog",
+ RDFCubeWorkbook=NULL
  )
 
 check.cube(
-  fnxptDataSet=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
-  dsURL= NULL,
-  ds.dataset= "ds:dataset-demog",
-qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
-domain="demog"
-)
-
-check.cube(
-fnxptDataSet=paste(tempdir(),"/", "adae", ".xpt",sep=""),
-dsURL=  NULL,
+obsFile=paste(tempdir(),"/", "adae", ".xpt",sep=""),
+dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt",
 ds.dataset= "ds:dataset-ae",
 qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0"),
-domain="ae"
+domain="ae",
+RDFCubeWorkbook=NULL
 )
+
+check.cube(
+  obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
+  dsURL= NULL,
+  ds.dataset= "ds:dataset-demog",
+  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
+  domain="demog",
+  RDFCubeWorkbook=NULL
+ )
+
+check.cube(
+ obsFile=paste(tempdir(),"/", "adae", ".xpt",sep=""),
+ dsURL=  NULL,
+ ds.dataset= "ds:dataset-ae",
+ qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0"),
+ domain="ae",
+ RDFCubeWorkbook=NULL
+ )
 
 
 ```
 
+End of file.
