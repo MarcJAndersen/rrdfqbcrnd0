@@ -18,7 +18,9 @@ You will need to install some packages for development
 install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "xlsx" ) )
 ```
 
-This package uses the [rrdf](https://github.com/egonw/rrdf) package, which currently must be installed accoding to the instructions on the packages github page.
+Furthermore, the [rrdf](https://github.com/egonw/rrdf) package must be
+installed. The packages must be installed accoding to the instructions
+on the packages github page.
 
 
 To install the package use
@@ -47,11 +49,13 @@ For example of usage look in the vignettes directory.
 Developing
 ----------
 
-Here are the commands I use for developing (see also ggplot2 in references).
+Here are the commands I use for developing. The [ggplot2 development](http://cran.r-project.org/web/packages/ggplot2/vignettes/development.html) webpage also provides suggestions for development strategies.
 
-TIP: Using ESS it is easy to single step the lines.
+TIP: To single step line by line use ESS in emacs
 
-TIP: Using rstudy it is easy to single step the lines.
+TIP: To single step line by line use rstudio 
+
+
 
 ```r
 library(devtools)
