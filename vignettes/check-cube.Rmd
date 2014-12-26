@@ -60,26 +60,28 @@ check.cube<- function(
 
 if (!is.null(RDFCubeWorkbook)) {
   print(RDFCubeWorkbook)
-common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
-cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"))
-metadataSource <-cubeMetadata[grep("metadata", cubeMetadata$compType),]
-if (is.null(obsFile)) {
-obsFile<- metadataSource[ metadataSource$compName=="wasDerivedFrom", "compLabel" ]
-print(obsFile)
-}
-if (is.null(qbfile)) {
-qbfile<-  file.path(qbfiledir,metadataSource[ metadataSource$compName=="dataCubeFileName", "dataCubeFileName"] ) 
-print(qbfile)
-}
-if (is.null(dsURL)) {
-dsURL<-  metadataSource[ metadataSource$compName=="obsURL", "dataCubeFileName" ]
-print(dsURL)
-}
+  common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
+  cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"))
+  metadataSource <-cubeMetadata[grep("metadata", cubeMetadata$compType),]
+  if (is.null(obsFile)) {
+    obsFile<- metadataSource[ metadataSource$compName=="wasDerivedFrom", "compLabel" ]
+    print(obsFile)
+  }
+  if (is.null(qbfile)) {
+    qbfile<-  file.path(qbfiledir,metadataSource[ metadataSource$compName=="dataCubeFileName", "dataCubeFileName"] ) 
+    print(qbfile)
+  }
+  if (is.null(dsURL)) {
+    dsURL<-  metadataSource[ metadataSource$compName=="obsURL", "dataCubeFileName" ]
+    print(dsURL)
+  }
 } else {
-
-data(qbCDISCprefixes)
-common.prefixes <- data.frame(prefix=gsub("^prefix","",names(qbCDISCprefixes)),namespace=as.character(qbCDISCprefixes ))
-common.prefixes
+  data(qbCDISCprefixes)
+  common.prefixes <- data.frame(
+    prefix=gsub("^prefix","",names(qbCDISCprefixes)),
+    namespace=as.character(qbCDISCprefixes )
+    )
+  common.prefixes
 }  
 
 
@@ -122,7 +124,7 @@ prefixes<- rbind(common.prefixes, custom.prefixes, validation.mesure.prefix)
 
 forsparqlprefix<- paste("prefix", paste(prefixes$prefix,":",sep=""), paste("<",prefixes$namespace,">",sep=""),sep=" ",collapse="\n")
 
-cat(forsparqlprefix)
+# cat(forsparqlprefix)
 
 # The qbfile also contains prefixes, which are part of the model
 # So not adding the prefixes to the model, but using them for adding further
@@ -169,7 +171,7 @@ select ?p ?cl ?prefLabel where {
 '
 )
 
-cat(codelists.rq)
+# cat(codelists.rq)
 
 cube.codelists= as.data.frame(sparql.rdf(cubeData, codelists.rq));
 # print(cube.codelists)
@@ -217,7 +219,7 @@ cube.observations<- sparql.rdf(cubeData,
   );
 
 # print(head(cube.observations))
-str(cube.observations)
+# str(cube.observations)
 
 
 # cts:cdiscSubmissionValue could also be used instead of skos:prefLabel
@@ -274,7 +276,7 @@ if (thisrow["procedure"] %in% names(univfunc1) ) {
 #  denom.def<- thisrow[ c("saffl", "trt01a", "race", "sex" ) ]
 #  denom.def<- thisrow[ c( "trt01a", "race", "sex" ) ]
   denom.def<- thisrow[ names(subsetting.dimensions) ]
-  
+
   denom.def[ tolower(thisrow["denominator"]) ] =paste0("code:",tolower(thisrow["denominator"]),"-_ALL_",sep="")
   AOD= DataSet[data.subset.logical,] # should use a variable name - USUBJID like for count
 
@@ -296,13 +298,13 @@ for (v in names(denom.def)) {
 
 
 if (has.result) {
-print(paste("result", result, sep=" "))
-debug.add.data.triple( cubeData,
+# print(paste("result", result, sep=" "))
+add.data.triple( cubeData,
 subject=gsub("ds:", myprefixes$prefixDS, thisrow["s"]), # add triple does not resolve prefix
 predicate=gsub("validmeas:", myprefixes$prefixVALIDMEAS, "validmeas:result"),
 data=paste(result), type="float")
 } else {
- print( paste( thisrow["s"], ifelse(has.result, result, "No result determined") ) )
+#  print( paste( thisrow["s"], ifelse(has.result, result, "No result determined") ) )
 }
 
 
@@ -313,21 +315,13 @@ cube.measure.result<-  sparql.rdf(cubeData,
     "select * where {",
     "    ?s a qb:Observation  ;",
     paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
-#    "       prop:saffl        ?saffl ;        ",
-#    "       prop:trt01a       ?trt01a ;       ",
-#    "       prop:race         ?race ;         ",
-#    "       prop:sex          ?sex ;          ",
-#    "       prop:procedure    code:procedure-PERCENT ;",
-#    "       prop:procedure    ?procedure ;    ",
-#    "       prop:denominator  ?denominator ;",
-#    "       prop:factor       ?factor ;       ",
     "       prop:measure      ?measure ;      ",
     "      optional{ ?s validmeas:result      ?result }      ",
     "} order by ?s"
                 )
   );
 
-print(cube.measure.result)
+# print(cube.measure.result)
 
 
 cube.check<- sparql.rdf(cubeData,
@@ -335,14 +329,6 @@ cube.check<- sparql.rdf(cubeData,
     "select * where {",
     "    ?s a qb:Observation  ;",
     paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
-#    "       prop:saffl        ?saffl ;        ",
-#    "       prop:trt01a       ?trt01a ;       ",
-#    "       prop:race         ?race ;         ",
-#    "       prop:sex          ?sex ;          ",
-#    "       prop:procedure    code:procedure-PERCENT ;",
-#    "       prop:procedure    ?procedure ;    ",
-#    "       prop:denominator  ?denominator ;",
-#    "       prop:factor       ?factor ;       ",
     "       prop:measure      ?measure ;      ",
     "      optional{ ?s validmeas:result      ?result }      ",
     " filter ( ?measure != ?result ) ",
