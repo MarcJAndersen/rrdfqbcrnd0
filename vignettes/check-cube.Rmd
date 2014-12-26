@@ -9,7 +9,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-### Devloping
+### Developing
 Use
 ```{r eval=FALSE}
 library(knitr)
@@ -18,81 +18,156 @@ knit("vignettes/check-cube.Rmd")
 
 ```{r, results='asis', eval=TRUE}
 
-check.dm.cube<- function() {
-
 library(foreign)
 library(RCurl)
 
-# xptdirectory= "."
-xptdirectory= tempdir()
-fnadDataSet=paste(xptdirectory,"/", "adsl", ".xpt",sep="")
-dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt"
-# if (! url.exists(dsURL) ) {
-#   stop(paste0("Can not access URL ",dsURL))
-# }
-# write(getBinaryURL( dsURL ), file=fnadDataSet)
-download.file( dsURL, fnadDataSet, method="curl")
-
-adDataSet=read.xport(fnadDataSet)
-## library(Hmisc)
-## adDataSet <- sasxport.get(fnadDataSet)
-## # --- see what have got:
-## contents(adDataSet)
-## label(adDataSet)
-
-# str(adDataSet)
-
-
 library(rrdf)
 library(rrdfqbcrnd0)
+
+
+check.cube<- function(
+  fnxptDataSet=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
+  dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt",
+  ds.dataset= "ds:dataset-demog",
+  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
+  domainName="demog"
+#  fnxptDataSet=paste(tempdir(),"/", "adae", ".xpt",sep=""),
+#  dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt",
+#  ds.dataset= "ds:dataset-ae",
+#  qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0")
+#  domainName="ae"
+  
+) {
+
+
+if (! is.null(dsURL) ) {
+   if (! url.exists(dsURL) ) {
+      stop(paste0("Can not access URL ",dsURL))
+   }
+   download.file( dsURL, fnxptDataSet, method="curl")
+}
+
+DataSet=read.xport(fnxptDataSet)
+
+## library(Hmisc)
+## DataSet <- sasxport.get(fnDataSet)
+## # --- see what have got:
+## contents(DataSet)
+## label(DataSet)
+
+# str(DataSet)
+
 
 cubeData = new.rdf(ontology=FALSE)
 
 data(qbCDISCprefixes)
 
-myprefixes= c(qbCDISCprefixes, list(
- "dccs"="http://www.example.org/dc/demog/dccs/" ,
- "code"="http://www.example.org/dc/code/" ,
- "ds"=  "http://www.example.org/dc/demog/dataset/" ,
- "prop"="http://www.example.org/dc/demog/prop/",
- "valid"="http://www.example.org/dc/demog/valid/"
-  ))
+RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+common.prefixes = read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
+# Domain-specific prefixes:for /prop/, /dccs/ and /dataset/
+custom.prefixes <-data.frame(prefix=c("prop", "dccs", "ds"),
+        namespace=c(paste0("http://www.example.org/dc/",domainName,"/prop/"),
+                    paste0("http://www.example.org/dc/",domainName,"/dccs/"),
+                    paste0("http://www.example.org/dc/",domainName,"/dataset/")
+                    ))
+# Prefix for doing the check of the data cube
+check.prefix<- data.frame(prefix=c("valid"),
+        namespace=c(paste0("http://www.example.org/dc/",domainName,"/valid/")
+                            ))
 
-forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
+prefixes<- rbind(common.prefixes, custom.prefixes, check.prefix)
 
-qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
+# print(prefixes)
+
+
+forsparqlprefix<- paste("prefix", paste(prefixes$prefix,":",sep=""), paste("<",prefixes$namespace,">",sep=""),sep=" ",collapse="\n")
+
 load.rdf( qbfile, format="N3", appendTo= cubeData)
 # summarize.rdf(cubeData)
 
 
 ## ------------------------------------------------------------------------
-cube.observations1= sparql.rdf(cubeData,
+cube.observations1<- sparql.rdf(cubeData,
    paste( forsparqlprefix,
      "select * where {?s ?p ?o .} limit 10"
      )
    );
+print(   paste( forsparqlprefix,
+     "select * where {?s ?p ?o .} limit 10"
+     )
+)
 # print(cube.observations1)
 
 
-cube.observations2= sparql.rdf(cubeData,
+cube.observations2<- sparql.rdf(cubeData,
    paste( forsparqlprefix,
      "select * where { ?s a qb:Observation ; ?p ?o .} limit 10"
      )
    );
 # print(cube.observations2)
 
-
 ## get the dimensions
+cube.dimensions= sparql.rdf(cubeData,
+  paste(forsparqlprefix,
+"select * where { [] qb:dimension ?p .  }"
+));
+# print(cube.dimensions)
 
-cube.dimensionsattr= sparql.rdf(cubeData,
+## prop:trt01a  a       rdf:Property , qb:DimensionProperty ;
+##         rdfs:label   "Treatment Arm" ;
+##         rdfs:range   code:Trt01a ;
+##         qb:codeList  code:trt01a .
+
+
+
+# this will be made generic based on the dimensions in the cube
+## subsetting.dimensions<- list(
+##   "saffl"="code:saffl-_ALL_",
+##   "trt01a"="code:trt01a-_ALL_",
+##   "race"="code:race-_ALL_",
+##   "sex"="code:sex-_ALL_"
+##   )
+
+
+## get the codelist
+cube.codelists= as.data.frame(sparql.rdf(cubeData,
+  paste(forsparqlprefix,
+'
+select ?p ?cl ?prefLabel where {
+[] qb:dimension ?p.
+?p qb:codeList ?c.
+?c skos:hasTopConcept ?cl .
+?cl skos:prefLabel ?prefLabel.
+}
+'
+)));
+# print(cube.codelists)
+
+
+codelist.all<- cube.codelists[ cube.codelists$prefLabel=="_ALL_",]
+# print(codelist.all)
+subsetting.dimensions<- list();
+
+# the variable name/column name in the data frame should be part of the datacube
+# this would remove the need for the workaround below using gsub
+for (i in 1:nrow(codelist.all))
+{
+  subsetting.dimensions[[ gsub("[^:]*:","", codelist.all[i,"p"]) ]] <-
+      as.character(codelist.all[i,"cl"])
+}
+
+
+## get the dimensions and attributes
+
+cube.dimensionsattr<- sparql.rdf(cubeData,
   paste(forsparqlprefix,
 "select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }"
 ));
-#print(cube.dimensionsattr)
+# print(cube.dimensionsattr)
 
 selectexpr=  paste(  "select * where {",
     "    ?s a qb:Observation  ;",
-    "       qb:dataSet ds:dataset-demog ;",
+    paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
     paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";",sep=" ",collapse=" "),
     "       prop:measure      ?measure ;      ",
     "       prop:denominator      ?denominator .      ",
@@ -101,15 +176,18 @@ selectexpr=  paste(  "select * where {",
            " ",
            sub("prop:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
-           sep=" ",collapse=" "),
+           sep=" ",collapse="\n"),
     "} " );
-### print(selectexpr)
+# print(selectexpr)
+# print(  paste(forsparqlprefix, selectexpr ) )
 
-cube.observations= sparql.rdf(cubeData,
+cube.observations<- sparql.rdf(cubeData,
   paste(forsparqlprefix, selectexpr )
   );
 
-head(cube.observations)
+# print(head(cube.observations))
+# str(cube.observations)
+
 # cts:cdiscSubmissionValue could also be used instead of skos:prefLabel
 # by code:saffl-Y does not have cts:cdiscSubmissionValue
 
@@ -132,20 +210,13 @@ for (r in  1: nrow(cube.observations )  ) {
 thisrow<-  cube.observations[r,]
 # print(thisrow)
 
-# this will be made generic based on the dimensions in the cube
-subsetting.dimensions= list(
-  "saffl"="code:saffl-_ALL_",
-  "trt01a"="code:trt01a-_ALL_",
-  "race"="code:race-_ALL_",
-  "sex"="code:sex-_ALL_"
-  )
-data.subset.logical= rep(TRUE, nrow(adDataSet))
+data.subset.logical= rep(TRUE, nrow(DataSet))
 for (v in names(subsetting.dimensions)) {
   # print( c(v, thisrow[v ],  subsetting.dimensions[[ v ]] ) )
   if ( thisrow[v ] != subsetting.dimensions[[ v ]] ) {
   # print( paste0(v, ": ", thisrow[v ], " = ", thisrow[ paste0(v,"value") ]))
-  # print( adDataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
-    data.subset.logical= data.subset.logical & ( adDataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
+  # print( DataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
+    data.subset.logical= data.subset.logical & ( DataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
   }
 }
 
@@ -154,36 +225,35 @@ has.result= FALSE
 
 if (thisrow["procedure"] %in% names(univfunc1) ) {
 # print("univfunc1")
-  AOD= adDataSet[data.subset.logical,thisrow["factorvalue"]]
+  AOD= DataSet[data.subset.logical,thisrow["factorvalue"]]
   result= univfunc1[[ thisrow["procedure"] ]](AOD)
   has.result= TRUE
 #   print(paste("AOD number of observations", nrow(AOD)))
 } else if (thisrow["procedure"] %in% names(univfunc2) ) {
 # print(paste0("univfunc2"," ",thisrow["procedure" ],collapse=" "))
-  AOD= adDataSet[data.subset.logical,"USUBJID"]  # take the first variable, would be better if there was a default, like USUBJID
+  AOD= DataSet[data.subset.logical,"USUBJID"]  # take the first variable, would be better if there was a default, like USUBJID
   result= univfunc2[[ thisrow["procedure" ] ]](AOD)
   has.result= TRUE
 #   print(paste0("AOD number of observations", nrow(AOD), sep=" "))
 } else if (thisrow["procedure"]== "code:procedure-PERCENT" & thisrow["factor"]== "code:factor-PROPORTION") {
 
-  # print(c("proportion",thisrow["denominator"]))
+#  print(c("proportion",thisrow["denominator"]))
 
-  denom.def<- thisrow[ c("saffl", "trt01a", "race", "sex" ) ]
-# change data cube only for DM  - to be discussed
-
-#   if (thisrow["s"] %in% paste0( "ds:obs", 12:17)) { denom.def["sex"]= "code:sex-_ALL_"; }
-#  if (thisrow["s"] %in% paste0( "ds:obs", 33:41)) { denom.def["race"]= "code:race-_ALL_"; }
+#  denom.def<- thisrow[ c("saffl", "trt01a", "race", "sex" ) ]
+#  denom.def<- thisrow[ c( "trt01a", "race", "sex" ) ]
+  denom.def<- thisrow[ names(subsetting.dimensions) ]
+  
   denom.def[ tolower(thisrow["denominator"]) ] =paste0("code:",tolower(thisrow["denominator"]),"-_ALL_",sep="")
-  AOD= adDataSet[data.subset.logical,] # should use a variable name - USUBJID like for count
+  AOD= DataSet[data.subset.logical,] # should use a variable name - USUBJID like for count
 
-denom.data.subset.logical= rep(TRUE, nrow(adDataSet))
+denom.data.subset.logical= rep(TRUE, nrow(DataSet))
 # print( denom.def )
 for (v in names(denom.def)) {
   if ( denom.def[v ] != subsetting.dimensions[[ v ]] ) {
-    denom.data.subset.logical= denom.data.subset.logical & ( adDataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
+    denom.data.subset.logical= denom.data.subset.logical & ( DataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
   }
 }
-  denom.data.frame<-  adDataSet[denom.data.subset.logical , ]
+  denom.data.frame<-  DataSet[denom.data.subset.logical , ]
 
   result= nrow(AOD) / nrow( denom.data.frame ) * 100;
   has.result=TRUE
@@ -212,7 +282,7 @@ cube.check= sparql.rdf(cubeData,
   paste(forsparqlprefix,
     "select * where {",
     "    ?s a qb:Observation  ;",
-    "       qb:dataSet ds:dataset-demog ;",
+    paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
 #    "       prop:saffl        ?saffl ;        ",
 #    "       prop:trt01a       ?trt01a ;       ",
 #    "       prop:race         ?race ;         ",
@@ -235,237 +305,39 @@ cube.check
 }
 
 
-check.ae.cube<- function() {
 
-library(foreign)
-# xptdirectory= "."
-xptdirectory= tempdir()
+check.cube(
+   fnxptDataSet=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
+   dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt",
+   ds.dataset= "ds:dataset-demog",
+ qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
+ domain="demog"
+ )
 
+ check.cube(
+ fnxptDataSet=paste(tempdir(),"/", "adae", ".xpt",sep=""),
+ dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt",
+ ds.dataset= "ds:dataset-ae",
+ qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0"),
+ domain="ae"
+ )
 
-fnadDataSet=paste(xptdirectory,"/", "adae", ".xpt",sep="")
-dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt"
-# if (! url.exists(dsURL) ) {
-#   stop(paste0("Can not access URL ",dsURL))
-# }
-# write(getBinaryURL( dsURL ), file=fnadDataSet)
-download.file( dsURL, fnadDataSet, method="curl")
+check.cube(
+  fnxptDataSet=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
+  dsURL= NULL,
+  ds.dataset= "ds:dataset-demog",
+qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
+domain="demog"
+)
 
-adDataSet=read.xport(fnadDataSet)
-## library(Hmisc)
-## adDataSet <- sasxport.get(fnadDataSet)
-## # --- see what have got:
-## contents(adDataSet)
-## label(adDataSet)
+check.cube(
+fnxptDataSet=paste(tempdir(),"/", "adae", ".xpt",sep=""),
+dsURL=  NULL,
+ds.dataset= "ds:dataset-ae",
+qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0"),
+domain="ae"
+)
 
-# str(adDataSet)
-# print(names(adDataSet))
-
-library(rrdf)
-cubeData = new.rdf(ontology=FALSE)
-
-myprefixes= c(qbCDISCprefixes, list(
- "dccs"="http://www.example.org/dc/ae/dccs/" ,
- "code"="http://www.example.org/dc/code/" ,
- "ds"=  "http://www.example.org/dc/ae/dataset/" ,
- "prop"="http://www.example.org/dc/ae/prop/",
- "valid"="http://www.example.org/dc/ae/valid/"
-)  )
-
-
-forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse="\n")
-
-print(forsparqlprefix)
-
-qbfile<- system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0")
-load.rdf( qbfile, format="N3", appendTo= cubeData)
-
-# summarize.rdf(cubeData)
-
-
-## ------------------------------------------------------------------------
-cube.observations1= sparql.rdf(cubeData,
-   paste( forsparqlprefix,
-     "select * where {?s ?p ?o .} limit 10"
-     )
-   );
-print(nrow(cube.observations1))
-
-
-cube.observations2= sparql.rdf(cubeData,
-   paste( forsparqlprefix,
-     "select * where { ?s a qb:Observation ; ?p ?o .} limit 10"
-     )
-   );
-print(nrow(cube.observations2))
-
-## get the dimensions
-
-cube.dimensions= sparql.rdf(cubeData,
-  paste(forsparqlprefix,
-"select * where { {[] qb:dimension ?p . }  }"
-));
-# print(cube.dimensions)
-
-cube.dimensionsattr= sparql.rdf(cubeData,
-  paste(forsparqlprefix,
-"select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }"
-));
-# print(cube.dimensionsattr)
-
-selectexpr=  paste(  "select * where {",
-    "    ?s a qb:Observation  ;",
-    "       qb:dataSet ds:dataset-ae ;",
-    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";",sep=" ",collapse=" "),
-    "       prop:measure      ?measure ;      ",
-    "       prop:denominator      ?denominator .      ",
-    paste0( "optional{ ", sub("prop:", "?", cube.dimensionsattr), " ",
-           "skos:prefLabel",
-           " ",
-           sub("prop:", "?", cube.dimensionsattr), "value" ,
-           " . ", "}",
-           sep=" ",collapse="\n"),
-    "} " );
-### print(selectexpr)
-
-cube.observations= sparql.rdf(cubeData,
-  paste(forsparqlprefix, selectexpr )
-  );
-
-head(cube.observations)
-# cts:cdiscSubmissionValue could also be used instead of skos:prefLabel
-# by code:saffl-Y does not have cts:cdiscSubmissionValue
-
-# using list for key-value lookup to function for descriptive statistic
-univfunc1= list(
-  "code:procedure-MEAN"=mean,
-  "code:procedure-STDDEV"=sd,
-  "code:procedure-MEDIAN"=median,
-  "code:procedure-MIN"=min,
-  "code:procedure-MAX"=max
-  )
-
-univfunc2= list(
-  "code:procedure-COUNT"=length,
-  "code:procedure-COUNTDISTINCT"=function(x){length(unique(x))}
-  )
-
-
-# this will be made generic based on the dimensions in the cube
-subsetting.dimensions= list(
-"aedecod"="code:aedecod-_ALL_",
-"aesoc"="code:aesoc-_ALL_",
-"trta"="code:trta-_ALL_",
-"saffl"="code:saffl-_ALL_"
-  )
-
-for (r in  1: nrow(cube.observations )  ) {
-
-thisrow<-  cube.observations[r,]
-# print(thisrow)
-
-
-data.subset.logical= rep(TRUE, nrow(adDataSet))
-for (v in names(subsetting.dimensions)) {
-#  print( c(v, thisrow[v ],  subsetting.dimensions[[ v ]] ) )
-  if ( thisrow[v ] != subsetting.dimensions[[ v ]] ) {
-#   print( paste0(v, ": ", thisrow[v ], " = ", thisrow[ paste0(v,"value") ]))
-#   print( adDataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
-# print(toupper(v))    
-    data.subset.logical= data.subset.logical & ( adDataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
-  }
-}
-
-
-has.result= FALSE
-
-if (thisrow["procedure"] %in% names(univfunc1) ) {
-# print("univfunc1")
-  AOD= adDataSet[data.subset.logical,thisrow["factorvalue"]]
-  result= univfunc1[[ thisrow["procedure"] ]](AOD)
-  has.result= TRUE
-#   print(paste("AOD number of observations", nrow(AOD)))
-} else if (thisrow["procedure"] %in% names(univfunc2) ) {
-# print(paste0("univfunc2"," ",thisrow["procedure" ],collapse=" "))
-  AOD= adDataSet[data.subset.logical,"USUBJID"]  # take the first variable, would be better if there was a default, like USUBJID
-# print(AOD)  
-  result= univfunc2[[ thisrow["procedure" ] ]](AOD)
-  has.result= TRUE
-#   print(paste0("AOD number of observations", nrow(AOD), sep=" "))
-} else if (thisrow["procedure"]== "code:procedure-PERCENT" & thisrow["factor"]== "code:factor-PROPORTION") {
-
-  # print(c("proportion",thisrow["denominator"]))
-
-  denom.def<- thisrow[ c("saffl", "trt01a", "race", "sex" ) ] # this does not work for AE data
-  
-# change data cube only for DM  - to be discussed
-
-#   if (thisrow["s"] %in% paste0( "ds:obs", 12:17)) { denom.def["sex"]= "code:sex-_ALL_"; }
-#  if (thisrow["s"] %in% paste0( "ds:obs", 33:41)) { denom.def["race"]= "code:race-_ALL_"; }
-  denom.def[ tolower(thisrow["denominator"]) ] =paste0("code:",tolower(thisrow["denominator"]),"-_ALL_",sep="")
-  AOD= adDataSet[data.subset.logical,] # should use a variable name - USUBJID like for count
-
-denom.data.subset.logical= rep(TRUE, nrow(adDataSet))
-# print( denom.def )
-for (v in names(denom.def)) {
-  if ( denom.def[v ] != subsetting.dimensions[[ v ]] ) {
-    denom.data.subset.logical= denom.data.subset.logical & ( adDataSet[,toupper(v)] == thisrow[ paste0(v,"value") ] )
-  }
-}
-  denom.data.frame<-  adDataSet[denom.data.subset.logical , ]
-
-  result= nrow(AOD) / nrow( denom.data.frame ) * 100;
-  has.result=TRUE
-  # print(paste("AOD number of observations", nrow(AOD)))
-  # print(paste("denom.data.frame number of observations", nrow(denom.data.frame)))
-}
-
-
-# print( gsub("ds:", myprefixes$ds, thisrow["s"]) )
-# print( gsub("valid:", myprefixes$valid, "valid:result") )
-# print( paste(result) )
-
-if (has.result) {
-# print(paste0("result", result, sep=" "))
-add.data.triple( cubeData,
-subject=gsub("ds:", myprefixes$ds, thisrow["s"]), # add triple does not resolve prefix
-predicate=gsub("valid:", myprefixes$valid, "valid:result"),
-data=paste(result), type="float")
-} else {
-# print( paste( thisrow["s"], ifelse(has.result, result, "No result determined") ) )
-}
-
-
-} # for
-
-cube.check= sparql.rdf(cubeData,
-  paste(forsparqlprefix,
-    "select * where {",
-    "    ?s a qb:Observation  ;",
-    "       qb:dataSet ds:dataset-ae ;",
-#    "       prop:saffl        ?saffl ;        ",
-#    "       prop:trt01a       ?trt01a ;       ",
-#    "       prop:race         ?race ;         ",
-#    "       prop:sex          ?sex ;          ",
-#    "       prop:procedure    code:procedure-PERCENT ;",
-    "       prop:procedure    ?procedure ;    ",
-#    "       prop:denominator  ?denominator ;",
-#    "       prop:factor       ?factor ;       ",
-    "       prop:measure      ?measure ;      ",
-    "      optional{ ?s valid:result      ?result }      ",
-    " filter ( ?measure != ?result ) ",
-    "} order by ?s"
-                )
-  );
-
-print("If the result is <0 x 0> matrix then all value matches")
-cube.check
-
-
-}
-
-check.dm.cube()
-
-check.ae.cube()
 
 ```
 
