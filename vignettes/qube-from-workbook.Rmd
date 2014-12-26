@@ -60,31 +60,25 @@ library(rrdfqbcrnd0)
 #NOTE: Must match the name in the workbook sheet (DM-components), etc.
 #      Also used in cube name, dsd-<name>, and other places.
 
-domainName<- "AE"
-# domainName<- "DM"
+# For now - select of of the values to see if it works ...
+
+# domainName<- "AE"
+domainName<- "DM"
 
 endpoint<- NULL # for using internal rdf.cdisc.org store
+# NOTE: if all cells in a column is missing, then the input fails
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
 
 
-############
-# Prefixes #
-###############################################################################
-# Construct list to hold the prefix namespaces, 
-# using format:prefixPREFIXNAME with key .
-# Sources: 1. Workbook sheet CubePrefixes 2. custom built on domain name
-# Vars. used  later in the construction of cube skeleton and cube obs.
-#   Examples: prefixQB   holds value http://purl.org/linked-data/cube#
-#             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
-
+# Prefixe sources: 1. Workbook sheet CubePrefixes 2. custom built on domain name
 
 # Prefixes common to all cubes (regardless of domain) 
 common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
 
-# Domain-specific prefixes:for /code/, /prop/, /dccs/ and /dataset/
+# Domain-specific prefixes for prop/, dccs/ and dataset/
+# Domain-independent for code/
 custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
-
-prefixes=rbind(common.prefixes, custom.prefixes)                                                
+prefixes<- rbind(common.prefixes, custom.prefixes)                                                
 
 
 # should maybe get that from some other data - eg. stored in the cube
@@ -107,6 +101,14 @@ data.recode.list<- DM.recode.list
 }
 
 if (domainName=="AE") {
+
+# These codelist could also go in a RDF codelists instead of CSV files
+AE.recode.aesoc.list<- read.csv(file=system.file("extdata/sample-cfg", "ae.aesoc.AR.csv", package="rrdfqbcrnd0"))
+aesoc.list= list();
+for (i in 1:nrow(AE.recode.aesoc.list)) {
+  aesoc.list[[ as.character(AE.recode.aesoc.list[i,1]) ]]=
+       encodetouri( paste0("aesoc-",as.character(AE.recode.aesoc.list[i,2])) )
+}
 
   AE.recode.aedecod.list<- read.csv(file=system.file("extdata/sample-cfg", "ae.aedecod.AR.csv", package="rrdfqbcrnd0"))
 aedecod.list= list();
@@ -164,7 +166,10 @@ recode.list<- c( data.recode.list, qb.crnd.recode.list)
   
 store <- new.rdf(ontology=FALSE)  # Initialize
 
-# Register prefixes
+# Register prefixes and return prefixlist
+# Examples: prefixQB   holds value http://purl.org/linked-data/cube#
+#             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
+
 prefixlist<- qb.def.prefixlist(store, prefixes)
 
 ###############################################################################
@@ -209,7 +214,13 @@ obsFileDir<- system.file("extdata/sample-cfg", package="rrdfqbcrnd0")
 }
 
 obsFile<- as.character(metadataSource[ metadataSource$compName=="obsFileName", "compLabel" ])
-obsData <- read.csv(file.path(obsFileDir,obsFile))
+obsFileName<- file.path(obsFileDir,obsFile)
+if (! file.exists(obsFileName) ) {
+  # consider using try instead
+  stop( paste0("Expected file ", obsFileName, " does not exist" ))
+  }
+
+obsData <- read.csv(obsFileName)
 # Making variable names to lower case
 names(obsData)<- tolower(names(obsData))
 
