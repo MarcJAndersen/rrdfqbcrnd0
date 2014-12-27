@@ -49,21 +49,15 @@ check.cube<- function(
   qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
   domainName="demog",
   RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-#  obsFile=paste(tempdir(),"/", "adae", ".xpt",sep=""),
-#  dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt",
-#  ds.dataset= "ds:dataset-ae",
-#  qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0")
-#  domainName="ae"
-  
 ) {
 
-  obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep="")
-  dsURL= NULL
-  ds.dataset= "ds:dataset-demog"
-  qbfiledir= system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
-  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
-  domainName="demog"
-  RDFCubeWorkbook = NULL
+ ## obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep="")
+ ## dsURL= NULL
+ ## ds.dataset= "ds:dataset-demog"
+ ## qbfiledir= system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
+ ## qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
+ ## domainName="demog"
+ ## RDFCubeWorkbook = NULL
 
 if (!is.null(RDFCubeWorkbook)) {
   common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
@@ -197,22 +191,25 @@ cube.dimensionsattr<- sparql.rdf(cubeData,
 
 selectexpr<-  paste(  "select * where {",
     "    ?s a qb:Observation  ;",
-    paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
-    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";",sep=" ",collapse=" "),
-    "       prop:measure      ?measure ;      ",
-    "       prop:denominator      ?denominator .      ",
+    paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse="\n"), "\n",
+    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";", collapse="\n"),
+                    "\n",
+    "       prop:measure      ?measure ;      \n",
+    "       prop:denominator      ?denominator .     \n",
     paste0( "optional{ ", sub("prop:", "?", cube.dimensionsattr), " ",
            "skos:prefLabel",
            " ",
            sub("prop:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
-           sep=" ",collapse="\n"),
-    "} " );
+           collapse="\n"),
+    "} ",
+    "\n"
+   );
 # cat(selectexpr)
-# print(  paste(forsparqlprefix, selectexpr ) )
+# cat(  paste(forsparqlprefix, "\n", selectexpr ) )
 
 cube.observations<- sparql.rdf(cubeData,
-  paste(forsparqlprefix, selectexpr )
+  paste(forsparqlprefix, "\n",  selectexpr )
   );
 
 # print(head(cube.observations))
