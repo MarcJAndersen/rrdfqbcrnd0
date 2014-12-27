@@ -32,19 +32,6 @@ install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= T
 
 Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
 
-### Not current 
-The following is updated.
-
-For building the vignettes Fuseki endpoint serving CDISC rdf.cdisc.org
-and the rdf data cube must be running - see vignette for "Demograhics
-table from CSV file". This is not a good idea, as it yet another layer
-of complexity to get a local fuseki SPARQL server running.
-
-Suggest changing endpoint to (http://www.datadriven.jp:3030/) or
-create local turtle file with CDISC rdf.cdisc.org and the rdf data
-cube definiton. Having a local CDISC later is marked as issue, for a start see the vignette store-cdisc-rdf-as-rrdf.Rmd.
-
-For example of usage look in the vignettes directory.
 
 Developing
 ----------
