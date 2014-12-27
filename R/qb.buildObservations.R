@@ -6,12 +6,88 @@
 ##' @param obsData 
 ##' @param skeletonSource 
 ##' @param dsdURIwoprefix 
-##' @param recode.list A list of lists specifying how to recode the value in the data frame
-##' @param procedure2format A list specifying the format for the descriptive statistics
+##' @param dsdName 
+##' @param recode.list A list of lists specifying how to recode the value in the data frame. If NULL then the recode.list is generated from the store
+##' @param procedure2format A list specifying the format for the descriptive statistics. If NULL then the default list is used
 ##' @return Always TRUE
-qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix, recode.list, procedure2format ) {
+qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix, dsdName, recode.list, procedure2format ) {
 
 colnames(obsData) <- tolower(colnames(obsData))  # Convert column names to lowercase for later matching
+
+
+if (is.null(procedure2format)) {
+    procedure2format<- list("count"="int",
+                         "countdistinct"="int",
+                            'percent'='double', 
+                            'mean'='double', 
+                            'stdev'='double', 
+                            'min'='double', 
+                            'median'='double', 
+                            'max'='double'                         
+     );
+
+  }
+
+if (is.null(recode.list)) {
+forsparqlprefix<- Get.rq.prefixlist.df( prefixlist )
+
+# first find the qb:DataSet
+## ds:dataset-dm  a          qb:DataSet ;
+## Then find the qb:structure
+##         qb:structure         ds:dsd-dm ;
+## Then the qb:DataStructureDefinition
+## ds:dsd-dm  a       qb:DataStructureDefinition ;
+## Which gives the qb:component
+##         qb:component  dccs:denominator , dccs:unit , dccs:measure , dccs:saffl , dccs:trt01a , dccs:sex , dccs:race , dccs:procedure , dccs:factor .
+## Among these find the qb:ComponentSpecification ;
+## dccs:saffl  a         qb:ComponentSpecification ;
+##         qb:dimension  prop:saffl .
+## which are dimensions and contains qb:DimensionProperty
+## prop:saffl  a        rdf:Property , qb:DimensionProperty ;
+##         rdfs:label   "Safety Population Flag" ;
+##         rdfs:range   code:Saffl ;
+##         qb:codeList  code:saffl .
+## and have a qb:codeList
+
+# identify codelists
+codelists.rq<-   paste(forsparqlprefix,
+'
+select distinct ?p ?cl ?prefLabel
+where {
+?DataStructureDefinition a qb:DataStructureDefinition ;
+   qb:component ?component .
+?component a qb:ComponentSpecification .
+?component qb:dimension ?p .
+?p qb:codeList ?c .
+?c skos:hasTopConcept ?cl .
+?cl skos:prefLabel ?prefLabel .
+values ( ?DataStructureDefinition ) {
+',
+paste0( "(", "ds:", dsdName, ")"),
+'
+}
+}
+order by ?p ?cl ?prefLabel
+'
+)
+
+# cat(codelists.rq)
+cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors=FALSE);
+# TODO instead of gsub make a more straightforward way
+# TOTO this involves a new version of the ph.recode function
+cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
+cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
+# print(cube.codelists)
+
+recode.list<-by(cube.codelists, cube.codelists$vn, function(x){
+#  print(x)
+  pl<-list();
+  for (i in 1:nrow(x)) { pl[[ as.character(x[i,"prefLabel"]) ]] <-  as.character(x[i,"clc"])}
+#  print(pl)
+  pl
+  }
+  )
+}
 
 for (i in 1:nrow(obsData)){
   obsNum <- paste0("obs",i) # consider this being the rownames
