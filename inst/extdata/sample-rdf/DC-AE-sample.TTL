@@ -13,7 +13,7 @@
 @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
 @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
-@prefix ds:    <http://www.example.org/dc/ae/dataset/> .
+@prefix ds:    <http://www.example.org/dc/ae/ds/> .
 
 ds:obs840  a              qb:Observation ;
         rdfs:label        "840" ;
