@@ -52,6 +52,7 @@ devtools::document()
 devtools::test()
 devtools::check()
 devtools::install()
+devtools::build_vignettes()
 ```
 
 Here is what I use while developing.
