@@ -18,7 +18,7 @@ cubeComment<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="co
 cubeLabel<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="label",defaultValue="** no label given **" )
 cubeTitle<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="title",defaultValue="** no title given **" )
 domainName<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="domainName",defaultValue="notgiven" )
-obsFile<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="obsFileName" )
+obsFile<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="obsFileName",defaultValue="notgiven" )
 
 # Output file format: DC-<domain>-R-Vn-n-(n).TTL . Also used in dcat:distribution
 # NOTE: For pav:Version (dot, notdash) and output file name
