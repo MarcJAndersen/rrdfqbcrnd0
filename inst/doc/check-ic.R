@@ -1,0 +1,47 @@
+## ----, results='asis', eval=TRUE-----------------------------------------
+
+library(rrdf)
+library(rrdfqbcrnd0)
+
+cubeData = new.rdf(ontology=FALSE)
+
+data(qbCDISCprefixes)
+ 
+myprefixes= c(qbCDISCprefixes, list(
+ "dccs"="http://www.example.org/dc/demog/dccs/" ,
+ "code"="http://www.example.org/dc/code/" ,
+ "ds"=  "http://www.example.org/dc/demog/dataset/" ,
+ "prop"="http://www.example.org/dc/demog/prop/",
+ "valid"="http://www.example.org/dc/demog/valid/"
+  ))
+
+forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
+
+
+qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
+load.rdf( qbfile, format="N3", appendTo= cubeData)
+
+ic1<- "ASK {
+  {
+    # Check observation has a data set
+    ?obs a qb:Observation .
+    FILTER NOT EXISTS { ?obs qb:dataSet ?dataset1 . }
+  } UNION {
+    # Check has just one data set
+    ?obs a qb:Observation ;
+       qb:dataSet ?dataset1, ?dataset2 .
+    FILTER (?dataset1 != ?dataset2)
+  }
+}"
+
+
+## ----, results='asis', eval=TRUE-----------------------------------------
+
+ic1Select<- gsub("ASK \\{", "SELECT (COUNT(*) AS ?nfail) WHERE \\{", ic1)
+
+cube.ic1= sparql.rdf(cubeData, paste( forsparqlprefix, ic1Select  )  )
+print(cube.ic1)
+
+
+
+
