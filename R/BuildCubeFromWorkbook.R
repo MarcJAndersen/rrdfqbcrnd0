@@ -38,5 +38,5 @@ if (! file.exists(obsFileName) ) {
 
 obsData <- read.csv(obsFileName)
 
-outcube<- BuildCubeFromDataFrames(common.prefixes, cubeMetadata, obsData, endpoint=endpoint)
+outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData, common.prefixes, endpoint=endpoint)
 }

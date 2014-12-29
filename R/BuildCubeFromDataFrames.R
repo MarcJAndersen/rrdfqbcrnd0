@@ -1,11 +1,15 @@
 ##' Build a RDF data cube based on specification 
 ##'
 ##' 
-##' @param RDFCubeWorkbook Filename and path to an workbook specifying the datacube
-##' @param domainName The domainName create the data cube using the corresponding tab in the workbook
-##' @param endpoint Used for determined codelist for dimensions. When codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
+##' @param cubeMetadata data.frame with metadata
+##' @param obsData data.frame with observations
+##' @param common.prefixes data.frame commom prefixes, if NULL a built in default value is used
+##' @param endpoint Used for determined codelist for dimensions. When
+##' codetype="SDTM" to give the URL for the remote endpoint. If NULL
+##' then the local rdf.cdisc.store from the environment is used.
 ##' @return The filename for the generated turtle file
-BuildCubeFromDataFrames<- function(common.prefixes, cubeMetadata, obsData, endpoint=NULL) {
+
+BuildCubeFromDataFrames<- function(cubeMetadata, obsData, common.prefixes=NULL, endpoint=NULL) {
   
 
 # Cube metadata. 
@@ -37,6 +41,15 @@ names(obsData)<- tolower(names(obsData))
 
 # Subset to the dimensions, attributes, and measure used to construct the skeleton
 skeletonSource <-cubeMetadata[grep("dimension|attribute|measure", cubeMetadata$compType),]
+
+# If common.prefixes is not set, then use built-in defaults
+if (is.null(common.prefixes)) {
+  data(qbCDISCprefixes)
+  common.prefixes <-data.frame(
+  prefix=names(qbCDISCprefixes),
+  namespace=as.character(qbCDISCprefixes)
+  )
+}  
 
 # Domain-specific prefixes for prop/, dccs/ and dataset/
 # Domain-independent for code/
