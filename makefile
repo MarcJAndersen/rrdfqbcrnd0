@@ -3,7 +3,7 @@ PACKAGENAME=rrdfqbcrnd0
 all: createRD qbIClist rbuildforce rcheck rbuild
 
 cleantempemacs:
-	rm -v -f .#* */.#* */*/.#*
+	rm -v -f .#* */.#* */*/.#* */#*#
 
 rbuildforce: 
 	cd ..; R CMD build --force ${PACKAGENAME}
