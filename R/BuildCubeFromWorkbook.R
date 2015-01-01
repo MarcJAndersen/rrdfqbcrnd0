@@ -9,7 +9,7 @@ BuildCubeFromWorkbook<- function(RDFCubeWorkbook,domainName,endpoint=NULL) {
   
 # Prefixe sources: 1. Workbook sheet CubePrefixes 2. custom built on domain name
 # Prefixes common to all cubes (regardless of domain) 
-common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
+common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"),stringsAsFactors=FALSE)
 
 ###############################################################################
 # Read the skeleton  specifications to dataframe
@@ -17,7 +17,7 @@ common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"))
 # TODO: Replace some use of compLabel with a var : compNameClass, formed by
 #       Upcase of first letter of the compName value.
 
-cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"))
+cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"),stringsAsFactors=FALSE)
 
 metadataSource <-cubeMetadata[grep("metadata", cubeMetadata$compType),]
 
@@ -36,7 +36,7 @@ if (! file.exists(obsFileName) ) {
   stop( paste0("Expected file ", obsFileName, " does not exist" ))
   }
 
-obsData <- read.csv(obsFileName)
+obsData <- read.csv(obsFileName,stringsAsFactors=FALSE)
 
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData, common.prefixes, endpoint=endpoint)
 }
