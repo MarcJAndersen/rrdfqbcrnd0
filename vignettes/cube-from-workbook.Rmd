@@ -191,3 +191,27 @@ knitr::kable(cube.observations[,c(paste0(sub("prop:", "", cube.dimensionsattr), 
 
 
 ```
+
+Here is how to re-produce the metadata.
+First get the dimensions, measure and attribute
+
+```{r, echo=FALSE}
+
+cube.dimensionsattr<- sparql.rdf(checkCube,
+  paste(forsparqlprefix,
+'
+select ?compType ?compName ?codeType ?nciDomainValue
+where {
+{[] qb:dimension ?compName.
+ optional {  ?compName qb:codeList ?codeList . ?codeList mms:inValueDomain ?nciDomainValue }
+ values (?compType) { ("dimension") }  }
+union
+{ ?compName a qb:AttributeProperty . values (?compType) { ("attribute") } }
+union
+{ ?compName a qb:MeasureProperty . values (?compType) { ("measure") } }
+}
+'
+))
+cube.dimensionsattr
+
+```
