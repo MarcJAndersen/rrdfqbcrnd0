@@ -30,7 +30,8 @@ qbCDISCprefixes<-  list(
  "pav"= "http://purl.org/pav" ,
  "dct"= "http://purl.org/dc/terms/" ,
  "mms"= "http://rdf.cdisc.org/mms#" ,
- "cts"= "http://rdf.cdisc.org/ct/schema#" 
+ "cts"= "http://rdf.cdisc.org/ct/schema#",
+ "rrdfqbcrnd0"="http://www.example.org/rrdfqbcrnd0/"
 )  ;
 
 
@@ -50,7 +51,9 @@ Data are stored in the data directory, following [R packages by Hadley Wickham](
 
 ```{r, results='asis', eval=TRUE}
 
-setwd("..")
+# not needed when working directory is package root
+# but needed when run using the knitr command above
+setwd("../..")
 devtools::use_data(qbCDISCprefixes,overwrite=TRUE)
 
 print("Done")
