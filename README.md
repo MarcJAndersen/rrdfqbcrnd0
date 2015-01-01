@@ -14,18 +14,25 @@ Introduction
 
 You will need to install some packages for development
 
-```
-install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "xlsx" ) )
+```r
+install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown" ) )
 ```
 
-Furthermore, the [rrdf](https://github.com/egonw/rrdf) package must be
+The rrdfqbcrnd0 packages uses these packages, that also must be installed:
+```r
+install.packages( c( "RCurl", "rJava", "xlsx" ) )
+```
+These packages are mentioned under Imports: section in the DESCRIPTION file.
+If RCurl install fails, it may be resolved by first installing the libcurl and libcurl-devel packages (on fedora: install.packages( c( "RCurl").
+
+Finally, the [rrdf](https://github.com/egonw/rrdf) package must be
 installed. The packages must be installed accoding to the instructions
 on the packages github page.
 
 
-To install the package use
+To install the rrdfqbcrnd0 package use
 
-```
+```r
 library(devtools)
 install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= TRUE)
 ```
