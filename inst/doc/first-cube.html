@@ -350,7 +350,7 @@ knitr::kable(cubeMetadata)
 <pre><code class="r">outcube
 </code></pre>
 
-<pre><code>## [1] &quot;/tmp/Rtmpvmy6mB/DC-EXAMPLE-R-V-0-0-0.TTL&quot;
+<pre><code>## [1] &quot;/tmp/Rtmp8TFFPv/DC-EXAMPLE-R-V-0-0-0.TTL&quot;
 </code></pre>
 
 <h2>Looking at the RDF data cube</h2>
@@ -367,7 +367,7 @@ load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= checkCube)
 summarize.rdf(checkCube)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 124&quot;
+<pre><code>## [1] &quot;Number of triples: 127&quot;
 </code></pre>
 
 <pre><code class="r"># determine the domain name; used for defining prefixes
@@ -617,6 +617,7 @@ knitr::kable(print(cube.dimensions))
 ## prefix dct: &lt;http://purl.org/dc/terms/&gt;
 ## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
 ## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
+## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
 ## prefix code: &lt;http://www.example.org/dc/code/&gt;
 ## prefix prop: &lt;http://www.example.org/dc/example/prop/&gt;
 ## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;

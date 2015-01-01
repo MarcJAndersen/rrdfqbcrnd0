@@ -213,29 +213,23 @@ library(rrdfqbcrnd0)
 RDFCubeWorkbook&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;RDFCubeWorkbook.xlsx&quot;, package=&quot;rrdfqbcrnd0&quot;)
 
 dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
+cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Start loading rdf.cdisc.org contents from /home/ma/projects/R-packages/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 164651
-</code></pre>
-
-<pre><code class="r">cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## DM cube stored as  /tmp/Rtmpvmy6mB/DC-DM-R-V-0-5-2.TTL
+<pre><code>## DM cube stored as  /tmp/Rtmp8TFFPv/DC-DM-R-V-0-5-2.TTL
 </code></pre>
 
 <pre><code class="r">ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )
 cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## AE cube stored as  /tmp/Rtmpvmy6mB/DC-AE-R-V-0-5-2.TTL
+<pre><code>## AE cube stored as  /tmp/Rtmp8TFFPv/DC-AE-R-V-0-5-2.TTL
 </code></pre>
 
 <p>Now look at the generated cubes by loading the turle files. Note: by specifying prefix the output contains is shown using the prefixes.
 Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.</p>
 
-<pre><code>## [1] &quot;Number of triples: 1031&quot;
+<pre><code>## [1] &quot;Number of triples: 1039&quot;
 </code></pre>
 
 <p>The next statement shows the first 10 triples in the cube.</p>
@@ -609,6 +603,7 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 ## prefix dct: &lt;http://purl.org/dc/terms/&gt;
 ## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
 ## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
+## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
 ## prefix code: &lt;http://www.example.org/dc/code/&gt;
 ## prefix prop: &lt;http://www.example.org/dc/dm/prop/&gt;
 ## prefix dccs: &lt;http://www.example.org/dc/dm/dccs/&gt;
@@ -1265,6 +1260,196 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 <td align="left">NA</td>
 <td align="left">NA</td>
 <td align="left">86</td>
+</tr>
+</tbody></table>
+
+<p>Here is how to re-produce the metadata.
+First get the dimensions, measure and attribute</p>
+
+<table><thead>
+<tr>
+<th align="left">compType</th>
+<th align="left">compName</th>
+<th align="left">codeType</th>
+<th align="left">nciDomainValue</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:trt01a</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:race</td>
+<td align="left">NA</td>
+<td align="left">C74457</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:factor</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:procedure</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:sex</td>
+<td align="left">NA</td>
+<td align="left">C66731</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:saffl</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">attribute</td>
+<td align="left">prop:unit</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">attribute</td>
+<td align="left">prop:denominator</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">measure</td>
+<td align="left">prop:measure</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody></table>
+
+<p>&ldquo;cubeVersion&rdquo; is not directly available but from dcat:distribution derived as
+the result of paste0(&ldquo;DC-&rdquo;, domainName,&ldquo;-R-V-&rdquo;,cubeVersion,&ldquo;.TTL&rdquo;), and shown as cubeversionlong.</p>
+
+<table><thead>
+<tr>
+<th align="left">compType</th>
+<th align="left">compName</th>
+<th align="left">compLabel</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">metadata</td>
+<td align="left">title</td>
+<td align="left">Demographics Analysis Results</td>
+</tr>
+<tr>
+<td align="left">metadata</td>
+<td align="left">cubeversionlong</td>
+<td align="left">DC-DM-R-V-0-5-2.TTL</td>
+</tr>
+<tr>
+<td align="left">metadata</td>
+<td align="left">comment</td>
+<td align="left">Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a</td>
+</tr>
+<tr>
+<td align="left">metadata</td>
+<td align="left">label</td>
+<td align="left">Demographics results data set.</td>
+</tr>
+<tr>
+<td align="left">metadata</td>
+<td align="left">description</td>
+<td align="left">Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)</td>
+</tr>
+<tr>
+<td align="left">metadata</td>
+<td align="left">obsFileName</td>
+<td align="left">dm.AR.csv</td>
+</tr>
+</tbody></table>
+
+<p>Get the meta data from the excel workbook and show only the compName and value</p>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="left">compName</th>
+<th align="left">compLabel</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">10</td>
+<td align="left">obsURL</td>
+<td align="left"><a href="https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt">https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt</a></td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">obsFileName</td>
+<td align="left">dm.AR.csv</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left">dataCubeFileName</td>
+<td align="left">DC-DM-R-V</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">cubeVersion</td>
+<td align="left">0.5.2</td>
+</tr>
+<tr>
+<td align="left">14</td>
+<td align="left">createdBy</td>
+<td align="left">Tim Williams</td>
+</tr>
+<tr>
+<td align="left">15</td>
+<td align="left">description</td>
+<td align="left">Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)</td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="left">providedBy</td>
+<td align="left">PhUSE Results Metadata Working Group</td>
+</tr>
+<tr>
+<td align="left">17</td>
+<td align="left">comment</td>
+<td align="left">Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">title</td>
+<td align="left">Demographics Analysis Results</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">label</td>
+<td align="left">Demographics results data set.</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">wasDerivedFrom</td>
+<td align="left">demog.AR.csv</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">domainName</td>
+<td align="left">DM</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">obsFileNameDirectory</td>
+<td align="left">!example</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">dataCubeOutDirectory</td>
+<td align="left">!temporary</td>
 </tr>
 </tbody></table>
 

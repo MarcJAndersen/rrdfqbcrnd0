@@ -157,3 +157,59 @@ knitr::kable(cube.observations[,c(paste0(sub("prop:", "", cube.dimensionsattr), 
 
 
 
+## ----, echo=FALSE--------------------------------------------------------
+
+cube.dimensionsattr.rq<- '
+select ?compType ?compName ?codeType ?nciDomainValue
+where {
+{[] qb:dimension ?compName.
+ optional {  ?compName qb:codeList ?codeList . ?codeList mms:inValueDomain ?nciDomainValue }
+ values (?compType) { ("dimension") }  }
+union
+{ ?compName a qb:AttributeProperty . values (?compType) { ("attribute") } }
+union
+{ ?compName a qb:MeasureProperty . values (?compType) { ("measure") } }
+}
+'
+
+cube.dimensionsattr<- sparql.rdf(checkCube, paste(forsparqlprefix, cube.dimensionsattr.rq ))
+
+knitr::kable(cube.dimensionsattr)
+
+
+
+## ----, echo=FALSE--------------------------------------------------------
+
+cube.metadata.rq<- '
+# could show ?dataset
+select  ?compType ?compName ?compLabel
+# ?compType ?compName
+where {
+{
+?dataset a qb:DataSet .
+?dataset ?p ?compLabel .
+ values (?p ?compName) {
+   (dct:title "title" )
+   (dcat:distribution "cubeversionlong")
+   (rdfs:comment "comment" )
+   (rdfs:label "label" )
+   (dct:description "description" )
+   (prov:wasDerivedFrom "obsFileName")
+ }
+ values (?compType) { ("metadata") }
+}
+}
+'
+
+cube.metadata<- sparql.rdf(checkCube, paste(forsparqlprefix, cube.metadata.rq ))
+
+knitr::kable(cube.metadata)
+
+
+## ----, echo=FALSE--------------------------------------------------------
+
+cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"),stringsAsFactors=FALSE)
+
+knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compLabel")])
+
+
