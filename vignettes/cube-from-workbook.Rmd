@@ -197,9 +197,7 @@ First get the dimensions, measure and attribute
 
 ```{r, echo=FALSE}
 
-cube.dimensionsattr<- sparql.rdf(checkCube,
-  paste(forsparqlprefix,
-'
+cube.dimensionsattr.rq<- '
 select ?compType ?compName ?codeType ?nciDomainValue
 where {
 {[] qb:dimension ?compName.
@@ -211,7 +209,53 @@ union
 { ?compName a qb:MeasureProperty . values (?compType) { ("measure") } }
 }
 '
-))
-cube.dimensionsattr
+
+cube.dimensionsattr<- sparql.rdf(checkCube, paste(forsparqlprefix, cube.dimensionsattr.rq ))
+
+knitr::kable(cube.dimensionsattr)
+
+
+```
+
+ 
+"cubeVersion" is not directly available but from dcat:distribution derived as
+the result of paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL"), and shown as cubeversionlong.
+
+```{r, echo=FALSE}
+
+cube.metadata.rq<- '
+# could show ?dataset
+select  ?compType ?compName ?compLabel
+# ?compType ?compName
+where {
+{
+?dataset a qb:DataSet .
+?dataset ?p ?compLabel .
+ values (?p ?compName) {
+   (dct:title "title" )
+   (dcat:distribution "cubeversionlong")
+   (rdfs:comment "comment" )
+   (rdfs:label "label" )
+   (dct:description "description" )
+   (prov:wasDerivedFrom "obsFileName")
+ }
+ values (?compType) { ("metadata") }
+}
+}
+'
+
+cube.metadata<- sparql.rdf(checkCube, paste(forsparqlprefix, cube.metadata.rq ))
+
+knitr::kable(cube.metadata)
+
+```
+
+Get the meta data from the excel workbook and show only the compName and value
+
+```{r, echo=FALSE}
+
+cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"),stringsAsFactors=FALSE)
+
+knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compLabel")])
 
 ```
