@@ -7,7 +7,7 @@
 ##' @param codeType Character "DATA" or "SDTM".
 ##' "DATA" to derive code list from the data.
 ##' "SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query
-##' @param nciDomainValue When codetype="DATA" the nciDomain used for identifying the codelist
+##' @param nciDomainValue When codetype="SDTM" the nciDomain used for identifying the codelist
 ##' @param dimName the name of the dimension - for codeType="DATA" the name of the variable in the data frame ObsData
 ##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
 ##' @return Alway TRUE - to be corrected
@@ -132,6 +132,21 @@ remote.endpoint
                    paste0(prefixlist$prefixSKOS,"notation"),
                    paste0("CL_",toupper(dimName)))
 
+    ## Add rrdfqbcrnd0 information
+       add.data.triple(store,
+                   paste0(prefixlist$prefixCODE,dimName),
+                    paste0(prefixlist$prefixRRDFQBCRND0, "codeType"),
+                    paste0(codeType)
+                    )
+    if (codeType=="SDTM"){
+      add.data.triple(store,
+                   paste0(prefixlist$prefixCODE,dimName),
+                    paste0(prefixlist$prefixMMS,"inValueDomain"),
+                    paste0(nciDomainValue)
+                      )
+    }
+
+  
   # --------- hasTopConcept ---------
   # For each unique code
   for (i in 1:nrow(codeSource)){
@@ -177,7 +192,8 @@ remote.endpoint
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
                     paste0(codeSource[i,"code"]))
 
-    # Document when the codes come from the source data without reconciliation
+
+                                        # Document when the codes come from the source data without reconciliation
     #   against other sources.
     if (codeType=="DATA"){
        add.data.triple(store,
