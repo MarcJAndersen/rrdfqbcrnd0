@@ -20,10 +20,12 @@ install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown" ) )
 
 The rrdfqbcrnd0 packages uses these packages, that also must be installed:
 ```r
-install.packages( c( "RCurl", "rJava", "xlsx" ) )
+install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
 ```
 These packages are mentioned under Imports: section in the DESCRIPTION file.
-If RCurl install fails, it may be resolved by first installing the libcurl and libcurl-devel packages (on fedora: install.packages( c( "RCurl").
+Note for Linux: Check if there are distribution specific packages for the components. For example for Fedora, these RCurl exists as package R-RCurl and XML as R-XML, eg yum install R-RCurl R-XML.
+
+If RCurl install fails, it may be resolved by first installing the libcurl and libcurl-devel packages (on fedora: install.packages( c( "RCurl"). 
 
 Finally, the [rrdf](https://github.com/egonw/rrdf) package must be
 installed. The packages must be installed accoding to the instructions
