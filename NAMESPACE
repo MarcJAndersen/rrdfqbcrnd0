@@ -1,3 +1,6 @@
 exportPattern("^[^\\.]")
 import(rrdf)
+import(RCurl)
+import(rJava)
+import(xlsx)
 
