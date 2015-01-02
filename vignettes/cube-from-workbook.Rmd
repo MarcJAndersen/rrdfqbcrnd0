@@ -40,7 +40,7 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 
 dataCubeFile<- dm.cube.fn
 # dataCubeFile<- ae.cube.fn
-11```
+```
 
 ```{r, echo=FALSE}
 # the rest of the code only depends on the value of dataCubeFile 
@@ -58,8 +58,8 @@ dsdName<- tempstrvec[length(tempstrvec)]
 domainName<- strsplit(dsdName,"-")[[1]][[2]]
 
 common.prefixes <- data.frame(
-    prefix=gsub("^prefix","",names(qbCDISCprefixes)),
-    namespace=as.character(qbCDISCprefixes )
+    prefix=gsub("^prefix","",names(Get.default.crnd.prefixes())),
+    namespace=as.character(Get.default.crnd.prefixes() )
     )
 custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
 
