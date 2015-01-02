@@ -45,8 +45,8 @@ skeletonSource <-cubeMetadata[grep("dimension|attribute|measure", cubeMetadata$c
 # If common.prefixes is not set, then use built-in defaults
 if (is.null(common.prefixes)) {
   common.prefixes <-data.frame(
-  prefix=names(qbCDISCprefixes),
-  namespace=as.character(qbCDISCprefixes)
+  prefix=names( Get.default.crnd.prefixes() ),
+  namespace=as.character( Get.default.crnd.prefixes() )
   )
 }  
 
