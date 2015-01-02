@@ -1,11 +1,14 @@
 ##' Add RDF Data Set Specification (DSD) to the rrdf store
 ##'
-##' More text
+##' 
 ##' @inheritParams BuildCubeFromDataFrames
+##' @param store RRDF store
+##' @param prefixlist prefix list
+##' @param skeletonSource data.frame with skeleton source
 ##' @param dsdURIwoprefix DSD URI
 ##' @param dsdName DSD name
 ##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title 
-##' @param remote.endpoint 
+##' @param remote.endpoint Remote endpoint, if NULL use local version of CDISC RDF standards
 ##' @return Always TRUE
 qb.buildDSD<- function(store,
   prefixlist,
