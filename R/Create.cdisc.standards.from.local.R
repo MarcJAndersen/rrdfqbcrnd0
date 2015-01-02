@@ -17,7 +17,7 @@ Create.cdisc.standards.from.local<- function(
   CDISCfilelist= Get.filenames.for.cdisc.standards()
   ) {
 
-g
+
 format.from.ext<- list("ttl"="TURTLE", "rdf"="RDF/XML", "owl"="RDF/XML", "n3"="N3")
 
 cdisc.rdf <- new.rdf(ontology=FALSE)
@@ -52,7 +52,7 @@ if (file.exists(full.cdisc.save.zip)) {
 message("Writing to zip file ", full.cdisc.save.zip)
 zip( full.cdisc.save.zip, files=c(full.cdisc.save.ttl), extras="-j" )
   if (! file.exists(full.cdisc.save.zip)) {
-    stop("Problem: Expected zip file not found - ", full.cdisc.save.zop )
+    stop("Problem: Expected zip file not found - ", full.cdisc.save.zip )
   }
 
   if (remove.cdisc.save.ttl) {
