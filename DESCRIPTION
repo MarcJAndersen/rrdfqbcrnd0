@@ -9,7 +9,10 @@ Authors@R: c(
 Description: Creates and operates on RDF Data cube using rdf.cdisc.org
     definitions
 Depends:
-    R (>= 3.0.2)
+    R (>= 3.0.2),
+    rrdf,
+    xlsx,
+    rJava
 Imports:
     rrdf,
     tools,
