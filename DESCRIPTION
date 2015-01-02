@@ -12,13 +12,10 @@ Depends:
     R (>= 3.0.2),
     rrdf,
     xlsx,
-    rJava
-Imports:
-    rrdf,
-    tools,
-    xlsx,
     RCurl,
     rJava
+Imports:
+    tools,
 License: MIT + file LICENSE
 LazyData: true
 Suggests:
