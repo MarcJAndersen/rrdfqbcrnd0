@@ -19,3 +19,9 @@ NULL
 ##' @references \url{http://www.w3.org/TR/2014/REC-vocab-data-cube-20140116/}
 NULL
 
+##' Package locale environment
+##'
+##' @docType data
+##' @name env
+NULL
+
