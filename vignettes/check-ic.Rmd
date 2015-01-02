@@ -16,7 +16,7 @@ library(rrdfqbcrnd0)
 
 cubeData = new.rdf(ontology=FALSE)
 
-myprefixes= c(qbCDISCprefixes, list(
+myprefixes= c(Get.default.crnd.prefixes(), list(
  "dccs"="http://www.example.org/dc/demog/dccs/" ,
  "code"="http://www.example.org/dc/code/" ,
  "ds"=  "http://www.example.org/dc/demog/dataset/" ,
