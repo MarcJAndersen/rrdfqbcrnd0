@@ -73,7 +73,6 @@ if (!is.null(RDFCubeWorkbook)) {
     dsURL<-  metadataSource[ metadataSource$compName=="obsURL", "dataCubeFileName" ]
   }
 } else {
-  data(qbCDISCprefixes)
   common.prefixes <- data.frame(
     prefix=gsub("^prefix","",names(qbCDISCprefixes)),
     namespace=as.character(qbCDISCprefixes )

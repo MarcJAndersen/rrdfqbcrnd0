@@ -83,7 +83,6 @@ tempstrvec<- unlist(strsplit( tempstr, "/"))
 dsdName<- tempstrvec[length(tempstrvec)]
 domainName<- strsplit(dsdName,"-")[[1]][[2]]
 
-data(qbCDISCprefixes)
 common.prefixes <- data.frame(
     prefix=gsub("^prefix","",names(qbCDISCprefixes)),
     namespace=as.character(qbCDISCprefixes )
