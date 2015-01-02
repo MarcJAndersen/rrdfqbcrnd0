@@ -7,13 +7,14 @@
 ##' @param remove.cdisc.load.ttl If TRUE then the remove the unzipped
 ##' turtle version of rdf.cdisc.org
 Load.cdisc.standards<- function(
-  cdisc.load.zip=file.path(system.file("extdata/CDISC-standards-rdf", package="rrdfqbcrnd0"), "cdisc-rdf.zip" ),
+  cdisc.load.zip=file.path(
+    system.file("extdata/CDISC-standards-rdf", package="rrdfqbcrnd0"), "cdisc-rdf.zip"
+    ),
   cdisc.load.ttl= file.path(tempdir(),"cdisc-rdf.ttl"),
   remove.cdisc.load.ttl= TRUE  
   ) {
 
   cdisc.rdf = new.rdf(ontology=FALSE)
-
 
   message("Start loading rdf.cdisc.org contents from ", cdisc.load.zip )
   if (! file.exists(cdisc.load.zip)) {
@@ -24,7 +25,6 @@ Load.cdisc.standards<- function(
     stop("Expected file not found - ", cdisc.load.ttl )
   }
   load.rdf(cdisc.load.ttl, format="TURTLE", appendTo=cdisc.rdf )
-
 
   message("Done loading rdf.cdisc.org contents, number of triples: ", summarize.rdf.noprint(cdisc.rdf) )
   if (remove.cdisc.load.ttl) {
