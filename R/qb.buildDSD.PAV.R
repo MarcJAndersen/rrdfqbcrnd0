@@ -47,7 +47,7 @@ add.data.triple(store,
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "version"),
-                pavVersion)
+                PAVnodes$pavVersion)
 
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
