@@ -8,11 +8,14 @@ cleantempemacs:
 rbuildforce: 
 	cd ..; R CMD build --force ${PACKAGENAME}
 
+# checking package
+# see http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-packages
+# see http://stackoverflow.com/questions/15324705/should-there-be-a-package-subfolder-in-a-github-package-repo?lq=1
 rcheck: 
-	cd ..; R CMD check --as-cran ${PACKAGENAME}
+	cd ..; R CMD check --as-cran ${PACKAGENAME}_0.1.tar.gz
 
 rbuild: 
-	cd ..; R CMD build  ${PACKAGENAME}
+	cd ..; R CMD build  ../${PACKAGENAME}
 
 createRD:
 	# does not work MJA 2014-11-16 Rscript -e 'library(devtools); devtools::document()'
