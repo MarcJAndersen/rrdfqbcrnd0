@@ -1,7 +1,7 @@
 ##' Return number of triples in model
 ##'
 ##' 
-##' @param model 
+##' @param model RRDF model
 ##' @return Number of triples in model
 ##' @details This the rrdf summarize.rdf without a print statement
 summarize.rdf.noprint<- function (model) 

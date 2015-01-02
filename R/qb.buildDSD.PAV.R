@@ -1,17 +1,17 @@
 ##' Add information on creation following the PAV ontology
 ##'
-##' More text to be written ....
-##' @param store 
-##' @param prefixlist 
-##' @param obsData 
-##' @param skeletonSource 
-##' @param dsdURIwoprefix 
-##' @param dsdName 
+##' @param store RRDF store
+##' @param prefixlist list of prefixes
+##' @param obsData the data as a dataframe
+##' @param skeletonSource skeleton source as data frame
+##' @param dsdURIwoprefix DSD URI
+##' @param dsdName DSD name
 ##' @param PAVnodes A list with member names createdOn, createdBy, pavVersion, createdWith, providedBy
 ##' @return Always TRUE
 ##' @author Tim Williams, Marc Andersen
 qb.buildDSD.PAV<- function(
-store, prefixlist,
+store,
+prefixlist,
 obsData,
 skeletonSource,
 dsdURIwoprefix="dataset-demog",
@@ -35,13 +35,13 @@ providedBy="PhUSE Results Metadata Working Group"
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "createdOn"),
-                PAVnode$createdOn,
+                PAVnodes$createdOn,
                 "dateTime")
 
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "createdBy"),
-                PAVnode$createdBy,
+                PAVnodes$createdBy,
                 "string")
 
 add.data.triple(store,

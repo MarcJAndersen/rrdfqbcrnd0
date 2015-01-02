@@ -1,12 +1,9 @@
 ##' Add RDF Data Set Specification (DSD) to the rrdf store
 ##'
 ##' More text
-##' @param store 
-##' @param prefixlist 
-##' @param obsData 
-##' @param skeletonSource 
-##' @param dsdURIwoprefix 
-##' @param dsdName 
+##' @inheritParams BuildCubeFromDataFrames
+##' @param dsdURIwoprefix DSD URI
+##' @param dsdName DSD name
 ##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title 
 ##' @param remote.endpoint 
 ##' @return Always TRUE
@@ -24,7 +21,7 @@ qb.buildDSD<- function(store,
       "Attributes applied from source data. ",
       "Attributes as VALUES instead of URIs."),
     label="Demographics results data set.",
-    distribution=dataCubeFileName,
+    distribution="dataCubeFileName",
     obsfilename="the name of the input file",
     title="Demographics Analysis Results"
   ),

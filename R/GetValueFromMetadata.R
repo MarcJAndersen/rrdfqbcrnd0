@@ -4,7 +4,7 @@
 ##' @param metaData data.frame with columns compType, compName and compLabel
 ##' @param compType a vector with values of compType, or NULL if not used
 ##' @param compName select on the value of compName
-##' @param defaulValue if not NULL then a character string providing the default value in 
+##' @param defaultValue if not NULL then a character string providing the default value in 
 ##' @return the value of the meta data or the the provided default value if keys are not found
 GetValueFromMetadata<- function(metaData,compType=NULL,compName=NULL,defaultValue=NULL) {
 

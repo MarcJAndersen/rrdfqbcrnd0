@@ -17,7 +17,7 @@ common.prefixes <- read.xlsx(RDFCubeWorkbook,sheetName=paste0("CubePrefixes"),st
 # TODO: Replace some use of compLabel with a var : compNameClass, formed by
 #       Upcase of first letter of the compName value.
 
-cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"),stringsAsFactors=FALSE)
+cubeMetadata <- xlsx::read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"),stringsAsFactors=FALSE)
 
 metadataSource <-cubeMetadata[grep("metadata", cubeMetadata$compType),]
 

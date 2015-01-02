@@ -4,7 +4,8 @@
 ##' @return RRDF model containing CDISC standards stored locally in zip file
 ##' @param cdisc.load.zip Path and filename to zip file with turtle version of rdf.cdisc.org. Default location is in package extdata/CDISC-standards-rdf directory files cdisc-rdf.zip
 ##' @param cdisc.load.ttl Path and filename for the unzipped turtle version of rdf.cdisc.org. Default location is file cdisc-rdf.ttl in R session temporary directory
-##' @param remove.cdisc.load.ttl If TRUE then the remove the unzipped turtle version of rdf.cdisc.org 
+##' @param remove.cdisc.load.ttl If TRUE then the remove the unzipped
+##' turtle version of rdf.cdisc.org
 Load.cdisc.standards<- function(
   cdisc.load.zip=file.path(system.file("extdata/CDISC-standards-rdf", package="rrdfqbcrnd0"), "cdisc-rdf.zip" ),
   cdisc.load.ttl= file.path(tempdir(),"cdisc-rdf.ttl"),
