@@ -40,7 +40,7 @@ Note for future: This may be a disadvantage if the value of the prefix, say ds, 
 
 dataCubeFile<- dm.cube.fn
 # dataCubeFile<- ae.cube.fn
-```
+11```
 
 ```{r, echo=FALSE}
 # the rest of the code only depends on the value of dataCubeFile 
@@ -57,7 +57,6 @@ tempstrvec<- unlist(strsplit( tempstr, "/"))
 dsdName<- tempstrvec[length(tempstrvec)]
 domainName<- strsplit(dsdName,"-")[[1]][[2]]
 
-data(qbCDISCprefixes)
 common.prefixes <- data.frame(
     prefix=gsub("^prefix","",names(qbCDISCprefixes)),
     namespace=as.character(qbCDISCprefixes )
@@ -144,7 +143,7 @@ select * where
 "\n"
 )
 cube.dimensions<- as.data.frame(sparql.rdf(checkCube, cube.dimensions.rq), stringsAsFactors=FALSE)
-knitr::kable(print(cube.dimensions))
+knitr::kable(cube.dimensions)
 
 ```
 
@@ -178,7 +177,6 @@ cube.observations.rq<-  paste( forsparqlprefix,
 
 This is the query for getting the observations
 ```{r, echo=FALSE}
-
 cat(cube.observations.rq)
 ```
 
@@ -217,23 +215,22 @@ knitr::kable(cube.dimensionsattr)
 
 ```
 
- 
-"cubeVersion" is not directly available but from dcat:distribution derived as
-the result of paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL"), and shown as cubeversionlong.
+Secondly, we get the metadata.
+The metadata element "cubeVersion" is not directly available but from dcat:distribution derived as
+the result of paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL").
 
 ```{r, echo=FALSE}
 
 cube.metadata.rq<- '
 # could show ?dataset
 select  ?compType ?compName ?compLabel
-# ?compType ?compName
 where {
 {
 ?dataset a qb:DataSet .
 ?dataset ?p ?compLabel .
  values (?p ?compName) {
    (dct:title "title" )
-   (dcat:distribution "cubeversionlong")
+   (dcat:distribution "distribution")
    (rdfs:comment "comment" )
    (rdfs:label "label" )
    (dct:description "description" )
