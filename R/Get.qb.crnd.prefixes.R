@@ -6,6 +6,8 @@
 ##' 
 ##' @param domainName The domainName to create prefixes for
 ##' @param namespaceStem The stem for the namespace
+##' @param domain.prefixes Prefix specific for the domain
+##' @param general.prefixes General prefixes not specific for the domain
 ##' @return Data frame with column prefix and namespace
 Get.qb.crnd.prefixes<- function(
   domainName,
