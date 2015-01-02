@@ -5,6 +5,8 @@
 .Rhistory
 .RData
 inst/doc
+build/
+man/
 *.Rmd~
 *.R~
 .#*
