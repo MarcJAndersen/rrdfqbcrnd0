@@ -18,7 +18,7 @@ You will need to install some packages for development
 install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown" ) )
 ```
 
-The rrdfqbcrnd0 packages uses these packages, that also must be installed:
+The rrdfqbcrnd0 packages uses the following packages, that also must be installed:
 ```r
 install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
 ```
@@ -41,6 +41,7 @@ install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= T
 
 Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
 
+The R package generation may require qpdf - see R function compactPDF  help page.
 
 Developing
 ----------
