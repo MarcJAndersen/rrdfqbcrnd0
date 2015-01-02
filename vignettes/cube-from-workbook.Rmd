@@ -243,7 +243,12 @@ where {
 
 cube.metadata<- sparql.rdf(checkCube, paste(forsparqlprefix, cube.metadata.rq ))
 
-knitr::kable(cube.metadata)
+cubeVersion<-  gsub("-",".", gsub("DC-.*-R-V-([^\\.]+).TTL", "\\1", cube.metadata[ cube.metadata[,2]=="distribution", "compLabel"], perl=TRUE))
+
+cube.metadataX<- rbind(cube.metadata, 
+rbind(cube.metadata, cbind(compType="metadata", compName="cubeVersion", compLabel=cubeVersion)))
+
+knitr::kable(cube.metadataX)
 
 ```
 
