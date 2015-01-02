@@ -1,11 +1,9 @@
-##' 
-##'
-##' Start-up code for defining cdiscstandards and qbCDISCprefixes
-##' @param libname library name
-##' @param pkgname package name
-##' @return invisible
+##' @noRd
+##
 
 env <- new.env(parent=emptyenv()) 
+
+#  Following http://stackoverflow.com/questions/12598242/global-variables-in-packages-in-r
 
 .onLoad <- function(libname, pkgname) {
   env[["cdiscstandards"]]<- NULL
@@ -24,7 +22,7 @@ env <- new.env(parent=emptyenv())
  "mms"= "http://rdf.cdisc.org/mms#" ,
  "cts"= "http://rdf.cdisc.org/ct/schema#",
  "rrdfqbcrnd0"="http://www.example.org/rrdfqbcrnd0/"
-)  ;
+)  
 
   invisible()
 }
