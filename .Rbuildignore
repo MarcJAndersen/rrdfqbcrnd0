@@ -8,8 +8,11 @@
 ^\vignettes/.#.*$
 ^\.Rbuildignore~
 ^\.Rhistory
-^\R/.Rhistory
+^\R/.Rhistory$
 ^\vignettes/.Rhistory
-^\.git.*$
 ^\.git/.*$
 ^.*~$
+^makefile$
+^\.git.*$
+
+
