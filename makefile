@@ -24,9 +24,6 @@ qbIClist: data/qbIClist.rda
 data/qbIClist.rda: inst/data-raw/create-qb-IC-dataset.Rmd
 	Rscript -e 'library(knitr);knit("inst/data-raw/create-qb-IC-dataset.Rmd")'
 
-data/qbCDISCprefixes.rda: inst/data-raw/create-qb-CDISC-prefix.Rmd
-	Rscript -e 'library(knitr);knit("inst/data-raw/create-qb-CDISC-prefix.Rmd")'
-
 AEtable: inst/data-raw/create-ae-table-as-csv.Rmd
 	Rscript -e 'library(knitr);knit("inst/data-raw/create-ae-table-as-csv.Rmd")'
 
