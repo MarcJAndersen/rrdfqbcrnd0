@@ -43,6 +43,13 @@ Replace xxx above with the auth_token generated from the page (https://github.co
 
 The R package generation may require qpdf - see R function compactPDF  help page.
 
+If the creation of vignettes reports "Pandoc is not available. Please install Pandoc.", the setting the environment variable RSTUDIO_PANDOC before starting R as follows:
+
+```bash
+export RSTUDIO_PANDOC=`which pandoc | xargs dirname`
+```
+([source](http://stackoverflow.com/questions/26803652/devtoolsbuild-vignettes-yields-error-invalid-version-specification-pandoc))
+
 Developing
 ----------
 
