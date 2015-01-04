@@ -6,7 +6,7 @@
 
 options(width=200) # long lines
 
-library (xlsx)
+library(xlsx)
 library(foreign)
 library(RCurl)
 
@@ -59,10 +59,9 @@ if (!is.null(RDFCubeWorkbook)) {
     dsURL<-  metadataSource[ metadataSource$compName=="obsURL", "dataCubeFileName" ]
   }
 } else {
-  data(qbCDISCprefixes)
   common.prefixes <- data.frame(
-    prefix=gsub("^prefix","",names(qbCDISCprefixes)),
-    namespace=as.character(qbCDISCprefixes )
+    prefix=gsub("^prefix","",names(Get.default.crnd.prefixes())),
+    namespace=as.character(Get.default.crnd.prefixes() )
     )
 }  
 

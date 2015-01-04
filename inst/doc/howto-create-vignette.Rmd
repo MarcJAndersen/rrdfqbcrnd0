@@ -29,7 +29,7 @@ knit("vignettes/cube-from-workbook.Rmd")
 
 Generate the pdf file using the following command
 ```{r makepdf.sh, eval=FALSE, engine='bash'}
-pandoc qube-from-workbook.md -o xx.pdf
+pandoc qube-from-workbook.md -o qube-from-workbook.pdf
 ```
 
 The knitr::knit2html should generate a .html file in the present work directory - the package root directory
