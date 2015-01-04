@@ -1,236 +1,86 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Introduction</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="author" content="PhuseSubTeamAnalysisResults@example.org" />
+
+<meta name="date" content="2015-01-05" />
+
+<title>Create simple RDF data qube</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
   }
-};
-</script>
-
-<!-- Styles for R syntax highlighter -->
-<style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
-</style>
-
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
-</script>
-
-
-
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
-}
-
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
-}
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
-}
-
-h1 {
-   font-size:2.2em;
-}
-
-h2 {
-   font-size:1.8em;
-}
-
-h3 {
-   font-size:1.4em;
-}
-
-h4 {
-   font-size:1.0em;
-}
-
-h5 {
-   font-size:0.9em;
-}
-
-h6 {
-   font-size:0.8em;
-}
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
-}
-
-pre, img {
-  max-width: 100%;
-}
-pre {
-  overflow-x: auto;
-}
-pre code {
-   display: block; padding: 0.5em;
-}
-
-code {
-  font-size: 92%;
-  border: 1px solid #ccc;
-}
-
-code[class] {
-  background-color: #F8F8F8;
-}
-
-table, td, th {
-  border: none;
-}
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
-}
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
-}
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
-}
 </style>
 
 
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
+
+
+
+<div id="header">
+<h1 class="title">Create simple RDF data qube</h1>
+<h4 class="author"><em><a href="mailto:PhuseSubTeamAnalysisResults@example.org">PhuseSubTeamAnalysisResults@example.org</a></em></h4>
+<h4 class="date"><em>2015-01-05</em></h4>
+</div>
+
+
+<div id="introduction" class="section level2">
 <h2>Introduction</h2>
-
-<p>This vignette shows how to create a very simple RDF data cube from </p>
-
-<ul>
-<li>data </li>
-<li>metadata<br/></li>
-</ul>
-
+<p>This vignette shows how to create a very simple RDF data cube from - data - metadata</p>
+</div>
+<div id="setup" class="section level2">
 <h2>Setup</h2>
-
-<pre><code class="r">library (rrdf)
-library(rrdfqbcrnd0)
-</code></pre>
-
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span> (rrdf)
+<span class="kw">library</span>(rrdfqbcrnd0)</code></pre>
+</div>
+<div id="define-data" class="section level2">
 <h2>Define data</h2>
-
-<pre><code class="r">obsData&lt;- data.frame(
-  category=c(&quot;AA-group&quot;, &quot;BB-group&quot;),
-  procedure=c(&quot;count&quot;, &quot;count&quot; ),
-  factor=c(&quot;quantity&quot;, &quot;quantity&quot; ),
-  unit=c(&quot;subject&quot;, &quot;subject&quot; ),
-  denominator=c(&quot; &quot;, &quot; &quot;),
-  measure=c( 123, 456 ),
-  stringsAsFactors=FALSE  )
-knitr::kable(obsData)
-</code></pre>
-
-<table><thead>
-<tr>
+<pre class="sourceCode r"><code class="sourceCode r">obsData&lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">category=</span><span class="kw">c</span>(<span class="st">&quot;AA-group&quot;</span>, <span class="st">&quot;BB-group&quot;</span>),
+  <span class="dt">procedure=</span><span class="kw">c</span>(<span class="st">&quot;count&quot;</span>, <span class="st">&quot;count&quot;</span> ),
+  <span class="dt">factor=</span><span class="kw">c</span>(<span class="st">&quot;quantity&quot;</span>, <span class="st">&quot;quantity&quot;</span> ),
+  <span class="dt">unit=</span><span class="kw">c</span>(<span class="st">&quot;subject&quot;</span>, <span class="st">&quot;subject&quot;</span> ),
+  <span class="dt">denominator=</span><span class="kw">c</span>(<span class="st">&quot; &quot;</span>, <span class="st">&quot; &quot;</span>),
+  <span class="dt">measure=</span><span class="kw">c</span>( <span class="dv">123</span>, <span class="dv">456</span> ),
+  <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>  )
+knitr::<span class="kw">kable</span>(obsData)</code></pre>
+<table>
+<thead>
+<tr class="header">
 <th align="left">category</th>
 <th align="left">procedure</th>
 <th align="left">factor</th>
@@ -238,8 +88,9 @@ knitr::kable(obsData)
 <th align="left">denominator</th>
 <th align="right">measure</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="left">AA-group</td>
 <td align="left">count</td>
 <td align="left">quantity</td>
@@ -247,7 +98,7 @@ knitr::kable(obsData)
 <td align="left"></td>
 <td align="right">123</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">BB-group</td>
 <td align="left">count</td>
 <td align="left">quantity</td>
@@ -255,23 +106,23 @@ knitr::kable(obsData)
 <td align="left"></td>
 <td align="right">456</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
+</div>
+<div id="define-meta-data" class="section level2">
 <h2>Define meta data</h2>
-
-<pre><code class="r">cubeMetadata&lt;- data.frame(
-  compType=c(&quot;dimension&quot;, &quot;dimension&quot;, &quot;dimension&quot;, &quot;unit&quot;, &quot;denominator&quot;, &quot;measure&quot;, &quot;metadata&quot;),
-  compName=c(&quot;category&quot;, &quot;procedure&quot;, &quot;factor&quot;, &quot;attribute&quot;, &quot;attribute&quot;, &quot;measure&quot;, &quot;domainName&quot;),
-  codeType=c(&quot;DATA&quot;, &quot;DATA&quot;, &quot;DATA&quot;, &quot; &quot;, &quot; &quot;, &quot;&lt;NA&gt;&quot;,&quot;&lt;NA&gt;&quot;),
-  nciDomainValue=c(&quot; &quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;, &quot; &quot;, &quot; &quot;,&quot; &quot;),
-  compLabel=c(&quot;Category&quot;, &quot;Statistical procedure&quot;, &quot;Type of procedure&quot;, &quot;Result&quot;, &quot;Unit&quot;, &quot;Denominator&quot;, &quot;EXAMPLE&quot;),
-  Comment=c(&quot; &quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;,&quot; &quot;),
-  stringsAsFactors=FALSE  )
-knitr::kable(cubeMetadata)
-</code></pre>
-
-<table><thead>
-<tr>
+<pre class="sourceCode r"><code class="sourceCode r">cubeMetadata&lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">compType=</span><span class="kw">c</span>(<span class="st">&quot;dimension&quot;</span>, <span class="st">&quot;dimension&quot;</span>, <span class="st">&quot;dimension&quot;</span>, <span class="st">&quot;unit&quot;</span>, <span class="st">&quot;denominator&quot;</span>, <span class="st">&quot;measure&quot;</span>, <span class="st">&quot;metadata&quot;</span>),
+  <span class="dt">compName=</span><span class="kw">c</span>(<span class="st">&quot;category&quot;</span>, <span class="st">&quot;procedure&quot;</span>, <span class="st">&quot;factor&quot;</span>, <span class="st">&quot;attribute&quot;</span>, <span class="st">&quot;attribute&quot;</span>, <span class="st">&quot;measure&quot;</span>, <span class="st">&quot;domainName&quot;</span>),
+  <span class="dt">codeType=</span><span class="kw">c</span>(<span class="st">&quot;DATA&quot;</span>, <span class="st">&quot;DATA&quot;</span>, <span class="st">&quot;DATA&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="st">&quot; &quot;</span>, <span class="st">&quot;&lt;NA&gt;&quot;</span>,<span class="st">&quot;&lt;NA&gt;&quot;</span>),
+  <span class="dt">nciDomainValue=</span><span class="kw">c</span>(<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>, <span class="st">&quot; &quot;</span>, <span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>),
+  <span class="dt">compLabel=</span><span class="kw">c</span>(<span class="st">&quot;Category&quot;</span>, <span class="st">&quot;Statistical procedure&quot;</span>, <span class="st">&quot;Type of procedure&quot;</span>, <span class="st">&quot;Result&quot;</span>, <span class="st">&quot;Unit&quot;</span>, <span class="st">&quot;Denominator&quot;</span>, <span class="st">&quot;EXAMPLE&quot;</span>),
+  <span class="dt">Comment=</span><span class="kw">c</span>(<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>,<span class="st">&quot; &quot;</span>),
+  <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>  )
+knitr::<span class="kw">kable</span>(cubeMetadata)</code></pre>
+<table>
+<thead>
+<tr class="header">
 <th align="left">compType</th>
 <th align="left">compName</th>
 <th align="left">codeType</th>
@@ -279,8 +130,9 @@ knitr::kable(cubeMetadata)
 <th align="left">compLabel</th>
 <th align="left">Comment</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="left">dimension</td>
 <td align="left">category</td>
 <td align="left">DATA</td>
@@ -288,7 +140,7 @@ knitr::kable(cubeMetadata)
 <td align="left">Category</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">dimension</td>
 <td align="left">procedure</td>
 <td align="left">DATA</td>
@@ -296,7 +148,7 @@ knitr::kable(cubeMetadata)
 <td align="left">Statistical procedure</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">dimension</td>
 <td align="left">factor</td>
 <td align="left">DATA</td>
@@ -304,7 +156,7 @@ knitr::kable(cubeMetadata)
 <td align="left">Type of procedure</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">unit</td>
 <td align="left">attribute</td>
 <td align="left"></td>
@@ -312,7 +164,7 @@ knitr::kable(cubeMetadata)
 <td align="left">Result</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">denominator</td>
 <td align="left">attribute</td>
 <td align="left"></td>
@@ -320,7 +172,7 @@ knitr::kable(cubeMetadata)
 <td align="left">Unit</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">measure</td>
 <td align="left">measure</td>
 <td align="left"><NA></td>
@@ -328,7 +180,7 @@ knitr::kable(cubeMetadata)
 <td align="left">Denominator</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">metadata</td>
 <td align="left">domainName</td>
 <td align="left"><NA></td>
@@ -336,275 +188,236 @@ knitr::kable(cubeMetadata)
 <td align="left">EXAMPLE</td>
 <td align="left"></td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
+</div>
+<div id="create-rdf-data-cube" class="section level2">
 <h2>Create RDF data cube</h2>
-
 <p>The RDF data cube for the data above is created using</p>
-
-<pre><code class="r">outcube&lt;- BuildCubeFromDataFrames(cubeMetadata, obsData )
-</code></pre>
-
+<pre class="sourceCode r"><code class="sourceCode r">outcube&lt;-<span class="st"> </span><span class="kw">BuildCubeFromDataFrames</span>(cubeMetadata, obsData )</code></pre>
 <p>The RDF data cube is serialized in turtle format and stored as</p>
-
-<pre><code class="r">outcube
-</code></pre>
-
-<pre><code>## [1] &quot;/tmp/Rtmp8TFFPv/DC-EXAMPLE-R-V-0-0-0.TTL&quot;
-</code></pre>
-
+<pre class="sourceCode r"><code class="sourceCode r">outcube</code></pre>
+<pre><code>## [1] &quot;/tmp/RtmpG1PhVH/DC-EXAMPLE-R-V-0-0-0.TTL&quot;</code></pre>
+</div>
+<div id="looking-at-the-rdf-data-cube" class="section level2">
 <h2>Looking at the RDF data cube</h2>
+<p>Now look at the generated cubes by loading the turle files. Note: by specifying prefix the output contains is shown using the prefixes. Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.</p>
+<pre class="sourceCode r"><code class="sourceCode r">dataCubeFile&lt;-<span class="st"> </span>outcube</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the rest of the code only depends on the value of dataCubeFile </span>
+checkCube &lt;-<span class="st"> </span><span class="kw">new.rdf</span>(<span class="dt">ontology=</span><span class="ot">FALSE</span>)  <span class="co"># Initialize</span>
+<span class="kw">load.rdf</span>(dataCubeFile, <span class="dt">format=</span><span class="st">&quot;TURTLE&quot;</span>, <span class="dt">appendTo=</span> checkCube)
+<span class="kw">summarize.rdf</span>(checkCube)</code></pre>
+<pre><code>## [1] &quot;Number of triples: 127&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># determine the domain name; used for defining prefixes</span>
+<span class="co"># TODO: reconsider the use of domain specific prefixes</span>
 
-<p>Now look at the generated cubes by loading the turle files. Note: by specifying prefix the output contains is shown using the prefixes.
-Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.</p>
+<span class="co"># TODO: make this simpler - the only purpose is find the dsdName</span>
+<span class="co"># TODO: a qb:DataStructureDefinition, and for domainname, say, the DM in ds:dsd-DM</span>
+tempstr&lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">sparql.rdf</span>(checkCube, <span class="st">&quot;select ?s where { ?s a &lt;http://purl.org/linked-data/cube#DataStructureDefinition&gt; } limit 1&quot;</span>))
+tempstrvec&lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>( tempstr, <span class="st">&quot;/&quot;</span>))
+dsdName&lt;-<span class="st"> </span>tempstrvec[<span class="kw">length</span>(tempstrvec)]
+domainName&lt;-<span class="st"> </span><span class="kw">strsplit</span>(dsdName,<span class="st">&quot;-&quot;</span>)[[<span class="dv">1</span>]][[<span class="dv">2</span>]]
 
-<pre><code class="r">dataCubeFile&lt;- outcube
-</code></pre>
-
-<pre><code class="r"># the rest of the code only depends on the value of dataCubeFile 
-checkCube &lt;- new.rdf(ontology=FALSE)  # Initialize
-load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= checkCube)
-summarize.rdf(checkCube)
-</code></pre>
-
-<pre><code>## [1] &quot;Number of triples: 127&quot;
-</code></pre>
-
-<pre><code class="r"># determine the domain name; used for defining prefixes
-# TODO: reconsider the use of domain specific prefixes
-
-# TODO: make this simpler - the only purpose is find the dsdName
-# TODO: a qb:DataStructureDefinition, and for domainname, say, the DM in ds:dsd-DM
-tempstr&lt;- as.character(sparql.rdf(checkCube, &quot;select ?s where { ?s a &lt;http://purl.org/linked-data/cube#DataStructureDefinition&gt; } limit 1&quot;))
-tempstrvec&lt;- unlist(strsplit( tempstr, &quot;/&quot;))
-dsdName&lt;- tempstrvec[length(tempstrvec)]
-domainName&lt;- strsplit(dsdName,&quot;-&quot;)[[1]][[2]]
-
-data(qbCDISCprefixes)
-common.prefixes &lt;- data.frame(
-    prefix=gsub(&quot;^prefix&quot;,&quot;&quot;,names(qbCDISCprefixes)),
-    namespace=as.character(qbCDISCprefixes )
+common.prefixes &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+    <span class="dt">prefix=</span><span class="kw">gsub</span>(<span class="st">&quot;^prefix&quot;</span>,<span class="st">&quot;&quot;</span>,<span class="kw">names</span>(<span class="kw">Get.default.crnd.prefixes</span>())),
+    <span class="dt">namespace=</span><span class="kw">as.character</span>(<span class="kw">Get.default.crnd.prefixes</span>() )
     )
-custom.prefixes &lt;-Get.qb.crnd.prefixes(tolower(domainName))
+custom.prefixes &lt;-<span class="kw">Get.qb.crnd.prefixes</span>(<span class="kw">tolower</span>(domainName))
 
-forsparqlprefix&lt;- Get.rq.prefix.df(rbind(common.prefixes, custom.prefixes))
-</code></pre>
-
+forsparqlprefix&lt;-<span class="st"> </span><span class="kw">Get.rq.prefix.df</span>(<span class="kw">rbind</span>(common.prefixes, custom.prefixes))</code></pre>
 <p>The next statement shows the first 10 triples in the cube.</p>
-
-<table><thead>
-<tr>
+<table>
+<thead>
+<tr class="header">
 <th align="left">s</th>
 <th align="left">p</th>
 <th align="left">o</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="left">dccs:measure</td>
 <td align="left">qb:measure</td>
 <td align="left">prop:measure</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">dccs:measure</td>
 <td align="left">rdfs:label</td>
 <td align="left">Denominator</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">dccs:measure</td>
 <td align="left">rdf:type</td>
 <td align="left">qb:ComponentSpecification</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">code:Category</td>
 <td align="left">rdfs:subClassOf</td>
 <td align="left">skos:Concept</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">code:Category</td>
 <td align="left">rdfs:seeAlso</td>
 <td align="left">code:category</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">code:Category</td>
 <td align="left">rdfs:label</td>
 <td align="left">Class for code list: category</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">code:Category</td>
 <td align="left">rdfs:comment</td>
 <td align="left">Specifies the category for each observation</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">code:Category</td>
 <td align="left">rdf:type</td>
 <td align="left">owl:Class</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">code:Category</td>
 <td align="left">rdf:type</td>
 <td align="left">rdfs:Class</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">code:category-AA-group</td>
 <td align="left">skos:topConceptOf</td>
 <td align="left">code:category</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
 <p>The next statement shows the first 30 triples in the cube, where the subject is a qb:Observation.</p>
-
-<pre><code class="r">cube.observations2.rq&lt;-  paste( forsparqlprefix,
-&#39;
-select *
-where { ?s a qb:Observation ; ?p ?o .}
-limit 30
-&#39;,
-&quot;\n&quot;                               
+<pre class="sourceCode r"><code class="sourceCode r">cube.observations2.rq&lt;-<span class="st">  </span><span class="kw">paste</span>( forsparqlprefix,
+<span class="st">'</span>
+<span class="st">select *</span>
+<span class="st">where { ?s a qb:Observation ; ?p ?o .}</span>
+<span class="st">limit 30</span>
+<span class="st">'</span>,
+<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>                               
 )
 
-cube.observations2&lt;- sparql.rdf(checkCube, cube.observations2.rq)
-knitr::kable(head(cube.observations2, 10))
-</code></pre>
-
-<table><thead>
-<tr>
+cube.observations2&lt;-<span class="st"> </span><span class="kw">sparql.rdf</span>(checkCube, cube.observations2.rq)
+knitr::<span class="kw">kable</span>(<span class="kw">head</span>(cube.observations2, <span class="dv">10</span>))</code></pre>
+<table>
+<thead>
+<tr class="header">
 <th align="left">s</th>
 <th align="left">p</th>
 <th align="left">o</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="left">ds:obs1</td>
 <td align="left">prop:unit</td>
 <td align="left">subject</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">ds:obs1</td>
 <td align="left">prop:procedure</td>
 <td align="left">code:procedure-count</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">ds:obs1</td>
 <td align="left">prop:measure</td>
 <td align="left">123</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">ds:obs1</td>
 <td align="left">prop:factor</td>
 <td align="left">code:factor-quantity</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">ds:obs1</td>
 <td align="left">prop:denominator</td>
 <td align="left"></td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">ds:obs1</td>
 <td align="left">prop:category</td>
 <td align="left">code:category-AA-group</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">ds:obs1</td>
 <td align="left">qb:dataSet</td>
 <td align="left">ds:dataset-EXAMPLE</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">ds:obs1</td>
 <td align="left">rdfs:label</td>
 <td align="left">1</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">ds:obs1</td>
 <td align="left">rdf:type</td>
 <td align="left">qb:Observation</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">ds:obs2</td>
 <td align="left">prop:unit</td>
 <td align="left">subject</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
 <p>The codelists are shown in the next output.</p>
-
 <pre><code>##          vn               clc prefLabel
 ## 1  category category-AA-group  AA-group
 ## 2  category category-BB-group  BB-group
 ## 3    factor   factor-quantity  quantity
-## 4 procedure   procedure-count     count
-</code></pre>
-
-<table><thead>
-<tr>
+## 4 procedure   procedure-count     count</code></pre>
+<table>
+<thead>
+<tr class="header">
 <th align="left">vn</th>
 <th align="left">clc</th>
 <th align="left">prefLabel</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="left">category</td>
 <td align="left">category-AA-group</td>
 <td align="left">AA-group</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">category</td>
 <td align="left">category-BB-group</td>
 <td align="left">BB-group</td>
 </tr>
-<tr>
+<tr class="odd">
 <td align="left">factor</td>
 <td align="left">factor-quantity</td>
 <td align="left">quantity</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">procedure</td>
 <td align="left">procedure-count</td>
 <td align="left">count</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
 <p>The dimensions are shown in the next output.</p>
-
-<pre><code class="r">cube.dimensions.rq&lt;- paste(forsparqlprefix,
-&#39;
-select * where
-{ [] qb:dimension ?p .  }
-&#39;,
-&quot;\n&quot;
+<pre class="sourceCode r"><code class="sourceCode r">cube.dimensions.rq&lt;-<span class="st"> </span><span class="kw">paste</span>(forsparqlprefix,
+<span class="st">'</span>
+<span class="st">select * where</span>
+<span class="st">{ [] qb:dimension ?p .  }</span>
+<span class="st">'</span>,
+<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>
 )
-cube.dimensions&lt;- as.data.frame(sparql.rdf(checkCube, cube.dimensions.rq), stringsAsFactors=FALSE)
-knitr::kable(print(cube.dimensions))
-</code></pre>
-
+cube.dimensions&lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">sparql.rdf</span>(checkCube, cube.dimensions.rq), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+knitr::<span class="kw">kable</span>(<span class="kw">print</span>(cube.dimensions))</code></pre>
 <pre><code>##                p
 ## 1    prop:factor
 ## 2 prop:procedure
-## 3  prop:category
-</code></pre>
-
-<table><thead>
-<tr>
-<th align="left">p</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">prop:factor</td>
-</tr>
-<tr>
-<td align="left">prop:procedure</td>
-</tr>
-<tr>
-<td align="left">prop:category</td>
-</tr>
-</tbody></table>
-
+## 3  prop:category</code></pre>
+</div>
+<div id="p" class="section level2">
+<h2>p</h2>
+<p>prop:factor<br />prop:procedure prop:category</p>
 <p>And finally the SPARQL query for observations.</p>
-
 <p>This is the query for getting the observations</p>
-
-<pre><code class="r">cat(cube.observations.rq)
-</code></pre>
-
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(cube.observations.rq)</code></pre>
 <pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
 ## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
 ## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
@@ -631,37 +444,47 @@ knitr::kable(print(cube.dimensions))
 ##  optional{ ?factor skos:prefLabel ?factorvalue . }
 ## optional{ ?procedure skos:prefLabel ?procedurevalue . }
 ## optional{ ?category skos:prefLabel ?categoryvalue . } 
-##  }
-</code></pre>
-
+##  }</code></pre>
 <p>And finally the observations.</p>
-
-<pre><code class="r">cube.observations&lt;- as.data.frame(sparql.rdf(checkCube, cube.observations.rq ), stringsAsFactors=FALSE)
-knitr::kable(cube.observations[,c(paste0(sub(&quot;prop:&quot;, &quot;&quot;, cube.dimensionsattr), &quot;value&quot;),&quot;measure&quot;)])
-</code></pre>
-
-<table><thead>
-<tr>
+<pre class="sourceCode r"><code class="sourceCode r">cube.observations&lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">sparql.rdf</span>(checkCube, cube.observations.rq ), <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+knitr::<span class="kw">kable</span>(cube.observations[,<span class="kw">c</span>(<span class="kw">paste0</span>(<span class="kw">sub</span>(<span class="st">&quot;prop:&quot;</span>, <span class="st">&quot;&quot;</span>, cube.dimensionsattr), <span class="st">&quot;value&quot;</span>),<span class="st">&quot;measure&quot;</span>)])</code></pre>
+<table>
+<thead>
+<tr class="header">
 <th align="left">factorvalue</th>
 <th align="left">procedurevalue</th>
 <th align="left">categoryvalue</th>
 <th align="left">measure</th>
 </tr>
-</thead><tbody>
-<tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="left">quantity</td>
 <td align="left">count</td>
 <td align="left">AA-group</td>
 <td align="left">123</td>
 </tr>
-<tr>
+<tr class="even">
 <td align="left">quantity</td>
 <td align="left">count</td>
 <td align="left">BB-group</td>
 <td align="left">456</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>
