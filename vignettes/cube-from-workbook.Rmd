@@ -2,74 +2,101 @@
 title: "Data qubes from Workbook"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: 
+   rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Data qubes from Workbook}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
 
-## Code
+# Setup
 
+First load the package.
+```{r, eval=TRUE}
+library(rrdfqbcrnd0)
+```
+
+# Generating RDF data cube from specification in a spreadsheet and export as turtle file
+
+The generation of RDF data cube can be specified in a spreadsheet.
+The outputs below shows the meta data for generation of the DM RDF data cube.
 
 ```{r, eval=TRUE}
-
-library (rrdf)
-library (xlsx)
-library(rrdfqbcrnd0)
-
-
-
-# NOTE: if all cells in a column is missing, then the input fails
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+cubeMetadata <- read.xlsx(RDFCubeWorkbook,
+                          sheetName=paste0("DM-Components"),
+                          stringsAsFactors=FALSE)
+knitr::kable(
+  cubeMetadata[ cubeMetadata$compType %in% c("dimension", "attribute", "measure"),
+               c("codeType", "compName","nciDomainValue", "compLabel")]
+  )
+knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compLabel")])
+```
 
+The next statements demonstrates how to create two RDF data cubes
+according to the specfications in the excel spreadsheet. Note the
+contents of the RDF data cube is read from the csv file given by
+obsFileName in directory given by obsFileNameDirectory. The value
+```!example´´´ specifies that the file should be read from sample data
+in the package. The dataCubeOutDirectory give the directory name for
+the generated RDF data cube.
+
+```{r, eval=TRUE}
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 cat("DM cube stored as ", dm.cube.fn, "\n")
 
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 cat("AE cube stored as ", ae.cube.fn, "\n")
-
-
 ```
 
+Notes 
+-----
+In the read.xlsx, if all cells in a column is missing, then the input fails.  
 
-Now look at the generated cubes by loading the turle files. Note: by specifying prefix the output contains is shown using the prefixes.
-Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.
+Future version may replace the use of the DomainName, eg. DM and AE in
+the examples above, with another way of deriving identification of the
+table 
+
+The attribute denominator may be changed to a dimension to handle more
+complex situations. For example if there are percentages for TRT01A
+and SEX using respectively TRT01A and SEX as denominator. This will be
+represented by two observations with by definition the same dimensions
+but different value for the attribute denominator. However, this will
+violate the intergrity constraints for a RDF Data Cube (TODO: Add IC
+name).  
+
+-----
+
+# Input the generated turtle file
+
+Now look at the generated cubes by loading the turle files. Note: by
+specifying prefix the output contains is shown using the prefixes.
+Note for future: This may be a disadvantage if the value of the
+prefix, say ds, changes.
 
 ```{r, echo=FALSE, results='asis'}
-
 dataCubeFile<- dm.cube.fn
 # dataCubeFile<- ae.cube.fn
 ```
 
+The rest of the code only depends on the value of dataCubeFile.
 ```{r, echo=FALSE}
-# the rest of the code only depends on the value of dataCubeFile 
 checkCube <- new.rdf(ontology=FALSE)  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
-# determine the domain name; used for defining prefixes
-# TODO: reconsider the use of domain specific prefixes
+```
 
-# TODO: make this simpler - the only purpose is find the dsdName
-# TODO: a qb:DataStructureDefinition, and for domainname, say, the DM in ds:dsd-DM
-tempstr<- as.character(sparql.rdf(checkCube, "select ?s where { ?s a <http://purl.org/linked-data/cube#DataStructureDefinition> } limit 1"))
-tempstrvec<- unlist(strsplit( tempstr, "/"))
-dsdName<- tempstrvec[length(tempstrvec)]
-domainName<- strsplit(dsdName,"-")[[1]][[2]]
-
-common.prefixes <- data.frame(
-    prefix=gsub("^prefix","",names(Get.default.crnd.prefixes())),
-    namespace=as.character(Get.default.crnd.prefixes() )
-    )
-custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
-
-forsparqlprefix<- Get.rq.prefix.df(rbind(common.prefixes, custom.prefixes))
+First set values for accessing the cube.
+```{r, echo=FALSE}
+dsdName<- GetDsdNameFromCube( checkCube )
+domainName<- GetDomainNameFromCube( checkCube )
+forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
 The next statement shows the first 10 triples in the cube.
 ```{r, echo=FALSE}
-
-cube.observations1.rq<- paste( forsparqlprefix,
+observations1Rq<- paste( forsparqlprefix,
 '
 select *
 where {?s ?p ?o .}
@@ -77,187 +104,87 @@ limit 10
 ',
 "\n"
 )
-
-cube.observations1<- sparql.rdf(checkCube, cube.observations1.rq  )
-knitr::kable(head(cube.observations1, 10))
+observations1<- sparql.rdf(checkCube, observations1Rq  )
+knitr::kable(head(observations1))
 ```
 
-The next statement shows the first 30 triples in the cube, where the subject is a qb:Observation.
+The next statement shows the first 10 triples in the cube, where the subject is a qb:Observation.
 ```{r, echo=FALSE}
-
-cube.observations2.rq<-  paste( forsparqlprefix,
+observations2Rq<-  paste( forsparqlprefix,
 '
 select *
 where { ?s a qb:Observation ; ?p ?o .}
-limit 30
+limit 10
 ',
 "\n"                               
 )
-
-cube.observations2<- sparql.rdf(checkCube, cube.observations2.rq)
-knitr::kable(head(cube.observations2, 10))
-
+observations2<- sparql.rdf(checkCube, observations2Rq)
+knitr::kable(head(observations2, 10))
 ```
 
 The codelists are shown in the next output.
 ```{r, echo=FALSE}
-
-codelists.rq<-   paste(forsparqlprefix,
-'
-select distinct ?p ?cl ?prefLabel
-where {
-?DataStructureDefinition a qb:DataStructureDefinition ;
-   qb:component ?component .
-?component a qb:ComponentSpecification .
-?component qb:dimension ?p .
-?p qb:codeList ?c .
-?c skos:hasTopConcept ?cl .
-?cl skos:prefLabel ?prefLabel .
-values ( ?DataStructureDefinition ) {
-',
-paste0( "(", "ds:", dsdName, ")"),
-'
-}
-}
-order by ?p ?cl ?prefLabel
-'
-)
-
-cube.codelists<- as.data.frame(sparql.rdf(checkCube, codelists.rq), stringsAsFactors=FALSE)
-# TODO instead of gsub make a more straightforward way
-# TOTO this involves a new version of the ph.recode function
-cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
-cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
-knitr::kable(print(cube.codelists[,c("vn", "clc", "prefLabel")]))
-
+codelistsRq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
+codelists<- as.data.frame(sparql.rdf(checkCube, codelistsRq), stringsAsFactors=FALSE)
+codelists$vn<- gsub("prop:","",codelists$p)
+codelists$clc<- gsub("code:","",codelists$cl)
+knitr::kable(print(codelists[,c("vn", "clc", "prefLabel")]))
 ```
+
+Notes
+-----
+instead of using gsub the codelist values should be obtained in  a more straightforward way
+
+this involves a new version of the ph.recode function
+
+the rrdf package could be extended to expand the URI using the Jena expandPrefix method
+
+-----
 
 The dimensions are shown in the next output.
 ```{r, echo=FALSE}
-
-cube.dimensions.rq<- paste(forsparqlprefix,
-'
-select * where
-{ [] qb:dimension ?p .  }
-',
-"\n"
-)
-cube.dimensions<- as.data.frame(sparql.rdf(checkCube, cube.dimensions.rq), stringsAsFactors=FALSE)
-knitr::kable(cube.dimensions)
-
+dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
+dimensions<- sparql.rdf(checkCube, dimensionsRq)
+knitr::kable(dimensions)
 ```
 
-And finally the SPARQL query for observations.
+Then the attributes as shown in the next output.
 ```{r, echo=FALSE}
-
-cube.dimensionsattr<- sparql.rdf(checkCube,
-  paste(forsparqlprefix,
-"select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }"
-))
-
-cube.observations.rq<-  paste( forsparqlprefix,
-    "select * where {",
-    "?s a qb:Observation  ;", "\n",
-    paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
-    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";", collapse="\n"),
-    "\n",
-    "prop:measure      ?measure ;      \n",
-    paste0( "optional{ ", sub("prop:", "?", cube.dimensionsattr), " ",
-           "skos:prefLabel",
-           " ",
-           sub("prop:", "?", cube.dimensionsattr), "value" ,
-           " . ", "}",
-           collapse="\n"),
-    "\n",
-    "} ",
-    "\n"
-   )
-
+attributesRq<- GetAttributesSparqlQuery( forsparqlprefix )
+attributes<- sparql.rdf(checkCube, attributesRq)
+knitr::kable(attributes)
 ```
 
-This is the query for getting the observations
+And finally the SPARQL query for observations, showing only the first 10 observations.
 ```{r, echo=FALSE}
-cat(cube.observations.rq)
-```
-
-And finally the observations.
-```{r, echo=FALSE}
-
-
-cube.observations<- as.data.frame(sparql.rdf(checkCube, cube.observations.rq ), stringsAsFactors=FALSE)
-knitr::kable(cube.observations[,c(paste0(sub("prop:", "", cube.dimensionsattr), "value"),"measure")])
-
+observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
+cat(observationsRq)
+observations<- as.data.frame(sparql.rdf(checkCube, observationsRq ), stringsAsFactors=FALSE)
+knitr::kable(observations[ 1:10 ,
+   c(paste0(sub("prop:", "", dimensions), "value"),sub("prop:", "", attributes), "measure")])
 
 ```
 
-Here is how to re-produce the metadata.
+Here is how to re-produce the metadata for the workbook.
 First get the dimensions, measure and attribute
 
 ```{r, echo=FALSE}
-
-cube.dimensionsattr.rq<- '
-select ?compType ?compName ?codeType ?nciDomainValue
-where {
-{[] qb:dimension ?compName.
- optional {  ?compName qb:codeList ?codeList . ?codeList mms:inValueDomain ?nciDomainValue }
- values (?compType) { ("dimension") }  }
-union
-{ ?compName a qb:AttributeProperty . values (?compType) { ("attribute") } }
-union
-{ ?compName a qb:MeasureProperty . values (?compType) { ("measure") } }
-}
-'
-
-cube.dimensionsattr<- sparql.rdf(checkCube, paste(forsparqlprefix, cube.dimensionsattr.rq ))
-
-knitr::kable(cube.dimensionsattr)
-
-
+workbookDimAttrMeasRq<- GetDimAttrMeasInWorkbookFormatSparqlQuery( forsparqlprefix ) 
+dimensionsattr<- sparql.rdf(checkCube, workbookDimAttrMeasRq )
+knitr::kable(dimensionsattr)
 ```
 
-Secondly, we get the metadata.
-The metadata element "cubeVersion" is not directly available but from dcat:distribution derived as
-the result of paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL").
-
+Secondly, get the metadata for the workbook. To get the metadata
+element "cubeVersion" a workaround is needed. The cubeversion is not
+directly available but from dcat:distribution derived as the result of
+paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL").
 ```{r, echo=FALSE}
-
-cube.metadata.rq<- '
-# could show ?dataset
-select  ?compType ?compName ?compLabel
-where {
-{
-?dataset a qb:DataSet .
-?dataset ?p ?compLabel .
- values (?p ?compName) {
-   (dct:title "title" )
-   (dcat:distribution "distribution")
-   (rdfs:comment "comment" )
-   (rdfs:label "label" )
-   (dct:description "description" )
-   (prov:wasDerivedFrom "obsFileName")
- }
- values (?compType) { ("metadata") }
-}
-}
-'
-
-cube.metadata<- sparql.rdf(checkCube, paste(forsparqlprefix, cube.metadata.rq ))
-
-cubeVersion<-  gsub("-",".", gsub("DC-.*-R-V-([^\\.]+).TTL", "\\1", cube.metadata[ cube.metadata[,2]=="distribution", "compLabel"], perl=TRUE))
-
-cube.metadataX<- rbind(cube.metadata, 
-rbind(cube.metadata, cbind(compType="metadata", compName="cubeVersion", compLabel=cubeVersion)))
-
-knitr::kable(cube.metadataX)
-
+workbookMetadataRq<- GetMetaDataInWorkbookFormatSparqlQuery( forsparqlprefix )
+metadata<- sparql.rdf(checkCube, workbookMetadataRq)
+cubeVersion<- gsub("-",".", gsub("DC-.*-R-V-([^\\.]+).TTL", "\\1", metadata[ metadata[,2]=="distribution", "compLabel"], perl=TRUE))
+metadataX<- rbind(metadata, cbind(compType="metadata", compName="cubeVersion", compLabel=cubeVersion))
+knitr::kable(metadataX)
 ```
 
-Get the meta data from the excel workbook and show only the compName and value
+For comparison, see the meta data from the excel workbook in the beginning of the document.
 
-```{r, echo=FALSE}
-
-cubeMetadata <- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,"-Components"),stringsAsFactors=FALSE)
-
-knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compLabel")])
-
-```
