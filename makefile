@@ -15,7 +15,7 @@ rcheck:
 	cd ..; R CMD check --as-cran ${PACKAGENAME}_0.1.tar.gz
 
 rbuild: 
-	cd ..; R CMD build  ../${PACKAGENAME}
+	cd ..; R CMD build  ${PACKAGENAME}
 
 createRD:
 	# does not work MJA 2014-11-16 Rscript -e 'library(devtools); devtools::document()'
