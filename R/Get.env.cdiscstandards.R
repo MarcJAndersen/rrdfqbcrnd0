@@ -3,9 +3,9 @@
 ##' 
 ##' @return rdf.cdisc.org rrdf model
 
-Get.env.cdiscstandards.R<- function() {
+Get.env.cdiscstandards<- function() {
 if (is.null(env[["cdiscstandards"]]) ) {
   env[["cdiscstandards"]]<- Load.cdisc.standards()
 }
-return(env[["cdiscstandards"]])
+return(TRUE)
 }

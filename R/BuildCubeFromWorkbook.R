@@ -3,7 +3,9 @@
 ##' 
 ##' @param RDFCubeWorkbook Filename and path to an workbook specifying the datacube
 ##' @param domainName The domainName create the data cube using the corresponding tab in the workbook
-##' @param endpoint Used for determined codelist for dimensions. When codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
+##' @param endpoint Used for determined codelist for dimensions. When
+##' codetype="SDTM" to give the URL for the remote endpoint. If NULL
+##' then the local rdf.cdisc.store from the environment is used.
 ##' @return The filename for the generated turtle file
 BuildCubeFromWorkbook<- function(RDFCubeWorkbook,domainName,endpoint=NULL) {
   
