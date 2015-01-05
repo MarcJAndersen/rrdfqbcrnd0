@@ -35,7 +35,7 @@ remote.endpoint
     colnames(codeSource) <- ("code")  # Rename to match SDTM approach
   }
   if (codeType=="SDTM"){
-    query = paste0(' prefix : <http://rdf.cdisc.org/sdtm-terminology#>
+    query <- paste0(' prefix : <http://rdf.cdisc.org/sdtm-terminology#>
       prefix cts:   <http://rdf.cdisc.org/ct/schema#>
 		  prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
 		  prefix mms:   <http://rdf.cdisc.org/mms#>
@@ -56,10 +56,14 @@ remote.endpoint
       )
 
     if (! is.null(remote.endpoint) ) {
-    codeSource = as.data.frame(sparql.remote(remote.endpoint, query))
+    codeSource <- as.data.frame(sparql.remote(remote.endpoint, query))
   } else {
-    Get.env.cdiscstandards.R() # this is only needed first time the local environment is used
-    codeSource = as.data.frame(sparql.rdf(env$cdiscstandards, query))
+    Get.env.cdiscstandards() # the CDISC standards are cached, so the
+                             # loading only happens first time the
+                             # local environment is used
+                             # TODO make the
+                             # loading of cdiscstandards more clever
+    codeSource <- as.data.frame(sparql.rdf(env$cdiscstandards, query))
     ## message("Result of sparql using local store")
     ## print(codeSource)
     ## print(str(codeSource))
