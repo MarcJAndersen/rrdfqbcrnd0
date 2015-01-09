@@ -45,7 +45,7 @@ for (i in 1:(length(both)-1)) {
    ictitle<- xmlValue(xmlChildren(both[[i]])$text )
    print(paste0( "Node ", i, ", IC name ", icname, " - ", ictitle ))
    qbIClist[[icname]]<- paste0(
-     paste0("# ", ictitle ),
+     paste0("# ", ictitle, "\n" ),
      xmlValue(xmlChildren(both[[i+1]])$text),
      sep="\n"
      )
