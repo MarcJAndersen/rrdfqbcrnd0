@@ -122,6 +122,14 @@ observations2<- sparql.rdf(checkCube, observations2Rq)
 knitr::kable(head(observations2, 10))
 ```
 
+The cube components are shown in the next output.
+```{r, echo=FALSE}
+componentsRq<- GetComponentSparqlQuery( forsparqlprefix, dsdName )
+components<- as.data.frame(sparql.rdf(checkCube, componentsRq), stringsAsFactors=FALSE)
+components$vn<- gsub("prop:","",components$p)
+knitr::kable(print(components[,c("vn", "label")]))
+```
+
 The codelists are shown in the next output.
 ```{r, echo=FALSE}
 codelistsRq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
