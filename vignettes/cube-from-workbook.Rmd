@@ -169,6 +169,17 @@ knitr::kable(observations[ 1:10 ,
 
 ```
 
+The SPARQL query for observations with labels for variables, showing only the first 10 observations.
+```{r, echo=TRUE}
+observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
+cat(observationsDescriptionRq)
+observationsDesc<- as.data.frame(sparql.rdf(checkCube, observationsDescriptionRq ), stringsAsFactors=FALSE)
+knitr::kable(observationsDesc[ 1:10 ,
+   c(paste0(rep(sub("prop:", "", dimensions),each=3), c("label", "value", "IRI")),
+     sub("prop:", "", attributes), "measure")]
+)
+```
+
 ### Notes
 
 Instead of using gsub the codelist values should be obtained in a more
