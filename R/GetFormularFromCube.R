@@ -2,8 +2,7 @@
 ##'
 ##' 
 ##' @param store 
-##' @return 
-##' @examples 
+##' @return value
 GetFormularFromCube<- function( store ) {
 
 dsdName<- GetDsdNameFromCube( store )
