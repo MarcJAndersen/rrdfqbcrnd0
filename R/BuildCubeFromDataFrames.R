@@ -76,7 +76,14 @@ qb.buildDSD(store, prefixlist, obsData, skeletonSource,
               label=cubeLabel,
               distribution=dataCubeFileName,
               obsfilename=obsFile,
-              title=cubeTitle
+              title=cubeTitle,
+    PAVnodes=list(
+      createdOn=gsub("(\\d\\d)$", ":\\1",strftime(Sys.time(),"%Y-%m-%dT%H:%M:%S%z")),
+      createdBy="username or session name",
+      pavVersion="0.0.0",
+      createdWith=paste0("R Version ", R.version$major, ".", R.version$minor, " Platform:", R.version$platform, " rrdfqbrnd0 package and dependencies"),
+      providedBy="PhUSE Results Metadata Working Group"
+      )
                ),
 remote.endpoint=endpoint
 #            codelist.source=sdtm.terminology

@@ -7,7 +7,7 @@
 ##' @param skeletonSource data.frame with skeleton source
 ##' @param dsdURIwoprefix DSD URI
 ##' @param dsdName DSD name
-##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title 
+##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title, PAVnodes
 ##' @param remote.endpoint Remote endpoint, if NULL use local version of CDISC RDF standards
 ##' @return Always TRUE
 qb.buildDSD<- function(store,
@@ -26,7 +26,14 @@ qb.buildDSD<- function(store,
     label="Demographics results data set.",
     distribution="dataCubeFileName",
     obsfilename="the name of the input file",
-    title="Demographics Analysis Results"
+    title="Demographics Analysis Results",
+    PAVnodes=list(
+      createdOn=gsub("(\\d\\d)$", ":\\1",strftime(Sys.time(),"%Y-%m-%dT%H:%M:%S%z")),
+      createdBy="Tim Williams",
+      pavVersion="0.0.0",
+      createdWith=paste0("R Version ", R.version$major, ".", R.version$minor, " Platform:", R.version$platform, " rrdfqbrnd0 package and dependencies"),
+      providedBy="PhUSE Results Metadata Working Group"
+      )
   ),
 remote.endpoint=NULL
 #  codelist.source
@@ -85,29 +92,40 @@ add.data.triple(store,
                 paste0(prefixlist$prefixRDFS, "label"),
                 extra$label,
                 lang="en")
+
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixDCAT, "distribution"),
                 extra$distribution)
 
-(now_ct <- Sys.time())
-## Reformat for xsd:timestamp as 2014-09-04T16:34:27-0400
-issuedTime <-strftime(now_ct,"%Y-%m-%dT%H:%M:%S%z")
-## For XSD format: add colon before minutes
-issuedTime<-gsub("(\\d\\d)$", ":\\1",issuedTime)
-
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixPAV, "createdOn"), 
-                issuedTime,
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "createdOn"),
+                extra$PAVnodes$createdOn,
                 "dateTime")
 
-# Need parameter for creator program
-add.data.triple(store, 
-                paste0(prefixlist$prefixDS, dsdURIwoprefix), 
-                paste0(prefixlist$prefixPAV, "createdWith"), 
-                paste0("R Version ", R.version$major, ".", R.version$minor, " Platform:", R.version$platform, " Program: dm-table-from-csv.Rmd and dependencies")
-                )
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "createdBy"),
+                extra$PAVnodes$createdBy,
+                "string")
+
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "version"),
+                extra$PAVnodes$pavVersion)
+
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "createdWith"),
+                extra$PAVnodes$createdWith)
+
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixPAV, "createdBy"),
+                extra$PAVnodes$createdBy,
+                "string"  )
+
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPROV, "wasDerivedFrom"),

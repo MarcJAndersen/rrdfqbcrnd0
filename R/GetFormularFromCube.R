@@ -2,8 +2,7 @@
 ##'
 ##' 
 ##' @param store 
-##' @return 
-##' @examples 
+##' @return expression with the formulars representing the RDF data cube
 GetFormularFromCube<- function( store ) {
 
 dsdName<- GetDsdNameFromCube( store )
