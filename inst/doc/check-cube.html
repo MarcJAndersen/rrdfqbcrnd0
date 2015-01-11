@@ -1,102 +1,247 @@
 <!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="pandoc" />
+<title>For developing</title>
 
-<meta name="author" content="mja@statgroup.dk" />
-
-<meta name="date" content="2015-01-05" />
-
-<title>Derive results in RDF data cube and compare with results in data cube</title>
-
-
-
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
-</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
   }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
 </style>
 
 
-<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
-
-
-
-<div id="header">
-<h1 class="title">Derive results in RDF data cube and compare with results in data cube</h1>
-<h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-01-05</em></h4>
-</div>
-
-
-<div id="for-developing" class="section level3">
 <h3>For developing</h3>
+
 <p>Use</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(knitr)
-<span class="kw">knit</span>(<span class="st">&quot;vignettes/check-cube.Rmd&quot;</span>)</code></pre>
-</div>
-<div id="the-vignette" class="section level3">
+
+<pre><code class="r">library(knitr)
+knit(&quot;vignettes/check-cube.Rmd&quot;)
+</code></pre>
+
 <h3>The vignette</h3>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">width=</span><span class="dv">200</span>) <span class="co"># long lines</span>
 
-<span class="kw">library</span>(xlsx)
-<span class="kw">library</span>(foreign)
-<span class="kw">library</span>(RCurl)
+<pre><code class="r">options(width=200) # long lines
 
-<span class="kw">library</span>(rrdf)
-<span class="kw">library</span>(rrdfqbcrnd0)
+library(xlsx)
+library(foreign)
+library(RCurl)
 
-debug.add.data.triple&lt;-<span class="st"> </span>function( cubeData,
+library(rrdf)
+library(rrdfqbcrnd0)
+
+debug.add.data.triple&lt;- function( cubeData,
 subject,
 predicate,
 data, type) {
 
-<span class="kw">print</span>(<span class="kw">cbind</span>(<span class="dt">subject=</span>subject,<span class="dt">predicate=</span>predicate,<span class="dt">data=</span>data,<span class="dt">type=</span>type))
-      
-<span class="kw">add.data.triple</span>( cubeData,
-<span class="dt">subject=</span>subject,
-<span class="dt">predicate=</span>predicate,
-<span class="dt">data=</span>data, <span class="dt">type=</span>type)
+print(cbind(subject=subject,predicate=predicate,data=data,type=type))
+
+add.data.triple( cubeData,
+subject=subject,
+predicate=predicate,
+data=data, type=type)
 
 } 
- 
-check.cube&lt;-<span class="st"> </span>function(
-  <span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adsl&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
-  <span class="dt">dsURL=</span> <span class="st">&quot;https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt&quot;</span>,
-  <span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-demog&quot;</span>,
-  <span class="dt">qbfiledir=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
-  <span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-DM-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
-  <span class="dt">domainName=</span><span class="st">&quot;demog&quot;</span>,
-  <span class="dt">RDFCubeWorkbook =</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-cfg&quot;</span>, <span class="st">&quot;RDFCubeWorkbook.xlsx&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>)
+
+check.cube&lt;- function(
+  obsFile=paste(tempdir(),&quot;/&quot;, &quot;adsl&quot;, &quot;.xpt&quot;,sep=&quot;&quot;),
+  dsURL= &quot;https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt&quot;,
+  ds.dataset= &quot;ds:dataset-demog&quot;,
+  qbfiledir= system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbcrnd0&quot;),
+  qbfile= system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DM-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;),
+  domainName=&quot;demog&quot;,
+  RDFCubeWorkbook = system.file(&quot;extdata/sample-cfg&quot;, &quot;RDFCubeWorkbook.xlsx&quot;, package=&quot;rrdfqbcrnd0&quot;)
 ) {
 
  ## obsFile=paste(tempdir(),&quot;/&quot;, &quot;adsl&quot;, &quot;.xpt&quot;,sep=&quot;&quot;)
@@ -107,38 +252,38 @@ check.cube&lt;-<span class="st"> </span>function(
  ## domainName=&quot;demog&quot;
  ## RDFCubeWorkbook = NULL
 
-if (!<span class="kw">is.null</span>(RDFCubeWorkbook)) {
-  common.prefixes &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(RDFCubeWorkbook,<span class="dt">sheetName=</span><span class="kw">paste0</span>(<span class="st">&quot;CubePrefixes&quot;</span>))
-  cubeMetadata &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(RDFCubeWorkbook,<span class="dt">sheetName=</span><span class="kw">paste0</span>(domainName,<span class="st">&quot;-Components&quot;</span>))
-  metadataSource &lt;-cubeMetadata[<span class="kw">grep</span>(<span class="st">&quot;metadata&quot;</span>, cubeMetadata$compType),]
-  if (<span class="kw">is.null</span>(obsFile)) {
-    obsFile&lt;-<span class="st"> </span>metadataSource[ metadataSource$compName==<span class="st">&quot;wasDerivedFrom&quot;</span>, <span class="st">&quot;compLabel&quot;</span> ]
+if (!is.null(RDFCubeWorkbook)) {
+  common.prefixes &lt;- read.xlsx(RDFCubeWorkbook,sheetName=paste0(&quot;CubePrefixes&quot;))
+  cubeMetadata &lt;- read.xlsx(RDFCubeWorkbook,sheetName=paste0(domainName,&quot;-Components&quot;))
+  metadataSource &lt;-cubeMetadata[grep(&quot;metadata&quot;, cubeMetadata$compType),]
+  if (is.null(obsFile)) {
+    obsFile&lt;- metadataSource[ metadataSource$compName==&quot;wasDerivedFrom&quot;, &quot;compLabel&quot; ]
   }
-  if (<span class="kw">is.null</span>(qbfile)) {
-    qbfile&lt;-<span class="st">  </span><span class="kw">file.path</span>(qbfiledir,metadataSource[ metadataSource$compName==<span class="st">&quot;dataCubeFileName&quot;</span>, <span class="st">&quot;dataCubeFileName&quot;</span>] ) 
+  if (is.null(qbfile)) {
+    qbfile&lt;-  file.path(qbfiledir,metadataSource[ metadataSource$compName==&quot;dataCubeFileName&quot;, &quot;dataCubeFileName&quot;] ) 
   }
-  if (<span class="kw">is.null</span>(dsURL)) {
-    dsURL&lt;-<span class="st">  </span>metadataSource[ metadataSource$compName==<span class="st">&quot;obsURL&quot;</span>, <span class="st">&quot;dataCubeFileName&quot;</span> ]
+  if (is.null(dsURL)) {
+    dsURL&lt;-  metadataSource[ metadataSource$compName==&quot;obsURL&quot;, &quot;dataCubeFileName&quot; ]
   }
 } else {
-  common.prefixes &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-    <span class="dt">prefix=</span><span class="kw">gsub</span>(<span class="st">&quot;^prefix&quot;</span>,<span class="st">&quot;&quot;</span>,<span class="kw">names</span>(<span class="kw">Get.default.crnd.prefixes</span>())),
-    <span class="dt">namespace=</span><span class="kw">as.character</span>(<span class="kw">Get.default.crnd.prefixes</span>() )
+  common.prefixes &lt;- data.frame(
+    prefix=gsub(&quot;^prefix&quot;,&quot;&quot;,names(Get.default.crnd.prefixes())),
+    namespace=as.character(Get.default.crnd.prefixes() )
     )
 }  
 
 
-if (!<span class="st"> </span><span class="kw">is.null</span>(dsURL) ) {
-   if (!<span class="st"> </span><span class="kw">url.exists</span>(dsURL) ) {
-      <span class="kw">stop</span>(<span class="kw">paste0</span>(<span class="st">&quot;Can not access URL &quot;</span>,dsURL))
+if (! is.null(dsURL) ) {
+   if (! url.exists(dsURL) ) {
+      stop(paste0(&quot;Can not access URL &quot;,dsURL))
    }
-   <span class="kw">download.file</span>( dsURL, obsFile, <span class="dt">method=</span><span class="st">&quot;curl&quot;</span>)
+   download.file( dsURL, obsFile, method=&quot;curl&quot;)
 }
 
-if (!<span class="st"> </span><span class="kw">file.exists</span>(obsFile)) {
-  <span class="kw">stop</span>(<span class="kw">paste0</span>(<span class="st">&quot;Expected file &quot;</span>, obsFile, <span class="st">&quot; does not exist&quot;</span>))
+if (! file.exists(obsFile)) {
+  stop(paste0(&quot;Expected file &quot;, obsFile, &quot; does not exist&quot;))
   }
-DataSet&lt;-<span class="kw">read.xport</span>(obsFile)
+DataSet&lt;-read.xport(obsFile)
 
 ## library(Hmisc)
 ## DataSet &lt;- sasxport.get(fnDataSet)
@@ -146,238 +291,238 @@ DataSet&lt;-<span class="kw">read.xport</span>(obsFile)
 ## contents(DataSet)
 ## label(DataSet)
 
-<span class="co"># str(DataSet)</span>
+# str(DataSet)
 
 
 
-<span class="co"># Domain-specific prefixes:for /code/, /prop/, /dccs/ and /dataset/</span>
-custom.prefixes &lt;-<span class="kw">Get.qb.crnd.prefixes</span>(domainName)
+# Domain-specific prefixes:for /code/, /prop/, /dccs/ and /dataset/
+custom.prefixes &lt;-Get.qb.crnd.prefixes(domainName)
 
-<span class="co"># Prefix for storing the results of check each measure in the data cube</span>
+# Prefix for storing the results of check each measure in the data cube
 
-  validation.mesure.prefix&lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">prefix=</span><span class="kw">c</span>(<span class="st">&quot;validmeas&quot;</span>),
-        <span class="dt">namespace=</span><span class="kw">c</span>(<span class="kw">paste0</span>(<span class="st">&quot;http://www.example.org/dc/&quot;</span>,domainName,<span class="st">&quot;/validmeas/&quot;</span>)
+  validation.mesure.prefix&lt;- data.frame(prefix=c(&quot;validmeas&quot;),
+        namespace=c(paste0(&quot;http://www.example.org/dc/&quot;,domainName,&quot;/validmeas/&quot;)
                             ))
 
-prefixes&lt;-<span class="st"> </span><span class="kw">rbind</span>(common.prefixes, custom.prefixes, validation.mesure.prefix)
+prefixes&lt;- rbind(common.prefixes, custom.prefixes, validation.mesure.prefix)
 
-forsparqlprefix&lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;prefix&quot;</span>, <span class="kw">paste</span>(prefixes$prefix,<span class="st">&quot;:&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>), <span class="kw">paste</span>(<span class="st">&quot;&lt;&quot;</span>,prefixes$namespace,<span class="st">&quot;&gt;&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),<span class="dt">sep=</span><span class="st">&quot; &quot;</span>,<span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+forsparqlprefix&lt;- paste(&quot;prefix&quot;, paste(prefixes$prefix,&quot;:&quot;,sep=&quot;&quot;), paste(&quot;&lt;&quot;,prefixes$namespace,&quot;&gt;&quot;,sep=&quot;&quot;),sep=&quot; &quot;,collapse=&quot;\n&quot;)
 
-<span class="co"># cat(forsparqlprefix)</span>
-<span class="co"># The qbfile also contains prefixes, which are part of the model</span>
-<span class="co"># So not adding the prefixes to the model, but using them for adding further</span>
-<span class="co"># information to the model when deriving statistics</span>
+# cat(forsparqlprefix)
+# The qbfile also contains prefixes, which are part of the model
+# So not adding the prefixes to the model, but using them for adding further
+# information to the model when deriving statistics
 
-cubeData =<span class="st"> </span><span class="kw">new.rdf</span>(<span class="dt">ontology=</span><span class="ot">FALSE</span>)
-myprefixes&lt;-<span class="st"> </span><span class="kw">qb.def.prefixlist</span>(cubeData, prefixes )
-<span class="kw">load.rdf</span>( qbfile, <span class="dt">format=</span><span class="st">&quot;N3&quot;</span>, <span class="dt">appendTo=</span> cubeData)
-<span class="co"># summarize.rdf(cubeData)</span>
+cubeData = new.rdf(ontology=FALSE)
+myprefixes&lt;- qb.def.prefixlist(cubeData, prefixes )
+load.rdf( qbfile, format=&quot;N3&quot;, appendTo= cubeData)
+# summarize.rdf(cubeData)
 
 
 ## ------------------------------------------------------------------------
-cube.observations1&lt;-<span class="st"> </span><span class="kw">sparql.rdf</span>(cubeData,
-   <span class="kw">paste</span>( forsparqlprefix,
-     <span class="st">&quot;select * where {?s ?p ?o .} limit 10&quot;</span>
+cube.observations1&lt;- sparql.rdf(cubeData,
+   paste( forsparqlprefix,
+     &quot;select * where {?s ?p ?o .} limit 10&quot;
      )
    );
-<span class="co"># print(cube.observations1)</span>
+# print(cube.observations1)
 
 
-cube.observations2&lt;-<span class="st"> </span><span class="kw">sparql.rdf</span>(cubeData,
-   <span class="kw">paste</span>( forsparqlprefix,
-     <span class="st">&quot;select * where { ?s a qb:Observation ; ?p ?o .} limit 10&quot;</span>
+cube.observations2&lt;- sparql.rdf(cubeData,
+   paste( forsparqlprefix,
+     &quot;select * where { ?s a qb:Observation ; ?p ?o .} limit 10&quot;
      )
    );
-<span class="co"># print(cube.observations2)</span>
+# print(cube.observations2)
 
 ## get the dimensions
-cube.dimensions&lt;-<span class="st"> </span><span class="kw">sparql.rdf</span>(cubeData,
-  <span class="kw">paste</span>(forsparqlprefix,
-<span class="st">&quot;select * where { [] qb:dimension ?p .  }&quot;</span>
+cube.dimensions&lt;- sparql.rdf(cubeData,
+  paste(forsparqlprefix,
+&quot;select * where { [] qb:dimension ?p .  }&quot;
 ));
-<span class="co"># print(cube.dimensions)</span>
+# print(cube.dimensions)
 
 ## get the codelist
-codelists.rq&lt;-<span class="st">   </span><span class="kw">paste</span>(forsparqlprefix,
-<span class="st">'</span>
-<span class="st">select ?p ?cl ?prefLabel where {</span>
-<span class="st">[] qb:dimension ?p.</span>
-<span class="st">?p qb:codeList ?c.</span>
-<span class="st">?c skos:hasTopConcept ?cl .</span>
-<span class="st">?cl skos:prefLabel ?prefLabel.</span>
-<span class="st">}</span>
-<span class="st">'</span>
+codelists.rq&lt;-   paste(forsparqlprefix,
+&#39;
+select ?p ?cl ?prefLabel where {
+[] qb:dimension ?p.
+?p qb:codeList ?c.
+?c skos:hasTopConcept ?cl .
+?cl skos:prefLabel ?prefLabel.
+}
+&#39;
 )
 
-<span class="co"># cat(codelists.rq)</span>
+# cat(codelists.rq)
 
-cube.codelists&lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">sparql.rdf</span>(cubeData, codelists.rq));
-<span class="co"># print(cube.codelists)</span>
+cube.codelists&lt;- as.data.frame(sparql.rdf(cubeData, codelists.rq));
+# print(cube.codelists)
 
 
-codelist.all&lt;-<span class="st"> </span>cube.codelists[ cube.codelists$prefLabel==<span class="st">&quot;_ALL_&quot;</span>,]
-<span class="co"># print(codelist.all)</span>
-subsetting.dimensions&lt;-<span class="st"> </span><span class="kw">list</span>();
+codelist.all&lt;- cube.codelists[ cube.codelists$prefLabel==&quot;_ALL_&quot;,]
+# print(codelist.all)
+subsetting.dimensions&lt;- list();
 
-<span class="co"># the variable name/column name in the data frame should be part of the datacube</span>
-<span class="co"># this would remove the need for the workaround below using gsub</span>
-for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(codelist.all))
+# the variable name/column name in the data frame should be part of the datacube
+# this would remove the need for the workaround below using gsub
+for (i in 1:nrow(codelist.all))
 {
-  subsetting.dimensions[[ <span class="kw">gsub</span>(<span class="st">&quot;[^:]*:&quot;</span>,<span class="st">&quot;&quot;</span>, codelist.all[i,<span class="st">&quot;p&quot;</span>]) ]] &lt;-
-<span class="st">      </span><span class="kw">as.character</span>(codelist.all[i,<span class="st">&quot;cl&quot;</span>])
+  subsetting.dimensions[[ gsub(&quot;[^:]*:&quot;,&quot;&quot;, codelist.all[i,&quot;p&quot;]) ]] &lt;-
+      as.character(codelist.all[i,&quot;cl&quot;])
 }
 
 
 ## get the dimensions and attributes
 
-cube.dimensionsattr&lt;-<span class="st"> </span><span class="kw">sparql.rdf</span>(cubeData,
-  <span class="kw">paste</span>(forsparqlprefix,
-<span class="st">&quot;select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }&quot;</span>
+cube.dimensionsattr&lt;- sparql.rdf(cubeData,
+  paste(forsparqlprefix,
+&quot;select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }&quot;
 ));
-<span class="co"># print(cube.dimensionsattr)</span>
+# print(cube.dimensionsattr)
 
-selectexpr&lt;-<span class="st">  </span><span class="kw">paste</span>(  <span class="st">&quot;select * where {&quot;</span>,
-    <span class="st">&quot;    ?s a qb:Observation  ;&quot;</span>,
-    <span class="kw">paste</span>(<span class="st">&quot;       qb:dataSet&quot;</span>,  ds.dataset, <span class="st">&quot; ;&quot;</span>, <span class="dt">sep=</span><span class="st">&quot; &quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
-    <span class="kw">paste0</span>( cube.dimensionsattr, <span class="st">&quot; &quot;</span>, <span class="kw">sub</span>(<span class="st">&quot;prop:&quot;</span>, <span class="st">&quot;?&quot;</span>, cube.dimensionsattr), <span class="st">&quot;;&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>),
-                    <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,
-    <span class="st">&quot;       prop:measure      ?measure ;      </span><span class="ch">\n</span><span class="st">&quot;</span>,
-    <span class="st">&quot;       prop:denominator      ?denominator .     </span><span class="ch">\n</span><span class="st">&quot;</span>,
-    <span class="kw">paste0</span>( <span class="st">&quot;optional{ &quot;</span>, <span class="kw">sub</span>(<span class="st">&quot;prop:&quot;</span>, <span class="st">&quot;?&quot;</span>, cube.dimensionsattr), <span class="st">&quot; &quot;</span>,
-           <span class="st">&quot;skos:prefLabel&quot;</span>,
-           <span class="st">&quot; &quot;</span>,
-           <span class="kw">sub</span>(<span class="st">&quot;prop:&quot;</span>, <span class="st">&quot;?&quot;</span>, cube.dimensionsattr), <span class="st">&quot;value&quot;</span> ,
-           <span class="st">&quot; . &quot;</span>, <span class="st">&quot;}&quot;</span>,
-           <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>),
-    <span class="st">&quot;} &quot;</span>,
-    <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>
+selectexpr&lt;-  paste(  &quot;select * where {&quot;,
+    &quot;    ?s a qb:Observation  ;&quot;,
+    paste(&quot;       qb:dataSet&quot;,  ds.dataset, &quot; ;&quot;, sep=&quot; &quot;, collapse=&quot;\n&quot;), &quot;\n&quot;,
+    paste0( cube.dimensionsattr, &quot; &quot;, sub(&quot;prop:&quot;, &quot;?&quot;, cube.dimensionsattr), &quot;;&quot;, collapse=&quot;\n&quot;),
+                    &quot;\n&quot;,
+    &quot;       prop:measure      ?measure ;      \n&quot;,
+    &quot;       prop:denominator      ?denominator .     \n&quot;,
+    paste0( &quot;optional{ &quot;, sub(&quot;prop:&quot;, &quot;?&quot;, cube.dimensionsattr), &quot; &quot;,
+           &quot;skos:prefLabel&quot;,
+           &quot; &quot;,
+           sub(&quot;prop:&quot;, &quot;?&quot;, cube.dimensionsattr), &quot;value&quot; ,
+           &quot; . &quot;, &quot;}&quot;,
+           collapse=&quot;\n&quot;),
+    &quot;} &quot;,
+    &quot;\n&quot;
    );
-<span class="co"># cat(selectexpr)</span>
-<span class="co"># cat(  paste(forsparqlprefix, &quot;\n&quot;, selectexpr ) )</span>
+# cat(selectexpr)
+# cat(  paste(forsparqlprefix, &quot;\n&quot;, selectexpr ) )
 
-cube.observations&lt;-<span class="st"> </span><span class="kw">sparql.rdf</span>(cubeData,
-  <span class="kw">paste</span>(forsparqlprefix, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>,  selectexpr )
+cube.observations&lt;- sparql.rdf(cubeData,
+  paste(forsparqlprefix, &quot;\n&quot;,  selectexpr )
   );
 
-<span class="co"># print(head(cube.observations))</span>
-<span class="co"># str(cube.observations)</span>
+# print(head(cube.observations))
+# str(cube.observations)
 
 
-<span class="co"># cts:cdiscSubmissionValue could also be used instead of skos:prefLabel</span>
-<span class="co"># by code:saffl-Y does not have cts:cdiscSubmissionValue</span>
+# cts:cdiscSubmissionValue could also be used instead of skos:prefLabel
+# by code:saffl-Y does not have cts:cdiscSubmissionValue
 
-<span class="co"># using list for key-value lookup to function for descriptive statistic</span>
-univfunc1=<span class="st"> </span><span class="kw">list</span>(
-  <span class="st">&quot;code:procedure-MEAN&quot;</span>=mean,
-  <span class="st">&quot;code:procedure-STDDEV&quot;</span>=sd,
-  <span class="st">&quot;code:procedure-MEDIAN&quot;</span>=median,
-  <span class="st">&quot;code:procedure-MIN&quot;</span>=min,
-  <span class="st">&quot;code:procedure-MAX&quot;</span>=max
+# using list for key-value lookup to function for descriptive statistic
+univfunc1= list(
+  &quot;code:procedure-MEAN&quot;=mean,
+  &quot;code:procedure-STDDEV&quot;=sd,
+  &quot;code:procedure-MEDIAN&quot;=median,
+  &quot;code:procedure-MIN&quot;=min,
+  &quot;code:procedure-MAX&quot;=max
   )
 
-univfunc2=<span class="st"> </span><span class="kw">list</span>(
-  <span class="st">&quot;code:procedure-COUNT&quot;</span>=length,
-  <span class="st">&quot;code:procedure-COUNTDISTINCT&quot;</span>=function(x){<span class="kw">length</span>(<span class="kw">unique</span>(x))}
+univfunc2= list(
+  &quot;code:procedure-COUNT&quot;=length,
+  &quot;code:procedure-COUNTDISTINCT&quot;=function(x){length(unique(x))}
   )
 
 
-for (r in  <span class="dv">1</span>:<span class="kw">nrow</span>(cube.observations )  ) {
-thisrow&lt;-<span class="st">  </span>cube.observations[r,]
-<span class="co"># print(thisrow)</span>
+for (r in  1:nrow(cube.observations )  ) {
+thisrow&lt;-  cube.observations[r,]
+# print(thisrow)
 
-data.subset.logical=<span class="st"> </span><span class="kw">rep</span>(<span class="ot">TRUE</span>, <span class="kw">nrow</span>(DataSet))
-for (v in <span class="kw">names</span>(subsetting.dimensions)) {
-<span class="co">#   print( c(v, thisrow[v ],  subsetting.dimensions[[ v ]] ) )</span>
-  if ( thisrow[v ] !=<span class="st"> </span>subsetting.dimensions[[ v ]] ) {
-<span class="co">#   print( paste0(v, &quot;: &quot;, thisrow[v ], &quot; = &quot;, thisrow[ paste0(v,&quot;value&quot;) ]))</span>
-<span class="co">#   print( DataSet[,toupper(v)] == thisrow[ paste0(v,&quot;value&quot;) ] )</span>
-    data.subset.logical=<span class="st"> </span>data.subset.logical &amp;<span class="st"> </span>( DataSet[,<span class="kw">toupper</span>(v)] ==<span class="st"> </span>thisrow[ <span class="kw">paste0</span>(v,<span class="st">&quot;value&quot;</span>) ] )
+data.subset.logical= rep(TRUE, nrow(DataSet))
+for (v in names(subsetting.dimensions)) {
+#   print( c(v, thisrow[v ],  subsetting.dimensions[[ v ]] ) )
+  if ( thisrow[v ] != subsetting.dimensions[[ v ]] ) {
+#   print( paste0(v, &quot;: &quot;, thisrow[v ], &quot; = &quot;, thisrow[ paste0(v,&quot;value&quot;) ]))
+#   print( DataSet[,toupper(v)] == thisrow[ paste0(v,&quot;value&quot;) ] )
+    data.subset.logical= data.subset.logical &amp; ( DataSet[,toupper(v)] == thisrow[ paste0(v,&quot;value&quot;) ] )
   }
 }
 
 
-has.result=<span class="st"> </span><span class="ot">FALSE</span>
+has.result= FALSE
 
-if (thisrow[<span class="st">&quot;procedure&quot;</span>] %in%<span class="st"> </span><span class="kw">names</span>(univfunc1) ) {
-<span class="co"># print(&quot;univfunc1&quot;)</span>
-  AOD=<span class="st"> </span>DataSet[data.subset.logical,thisrow[<span class="st">&quot;factorvalue&quot;</span>]]
-  result=<span class="st"> </span>univfunc1[[ thisrow[<span class="st">&quot;procedure&quot;</span>] ]](AOD)
-  has.result=<span class="st"> </span><span class="ot">TRUE</span>
-<span class="co">#   print(paste(&quot;AOD number of observations&quot;, nrow(AOD)))</span>
-} else if (thisrow[<span class="st">&quot;procedure&quot;</span>] %in%<span class="st"> </span><span class="kw">names</span>(univfunc2) ) {
-<span class="co"># print(paste0(&quot;univfunc2&quot;,&quot; &quot;,thisrow[&quot;procedure&quot; ],collapse=&quot; &quot;))</span>
-  AOD=<span class="st"> </span>DataSet[data.subset.logical,<span class="st">&quot;USUBJID&quot;</span>]  <span class="co"># take the first variable, would be better if there was a default, like USUBJID</span>
-  result=<span class="st"> </span>univfunc2[[ thisrow[<span class="st">&quot;procedure&quot;</span> ] ]](AOD)
-  has.result=<span class="st"> </span><span class="ot">TRUE</span>
-<span class="co">#   print(paste0(&quot;AOD number of observations&quot;, nrow(AOD), sep=&quot; &quot;))</span>
-} else if (thisrow[<span class="st">&quot;procedure&quot;</span>]==<span class="st"> &quot;code:procedure-PERCENT&quot;</span> &amp;<span class="st"> </span>thisrow[<span class="st">&quot;factor&quot;</span>]==<span class="st"> &quot;code:factor-PROPORTION&quot;</span>) {
+if (thisrow[&quot;procedure&quot;] %in% names(univfunc1) ) {
+# print(&quot;univfunc1&quot;)
+  AOD= DataSet[data.subset.logical,thisrow[&quot;factorvalue&quot;]]
+  result= univfunc1[[ thisrow[&quot;procedure&quot;] ]](AOD)
+  has.result= TRUE
+#   print(paste(&quot;AOD number of observations&quot;, nrow(AOD)))
+} else if (thisrow[&quot;procedure&quot;] %in% names(univfunc2) ) {
+# print(paste0(&quot;univfunc2&quot;,&quot; &quot;,thisrow[&quot;procedure&quot; ],collapse=&quot; &quot;))
+  AOD= DataSet[data.subset.logical,&quot;USUBJID&quot;]  # take the first variable, would be better if there was a default, like USUBJID
+  result= univfunc2[[ thisrow[&quot;procedure&quot; ] ]](AOD)
+  has.result= TRUE
+#   print(paste0(&quot;AOD number of observations&quot;, nrow(AOD), sep=&quot; &quot;))
+} else if (thisrow[&quot;procedure&quot;]== &quot;code:procedure-PERCENT&quot; &amp; thisrow[&quot;factor&quot;]== &quot;code:factor-PROPORTION&quot;) {
 
-<span class="co">#  print(c(&quot;proportion&quot;,thisrow[&quot;denominator&quot;]))</span>
+#  print(c(&quot;proportion&quot;,thisrow[&quot;denominator&quot;]))
 
-<span class="co">#  denom.def&lt;- thisrow[ c(&quot;saffl&quot;, &quot;trt01a&quot;, &quot;race&quot;, &quot;sex&quot; ) ]</span>
-<span class="co">#  denom.def&lt;- thisrow[ c( &quot;trt01a&quot;, &quot;race&quot;, &quot;sex&quot; ) ]</span>
-  denom.def&lt;-<span class="st"> </span>thisrow[ <span class="kw">names</span>(subsetting.dimensions) ]
+#  denom.def&lt;- thisrow[ c(&quot;saffl&quot;, &quot;trt01a&quot;, &quot;race&quot;, &quot;sex&quot; ) ]
+#  denom.def&lt;- thisrow[ c( &quot;trt01a&quot;, &quot;race&quot;, &quot;sex&quot; ) ]
+  denom.def&lt;- thisrow[ names(subsetting.dimensions) ]
 
-  denom.def[ <span class="kw">tolower</span>(thisrow[<span class="st">&quot;denominator&quot;</span>]) ] =<span class="kw">paste0</span>(<span class="st">&quot;code:&quot;</span>,<span class="kw">tolower</span>(thisrow[<span class="st">&quot;denominator&quot;</span>]),<span class="st">&quot;-_ALL_&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
-  AOD=<span class="st"> </span>DataSet[data.subset.logical,] <span class="co"># should use a variable name - USUBJID like for count</span>
+  denom.def[ tolower(thisrow[&quot;denominator&quot;]) ] =paste0(&quot;code:&quot;,tolower(thisrow[&quot;denominator&quot;]),&quot;-_ALL_&quot;,sep=&quot;&quot;)
+  AOD= DataSet[data.subset.logical,] # should use a variable name - USUBJID like for count
 
-denom.data.subset.logical=<span class="st"> </span><span class="kw">rep</span>(<span class="ot">TRUE</span>, <span class="kw">nrow</span>(DataSet))
-<span class="co"># print( denom.def )</span>
-for (v in <span class="kw">names</span>(denom.def)) {
-  if ( denom.def[v ] !=<span class="st"> </span>subsetting.dimensions[[ v ]] ) {
-    denom.data.subset.logical=<span class="st"> </span>denom.data.subset.logical &amp;<span class="st"> </span>( DataSet[,<span class="kw">toupper</span>(v)] ==<span class="st"> </span>thisrow[ <span class="kw">paste0</span>(v,<span class="st">&quot;value&quot;</span>) ] )
+denom.data.subset.logical= rep(TRUE, nrow(DataSet))
+# print( denom.def )
+for (v in names(denom.def)) {
+  if ( denom.def[v ] != subsetting.dimensions[[ v ]] ) {
+    denom.data.subset.logical= denom.data.subset.logical &amp; ( DataSet[,toupper(v)] == thisrow[ paste0(v,&quot;value&quot;) ] )
   }
 }
-  denom.data.frame&lt;-<span class="st">  </span>DataSet[denom.data.subset.logical , ]
+  denom.data.frame&lt;-  DataSet[denom.data.subset.logical , ]
 
-  result=<span class="st"> </span><span class="kw">nrow</span>(AOD) /<span class="st"> </span><span class="kw">nrow</span>( denom.data.frame ) *<span class="st"> </span><span class="dv">100</span>;
-  has.result=<span class="ot">TRUE</span>
-  <span class="co"># print(paste(&quot;AOD number of observations&quot;, nrow(AOD)))</span>
-  <span class="co"># print(paste(&quot;denom.data.frame number of observations&quot;, nrow(denom.data.frame)))</span>
+  result= nrow(AOD) / nrow( denom.data.frame ) * 100;
+  has.result=TRUE
+  # print(paste(&quot;AOD number of observations&quot;, nrow(AOD)))
+  # print(paste(&quot;denom.data.frame number of observations&quot;, nrow(denom.data.frame)))
 }
 
 
 
 if (has.result) {
-<span class="co"># print(paste(&quot;result&quot;, result, sep=&quot; &quot;))</span>
-<span class="kw">add.data.triple</span>( cubeData,
-<span class="dt">subject=</span><span class="kw">gsub</span>(<span class="st">&quot;ds:&quot;</span>, myprefixes$prefixDS, thisrow[<span class="st">&quot;s&quot;</span>]), <span class="co"># add triple does not resolve prefix</span>
-<span class="dt">predicate=</span><span class="kw">gsub</span>(<span class="st">&quot;validmeas:&quot;</span>, myprefixes$prefixVALIDMEAS, <span class="st">&quot;validmeas:result&quot;</span>),
-<span class="dt">data=</span><span class="kw">paste</span>(result), <span class="dt">type=</span><span class="st">&quot;float&quot;</span>)
+# print(paste(&quot;result&quot;, result, sep=&quot; &quot;))
+add.data.triple( cubeData,
+subject=gsub(&quot;ds:&quot;, myprefixes$prefixDS, thisrow[&quot;s&quot;]), # add triple does not resolve prefix
+predicate=gsub(&quot;validmeas:&quot;, myprefixes$prefixVALIDMEAS, &quot;validmeas:result&quot;),
+data=paste(result), type=&quot;float&quot;)
 } else {
-<span class="co">#  print( paste( thisrow[&quot;s&quot;], ifelse(has.result, result, &quot;No result determined&quot;) ) )</span>
+#  print( paste( thisrow[&quot;s&quot;], ifelse(has.result, result, &quot;No result determined&quot;) ) )
 }
 
 
-} <span class="co"># for</span>
+} # for
 
-cube.measure.result&lt;-<span class="st">  </span><span class="kw">sparql.rdf</span>(cubeData,
-  <span class="kw">paste</span>(forsparqlprefix,
-    <span class="st">&quot;select * where {&quot;</span>,
-    <span class="st">&quot;    ?s a qb:Observation  ;&quot;</span>,
-    <span class="kw">paste</span>(<span class="st">&quot;       qb:dataSet&quot;</span>,  ds.dataset, <span class="st">&quot; ;&quot;</span>, <span class="dt">sep=</span><span class="st">&quot; &quot;</span>, <span class="dt">collapse=</span><span class="st">&quot; &quot;</span>),
-    <span class="st">&quot;       prop:measure      ?measure ;      &quot;</span>,
-    <span class="st">&quot;      optional{ ?s validmeas:result      ?result }      &quot;</span>,
-    <span class="st">&quot;} order by ?s&quot;</span>
+cube.measure.result&lt;-  sparql.rdf(cubeData,
+  paste(forsparqlprefix,
+    &quot;select * where {&quot;,
+    &quot;    ?s a qb:Observation  ;&quot;,
+    paste(&quot;       qb:dataSet&quot;,  ds.dataset, &quot; ;&quot;, sep=&quot; &quot;, collapse=&quot; &quot;),
+    &quot;       prop:measure      ?measure ;      &quot;,
+    &quot;      optional{ ?s validmeas:result      ?result }      &quot;,
+    &quot;} order by ?s&quot;
                 )
   );
 
-<span class="co"># print(cube.measure.result)</span>
+# print(cube.measure.result)
 
 
-cube.check&lt;-<span class="st"> </span><span class="kw">sparql.rdf</span>(cubeData,
-  <span class="kw">paste</span>(forsparqlprefix,
-    <span class="st">&quot;select * where {&quot;</span>,
-    <span class="st">&quot;    ?s a qb:Observation  ;&quot;</span>,
-    <span class="kw">paste</span>(<span class="st">&quot;       qb:dataSet&quot;</span>,  ds.dataset, <span class="st">&quot; ;&quot;</span>, <span class="dt">sep=</span><span class="st">&quot; &quot;</span>, <span class="dt">collapse=</span><span class="st">&quot; &quot;</span>),
-    <span class="st">&quot;       prop:measure      ?measure ;      &quot;</span>,
-    <span class="st">&quot;      optional{ ?s validmeas:result      ?result }      &quot;</span>,
-    <span class="st">&quot; filter ( ?measure != ?result ) &quot;</span>,
-    <span class="st">&quot;} order by ?s&quot;</span>
+cube.check&lt;- sparql.rdf(cubeData,
+  paste(forsparqlprefix,
+    &quot;select * where {&quot;,
+    &quot;    ?s a qb:Observation  ;&quot;,
+    paste(&quot;       qb:dataSet&quot;,  ds.dataset, &quot; ;&quot;, sep=&quot; &quot;, collapse=&quot; &quot;),
+    &quot;       prop:measure      ?measure ;      &quot;,
+    &quot;      optional{ ?s validmeas:result      ?result }      &quot;,
+    &quot; filter ( ?measure != ?result ) &quot;,
+    &quot;} order by ?s&quot;
                 )
   );
 
-<span class="kw">print</span>(<span class="st">&quot;If the result is &lt;0 x 0&gt; matrix then all value matches&quot;</span>)
+print(&quot;If the result is &lt;0 x 0&gt; matrix then all value matches&quot;)
 cube.check
 
 
@@ -385,56 +530,60 @@ cube.check
 
 
 
-<span class="kw">check.cube</span>(
-   <span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adsl&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
-   <span class="dt">dsURL=</span> <span class="st">&quot;https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt&quot;</span>,
-   <span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-demog&quot;</span>,
- <span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-DM-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
- <span class="dt">domain=</span><span class="st">&quot;demog&quot;</span>,
- <span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
- )</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check.cube</span>(
-<span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adae&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
-<span class="dt">dsURL=</span> <span class="st">&quot;https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt&quot;</span>,
-<span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-ae&quot;</span>,
-<span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-AE-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
-<span class="dt">domain=</span><span class="st">&quot;ae&quot;</span>,
-<span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
-)</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check.cube</span>(
-  <span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adsl&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
-  <span class="dt">dsURL=</span> <span class="ot">NULL</span>,
-  <span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-demog&quot;</span>,
-  <span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-DM-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
-  <span class="dt">domain=</span><span class="st">&quot;demog&quot;</span>,
-  <span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
- )</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check.cube</span>(
- <span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adae&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
- <span class="dt">dsURL=</span>  <span class="ot">NULL</span>,
- <span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-ae&quot;</span>,
- <span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-AE-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
- <span class="dt">domain=</span><span class="st">&quot;ae&quot;</span>,
- <span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
- )</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
+check.cube(
+   obsFile=paste(tempdir(),&quot;/&quot;, &quot;adsl&quot;, &quot;.xpt&quot;,sep=&quot;&quot;),
+   dsURL= &quot;https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt&quot;,
+   ds.dataset= &quot;ds:dataset-demog&quot;,
+ qbfile= system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DM-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;),
+ domain=&quot;demog&quot;,
+ RDFCubeWorkbook=NULL
+ )
+</code></pre>
+
+<p>[1] &ldquo;If the result is <0 x 0> matrix then all value matches&rdquo;
+<0 x 0 matrix></p>
+
+<pre><code class="r">check.cube(
+obsFile=paste(tempdir(),&quot;/&quot;, &quot;adae&quot;, &quot;.xpt&quot;,sep=&quot;&quot;),
+dsURL= &quot;https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt&quot;,
+ds.dataset= &quot;ds:dataset-ae&quot;,
+qbfile= system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-AE-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;),
+domain=&quot;ae&quot;,
+RDFCubeWorkbook=NULL
+)
+</code></pre>
+
+<p>[1] &ldquo;If the result is <0 x 0> matrix then all value matches&rdquo;
+<0 x 0 matrix></p>
+
+<pre><code class="r">check.cube(
+  obsFile=paste(tempdir(),&quot;/&quot;, &quot;adsl&quot;, &quot;.xpt&quot;,sep=&quot;&quot;),
+  dsURL= NULL,
+  ds.dataset= &quot;ds:dataset-demog&quot;,
+  qbfile= system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DM-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;),
+  domain=&quot;demog&quot;,
+  RDFCubeWorkbook=NULL
+ )
+</code></pre>
+
+<p>[1] &ldquo;If the result is <0 x 0> matrix then all value matches&rdquo;
+<0 x 0 matrix></p>
+
+<pre><code class="r">check.cube(
+ obsFile=paste(tempdir(),&quot;/&quot;, &quot;adae&quot;, &quot;.xpt&quot;,sep=&quot;&quot;),
+ dsURL=  NULL,
+ ds.dataset= &quot;ds:dataset-ae&quot;,
+ qbfile= system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-AE-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;),
+ domain=&quot;ae&quot;,
+ RDFCubeWorkbook=NULL
+ )
+</code></pre>
+
+<p>[1] &ldquo;If the result is <0 x 0> matrix then all value matches&rdquo;
+<0 x 0 matrix></p>
+
 <p>End of file.</p>
-</div>
-
-
-
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 
 </body>
+
 </html>
