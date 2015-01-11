@@ -1,6 +1,6 @@
 Package: rrdfqbcrnd0
 Title: R-RDF Data Cube for Clinical Research & Development -
-    development
+        development
 Version: 0.1
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") ),
@@ -8,25 +8,14 @@ Authors@R: c(
     )
 Description: Creates and operates on RDF Data cube using rdf.cdisc.org
     definitions
-Depends:
-    R (>= 3.0.2),
-    rrdf,
-    xlsx,
-    RCurl,
-    rJava
-Imports:
-    tools,
+Depends: R (>= 3.0.2), rrdf, xlsx, RCurl, rJava
+Imports: tools,
 License: MIT + file LICENSE
 LazyData: true
-Suggests:
-    knitr,
-    testthat,
-    foreign,
-    shiny,
-    XML
+Suggests: knitr, testthat, foreign, shiny, XML
 VignetteBuilder: knitr
-Packaged: 2014-11-02 22:35:08 UTC; ma
+Packaged: 2015-01-11 10:37:02 UTC; ma
 Author: Marc Andersen [aut, cre],
     Tim Williams [aut, cre]
 Maintainer: Marc Andersen <mja@statgroup.dk>,
-    Tim Williams <xx@xx.dk>
+ Tim Williams <xx@xx.dk>

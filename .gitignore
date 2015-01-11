@@ -4,7 +4,7 @@
 # History files
 .Rhistory
 .RData
-inst/doc
+# inst/doc
 build/
 man/
 *.Rmd~
