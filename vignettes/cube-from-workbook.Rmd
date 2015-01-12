@@ -176,8 +176,38 @@ cat(observationsDescriptionRq)
 observationsDesc<- as.data.frame(sparql.rdf(checkCube, observationsDescriptionRq ), stringsAsFactors=FALSE)
 knitr::kable(observationsDesc[ 1:10 ,
    c(paste0(rep(sub("prop:", "", dimensions),each=3), c("label", "value", "IRI")),
-     sub("prop:", "", attributes), "measure")]
+     sub("prop:", "", attributes), "measure", "measureIRI" )]
 )
+
+rowdim<- dimensions[c(6,5,2,3,4),]
+coldim<- dimensions[c(1),]
+
+rowdimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, rowdim )
+observationsRowDim<- as.data.frame(sparql.rdf(checkCube, rowdimRq ), stringsAsFactors=FALSE)
+uqr<-unique(observationsRowDim[,c(-1)])
+uqr[,"rowno"]<- 1:nrow(uqr)
+observationsRowDimE<-merge(observationsRowDim,uqr)
+observationsRowDimE[,c("s","rowno")]
+
+coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
+observationsColDim<- as.data.frame(sparql.rdf(checkCube, coldimRq ), stringsAsFactors=FALSE)
+uqc<-unique(observationsColDim[,c(-1)])
+uqc[,"colno"]<- 1:nrow(uqc)
+observationsColDimE<-merge(observationsColDim,uqc)
+observationsColDimE[,c("s","colno")]
+
+prm<- regexec("^prefix +([^:]+): +<(.*)>$", strsplit(forsparqlprefix,"\n")[[1]])
+ll<-regmatches(strsplit(forsparqlprefix,"\n")[[1]],prm)
+res<-data.frame(matrix(unlist(ll),ncol=3,byrow=TRUE),stringsAsFactors=FALSE)
+
+nIRIs<-  c(paste0(sub("prop:", "", dimensions), "IRI"),"measureIRI" )
+
+
+observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^prop:", as.character(res[res[,2]=="prop",3]), x)})
+observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^ds:", as.character(res[res[,2]=="ds",3]), x)})
+
+
+
 ```
 
 ### Notes
