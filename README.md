@@ -2,7 +2,6 @@ Private repository for R-RDF Data Cube for Clinical Research & Development
 ==========================================================================
  
 R code for presenting Analysis Results Model - work from a subgroup of FDA/PhUSE Semantic Technology Project - with the purpose of representing resuls in RDF.
-
 This is a private repository until I get comfortable with publishing code in the open :-)
 
 Please note: fields like author, contributors etc are presently not correct. 
@@ -12,34 +11,74 @@ Marc Andersen
 Introduction
 ------------
 
+## Setup of R
+
+### Note for Linux
+
+Note for Linux: Check if there are distribution specific packages for the components. For example for Fedora, these RCurl exists as package R-RCurl and XML as R-XML, eg yum install R-RCurl R-XML.
+
+If RCurl install fails, it may be resolved by first installing the libcurl and libcurl-devel packages (on fedora: install.packages( c( "RCurl"). 
+
+### Note for Windows
+
+To build packages on windows install the [Rtools](http://cran.r-project.org/bin/windows/Rtools/).
+
+For updating the devtools package follow the instructions on the github page for [devtools](https://github.com/hadley/devtools).
+
+## Required R packages
+
+### Packages for developing in general
+
 You will need to install some packages for development
 
 ```r
 install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown" ) )
 ```
 
-The rrdfqbcrnd0 packages uses the following packages, that also must be installed:
+These packages are mentioned under Imports: section in the DESCRIPTION file.
+
+### Packages for developing the rrdfqbcrnd0 package
+
+For using and developing the rrdfqbcrnd0 package uses the following packages must be installed:
 ```r
 install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
 ```
-These packages are mentioned under Imports: section in the DESCRIPTION file.
-Note for Linux: Check if there are distribution specific packages for the components. For example for Fedora, these RCurl exists as package R-RCurl and XML as R-XML, eg yum install R-RCurl R-XML.
-
-If RCurl install fails, it may be resolved by first installing the libcurl and libcurl-devel packages (on fedora: install.packages( c( "RCurl"). 
 
 Finally, the [rrdf](https://github.com/egonw/rrdf) package must be
 installed. The packages must be installed accoding to the instructions
-on the packages github page.
+on the packages github page. Well, almost, due changes in install_github, you need to use
 
+```r
+library(devtools)
+install_github("egonw/rrdf", subdir="rrdflibs")
+install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE)
+library(rrdflibs)
+library(rrdf)
+# check the version loaded
+packageVersion("rrdf")
+```
+
+
+## Install the rrdfqbcrnd0 package
+
+### Install in R from local directory using Rstudio
+Go to the directory with the download, and open the rrdfqbcrnd0.Rproj file.
+
+
+### Install in R from GitHub
 
 To install the rrdfqbcrnd0 package use
 
 ```r
 library(devtools)
 install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= TRUE)
+packageVersion("devtools")
 ```
 
 Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
+
+
+## Other issues 
 
 The R package generation may require qpdf - see R function compactPDF  help page.
 
@@ -50,6 +89,14 @@ export RSTUDIO_PANDOC=`which pandoc | xargs dirname`
 ```
 ([source](http://stackoverflow.com/questions/26803652/devtoolsbuild-vignettes-yields-error-invalid-version-specification-pandoc))
 
+### Version of packages
+Verify that you have the applicable versions. It appears unnessary, but version issues have more than once been the root cause of malfunction.
+
+```r
+sessionInfo()
+packageVersion("rrdf")
+```
+
 Developing
 ----------
 
@@ -59,7 +106,7 @@ TIP: To single step line by line use ESS in emacs
 
 TIP: To single step line by line use rstudio 
 
-
+TIP: In Rstudio I open README.md (this file) and execute code lines one by one.
 
 ```r
 library(devtools)
@@ -72,7 +119,7 @@ devtools::install()
 devtools::build_vignettes()
 ```
 
-Here is what I use while developing.
+## Commands used for developing
 
 Creating vignettes
 ##################
@@ -133,7 +180,8 @@ The code is based on incremental development of
 * snippets of SPARQL and R code (Marc and Tim)
 * R script reading CSV files and generating rdf data cube (Tim)
 * R code update and and addition of AE analysis results and verification of resuts (Marc)
-* Creation of R package (Ippei)
+* Creation of skeleton R package (Ippei)
+* Restructure R script into R pacakge (Marc)
 * Update code and create R package with vignettes (Marc)
 
 Comments to code and functionality:
