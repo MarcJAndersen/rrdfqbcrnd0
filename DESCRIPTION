@@ -8,7 +8,7 @@ Authors@R: c(
     )
 Description: Creates and operates on RDF Data cube using rdf.cdisc.org
     definitions
-Depends: R (>= 3.0.2), rrdf, xlsx, RCurl, rJava
+Depends: R (>= 3.0.2), rrdf(>= 2.0.4), xlsx, RCurl, rJava
 Imports: tools,
 License: MIT + file LICENSE
 LazyData: true
