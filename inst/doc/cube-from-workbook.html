@@ -10,7 +10,7 @@
 
 <meta name="author" content="PhuseSubTeamAnalysisResults@example.org" />
 
-<meta name="date" content="2015-01-05" />
+<meta name="date" content="2015-01-17" />
 
 <title>Data qubes from Workbook</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Data qubes from Workbook</h1>
 <h4 class="author"><em><a href="mailto:PhuseSubTeamAnalysisResults@example.org">PhuseSubTeamAnalysisResults@example.org</a></em></h4>
-<h4 class="date"><em>2015-01-05</em></h4>
+<h4 class="date"><em>2015-01-17</em></h4>
 </div>
 
 
@@ -222,15 +222,15 @@ knitr::<span class="kw">kable</span>(
 </tr>
 </tbody>
 </table>
-<p>The next statements demonstrates how to create two RDF data cubes according to the specfications in the excel spreadsheet. Note the contents of the RDF data cube is read from the csv file given by obsFileName in directory given by obsFileNameDirectory. The value ```!example´´´ specifies that the file should be read from sample data in the package. The dataCubeOutDirectory give the directory name for the generated RDF data cube.</p>
+<p>The next statements demonstrates how to create two RDF data cubes according to the specfications in the excel spreadsheet. Note the contents of the RDF data cube is read from the csv file given by obsFileName in directory given by obsFileNameDirectory. The value ```!exampleÂ´Â´Â´ specifies that the file should be read from sample data in the package. The dataCubeOutDirectory give the directory name for the generated RDF data cube.</p>
 <pre class="sourceCode r"><code class="sourceCode r">dm.cube.fn&lt;-<span class="st"> </span><span class="kw">BuildCubeFromWorkbook</span>(RDFCubeWorkbook, <span class="st">&quot;DM&quot;</span> )</code></pre>
-<pre><code>## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.1/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+<pre><code>## Start loading rdf.cdisc.org contents from C:/Users/mja/Documents/R/win-library/3.1/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 ## Done loading rdf.cdisc.org contents, number of triples: 164651</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;DM cube stored as &quot;</span>, dm.cube.fn, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
-<pre><code>## DM cube stored as  /tmp/RtmpG1PhVH/DC-DM-R-V-0-5-2.TTL</code></pre>
+<pre><code>## DM cube stored as  C:\Users\mja\AppData\Local\Temp\Rtmp4KLfsC/DC-DM-R-V-0-5-2.TTL</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">ae.cube.fn&lt;-<span class="st"> </span><span class="kw">BuildCubeFromWorkbook</span>(RDFCubeWorkbook, <span class="st">&quot;AE&quot;</span> )
 <span class="kw">cat</span>(<span class="st">&quot;AE cube stored as &quot;</span>, ae.cube.fn, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
-<pre><code>## AE cube stored as  /tmp/RtmpG1PhVH/DC-AE-R-V-0-5-2.TTL</code></pre>
+<pre><code>## AE cube stored as  C:\Users\mja\AppData\Local\Temp\Rtmp4KLfsC/DC-AE-R-V-0-5-2.TTL</code></pre>
 <div id="notes" class="section level2">
 <h2>Notes</h2>
 <p>In the read.xlsx, if all cells in a column is missing, then the input fails.</p>
@@ -243,7 +243,7 @@ knitr::<span class="kw">kable</span>(
 <h1>Input the generated turtle file</h1>
 <p>Now look at the generated cubes by loading the turle files. Note: by specifying prefix the output contains is shown using the prefixes. Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.</p>
 <p>The rest of the code only depends on the value of dataCubeFile.</p>
-<pre><code>## [1] &quot;Number of triples: 1039&quot;</code></pre>
+<pre><code>## [1] &quot;Number of triples: 1041&quot;</code></pre>
 <p>First set values for accessing the cube.</p>
 <p>The next statement shows the first 10 triples in the cube.</p>
 <table>

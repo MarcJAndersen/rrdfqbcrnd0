@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-01-05" />
+<meta name="date" content="2015-01-17" />
 
 <title>Derive results in RDF data cube and compare with results in data cube</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Derive results in RDF data cube and compare with results in data cube</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-01-05</em></h4>
+<h4 class="date"><em>2015-01-17</em></h4>
 </div>
 
 
@@ -66,6 +66,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 </div>
 <div id="the-vignette" class="section level3">
 <h3>The vignette</h3>
+<p>The code below is currently not evaluated, as downloading the datasets from Google Code may not work.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">width=</span><span class="dv">200</span>) <span class="co"># long lines</span>
 
 <span class="kw">library</span>(xlsx)
@@ -392,27 +393,27 @@ cube.check
  <span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-DM-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
  <span class="dt">domain=</span><span class="st">&quot;demog&quot;</span>,
  <span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
- )</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check.cube</span>(
+ )
+
+<span class="kw">check.cube</span>(
 <span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adae&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
 <span class="dt">dsURL=</span> <span class="st">&quot;https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt&quot;</span>,
 <span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-ae&quot;</span>,
 <span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-AE-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
 <span class="dt">domain=</span><span class="st">&quot;ae&quot;</span>,
 <span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
-)</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check.cube</span>(
+)
+
+<span class="kw">check.cube</span>(
   <span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adsl&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
   <span class="dt">dsURL=</span> <span class="ot">NULL</span>,
   <span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-demog&quot;</span>,
   <span class="dt">qbfile=</span> <span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;DC-DM-sample.TTL&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>),
   <span class="dt">domain=</span><span class="st">&quot;demog&quot;</span>,
   <span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
- )</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">check.cube</span>(
+ )
+
+<span class="kw">check.cube</span>(
  <span class="dt">obsFile=</span><span class="kw">paste</span>(<span class="kw">tempdir</span>(),<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adae&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>),
  <span class="dt">dsURL=</span>  <span class="ot">NULL</span>,
  <span class="dt">ds.dataset=</span> <span class="st">&quot;ds:dataset-ae&quot;</span>,
@@ -420,7 +421,6 @@ cube.check
  <span class="dt">domain=</span><span class="st">&quot;ae&quot;</span>,
  <span class="dt">RDFCubeWorkbook=</span><span class="ot">NULL</span>
  )</code></pre>
-<p>[1] “If the result is &lt;0 x 0&gt; matrix then all value matches” &lt;0 x 0 matrix&gt;</p>
 <p>End of file.</p>
 </div>
 

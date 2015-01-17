@@ -17,8 +17,9 @@ knit("vignettes/check-cube.Rmd")
 ``` 
 
 ### The vignette
+The code below is currently not evaluated, as downloading the datasets from Google Code may not work.
 
-```{r, results='asis', eval=TRUE}
+```{r, results='asis', eval=FALSE}
 
 options(width=200) # long lines
 

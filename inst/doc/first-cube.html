@@ -10,7 +10,7 @@
 
 <meta name="author" content="PhuseSubTeamAnalysisResults@example.org" />
 
-<meta name="date" content="2015-01-05" />
+<meta name="date" content="2015-01-17" />
 
 <title>Create simple RDF data qube</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Create simple RDF data qube</h1>
 <h4 class="author"><em><a href="mailto:PhuseSubTeamAnalysisResults@example.org">PhuseSubTeamAnalysisResults@example.org</a></em></h4>
-<h4 class="date"><em>2015-01-05</em></h4>
+<h4 class="date"><em>2015-01-17</em></h4>
 </div>
 
 
@@ -197,7 +197,7 @@ knitr::<span class="kw">kable</span>(cubeMetadata)</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">outcube&lt;-<span class="st"> </span><span class="kw">BuildCubeFromDataFrames</span>(cubeMetadata, obsData )</code></pre>
 <p>The RDF data cube is serialized in turtle format and stored as</p>
 <pre class="sourceCode r"><code class="sourceCode r">outcube</code></pre>
-<pre><code>## [1] &quot;/tmp/RtmpG1PhVH/DC-EXAMPLE-R-V-0-0-0.TTL&quot;</code></pre>
+<pre><code>## [1] &quot;C:\\Users\\mja\\AppData\\Local\\Temp\\Rtmp4KLfsC/DC-EXAMPLE-R-V-0-0-0.TTL&quot;</code></pre>
 </div>
 <div id="looking-at-the-rdf-data-cube" class="section level2">
 <h2>Looking at the RDF data cube</h2>
@@ -207,7 +207,7 @@ knitr::<span class="kw">kable</span>(cubeMetadata)</code></pre>
 checkCube &lt;-<span class="st"> </span><span class="kw">new.rdf</span>(<span class="dt">ontology=</span><span class="ot">FALSE</span>)  <span class="co"># Initialize</span>
 <span class="kw">load.rdf</span>(dataCubeFile, <span class="dt">format=</span><span class="st">&quot;TURTLE&quot;</span>, <span class="dt">appendTo=</span> checkCube)
 <span class="kw">summarize.rdf</span>(checkCube)</code></pre>
-<pre><code>## [1] &quot;Number of triples: 127&quot;</code></pre>
+<pre><code>## [1] &quot;Number of triples: 129&quot;</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="co"># determine the domain name; used for defining prefixes</span>
 <span class="co"># TODO: reconsider the use of domain specific prefixes</span>
 
