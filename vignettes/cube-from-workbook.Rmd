@@ -184,17 +184,27 @@ coldim<- dimensions[c(1),]
 
 rowdimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, rowdim )
 observationsRowDim<- as.data.frame(sparql.rdf(checkCube, rowdimRq ), stringsAsFactors=FALSE)
-uqr<-unique(observationsRowDim[,c(-1)])
+
+## getting the column names (variable) names for the row dimensions
+## this could be a return parameter from a function like GetDimsubsetWithObsSparqlQuery
+## to ensure that the naming convention was systematic
+## XX need a function to determine variable (column names) from properties for a given language
+colnamesRowDim<- sub("prop:", "", rowdim)
+uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]))
+## assuming rowno is a unused column name 
 uqr[,"rowno"]<- 1:nrow(uqr)
-observationsRowDimE<-merge(observationsRowDim,uqr)
-observationsRowDimE[,c("s","rowno")]
+observationsRowDimE<-merge(observationsRowDim, uqr, by=colnamesRowDim)
+## assuming s is the name of the IRI
+head(observationsRowDimE[,c("s","rowno")])
 
 coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
 observationsColDim<- as.data.frame(sparql.rdf(checkCube, coldimRq ), stringsAsFactors=FALSE)
-uqc<-unique(observationsColDim[,c(-1)])
+colnamesColDim<- sub("prop:", "", coldim)
+## using data.frame to handle the case where the result is a vector
+uqc<-data.frame(unique(observationsColDim[,colnamesColDim]))
 uqc[,"colno"]<- 1:nrow(uqc)
 observationsColDimE<-merge(observationsColDim,uqc)
-observationsColDimE[,c("s","colno")]
+head(observationsColDimE[,c("s","colno")])
 
 prm<- regexec("^prefix +([^:]+): +<(.*)>$", strsplit(forsparqlprefix,"\n")[[1]])
 ll<-regmatches(strsplit(forsparqlprefix,"\n")[[1]],prm)
@@ -206,7 +216,18 @@ nIRIs<-  c(paste0(sub("prop:", "", dimensions), "IRI"),"measureIRI" )
 observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^prop:", as.character(res[res[,2]=="prop",3]), x)})
 observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^ds:", as.character(res[res[,2]=="ds",3]), x)})
 
+names(observationsDesc)
+head(observationsColDimE)
+names(observationsColDimE)
 
+obsRowColNo<- merge( observationsRowDimE[,c("s","rowno")], observationsColDimE[,c("s","colno")])
+observationsDescX<- merge( observationsDesc, obsRowColNo, by="s")
+rowcolOrder<- order( observationsDescX$rowno, observationsDescX$colno )
+observationsDescXX<- observationsDescX[rowcolOrder,]
+
+## display observationsDescXX as a table showing row variables when rowno changes
+## or alternatively when colno==1
+## when rowno is 1 and colno is 1 then write the row and column headers
 
 ```
 
