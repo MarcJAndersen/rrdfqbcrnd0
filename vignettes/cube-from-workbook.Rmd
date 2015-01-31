@@ -190,10 +190,12 @@ observationsRowDim<- as.data.frame(sparql.rdf(checkCube, rowdimRq ), stringsAsFa
 ## to ensure that the naming convention was systematic
 ## XX need a function to determine variable (column names) from properties for a given language
 colnamesRowDim<- sub("prop:", "", rowdim)
-uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]))
-## assuming rowno is a unused column name 
-uqr[,"rowno"]<- 1:nrow(uqr)
-observationsRowDimE<-merge(observationsRowDim, uqr, by=colnamesRowDim)
+uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
+colnames(uqr)<- colnamesRowDim
+## assuming rowno is a unused column name
+rownoseq<- 1:nrow(uqr)
+uqr[,"rowno"]<- rownoseq
+observationsRowDimE<-merge(observationsRowDim, uqr, by=colnamesRowDim, all=TRUE)
 ## assuming s is the name of the IRI
 head(observationsRowDimE[,c("s","rowno")])
 
@@ -201,9 +203,12 @@ coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
 observationsColDim<- as.data.frame(sparql.rdf(checkCube, coldimRq ), stringsAsFactors=FALSE)
 colnamesColDim<- sub("prop:", "", coldim)
 ## using data.frame to handle the case where the result is a vector
-uqc<-data.frame(unique(observationsColDim[,colnamesColDim]))
-uqc[,"colno"]<- 1:nrow(uqc)
-observationsColDimE<-merge(observationsColDim,uqc)
+uqc<-data.frame(unique(observationsColDim[,colnamesColDim]), stringsAsFactors=FALSE)
+colnames(uqc)<- colnamesColDim
+colnoseq<- 1:nrow(uqc)
+uqc[,"colno"]<- colnoseq
+head(uqc)
+observationsColDimE<-merge(observationsColDim,uqc, by=colnamesColDim, all=TRUE)
 head(observationsColDimE[,c("s","colno")])
 
 prm<- regexec("^prefix +([^:]+): +<(.*)>$", strsplit(forsparqlprefix,"\n")[[1]])
@@ -220,16 +225,46 @@ names(observationsDesc)
 head(observationsColDimE)
 names(observationsColDimE)
 
-obsRowColNo<- merge( observationsRowDimE[,c("s","rowno")], observationsColDimE[,c("s","colno")])
-observationsDescX<- merge( observationsDesc, obsRowColNo, by="s")
-rowcolOrder<- order( observationsDescX$rowno, observationsDescX$colno )
-observationsDescXX<- observationsDescX[rowcolOrder,]
+any(duplicated(observationsRowDimE$s))
+any(duplicated(observationsColDimE$s))
+
+obsRowColNo<- merge( observationsRowDimE[,c("s","rowno")], observationsColDimE[,c("s","colno")], by="s", all=TRUE)
+any(duplicated(obsRowColNo$s))
+duplicated(obsRowColNo[,c("rowno","colno")])
+any(duplicated(obsRowColNo[,c("rowno","colno")]))
+obsRowColNo[ which(duplicated(obsRowColNo[,c("rowno","colno")])), ]
+obsRowColNo
+
+observationsDescX<- merge( observationsDesc, obsRowColNo, by="s", all=TRUE)
+observationsDescXX<- merge( tableFrame, observationsDescX, by=c("rowno","colno"), sort=TRUE, all=TRUE)
+
+tableFrame<- data.frame(rowno=rep(rownoseq, each=length(colnoseq) ), colno=rep(colnoseq, times=length(colnoseq) ), stringsAsFactors=FALSE )
+
 
 ## display observationsDescXX as a table showing row variables when rowno changes
 ## or alternatively when colno==1
 ## when rowno is 1 and colno is 1 then write the row and column headers
 
+
 ```
+
+First we re-arrange the data frame to provide a some what nice looking table to be displayed using kable.
+
+```{r, echo=TRUE}
+presTable<- uqr
+for (colno in colnoseq) {
+  presTable[,paste0("col", colno)]<- rep( NA, length(rownoseq))
+}
+for (colno in colnoseq) {
+  for (rowno in rownoseq) {
+presTable[rowno,paste0("col", colno)]<- observationsDescXX[observationsDescXX$rowno==rowno & observationsDescXX$colno==colno, "measure"]
+}
+}
+
+kable(presTable)
+
+```
+
 
 ### Notes
 
