@@ -24,8 +24,19 @@ create-r-data-contents: qbIClist data/qbCDISCprefixes.rda AEtable
 
 qbIClist: data/qbIClist.rda
 
-data/qbIClist.rda: inst/data-raw/create-qb-IC-dataset.Rmd
-	Rscript -e 'library(knitr);knit("inst/data-raw/create-qb-IC-dataset.Rmd")'
+data/qbIClist.rda: inst/data-raw/create-qb-IC-dataset.pdf
+
+%.pdf: %.Rmd
+	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
+#	mv -f $*.pdf ../inst/doc
+
+%.html: %.Rmd
+	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','html_document')"
+#	mv -f $*.html	 ../inst/doc
+
+
+vignettedoc:
+	(cd vignettes; make all)
 
 AEtable: inst/data-raw/create-ae-table-as-csv.Rmd
 	Rscript -e 'library(knitr);knit("inst/data-raw/create-ae-table-as-csv.Rmd")'

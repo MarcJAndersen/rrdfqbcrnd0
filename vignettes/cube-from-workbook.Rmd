@@ -2,11 +2,9 @@
 title: "Data qubes from Workbook"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
-output: 
-   rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Data qubes from Workbook}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
   %\usepackage[utf8]{inputenc}
 ---
 
@@ -27,6 +25,10 @@ RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", pack
 cubeMetadata <- read.xlsx(RDFCubeWorkbook,
                           sheetName=paste0("DM-Components"),
                           stringsAsFactors=FALSE)
+```
+
+The next statement shows the metadata.
+```{r, eval=TRUE}
 knitr::kable(
   cubeMetadata[ cubeMetadata$compType %in% c("dimension", "attribute", "measure"),
                c("codeType", "compName","nciDomainValue", "compLabel")]
@@ -34,12 +36,13 @@ knitr::kable(
 knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compLabel")])
 ```
 
+# Generating RDF data cube
 The next statements demonstrates how to create two RDF data cubes
 according to the specfications in the excel spreadsheet. Note the
 contents of the RDF data cube is read from the csv file given by
 obsFileName in directory given by obsFileNameDirectory. The value
 ```!example´´´ specifies that the file should be read from sample data
-in the package. The dataCubeOutDirectory give the directory name for
+in the package. The dataCubeOutDirectory defines the directory name for
 the generated RDF data cube.
 
 ```{r, eval=TRUE}
@@ -50,8 +53,8 @@ ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
-Notes 
------
+### Notes 
+
 In the read.xlsx, if all cells in a column is missing, then the input fails.  
 
 Future version may replace the use of the DomainName, eg. DM and AE in
@@ -66,36 +69,39 @@ but different value for the attribute denominator. However, this will
 violate the intergrity constraints for a RDF Data Cube (TODO: Add IC
 name).  
 
------
+Note: by specifying prefix the output is made shown using the
+prefixes. When the prefixes are defined to the RRDF, here as part of
+the turle file, then the output is also shown using the prefixes. This
+makes the output more readable.  This may be a disadvantage if the
+value of the prefix, say ds, changes. Also, in case of two RDF data cubes are loaded into the model, then it makes no sense to have the ds prefix.
+
 
 # Input the generated turtle file
 
-Now look at the generated cubes by loading the turle files. Note: by
-specifying prefix the output contains is shown using the prefixes.
-Note for future: This may be a disadvantage if the value of the
-prefix, say ds, changes.
+Now look at the generated cubes by loading the turtle files. 
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=TRUE, results='asis'}
 dataCubeFile<- dm.cube.fn
 # dataCubeFile<- ae.cube.fn
 ```
 
 The rest of the code only depends on the value of dataCubeFile.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 checkCube <- new.rdf(ontology=FALSE)  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
 
+## Get the values in the cube
 First set values for accessing the cube.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 dsdName<- GetDsdNameFromCube( checkCube )
 domainName<- GetDomainNameFromCube( checkCube )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
 The next statement shows the first 10 triples in the cube.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 observations1Rq<- paste( forsparqlprefix,
 '
 select *
@@ -109,7 +115,7 @@ knitr::kable(head(observations1))
 ```
 
 The next statement shows the first 10 triples in the cube, where the subject is a qb:Observation.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 observations2Rq<-  paste( forsparqlprefix,
 '
 select *
@@ -122,41 +128,43 @@ observations2<- sparql.rdf(checkCube, observations2Rq)
 knitr::kable(head(observations2, 10))
 ```
 
+## Get cube components
+
+The cube components are shown in the next output.
+```{r, echo=TRUE}
+componentsRq<- GetComponentSparqlQuery( forsparqlprefix, dsdName )
+components<- as.data.frame(sparql.rdf(checkCube, componentsRq), stringsAsFactors=FALSE)
+components$vn<- gsub("prop:","",components$p)
+knitr::kable(components[,c("vn", "label")])
+```
+
 The codelists are shown in the next output.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 codelistsRq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
 codelists<- as.data.frame(sparql.rdf(checkCube, codelistsRq), stringsAsFactors=FALSE)
 codelists$vn<- gsub("prop:","",codelists$p)
 codelists$clc<- gsub("code:","",codelists$cl)
-knitr::kable(print(codelists[,c("vn", "clc", "prefLabel")]))
+knitr::kable(codelists[,c("vn", "clc", "prefLabel")])
 ```
 
-Notes
------
-instead of using gsub the codelist values should be obtained in  a more straightforward way
-
-this involves a new version of the ph.recode function
-
-the rrdf package could be extended to expand the URI using the Jena expandPrefix method
-
------
 
 The dimensions are shown in the next output.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
 dimensions<- sparql.rdf(checkCube, dimensionsRq)
 knitr::kable(dimensions)
 ```
 
 Then the attributes as shown in the next output.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 attributesRq<- GetAttributesSparqlQuery( forsparqlprefix )
 attributes<- sparql.rdf(checkCube, attributesRq)
 knitr::kable(attributes)
 ```
 
+## Get observations
 And finally the SPARQL query for observations, showing only the first 10 observations.
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
 cat(observationsRq)
 observations<- as.data.frame(sparql.rdf(checkCube, observationsRq ), stringsAsFactors=FALSE)
@@ -165,10 +173,131 @@ knitr::kable(observations[ 1:10 ,
 
 ```
 
-Here is how to re-produce the metadata for the workbook.
+## Get observations with labels
+
+The SPARQL query for observations with labels for variables, showing only the first 10 observations.
+```{r, echo=TRUE}
+observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
+cat(observationsDescriptionRq)
+observationsDesc<- as.data.frame(sparql.rdf(checkCube, observationsDescriptionRq ), stringsAsFactors=FALSE)
+knitr::kable(observationsDesc[ 1:10 ,
+   c(paste0(rep(sub("prop:", "", dimensions),each=3), c("label", "value", "IRI")),
+     sub("prop:", "", attributes), "measure", "measureIRI" )]
+)
+```
+
+## Get observations and show as 2 dimensionan table 
+
+```{r, echo=TRUE}
+rowdim<- c(dimensions[c(6,5,2,3,4),],attributes)
+coldim<- dimensions[c(1),]
+
+## XX should also return desciptive labels for the dimensions
+rowdimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, rowdim )
+observationsRowDim<- as.data.frame(sparql.rdf(checkCube, rowdimRq ), stringsAsFactors=FALSE)
+
+## XX getting the column names (variable) names for the row dimensions
+## this could be a return parameter from a function like GetDimsubsetWithObsSparqlQuery
+## to ensure that the naming convention was systematic
+
+## XX need a function to determine variable (column names) from
+## properties for each language (R, SAS etc)
+
+colnamesRowDim<- sub("prop:", "", rowdim)
+uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
+colnames(uqr)<- colnamesRowDim
+## XX assuming rowno is a unused column name
+rownoseq<- 1:nrow(uqr)
+uqr[,"rowno"]<- rownoseq
+observationsRowDimE<-merge(observationsRowDim, uqr, by=colnamesRowDim, all=TRUE)
+## XX assuming s is the name of the IRI
+head(observationsRowDimE[,c("s","rowno")])
+
+coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
+observationsColDim<- as.data.frame(sparql.rdf(checkCube, coldimRq ), stringsAsFactors=FALSE)
+colnamesColDim<- sub("prop:", "", coldim)
+## using data.frame to handle the case where the result is a vector
+uqc<-data.frame(unique(observationsColDim[,colnamesColDim]), stringsAsFactors=FALSE)
+colnames(uqc)<- colnamesColDim
+colnoseq<- 1:nrow(uqc)
+uqc[,"colno"]<- colnoseq
+head(uqc)
+observationsColDimE<-merge(observationsColDim,uqc, by=colnamesColDim, all=TRUE)
+head(observationsColDimE[,c("s","colno")])
+
+prm<- regexec("^prefix +([^:]+): +<(.*)>$", strsplit(forsparqlprefix,"\n")[[1]])
+ll<-regmatches(strsplit(forsparqlprefix,"\n")[[1]],prm)
+res<-data.frame(matrix(unlist(ll),ncol=3,byrow=TRUE),stringsAsFactors=FALSE)
+
+nIRIs<-  c(paste0(sub("prop:", "", dimensions), "IRI"),"measureIRI" )
+
+
+observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^prop:", as.character(res[res[,2]=="prop",3]), x)})
+observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^ds:", as.character(res[res[,2]=="ds",3]), x)})
+
+names(observationsDesc)
+head(observationsColDimE)
+names(observationsColDimE)
+
+any(duplicated(observationsRowDimE$s))
+any(duplicated(observationsColDimE$s))
+
+obsRowColNo<- merge( observationsRowDimE[,c("s","rowno")], observationsColDimE[,c("s","colno")], by="s", all=TRUE)
+any(duplicated(obsRowColNo$s))
+duplicated(obsRowColNo[,c("rowno","colno")])
+any(duplicated(obsRowColNo[,c("rowno","colno")]))
+obsRowColNo[ which(duplicated(obsRowColNo[,c("rowno","colno")])), ]
+obsRowColNo
+
+observationsDescX<- merge( observationsDesc, obsRowColNo, by="s", all=TRUE)
+
+tableFrame<- data.frame(rowno=rep(rownoseq, each=length(colnoseq) ), colno=rep(colnoseq, times=length(colnoseq) ), stringsAsFactors=FALSE )
+
+observationsDescXX<- merge( tableFrame, observationsDescX, by=c("rowno","colno"), sort=TRUE, all=TRUE)
+
+## display observationsDescXX as a table showing row variables when rowno changes
+## or alternatively when colno==1
+## when rowno is 1 and colno is 1 then write the row and column headers
+
+
+```
+
+First we re-arrange the data frame to provide a some what nice looking table to be displayed using kable.
+
+```{r, echo=TRUE}
+presTable<- uqr
+for (colno in colnoseq) {
+  presTable[,paste0("col", colno)]<- rep( NA, length(rownoseq))
+}
+for (colno in colnoseq) {
+  for (rowno in rownoseq) {
+presTable[rowno,paste0("col", colno)]<- observationsDescXX[observationsDescXX$rowno==rowno & observationsDescXX$colno==colno, "measure"]
+}
+}
+
+knitr::kable(presTable)
+
+```
+
+
+### Notes
+
+Instead of using gsub the codelist values should be obtained in a more
+straightforward way. This involves a new version of the ph.recode function. 
+
+Much or the code expands the IRI's using a regulare expression. This
+could instead be handled by the rrdf package, by a new add.triple
+function that expand URI using the Jena expandPrefix method.
+
+
+## Reproduce the metadata for the workbook from cub
+
+Here is an example of roundtripping: make the metadata used for the
+workbook from RDF data cube.
+
 First get the dimensions, measure and attribute
 
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 workbookDimAttrMeasRq<- GetDimAttrMeasInWorkbookFormatSparqlQuery( forsparqlprefix ) 
 dimensionsattr<- sparql.rdf(checkCube, workbookDimAttrMeasRq )
 knitr::kable(dimensionsattr)
@@ -178,7 +307,7 @@ Secondly, get the metadata for the workbook. To get the metadata
 element "cubeVersion" a workaround is needed. The cubeversion is not
 directly available but from dcat:distribution derived as the result of
 paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL").
-```{r, echo=FALSE}
+```{r, echo=TRUE}
 workbookMetadataRq<- GetMetaDataInWorkbookFormatSparqlQuery( forsparqlprefix )
 metadata<- sparql.rdf(checkCube, workbookMetadataRq)
 cubeVersion<- gsub("-",".", gsub("DC-.*-R-V-([^\\.]+).TTL", "\\1", metadata[ metadata[,2]=="distribution", "compLabel"], perl=TRUE))
@@ -187,4 +316,9 @@ knitr::kable(metadataX)
 ```
 
 For comparison, see the meta data from the excel workbook in the beginning of the document.
+
+# Session information
+```{r, echo=TRUE}
+sessionInfo()
+```
 

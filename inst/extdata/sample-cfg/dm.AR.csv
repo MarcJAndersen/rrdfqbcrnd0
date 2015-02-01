@@ -16,9 +16,6 @@ measure,TRT01A,sex,SAFFL,procedure,factor,denominator,race,unit
 52.38095238,Xanomeline High Dose,M,Y,percent,proportion,SEX,_ALL_,_NULL_
 59.52380952,Xanomeline Low Dose,F,Y,percent,proportion,SEX,_ALL_,_NULL_
 40.47619048,Xanomeline Low Dose,M,Y,percent,proportion,SEX,_ALL_,_NULL_
-86,Placebo,_ALL_,Y,count,quantity,_ALL_,_ALL_,_NULL_
-84,Xanomeline High Dose,_ALL_,Y,count,quantity,_ALL_,_ALL_,_NULL_
-84,Xanomeline Low Dose,_ALL_,Y,count,quantity,_ALL_,_ALL_,_NULL_
 230,_ALL_,_ALL_,Y,count,quantity,_ALL_,WHITE,_NULL_
 23,_ALL_,_ALL_,Y,count,quantity,_ALL_,BLACK OR AFRICAN AMERICAN,_NULL_
 1,_ALL_,_ALL_,Y,count,quantity,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_NULL_

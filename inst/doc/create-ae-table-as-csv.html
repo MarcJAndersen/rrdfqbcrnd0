@@ -8,11 +8,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<meta name="author" content="PhuseSubTeamAnalysisResults@example.org" />
+<meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-01-17" />
+<meta name="date" content="2015-02-01" />
 
-<title>SPARQL query using Shiny to build interface</title>
+<title>Create AE table as csv file</title>
 
 
 
@@ -52,18 +52,59 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 
 <div id="header">
-<h1 class="title">SPARQL query using Shiny to build interface</h1>
-<h4 class="author"><em><a href="mailto:PhuseSubTeamAnalysisResults@example.org">PhuseSubTeamAnalysisResults@example.org</a></em></h4>
-<h4 class="date"><em>2015-01-17</em></h4>
+<h1 class="title">Create AE table as csv file</h1>
+<h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
+<h4 class="date"><em>2015-02-01</em></h4>
 </div>
 
 
-<div id="prelimnaries" class="section level2">
-<h2>Prelimnaries</h2>
-<p>write more here Here should be more text. ## Code</p>
-<p>When creating vignettes the code hangs. Hence the code is disabled.</p>
-<p>Use eval=TRUE to get it to run. Note that it the shiny app does not respond, try to run it in a browser.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">do_sparql</span>(<span class="st">&quot;aa&quot;</span>)</code></pre>
+<div id="create-ae-sample-table-as-csv-file-and-other-files" class="section level1">
+<h1>Create AE sample table as CSV file and other files</h1>
+<p>This script creates the result and codelist for a simple AE table.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(devtools)
+
+<span class="kw">require</span>(foreign)
+<span class="kw">require</span>(sqldf)
+
+xptdirectory=<span class="st"> </span><span class="kw">tempdir</span>()
+
+fnadae=<span class="kw">paste</span>(xptdirectory,<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adae&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
+
+<span class="kw">download.file</span>(<span class="st">&quot;http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt&quot;</span>, fnadae)
+
+adae=<span class="kw">read.xport</span>(fnadae)
+
+
+aesummay.e&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
+aesoc.e&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
+aesocpt.e&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select TRTA, SAFFL, AESOC, AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
+
+aesummay.n&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
+aesoc.n&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
+aesocpt.n&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select TRTA, SAFFL, AESOC, AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
+
+aetable&lt;-<span class="st"> </span><span class="kw">rbind</span>(aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n )
+aetable$unit&lt;-<span class="st"> &quot;_NULL_&quot;</span>
+aetable$denominator&lt;-<span class="st"> &quot;_NULL_&quot;</span>
+<span class="kw">names</span>(aetable)&lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">names</span>(aetable))
+
+aetableFile&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-cfg&quot;</span>, <span class="st">&quot;ae.AR.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>)
+<span class="kw">write.csv</span>(aetable, <span class="dt">file=</span>aetableFile,<span class="dt">row.names=</span><span class="ot">FALSE</span>)
+
+recode.aesoc.list&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select distinct AESOC from adae&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+<span class="kw">names</span>(recode.aesoc.list)&lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">names</span>(recode.aesoc.list))
+recode.aesoc.list&lt;-<span class="st"> </span><span class="kw">rbind</span>(recode.aesoc.list, <span class="kw">data.frame</span>(<span class="dt">aesoc=</span><span class="st">&quot;_ALL_&quot;</span>))
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(recode.aesoc.list)) { recode.aesoc.list[i,<span class="st">&quot;recodeto&quot;</span>]&lt;-<span class="st"> </span><span class="kw">encodetouri</span>(<span class="kw">as.character</span>(recode.aesoc.list[i,<span class="dv">1</span>])) }
+aesocFile&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-cfg&quot;</span>, <span class="st">&quot;ae.aesoc.AR.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>)
+<span class="kw">write.csv</span>(recode.aesoc.list, <span class="dt">file=</span>aesocFile, <span class="dt">row.names=</span><span class="ot">FALSE</span>)
+
+recode.aedecod.list&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select distinct AEDECOD from adae&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
+<span class="kw">names</span>(recode.aedecod.list)&lt;-<span class="st"> </span><span class="kw">tolower</span>(<span class="kw">names</span>(recode.aedecod.list))
+recode.aedecod.list&lt;-<span class="st"> </span><span class="kw">rbind</span>(recode.aedecod.list, <span class="kw">data.frame</span>(<span class="dt">aedecod=</span><span class="st">&quot;_ALL_&quot;</span>))
+for (i in <span class="dv">1</span>:<span class="kw">nrow</span>(recode.aedecod.list)) { recode.aedecod.list[i,<span class="st">&quot;recodeto&quot;</span>]&lt;-<span class="st"> </span><span class="kw">encodetouri</span>(<span class="kw">as.character</span>(recode.aedecod.list[i,<span class="dv">1</span>])) }
+
+aedecodFile&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-cfg&quot;</span>, <span class="st">&quot;ae.aedecod.AR.csv&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>)
+<span class="kw">write.csv</span>(recode.aedecod.list, <span class="dt">file=</span>aedecodFile, <span class="dt">row.names=</span><span class="ot">FALSE</span>)</code></pre>
 </div>
 
 

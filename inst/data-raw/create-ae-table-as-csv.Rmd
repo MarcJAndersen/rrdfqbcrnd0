@@ -57,6 +57,7 @@ recode.aedecod.list<- sqldf("select distinct AEDECOD from adae", stringsAsFactor
 names(recode.aedecod.list)<- tolower(names(recode.aedecod.list))
 recode.aedecod.list<- rbind(recode.aedecod.list, data.frame(aedecod="_ALL_"))
 for (i in 1:nrow(recode.aedecod.list)) { recode.aedecod.list[i,"recodeto"]<- encodetouri(as.character(recode.aedecod.list[i,1])) }
+
 aedecodFile<- system.file("extdata/sample-cfg", "ae.aedecod.AR.csv", package="rrdfqbcrnd0")
 write.csv(recode.aedecod.list, file=aedecodFile, row.names=FALSE)
 

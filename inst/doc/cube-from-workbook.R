@@ -6,6 +6,9 @@ RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", pack
 cubeMetadata <- read.xlsx(RDFCubeWorkbook,
                           sheetName=paste0("DM-Components"),
                           stringsAsFactors=FALSE)
+
+## ----, eval=TRUE---------------------------------------------------------
+
 knitr::kable(
   cubeMetadata[ cubeMetadata$compType %in% c("dimension", "attribute", "measure"),
                c("codeType", "compName","nciDomainValue", "compLabel")]
@@ -58,11 +61,17 @@ observations2<- sparql.rdf(checkCube, observations2Rq)
 knitr::kable(head(observations2, 10))
 
 ## ----, echo=FALSE--------------------------------------------------------
+componentsRq<- GetComponentSparqlQuery( forsparqlprefix, dsdName )
+components<- as.data.frame(sparql.rdf(checkCube, componentsRq), stringsAsFactors=FALSE)
+components$vn<- gsub("prop:","",components$p)
+knitr::kable(components[,c("vn", "label")])
+
+## ----, echo=FALSE--------------------------------------------------------
 codelistsRq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
 codelists<- as.data.frame(sparql.rdf(checkCube, codelistsRq), stringsAsFactors=FALSE)
 codelists$vn<- gsub("prop:","",codelists$p)
 codelists$clc<- gsub("code:","",codelists$cl)
-knitr::kable(print(codelists[,c("vn", "clc", "prefLabel")]))
+knitr::kable(codelists[,c("vn", "clc", "prefLabel")])
 
 ## ----, echo=FALSE--------------------------------------------------------
 dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
