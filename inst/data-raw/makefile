@@ -1,15 +1,29 @@
+all: qbIClist AEtable
+
+clean:
+	rm -f ../data/qbIClist.rda create-ae-table-as-csv.pdf create-qb-IC-dataset.pdf 
+
+AEtable: create-ae-table-as-csv.pdf
+# creates
+# ../extdata/sample-cfg/ae.AR.csv ../extdata/sample-cfg/ae.aesoc.AR.csv ../extdata/sample-cfg/ae.aedecod.AR.csv
+# not good use of makefile
+
+create-ae-table-as-csv.pdf: create-ae-table-as-csv.Rmd
+
 qbIClist: ../data/qbIClist.rda
 
-../data/qbIClist.rda: create-qb-IC-dataset.pdf
+../data/qbIClist.rda: create-qb-IC-dataset.pdf 
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"
-	mv -f $*.pdf ../inst/doc
+	mv -f $*.pdf ../doc
 
+# not clever rule - also creates HTML version
 %.pdf: %.Rmd
-	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
-	mv -f $*.pdf ../inst/doc
+	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','all')"
+	mv -f $*.pdf ../doc
+	mv -f $*.html ../doc
 
 %.html: %.Rmd
 	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','html_document')"
-	mv -f $*.html	 ../inst/doc
+	mv -f $*.html ../doc
