@@ -21,18 +21,12 @@ createRD:
 	$(R_HOME)/bin/Rscript -e "library(devtools); devtools::document()"
 
 
-%.pdf: %.Rmd
-	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
-#	mv -f $*.pdf ../inst/doc
-
-%.html: %.Rmd
-	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','html_document')"
-#	mv -f $*.html	 ../inst/doc
-
-
 data-raw:
 	(cd inst/data-raw; make all)
 
+# Only run this after the package is installed in the overall R library
+# The vignettes uses the packages, and this should be the most recent version
+# The vignettes document should be extracted from the package
 vignettedoc:
 	(cd vignettes; make all)
 
