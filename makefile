@@ -1,6 +1,6 @@
 PACKAGENAME=rrdfqbcrnd0
 
-all: createRD qbIClist rbuildforce rcheck rbuild
+all: createRD data-raw rbuildforce rcheck rbuild
 
 cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*#
@@ -18,13 +18,8 @@ rbuild:
 	cd ..; R CMD build  ${PACKAGENAME}
 
 createRD:
-	# does not work MJA 2014-11-16 Rscript -e 'library(devtools); devtools::document()'
+	$(R_HOME)/bin/Rscript -e "library(devtools); devtools::document()"
 
-create-r-data-contents: qbIClist data/qbCDISCprefixes.rda AEtable
-
-qbIClist: data/qbIClist.rda
-
-data/qbIClist.rda: inst/data-raw/create-qb-IC-dataset.pdf
 
 %.pdf: %.Rmd
 	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
@@ -35,11 +30,12 @@ data/qbIClist.rda: inst/data-raw/create-qb-IC-dataset.pdf
 #	mv -f $*.html	 ../inst/doc
 
 
+data-raw:
+	(cd inst/data-raw; make all)
+
 vignettedoc:
 	(cd vignettes; make all)
 
-AEtable: inst/data-raw/create-ae-table-as-csv.Rmd
-	Rscript -e 'library(knitr);knit("inst/data-raw/create-ae-table-as-csv.Rmd")'
 
 # To start fuseki endpoint - should be a script. 
 # Problem that location is configuration dependent
