@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Setup</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Setup</h1>
+
+<p>First load the package.</p>
+
+<pre><code class="r">library(rrdfqbcrnd0)
+</code></pre>
+
+<h1>Generating RDF data cube from specification in a spreadsheet and export as turtle file</h1>
+
+<p>The generation of RDF data cube can be specified in a spreadsheet.
+The outputs below shows the meta data for generation of the DM RDF data cube.</p>
+
+<pre><code class="r">RDFCubeWorkbook&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;RDFCubeWorkbook.xlsx&quot;, package=&quot;rrdfqbcrnd0&quot;)
+cubeMetadata &lt;- read.xlsx(RDFCubeWorkbook,
+                          sheetName=paste0(&quot;DM-Components&quot;),
+                          stringsAsFactors=FALSE)
+</code></pre>
+
+<p>The next statement shows the metadata.</p>
+
+<pre><code class="r">knitr::kable(
+  cubeMetadata[ cubeMetadata$compType %in% c(&quot;dimension&quot;, &quot;attribute&quot;, &quot;measure&quot;),
+               c(&quot;codeType&quot;, &quot;compName&quot;,&quot;nciDomainValue&quot;, &quot;compLabel&quot;)]
+  )
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">codeType</th>
+<th align="left">compName</th>
+<th align="left">nciDomainValue</th>
+<th align="left">compLabel</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">DATA</td>
+<td align="left">trt01a</td>
+<td align="left">NA</td>
+<td align="left">Treatment Arm</td>
+</tr>
+<tr>
+<td align="left">SDTM</td>
+<td align="left">sex</td>
+<td align="left">C66731</td>
+<td align="left">Sex (Gender)</td>
+</tr>
+<tr>
+<td align="left">DATA</td>
+<td align="left">saffl</td>
+<td align="left">NA</td>
+<td align="left">Safety Population Flag</td>
+</tr>
+<tr>
+<td align="left">DATA</td>
+<td align="left">procedure</td>
+<td align="left">NA</td>
+<td align="left">Statistical Procedure</td>
+</tr>
+<tr>
+<td align="left">DATA</td>
+<td align="left">factor</td>
+<td align="left">NA</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+</tr>
+<tr>
+<td align="left">SDTM</td>
+<td align="left">race</td>
+<td align="left">C74457</td>
+<td align="left">Race</td>
+</tr>
+<tr>
+<td align="left">NA</td>
+<td align="left">measure</td>
+<td align="left">NA</td>
+<td align="left">Value of the statistical measure</td>
+</tr>
+<tr>
+<td align="left">NA</td>
+<td align="left">unit</td>
+<td align="left">NA</td>
+<td align="left">Unit of measure</td>
+</tr>
+<tr>
+<td align="left">NA</td>
+<td align="left">denominator</td>
+<td align="left">NA</td>
+<td align="left">Denominator for a proportion (oskr) subset on which a statistic is based</td>
+</tr>
+</tbody></table>
+
+<pre><code class="r">knitr::kable(cubeMetadata[ cubeMetadata$compType==&quot;metadata&quot;,c(&quot;compName&quot;,&quot;compLabel&quot;)])
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="left">compName</th>
+<th align="left">compLabel</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">10</td>
+<td align="left">obsURL</td>
+<td align="left"><a href="https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt">https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt</a></td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">obsFileName</td>
+<td align="left">dm.AR.csv</td>
+</tr>
+<tr>
+<td align="left">12</td>
+<td align="left">dataCubeFileName</td>
+<td align="left">DC-DM-R-V</td>
+</tr>
+<tr>
+<td align="left">13</td>
+<td align="left">cubeVersion</td>
+<td align="left">0.5.2</td>
+</tr>
+<tr>
+<td align="left">14</td>
+<td align="left">createdBy</td>
+<td align="left">Tim Williams</td>
+</tr>
+<tr>
+<td align="left">15</td>
+<td align="left">description</td>
+<td align="left">Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)</td>
+</tr>
+<tr>
+<td align="left">16</td>
+<td align="left">providedBy</td>
+<td align="left">PhUSE Results Metadata Working Group</td>
+</tr>
+<tr>
+<td align="left">17</td>
+<td align="left">comment</td>
+<td align="left">Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">title</td>
+<td align="left">Demographics Analysis Results</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">label</td>
+<td align="left">Demographics results data set.</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">wasDerivedFrom</td>
+<td align="left">demog.AR.csv</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">domainName</td>
+<td align="left">DM</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">obsFileNameDirectory</td>
+<td align="left">!example</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">dataCubeOutDirectory</td>
+<td align="left">!temporary</td>
+</tr>
+</tbody></table>
+
+<h1>Generating RDF data cube</h1>
+
+<p>The next statements demonstrates how to create two RDF data cubes
+according to the specfications in the excel spreadsheet. Note the
+contents of the RDF data cube is read from the csv file given by
+obsFileName in directory given by obsFileNameDirectory. The value
+&ldquo;!example´´´ specifies that the file should be read from sample data
+in the package. The dataCubeOutDirectory defines the directory name for
+the generated RDF data cube.</p>
+
+<pre><code class="r">dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
+</code></pre>
+
+<pre><code>## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.1/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+## Done loading rdf.cdisc.org contents, number of triples: 164651
+</code></pre>
+
+<pre><code class="r">cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)
+</code></pre>
+
+<pre><code>## DM cube stored as  /tmp/Rtmpj7i2jz/DC-DM-R-V-0-5-2.TTL
+</code></pre>
+
+<pre><code class="r">ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )
+cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)
+</code></pre>
+
+<pre><code>## AE cube stored as  /tmp/Rtmpj7i2jz/DC-AE-R-V-0-5-2.TTL
+</code></pre>
+
+<h3>Notes</h3>
+
+<p>In the read.xlsx, if all cells in a column is missing, then the input fails.  </p>
+
+<p>Future version may replace the use of the DomainName, eg. DM and AE in
+the examples above, with another way of deriving identification of the
+table </p>
+
+<p>The attribute denominator may be changed to a dimension to handle more
+complex situations. For example if there are percentages for TRT01A
+and SEX using respectively TRT01A and SEX as denominator. This will be
+represented by two observations with by definition the same dimensions
+but different value for the attribute denominator. However, this will
+violate the intergrity constraints for a RDF Data Cube (TODO: Add IC
+name).  </p>
+
+<p>Note: by specifying prefix the output is made shown using the
+prefixes. When the prefixes are defined to the RRDF, here as part of
+the turle file, then the output is also shown using the prefixes. This
+makes the output more readable.  This may be a disadvantage if the
+value of the prefix, say ds, changes. Also, in case of two RDF data cubes are loaded into the model, then it makes no sense to have the ds prefix.</p>
+
+<h1>Input the generated turtle file</h1>
+
+<p>Now look at the generated cubes by loading the turtle files. </p>
+
+<pre><code class="r">dataCubeFile&lt;- dm.cube.fn
+# dataCubeFile&lt;- ae.cube.fn
+</code></pre>
+
+<p>The rest of the code only depends on the value of dataCubeFile.</p>
+
+<pre><code class="r">checkCube &lt;- new.rdf(ontology=FALSE)  # Initialize
+load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= checkCube)
+summarize.rdf(checkCube)
+</code></pre>
+
+<pre><code>## [1] &quot;Number of triples: 1005&quot;
+</code></pre>
+
+<h2>Get the values in the cube</h2>
+
+<p>First set values for accessing the cube.</p>
+
+<pre><code class="r">dsdName&lt;- GetDsdNameFromCube( checkCube )
+domainName&lt;- GetDomainNameFromCube( checkCube )
+forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
+</code></pre>
+
+<p>The next statement shows the first 10 triples in the cube.</p>
+
+<pre><code class="r">observations1Rq&lt;- paste( forsparqlprefix,
+&#39;
+select *
+where {?s ?p ?o .}
+limit 10
+&#39;,
+&quot;\n&quot;
+)
+observations1&lt;- sparql.rdf(checkCube, observations1Rq  )
+knitr::kable(head(observations1))
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">dccs:saffl</td>
+<td align="left">qb:dimension</td>
+<td align="left">prop:saffl</td>
+</tr>
+<tr>
+<td align="left">dccs:saffl</td>
+<td align="left">rdfs:label</td>
+<td align="left">Safety Population Flag</td>
+</tr>
+<tr>
+<td align="left">dccs:saffl</td>
+<td align="left">rdf:type</td>
+<td align="left">qb:ComponentSpecification</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">prop:saffl</td>
+<td align="left">code:saffl-Y</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">prop:unit</td>
+<td align="left"><em>NULL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">rdfs:label</td>
+<td align="left">2</td>
+</tr>
+</tbody></table>
+
+<p>The next statement shows the first 10 triples in the cube, where the subject is a qb:Observation.</p>
+
+<pre><code class="r">observations2Rq&lt;-  paste( forsparqlprefix,
+&#39;
+select *
+where { ?s a qb:Observation ; ?p ?o .}
+limit 10
+&#39;,
+&quot;\n&quot;                               
+)
+observations2&lt;- sparql.rdf(checkCube, observations2Rq)
+knitr::kable(head(observations2, 10))
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">rdfs:label</td>
+<td align="left">35</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">prop:race</td>
+<td align="left">code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">rdf:type</td>
+<td align="left">qb:Observation</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">prop:denominator</td>
+<td align="left">RACE</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">prop:procedure</td>
+<td align="left">code:procedure-percent</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">prop:factor</td>
+<td align="left">code:factor-proportion</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">prop:saffl</td>
+<td align="left">code:saffl-Y</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">qb:dataSet</td>
+<td align="left">ds:dataset-DM</td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">prop:unit</td>
+<td align="left"><em>NULL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs35</td>
+<td align="left">prop:trt01a</td>
+<td align="left">code:trt01a-Xanomeline_High_Dose</td>
+</tr>
+</tbody></table>
+
+<h2>Get cube components</h2>
+
+<p>The cube components are shown in the next output.</p>
+
+<pre><code class="r">componentsRq&lt;- GetComponentSparqlQuery( forsparqlprefix, dsdName )
+components&lt;- as.data.frame(sparql.rdf(checkCube, componentsRq), stringsAsFactors=FALSE)
+components$vn&lt;- gsub(&quot;prop:&quot;,&quot;&quot;,components$p)
+knitr::kable(components[,c(&quot;vn&quot;, &quot;label&quot;)])
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">vn</th>
+<th align="left">label</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">factor</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">Statistical Procedure</td>
+</tr>
+<tr>
+<td align="left">race</td>
+<td align="left">Race</td>
+</tr>
+<tr>
+<td align="left">saffl</td>
+<td align="left">Safety Population Flag</td>
+</tr>
+<tr>
+<td align="left">sex</td>
+<td align="left">Sex (Gender)</td>
+</tr>
+<tr>
+<td align="left">trt01a</td>
+<td align="left">Treatment Arm</td>
+</tr>
+</tbody></table>
+
+<p>The codelists are shown in the next output.</p>
+
+<pre><code class="r">codelistsRq&lt;- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
+codelists&lt;- as.data.frame(sparql.rdf(checkCube, codelistsRq), stringsAsFactors=FALSE)
+codelists$vn&lt;- gsub(&quot;prop:&quot;,&quot;&quot;,codelists$p)
+codelists$clc&lt;- gsub(&quot;code:&quot;,&quot;&quot;,codelists$cl)
+knitr::kable(codelists[,c(&quot;vn&quot;, &quot;clc&quot;, &quot;prefLabel&quot;)])
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">vn</th>
+<th align="left">clc</th>
+<th align="left">prefLabel</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">factor</td>
+<td align="left">factor-AGE</td>
+<td align="left">AGE</td>
+</tr>
+<tr>
+<td align="left">factor</td>
+<td align="left">factor-proportion</td>
+<td align="left">proportion</td>
+</tr>
+<tr>
+<td align="left">factor</td>
+<td align="left">factor-quantity</td>
+<td align="left">quantity</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-count</td>
+<td align="left">count</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-max</td>
+<td align="left">max</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-mean</td>
+<td align="left">mean</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-median</td>
+<td align="left">median</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-min</td>
+<td align="left">min</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-percent</td>
+<td align="left">percent</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-stdev</td>
+<td align="left">stdev</td>
+</tr>
+<tr>
+<td align="left">race</td>
+<td align="left">race-AMERICAN_INDIAN_OR_ALASKA_NATIVE</td>
+<td align="left">AMERICAN INDIAN OR ALASKA NATIVE</td>
+</tr>
+<tr>
+<td align="left">race</td>
+<td align="left">race-ASIAN</td>
+<td align="left">ASIAN</td>
+</tr>
+<tr>
+<td align="left">race</td>
+<td align="left">race-BLACK_OR_AFRICAN_AMERICAN</td>
+<td align="left">BLACK OR AFRICAN AMERICAN</td>
+</tr>
+<tr>
+<td align="left">race</td>
+<td align="left">race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER</td>
+<td align="left">NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER</td>
+</tr>
+<tr>
+<td align="left">race</td>
+<td align="left">race-WHITE</td>
+<td align="left">WHITE</td>
+</tr>
+<tr>
+<td align="left">race</td>
+<td align="left">race-<em>ALL</em></td>
+<td align="left"><em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">saffl</td>
+<td align="left">saffl-Y</td>
+<td align="left">Y</td>
+</tr>
+<tr>
+<td align="left">sex</td>
+<td align="left">sex-F</td>
+<td align="left">F</td>
+</tr>
+<tr>
+<td align="left">sex</td>
+<td align="left">sex-M</td>
+<td align="left">M</td>
+</tr>
+<tr>
+<td align="left">sex</td>
+<td align="left">sex-U</td>
+<td align="left">U</td>
+</tr>
+<tr>
+<td align="left">sex</td>
+<td align="left">sex-UN</td>
+<td align="left">UN</td>
+</tr>
+<tr>
+<td align="left">sex</td>
+<td align="left">sex-<em>ALL</em></td>
+<td align="left"><em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">trt01a</td>
+<td align="left">trt01a-Placebo</td>
+<td align="left">Placebo</td>
+</tr>
+<tr>
+<td align="left">trt01a</td>
+<td align="left">trt01a-Xanomeline_High_Dose</td>
+<td align="left">Xanomeline High Dose</td>
+</tr>
+<tr>
+<td align="left">trt01a</td>
+<td align="left">trt01a-Xanomeline_Low_Dose</td>
+<td align="left">Xanomeline Low Dose</td>
+</tr>
+<tr>
+<td align="left">trt01a</td>
+<td align="left">trt01a-<em>ALL</em></td>
+<td align="left"><em>ALL</em></td>
+</tr>
+</tbody></table>
+
+<p>The dimensions are shown in the next output.</p>
+
+<pre><code class="r">dimensionsRq &lt;- GetDimensionsSparqlQuery( forsparqlprefix )
+dimensions&lt;- sparql.rdf(checkCube, dimensionsRq)
+knitr::kable(dimensions)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">p</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">prop:trt01a</td>
+</tr>
+<tr>
+<td align="left">prop:race</td>
+</tr>
+<tr>
+<td align="left">prop:factor</td>
+</tr>
+<tr>
+<td align="left">prop:procedure</td>
+</tr>
+<tr>
+<td align="left">prop:sex</td>
+</tr>
+<tr>
+<td align="left">prop:saffl</td>
+</tr>
+</tbody></table>
+
+<p>Then the attributes as shown in the next output.</p>
+
+<pre><code class="r">attributesRq&lt;- GetAttributesSparqlQuery( forsparqlprefix )
+attributes&lt;- sparql.rdf(checkCube, attributesRq)
+knitr::kable(attributes)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">p</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">prop:unit</td>
+</tr>
+<tr>
+<td align="left">prop:denominator</td>
+</tr>
+</tbody></table>
+
+<h2>Get observations</h2>
+
+<p>And finally the SPARQL query for observations, showing only the first 10 observations.</p>
+
+<pre><code class="r">observationsRq&lt;- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
+cat(observationsRq)
+</code></pre>
+
+<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
+## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
+## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
+## prefix pav: &lt;http://purl.org/pav&gt;
+## prefix dct: &lt;http://purl.org/dc/terms/&gt;
+## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
+## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
+## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
+## prefix code: &lt;http://www.example.org/dc/code/&gt;
+## prefix prop: &lt;http://www.example.org/dc/dm/prop/&gt;
+## prefix dccs: &lt;http://www.example.org/dc/dm/dccs/&gt;
+## prefix ds: &lt;http://www.example.org/dc/dm/ds/&gt;
+##  select * where { ?s a qb:Observation  ; 
+##         qb:dataSet ds:dataset-DM  ; 
+##  prop:trt01a ?trt01a;
+## prop:race ?race;
+## prop:factor ?factor;
+## prop:procedure ?procedure;
+## prop:sex ?sex;
+## prop:saffl ?saffl; prop:unit ?unit;
+## prop:denominator ?denominator; prop:measure      ?measure ;      
+##  optional{ ?trt01a skos:prefLabel ?trt01avalue . }
+## optional{ ?race skos:prefLabel ?racevalue . }
+## optional{ ?factor skos:prefLabel ?factorvalue . }
+## optional{ ?procedure skos:prefLabel ?procedurevalue . }
+## optional{ ?sex skos:prefLabel ?sexvalue . }
+## optional{ ?saffl skos:prefLabel ?safflvalue . } 
+##  }
+</code></pre>
+
+<pre><code class="r">observations&lt;- as.data.frame(sparql.rdf(checkCube, observationsRq ), stringsAsFactors=FALSE)
+knitr::kable(observations[ 1:10 ,
+   c(paste0(sub(&quot;prop:&quot;, &quot;&quot;, dimensions), &quot;value&quot;),sub(&quot;prop:&quot;, &quot;&quot;, attributes), &quot;measure&quot;)])
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">trt01avalue</th>
+<th align="left">racevalue</th>
+<th align="left">factorvalue</th>
+<th align="left">procedurevalue</th>
+<th align="left">sexvalue</th>
+<th align="left">safflvalue</th>
+<th align="left">unit</th>
+<th align="left">denominator</th>
+<th align="left">measure</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">Xanomeline High Dose</td>
+<td align="left">AMERICAN INDIAN OR ALASKA NATIVE</td>
+<td align="left">proportion</td>
+<td align="left">percent</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="left">1.19047619</td>
+</tr>
+<tr>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left">AMERICAN INDIAN OR ALASKA NATIVE</td>
+<td align="left">proportion</td>
+<td align="left">percent</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="left">0</td>
+</tr>
+<tr>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left">BLACK OR AFRICAN AMERICAN</td>
+<td align="left">proportion</td>
+<td align="left">percent</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="left">7.142857143</td>
+</tr>
+<tr>
+<td align="left">Placebo</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">quantity</td>
+<td align="left">count</td>
+<td align="left">F</td>
+<td align="left">Y</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="left">53</td>
+</tr>
+<tr>
+<td align="left"><em>ALL</em></td>
+<td align="left">WHITE</td>
+<td align="left">quantity</td>
+<td align="left">count</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="left">230</td>
+</tr>
+<tr>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">AGE</td>
+<td align="left">min</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">51</td>
+</tr>
+<tr>
+<td align="left">Xanomeline High Dose</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">AGE</td>
+<td align="left">stdev</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">7.886093849</td>
+</tr>
+<tr>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">proportion</td>
+<td align="left">percent</td>
+<td align="left">M</td>
+<td align="left">Y</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">SEX</td>
+<td align="left">40.47619048</td>
+</tr>
+<tr>
+<td align="left">Placebo</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">AGE</td>
+<td align="left">stdev</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">8.590167127</td>
+</tr>
+<tr>
+<td align="left">Xanomeline High Dose</td>
+<td align="left">WHITE</td>
+<td align="left">quantity</td>
+<td align="left">count</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">Y</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="left">74</td>
+</tr>
+</tbody></table>
+
+<h2>Get observations with labels</h2>
+
+<p>The SPARQL query for observations with labels for variables, showing only the first 10 observations.</p>
+
+<pre><code class="r">observationsDescriptionRq&lt;- GetObservationsWithDescriptionSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
+cat(observationsDescriptionRq)
+</code></pre>
+
+<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
+## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
+## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
+## prefix pav: &lt;http://purl.org/pav&gt;
+## prefix dct: &lt;http://purl.org/dc/terms/&gt;
+## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
+## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
+## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
+## prefix code: &lt;http://www.example.org/dc/code/&gt;
+## prefix prop: &lt;http://www.example.org/dc/dm/prop/&gt;
+## prefix dccs: &lt;http://www.example.org/dc/dm/dccs/&gt;
+## prefix ds: &lt;http://www.example.org/dc/dm/ds/&gt;
+##  select * where { ?s a qb:Observation  ; 
+##         qb:dataSet ds:dataset-DM  ; 
+##  prop:trt01a ?trt01a;
+## prop:race ?race;
+## prop:factor ?factor;
+## prop:procedure ?procedure;
+## prop:sex ?sex;
+## prop:saffl ?saffl; prop:unit ?unit;
+## prop:denominator ?denominator; prop:measure      ?measure ;      
+##  optional{ ?trt01a skos:prefLabel ?trt01avalue . }
+## optional{ ?race skos:prefLabel ?racevalue . }
+## optional{ ?factor skos:prefLabel ?factorvalue . }
+## optional{ ?procedure skos:prefLabel ?procedurevalue . }
+## optional{ ?sex skos:prefLabel ?sexvalue . }
+## optional{ ?saffl skos:prefLabel ?safflvalue . } optional{ prop:trt01a rdfs:label ?trt01alabel . }
+## optional{ prop:race rdfs:label ?racelabel . }
+## optional{ prop:factor rdfs:label ?factorlabel . }
+## optional{ prop:procedure rdfs:label ?procedurelabel . }
+## optional{ prop:sex rdfs:label ?sexlabel . }
+## optional{ prop:saffl rdfs:label ?saffllabel . } BIND( IRI(prop:trt01a)as ?trt01aIRI)
+## BIND( IRI(prop:race)as ?raceIRI)
+## BIND( IRI(prop:factor)as ?factorIRI)
+## BIND( IRI(prop:procedure)as ?procedureIRI)
+## BIND( IRI(prop:sex)as ?sexIRI)
+## BIND( IRI(prop:saffl)as ?safflIRI) BIND( IRI( ?s ) AS ?measureIRI) 
+##  }
+</code></pre>
+
+<pre><code class="r">observationsDesc&lt;- as.data.frame(sparql.rdf(checkCube, observationsDescriptionRq ), stringsAsFactors=FALSE)
+knitr::kable(observationsDesc[ 1:10 ,
+   c(paste0(rep(sub(&quot;prop:&quot;, &quot;&quot;, dimensions),each=3), c(&quot;label&quot;, &quot;value&quot;, &quot;IRI&quot;)),
+     sub(&quot;prop:&quot;, &quot;&quot;, attributes), &quot;measure&quot;, &quot;measureIRI&quot; )]
+)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">trt01alabel</th>
+<th align="left">trt01avalue</th>
+<th align="left">trt01aIRI</th>
+<th align="left">racelabel</th>
+<th align="left">racevalue</th>
+<th align="left">raceIRI</th>
+<th align="left">factorlabel</th>
+<th align="left">factorvalue</th>
+<th align="left">factorIRI</th>
+<th align="left">procedurelabel</th>
+<th align="left">procedurevalue</th>
+<th align="left">procedureIRI</th>
+<th align="left">sexlabel</th>
+<th align="left">sexvalue</th>
+<th align="left">sexIRI</th>
+<th align="left">saffllabel</th>
+<th align="left">safflvalue</th>
+<th align="left">safflIRI</th>
+<th align="left">unit</th>
+<th align="left">denominator</th>
+<th align="left">measure</th>
+<th align="left">measureIRI</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Xanomeline High Dose</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left">AMERICAN INDIAN OR ALASKA NATIVE</td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">proportion</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">percent</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="left">1.19047619</td>
+<td align="left">ds:obs35</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left">AMERICAN INDIAN OR ALASKA NATIVE</td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">proportion</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">percent</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="left">0</td>
+<td align="left">ds:obs38</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left">BLACK OR AFRICAN AMERICAN</td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">proportion</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">percent</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="left">7.142857143</td>
+<td align="left">ds:obs37</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Placebo</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">quantity</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">count</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left">F</td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="left">53</td>
+<td align="left">ds:obs6</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left">WHITE</td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">quantity</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">count</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="left">230</td>
+<td align="left">ds:obs18</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">AGE</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">min</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">51</td>
+<td align="left">ds:obs47</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Xanomeline High Dose</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">AGE</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">stdev</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">7.886093849</td>
+<td align="left">ds:obs43</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">proportion</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">percent</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left">M</td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">SEX</td>
+<td align="left">40.47619048</td>
+<td align="left">ds:obs17</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Placebo</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">AGE</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">stdev</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">8.590167127</td>
+<td align="left">ds:obs42</td>
+</tr>
+<tr>
+<td align="left">Treatment Arm</td>
+<td align="left">Xanomeline High Dose</td>
+<td align="left">prop:trt01a</td>
+<td align="left">Race</td>
+<td align="left">WHITE</td>
+<td align="left">prop:race</td>
+<td align="left">Type of procedure (quantity, proportion&hellip;)</td>
+<td align="left">quantity</td>
+<td align="left">prop:factor</td>
+<td align="left">Statistical Procedure</td>
+<td align="left">count</td>
+<td align="left">prop:procedure</td>
+<td align="left">Sex (Gender)</td>
+<td align="left"><em>ALL</em></td>
+<td align="left">prop:sex</td>
+<td align="left">Safety Population Flag</td>
+<td align="left">Y</td>
+<td align="left">prop:saffl</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="left">74</td>
+<td align="left">ds:obs24</td>
+</tr>
+</tbody></table>
+
+<h2>Get observations and show as 2 dimensionan table</h2>
+
+<pre><code class="r">rowdim&lt;- c(dimensions[c(6,5,2,3,4),],attributes)
+coldim&lt;- dimensions[c(1),]
+
+## XX should also return desciptive labels for the dimensions
+rowdimRq&lt;- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, rowdim )
+observationsRowDim&lt;- as.data.frame(sparql.rdf(checkCube, rowdimRq ), stringsAsFactors=FALSE)
+
+## XX getting the column names (variable) names for the row dimensions
+## this could be a return parameter from a function like GetDimsubsetWithObsSparqlQuery
+## to ensure that the naming convention was systematic
+
+## XX need a function to determine variable (column names) from
+## properties for each language (R, SAS etc)
+
+colnamesRowDim&lt;- sub(&quot;prop:&quot;, &quot;&quot;, rowdim)
+uqr&lt;-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
+colnames(uqr)&lt;- colnamesRowDim
+## XX assuming rowno is a unused column name
+rownoseq&lt;- 1:nrow(uqr)
+uqr[,&quot;rowno&quot;]&lt;- rownoseq
+observationsRowDimE&lt;-merge(observationsRowDim, uqr, by=colnamesRowDim, all=TRUE)
+## XX assuming s is the name of the IRI
+head(observationsRowDimE[,c(&quot;s&quot;,&quot;rowno&quot;)])
+</code></pre>
+
+<pre><code>##          s rowno
+## 1 ds:obs51    11
+## 2 ds:obs52    11
+## 3 ds:obs53    11
+## 4 ds:obs39    12
+## 5 ds:obs40    12
+## 6 ds:obs41    12
+</code></pre>
+
+<pre><code class="r">coldimRq&lt;- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
+observationsColDim&lt;- as.data.frame(sparql.rdf(checkCube, coldimRq ), stringsAsFactors=FALSE)
+colnamesColDim&lt;- sub(&quot;prop:&quot;, &quot;&quot;, coldim)
+## using data.frame to handle the case where the result is a vector
+uqc&lt;-data.frame(unique(observationsColDim[,colnamesColDim]), stringsAsFactors=FALSE)
+colnames(uqc)&lt;- colnamesColDim
+colnoseq&lt;- 1:nrow(uqc)
+uqc[,&quot;colno&quot;]&lt;- colnoseq
+head(uqc)
+</code></pre>
+
+<pre><code>##                             trt01a colno
+## 1              code:trt01a-Placebo     1
+## 2 code:trt01a-Xanomeline_High_Dose     2
+## 3  code:trt01a-Xanomeline_Low_Dose     3
+## 4                code:trt01a-_ALL_     4
+</code></pre>
+
+<pre><code class="r">observationsColDimE&lt;-merge(observationsColDim,uqc, by=colnamesColDim, all=TRUE)
+head(observationsColDimE[,c(&quot;s&quot;,&quot;colno&quot;)])
+</code></pre>
+
+<pre><code>##          s colno
+## 1 ds:obs18     4
+## 2 ds:obs19     4
+## 3 ds:obs20     4
+## 4  ds:obs4     4
+## 5  ds:obs5     4
+## 6  ds:obs1     1
+</code></pre>
+
+<pre><code class="r">prm&lt;- regexec(&quot;^prefix +([^:]+): +&lt;(.*)&gt;$&quot;, strsplit(forsparqlprefix,&quot;\n&quot;)[[1]])
+ll&lt;-regmatches(strsplit(forsparqlprefix,&quot;\n&quot;)[[1]],prm)
+res&lt;-data.frame(matrix(unlist(ll),ncol=3,byrow=TRUE),stringsAsFactors=FALSE)
+
+nIRIs&lt;-  c(paste0(sub(&quot;prop:&quot;, &quot;&quot;, dimensions), &quot;IRI&quot;),&quot;measureIRI&quot; )
+
+
+observationsDesc[, nIRIs]&lt;- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub(&quot;^prop:&quot;, as.character(res[res[,2]==&quot;prop&quot;,3]), x)})
+observationsDesc[, nIRIs]&lt;- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub(&quot;^ds:&quot;, as.character(res[res[,2]==&quot;ds&quot;,3]), x)})
+
+names(observationsDesc)
+</code></pre>
+
+<pre><code>##  [1] &quot;s&quot;              &quot;trt01a&quot;         &quot;race&quot;           &quot;factor&quot;        
+##  [5] &quot;procedure&quot;      &quot;sex&quot;            &quot;saffl&quot;          &quot;unit&quot;          
+##  [9] &quot;denominator&quot;    &quot;measure&quot;        &quot;trt01avalue&quot;    &quot;racevalue&quot;     
+## [13] &quot;factorvalue&quot;    &quot;procedurevalue&quot; &quot;sexvalue&quot;       &quot;safflvalue&quot;    
+## [17] &quot;trt01alabel&quot;    &quot;racelabel&quot;      &quot;factorlabel&quot;    &quot;procedurelabel&quot;
+## [21] &quot;sexlabel&quot;       &quot;saffllabel&quot;     &quot;trt01aIRI&quot;      &quot;raceIRI&quot;       
+## [25] &quot;factorIRI&quot;      &quot;procedureIRI&quot;   &quot;sexIRI&quot;         &quot;safflIRI&quot;      
+## [29] &quot;measureIRI&quot;
+</code></pre>
+
+<pre><code class="r">head(observationsColDimE)
+</code></pre>
+
+<pre><code>##                trt01a        s colno
+## 1   code:trt01a-_ALL_ ds:obs18     4
+## 2   code:trt01a-_ALL_ ds:obs19     4
+## 3   code:trt01a-_ALL_ ds:obs20     4
+## 4   code:trt01a-_ALL_  ds:obs4     4
+## 5   code:trt01a-_ALL_  ds:obs5     4
+## 6 code:trt01a-Placebo  ds:obs1     1
+</code></pre>
+
+<pre><code class="r">names(observationsColDimE)
+</code></pre>
+
+<pre><code>## [1] &quot;trt01a&quot; &quot;s&quot;      &quot;colno&quot;
+</code></pre>
+
+<pre><code class="r">any(duplicated(observationsRowDimE$s))
+</code></pre>
+
+<pre><code>## [1] FALSE
+</code></pre>
+
+<pre><code class="r">any(duplicated(observationsColDimE$s))
+</code></pre>
+
+<pre><code>## [1] FALSE
+</code></pre>
+
+<pre><code class="r">obsRowColNo&lt;- merge( observationsRowDimE[,c(&quot;s&quot;,&quot;rowno&quot;)], observationsColDimE[,c(&quot;s&quot;,&quot;colno&quot;)], by=&quot;s&quot;, all=TRUE)
+any(duplicated(obsRowColNo$s))
+</code></pre>
+
+<pre><code>## [1] FALSE
+</code></pre>
+
+<pre><code class="r">duplicated(obsRowColNo[,c(&quot;rowno&quot;,&quot;colno&quot;)])
+</code></pre>
+
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [23] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [34] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [45] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+</code></pre>
+
+<pre><code class="r">any(duplicated(obsRowColNo[,c(&quot;rowno&quot;,&quot;colno&quot;)]))
+</code></pre>
+
+<pre><code>## [1] FALSE
+</code></pre>
+
+<pre><code class="r">obsRowColNo[ which(duplicated(obsRowColNo[,c(&quot;rowno&quot;,&quot;colno&quot;)])), ]
+</code></pre>
+
+<pre><code>## [1] s     rowno colno
+## &lt;0 rows&gt; (or 0-length row.names)
+</code></pre>
+
+<pre><code class="r">obsRowColNo
+</code></pre>
+
+<pre><code>##           s rowno colno
+## 1   ds:obs1    16     1
+## 2  ds:obs10     2     3
+## 3  ds:obs11     4     3
+## 4  ds:obs12     1     1
+## 5  ds:obs13     3     1
+## 6  ds:obs14     1     2
+## 7  ds:obs15     3     2
+## 8  ds:obs16     1     3
+## 9  ds:obs17     3     3
+## 10 ds:obs18    10     4
+## 11 ds:obs19     8     4
+## 12  ds:obs2    16     2
+## 13 ds:obs20     6     4
+## 14 ds:obs21    10     1
+## 15 ds:obs22     8     1
+## 16 ds:obs23     6     1
+## 17 ds:obs24    10     2
+## 18 ds:obs25     8     2
+## 19 ds:obs26     6     2
+## 20 ds:obs27    10     3
+## 21 ds:obs28     8     3
+## 22 ds:obs29     6     3
+## 23  ds:obs3    16     3
+## 24 ds:obs30     9     1
+## 25 ds:obs31     7     1
+## 26 ds:obs32     5     1
+## 27 ds:obs33     9     2
+## 28 ds:obs34     7     2
+## 29 ds:obs35     5     2
+## 30 ds:obs36     9     3
+## 31 ds:obs37     7     3
+## 32 ds:obs38     5     3
+## 33 ds:obs39    12     1
+## 34  ds:obs4     2     4
+## 35 ds:obs40    12     2
+## 36 ds:obs41    12     3
+## 37 ds:obs42    15     1
+## 38 ds:obs43    15     2
+## 39 ds:obs44    15     3
+## 40 ds:obs45    14     1
+## 41 ds:obs46    14     2
+## 42 ds:obs47    14     3
+## 43 ds:obs48    13     1
+## 44 ds:obs49    13     2
+## 45  ds:obs5     4     4
+## 46 ds:obs50    13     3
+## 47 ds:obs51    11     1
+## 48 ds:obs52    11     2
+## 49 ds:obs53    11     3
+## 50  ds:obs6     2     1
+## 51  ds:obs7     4     1
+## 52  ds:obs8     2     2
+## 53  ds:obs9     4     2
+</code></pre>
+
+<pre><code class="r">observationsDescX&lt;- merge( observationsDesc, obsRowColNo, by=&quot;s&quot;, all=TRUE)
+
+tableFrame&lt;- data.frame(rowno=rep(rownoseq, each=length(colnoseq) ), colno=rep(colnoseq, times=length(colnoseq) ), stringsAsFactors=FALSE )
+
+observationsDescXX&lt;- merge( tableFrame, observationsDescX, by=c(&quot;rowno&quot;,&quot;colno&quot;), sort=TRUE, all=TRUE)
+
+## display observationsDescXX as a table showing row variables when rowno changes
+## or alternatively when colno==1
+## when rowno is 1 and colno is 1 then write the row and column headers
+</code></pre>
+
+<p>First we re-arrange the data frame to provide a some what nice looking table to be displayed using kable.</p>
+
+<pre><code class="r">presTable&lt;- uqr
+for (colno in colnoseq) {
+  presTable[,paste0(&quot;col&quot;, colno)]&lt;- rep( NA, length(rownoseq))
+}
+for (colno in colnoseq) {
+  for (rowno in rownoseq) {
+presTable[rowno,paste0(&quot;col&quot;, colno)]&lt;- observationsDescXX[observationsDescXX$rowno==rowno &amp; observationsDescXX$colno==colno, &quot;measure&quot;]
+}
+}
+
+knitr::kable(presTable)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="left">saffl</th>
+<th align="left">sex</th>
+<th align="left">race</th>
+<th align="left">factor</th>
+<th align="left">procedure</th>
+<th align="left">unit</th>
+<th align="left">denominator</th>
+<th align="right">rowno</th>
+<th align="left">col1</th>
+<th align="left">col2</th>
+<th align="left">col3</th>
+<th align="left">col4</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-F</td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-proportion</td>
+<td align="left">code:procedure-percent</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">SEX</td>
+<td align="right">1</td>
+<td align="left">61.62790698</td>
+<td align="left">47.61904762</td>
+<td align="left">59.52380952</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-F</td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-quantity</td>
+<td align="left">code:procedure-count</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="right">2</td>
+<td align="left">53</td>
+<td align="left">40</td>
+<td align="left">50</td>
+<td align="left">143</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-M</td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-proportion</td>
+<td align="left">code:procedure-percent</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">SEX</td>
+<td align="right">3</td>
+<td align="left">38.37209302</td>
+<td align="left">52.38095238</td>
+<td align="left">40.47619048</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-M</td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-quantity</td>
+<td align="left">code:procedure-count</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="right">4</td>
+<td align="left">33</td>
+<td align="left">44</td>
+<td align="left">34</td>
+<td align="left">111</td>
+</tr>
+<tr>
+<td align="left">15</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE</td>
+<td align="left">code:factor-proportion</td>
+<td align="left">code:procedure-percent</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="right">5</td>
+<td align="left">0</td>
+<td align="left">1.19047619</td>
+<td align="left">0</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE</td>
+<td align="left">code:factor-quantity</td>
+<td align="left">code:procedure-count</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="right">6</td>
+<td align="left">0</td>
+<td align="left">1</td>
+<td align="left">0</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-BLACK_OR_AFRICAN_AMERICAN</td>
+<td align="left">code:factor-proportion</td>
+<td align="left">code:procedure-percent</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="right">7</td>
+<td align="left">9.302325581</td>
+<td align="left">10.71428571</td>
+<td align="left">7.142857143</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">25</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-BLACK_OR_AFRICAN_AMERICAN</td>
+<td align="left">code:factor-quantity</td>
+<td align="left">code:procedure-count</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="right">8</td>
+<td align="left">8</td>
+<td align="left">9</td>
+<td align="left">6</td>
+<td align="left">23</td>
+</tr>
+<tr>
+<td align="left">29</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-WHITE</td>
+<td align="left">code:factor-proportion</td>
+<td align="left">code:procedure-percent</td>
+<td align="left"><em>NULL</em></td>
+<td align="left">RACE</td>
+<td align="right">9</td>
+<td align="left">90.69767442</td>
+<td align="left">88.0952381</td>
+<td align="left">92.85714286</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">32</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-WHITE</td>
+<td align="left">code:factor-quantity</td>
+<td align="left">code:procedure-count</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="right">10</td>
+<td align="left">78</td>
+<td align="left">74</td>
+<td align="left">78</td>
+<td align="left">230</td>
+</tr>
+<tr>
+<td align="left">36</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-AGE</td>
+<td align="left">code:procedure-max</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="right">11</td>
+<td align="left">89</td>
+<td align="left">88</td>
+<td align="left">88</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">39</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-AGE</td>
+<td align="left">code:procedure-mean</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="right">12</td>
+<td align="left">75.20930233</td>
+<td align="left">74.38095238</td>
+<td align="left">75.66666667</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">42</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-AGE</td>
+<td align="left">code:procedure-median</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="right">13</td>
+<td align="left">76</td>
+<td align="left">76</td>
+<td align="left">77.5</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">45</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-AGE</td>
+<td align="left">code:procedure-min</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="right">14</td>
+<td align="left">52</td>
+<td align="left">56</td>
+<td align="left">51</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">48</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-AGE</td>
+<td align="left">code:procedure-stdev</td>
+<td align="left">YEARS</td>
+<td align="left"><em>NULL</em></td>
+<td align="right">15</td>
+<td align="left">8.590167127</td>
+<td align="left">7.886093849</td>
+<td align="left">8.2860506</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">51</td>
+<td align="left">code:saffl-Y</td>
+<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:race-<em>ALL</em></td>
+<td align="left">code:factor-quantity</td>
+<td align="left">code:procedure-count</td>
+<td align="left"><em>NULL</em></td>
+<td align="left"><em>ALL</em></td>
+<td align="right">16</td>
+<td align="left">86</td>
+<td align="left">84</td>
+<td align="left">84</td>
+<td align="left">NA</td>
+</tr>
+</tbody></table>
+
+<h3>Notes</h3>
+
+<p>Instead of using gsub the codelist values should be obtained in a more
+straightforward way. This involves a new version of the ph.recode function. </p>
+
+<p>Much or the code expands the IRI&#39;s using a regulare expression. This
+could instead be handled by the rrdf package, by a new add.triple
+function that expand URI using the Jena expandPrefix method.</p>
+
+<h2>Reproduce the metadata for the workbook from cub</h2>
+
+<p>Here is an example of roundtripping: make the metadata used for the
+workbook from RDF data cube.</p>
+
+<p>First get the dimensions, measure and attribute</p>
+
+<pre><code class="r">workbookDimAttrMeasRq&lt;- GetDimAttrMeasInWorkbookFormatSparqlQuery( forsparqlprefix ) 
+dimensionsattr&lt;- sparql.rdf(checkCube, workbookDimAttrMeasRq )
+knitr::kable(dimensionsattr)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">compType</th>
+<th align="left">compName</th>
+<th align="left">codeType</th>
+<th align="left">nciDomainValue</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:trt01a</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:race</td>
+<td align="left">NA</td>
+<td align="left">C74457</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:factor</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:procedure</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:sex</td>
+<td align="left">NA</td>
+<td align="left">C66731</td>
+</tr>
+<tr>
+<td align="left">dimension</td>
+<td align="left">prop:saffl</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">attribute</td>
+<td align="left">prop:unit</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">attribute</td>
+<td align="left">prop:denominator</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">measure</td>
+<td align="left">prop:measure</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody></table>
+
+<p>Secondly, get the metadata for the workbook. To get the metadata
+element &quot;cubeVersion&rdquo; a workaround is needed. The cubeversion is not
+directly available but from dcat:distribution derived as the result of
+paste0(&ldquo;DC-&rdquo;, domainName,&ldquo;-R-V-&rdquo;,cubeVersion,&ldquo;.TTL&rdquo;).</p>
+
+<pre><code class="r">workbookMetadataRq&lt;- GetMetaDataInWorkbookFormatSparqlQuery( forsparqlprefix )
+metadata&lt;- sparql.rdf(checkCube, workbookMetadataRq)
+cubeVersion&lt;- gsub(&quot;-&quot;,&quot;.&quot;, gsub(&quot;DC-.*-R-V-([^\\.]+).TTL&quot;, &quot;\\1&quot;, metadata[ metadata[,2]==&quot;distribution&quot;, &quot;compLabel&quot;], perl=TRUE))
+metadataX&lt;- rbind(metadata, cbind(compType=&quot;metadata&quot;, compName=&quot;cubeVersion&quot;, compLabel=cubeVersion))
+knitr::kable(metadataX)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="left">compType</th>
+<th align="left">compName</th>
+<th align="left">compLabel</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"></td>
+<td align="left">metadata</td>
+<td align="left">title</td>
+<td align="left">Demographics Analysis Results</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">metadata</td>
+<td align="left">distribution</td>
+<td align="left">DC-DM-R-V-0-5-2.TTL</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">metadata</td>
+<td align="left">comment</td>
+<td align="left">Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">metadata</td>
+<td align="left">label</td>
+<td align="left">Demographics results data set.</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">metadata</td>
+<td align="left">description</td>
+<td align="left">Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">metadata</td>
+<td align="left">obsFileName</td>
+<td align="left">dm.AR.csv</td>
+</tr>
+<tr>
+<td align="left">compLabel</td>
+<td align="left">metadata</td>
+<td align="left">cubeVersion</td>
+<td align="left">0.5.2</td>
+</tr>
+</tbody></table>
+
+<p>For comparison, see the meta data from the excel workbook in the beginning of the document.</p>
+
+<h1>Session information</h1>
+
+<pre><code class="r">sessionInfo()
+</code></pre>
+
+<pre><code>## R version 3.1.2 (2014-10-31)
+## Platform: x86_64-redhat-linux-gnu (64-bit)
+## 
+## locale:
+##  [1] LC_CTYPE=en_GB.utf8          LC_NUMERIC=C                
+##  [3] LC_TIME=en_GB.utf8           LC_COLLATE=en_GB.utf8       
+##  [5] LC_MONETARY=en_GB.utf8       LC_MESSAGES=en_GB.utf8      
+##  [7] LC_PAPER=en_GB.utf8          LC_NAME=en_GB.utf8          
+##  [9] LC_ADDRESS=en_GB.utf8        LC_TELEPHONE=en_GB.utf8     
+## [11] LC_MEASUREMENT=en_GB.utf8    LC_IDENTIFICATION=en_GB.utf8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] rrdfqbcrnd0_0.1 testthat_0.9.1  RCurl_1.95-4.5  bitops_1.0-6   
+##  [5] xlsx_0.5.7      xlsxjars_0.6.1  rrdf_2.0.4      rrdflibs_1.3.3 
+##  [9] rJava_0.9-6     knitr_1.9       devtools_1.7.0 
+## 
+## loaded via a namespace (and not attached):
+## [1] digest_0.6.8   evaluate_0.5.5 formatR_1.0    markdown_0.7.4
+## [5] Rcpp_0.11.4    roxygen2_4.1.0 stringr_0.6.2  tools_3.1.2
+</code></pre>
+
+</body>
+
+</html>
