@@ -92,6 +92,7 @@ load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
 
+## Get the values in the cube
 First set values for accessing the cube.
 ```{r, echo=TRUE}
 dsdName<- GetDsdNameFromCube( checkCube )
@@ -127,6 +128,8 @@ observations2<- sparql.rdf(checkCube, observations2Rq)
 knitr::kable(head(observations2, 10))
 ```
 
+## Get cube components
+
 The cube components are shown in the next output.
 ```{r, echo=TRUE}
 componentsRq<- GetComponentSparqlQuery( forsparqlprefix, dsdName )
@@ -159,6 +162,7 @@ attributes<- sparql.rdf(checkCube, attributesRq)
 knitr::kable(attributes)
 ```
 
+## Get observations
 And finally the SPARQL query for observations, showing only the first 10 observations.
 ```{r, echo=TRUE}
 observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
@@ -169,6 +173,8 @@ knitr::kable(observations[ 1:10 ,
 
 ```
 
+## Get observations with labels
+
 The SPARQL query for observations with labels for variables, showing only the first 10 observations.
 ```{r, echo=TRUE}
 observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
@@ -178,25 +184,33 @@ knitr::kable(observationsDesc[ 1:10 ,
    c(paste0(rep(sub("prop:", "", dimensions),each=3), c("label", "value", "IRI")),
      sub("prop:", "", attributes), "measure", "measureIRI" )]
 )
+```
 
-rowdim<- dimensions[c(6,5,2,3,4),]
+## Get observations and show as 2 dimensionan table 
+
+```{r, echo=TRUE}
+rowdim<- c(dimensions[c(6,5,2,3,4),],attributes)
 coldim<- dimensions[c(1),]
 
+## XX should also return desciptive labels for the dimensions
 rowdimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, rowdim )
 observationsRowDim<- as.data.frame(sparql.rdf(checkCube, rowdimRq ), stringsAsFactors=FALSE)
 
-## getting the column names (variable) names for the row dimensions
+## XX getting the column names (variable) names for the row dimensions
 ## this could be a return parameter from a function like GetDimsubsetWithObsSparqlQuery
 ## to ensure that the naming convention was systematic
-## XX need a function to determine variable (column names) from properties for a given language
+
+## XX need a function to determine variable (column names) from
+## properties for each language (R, SAS etc)
+
 colnamesRowDim<- sub("prop:", "", rowdim)
 uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
 colnames(uqr)<- colnamesRowDim
-## assuming rowno is a unused column name
+## XX assuming rowno is a unused column name
 rownoseq<- 1:nrow(uqr)
 uqr[,"rowno"]<- rownoseq
 observationsRowDimE<-merge(observationsRowDim, uqr, by=colnamesRowDim, all=TRUE)
-## assuming s is the name of the IRI
+## XX assuming s is the name of the IRI
 head(observationsRowDimE[,c("s","rowno")])
 
 coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
@@ -236,10 +250,10 @@ obsRowColNo[ which(duplicated(obsRowColNo[,c("rowno","colno")])), ]
 obsRowColNo
 
 observationsDescX<- merge( observationsDesc, obsRowColNo, by="s", all=TRUE)
-observationsDescXX<- merge( tableFrame, observationsDescX, by=c("rowno","colno"), sort=TRUE, all=TRUE)
 
 tableFrame<- data.frame(rowno=rep(rownoseq, each=length(colnoseq) ), colno=rep(colnoseq, times=length(colnoseq) ), stringsAsFactors=FALSE )
 
+observationsDescXX<- merge( tableFrame, observationsDescX, by=c("rowno","colno"), sort=TRUE, all=TRUE)
 
 ## display observationsDescXX as a table showing row variables when rowno changes
 ## or alternatively when colno==1
@@ -261,7 +275,7 @@ presTable[rowno,paste0("col", colno)]<- observationsDescXX[observationsDescXX$ro
 }
 }
 
-kable(presTable)
+knitr::kable(presTable)
 
 ```
 
@@ -302,4 +316,9 @@ knitr::kable(metadataX)
 ```
 
 For comparison, see the meta data from the excel workbook in the beginning of the document.
+
+# Session information
+```{r, echo=TRUE}
+sessionInfo()
+```
 
