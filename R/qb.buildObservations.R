@@ -10,7 +10,16 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
 
 colnames(obsData) <- tolower(colnames(obsData))  # Convert column names to lowercase for later matching
 
-
+## XX this could go into a function
+checkVars<- skeletonSource[ skeletonSource$compType %in% c("dimension","attribute"), "compName" ]
+dupObs<-duplicated(obsData[, checkVars])
+if (any(dupObs)) {
+# idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
+  dupObsRev<-  duplicated(obsData[,checkVars], fromLast=TRUE) 
+  print( obsData[which(dupObs | dupObsRev ), ] )
+  stop("Duplicated observations in obsData")
+}
+                        
 if (is.null(procedure2format)) {
     procedure2format<- list("count"="int",
                          "countdistinct"="int",
@@ -125,6 +134,7 @@ for (i in 1:nrow(obsData)){
                    paste0(prefixlist$prefixPROP, "measure"),
                    paste0(obsData[i,"measure"]),
                    xsdFormat)
+
    #--------------- Attributes -------------------------------------------------
    add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
