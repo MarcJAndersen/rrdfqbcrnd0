@@ -1,6 +1,7 @@
 %% \VignetteIndexEntry{Analysis results stored using RDF Data Cube}
 %% \VignetteEngine{knitr::knitr}
 %% \usepackage[utf8]{inputenc}
+%\SweaveUTF8
 
 \documentclass[10pt]{beamer}
 \usepackage[T1]{fontenc}
@@ -97,6 +98,7 @@ right - same data shown using Kable
 
 \end{document}
 
+%% http://tex.stackexchange.com/questions/133719/changing-auctex-processor-in-the-file-itself
 %%% Local Variables:
 %%% mode: LaTeX
 %%% TeX-PDF-mode: t
