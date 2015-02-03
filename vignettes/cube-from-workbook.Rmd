@@ -6,6 +6,7 @@ vignette: >
   %\VignetteIndexEntry{Data qubes from Workbook}
   %\VignetteEngine{knitr::knitr}
   %\usepackage[utf8]{inputenc}
+  %\SweaveUTF8
 ---
 
 # Setup
