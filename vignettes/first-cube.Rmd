@@ -2,7 +2,6 @@
 title: "Create simple RDF data qube"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create simple RDF data qube}
   %\VignetteEngine{knitr::rmarkdown}
