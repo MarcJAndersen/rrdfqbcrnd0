@@ -32,7 +32,7 @@ For updating the devtools package follow the instructions on the github page for
 You will need to install some packages for development
 
 ```r
-install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown" ) )
+install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "shiny" ) )
 ```
 
 These packages are mentioned under Imports: section in the DESCRIPTION file.
@@ -43,6 +43,15 @@ For using and developing the rrdfqbcrnd0 package uses the following packages mus
 ```r
 install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
 ```
+
+### Packages used for generating the data
+The scripts in inst/data-raw generates the data that are part of the packages.
+These scripts uses the following packages:
+```r
+install.packages( c( "foreign)", "sqldf" ) )
+```
+
+### The RRDF package
 
 Finally, the [rrdf](https://github.com/egonw/rrdf) package must be
 installed. The packages must be installed accoding to the instructions
@@ -62,8 +71,17 @@ packageVersion("rrdf")
 ## Install the rrdfqbcrnd0 package
 
 ### Install in R from local directory using Rstudio
-Go to the directory with the download, and open the rrdfqbcrnd0.Rproj file.
+Obtain the package as a zip file, for example by downloading from GitHub (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
 
+Extract the zip file to a directory of your choosing. 
+
+Go to the directory and open the rrdfqbcrnd0.Rproj file.
+
+### Clone from GitHub and start use Rstudio
+
+Clone the repository (https://github.com/MarcJAndersen/rrdfqbcrnd0.git).
+
+Go to the directory and open the rrdfqbcrnd0.Rproj file.
 
 ### Install in R from GitHub
 
