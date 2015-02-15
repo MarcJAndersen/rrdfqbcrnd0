@@ -4,7 +4,7 @@ author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Create prefixes for use with CDISC standards in RDF}
+  %\VignetteIndexEntry{Create AE table as csv file}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -21,13 +21,13 @@ require(devtools)
 require(foreign)
 require(sqldf)
 
-xptdirectory= tempdir()
+xptdirectory<- tempdir()
 
-fnadae=paste(xptdirectory,"/", "adae", ".xpt",sep="")
+fnadae<- paste(xptdirectory,"/", "adae", ".xpt",sep="")
 
 download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt", fnadae)
 
-adae=read.xport(fnadae)
+adae<- read.xport(fnadae)
 
 
 aesummay.e<- sqldf("select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA", stringsAsFactors=FALSE )
