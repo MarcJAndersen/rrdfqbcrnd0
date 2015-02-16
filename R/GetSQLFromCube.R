@@ -2,12 +2,12 @@
 ##'
 ##' 
 ##' @param store The name for the rrdf store
+##' @param xdsdName The name of the data frame with data
 ##' @return SQL expression with the formulars representing the RDF data cube
 
-GetSQLFromCube<- function( store ) {
+GetSQLFromCube<- function( store, xdsdName="adsl"  ) {
 
   dsdName<- GetDsdNameFromCube( store )
-  xdsdName<- "adsl"
   domainName<- GetDomainNameFromCube( store )
   forsparqlprefix<- GetForSparqlPrefix( domainName )
 
