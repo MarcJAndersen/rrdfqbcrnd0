@@ -28,37 +28,79 @@ fnadsl<- paste(xptdirectory,"/", "adsl", ".xpt",sep="")
 download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadsl)
 
 adsl<- read.xport(fnadsl)
+adsl$TRT01A<- as.character(adsl$TRT01A)
+adsl$RACE<- as.character(adsl$RACE)
+adsl$SAFFL<- as.character(adsl$SAFFL)
+adsl$SEX<- as.character(adsl$SEX)
+
+## SASxport package maps characters and dates etc into more R like data type
+## install.packages("SASxport")
+## library(SASxport)
+## adsl<- as.data.frame(read.xport(fnadsl,as.is=TRUE))
+## str(adsl)
 
 
-aesummay.e<- sqldf("select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA", stringsAsFactors=FALSE )
-aesoc.e<- sqldf("select TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC", stringsAsFactors=FALSE )
-aesocpt.e<- sqldf("select TRTA, SAFFL, AESOC, AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD", stringsAsFactors=FALSE )
 
-aesummay.n<- sqldf("select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA", stringsAsFactors=FALSE )
-aesoc.n<- sqldf("select TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC", stringsAsFactors=FALSE )
-aesocpt.n<- sqldf("select TRTA, SAFFL, AESOC, AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD", stringsAsFactors=FALSE )
 
-aetable<- rbind(aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n )
-aetable$unit<- "_NULL_"
-aetable$denominator<- "_NULL_"
-names(aetable)<- tolower(names(aetable))
+stmtSQL<- GetSQLFromCube(checkCube)
+str(stmtSQL)
+cat(stmtSQL$summStatSQL)
+adsl.summ.stat.res<- sqldf( stmtSQL$summStatSQL)
+# adsl.summ.stat$unit<- "_NULL_"
+names(adsl.summ.stat.res)<- tolower(gsub("(a|b)\\.","", names(adsl.summ.stat.res)))
+str(adsl.summ.stat.res)
+names(adsl.summ.stat.res)
+names(stmtSQL$qbframe)
 
-aetableFile<- system.file("extdata/sample-cfg", "ae.AR.csv", package="rrdfqbcrnd0")
-write.csv(aetable, file=aetableFile,row.names=FALSE)
+apply(stmtSQL$qbframe,c(1,2),function(x) {paste0("'",x,"'")})
 
-recode.aesoc.list<- sqldf("select distinct AESOC from adae", stringsAsFactors=FALSE)
-names(recode.aesoc.list)<- tolower(names(recode.aesoc.list))
-recode.aesoc.list<- rbind(recode.aesoc.list, data.frame(aesoc="_ALL_"))
-for (i in 1:nrow(recode.aesoc.list)) { recode.aesoc.list[i,"recodeto"]<- encodetouri(as.character(recode.aesoc.list[i,1])) }
-aesocFile<- system.file("extdata/sample-cfg", "ae.aesoc.AR.csv", package="rrdfqbcrnd0")
-write.csv(recode.aesoc.list, file=aesocFile, row.names=FALSE)
+sqldf()
+sqldf(
+  paste0("create table qbframe ", "(", paste(names(stmtSQL$qbframe), "TEXT", collapse=", "), ")",";")
+      )
+sqldf(
+  paste0(
+  paste(
+  paste0("insert into qbframe ", "(", paste0(names(stmtSQL$qbframe),collapse=","), ")\n" ),
+  "values\n",
+  paste0( "(", apply(stmtSQL$qbframe[1:3,],1,function(x) {paste0('"',x,'"', collapse=",")}), ")",  collapse=",\n"),
+  collapse="\n"
+  ),";\n")
+  )
 
-recode.aedecod.list<- sqldf("select distinct AEDECOD from adae", stringsAsFactors=FALSE )
-names(recode.aedecod.list)<- tolower(names(recode.aedecod.list))
-recode.aedecod.list<- rbind(recode.aedecod.list, data.frame(aedecod="_ALL_"))
-for (i in 1:nrow(recode.aedecod.list)) { recode.aedecod.list[i,"recodeto"]<- encodetouri(as.character(recode.aedecod.list[i,1])) }
+xx<- sqldf("select * from qbframe;",verbose=TRUE)
+sqldf()
 
-aedecodFile<- system.file("extdata/sample-cfg", "ae.aedecod.AR.csv", package="rrdfqbcrnd0")
-write.csv(recode.aedecod.list, file=aedecodFile, row.names=FALSE)
+str(xx)
+G
+adsl.summ.stat<- merge(stmtSQL$qbframe,adsl.summ.stat.res,by=names(stmtSQL$qbframe),all=TRUE)
+# adsl.summ.stat<- merge(stmtSQL$qbframe,adsl.summ.stat.res,all=TRUE)
+adsl.summ.stat$measure[ is.na(adsl.summ.stat$measure) & adsl.summ.stat$procedure=="count" ]<- 0
+adsl.summ.stat
+
+dmtableFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+# write.csv(dmtable, file=dmtableFile,row.names=FALSE)
+
+# removing unit
+colorder<- c( "saffl", "trt01a", "race", "sex", "procedure", "factor", "denominator", "measure")
+dmtableFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+dmtable<- read.csv(dmtableFile,stringsAsFactors=FALSE)
+names(dmtable)<-tolower(names(dmtable))
+## str(dmtable)
+Sort <- function(DF) DF[do.call(order, DF),]
+fromCSV.for.all.equal<- Sort(dmtable[,colorder])
+## str(adsl.summ.stat)
+xadsl.summ.stat<- adsl.summ.stat[,colorder]
+# fromSQL.for.all.equal<- Sort(xadsl.summ.stat[ , intersect(names(fromCSV.for.all.equal),names(xadsl.summ.stat)) ])
+fromSQL.for.all.equal<- Sort(xadsl.summ.stat[ , intersect(names(fromCSV.for.all.equal),names(xadsl.summ.stat)) ])
+## str(fromSQL.for.all.equal)
+## str(fromCSV.for.all.equal)
+all.equal(fromCSV.for.all.equal, fromSQL.for.all.equal, check.attributes = FALSE)
+## fromSQL.for.all.equal
+## fromCSV.for.all.equal
+compare<-merge(fromSQL.for.all.equal, fromCSV.for.all.equal,by=setdiff(colorder,"measure"),all=TRUE)
+## not clever
+compare$isequal<- abs(compare$measure.x - compare$measure.y ) < 1e-6
+compare
 
 ```
