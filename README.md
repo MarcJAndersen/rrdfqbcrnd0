@@ -48,7 +48,7 @@ install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
 The scripts in inst/data-raw generates the data that are part of the packages.
 These scripts uses the following packages:
 ```r
-install.packages( c( "foreign)", "sqldf" ) )
+install.packages( c( "foreign", "sqldf" ) )
 ```
 
 ### The RRDF package
@@ -100,7 +100,7 @@ Replace xxx above with the auth_token generated from the page (https://github.co
 
 The R package generation may require qpdf - see R function compactPDF  help page.
 
-If the creation of vignettes reports "Pandoc is not available. Please install Pandoc.", the setting the environment variable RSTUDIO_PANDOC before starting R as follows:
+If the creation of vignettes reports "Pandoc is not available. Please install Pandoc.", try setting the environment variable RSTUDIO_PANDOC before starting R as follows:
 
 ```bash
 export RSTUDIO_PANDOC=`which pandoc | xargs dirname`
