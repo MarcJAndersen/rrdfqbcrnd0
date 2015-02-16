@@ -19,6 +19,7 @@ attributes<- sparql.rdf(store, attributesRq)
 observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
 observations<- as.data.frame(sparql.rdf(store, observationsRq ), stringsAsFactors=FALSE)
 
+print(observations)
 xx<- apply( observations, 1, function(x) {
 expr<- c()
 for (vn in names(x)) {
@@ -27,16 +28,20 @@ if (vn %in% gsub("prop:", "", c(dimensions)) & ! (vn %in% c("factor", "procedure
   }
 }
 
-if (!(x["factorvalue"] %in% c("quantity","proportion"))) {
-   expr<- c(expr, tolower(x["factorvalue"]))
-   }
+## if (!(x["factorvalue"] %in% c("quantity","proportion"))) {
+##   expr<- c(expr, tolower(x["factorvalue"]))
+##   }
 if ( x["procedurevalue"] %in% c("percent")) {
   expr<- c(expr, paste0(x["procedurevalue"],"(", tolower(x["denominator"]), ")"))
-  } else {
-  expr<- c(expr, paste0(x["procedurevalue"],"()"))
+} else if ( x["procedurevalue"] %in% c("count")) {
+  expr<- c(expr, paste0(x["procedurevalue"],"(", " ", ")"))
+} else {
+  expr<- c(expr, paste0(x["procedurevalue"],"(", tolower(x["factorvalue"]),")" ))
   }
+paste0(expr,collapse="*")
 }
 )
 
 a<-parse(text=paste0("~", paste0(unique(xx),collapse="+")))
+a
 }
