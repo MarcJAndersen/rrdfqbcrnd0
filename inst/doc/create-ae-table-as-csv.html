@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-02-04" />
+<meta name="date" content="2015-02-16" />
 
 <title>Create AE table as csv file</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Create AE table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-02-04</em></h4>
+<h4 class="date"><em>2015-02-16</em></h4>
 </div>
 
 
@@ -66,13 +66,13 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <span class="kw">require</span>(foreign)
 <span class="kw">require</span>(sqldf)
 
-xptdirectory=<span class="st"> </span><span class="kw">tempdir</span>()
+xptdirectory&lt;-<span class="st"> </span><span class="kw">tempdir</span>()
 
-fnadae=<span class="kw">paste</span>(xptdirectory,<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adae&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
+fnadae&lt;-<span class="st"> </span><span class="kw">paste</span>(xptdirectory,<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adae&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
 
 <span class="kw">download.file</span>(<span class="st">&quot;http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt&quot;</span>, fnadae)
 
-adae=<span class="kw">read.xport</span>(fnadae)
+adae&lt;-<span class="st"> </span><span class="kw">read.xport</span>(fnadae)
 
 
 aesummay.e&lt;-<span class="st"> </span><span class="kw">sqldf</span>(<span class="st">&quot;select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span> )
