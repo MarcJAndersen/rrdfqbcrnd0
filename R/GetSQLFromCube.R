@@ -79,11 +79,13 @@ GetSQLFromCube<- function( store ) {
 
   a<-paste0(paste0(unique(xx),collapse="\nUNION\n"),"\n")
 
-  print(str(observations))
-  print(c(dimensions,attributes))
+#  print(str(observations))
+#  print(c(dimensions,attributes))
 
 
   qbframe<- observations[,c(paste0(gsub("prop:","",dimensions),"value"),gsub("prop:","",attributes))]
   names(qbframe)[1:length(dimensions)]<- gsub("prop:","",dimensions)
+
+
   list(summStatSQL=a,qbframe=qbframe)
 }
