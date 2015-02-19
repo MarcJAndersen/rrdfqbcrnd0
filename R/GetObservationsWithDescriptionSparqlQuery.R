@@ -6,35 +6,42 @@
 ##' @return SPARQL query
 ##' 
 GetObservationsWithDescriptionSparqlQuery<- function( forsparqlprefix, domainName, dimensions, attributes ) {
-cube.observations.rq<-  paste( forsparqlprefix,
+  cube.observations.rq<-  paste(
+    forsparqlprefix,
     "select * where {",
+    "\n",
     "?s a qb:Observation  ;", "\n",
-    paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
+    paste("qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
     paste0( dimensions, " ", sub("prop:", "?", dimensions), ";", collapse="\n"),
+    "\n",
     paste0( attributes, " ", sub("prop:", "?", attributes), ";", collapse="\n"),
-    "prop:measure      ?measure ;      \n",
+    "\n",                          
+    "prop:measure      ?measure .      \n",
     paste0( "optional{ ", sub("prop:", "?", dimensions), " ",
            "skos:prefLabel",
            " ",
            sub("prop:", "?", dimensions), "value" ,
            " . ", "}",
            collapse="\n"),
+    "\n",                              
     paste0( "optional{ ", dimensions, " ",
            "rdfs:label",
            " ",
            sub("prop:", "?", dimensions), "label" ,
            " . ", "}",
            collapse="\n"),
+    "\n",                              
     paste0( "BIND( IRI(", dimensions, ")",
-           "as",
+           " as",
            " ",
            sub("prop:", "?", dimensions), "IRI" ,
-            ")",
+           ")",
            collapse="\n"),
+    "\n",                          
     "BIND( IRI( ?s ) AS ?measureIRI)",                              
     "\n",
     "} ",
     "\n"
-   )
-cube.observations.rq
+    )
+  cube.observations.rq
 }
