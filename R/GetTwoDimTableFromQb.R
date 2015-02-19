@@ -100,13 +100,16 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   if (any(duplicated(obsRowColNo[,c("rowno","colno")]))) {
     stop("Unexpected an observation is not uniquely identified by row and column number")
   }
-  
-  obsRowColNo[ which(duplicated(obsRowColNo[,c("rowno","colno")])), ]
-##  obsRowColNo
+
+  if (any(duplicated(obsRowColNo[,c("rowno","colno")]))) {
+##  obsRowColNo[ which(duplicated(obsRowColNo[,c("rowno","colno")])), ]
+    ##  obsRowColNo
+    stop("unexpected dublicates - see program code")
+  }
 
   observationsDescX<- merge( observationsDesc, obsRowColNo, by="s", all=TRUE)
 
-  tableFrame<- data.frame(rowno=rep(rownoseq, each=length(colnoseq) ), colno=rep(colnoseq, times=length(colnoseq) ), stringsAsFactors=FALSE )
+  tableFrame<- data.frame(rowno=rep(rownoseq, each=length(colnoseq) ), colno=rep(colnoseq, times=length(rownoseq) ), stringsAsFactors=FALSE )
 
   observationsDescXX<- merge( tableFrame, observationsDescX, by=c("rowno","colno"), sort=TRUE, all=TRUE)
 
