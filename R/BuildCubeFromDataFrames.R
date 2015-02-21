@@ -56,7 +56,7 @@ if (is.null(common.prefixes)) {
 custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
 prefixes<- rbind(common.prefixes, custom.prefixes)                                                
 
-store <- new.rdf(ontology=FALSE)  # Initialize
+store <- new.rdf(ontology)  # Initialize
 
 # Register prefixes and return prefixlist
 # Examples: prefixQB   holds value http://purl.org/linked-data/cube#

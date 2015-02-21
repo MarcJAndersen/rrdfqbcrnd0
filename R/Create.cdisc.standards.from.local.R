@@ -20,7 +20,7 @@ Create.cdisc.standards.from.local<- function(
 
 format.from.ext<- list("ttl"="TURTLE", "rdf"="RDF/XML", "owl"="RDF/XML", "n3"="N3")
 
-cdisc.rdf <- new.rdf(ontology=FALSE)
+cdisc.rdf <- new.rdf()
 
 
 for (fn in CDISCfilelist) {
