@@ -39,7 +39,7 @@ domainName<- GetDomainNameFromCube( checkCube )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
-## New function:
+## Create the two dimensional representation
 
 For sex, race and factor show the label and the level if the level is not _ALL_.
 If factor is code:factor-AGE then show the label.
@@ -61,6 +61,7 @@ coldim<- c("prop:trt01a")
 qbtest<- GetTwoDimTableFromQb( checkCube, forsparqlprefix, domainName, rowdim, coldim )
 
 qbtest
+names(attributes(qbtest))
 
 ## attr(qbtest,"obsURI")
 

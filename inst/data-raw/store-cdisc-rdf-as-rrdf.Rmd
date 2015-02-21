@@ -29,7 +29,6 @@ git clone https://github.com/phuse-org/rdf.cdisc.org.git
 mkdir rdf-data-cube
 cd rdf-data-cube
 wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab/cube.ttl
-cd ..
 ```
 
 
@@ -57,14 +56,19 @@ ${FUSEKI_HOME}/fuseki-server --pages=${FUSEKI_HOME}/pages --update --loc=tdb /cd
 
 ## Finding the files
 
-Finding the files replace directory for find with the appropriate directory for your setup.
+Replace directory for find with the appropriate directory for your setup.
 Also change below in R code.
 
 ```
 find ~/projects/phrmwg/rdf.cdisc.org -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
 ```
 
+The result of the function call Get.filenames.for.cdisc.standards() is itended to match the output from find.
+```{r, results='asis', eval=TRUE}
+Get.filenames.for.cdisc.standards()
 ```
+
+
 
 ## Create local version using RRDF from local directory conting rdf.cdisc.org
 
@@ -78,7 +82,7 @@ First load the files in a rrdf store.
 library(rrdf)
 library(tools)
 
-cdisc.save.zip<- Create.cdisc.standards.from.local()
+cdisc.save.zip<- Create.cdisc.standards.from.local(cdisc.files.dir= "~/projects/phrmwg/rdf.cdisc.org")
 cdisc.save.zip.info<- file.info(cdisc.save.zip)
 message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size ", cdisc.save.zip.info$size, " bytes")
 ```
