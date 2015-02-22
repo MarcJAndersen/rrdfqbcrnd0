@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-02-19" />
+<meta name="date" content="2015-02-22" />
 
 <title>Create Integrity Contraints SPARQL Queries from RDF data qubce definition</title>
 
@@ -64,10 +64,24 @@ img {
 <div id="header">
 <h1 class="title">Create Integrity Contraints SPARQL Queries from RDF data qubce definition</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-02-19</em></h4>
+<h4 class="date"><em>2015-02-22</em></h4>
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#preliminaries">Preliminaries</a></li>
+<li><a href="#r-code">R-code</a></li>
+</ul>
+</div>
 
+<div id="preliminaries" class="section level1">
+<h1>Preliminaries</h1>
+<p>When developing, the script is intented to run from the package root after the setup for development as defined in the README.md.</p>
+<pre class="r"><code>knit(input=&quot;inst/data-raw/create-qb-IC-dataset.Rmd&quot;,
+     output=&quot;inst/data-raw/create-qb-IC-dataset.md&quot;)</code></pre>
+</div>
+<div id="r-code" class="section level1">
+<h1>R-code</h1>
 <pre class="r"><code>library(RCurl)</code></pre>
 <pre><code>## Loading required package: methods
 ## Loading required package: bitops</code></pre>
@@ -355,19 +369,17 @@ for (i in 1:(length(both)-1)) {
 ##     FILTER NOT EXISTS { ?list qb:hierarchyRoot/(^&lt;$p&gt;)* ?v }
 ## }
 ## </code></pre>
-<p>The script is intented to run from the package root as</p>
-<pre><code>knit(&quot;inst/data-raw/create-qb-IC-dataset.Rmd&quot;)</code></pre>
-<p>knit runs the script in the data-raw directory, so it would be expected to use pkg=“../..” to store the qbIClist in the data directory However, it did not work - hence the setwd below-</p>
 <p>Data are stored in the data directory, following <a href="http://r-pkgs.had.co.nz/data.html">R packages by Hadley Wickham</a> and <a href="http://cran.r-project.org/doc/manuals/R-exts.pdf">Writing R Extensions</a>.</p>
-<pre><code>devtools::use_data(qbIClist,pgk=&quot;../..&quot;,overwrite=TRUE)</code></pre>
+<p>knit runs the script in the data-raw directory, so it would be expected to use pkg=“../..” to store the qbIClist in the data directory However, it did not work - hence the setwd below-</p>
+<pre class="r"><code>devtools::use_data(qbIClist,pgk=&quot;../..&quot;,overwrite=TRUE)</code></pre>
 <pre class="r"><code># This stores the qbIClist in the data directory
 # Consider making it internal
 
-setwd(&quot;../..&quot;)
 devtools::use_data(qbIClist,overwrite=TRUE)</code></pre>
 <pre><code>## Saving qbIClist to data/qbIClist.rda</code></pre>
 <pre class="r"><code>print(&quot;Done&quot;)</code></pre>
 <p>[1] “Done”</p>
+</div>
 
 
 </div>
