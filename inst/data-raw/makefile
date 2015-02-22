@@ -1,18 +1,18 @@
-all: qbIClist AEtable
+all: qbIClist AEtable DMtable
 
 clean:
-	rm -f ../data/qbIClist.rda create-ae-table-as-csv.pdf create-qb-IC-dataset.pdf 
+	rm -f ../data/qbIClist.rda create-ae-table-as-csv.pdf create-dm-table-as-csv.pdf create-qb-IC-dataset.pdf 
 
+DMtable: create-dm-table-as-csv.pdf
 AEtable: create-ae-table-as-csv.pdf
 # creates
 # ../extdata/sample-cfg/ae.AR.csv ../extdata/sample-cfg/ae.aesoc.AR.csv ../extdata/sample-cfg/ae.aedecod.AR.csv
 # not good use of makefile
 
-create-ae-table-as-csv.pdf: create-ae-table-as-csv.Rmd
-
 qbIClist: ../data/qbIClist.rda
 
 ../data/qbIClist.rda: create-qb-IC-dataset.pdf 
+
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"
