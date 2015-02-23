@@ -71,6 +71,27 @@ img {
 <ul>
 <li><a href="#preliminaries">Preliminaries</a></li>
 <li><a href="#r-code">R-code</a></li>
+<li><a href="#ic-1.-unique-dataset">IC-1. Unique DataSet</a></li>
+<li><a href="#ic-2.-unique-dsd">IC-2. Unique DSD</a></li>
+<li><a href="#ic-3.-dsd-includes-measure">IC-3. DSD includes measure</a></li>
+<li><a href="#ic-4.-dimensions-have-range">IC-4. Dimensions have range</a></li>
+<li><a href="#ic-5.-concept-dimensions-have-code-lists">IC-5. Concept dimensions have code lists</a></li>
+<li><a href="#ic-6.-only-attributes-may-be-optional">IC-6. Only attributes may be optional</a></li>
+<li><a href="#ic-7.-slice-keys-must-be-declared">IC-7. Slice Keys must be declared</a></li>
+<li><a href="#ic-8.-slice-keys-consistent-with-dsd">IC-8. Slice Keys consistent with DSD</a></li>
+<li><a href="#ic-9.-unique-slice-structure">IC-9. Unique slice structure</a></li>
+<li><a href="#ic-10.-slice-dimensions-complete">IC-10. Slice dimensions complete</a></li>
+<li><a href="#ic-11.-all-dimensions-required">IC-11. All dimensions required</a></li>
+<li><a href="#ic-12.-no-duplicate-observations">IC-12. No duplicate observations</a></li>
+<li><a href="#ic-13.-required-attributes">IC-13. Required attributes</a></li>
+<li><a href="#ic-14.-all-measures-present">IC-14. All measures present</a></li>
+<li><a href="#ic-15.-measure-dimension-consistent">IC-15. Measure dimension consistent</a></li>
+<li><a href="#ic-16.-single-measure-on-measure-dimension-observation">IC-16. Single measure on measure dimension observation</a></li>
+<li><a href="#ic-17.-all-measures-present-in-measures-dimension-cube">IC-17. All measures present in measures dimension cube</a></li>
+<li><a href="#ic-18.-consistent-data-set-links">IC-18. Consistent data set links</a></li>
+<li><a href="#ic-20.-codes-from-hierarchy">IC-20. Codes from hierarchy</a></li>
+<li><a href="#ic-21.-codes-from-hierarchy-inverse">IC-21. Codes from hierarchy (inverse)</a></li>
+<li><a href="#ic-19a.-codes-from-code-list">IC-19a. Codes from code list</a></li>
 </ul>
 </div>
 
@@ -124,251 +145,126 @@ for (i in 1:(length(both)-1)) {
      )
   }
   }</code></pre>
+<p>IC-19 is two querie, so it is split into IC-19a and IC-19b:</p>
+<pre class="r"><code>qbIClist$`ic-19a`&lt;- gsub(&quot;IC-19&quot;, &quot;IC-19a&quot;, paste(unlist(strsplit(qbIClist$`ic-19`,&quot;\n&quot;))[1:9],collapse=&quot;\n&quot;))
+
+qbIClist$`ic-19b`&lt;- gsub(&quot;IC-19&quot;, &quot;IC-19b&quot;, paste(unlist(strsplit(qbIClist$`ic-19`,&quot;\n&quot;))[c(1,11:18)],collapse=&quot;\n&quot;))
+qbIClist$`ic-19`&lt;- NULL</code></pre>
 <p>Here are the integrity constraints:</p>
 <pre class="r"><code>for (icname in names(qbIClist)) {
 ##    fileConn&lt;-file(paste0(icname, &quot;.rq&quot;))
     cat( qbIClist[[icname]] )
 ##    close(fileConn)
   }</code></pre>
-<pre><code>## # IC-1.  Unique DataSet
-## ASK {
-##   {
-##     # Check observation has a data set
-##     ?obs a qb:Observation .
-##     FILTER NOT EXISTS { ?obs qb:dataSet ?dataset1 . }
-##   } UNION {
-##     # Check has just one data set
-##     ?obs a qb:Observation ;
-##        qb:dataSet ?dataset1, ?dataset2 .
-##     FILTER (?dataset1 != ?dataset2)
-##   }
-## }
-##     
-## # IC-2. Unique DSD
-## ASK {
-##   {
-##     # Check dataset has a dsd
-##     ?dataset a qb:DataSet .
-##     FILTER NOT EXISTS { ?dataset qb:structure ?dsd . }
-##   } UNION { 
-##     # Check has just one dsd
-##     ?dataset a qb:DataSet ;
-##        qb:structure ?dsd1, ?dsd2 .
-##     FILTER (?dsd1 != ?dsd2)
-##   }
-## }
-##     
-## # IC-3. DSD includes measure
-## ASK {
-##   ?dsd a qb:DataStructureDefinition .
-##   FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty [a qb:MeasureProperty]] }
-## }
-##     
-## # IC-4. Dimensions have range
-## ASK {
-##   ?dim a qb:DimensionProperty .
-##   FILTER NOT EXISTS { ?dim rdfs:range [] }
-## }
-##     
-## # IC-5. Concept dimensions have code lists
-## ASK {
-##   ?dim a qb:DimensionProperty ;
-##        rdfs:range skos:Concept .
-##   FILTER NOT EXISTS { ?dim qb:codeList [] }
-## }
-##     
-## # IC-6. Only attributes may be optional
-## ASK {
-##   ?dsd qb:component ?componentSpec .
-##   ?componentSpec qb:componentRequired &quot;false&quot;^^xsd:boolean ;
-##                  qb:componentProperty ?component .
-##   FILTER NOT EXISTS { ?component a qb:AttributeProperty }
-## }
-##     
-## # IC-7. Slice Keys must be declared
-## ASK {
-##     ?sliceKey a qb:SliceKey .
-##     FILTER NOT EXISTS { [a qb:DataStructureDefinition] qb:sliceKey ?sliceKey }
-## }
-##     
-## # IC-8. Slice Keys consistent with DSD
-## ASK {
-##   ?slicekey a qb:SliceKey;
-##       qb:componentProperty ?prop .
-##   ?dsd qb:sliceKey ?slicekey .
-##   FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty ?prop] }
-## }
-##     
-## # IC-9. Unique slice structure
-## ASK {
-##   {
-##     # Slice has a key
-##     ?slice a qb:Slice .
-##     FILTER NOT EXISTS { ?slice qb:sliceStructure ?key }
-##   } UNION {
-##     # Slice has just one key
-##     ?slice a qb:Slice ;
-##            qb:sliceStructure ?key1, ?key2;
-##     FILTER (?key1 != ?key2)
-##   }
-## }
-##     
-## # IC-10. Slice dimensions complete
-## ASK {
-##   ?slice qb:sliceStructure [qb:componentProperty ?dim] .
-##   FILTER NOT EXISTS { ?slice ?dim [] }
-## }
-##     
-## # IC-11. All dimensions required
-## ASK {
-##     ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim .
-##     ?dim a qb:DimensionProperty;
-##     FILTER NOT EXISTS { ?obs ?dim [] }
-## }
-##     
-## # IC-12. No duplicate observations
-## ASK {
-##   FILTER( ?allEqual )
-##   {
-##     # For each pair of observations test if all the dimension values are the same
-##     SELECT (MIN(?equal) AS ?allEqual) WHERE {
-##         ?obs1 qb:dataSet ?dataset .
-##         ?obs2 qb:dataSet ?dataset .
-##         FILTER (?obs1 != ?obs2)
-##         ?dataset qb:structure/qb:component/qb:componentProperty ?dim .
-##         ?dim a qb:DimensionProperty .
-##         ?obs1 ?dim ?value1 .
-##         ?obs2 ?dim ?value2 .
-##         BIND( ?value1 = ?value2 AS ?equal)
-##     } GROUP BY ?obs1 ?obs2
-##   }
-## }
-##     
-## # IC-13. Required attributes
-## ASK {
-##     ?obs qb:dataSet/qb:structure/qb:component ?component .
-##     ?component qb:componentRequired &quot;true&quot;^^xsd:boolean ;
-##                qb:componentProperty ?attr .
-##     FILTER NOT EXISTS { ?obs ?attr [] }
-## }
-##     
-## # IC-14. All measures present
-## ASK {
-##     # Observation in a non-measureType cube
-##     ?obs qb:dataSet/qb:structure ?dsd .
-##     FILTER NOT EXISTS { ?dsd qb:component/qb:componentProperty qb:measureType }
-## 
-##     # verify every measure is present
-##     ?dsd qb:component/qb:componentProperty ?measure .
-##     ?measure a qb:MeasureProperty;
-##     FILTER NOT EXISTS { ?obs ?measure [] }
-## }
-##     
-## # IC-15. Measure dimension consistent
-## ASK {
-##     # Observation in a measureType-cube
-##     ?obs qb:dataSet/qb:structure ?dsd ;
-##          qb:measureType ?measure .
-##     ?dsd qb:component/qb:componentProperty qb:measureType .
-##     # Must have value for its measureType
-##     FILTER NOT EXISTS { ?obs ?measure [] }
-## }
-##     
-## # IC-16. Single measure on measure dimension observation
-## ASK {
-##     # Observation with measureType
-##     ?obs qb:dataSet/qb:structure ?dsd ;
-##          qb:measureType ?measure ;
-##          ?omeasure [] .
-##     # Any measure on the observation
-##     ?dsd qb:component/qb:componentProperty qb:measureType ;
-##          qb:component/qb:componentProperty ?omeasure .
-##     ?omeasure a qb:MeasureProperty .
-##     # Must be the same as the measureType
-##     FILTER (?omeasure != ?measure)
-## }
-##     
-## # IC-17. All measures present in measures dimension cube 
-## ASK {
-##   {
-##       # Count number of other measures found at each point 
-##       SELECT ?numMeasures (COUNT(?obs2) AS ?count) WHERE {
-##           {
-##               # Find the DSDs and check how many measures they have
-##               SELECT ?dsd (COUNT(?m) AS ?numMeasures) WHERE {
-##                   ?dsd qb:component/qb:componentProperty ?m.
-##                   ?m a qb:MeasureProperty .
-##               } GROUP BY ?dsd
-##           }
-##         
-##           # Observation in measureType cube
-##           ?obs1 qb:dataSet/qb:structure ?dsd;
-##                 qb:dataSet ?dataset ;
-##                 qb:measureType ?m1 .
-##     
-##           # Other observation at same dimension value
-##           ?obs2 qb:dataSet ?dataset ;
-##                 qb:measureType ?m2 .
-##           FILTER NOT EXISTS { 
-##               ?dsd qb:component/qb:componentProperty ?dim .
-##               FILTER (?dim != qb:measureType)
-##               ?dim a qb:DimensionProperty .
-##               ?obs1 ?dim ?v1 . 
-##               ?obs2 ?dim ?v2. 
-##               FILTER (?v1 != ?v2)
-##           }
-##           
-##       } GROUP BY ?obs1 ?numMeasures
-##         HAVING (?count != ?numMeasures)
-##   }
-## }
-##     
-## # IC-18. Consistent data set links
-## ASK {
-##     ?dataset qb:slice       ?slice .
-##     ?slice   qb:observation ?obs .
-##     FILTER NOT EXISTS { ?obs qb:dataSet ?dataset . }
-## }
-##     
-## # IC-19. Codes from code list
-## ASK {
-##     ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim .
-##     ?dim a qb:DimensionProperty ;
-##         qb:codeList ?list .
-##     ?list a skos:ConceptScheme .
-##     ?obs ?dim ?v .
-##     FILTER NOT EXISTS { ?v a skos:Concept ; skos:inScheme ?list }
-## }
-## 
-## ASK {
-##     ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim .
-##     ?dim a qb:DimensionProperty ;
-##         qb:codeList ?list .
-##     ?list a skos:Collection .
-##     ?obs ?dim ?v .
-##     FILTER NOT EXISTS { ?v a skos:Concept . ?list skos:member+ ?v }
-## }
-##     
-## # IC-20. Codes from hierarchy
-## ASK {
-##     ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim .
-##     ?dim a qb:DimensionProperty ;
-##         qb:codeList ?list .
-##     ?list a qb:HierarchicalCodeList .
-##     ?obs ?dim ?v .
-##     FILTER NOT EXISTS { ?list qb:hierarchyRoot/&lt;$p&gt;* ?v }
-## }
-##     
-## # IC-21. Codes from hierarchy (inverse)
-## ASK {
-##     ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim .
-##     ?dim a qb:DimensionProperty ;
-##          qb:codeList ?list .
-##     ?list a qb:HierarchicalCodeList .
-##     ?obs ?dim ?v .
-##     FILTER NOT EXISTS { ?list qb:hierarchyRoot/(^&lt;$p&gt;)* ?v }
-## }
-## </code></pre>
+</div>
+<div id="ic-1.-unique-dataset" class="section level1">
+<h1>IC-1. Unique DataSet</h1>
+<p>ASK { { # Check observation has a data set ?obs a qb:Observation . FILTER NOT EXISTS { ?obs qb:dataSet ?dataset1 . } } UNION { # Check has just one data set ?obs a qb:Observation ; qb:dataSet ?dataset1, ?dataset2 . FILTER (?dataset1 != ?dataset2) } }</p>
+</div>
+<div id="ic-2.-unique-dsd" class="section level1">
+<h1>IC-2. Unique DSD</h1>
+<p>ASK { { # Check dataset has a dsd ?dataset a qb:DataSet . FILTER NOT EXISTS { ?dataset qb:structure ?dsd . } } UNION { # Check has just one dsd ?dataset a qb:DataSet ; qb:structure ?dsd1, ?dsd2 . FILTER (?dsd1 != ?dsd2) } }</p>
+</div>
+<div id="ic-3.-dsd-includes-measure" class="section level1">
+<h1>IC-3. DSD includes measure</h1>
+<p>ASK { ?dsd a qb:DataStructureDefinition . FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty [a qb:MeasureProperty]] } }</p>
+</div>
+<div id="ic-4.-dimensions-have-range" class="section level1">
+<h1>IC-4. Dimensions have range</h1>
+<p>ASK { ?dim a qb:DimensionProperty . FILTER NOT EXISTS { ?dim rdfs:range [] } }</p>
+</div>
+<div id="ic-5.-concept-dimensions-have-code-lists" class="section level1">
+<h1>IC-5. Concept dimensions have code lists</h1>
+<p>ASK { ?dim a qb:DimensionProperty ; rdfs:range skos:Concept . FILTER NOT EXISTS { ?dim qb:codeList [] } }</p>
+</div>
+<div id="ic-6.-only-attributes-may-be-optional" class="section level1">
+<h1>IC-6. Only attributes may be optional</h1>
+<p>ASK { ?dsd qb:component ?componentSpec . ?componentSpec qb:componentRequired “false”^^xsd:boolean ; qb:componentProperty ?component . FILTER NOT EXISTS { ?component a qb:AttributeProperty } }</p>
+</div>
+<div id="ic-7.-slice-keys-must-be-declared" class="section level1">
+<h1>IC-7. Slice Keys must be declared</h1>
+<p>ASK { ?sliceKey a qb:SliceKey . FILTER NOT EXISTS { [a qb:DataStructureDefinition] qb:sliceKey ?sliceKey } }</p>
+</div>
+<div id="ic-8.-slice-keys-consistent-with-dsd" class="section level1">
+<h1>IC-8. Slice Keys consistent with DSD</h1>
+<p>ASK { ?slicekey a qb:SliceKey; qb:componentProperty ?prop . ?dsd qb:sliceKey ?slicekey . FILTER NOT EXISTS { ?dsd qb:component [qb:componentProperty ?prop] } }</p>
+</div>
+<div id="ic-9.-unique-slice-structure" class="section level1">
+<h1>IC-9. Unique slice structure</h1>
+<p>ASK { { # Slice has a key ?slice a qb:Slice . FILTER NOT EXISTS { ?slice qb:sliceStructure ?key } } UNION { # Slice has just one key ?slice a qb:Slice ; qb:sliceStructure ?key1, ?key2; FILTER (?key1 != ?key2) } }</p>
+</div>
+<div id="ic-10.-slice-dimensions-complete" class="section level1">
+<h1>IC-10. Slice dimensions complete</h1>
+<p>ASK { ?slice qb:sliceStructure [qb:componentProperty ?dim] . FILTER NOT EXISTS { ?slice ?dim [] } }</p>
+</div>
+<div id="ic-11.-all-dimensions-required" class="section level1">
+<h1>IC-11. All dimensions required</h1>
+<p>ASK { ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim . ?dim a qb:DimensionProperty; FILTER NOT EXISTS { ?obs ?dim [] } }</p>
+</div>
+<div id="ic-12.-no-duplicate-observations" class="section level1">
+<h1>IC-12. No duplicate observations</h1>
+<p>ASK { FILTER( ?allEqual ) { # For each pair of observations test if all the dimension values are the same SELECT (MIN(?equal) AS ?allEqual) WHERE { ?obs1 qb:dataSet ?dataset . ?obs2 qb:dataSet ?dataset . FILTER (?obs1 != ?obs2) ?dataset qb:structure/qb:component/qb:componentProperty ?dim . ?dim a qb:DimensionProperty . ?obs1 ?dim ?value1 . ?obs2 ?dim ?value2 . BIND( ?value1 = ?value2 AS ?equal) } GROUP BY ?obs1 ?obs2 } }</p>
+</div>
+<div id="ic-13.-required-attributes" class="section level1">
+<h1>IC-13. Required attributes</h1>
+<p>ASK { ?obs qb:dataSet/qb:structure/qb:component ?component . ?component qb:componentRequired “true”^^xsd:boolean ; qb:componentProperty ?attr . FILTER NOT EXISTS { ?obs ?attr [] } }</p>
+</div>
+<div id="ic-14.-all-measures-present" class="section level1">
+<h1>IC-14. All measures present</h1>
+<p>ASK { # Observation in a non-measureType cube ?obs qb:dataSet/qb:structure ?dsd . FILTER NOT EXISTS { ?dsd qb:component/qb:componentProperty qb:measureType }</p>
+<pre><code># verify every measure is present
+?dsd qb:component/qb:componentProperty ?measure .
+?measure a qb:MeasureProperty;
+FILTER NOT EXISTS { ?obs ?measure [] }</code></pre>
+<p>}</p>
+</div>
+<div id="ic-15.-measure-dimension-consistent" class="section level1">
+<h1>IC-15. Measure dimension consistent</h1>
+<p>ASK { # Observation in a measureType-cube ?obs qb:dataSet/qb:structure ?dsd ; qb:measureType ?measure . ?dsd qb:component/qb:componentProperty qb:measureType . # Must have value for its measureType FILTER NOT EXISTS { ?obs ?measure [] } }</p>
+</div>
+<div id="ic-16.-single-measure-on-measure-dimension-observation" class="section level1">
+<h1>IC-16. Single measure on measure dimension observation</h1>
+<p>ASK { # Observation with measureType ?obs qb:dataSet/qb:structure ?dsd ; qb:measureType ?measure ; ?omeasure [] . # Any measure on the observation ?dsd qb:component/qb:componentProperty qb:measureType ; qb:component/qb:componentProperty ?omeasure . ?omeasure a qb:MeasureProperty . # Must be the same as the measureType FILTER (?omeasure != ?measure) }</p>
+</div>
+<div id="ic-17.-all-measures-present-in-measures-dimension-cube" class="section level1">
+<h1>IC-17. All measures present in measures dimension cube</h1>
+<p>ASK { { # Count number of other measures found at each point SELECT ?numMeasures (COUNT(?obs2) AS ?count) WHERE { { # Find the DSDs and check how many measures they have SELECT ?dsd (COUNT(?m) AS ?numMeasures) WHERE { ?dsd qb:component/qb:componentProperty ?m. ?m a qb:MeasureProperty . } GROUP BY ?dsd }</p>
+<pre><code>      # Observation in measureType cube
+      ?obs1 qb:dataSet/qb:structure ?dsd;
+            qb:dataSet ?dataset ;
+            qb:measureType ?m1 .
+
+      # Other observation at same dimension value
+      ?obs2 qb:dataSet ?dataset ;
+            qb:measureType ?m2 .
+      FILTER NOT EXISTS { 
+          ?dsd qb:component/qb:componentProperty ?dim .
+          FILTER (?dim != qb:measureType)
+          ?dim a qb:DimensionProperty .
+          ?obs1 ?dim ?v1 . 
+          ?obs2 ?dim ?v2. 
+          FILTER (?v1 != ?v2)
+      }
+      
+  } GROUP BY ?obs1 ?numMeasures
+    HAVING (?count != ?numMeasures)</code></pre>
+<p>} }</p>
+</div>
+<div id="ic-18.-consistent-data-set-links" class="section level1">
+<h1>IC-18. Consistent data set links</h1>
+<p>ASK { ?dataset qb:slice ?slice . ?slice qb:observation ?obs . FILTER NOT EXISTS { ?obs qb:dataSet ?dataset . } }</p>
+</div>
+<div id="ic-20.-codes-from-hierarchy" class="section level1">
+<h1>IC-20. Codes from hierarchy</h1>
+<p>ASK { ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim . ?dim a qb:DimensionProperty ; qb:codeList ?list . ?list a qb:HierarchicalCodeList . ?obs ?dim ?v . FILTER NOT EXISTS { ?list qb:hierarchyRoot/&lt;$p&gt;* ?v } }</p>
+</div>
+<div id="ic-21.-codes-from-hierarchy-inverse" class="section level1">
+<h1>IC-21. Codes from hierarchy (inverse)</h1>
+<p>ASK { ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim . ?dim a qb:DimensionProperty ; qb:codeList ?list . ?list a qb:HierarchicalCodeList . ?obs ?dim ?v . FILTER NOT EXISTS { ?list qb:hierarchyRoot/(^&lt;$p&gt;)* ?v } }</p>
+</div>
+<div id="ic-19a.-codes-from-code-list" class="section level1">
+<h1>IC-19a. Codes from code list</h1>
+<p>ASK { ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim . ?dim a qb:DimensionProperty ; qb:codeList ?list . ?list a skos:ConceptScheme . ?obs ?dim ?v . FILTER NOT EXISTS { ?v a skos:Concept ; skos:inScheme ?list } }# IC-19b. Codes from code list ASK { ?obs qb:dataSet/qb:structure/qb:component/qb:componentProperty ?dim . ?dim a qb:DimensionProperty ; qb:codeList ?list . ?list a skos:Collection . ?obs ?dim ?v . FILTER NOT EXISTS { ?v a skos:Concept . ?list skos:member+ ?v } }</p>
 <p>Data are stored in the data directory, following <a href="http://r-pkgs.had.co.nz/data.html">R packages by Hadley Wickham</a> and <a href="http://cran.r-project.org/doc/manuals/R-exts.pdf">Writing R Extensions</a>.</p>
 <p>knit runs the script in the data-raw directory, so it would be expected to use pkg=“../..” to store the qbIClist in the data directory However, it did not work - hence the setwd below-</p>
 <pre class="r"><code>devtools::use_data(qbIClist,pgk=&quot;../..&quot;,overwrite=TRUE)</code></pre>
