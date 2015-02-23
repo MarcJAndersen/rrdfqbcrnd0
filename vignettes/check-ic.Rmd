@@ -24,39 +24,58 @@ cdisc.rdf<- Load.cdisc.standards()
 
 cubeData<- combine.rdf( cube, cdisc.rdf)
 
-ic1<- "ASK {
-  {
-    # Check observation has a data set
-    ?obs a qb:Observation .
-    FILTER NOT EXISTS { ?obs qb:dataSet ?dataset1 . }
-  } UNION {
-    # Check has just one data set
-    ?obs a qb:Observation ;
-       qb:dataSet ?dataset1, ?dataset2 .
-    FILTER (?dataset1 != ?dataset2)
-  }
-}"
 
 ```
-rrdf does not implement the ASK query. As a word around use transform to, most likely more inefficient, a `SELECT (COUNT(*) ...)` query.
+
+rrdf does not implement the ASK query. As a work around the query is
+transformed to a `SELECT (COUNT(*) ...)` or `SELECT *` gitquery.
 
 ```{r, results='asis', eval=TRUE}
-
-## ic1Select<- gsub("ASK \\{", "SELECT (COUNT(*) AS ?nfail) WHERE \\{", ic1)
-## ic1SelectRq<- gsub("ASK \\{", "SELECT \\* WHERE \\{", ic1)
-## cat(ic1SelectRq)
-## cube.ic1<- sparql.rdf(cubeData, paste( forsparqlprefix, ic1SelectRq  )  )
-## print(cube.ic1)
-
-for (icall in qbIClist)) {
-  print(names(icall))
-  if (! icall$instantiationRq ) {
+str(cubeData)
+for (icall in qbIClist) {
+#  print(names(icall))
+  if (! icall$HasInstantiation ) {
     icSelectRq<- gsub("ASK \\{", "SELECT \\* WHERE \\{", icall$rq)
-##    cat(unlist(strsplit(icSelectRq,"\n"))[1])
+    print( icall$ittitle)
+    print( icSelectRq)
     cube.ic<- sparql.rdf(cubeData, paste( forsparqlprefix, icSelectRq  )  )
     cat(paste0(icall$ictitle, ": ", nrow(cube.ic), "\n"))
    }
 }
 
+```
+
+Here is the same code but wrapped into a function
+
+```{r, results='asis', eval=TRUE}
+icres<- RunQbIC( cubeData, forsparqlprefix )
+kable(icres)
+```
+
+## Checking two existing cube
+
+The example data is from
+(http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/example/example.ttl)
+
+```{r, results='asis', eval=TRUE}
+qbfile1<- system.file("extdata/sample-rdf", "example.ttl", package="rrdfqbcrnd0")
+cube1<- load.rdf( qbfile1, format="TURTLE")
+
+cubeData1<- combine.rdf( cube1, cdisc.rdf)
+
+icres1<- RunQbIC( cubeData1, forsparqlprefix )
+kable(icres1)
+```
+
+The file example-fails-IC14.ttl is example.ttl with a few triples added to make the cube non conformant with the intregity constaints.
+
+```{r, results='asis', eval=TRUE}
+qbfile2<- system.file("extdata/sample-rdf", "example-fails-IC14.ttl", package="rrdfqbcrnd0")
+cube2<- load.rdf( qbfile2, format="TURTLE")
+
+cubeData2<- combine.rdf( cube2, cdisc.rdf)
+
+icres2<- RunQbIC( cubeData2, forsparqlprefix,doForIC=c("ic-14") )
+kable(icres2)
 ```
 
