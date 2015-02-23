@@ -88,7 +88,7 @@ dataCubeFile<- dm.cube.fn
 
 The rest of the code only depends on the value of dataCubeFile.
 ```{r, echo=TRUE}
-checkCube <- new.rdf(ontology=FALSE)  # Initialize
+checkCube <- new.rdf()  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
