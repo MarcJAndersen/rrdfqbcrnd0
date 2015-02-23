@@ -30,7 +30,7 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 cat("DM cube stored as ", dm.cube.fn, "\n")
 
 dataCubeFile<- dm.cube.fn
-checkCube <- new.rdf(ontology=FALSE)  # Initialize
+checkCube <- new.rdf()  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 
