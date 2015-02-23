@@ -48,48 +48,15 @@ rrdf does not implement the ASK query. As a word around use transform to, most l
 ## cube.ic1<- sparql.rdf(cubeData, paste( forsparqlprefix, ic1SelectRq  )  )
 ## print(cube.ic1)
 
-## backward way to select elements
-for (icno in (1:length(qbIClist))) {
-##  print(names(qbIClist[icno]))
-  if (! (names(qbIClist[icno]) %in% c("ic-20", "ic-21")) ) {
-    ic<- qbIClist[[icno]]
-    icSelectRq<- gsub("ASK \\{", "SELECT \\* WHERE \\{", ic)
+for (icall in qbIClist)) {
+  print(names(icall))
+  if (! icall$instantiationRq ) {
+    icSelectRq<- gsub("ASK \\{", "SELECT \\* WHERE \\{", icall$rq)
 ##    cat(unlist(strsplit(icSelectRq,"\n"))[1])
     cube.ic<- sparql.rdf(cubeData, paste( forsparqlprefix, icSelectRq  )  )
-    cat(paste0(unlist(strsplit(icSelectRq,"\n"))[1], ": ", nrow(cube.ic), "\n"))
+    cat(paste0(icall$ictitle, ": ", nrow(cube.ic), "\n"))
    }
 }
 
 ```
 
-For IC-20 special handling is needed.
-IC-20 is a template and the value of p should be inserted as $p in the template 
-
-```{r, results='asis', eval=TRUE}
-instantiationRq<- "
-SELECT ?p WHERE {
-    ?hierarchy a qb:HierarchicalCodeList ;
-                 qb:parentChildProperty ?p .
-    FILTER ( isIRI(?p) )
-}
-"
-p<- sparql.rdf(cubeData, paste( forsparqlprefix, icSelectRq  )  )
-print(p)
-```
-
-For IC-21 special handling is needed.
-IC-21 is a template and the value of p should be inserted as $p in the template 
-
-```{r, results='asis', eval=TRUE}
-instantiationRq<- "
-SELECT ?p WHERE {
-    ?hierarchy a qb:HierarchicalCodeList;
-                 qb:parentChildProperty ?pcp .
-    FILTER( isBlank(?pcp) )
-    ?pcp  owl:inverseOf ?p .
-    FILTER( isIRI(?p) )
-}
-"
-p<- sparql.rdf(cubeData, paste( forsparqlprefix, icSelectRq  )  )
-print(p)
-```
