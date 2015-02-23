@@ -59,8 +59,17 @@ for (i in 1:(length(both)-1)) {
 
 ```
 
+IC-19 is two querie, so it is split into IC-19a and IC-19b:
+
+```{r, results='asis', eval=TRUE}
+qbIClist$`ic-19a`<- gsub("IC-19", "IC-19a", paste(unlist(strsplit(qbIClist$`ic-19`,"\n"))[1:9],collapse="\n"))
+
+qbIClist$`ic-19b`<- gsub("IC-19", "IC-19b", paste(unlist(strsplit(qbIClist$`ic-19`,"\n"))[c(1,11:18)],collapse="\n"))
+qbIClist$`ic-19`<- NULL
+```
+
 Here are the integrity constraints:
-```{r}
+```{r, results='asis', eval=TRUE}
 for (icname in names(qbIClist)) {
 ##    fileConn<-file(paste0(icname, ".rq"))
     cat( qbIClist[[icname]] )
