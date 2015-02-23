@@ -11,13 +11,9 @@
 ##' in R session temporary directory
 ##' @param remove.cdisc.load.ttl If TRUE then the remove the unzipped
 ##' turtle version of rdf.cdisc.org
-##' @examples cubestore<- Load.cdisc.standards<- function(
-##'   cdisc.load.zip= file.path(
-##'     system.file( "extdata/CDISC-standards-rdf", package="rrdfqbcrnd0" ), "cdisc-rdf.zip"
-##'     ),
-##'   cdisc.load.ttl= file.path(tempdir(),"cdisc-rdf.ttl"),
-##'   remove.cdisc.load.ttl= TRUE  
-##'   )
+##' @examples
+##' cubestore<- Load.cdisc.standards()
+##'  
 Load.cdisc.standards<- function(
   cdisc.load.zip= file.path(
     system.file( "extdata/CDISC-standards-rdf", package="rrdfqbcrnd0" ), "cdisc-rdf.zip"
