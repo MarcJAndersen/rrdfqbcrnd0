@@ -69,7 +69,7 @@ dataCubeFile<- outcube
 
 ```{r}
 # the rest of the code only depends on the value of dataCubeFile 
-checkCube <- new.rdf(ontology=FALSE)  # Initialize
+checkCube <- new.rdf()  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 # determine the domain name; used for defining prefixes
