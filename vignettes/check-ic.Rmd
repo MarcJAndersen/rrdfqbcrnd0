@@ -10,24 +10,19 @@ vignette: >
 
 ```{r, results='asis', eval=TRUE}
 
-library(rrdf)
 library(rrdfqbcrnd0)
-
-cubeData = new.rdf(ontology=FALSE)
-
-myprefixes= c(Get.default.crnd.prefixes(), list(
- "dccs"="http://www.example.org/dc/demog/dccs/" ,
- "code"="http://www.example.org/dc/code/" ,
- "ds"=  "http://www.example.org/dc/demog/dataset/" ,
- "prop"="http://www.example.org/dc/demog/prop/",
- "valid"="http://www.example.org/dc/demog/valid/"
-  ))
-
-forsparqlprefix= paste("prefix", paste(names(myprefixes),":",sep=""), paste("<",myprefixes,">",sep=""),sep=" ",collapse=" ")
 
 
 qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
-load.rdf( qbfile, format="N3", appendTo= cubeData)
+cube<- load.rdf( qbfile, format="TURTLE")
+
+dsdName<- GetDsdNameFromCube( cube )
+domainName<- GetDomainNameFromCube( cube )
+forsparqlprefix<- GetForSparqlPrefix( domainName )
+
+cdisc.rdf<- Load.cdisc.standards()
+
+cubeData<- combine.rdf( cube, cdisc.rdf)
 
 ic1<- "ASK {
   {
@@ -47,11 +42,54 @@ rrdf does not implement the ASK query. As a word around use transform to, most l
 
 ```{r, results='asis', eval=TRUE}
 
-ic1Select<- gsub("ASK \\{", "SELECT (COUNT(*) AS ?nfail) WHERE \\{", ic1)
+## ic1Select<- gsub("ASK \\{", "SELECT (COUNT(*) AS ?nfail) WHERE \\{", ic1)
+## ic1SelectRq<- gsub("ASK \\{", "SELECT \\* WHERE \\{", ic1)
+## cat(ic1SelectRq)
+## cube.ic1<- sparql.rdf(cubeData, paste( forsparqlprefix, ic1SelectRq  )  )
+## print(cube.ic1)
 
-cube.ic1= sparql.rdf(cubeData, paste( forsparqlprefix, ic1Select  )  )
-print(cube.ic1)
+## backward way to select elements
+for (icno in (1:length(qbIClist))) {
+##  print(names(qbIClist[icno]))
+  if (! (names(qbIClist[icno]) %in% c("ic-20", "ic-21")) ) {
+    ic<- qbIClist[[icno]]
+    icSelectRq<- gsub("ASK \\{", "SELECT \\* WHERE \\{", ic)
+##    cat(unlist(strsplit(icSelectRq,"\n"))[1])
+    cube.ic<- sparql.rdf(cubeData, paste( forsparqlprefix, icSelectRq  )  )
+    cat(paste0(unlist(strsplit(icSelectRq,"\n"))[1], ": ", nrow(cube.ic), "\n"))
+   }
+}
 
+```
 
+For IC-20 special handling is needed.
+IC-20 is a template and the value of p should be inserted as $p in the template 
 
+```{r, results='asis', eval=TRUE}
+instantiationRq<- "
+SELECT ?p WHERE {
+    ?hierarchy a qb:HierarchicalCodeList ;
+                 qb:parentChildProperty ?p .
+    FILTER ( isIRI(?p) )
+}
+"
+p<- sparql.rdf(cubeData, paste( forsparqlprefix, icSelectRq  )  )
+print(p)
+```
+
+For IC-21 special handling is needed.
+IC-21 is a template and the value of p should be inserted as $p in the template 
+
+```{r, results='asis', eval=TRUE}
+instantiationRq<- "
+SELECT ?p WHERE {
+    ?hierarchy a qb:HierarchicalCodeList;
+                 qb:parentChildProperty ?pcp .
+    FILTER( isBlank(?pcp) )
+    ?pcp  owl:inverseOf ?p .
+    FILTER( isIRI(?p) )
+}
+"
+p<- sparql.rdf(cubeData, paste( forsparqlprefix, icSelectRq  )  )
+print(p)
 ```
