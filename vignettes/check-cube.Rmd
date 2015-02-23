@@ -123,7 +123,7 @@ check.cube<- function(
   ## So not adding the prefixes to the model, but using them for adding further
   ## information to the model when deriving statistics
 
-  cubeData <- new.rdf(ontology=FALSE)
+  cubeData <- new.rdf()
   myprefixes<- qb.def.prefixlist(cubeData, prefixes )
   load.rdf( qbfile, format="N3", appendTo= cubeData)
   ## summarize.rdf(cubeData)
