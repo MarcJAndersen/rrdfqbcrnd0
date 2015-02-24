@@ -12,7 +12,6 @@ vignette: >
 
 library(rrdfqbcrnd0)
 
-
 qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
 cube<- load.rdf( qbfile, format="TURTLE")
 
@@ -49,7 +48,7 @@ Here is the same code but wrapped into a function
 
 ```{r, results='asis', eval=TRUE}
 icres<- RunQbIC( cubeData, forsparqlprefix )
-kable(icres)
+knitr::kable(icres)
 ```
 
 ## Checking two existing cube
@@ -64,7 +63,7 @@ cube1<- load.rdf( qbfile1, format="TURTLE")
 cubeData1<- combine.rdf( cube1, cdisc.rdf)
 
 icres1<- RunQbIC( cubeData1, forsparqlprefix )
-kable(icres1)
+knitr::kable(icres1)
 ```
 
 The file example-fails-IC14.ttl is example.ttl with a few triples added to make the cube non conformant with the intregity constaints.
@@ -76,6 +75,6 @@ cube2<- load.rdf( qbfile2, format="TURTLE")
 cubeData2<- combine.rdf( cube2, cdisc.rdf)
 
 icres2<- RunQbIC( cubeData2, forsparqlprefix,doForIC=c("ic-14") )
-kable(icres2)
+knitr::kable(icres2)
 ```
 

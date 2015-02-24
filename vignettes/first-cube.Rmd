@@ -190,14 +190,16 @@ Note, this is not very interesting, as the cube is small.
 cdisc.rdf<- Load.cdisc.standards()
 cubeData<- combine.rdf( cube, cdisc.rdf)
 icres<- RunQbIC( cubeData, forsparqlprefix )
-kable(icres)
+knitr::kable(icres)
 ```
 
-```{r}
-remove.triple(store,
-  subject="http://example.org/Subject",
-  predicate="http://example.org/Predicate",
-  object="http://example.org/Object")
+Here we remove one of the dimensions from the cube in observation ds:obs1. Note: for the remove.triple function the components must be given as the full qualified URI.
+```{r, eval=FALSE}
+remove.triple(cubeData,
+  subject="http://www.example.org/dc/example/ds/obs1",
+  predicate="http://www.example.org/dc/example/prop/category",
+  object="http://www.example.org/dc/code/category-AA-group")
 icres<- RunQbIC( cubeData, forsparqlprefix )
-kable(icres)
+knitr::kable(icres)
 ```
+        
