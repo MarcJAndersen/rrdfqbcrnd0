@@ -126,6 +126,41 @@ presTable
 
 ```
 
+For exampel code see
+library(Hmisc)
+html.data.frame
+
+```{r, echo=TRUE}
+options(width=300)
+file<- file.path(tempdir(),"test.html")
+append<- TRUE
+print(file)
+oD<-attr(qbtest,"observationsDesc")
+names(oD)
+cat("<table border>\n", file=file, append=FALSE)
+or<-1
+unique(oD$rowno)
+unique(oD$colno)
+## make the header row(s) for the columns
+for (rr in unique(oD$rowno)) {
+  cat("<tr>", file=file, append=TRUE)
+  ## make the row identification
+  for (cc in unique(oD$colno)) {
+    cat("<td>", file=file, append=TRUE)
+    if (oD$rowno[or]==rr & oD$colno[or]==cc) {
+##      cat(paste0("<a href=\"", oD$measureIRI[or], "\">", oD$measure[or], "</a>"), file=file, append=TRUE)
+      ## next line is for simple fly-over
+      cat(paste0("<a title=\"", oD$measureIRI[or], "\">", oD$measure[or], "</a>"), file=file, append=TRUE)
+      or<- or+1
+      }
+    cat("</td>", file=file, append=TRUE)
+  }
+cat("</tr>", file=file, append=TRUE)
+  }
+cat("</table>\n", file=file, append=TRUE)
+
+```
+
 
 # Session information
 ```{r, echo=TRUE}
