@@ -37,6 +37,18 @@ knitr::kable(
 knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compLabel")])
 ```
 
+# Create from demo data PhUSE scripting program
+
+Note: to handle the total, used as denominatory, categorical values the field denominatory is populated. Instead of count there could be a category called total and then denominator refering to that category? This is the "N[a]" item in the PhUSE table. 
+```{r, eval=TRUE}
+RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+cubeMetadata <- read.xlsx(RDFCubeWorkbook,
+                          sheetName=paste0("DEMO-Components"),
+                          stringsAsFactors=FALSE)
+demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
+cat("DEMO cube stored as ", demo.cube.fn, "\n")
+```
+
 # Generating RDF data cube
 The next statements demonstrates how to create two RDF data cubes
 according to the specfications in the excel spreadsheet. Note the

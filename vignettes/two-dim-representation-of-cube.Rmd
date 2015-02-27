@@ -23,13 +23,16 @@ The outputs below shows the meta data for generation of the DM RDF data cube.
 
 ```{r, eval=TRUE}
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-cubeMetadata <- read.xlsx(RDFCubeWorkbook,
-                          sheetName=paste0("DM-Components"),
-                          stringsAsFactors=FALSE)
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 cat("DM cube stored as ", dm.cube.fn, "\n")
+```
 
-dataCubeFile<- dm.cube.fn
+```{r, eval=TRUE}
+RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
+cat("DEMOM cube stored as ", demo.cube.fn, "\n")
+
+dataCubeFile<- demo.cube.fn
 checkCube <- new.rdf()  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
@@ -53,7 +56,10 @@ attributesDf<- sparql.rdf(checkCube, GetAttributesSparqlQuery( forsparqlprefix )
 ## rowdim<- setdiff(union(dimensions,attributesDf), c("prop:saffl"))
 ## rowdim<- union(dimensions,attributesDf), c("prop:saffl")
 
-rowdim<- c("prop:saffl", "prop:race", "prop:sex", "prop:factor",
+## rowdim<- c("prop:saffl", "prop:race", "prop:sex", "prop:factor",
+## "prop:procedure", "prop:unit", "prop:denominator" )
+
+rowdim<- c("prop:agegr1", "prop:race", "prop:ethnic", "prop:sex", "prop:factor",
 "prop:procedure", "prop:unit", "prop:denominator" )
 
 coldim<- c("prop:trt01a")
@@ -126,13 +132,15 @@ presTable
 
 ```
 
-For exampel code see
-library(Hmisc)
-html.data.frame
+Approach for making html code see library(Hmisc), html.data.frame.
+To make the usual N, % - introduce a new attibute sub column with 1 for N and 2 for %, 1 for all other statistics. Then the table can be made by defining columns from TRT01A and sub column.
 
 ```{r, echo=TRUE}
+colLabel<- attr(qbtest,"colLabelDf")
+colLabel
 options(width=300)
-file<- file.path(tempdir(),"test.html")
+file<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "test.html")
+# file<- file.path(tempdir(),"test.html")
 append<- TRUE
 print(file)
 oD<-attr(qbtest,"observationsDesc")
@@ -141,10 +149,34 @@ cat("<table border>\n", file=file, append=FALSE)
 or<-1
 unique(oD$rowno)
 unique(oD$colno)
+presrowvarvalue<- gsub("prop:(.*)","\\1value",rowdim)
+presrowvarIRI<- gsub("prop:(.*)","\\1IRI",rowdim)
+presrowvarlabel<- gsub("prop:(.*)","\\1label",rowdim)
+presrowvarindex<- 1:length(rowdim)
 ## make the header row(s) for the columns
+## TODO the code below does only work for this special case
+  for (vi in presrowvarindex) {
+    cat("<th>", file=file, append=TRUE)
+      ## next line is for simple fly-over
+      cat(paste0("<a title=\"", oD[1, presrowvarIRI[vi]], "\">", oD[or,presrowvarlabel[vi]], "</a>"), file=file, append=TRUE)
+    cat("</th>", file=file, append=TRUE)
+    }
+  for (cc in unique(oD$colno)) {
+    cat("<th>", file=file, append=TRUE)
+      cat(paste0("<a title=\"", colLabel$codeval[cc], "\">", colLabel$value[cc], "</a>"), file=file, append=TRUE)
+      }
+    cat("</th>", file=file, append=TRUE)
+
+cat("</tr>", file=file, append=TRUE)
 for (rr in unique(oD$rowno)) {
   cat("<tr>", file=file, append=TRUE)
   ## make the row identification
+  for (vi in presrowvarindex) {
+    cat("<td>", file=file, append=TRUE)
+      ## next line is for simple fly-over
+      cat(paste0("<a title=\"", oD[or, presrowvarIRI[vi]], "\">", oD[or,presrowvarvalue[vi]], "</a>"), file=file, append=TRUE)
+    cat("</td>", file=file, append=TRUE)
+    }
   for (cc in unique(oD$colno)) {
     cat("<td>", file=file, append=TRUE)
     if (oD$rowno[or]==rr & oD$colno[or]==cc) {
