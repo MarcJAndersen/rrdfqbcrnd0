@@ -14,10 +14,22 @@ NULL
 ##' @docType data
 ##' @keywords datasets
 ##' @name qbIClist
-##' @usage data(qbIClist)
+## @usage data(qbIClist)
 ##' @format A list with SPARQL queries
 ##' @references \url{http://www.w3.org/TR/2014/REC-vocab-data-cube-20140116/}
 NULL
+
+##' Default PREFIXes for SPARQL queries
+##'
+##' 
+##' @docType data
+##' @keywords datasets
+##' @name qbCDISCprefixes
+## @usage data(qbCDISCprefixes)
+##' @format A list of PREFIXes for SPARQL queries
+NULL
+
+
 
 ##' Package locale environment
 ##'
