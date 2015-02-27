@@ -5,13 +5,18 @@
 ##' @param coldim vector of dimension and attribute names for column identification
 ##' @param rowlabeldim vector of dimension names to define the row label data.frame
 ##' @param collabeldim vector of dimension names to define the column label data.frame
-# XX ##' @param rownamefunc function for derivin
-# XX ##' @param colnamefunc function for columnnames
+##' @param forsparqlprefix PREFIX part of SPARQL query
+##' @param domainName domainName for the RRDF cube
 ##' @return data.frame with result of query, the observations, with
 ##' attributes for rowLabelDf, colLabelDF, rowlabelURI, collabelURI,
 ##' obsURI
 ##'
 ##'
+
+
+## COnsider
+## rownamefunc function for deriving rownames
+## colnamefunc function for columnnames
 
 
 GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, coldim, rowlabeldim=NULL, collabeldim=NULL) {

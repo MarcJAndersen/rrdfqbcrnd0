@@ -15,9 +15,10 @@ checkVars<- skeletonSource[ skeletonSource$compType %in% c("dimension","attribut
 dupObs<-duplicated(obsData[, checkVars])
 if (any(dupObs)) {
 # idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
-  dupObsRev<-  duplicated(obsData[,checkVars], fromLast=TRUE) 
+  dupObsRev<-  duplicated(obsData[,checkVars], fromLast=TRUE)
+  print(str(obsData))
   print( obsData[which(dupObs | dupObsRev ), ] )
-  stop("Duplicated observations in obsData")
+  stop("Duplicated observations in obsData. Varibables that should be unique: ", paste0(checkVars,collapse=", "))
 }
                         
 if (is.null(procedure2format)) {
