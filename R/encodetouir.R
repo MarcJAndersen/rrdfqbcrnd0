@@ -5,6 +5,6 @@
 ##' @return The string{s} encoded as URI
 # TODO - make better way of doing this
 encodetouri<- function( s ) {
-  gsub(" |'|,|\\(|\\)","_", s )
+  gsub(" |'|,|\\(|\\)|>|<","_", s )
 }
 
