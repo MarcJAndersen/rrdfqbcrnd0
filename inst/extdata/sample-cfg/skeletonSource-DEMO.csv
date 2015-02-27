@@ -1,0 +1,9 @@
+compType,compName,compLabel,codeType,nciDomainValue
+dimension,trt01a,Treatment Arm,DATA,
+dimension,sex,Sex (Gender),SDTM,C66731
+dimension,saffl,Safety Population Flag,DATA,
+dimension,procedure,Statistical Procedure,DATA,
+dimension,factor,"Type of procedure (quantity, proportion...)",DATA,
+measure,measure,Value of the statistical measure,,
+attribute,unit,Unit of measure,,
+attribute,denominator,Denominator for a proportion (oskr) subset on which a statistic is based,,

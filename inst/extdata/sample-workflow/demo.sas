@@ -1,3 +1,4 @@
+options ls=150;
 filename source url "http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt" ;
 libname source xport ;
 
@@ -20,7 +21,16 @@ proc format;
      'MEDIANC'  = 3
      'Q1Q3C'    = 4
      'MINMAXC'  = 5
-     'MISSINGC' = 6;
+     'MISSINGC' = 6
+     'MIN'      =-101
+     'MAX'      =-102
+     'Q1'      =-103
+     'Q3'      =-104
+     'MEAN'    =-105
+     'MEDIAN'  =-106
+     'N'=-107
+       'STD'=-108
+       ;
 
     value $sexfmt
 	  'N' = 'n[a]'
@@ -38,7 +48,7 @@ proc format;
 	  '65-80' = '65-80'
 	  '>80'   = '>80';
 
-	invalue agegrfmt0
+	invalue agegrfmto
 	  'N'     = 1
       '<65'   = 2
 	  '65-80' = 3
@@ -104,11 +114,11 @@ proc sql noprint;
    from treatments;
 quit;
 
-%global trt1 trt2 trt3;
-
 %macro bigns;
+    %local i;
   proc sql noprint;
     %do i=1 %to &trtnum;
+     %global trt&i. trtname&i.;
        select count(usubjid) into: trt&i from adsl_work where __dummytrt = &i;
 	   select &trt into: trtname&i from adsl_work where __dummytrt = &i;
 	%end;
@@ -155,17 +165,31 @@ quit;
       var nc meanc stdc minmaxc q1q3c medianc; 
    run;
 
-   data __descrres;
+   proc sort data=__trout;
+       by _name_;
+   run;
+   proc transpose data=__meansres out=__troutn prefix=coln;
+      id __dummytrt;
+      var n mean std min max q1 q3 median; 
+   run;
+
+   proc sort data=__troutn;
+       by _name_;
+   run;
+
+    data __descrres;
       length col1-col&trtnum $50;
-      set __trout;
-	  length name col0 $200;
+      merge __trout __troutn;
+      by _name_;
+
+	  length name col0 varn $200;
 	  
 	  col0 = put(upcase(_NAME_), $destats.);
 	  ord = input(upcase(_NAME_), destatso.);
 	  name = &name;
 	  mainord = &ord;
-
-      keep name col0 ord col1-col&trtnum mainord;
+          varn="&varn.";
+      keep  mainord ord varn name col0 col1-col&trtnum  coln1-coln&trtnum _name_;
    run;
 
    data &outdata;
@@ -218,13 +242,16 @@ quit;
   data &outdata;
     set __trout_fr denom;
     length name col0 $200 col1-col&trtnum $50;
-
+    length _name_ $32;
 	%do i=1 %to &trtnum;
       if n&i = . then n&i = 0;
 	  %prcnt(num=n&i,denom=&&denom&i,pctd=pct&i,pctfmt=5.1);
       col&i = put(n&i,6.0-R) || pct1;
+      coln&i= n&i.;
+      colna&i= N&i. / &&denom&i*100;
 	%end;
 
+        varn ="&var";
 	name = &name;
 	col0 = put(&var, $&varfmt..);
 	mainord = &ord;
@@ -276,26 +303,33 @@ options nodate nobyline nonumber nocenter
 run;
 title;
 footnote;*/
+        
+%let under=%sysfunc(repeat(_,180-1));
 
 title5 "&under";
 
 footnote1 "&under";
 footnote2 "n[a] - number of subject with non-missing data, used as denominator";
 
-proc report data=report ls=150 ps=45 split="@"  headline headskip nocenter 
-nowd missing spacing=2;
+proc report data=report ls=180 ps=45 split="@"  headline headskip nocenter nowd missing spacing=2;
+    where ord>0;
   column mainord name ord col0 col1 col2 col3;
   
   define mainord / order order=internal noprint;
   define ord  / order order=internal noprint;
   define name / display " " width=62 spacing=0 flow order;
   define col0 / display " " width=30 ;
-  define col1 / display "&trtname1@      (N=%qcmpres(&trt1))" width=20;
-  define col2 / display "trtname1@      (N=%qcmpres(&trt2))" width=20;
-  define col3 / display "trtname1@     (N=%qcmpres(&trt3))" width=20;
+  define col1 / display "&trtname1.@      (N=%qcmpres(&trt1.))" width=20;
+  define col2 / display "&trtname2.@      (N=%qcmpres(&trt2.))" width=20;
+  define col3 / display "&trtname3.@     (N=%qcmpres(&trt3.))" width=20;
 
   break after mainord / skip;
 run;
 
 /*proc printto;
 run;*/
+
+data temp.report;
+    set report;
+run;
+libname temp list;
