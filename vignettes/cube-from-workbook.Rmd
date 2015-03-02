@@ -23,13 +23,13 @@ The outputs below shows the meta data for generation of the DM RDF data cube.
 
 ```{r, eval=TRUE}
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-cubeMetadata <- read.xlsx(RDFCubeWorkbook,
-                          sheetName=paste0("DM-Components"),
-                          stringsAsFactors=FALSE)
 ```
 
 The next statement shows the metadata.
 ```{r, eval=TRUE}
+cubeMetadata <- read.xlsx(RDFCubeWorkbook,
+                          sheetName=paste0("DM-Components"),
+                          stringsAsFactors=FALSE)
 knitr::kable(
   cubeMetadata[ cubeMetadata$compType %in% c("dimension", "attribute", "measure"),
                c("codeType", "compName","nciDomainValue", "compLabel")]
@@ -37,17 +37,6 @@ knitr::kable(
 knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compLabel")])
 ```
 
-# Create from demo data PhUSE scripting program
-
-Note: to handle the total, used as denominatory, categorical values the field denominatory is populated. Instead of count there could be a category called total and then denominator refering to that category? This is the "N[a]" item in the PhUSE table. 
-```{r, eval=TRUE}
-RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-cubeMetadata <- read.xlsx(RDFCubeWorkbook,
-                          sheetName=paste0("DEMO-Components"),
-                          stringsAsFactors=FALSE)
-demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
-cat("DEMO cube stored as ", demo.cube.fn, "\n")
-```
 
 # Generating RDF data cube
 The next statements demonstrates how to create two RDF data cubes
@@ -64,6 +53,15 @@ cat("DM cube stored as ", dm.cube.fn, "\n")
 
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 cat("AE cube stored as ", ae.cube.fn, "\n")
+```
+
+# Create from demo data PhUSE scripting program
+
+Note: the total of non missing values is represented using the code "_NONMISS_", used as denominatory, categorical values the field denominatory is populated. This is the "N[a]" item in the PhUSE table. This is not implemented in all parts of the RRDFQBCRND0 package.
+```{r, eval=TRUE}
+RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
+cat("DEMO cube stored as ", demo.cube.fn, "\n")
 ```
 
 ### Notes 
