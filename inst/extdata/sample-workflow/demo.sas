@@ -1,3 +1,17 @@
+/*------------------------------------------------------------------------*\
+** Program : demo.sas
+
+** Purpose : Show how to modify program from PhUSE scription group to
+** generate .csv files for using with RRDFQBCRND0
+
+** Note: Program code is from program by from Mike Carniello at
+** https://code.google.com/p/phuse-scripts/source/browse/trunk/whitepapers/demographics/demo.sas
+
+** Author: Marc Andersen (mja@statgroup.dk), 02-mar-2015
+\*------------------------------------------------------------------------*/
+
+
+
 options ls=150;
 filename source url "http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt" ;
 libname source xport ;
