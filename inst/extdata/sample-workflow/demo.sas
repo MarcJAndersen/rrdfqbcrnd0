@@ -242,7 +242,6 @@ quit;
   data &outdata;
     set __trout_fr denom;
     length name col0 $200 col1-col&trtnum $50;
-    length _name_ $32;
 	%do i=1 %to &trtnum;
       if n&i = . then n&i = 0;
 	  %prcnt(num=n&i,denom=&&denom&i,pctd=pct&i,pctfmt=5.1);
@@ -333,3 +332,269 @@ data temp.report;
     set report;
 run;
 libname temp list;
+
+/*------------------------------------------------------------------------*\
+** Program : report_to_rrdf.sas
+** Purpose : Transfer dataset report to RRDFQBCRND excel workbook format
+\*------------------------------------------------------------------------*/
+
+options linesize=200 nocenter;
+
+/*
+proc contents data=temp.report varnum;
+run;
+
+proc print data=temp.report width=min;
+*    where col0 in ( 'MIN', 'MAX', 'Q1', 'Q3', 'MEAN', 'MEDIAN', 'N', 'STD', 'NC' );
+*    where ord<0 or col0 = "NC";
+    var sex agegr1 race ethnic varn _name_ ord col0 coln1 colna1 coln2 colna2 coln3 colna3;
+run;
+*/
+
+data forexport;
+    length sex agegr1 race ethnic trt01a $200;
+    set temp.report;
+    keep sex agegr1 race ethnic trt01a;
+    keep procedure factor;
+    length procedure factor $50;
+    keep unit denominator;
+    length unit denominator $50;
+    unit=" ";
+    keep measure;
+    array adim(*) sex agegr1 race ethnic;
+    array meascont(*) coln1 coln2 coln3;
+    array measn(*) coln1 coln2 coln3;
+    array measnpct(*) coln1 coln2 coln3;
+    array atrt01a(3) $50 ("Placebo" "Xanomeline Low Dose"   "Xanomeline High Dose");
+    do i=1 to dim(adim);
+        if missing(adim(i)) or (adim(i)="N" and col0="n[a]") then do;
+        adim(i)="_NONMISS_";
+        end;
+    end;
+
+    select;
+    when (ord<0) do;
+        do i=1 to dim(atrt01a);
+            factor=varn;
+            procedure=_name_;
+            denominator=" ";
+            trt01a= atrt01a(i);
+            measure=meascont(i);
+            output;
+            end;
+        end;
+    when (varn in ("sex", "agegr1", "race", "ethnic")) do;
+        do i=1 to dim(atrt01a);
+            factor="quantity";
+            procedure="count";
+            denominator=" ";
+            trt01a= atrt01a(i);
+            measure=measn(i);
+            output;
+            end;
+        do i=1 to dim(atrt01a);
+            factor="proportion";
+            procedure="percent";
+            denominator=varn;
+            trt01a= atrt01a(i);
+            measure=measnpct(i);
+            output;
+            end;
+        end;
+    otherwise do;
+    end;
+end;
+run;
+
+/*
+proc print data=forexport width=min;
+run;
+
+proc contents data=forexport varnum;
+run;
+*/
+
+proc export data=forexport file="../sample-cfg/demo.AR.csv" replace;
+run;
+
+data skeletonSource1;
+length compType compName codeType nciDomainValue compLabel Comment $512;
+    Comment= " ";
+    compType= "dimension"; compName="trt01a";    compLabel="Treatment Arm"; codeType="DATA"; nciDomainValue= " "; output;
+    compType= "dimension"; compName="sex";       compLabel="Sex (Gender)"; codeType="SDTM"; nciDomainValue="C66731";output;
+    compType= "dimension"; compName="saffl";     compLabel="Safety Population Flag"; codeType="DATA"; nciDomainValue= " ";output;
+    compType= "dimension"; compName="procedure"; compLabel="Statistical Procedure"; codeType="DATA"; nciDomainValue= " ";output;
+    compType= "dimension"; compName="factor";    compLabel="Type of procedure (quantity, proportion...)"; codeType="DATA"; nciDomainValue= " "; output;
+
+    compType= "measure"; compName="measure";      compLabel="Value of the statistical measure"; codeType=" "; nciDomainValue=" "; output;
+    compType= "attribute"; compName="unit";        compLabel="Unit of measure"; codeType=" "; nciDomainValue=" "; output;
+    compType= "attribute"; compName="denominator"; compLabel="Denominator for a proportion (oskr) subset on which a statistic is based"; codeType=" "; nciDomainValue=" "; output;
+    
+run;
+
+/* === Code below generated from .csv file as follows ==================== *\
+
+* Program : get-DEMO-Components-orig.sas;
+* Purpose : Input data set in XX-Components.csv file and generate as SAS code;
+
+filename csvin "DEMO-Components-orig.csv";
+
+proc import file=csvin dbms=csv out=indsn;
+    delimiter= ";";
+run;
+
+proc print data=indsn;
+run;
+
+data _null_;
+    if _n_=1 then do;
+        retain fnsas;
+        length fnsas $200;
+        fnsas= cats(scan(pathname("csvin"),-2,"./\"),".sas.txt");
+    end;
+    file dummy filevar=fnsas;
+    length line $1024;
+    set indsn;
+    array vn(6) compType compName codeType nciDomainValue compLabel Comment;
+    if _n_=1 then do;
+        line="length ";
+        do i=1 to dim(vn);
+            line= catx( " ", line, vname(vn(i)));
+            end;
+        line=catx(" ", line," $512;");
+        put line :;
+        end;
+    
+        do i=1 to dim(vn);
+            line= cats(catx("= ", vname(vn(i)), quote(trim(vn(i)))),";");
+            put line :;
+            end;
+        put "output; " /;
+run;
+
+\*  ================================================================ */
+
+data skeletonSource2;
+length compType compName codeType nciDomainValue compLabel Comment $512;
+    
+compType= "metadata";
+compName= "obsURL";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt";
+Comment= "obsFileName";
+output; 
+
+compType= "metadata";
+compName= "obsFileName";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "demo.AR.csv";
+Comment= "obsFileName";
+output; 
+
+compType= "metadata";
+compName= "dataCubeFileName";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "DC-DEMO-R-V";
+Comment= "Cube name prefix (will be appended with version number by script. --> No. Will be set in code based on domainName parameter";
+output; 
+
+compType= "metadata";
+compName= "cubeVersion";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "0.5.2";
+Comment= "Version of cube with format n.n.n";
+output; 
+
+compType= "metadata";
+compName= "createdBy";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "Marc Andersen";
+Comment= "Person who configures this spreadsheet and runs the creation script to create the cube";
+output; 
+
+compType= "metadata";
+compName= "description";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "Data from demo.sas program";
+Comment= "Cube description";
+output; 
+
+compType= "metadata";
+compName= "providedBy";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "PhUSE Results Metadata Working Group";
+Comment= " ";
+output; 
+
+compType= "metadata";
+compName= "comment";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "Example demographics table from demo.sas program";
+Comment= " ";
+output; 
+
+compType= "metadata";
+compName= "title";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "Demographics Analysis Results";
+Comment= " ";
+output; 
+
+compType= "metadata";
+compName= "label";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "Demographics results data set.";
+Comment= " ";
+output; 
+
+compType= "metadata";
+compName= "wasDerivedFrom";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "demo.AR.csv";
+Comment= "Data source (obsFileName). Set this programmtically based on name of input file!";
+output; 
+
+compType= "metadata";
+compName= "domainName";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "DEMO";
+Comment= "The domain name, also part of the spreadsheet tab name";
+output; 
+
+compType= "metadata";
+compName= "obsFileNameDirec";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "!example";
+Comment= "The directory containd the wasDerivedFrom file";
+output; 
+
+compType= "metadata";
+compName= "dataCubeOutDirec";
+codeType= " ";
+nciDomainValue= " ";
+compLabel= "!temporary";
+Comment= " ";
+output; 
+
+run;
+
+data skeletonSource;
+    set skeletonSource1 skeletonSource2;
+run;
+    
+proc export data=skeletonSource file="../sample-cfg/DEMO-Components.csv" replace;
+run;
+
