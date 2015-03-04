@@ -42,6 +42,29 @@ domainName<- GetDomainNameFromCube( checkCube )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
+View observation "ds:obs7"
+
+```{r, eval=TRUE}
+cube.observations.rq<-  paste( forsparqlprefix,
+'
+select *
+where { 
+?s a qb:Observation ; 
+?p ?o .
+values (?s) {
+(ds:obs7)
+}
+}
+limit 30
+',
+"\n"                               
+)
+
+cube.observations<- sparql.rdf(checkCube, cube.observations.rq)
+knitr::kable(head(cube.observations, 10))
+
+```
+
 ## Create the two dimensional representation
 
 For sex, race and factor show the label and the level if the level is not _ALL_.

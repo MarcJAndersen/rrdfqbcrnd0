@@ -95,7 +95,8 @@ cube.observations1<- sparql.rdf(cube, cube.observations1.rq  )
 knitr::kable(head(cube.observations1, 10))
 ```
 
-The next statement shows the first 30 triples in the cube, where the subject is a qb:Observation.
+The next statement shows the first 30 triples in the cube, 
+where the subject is a qb:Observation.
 ```{r}
 
 cube.observations2.rq<-  paste( forsparqlprefix,
