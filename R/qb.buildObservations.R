@@ -8,13 +8,13 @@
 ##' @return Always TRUE
 qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix, dsdName, recode.list, procedure2format ) {
 
-colnames(obsData) <- tolower(colnames(obsData))  # Convert column names to lowercase for later matching
+colnames(obsData) <- tolower(colnames(obsData))  ## Convert column names to lowercase for later matching
 
 ## XX this could go into a function
 checkVars<- skeletonSource[ skeletonSource$compType %in% c("dimension","attribute"), "compName" ]
 dupObs<-duplicated(obsData[, checkVars])
 if (any(dupObs)) {
-# idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
+## idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
   dupObsRev<-  duplicated(obsData[,checkVars], fromLast=TRUE)
   print(str(obsData))
   print( obsData[which(dupObs | dupObsRev ), ] )
@@ -37,7 +37,7 @@ if (is.null(procedure2format)) {
 if (is.null(recode.list)) {
 forsparqlprefix<- Get.rq.prefixlist.df( prefixlist )
 
-# first find the qb:DataSet
+## first find the qb:DataSet
 ## ds:dataset-dm  a          qb:DataSet ;
 ## Then find the qb:structure
 ##         qb:structure         ds:dsd-dm ;
@@ -55,7 +55,7 @@ forsparqlprefix<- Get.rq.prefixlist.df( prefixlist )
 ##         qb:codeList  code:saffl .
 ## and have a qb:codeList
 
-# identify codelists
+## identify codelists
 codelists.rq<-   paste(forsparqlprefix,
 '
 select distinct ?p ?cl ?prefLabel
@@ -77,48 +77,49 @@ order by ?p ?cl ?prefLabel
 '
 )
 
-# cat(codelists.rq)
-cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors=FALSE);
-# TODO instead of gsub make a more straightforward way
-# TOTO this involves a new version of the ph.recode function
+## cat(codelists.rq)
+cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors=FALSE)
+
+## TODO instead of gsub make a more straightforward way
+## TOTO this involves a new version of the ph.recode function
 cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
-# print(cube.codelists)
+## print(cube.codelists)
 
 recode.list<-by(cube.codelists, cube.codelists$vn, function(x){
-#  print(x)
+##  print(x)
   pl<-list();
   for (i in 1:nrow(x)) { pl[[ as.character(x[i,"prefLabel"]) ]] <-  as.character(x[i,"clc"])}
-#  print(pl)
+##  print(pl)
   pl
   }
   )
 }
 
 for (i in 1:nrow(obsData)){
-  obsNum <- paste0("obs",i) # consider this being the rownames
+  obsNum <- paste0("obs",i) ## consider this being the rownames
 
   add.triple(store,
              paste0(prefixlist$prefixDS, obsNum),
              paste0(prefixlist$prefixRDF,"type" ),
              paste0(prefixlist$prefixQB, "Observation"))
-  # Tie dimension to dataset
+  ## Tie dimension to dataset
   add.triple(store,
              paste0(prefixlist$prefixDS, obsNum),
              paste0(prefixlist$prefixQB, "dataSet"),
              paste0(prefixlist$prefixDS, dsdURIwoprefix))  #TODO : CHange to declared var
-  # Label
+  ## Label
   add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
                    paste0(prefixlist$prefixRDFS, "label"),
                    paste0(i))
 
   for (qbdim in skeletonSource[ skeletonSource$compType=="dimension", "compName" ]){
-  #   print(paste0("qbdim :   ", qbdim))
-  #   print(paste0("recode.list[[qbdim]]: ", names(recode.list[[qbdim]]), "=", recode.list[[qbdim]]))
+  ##   print(paste0("qbdim :   ", qbdim))
+  ##   print(paste0("recode.list[[qbdim]]: ", names(recode.list[[qbdim]]), "=", recode.list[[qbdim]]))
   
     vCoded <-  ph.recode( obsData[i,qbdim], recode.list[[qbdim]] )
-    # b. Create coded triple
+    ## b. Create coded triple
     add.triple(store,
                   paste0(prefixlist$prefixDS, obsNum),
                   paste0(prefixlist$prefixPROP, qbdim),
@@ -126,7 +127,7 @@ for (i in 1:nrow(obsData)){
   }
 
   #--------------- Measure ----------------------------------------------------
-  # Set the format of the Measure based on the Procedure value
+  ## Set the format of the Measure based on the Procedure value
   procedure <- paste0(obsData[i,"procedure"])
   xsdFormat= procedure2format[[ procedure ]]
 
