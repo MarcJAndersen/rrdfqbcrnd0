@@ -107,6 +107,14 @@ export RSTUDIO_PANDOC=`which pandoc | xargs dirname`
 ```
 ([source](http://stackoverflow.com/questions/26803652/devtoolsbuild-vignettes-yields-error-invalid-version-specification-pandoc))
 
+For executing pandoc, there following packages may be need: framed, titling.
+([source](https://github.com/rstudio/rmarkdown/issues/39)
+
+```bash
+sudo yum -y install texlive-framed
+sudo yum -y install texlive-titling
+```
+
 ### Version of packages
 Verify that you have the applicable versions. It appears unnessary, but version issues have more than once been the root cause of malfunction.
 
@@ -127,8 +135,8 @@ TIP: To single step line by line use rstudio
 TIP: In Rstudio I open README.md (this file) and execute code lines one by one.
 
 ```r
-library(devtools)
 library(knitr)
+library(devtools)
 devtools::load_all()
 devtools::document()
 devtools::test()
