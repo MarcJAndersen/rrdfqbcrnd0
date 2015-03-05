@@ -19,7 +19,9 @@ library(rrdfqbcrnd0)
 # Generating RDF data cube from specification in a spreadsheet and export as turtle file
 
 The generation of RDF data cube can be specified in a spreadsheet.
-The outputs below shows the meta data for generation of the DM RDF data cube.
+
+## DM data 
+The outputs below shows the generation of the DM RDF data cube.
 
 ```{r, eval=TRUE}
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
@@ -27,10 +29,14 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
+## DEMO data 
+The outputs below shows the generation of the DEMO RDF data cube.
+
+
 ```{r, eval=TRUE}
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
 demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
-cat("DEMOM cube stored as ", demo.cube.fn, "\n")
+cat("DEMO cube stored as ", demo.cube.fn, "\n")
 
 dataCubeFile<- demo.cube.fn
 checkCube <- new.rdf()  # Initialize
