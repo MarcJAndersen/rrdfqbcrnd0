@@ -11,6 +11,8 @@ GetObservationsWithDescriptionSparqlQuery<- function( forsparqlprefix, domainNam
     "select * where {",
     "\n",
     "?s a qb:Observation  ;", "\n",
+## TODO: better way of using label    
+##    "rdfs:label        ?olabel;", "\n",
     paste("qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
     paste0( dimensions, " ", sub("prop:", "?", dimensions), ";", collapse="\n"),
     "\n",
@@ -41,6 +43,8 @@ GetObservationsWithDescriptionSparqlQuery<- function( forsparqlprefix, domainNam
     "BIND( IRI( ?s ) AS ?measureIRI)",                              
     "\n",
     "} ",
+## TODO(mja) Make more clever way os sorting    
+##    "ORDER BY ?olabel",
     "\n"
     )
   cube.observations.rq
