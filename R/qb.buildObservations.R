@@ -138,7 +138,10 @@ for (i in 1:nrow(obsData)){
                    xsdFormat)
 
    #--------------- Attributes -------------------------------------------------
-   add.data.triple(store,
+
+  ## make attributes generic
+
+  add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
                    paste0(prefixlist$prefixPROP, "unit"),
                    paste0(obsData[i,"unit"]),
