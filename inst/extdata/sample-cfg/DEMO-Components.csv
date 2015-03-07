@@ -7,6 +7,9 @@ dimension,factor,DATA,,"Type of procedure (quantity, proportion...)",
 measure,measure,,,Value of the statistical measure,
 attribute,unit,,,Unit of measure,
 attribute,denominator,,,Denominator for a proportion (oskr) subset on which a statistic is based,
+attribute,colno,,,Column number for two dimensional represenation,
+attribute,rowno,,,Row number for two dimensional represenation,
+attribute,cellpartno,,,Position within cell given by row and column number for two dimensional represenation,
 metadata,obsURL,,,https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt,obsFileName
 metadata,obsFileName,,,demo.AR.csv,obsFileName
 metadata,dataCubeFileName,,,DC-DEMO-R-V,Cube name prefix (will be appended with version number by script. --> No. Will be set in code based on domainName parameter
