@@ -103,7 +103,7 @@ attributesDf<- sparql.rdf(checkCube, GetAttributesSparqlQuery( forsparqlprefix )
 rowdim<- c("prop:rowno", "prop:agegr1", "prop:race", "prop:ethnic", "prop:sex" )
 
 coldim<- c("prop:colno", "prop:cellpartno", "prop:trt01a", "prop:procedure", "prop:unit", "prop:denominator" )
-coldim<- c("prop:colno", "prop:cellpartno", "prop:trt01a", "prop:factor" )
+coldim<- c("prop:colno", "prop:cellpartno", "prop:trt01a" )
 
 qbtest<- GetTwoDimTableFromQb( checkCube, forsparqlprefix, domainName, rowdim, coldim )
 
