@@ -259,7 +259,7 @@ quit;
 	%do i=1 %to &trtnum;
       if n&i = . then n&i = 0;
 	  %prcnt(num=n&i,denom=&&denom&i,pctd=pct&i,pctfmt=5.1);
-      col&i = put(n&i,6.0-R) || pct1;
+      col&i = put(n&i,6.0-R) || pct&i.;
       coln&i= n&i.;
       colna&i= N&i. / &&denom&i*100;
 	%end;
@@ -378,7 +378,7 @@ data forexport;
     array adim(*) sex agegr1 race ethnic;
     array meascont(*) coln1 coln2 coln3;
     array measn(*) coln1 coln2 coln3;
-    array measnpct(*) coln1 coln2 coln3;
+    array measnpct(*) colna1 colna2 colna3;
     array atrt01a(3) $50 ("Placebo" "Xanomeline Low Dose"   "Xanomeline High Dose");
     keep colno rowno cellpartno;
 

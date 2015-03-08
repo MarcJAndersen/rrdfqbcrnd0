@@ -50,84 +50,84 @@ _ALL_,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,std,weightbl,,,27,3,1,14.653433372
 F,_ALL_,_ALL_,_ALL_,Placebo,count,quantity,,,29,1,1,53
 F,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,count,quantity,,,29,2,1,50
 F,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,count,quantity,,,29,3,1,40
-F,_ALL_,_ALL_,_ALL_,Placebo,percent,proportion,,sex,29,1,2,53
-F,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,sex,29,2,2,50
-F,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,sex,29,3,2,40
+F,_ALL_,_ALL_,_ALL_,Placebo,percent,proportion,,sex,29,1,2,61.627906977
+F,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,sex,29,2,2,59.523809524
+F,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,sex,29,3,2,47.619047619
 M,_ALL_,_ALL_,_ALL_,Placebo,count,quantity,,,30,1,1,33
 M,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,count,quantity,,,30,2,1,34
 M,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,count,quantity,,,30,3,1,44
-M,_ALL_,_ALL_,_ALL_,Placebo,percent,proportion,,sex,30,1,2,33
-M,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,sex,30,2,2,34
-M,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,sex,30,3,2,44
+M,_ALL_,_ALL_,_ALL_,Placebo,percent,proportion,,sex,30,1,2,38.372093023
+M,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,sex,30,2,2,40.476190476
+M,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,sex,30,3,2,52.380952381
 _NONMISS_,_ALL_,_ALL_,_ALL_,Placebo,count,quantity,,,31,1,1,86
 _NONMISS_,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,count,quantity,,,31,2,1,84
 _NONMISS_,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,count,quantity,,,31,3,1,84
-_NONMISS_,_ALL_,_ALL_,_ALL_,Placebo,percent,proportion,,sex,31,1,2,86
-_NONMISS_,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,sex,31,2,2,84
-_NONMISS_,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,sex,31,3,2,84
+_NONMISS_,_ALL_,_ALL_,_ALL_,Placebo,percent,proportion,,sex,31,1,2,100
+_NONMISS_,_ALL_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,sex,31,2,2,100
+_NONMISS_,_ALL_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,sex,31,3,2,100
 _ALL_,65-80,_ALL_,_ALL_,Placebo,count,quantity,,,32,1,1,42
 _ALL_,65-80,_ALL_,_ALL_,Xanomeline Low Dose,count,quantity,,,32,2,1,47
 _ALL_,65-80,_ALL_,_ALL_,Xanomeline High Dose,count,quantity,,,32,3,1,55
-_ALL_,65-80,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,32,1,2,42
-_ALL_,65-80,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,32,2,2,47
-_ALL_,65-80,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,32,3,2,55
+_ALL_,65-80,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,32,1,2,48.837209302
+_ALL_,65-80,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,32,2,2,55.952380952
+_ALL_,65-80,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,32,3,2,65.476190476
 _ALL_,<65,_ALL_,_ALL_,Placebo,count,quantity,,,33,1,1,14
 _ALL_,<65,_ALL_,_ALL_,Xanomeline Low Dose,count,quantity,,,33,2,1,8
 _ALL_,<65,_ALL_,_ALL_,Xanomeline High Dose,count,quantity,,,33,3,1,11
-_ALL_,<65,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,33,1,2,14
-_ALL_,<65,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,33,2,2,8
-_ALL_,<65,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,33,3,2,11
+_ALL_,<65,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,33,1,2,16.279069767
+_ALL_,<65,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,33,2,2,9.5238095238
+_ALL_,<65,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,33,3,2,13.095238095
 _ALL_,>80,_ALL_,_ALL_,Placebo,count,quantity,,,34,1,1,30
 _ALL_,>80,_ALL_,_ALL_,Xanomeline Low Dose,count,quantity,,,34,2,1,29
 _ALL_,>80,_ALL_,_ALL_,Xanomeline High Dose,count,quantity,,,34,3,1,18
-_ALL_,>80,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,34,1,2,30
-_ALL_,>80,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,34,2,2,29
-_ALL_,>80,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,34,3,2,18
+_ALL_,>80,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,34,1,2,34.88372093
+_ALL_,>80,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,34,2,2,34.523809524
+_ALL_,>80,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,34,3,2,21.428571429
 _ALL_,_NONMISS_,_ALL_,_ALL_,Placebo,count,quantity,,,35,1,1,86
 _ALL_,_NONMISS_,_ALL_,_ALL_,Xanomeline Low Dose,count,quantity,,,35,2,1,84
 _ALL_,_NONMISS_,_ALL_,_ALL_,Xanomeline High Dose,count,quantity,,,35,3,1,84
-_ALL_,_NONMISS_,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,35,1,2,86
-_ALL_,_NONMISS_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,35,2,2,84
-_ALL_,_NONMISS_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,35,3,2,84
+_ALL_,_NONMISS_,_ALL_,_ALL_,Placebo,percent,proportion,,agegr1,35,1,2,100
+_ALL_,_NONMISS_,_ALL_,_ALL_,Xanomeline Low Dose,percent,proportion,,agegr1,35,2,2,100
+_ALL_,_NONMISS_,_ALL_,_ALL_,Xanomeline High Dose,percent,proportion,,agegr1,35,3,2,100
 _ALL_,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_ALL_,Placebo,count,quantity,,,36,1,1,0
 _ALL_,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_ALL_,Xanomeline Low Dose,count,quantity,,,36,2,1,0
 _ALL_,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_ALL_,Xanomeline High Dose,count,quantity,,,36,3,1,1
 _ALL_,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_ALL_,Placebo,percent,proportion,,race,36,1,2,0
 _ALL_,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_ALL_,Xanomeline Low Dose,percent,proportion,,race,36,2,2,0
-_ALL_,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_ALL_,Xanomeline High Dose,percent,proportion,,race,36,3,2,1
+_ALL_,_ALL_,AMERICAN INDIAN OR ALASKA NATIVE,_ALL_,Xanomeline High Dose,percent,proportion,,race,36,3,2,1.1904761905
 _ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Placebo,count,quantity,,,37,1,1,8
 _ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Xanomeline Low Dose,count,quantity,,,37,2,1,6
 _ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Xanomeline High Dose,count,quantity,,,37,3,1,9
-_ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Placebo,percent,proportion,,race,37,1,2,8
-_ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Xanomeline Low Dose,percent,proportion,,race,37,2,2,6
-_ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Xanomeline High Dose,percent,proportion,,race,37,3,2,9
+_ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Placebo,percent,proportion,,race,37,1,2,9.3023255814
+_ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Xanomeline Low Dose,percent,proportion,,race,37,2,2,7.1428571429
+_ALL_,_ALL_,BLACK OR AFRICAN AMERICAN,_ALL_,Xanomeline High Dose,percent,proportion,,race,37,3,2,10.714285714
 _ALL_,_ALL_,WHITE,_ALL_,Placebo,count,quantity,,,38,1,1,78
 _ALL_,_ALL_,WHITE,_ALL_,Xanomeline Low Dose,count,quantity,,,38,2,1,78
 _ALL_,_ALL_,WHITE,_ALL_,Xanomeline High Dose,count,quantity,,,38,3,1,74
-_ALL_,_ALL_,WHITE,_ALL_,Placebo,percent,proportion,,race,38,1,2,78
-_ALL_,_ALL_,WHITE,_ALL_,Xanomeline Low Dose,percent,proportion,,race,38,2,2,78
-_ALL_,_ALL_,WHITE,_ALL_,Xanomeline High Dose,percent,proportion,,race,38,3,2,74
+_ALL_,_ALL_,WHITE,_ALL_,Placebo,percent,proportion,,race,38,1,2,90.697674419
+_ALL_,_ALL_,WHITE,_ALL_,Xanomeline Low Dose,percent,proportion,,race,38,2,2,92.857142857
+_ALL_,_ALL_,WHITE,_ALL_,Xanomeline High Dose,percent,proportion,,race,38,3,2,88.095238095
 _ALL_,_ALL_,_NONMISS_,_ALL_,Placebo,count,quantity,,,39,1,1,86
 _ALL_,_ALL_,_NONMISS_,_ALL_,Xanomeline Low Dose,count,quantity,,,39,2,1,84
 _ALL_,_ALL_,_NONMISS_,_ALL_,Xanomeline High Dose,count,quantity,,,39,3,1,84
-_ALL_,_ALL_,_NONMISS_,_ALL_,Placebo,percent,proportion,,race,39,1,2,86
-_ALL_,_ALL_,_NONMISS_,_ALL_,Xanomeline Low Dose,percent,proportion,,race,39,2,2,84
-_ALL_,_ALL_,_NONMISS_,_ALL_,Xanomeline High Dose,percent,proportion,,race,39,3,2,84
+_ALL_,_ALL_,_NONMISS_,_ALL_,Placebo,percent,proportion,,race,39,1,2,100
+_ALL_,_ALL_,_NONMISS_,_ALL_,Xanomeline Low Dose,percent,proportion,,race,39,2,2,100
+_ALL_,_ALL_,_NONMISS_,_ALL_,Xanomeline High Dose,percent,proportion,,race,39,3,2,100
 _ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Placebo,count,quantity,,,40,1,1,3
 _ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Xanomeline Low Dose,count,quantity,,,40,2,1,6
 _ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Xanomeline High Dose,count,quantity,,,40,3,1,3
-_ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Placebo,percent,proportion,,ethnic,40,1,2,3
-_ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Xanomeline Low Dose,percent,proportion,,ethnic,40,2,2,6
-_ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Xanomeline High Dose,percent,proportion,,ethnic,40,3,2,3
+_ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Placebo,percent,proportion,,ethnic,40,1,2,3.488372093
+_ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Xanomeline Low Dose,percent,proportion,,ethnic,40,2,2,7.1428571429
+_ALL_,_ALL_,_ALL_,HISPANIC OR LATINO,Xanomeline High Dose,percent,proportion,,ethnic,40,3,2,3.5714285714
 _ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Placebo,count,quantity,,,41,1,1,83
 _ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Xanomeline Low Dose,count,quantity,,,41,2,1,78
 _ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Xanomeline High Dose,count,quantity,,,41,3,1,81
-_ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Placebo,percent,proportion,,ethnic,41,1,2,83
-_ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Xanomeline Low Dose,percent,proportion,,ethnic,41,2,2,78
-_ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Xanomeline High Dose,percent,proportion,,ethnic,41,3,2,81
+_ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Placebo,percent,proportion,,ethnic,41,1,2,96.511627907
+_ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Xanomeline Low Dose,percent,proportion,,ethnic,41,2,2,92.857142857
+_ALL_,_ALL_,_ALL_,NOT HISPANIC OR LATINO,Xanomeline High Dose,percent,proportion,,ethnic,41,3,2,96.428571429
 _ALL_,_ALL_,_ALL_,_NONMISS_,Placebo,count,quantity,,,42,1,1,86
 _ALL_,_ALL_,_ALL_,_NONMISS_,Xanomeline Low Dose,count,quantity,,,42,2,1,84
 _ALL_,_ALL_,_ALL_,_NONMISS_,Xanomeline High Dose,count,quantity,,,42,3,1,84
-_ALL_,_ALL_,_ALL_,_NONMISS_,Placebo,percent,proportion,,ethnic,42,1,2,86
-_ALL_,_ALL_,_ALL_,_NONMISS_,Xanomeline Low Dose,percent,proportion,,ethnic,42,2,2,84
-_ALL_,_ALL_,_ALL_,_NONMISS_,Xanomeline High Dose,percent,proportion,,ethnic,42,3,2,84
+_ALL_,_ALL_,_ALL_,_NONMISS_,Placebo,percent,proportion,,ethnic,42,1,2,100
+_ALL_,_ALL_,_ALL_,_NONMISS_,Xanomeline Low Dose,percent,proportion,,ethnic,42,2,2,100
+_ALL_,_ALL_,_ALL_,_NONMISS_,Xanomeline High Dose,percent,proportion,,ethnic,42,3,2,100
