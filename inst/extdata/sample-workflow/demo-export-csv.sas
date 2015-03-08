@@ -309,6 +309,10 @@ data report;
    set ageres weightres sexres agegrres raceres ethnicres;
 run;
 
+proc sort data=report;
+    by mainord ord;
+run;
+
 options nodate nobyline nonumber nocenter
         formchar='|_---|+|---+=|-/\<>*' charcode;
 

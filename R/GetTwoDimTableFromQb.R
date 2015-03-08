@@ -34,9 +34,9 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   attributesRq<- GetAttributesSparqlQuery( forsparqlprefix )
   attributes<- sparql.rdf(store, attributesRq)
 
-  if (! setequal(union(rowdim,coldim),union(dimensions,attributes)) ) {
-    stop("union of rowdim and coldim is not the union of dimensions and attributes in the cube")
-  }
+##  if (! setequal(union(rowdim,coldim),union(dimensions,attributes)) ) {
+##    stop("union of rowdim and coldim is not the union of dimensions and attributes in the cube")
+##  }
   if ( length(intersect(rowdim,coldim)) ) {
     stop("rowdim and coldim are not disjoint")
   }
@@ -58,13 +58,13 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   colnamesRowDim<- sub("prop:", "", rowdim)
   uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
   colnames(uqr)<- colnamesRowDim
-  ## XX assuming rowno is a unused column name
-  rownoseq<- 1:nrow(uqr)
-  uqr[,"rowno"]<- rownoseq
+  ## XX assuming irowno is a unused column name
+  irownoseq<- 1:nrow(uqr)
+  uqr[,"irowno"]<- irownoseq
   observationsRowDimE<-merge(observationsRowDim, uqr, by=colnamesRowDim, all=TRUE)
   ## XX assuming s is the name of the IRI
 
-  ## head(observationsRowDimE[,c("s","rowno")])
+  ## head(observationsRowDimE[,c("s","irowno")])
 
 
   coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
@@ -73,11 +73,12 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   ## using data.frame to handle the case where the result is a vector
   uqc<-data.frame(unique(observationsColDim[,colnamesColDim]), stringsAsFactors=FALSE)
   colnames(uqc)<- colnamesColDim
-  colnoseq<- 1:nrow(uqc)
-  uqc[,"colno"]<- colnoseq
+  icolnoseq<- 1:nrow(uqc)
+  uqc[,"icolno"]<- icolnoseq
+  print(uqc)
   ## head(uqc)
   observationsColDimE<-merge(observationsColDim,uqc, by=colnamesColDim, all=TRUE)
-  ## head(observationsColDimE[,c("s","colno")])
+  ## head(observationsColDimE[,c("s","icolno")])
 
   nIRIs<-  c(sub("prop:", "", dimensions), paste0(sub("prop:", "", dimensions), "IRI"),"measureIRI" )
 
@@ -98,54 +99,57 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   ## any(duplicated(observationsRowDimE$s))
   ## any(duplicated(observationsColDimE$s))
 
-  obsRowColNo<- merge( observationsRowDimE[,c("s","rowno")], observationsColDimE[,c("s","colno")], by="s", all=TRUE)
-  ## any(duplicated(obsRowColNo$s))
-  ## duplicated(obsRowColNo[,c("rowno","colno")])
-  ## any(duplicated(obsRowColNo[,c("rowno","colno")]))
-  if (any(duplicated(obsRowColNo[,c("rowno","colno")]))) {
+  obsRowIcolno<- merge( observationsRowDimE[,c("s","irowno")], observationsColDimE[,c("s","icolno")], by="s", all=TRUE)
+  ## any(duplicated(obsRowIcolno$s))
+  ## duplicated(obsRowIcolno[,c("irowno","icolno")])
+  ## any(duplicated(obsRowIcolno[,c("irowno","icolno")]))
+  if (any(duplicated(obsRowIcolno[,c("irowno","icolno")]))) {
     stop("Unexpected an observation is not uniquely identified by row and column number")
   }
 
-  if (any(duplicated(obsRowColNo[,c("rowno","colno")]))) {
-##  obsRowColNo[ which(duplicated(obsRowColNo[,c("rowno","colno")])), ]
-    ##  obsRowColNo
-    stop("unexpected dublicates - see program code")
+  if (any(duplicated(obsRowIcolno[,c("irowno","icolno")]))) {
+##  obsRowIcolno[ which(duplicated(obsRowIcolno[,c("irowno","icolno")])), ]
+    ##  obsRowIcolno
+    stop("unexpected duplicates - see program code")
   }
 
-  observationsDescX<- merge( observationsDesc, obsRowColNo, by="s", all=TRUE)
+  observationsDescX<- merge( observationsDesc, obsRowIcolno, by="s", all=TRUE)
 
-  tableFrame<- data.frame(rowno=rep(rownoseq, each=length(colnoseq) ), colno=rep(colnoseq, times=length(rownoseq) ), stringsAsFactors=FALSE )
+  tableFrame<- data.frame(irowno=rep(irownoseq, each=length(icolnoseq) ), icolno=rep(icolnoseq, times=length(irownoseq) ), stringsAsFactors=FALSE )
 
-  observationsDescXX<- merge( tableFrame, observationsDescX, by=c("rowno","colno"), sort=TRUE, all=TRUE)
+  observationsDescXX<- merge( tableFrame, observationsDescX, by=c("irowno","icolno"), sort=TRUE, all=TRUE)
 
-  ## display observationsDescXX as a table showing row variables when rowno changes
-  ## or alternatively when colno==1
-  ## when rowno is 1 and colno is 1 then write the row and column headers
+  ## display observationsDescXX as a table showing row variables when irowno changes
+  ## or alternatively when icolno==1
+  ## when irowno is 1 and icolno is 1 then write the row and column headers
 
 presTable<- uqr
-for (colno in colnoseq) {
-  presTable[,paste0("col", colno)]<- rep( NA, length(rownoseq))
+for (icolno in icolnoseq) {
+  presTable[,paste0("col", icolno)]<- rep( NA, length(irownoseq))
 }
-for (colno in colnoseq) {
-  for (rowno in rownoseq) {
-    presTable[rowno,paste0("col", colno)]<- observationsDescXX[observationsDescXX$rowno==rowno & observationsDescXX$colno==colno, "measure"]
+for (icolno in icolnoseq) {
+  for (irowno in irownoseq) {
+    presTable[irowno,paste0("col", icolno)]<-
+      observationsDescXX[observationsDescXX$irowno==irowno & observationsDescXX$icolno==icolno, "measure"]
 }
 }
 
-  attr(presTable, "rowLabelDf")<- data.frame(sparql.rdf(store,
-  GetDimsubsetDescSparqlQuery(forsparqlprefix, domainName, rowdim)),
+  attr(presTable, "rowLabelDf")<- data.frame(
+    sparql.rdf(store, GetDimsubsetDescSparqlQuery(forsparqlprefix, domainName, rowdim)),
   stringsAsFactors=FALSE )
   
-  attr(presTable, "colLabelDf")<- data.frame(sparql.rdf(store, GetDimsubsetDescSparqlQuery(forsparqlprefix, domainName, coldim)), stringsAsFactors=FALSE )
+  attr(presTable, "colLabelDf")<- data.frame(
+    sparql.rdf(store, GetDimsubsetDescSparqlQuery(forsparqlprefix, domainName, coldim)),
+    stringsAsFactors=FALSE )
 
   obsURI<- observationsDescXX[ , nIRIs ]
   names(obsURI)[1:length(dimensions)]<- paste0(sub("prop:", "", dimensions),"valueIRI")
 
-attr(presTable, "rowlabelURI")<- "to be defined"
-attr(presTable, "collabelURI")<- "to be defined"
-attr(presTable, "obsURI" )<- obsURI
-attr(presTable, "observationsDesc")<- observationsDescXX 
-attr(presTable, "colnoseq")<- colnoseq
-attr(presTable, "rownoseq")<- rownoseq
-presTable
+  attr(presTable, "rowlabelURI")<- "to be defined"
+  attr(presTable, "collabelURI")<- "to be defined"
+  attr(presTable, "obsURI" )<- obsURI
+  attr(presTable, "observationsDesc")<- observationsDescXX 
+  attr(presTable, "icolnoseq")<- icolnoseq
+  attr(presTable, "irownoseq")<- irownoseq
+  presTable
 }

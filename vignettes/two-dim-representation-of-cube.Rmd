@@ -51,7 +51,7 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 View observation "ds:obs7"
 
 ```{r, eval=TRUE}
-cube.observations.rq<-  paste( forsparqlprefix,
+observations.rq<-  paste( forsparqlprefix,
 '
 select *
 where { 
@@ -67,7 +67,51 @@ limit 30
 )
 
 cube.observations<- sparql.rdf(checkCube, cube.observations.rq)
-knitr::kable(head(cube.observations, 10))
+knitr::kable(cube.observations)
+
+```
+
+
+## Current - 08-mar-2015
+
+```{r, echo=TRUE}
+cols.rq<-  paste( forsparqlprefix,
+'
+select distinct ?colno ?cellpartno
+where { 
+?s a qb:Observation ; 
+prop:colno ?colno ;
+prop:cellpartno ?cellpartno .
+}
+order by ?colno ?cellpartno
+',
+"\n"                               
+)
+
+cols<- sparql.rdf(checkCube, cols.rq)
+knitr::kable(cols)
+
+dimensions<- sparql.rdf(checkCube, GetDimensionsSparqlQuery( forsparqlprefix ) )
+attributesDf<- sparql.rdf(checkCube, GetAttributesSparqlQuery( forsparqlprefix ))
+
+## rowdim<- setdiff(union(dimensions,attributesDf), c("prop:saffl"))
+## rowdim<- union(dimensions,attributesDf), c("prop:saffl")
+
+## rowdim<- c("prop:saffl", "prop:race", "prop:sex", "prop:factor",
+## "prop:procedure", "prop:unit", "prop:denominator" )
+
+rowdim<- c("prop:rowno", "prop:agegr1", "prop:race", "prop:ethnic", "prop:sex" )
+
+coldim<- c("prop:colno", "prop:cellpartno", "prop:trt01a", "prop:procedure", "prop:unit", "prop:denominator" )
+coldim<- c("prop:colno", "prop:cellpartno", "prop:trt01a", "prop:factor" )
+
+qbtest<- GetTwoDimTableFromQb( checkCube, forsparqlprefix, domainName, rowdim, coldim )
+
+qbtest
+names(attributes(qbtest))
+options(width=200)
+knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
+
 
 ```
 
