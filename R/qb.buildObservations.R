@@ -107,7 +107,6 @@ for (i in 1:nrow(obsData)){
 
    #--------------- Attributes -------------------------------------------------
   for (qbattr in skeletonSource[ skeletonSource$compType=="attribute", "compName" ]){
-    ## TODO: determine type of attributes in another manner
     print(qbattr)
     if (qbattr %in% c("denominator")) {
    add.data.triple(store,

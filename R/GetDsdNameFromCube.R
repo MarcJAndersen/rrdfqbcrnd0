@@ -15,7 +15,6 @@ where {
 ))
 tempstrvec<- unlist(strsplit( tempstr, "/"))
 dsdName<- tempstrvec[length(tempstrvec)]
-domainName<- strsplit(dsdName,"-")[[1]][[2]]
 
 dsdName
 }

@@ -380,6 +380,10 @@ data forexport;
     array measn(*) coln1 coln2 coln3;
     array measnpct(*) coln1 coln2 coln3;
     array atrt01a(3) $50 ("Placebo" "Xanomeline Low Dose"   "Xanomeline High Dose");
+    keep colno rowno cellpartno;
+
+    rowno+1;
+    
     do i=1 to dim(adim);
         select;
         when (adim(i)="N" and col0="n[a]") do;
@@ -397,6 +401,8 @@ data forexport;
     select;
     when (ord<0) do;
         do i=1 to dim(atrt01a);
+            colno=i;
+            cellpartno=1;
             factor=varn;
             procedure=_name_;
             denominator=" ";
@@ -407,6 +413,8 @@ data forexport;
         end;
     when (varn in ("sex", "agegr1", "race", "ethnic")) do;
         do i=1 to dim(atrt01a);
+            colno=i;
+            cellpartno=1;
             factor="quantity";
             procedure="count";
             denominator=" ";
@@ -415,6 +423,8 @@ data forexport;
             output;
             end;
         do i=1 to dim(atrt01a);
+            colno=i;
+            cellpartno=2;
             factor="proportion";
             procedure="percent";
             denominator=varn;
@@ -451,6 +461,11 @@ length compType compName codeType nciDomainValue compLabel Comment $512;
     compType= "measure"; compName="measure";      compLabel="Value of the statistical measure"; codeType=" "; nciDomainValue=" "; output;
     compType= "attribute"; compName="unit";        compLabel="Unit of measure"; codeType=" "; nciDomainValue=" "; output;
     compType= "attribute"; compName="denominator"; compLabel="Denominator for a proportion (oskr) subset on which a statistic is based"; codeType=" "; nciDomainValue=" "; output;
+
+/* presentation stuff */    
+    compType= "attribute"; compName="colno"; compLabel="Column number for two dimensional represenation"; codeType=" "; nciDomainValue=" "; output;
+    compType= "attribute"; compName="rowno"; compLabel="Row number for two dimensional represenation"; codeType=" "; nciDomainValue=" "; output;
+    compType= "attribute"; compName="cellpartno"; compLabel="Position within cell given by row and column number for two dimensional represenation"; codeType=" "; nciDomainValue=" "; output;
     
 run;
 
