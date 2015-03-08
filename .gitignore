@@ -14,3 +14,4 @@ man/
 
 inst/extdata/sample-workflow/demo-export-csv.log
 inst/extdata/sample-workflow/demo-export-csv.lst
+inst/extdata/sample-workflow/demo.log
