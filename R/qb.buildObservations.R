@@ -3,10 +3,15 @@
 ##' 
 ##' @inheritParams BuildCubeFromDataFrames
 ##' @inheritParams qb.buildDSD
-##' @param recode.list A list of lists specifying how to recode the value in the data frame. If NULL then the recode.list is generated from the store
-##' @param procedure2format A list specifying the format for the descriptive statistics. If NULL then the default list is used
+##' @param recode.list A list of lists specifying how to recode the
+##' value in the data frame. If NULL then the recode.list is generated
+##' from the store
+##' @param procedure2format A list specifying the format for the
+##' descriptive statistics. If NULL then the default list is used
 ##' @return Always TRUE
-qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix, dsdName, recode.list, procedure2format ) {
+##' 
+qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix,
+                                dsdName, recode.list, procedure2format ) {
 
 colnames(obsData) <- tolower(colnames(obsData))  ## Convert column names to lowercase for later matching
 
@@ -37,46 +42,9 @@ if (is.null(procedure2format)) {
 if (is.null(recode.list)) {
 forsparqlprefix<- Get.rq.prefixlist.df( prefixlist )
 
-## first find the qb:DataSet
-## ds:dataset-dm  a          qb:DataSet ;
-## Then find the qb:structure
-##         qb:structure         ds:dsd-dm ;
-## Then the qb:DataStructureDefinition
-## ds:dsd-dm  a       qb:DataStructureDefinition ;
-## Which gives the qb:component
-##         qb:component  dccs:denominator , dccs:unit , dccs:measure , dccs:saffl , dccs:trt01a , dccs:sex , dccs:race , dccs:procedure , dccs:factor .
-## Among these find the qb:ComponentSpecification ;
-## dccs:saffl  a         qb:ComponentSpecification ;
-##         qb:dimension  prop:saffl .
-## which are dimensions and contains qb:DimensionProperty
-## prop:saffl  a        rdf:Property , qb:DimensionProperty ;
-##         rdfs:label   "Safety Population Flag" ;
-##         rdfs:range   code:Saffl ;
-##         qb:codeList  code:saffl .
-## and have a qb:codeList
 
 ## identify codelists
-codelists.rq<-   paste(forsparqlprefix,
-'
-select distinct ?p ?cl ?prefLabel
-where {
-?DataStructureDefinition a qb:DataStructureDefinition ;
-   qb:component ?component .
-?component a qb:ComponentSpecification .
-?component qb:dimension ?p .
-?p qb:codeList ?c .
-?c skos:hasTopConcept ?cl .
-?cl skos:prefLabel ?prefLabel .
-values ( ?DataStructureDefinition ) {
-',
-paste0( "(", "ds:", dsdName, ")"),
-'
-}
-}
-order by ?p ?cl ?prefLabel
-'
-)
-
+codelists.rq<-   GetCodeListSparqlQuery(forsparqlprefix, dsdName )
 ## cat(codelists.rq)
 cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors=FALSE)
 
@@ -129,24 +97,31 @@ for (i in 1:nrow(obsData)){
   #--------------- Measure ----------------------------------------------------
   ## Set the format of the Measure based on the Procedure value
   procedure <- paste0(obsData[i,"procedure"])
-  xsdFormat= procedure2format[[ procedure ]]
+  xsdFormat<- procedure2format[[ procedure ]]
 
-   add.data.triple(store,
-                   paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixPROP, "measure"),
-                   paste0(obsData[i,"measure"]),
-                   xsdFormat)
+  add.data.triple(store,
+                  paste0(prefixlist$prefixDS, obsNum),
+                  paste0(prefixlist$prefixPROP, "measure"),
+                  paste0(obsData[i,"measure"]),
+                  xsdFormat)
 
    #--------------- Attributes -------------------------------------------------
-   add.data.triple(store,
-                   paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixPROP, "unit"),
-                   paste0(obsData[i,"unit"]),
-                   "string")
+  for (qbattr in skeletonSource[ skeletonSource$compType=="attribute", "compName" ]){
+    ## TODO: determine type of attributes in another manner
+    print(qbattr)
+    if (qbattr %in% c("denominator")) {
    add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
                    paste0(prefixlist$prefixPROP, "denominator"),
                    paste0(obsData[i,"denominator"]))
+    } else {
+   add.data.triple(store,
+                   paste0(prefixlist$prefixDS, obsNum),
+                   paste0(prefixlist$prefixPROP, qbattr),
+                   paste0(obsData[i,qbattr]),
+                   "string")
+    }
+ }
 }
 
 invisible(TRUE)

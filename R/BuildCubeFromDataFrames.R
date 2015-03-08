@@ -67,7 +67,7 @@ prefixlist<- qb.def.prefixlist(store, prefixes)
 
 qb.buildSkeleton(store, prefixlist, obsData, skeletonSource)
 
-# Issue How to handle multiple terminlogy files for code list generation?
+## TODO: Issue How to handle multiple terminlogy files for code list generation?
 qb.buildDSD(store, prefixlist, obsData, skeletonSource,
             dsdURIwoprefix=paste0("dataset-",domainName),
             dsdName=paste0("dsd-",domainName),
