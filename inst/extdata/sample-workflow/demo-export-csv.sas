@@ -381,7 +381,7 @@ data forexport;
     array measnpct(*) colna1 colna2 colna3;
     array atrt01a(3) $50 ("Placebo" "Xanomeline Low Dose"   "Xanomeline High Dose");
     keep colno rowno cellpartno;
-
+    format colno rowno cellpartno z5.0;
     rowno+1;
     
     do i=1 to dim(adim);
