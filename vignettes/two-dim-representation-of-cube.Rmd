@@ -72,7 +72,7 @@ knitr::kable(cube.observations)
 ```
 
 
-## Current - 08-mar-2015
+## Current - 10-mar-2015
 
 ```{r, echo=TRUE}
 cols.rq<-  paste( forsparqlprefix,
@@ -112,6 +112,161 @@ names(attributes(qbtest))
 options(width=200)
 knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
 
+oDx<-attr(qbtest,"observationsDesc")
+oDxx<- oDx[! is.na(oDx$s),]
+oD<- oDxx[order(strtoi(oDxx$rowno)),]
+presrowvarindex<- unique(oD$rowno)
+colvarindex<- unique(oD$colno)
+cellpartnoindex<- unique(oD$cellpartno)
+presrowvarindex
+colvarindex
+cellpartnoindex
+oD[,c("s","rowno","colno","cellpartno")]
+
+presrowvarvalue<- gsub("prop:(.*)","\\1value",rowdim)
+presrowvarIRI<- gsub("prop:(.*)","\\1IRI",rowdim)
+presrowvarlabel<- gsub("prop:(.*)","\\1label",rowdim)
+
+file<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "test.html")
+# file<- file.path(tempdir(),"test.html")
+append<- TRUE
+print(file)
+cat("<!DOCTYPE HTML>\n", file=file, append=FALSE)
+cat('
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DEMO table as html</title>
+   <script src="jquery-2.1.3.min.js"></script>
+   <link rel="stylesheet" href="jquery-ui-1.11.3.custom/jquery-ui.css"/>
+   <script src="jquery-ui-1.11.3.custom/jquery-ui.min.js"></script>
+   <script src="RDFa.min.1.4.0.js"></script>
+
+<style>
+#table {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:1000px;
+    width:750px;
+    float:left;
+    padding:5px;
+}
+#drop{
+    width:300px;
+    float:left;
+    padding:10px;
+}
+</style>
+
+</head>
+<script>
+"use strict";
+
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData("Text",ev.target.id);
+console.log("Dragging: ", ev.target.id);
+}
+
+function drop(ev)
+{
+ev.preventDefault();
+var data=ev.dataTransfer.getData("Text");
+console.log("Dropping: ", data);
+ev.target.appendChild(document.getElementById(data));
+}
+
+$(document).ready(function(){
+
+GreenTurtle.attach(document)
+
+})
+                  
+</script>
+<body>
+<h1>DEMO table as RDFa</h1>
+'
+, file=file, append=TRUE)
+
+cat('<div id="container">', file=file, append=TRUE)
+
+cat("<div id='table'>\n", file=file, append=TRUE)
+cat("<table border>\n", file=file, append=TRUE)
+or<-1
+
+## make the header row(s) for the columns
+
+for (rr in presrowvarindex) {
+  cat("<tr>", file=file, append=TRUE)
+print(rr)
+  ## make the row identification
+  for (cc in colvarindex) {
+print(cc)
+    cat("<td>", file=file, append=TRUE)
+cpindex<-0
+    for (cp in cellpartnoindex) {
+print(cp)
+cpindex<- cpindex+1
+if (cpindex>1) {
+## separator between cells should be taken from data
+      cat(" ", file=file, append=TRUE)
+}
+    if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
+## The observation
+      ## next line is for simple fly-over
+      cat(paste0("<a title=\"", oD$measureIRI[or], "\">"), file=file, append=TRUE)
+
+      cat(paste0('<span ', 'id="', gsub("ds:","",oD$s[or]), '"',
+                 'resource="', oD$s[or],'"',
+                 ' typeof="qb:Observation" draggable="true" ondragstart="drag(event)" >'),
+          file=file, append=TRUE)
+cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">'), file=file, append=TRUE)
+      
+for (prop in dimensions) {
+cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("prop:", "", prop)], '">'), file=file, append=TRUE)
+}
+
+## formatting to applied to measure
+      cat(paste0(oD$measure[or]), file=file, append=TRUE)
+
+for (prop in dimensions) {
+cat( '</span>', file=file, append=TRUE)
+}
+cat( '</span>', file=file, append=TRUE)
+cat( '</span>', file=file, append=TRUE)
+
+      cat(paste0("</a>"), file=file, append=TRUE)
+      or<- or+1
+    }
+    }
+    cat("</td>", file=file, append=TRUE)
+  }
+cat("</tr>", file=file, append=TRUE)
+  }
+cat("</table>\n", file=file, append=TRUE)
+cat("</div>\n", file=file, append=TRUE)
+
+cat('
+<div id="drop">
+Drag and drop a row to here.
+<table>
+<tr><td>
+<span  style="width:100px" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">Got it</span>
+</td></tr>
+</table>
+</div> 
+',  file=file, append=TRUE)                 
+cat('
+</div>
+</body>
+</html>
+', file=file, append=TRUE)
+print(file)
 
 ```
 
@@ -266,6 +421,7 @@ presrowvarlabel<- gsub("prop:(.*)","\\1label",rowdim)
 presrowvarindex<- 1:length(rowdim)
 ## make the header row(s) for the columns
 ## TODO the code below does only work for this special case
+cat("<tr>", file=file, append=TRUE)
 for (vi in presrowvarindex) {
     cat("<th>", file=file, append=TRUE)
       ## next line is for simple fly-over
