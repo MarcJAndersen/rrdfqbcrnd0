@@ -107,7 +107,6 @@ for (i in 1:nrow(obsData)){
 
    #--------------- Attributes -------------------------------------------------
   for (qbattr in skeletonSource[ skeletonSource$compType=="attribute", "compName" ]){
-    print(qbattr)
     if (qbattr %in% c("denominator")) {
    add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
