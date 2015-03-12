@@ -31,15 +31,18 @@ GetSQLFromCube<- function( store, xdsdName="adsl"  ) {
         vnx<- paste0( "a.", toupper(vn))
       }
       if (vn %in% gsub("prop:", "", c(dimensions)) & ! (vn %in% c("factor", "procedure")) )  {
-        if (x[paste0(vn,"value")] != "_ALL_") {
+        if (x[paste0(vn,"value")] == "_ALL_") {
+          selectExpr<- c(selectExpr, paste("'_ALL_' as", toupper(vn), collapse=" "))
+        } else if (x[paste0(vn,"value")] == "_NONMISS_") {
+          selectExpr<- c(selectExpr, paste("'_ALL_' as", toupper(vn), collapse=" "))
+        } else {
           selectExpr<- c(selectExpr, vnx)
           groupbyExpr<- c(groupbyExpr,vnx)
-        } else {
-          selectExpr<- c(selectExpr, paste("'_ALL_' as", toupper(vn), collapse=" "))
         }
       }
     }
-
+  }
+             
     ## if (!(x["factorvalue"] %in% c("quantity","proportion"))) {
     ##   SQLexpr<- c(SQLexpr, tolower(x["factorvalue"]))
     ##   }
