@@ -1,0 +1,33 @@
+---
+title: "Create DEMO table as csv file"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create DEMO table from csv file}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+# Create DEMO sample table from CSV file
+
+This script creates the result and codelist for a simple DEMO table.
+
+```{r, eval=TRUE}
+library(rrdfqbcrnd0)
+
+RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
+cat("DEMO cube stored as ", demo.cube.fn, "\n")
+
+dataCubeFile<- demo.cube.fn
+checkCube <- new.rdf()  # Initialize
+load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
+summarize.rdf(checkCube)
+
+```
+
+Note: the TTL file should be moved manually to the extdata/sample-rdf directory.
+
+
+
