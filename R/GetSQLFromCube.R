@@ -41,7 +41,7 @@ GetSQLFromCube<- function( store, xdsdName="adsl"  ) {
         }
       }
     }
-  }
+  
              
     ## if (!(x["factorvalue"] %in% c("quantity","proportion"))) {
     ##   SQLexpr<- c(SQLexpr, tolower(x["factorvalue"]))
