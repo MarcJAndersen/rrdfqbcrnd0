@@ -1,0 +1,134 @@
+---
+title: "Create ADSL as TTL file"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create ADSL as TTL file}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Create DEMO sample table from CSV file
+
+This script creates a turtle version of the ADSL dataset.
+
+```{r, eval=FALSE}
+library(rrdf)
+
+require(foreign)
+xptdirectory<- tempdir()
+
+fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
+adsl<-read.xport(fnadsl)
+
+## Use other method for reading sas - see elsewhere
+
+## http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf
+## install.packages("RSQLite")
+
+library(RSQLite)
+## create a SQLite instance and create one connection.
+m <- dbDriver("SQLite")
+## initialize a new database to a tempfile and copy some data.frame
+## from the base package into it
+tfile <- tempfile()
+con <- dbConnect(m, dbname = tfile)
+dbWriteTable(con, "adsl", adsl)
+dbDisconnect(con)
+# show the file name
+tfile
+system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
+#  sqlite3 //tmp/Rtmp4V2mc0/filef2a564a7b7e .dump > xx.sql
+# change TEXT to VARCHAR(1000)
+# remove top 2 lines with PRAGMA
+# in insert replace "adsl"  with adsl
+# add
+# PRIMARY KEY (USUBJID)
+# ./dump-rdf -o /tmp/xx-map.ttl -l xx.sql
+# see also RSQlite on dbSendQuery-methods - that can make more
+# https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html
+## see file:///opt/d2rq-0.8.1/doc/dump-rdf.html
+
+## -b option does not work with -l
+system(paste("/opt/d2rq-0.8.1/generate-mapping  -o /tmp/adsl-map.ttl -l /tmp/xx.sql"))
+system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://localhost/datasets/ -o /tmp/adsl.ttl -l /tmp/xx.sql /tmp/adsl-map.ttl"))
+" ))
+ 
+1
+
+### This could also work ..
+## m <- dbDriver("SQLite")
+## tfile <- tempfile()
+## con <- dbConnect(m, dbname = tfile)
+## s <- sprintf("create table %s(%s, primary key(%s))", "adsl",
+## 		paste(names(adsl), collapse = ", "),
+## 		paste(names(adsl)[c(1,2)],collapse=", ")
+##              )
+## dbGetQuery(con, s)
+
+## dbWriteTable(con, "adsl", adsl,append=TRUE)
+## dbDisconnect(con)
+## tfile
+
+## system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
+## system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://localhost:3030/ -o /tmp/adsl.ttl -l /tmp/xx.sql"))
+
+
+
+```
+
+Note: the TTL file should be moved manually to the extdata/sample-rdf directory.
+
+
+### Read in the file
+
+```{r, eval=FALSE}
+
+dataFilemap<- system.file("extdata/sample-rdf", "adsl-map.ttl", package="rrdfqbcrnd0")
+dataFilemap
+dataFile<- system.file("extdata/sample-rdf", "adsl.ttl", package="rrdfqbcrnd0")
+dataFile
+
+store <- new.rdf()  # Initialize
+load.rdf(dataFilemap, format="TURTLE", appendTo= store)
+load.rdf(dataFile, format="TURTLE", appendTo= store)
+summarize.rdf(store)
+
+rq<-"
+prefix map: <#> 
+prefix db: <> 
+prefix vocab: <vocab/> 
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> 
+prefix jdbc: <http://d2rq.org/terms/jdbc/> 
+select * where {
+?mapColumn a d2rq:PropertyBridge ;
+  d2rq:column ?d2rqcolumn ;
+  d2rq:datatype ?d2rqdatatype 
+.
+# ?mapColumn ?p ?o.
+}
+"
+
+res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
+str(res)
+res
+
+
+
+rq<-"
+select * where {
+<http://localhost/datasets/ADSL/01-718-1254> ?p ?o .
+}
+"
+
+res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
+str(res)
+res$pclean<- gsub("http://localhost/datasets/vocab/ADSL_", "", res$p)
+res[,c("pclean","o")]
+
+
+```
