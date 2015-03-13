@@ -1,5 +1,5 @@
 ---
-title: "Create Integrity Contraints SPARQL Queries from RDF data qubce definition"
+title: "Create Integrity Contraints SPARQL Queries from RDF data cube definition"
 author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
 ---
@@ -18,7 +18,7 @@ IC-19 is two queries, so it is split into IC-19a and IC-19b: For IC-20
 and IC-21 special handling are needed. The queries are templates and
 the value of p should be inserted as $p in the template.
 
-```{r, results='asis', eval=TRUE}
+```{r, results='asis', eval=FALSE}
 
 library(RCurl)
 library(XML)
@@ -102,7 +102,7 @@ for (i in 1:(length(both)-1)) {
 
 
 Here are the integrity constraints:
-```{r, results='asis', eval=TRUE}
+```{r, results='asis', eval=FALSE}
 for (icname in names(qbIClist)) {
   ##    fileConn<-file(paste0(icname, ".rq"))
   icall<- qbIClist[[icname]]
@@ -120,7 +120,7 @@ However, it did not work - hence the setwd below-
 devtools::use_data(qbIClist,pgk="../..",overwrite=TRUE)
 ```
 
-```{r, results='asis', eval=TRUE}
+```{r, results='asis', eval=FALSE}
 
 # This stores the qbIClist in the data directory
 # Consider making it internal

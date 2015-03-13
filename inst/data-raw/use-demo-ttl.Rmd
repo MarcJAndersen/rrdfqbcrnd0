@@ -16,9 +16,7 @@ This script creates the result and codelist for a simple DEMO table.
 ```{r, eval=TRUE}
 library(rrdfqbcrnd0)
 
-## TODO: decide on where to store 
-dataCubeSpec<- "../../../../phrmwg/rdf-cdisc-org-store/rdf-data-cube/cube.ttl"
-dataCubeSpec<- "/home/ma/projects/phrmwg/rdf-cdisc-org-store/rdf-data-cube/cube.ttl"
+dataCubeSpec<- system.file("extdata/sample-rdf", "cube.ttl", package="rrdfqbcrnd0")
 
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.TTL", package="rrdfqbcrnd0")
 

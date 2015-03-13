@@ -18,16 +18,16 @@ This script creates the result and codelist for a simple DM table.
 
 ```{r, results='asis', eval=TRUE}
 
-library(devtools)
+library(rrdfqbcrnd0)
 
 library(foreign)
 library(sqldf)
 
-xptdirectory<- tempdir()
+# xptdirectory<- tempdir()
+#fnadsl<- paste(xptdirectory,"/", "adsl", ".xpt",sep="")
+# download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadsl)
 
-fnadsl<- paste(xptdirectory,"/", "adsl", ".xpt",sep="")
-
-download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadsl)
+fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 
 adsl<- read.xport(fnadsl)
 adsl$TRT01A<- as.character(adsl$TRT01A)

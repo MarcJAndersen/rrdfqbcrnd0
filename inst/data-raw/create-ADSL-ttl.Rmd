@@ -18,7 +18,6 @@ library(rrdf)
 
 require(foreign)
 xptdirectory<- tempdir()
-
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 adsl<-read.xport(fnadsl)
 
