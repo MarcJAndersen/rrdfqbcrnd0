@@ -1,0 +1,106 @@
+---
+title: "Usage of cube DEMO"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Usage of cube DEMO}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Create DEMO sample table from CSV file
+
+This script creates the result and codelist for a simple DEMO table.
+
+```{r, eval=TRUE}
+library(rrdfqbcrnd0)
+
+## TODO: decide on where to store 
+dataCubeSpec<- "../../../../phrmwg/rdf-cdisc-org-store/rdf-data-cube/cube.ttl"
+dataCubeSpec<- "/home/ma/projects/phrmwg/rdf-cdisc-org-store/rdf-data-cube/cube.ttl"
+
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.TTL", package="rrdfqbcrnd0")
+
+store <- new.rdf()  # Initialize
+load.rdf(dataCubeSpec, format="TURTLE", appendTo= store)
+cat("Loading cube from ", dataCubeFile, "\n")
+load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+summarize.rdf(store)
+
+```
+
+Note: the TTL file should be moved manually to the extdata/sample-rdf directory.
+
+
+```{r, eval=TRUE}
+forsparqlprefix<-"
+prefix prov:  <http://www.w3.org/ns/prov#>
+prefix mms:   <http://rdf.cdisc.org/mms#>
+prefix prop:  <http://www.example.org/dc/demo/prop/>
+prefix code:  <http://www.example.org/dc/code/>
+prefix qb:    <http://purl.org/linked-data/cube#>
+prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+prefix dccs:  <http://www.example.org/dc/demo/dccs/>
+prefix dcat:  <http://www.w3.org/ns/dcat#>
+prefix pav:   <http://purl.org/pav>
+prefix dct:   <http://purl.org/dc/terms/>
+prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
+prefix owl:   <http://www.w3.org/2002/07/owl#>
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix cts:   <http://rdf.cdisc.org/ct/schema#>
+prefix skos:  <http://www.w3.org/2004/02/skos/core#>
+prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>
+prefix ds:    <http://www.example.org/dc/demo/ds/>
+"
+
+dsdname.rq<- "
+select ?s
+where {
+?s a qb:DataStructureDefinition
+} 
+"
+DataStructureDefinition<- data.frame(sparql.rdf(store, paste( forsparqlprefix, dsdname.rq)), stringsAsFactors=FALSE )
+knitr::kable(DataStructureDefinition)
+
+dimensions.rq<- "
+select *
+where {
+?s a qb:DataStructureDefinition .
+?s qb:component [ qb:dimension ?dimension ;  ] .
+} 
+"
+dimensions<- data.frame(sparql.rdf(store, paste( forsparqlprefix, dimensions.rq)), stringsAsFactors=FALSE )
+knitr::kable(dimensions)
+
+
+rq<-  paste( forsparqlprefix,
+'
+select *
+where { 
+?s a qb:Observation ; 
+?p ?o ;
+.
+[] qb:dimension ?p .
+values (?s) {
+(ds:obs114)
+}
+}
+# limit 30
+',
+"\n"                               
+)
+
+cube.observations<- sparql.rdf(store, rq)
+knitr::kable(cube.observations)
+
+```
+
+### Check the statistics
+
+```{r, eval=TRUE}
+
+stmtSQL<- GetSQLFromCube(checkCube) 
+cat(stmtSQL$summStatSQL) 
+
+```
