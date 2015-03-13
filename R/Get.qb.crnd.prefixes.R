@@ -1,6 +1,6 @@
 ##' Add prefixes to a rrdf store
 ##'
-##' The function defines the domain specifif prefixes used for the rdf
+##' The function defines the domain specific prefixes used for the rdf
 ##' data cube for the Clinical Research and Development Analysis
 ##' Results Data
 ##' 
