@@ -30,4 +30,11 @@ summarize.rdf(checkCube)
 Note: the TTL file should be moved manually to the extdata/sample-rdf directory.
 
 
+### Check the statistics
 
+```{r, eval=TRUE}
+
+stmtSQL<- GetSQLFromCube(checkCube) 
+cat(stmtSQL$summStatSQL) 
+
+```
