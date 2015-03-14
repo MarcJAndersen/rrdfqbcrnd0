@@ -13,6 +13,10 @@ vignette: >
 
 This script creates the result and codelist for a simple DM table.
 
+```{r, results='asis', eval=FALSE}
+knit(input="inst/data-raw/create-qb-IC-dataset.Rmd",
+     output="inst/data-raw/create-qb-IC-dataset.md")
+```
 
 ## Get the data and prepare for derivation of summary statistics
 

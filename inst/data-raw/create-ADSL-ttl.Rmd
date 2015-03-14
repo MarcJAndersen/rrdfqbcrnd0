@@ -9,14 +9,14 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-# Create DEMO sample table from CSV file
+# Create turtle version of ADSL dataset
 
 This script creates a turtle version of the ADSL dataset.
 
 ```{r, eval=FALSE}
 library(rrdf)
 
-require(foreign)
+library(foreign)
 xptdirectory<- tempdir()
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 adsl<-read.xport(fnadsl)
@@ -25,6 +25,8 @@ adsl<-read.xport(fnadsl)
 
 ## http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf
 ## install.packages("RSQLite")
+
+## Create a SQL dump - here using RSQLite - could also create the dump programically
 
 library(RSQLite)
 ## create a SQLite instance and create one connection.
@@ -35,28 +37,27 @@ tfile <- tempfile()
 con <- dbConnect(m, dbname = tfile)
 dbWriteTable(con, "adsl", adsl)
 dbDisconnect(con)
-# show the file name
+## show the file name
 tfile
 system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
-#  sqlite3 //tmp/Rtmp4V2mc0/filef2a564a7b7e .dump > xx.sql
-# change TEXT to VARCHAR(1000)
-# remove top 2 lines with PRAGMA
-# in insert replace "adsl"  with adsl
-# add
-# PRIMARY KEY (USUBJID)
-# ./dump-rdf -o /tmp/xx-map.ttl -l xx.sql
-# see also RSQlite on dbSendQuery-methods - that can make more
-# https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html
-## see file:///opt/d2rq-0.8.1/doc/dump-rdf.html
+## The change below are for now to be applied manually!
+## In /tmp/xx.sql:
+##   change TEXT to VARCHAR(1000)
+##   remove top 2 lines with PRAGMA
+##   in insert statements replace "adsl"  with adsl
+##   after "MMSETOT" REAL add a comma (",") and a new line with
+##   PRIMARY KEY (USUBJID)
+##
+## see also RSQlite on dbSendQuery-methods - that can make more
+## https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html
+## d2rq documentationsee file:///opt/d2rq-0.8.1/doc/dump-rdf.html
 
 ## -b option does not work with -l
 system(paste("/opt/d2rq-0.8.1/generate-mapping  -o /tmp/adsl-map.ttl -l /tmp/xx.sql"))
-system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://localhost/datasets/ -o /tmp/adsl.ttl -l /tmp/xx.sql /tmp/adsl-map.ttl"))
-" ))
+system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://www.example.org/datasets/ -o /tmp/adsl.ttl -l /tmp/xx.sql /tmp/adsl-map.ttl"))
  
-1
 
-### This could also work ..
+### This could maybe also work ..
 ## m <- dbDriver("SQLite")
 ## tfile <- tempfile()
 ## con <- dbConnect(m, dbname = tfile)
@@ -120,7 +121,7 @@ res
 
 rq<-"
 select * where {
-<http://localhost/datasets/ADSL/01-718-1254> ?p ?o .
+<http://www.example.org/datasets/ADSL/01-718-1254> ?p ?o .
 }
 "
 

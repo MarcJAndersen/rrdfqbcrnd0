@@ -9,9 +9,9 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-# Prefixes for use with CDISC standards in RDF
+# Prefixes for the package
 
-This script creates a list with the prefix used for CDISC standards.
+This script creates a list with the prefix used for the package.
 The prefix corresponds to the usual values.
 
 ```{r, results='asis', eval=TRUE}
