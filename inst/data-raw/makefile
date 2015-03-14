@@ -1,5 +1,5 @@
-all: qbIClist AEtable DMtable create-ADSL-ttl.Rmd \
-store-cdisc-rdf-as-rrdf.Rmd create-qb-CDISC-prefix.Rmd  \
+all: create-qb-CDISC-prefix.Rmd qbIClist AEtable DMtable create-ADSL-ttl.Rmd \
+store-cdisc-rdf-as-rrdf.Rmd   \
 use-demo-ttl.Rmd create-demo-ttl.Rmd create-qb-IC-dataset.Rmd
 
 
@@ -7,6 +7,7 @@ clean:
 	rm -f ../data/qbIClist.rda create-ae-table-as-csv.pdf create-dm-table-as-csv.pdf create-qb-IC-dataset.pdf 
 
 DMtable: create-dm-table-as-csv.pdf
+
 AEtable: create-ae-table-as-csv.pdf
 # creates
 # ../extdata/sample-cfg/ae.AR.csv ../extdata/sample-cfg/ae.aesoc.AR.csv ../extdata/sample-cfg/ae.aedecod.AR.csv
