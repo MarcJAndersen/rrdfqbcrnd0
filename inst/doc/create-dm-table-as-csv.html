@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-03-05" />
+<meta name="date" content="2015-03-14" />
 
 <title>Create DM table as csv file</title>
 
@@ -54,26 +54,35 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Create DM table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-03-05</em></h4>
+<h4 class="date"><em>2015-03-14</em></h4>
 </div>
 
 
 <div id="create-dm-sample-table-as-csv-file-and-other-files" class="section level1">
 <h1>Create DM sample table as CSV file and other files</h1>
 <p>This script creates the result and codelist for a simple DM table.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">knit</span>(<span class="dt">input=</span><span class="st">&quot;inst/data-raw/create-qb-IC-dataset.Rmd&quot;</span>,
+     <span class="dt">output=</span><span class="st">&quot;inst/data-raw/create-qb-IC-dataset.md&quot;</span>)</code></pre>
 <div id="get-the-data-and-prepare-for-derivation-of-summary-statistics" class="section level2">
 <h2>Get the data and prepare for derivation of summary statistics</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(devtools)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rrdfqbcrnd0)
 
 <span class="kw">library</span>(foreign)
 <span class="kw">library</span>(sqldf)
 
-xptdirectory&lt;-<span class="st"> </span><span class="kw">tempdir</span>()
+<span class="co"># xptdirectory&lt;- tempdir()</span>
+<span class="co">#fnadsl&lt;- paste(xptdirectory,&quot;/&quot;, &quot;adsl&quot;, &quot;.xpt&quot;,sep=&quot;&quot;)</span>
+<span class="co"># download.file(&quot;http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt&quot;, fnadsl)</span>
 
-fnadsl&lt;-<span class="st"> </span><span class="kw">paste</span>(xptdirectory,<span class="st">&quot;/&quot;</span>, <span class="st">&quot;adsl&quot;</span>, <span class="st">&quot;.xpt&quot;</span>,<span class="dt">sep=</span><span class="st">&quot;&quot;</span>)
-
-<span class="kw">download.file</span>(<span class="st">&quot;http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt&quot;</span>, fnadsl)
-
+fnadsl&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-xpt&quot;</span>, <span class="st">&quot;adsl.xpt&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>)
+<span class="kw">print</span>(fnadsl)</code></pre>
+<p>[1] “”</p>
+<pre class="sourceCode r"><code class="sourceCode r">if (!<span class="kw">file.exists</span>(fnadsl)) {
+  fnadsl&lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;..&quot;</span>, <span class="st">&quot;extdata/sample-xpt&quot;</span>, <span class="st">&quot;adsl.xpt&quot;</span>)
+  }
+if (!<span class="kw">file.exists</span>(fnadsl)) {
+  <span class="kw">stop</span>(<span class="st">&quot;File does not exist - &quot;</span>,fnadsl)
+}
 adsl&lt;-<span class="st"> </span><span class="kw">read.xport</span>(fnadsl)
 adsl$TRT01A&lt;-<span class="st"> </span><span class="kw">as.character</span>(adsl$TRT01A)
 adsl$RACE&lt;-<span class="st"> </span><span class="kw">as.character</span>(adsl$RACE)
@@ -125,7 +134,7 @@ tempfile&lt;-<span class="st"> </span><span class="kw">file.path</span>(<span cl
 <span class="kw">cat</span>(<span class="kw">paste</span>(<span class="st">&quot;in.text&lt;- '&quot;</span>, in.text,<span class="st">&quot;'</span><span class="ch">\n</span><span class="st">&quot;</span>,<span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>), <span class="dt">file=</span>tempfile,<span class="dt">append=</span><span class="ot">TRUE</span>)
 <span class="kw">cat</span>(<span class="kw">paste</span>(<span class="st">&quot;se.text&lt;- '&quot;</span>, se.text,<span class="st">&quot;'</span><span class="ch">\n</span><span class="st">&quot;</span>,<span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>), <span class="dt">file=</span>tempfile,<span class="dt">append=</span><span class="ot">TRUE</span>)
 <span class="kw">print</span>(tempfile)</code></pre>
-<p>[1] “/tmp/RtmpiOJJpw/temp-code.R”</p>
+<p>[1] “/tmp/RtmpZGuY7d/temp-code.R”</p>
 </div>
 <div id="define-sql-statements-directly" class="section level2">
 <h2>Define SQL statements directly</h2>
