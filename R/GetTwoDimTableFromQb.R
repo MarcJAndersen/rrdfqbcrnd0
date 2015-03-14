@@ -55,7 +55,7 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   ## XX need a function to determine variable (column names) from
   ## properties for each language (R, SAS etc)
 
-  colnamesRowDim<- sub("prop:", "", rowdim)
+  colnamesRowDim<- sub("crnd-dimensions:", "", osub("crnd-attributes:", "", rowdim))
   uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
   colnames(uqr)<- colnamesRowDim
   ## XX assuming irowno is a unused column name
@@ -69,18 +69,18 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
 
   coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
   observationsColDim<- as.data.frame(sparql.rdf(store, coldimRq ), stringsAsFactors=FALSE)
-  colnamesColDim<- sub("prop:", "", coldim)
+  colnamesColDim<- sub("crnd-dimensions:", "", osub("crnd-attributes:", "", coldim))
   ## using data.frame to handle the case where the result is a vector
   uqc<-data.frame(unique(observationsColDim[,colnamesColDim]), stringsAsFactors=FALSE)
   colnames(uqc)<- colnamesColDim
   icolnoseq<- 1:nrow(uqc)
   uqc[,"icolno"]<- icolnoseq
-  print(uqc)
+##  print(uqc)
   ## head(uqc)
   observationsColDimE<-merge(observationsColDim,uqc, by=colnamesColDim, all=TRUE)
   ## head(observationsColDimE[,c("s","icolno")])
 
-  nIRIs<-  c(sub("prop:", "", dimensions), paste0(sub("prop:", "", dimensions), "IRI"),"measureIRI" )
+  nIRIs<-  c(sub("crnd-dimensions:", "", dimensions), paste0(sub("crnd-dimensions:", "", dimensions), "IRI"),"measureIRI" )
 
 
   prm<- regexec("^prefix +([^:]+): +<(.*)>$", strsplit(forsparqlprefix,"\n")[[1]])
@@ -88,7 +88,9 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   res<-data.frame(matrix(unlist(ll),ncol=3,byrow=TRUE),stringsAsFactors=FALSE)
 
 ## XX should have a function for this
-  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^prop:", as.character(res[res[,2]=="prop",3]), x)})
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-attribute:", as.character(res[res[,2]=="crnd-attribute",3]), x)})
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-dimension:", as.character(res[res[,2]=="crnd-dimension",3]), x)})
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-measure:", as.character(res[res[,2]=="crnd-measure",3]), x)})
   observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^ds:", as.character(res[res[,2]=="ds",3]), x)})
   observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^code:", as.character(res[res[,2]=="code",3]), x)})
   
@@ -143,7 +145,7 @@ for (icolno in icolnoseq) {
     stringsAsFactors=FALSE )
 
   obsURI<- observationsDescXX[ , nIRIs ]
-  names(obsURI)[1:length(dimensions)]<- paste0(sub("prop:", "", dimensions),"valueIRI")
+  names(obsURI)[1:length(dimensions)]<- paste0(sub("crnd-dimension:", "", dimensions),"valueIRI")
 
   attr(presTable, "rowlabelURI")<- "to be defined"
   attr(presTable, "collabelURI")<- "to be defined"

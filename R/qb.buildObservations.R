@@ -50,7 +50,9 @@ cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors
 
 ## TODO instead of gsub make a more straightforward way
 ## TOTO this involves a new version of the ph.recode function
-cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
+cube.codelists$vn<- gsub("crnd-dimension:","",cube.codelists$p)
+cube.codelists$vn<- gsub("crnd-attribute:","",cube.codelists$p)
+cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$p)
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
 ## print(cube.codelists)
 

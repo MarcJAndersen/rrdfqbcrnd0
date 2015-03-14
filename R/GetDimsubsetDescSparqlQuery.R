@@ -10,7 +10,7 @@
 ## cat(rq)
 ## sparql.rdf(checkCube, rq)
 GetDimsubsetDescSparqlQuery<- function( forsparqlprefix, domainName, dimensions ) {
-  varnames<- sub("prop:", "?", dimensions)
+  varnames<- sub("crnd-dimensions:", "?", dimensions)
   ## XX redo code with vectors for each type of variable, varnamesIRI etc
   cube.observations.rq<-  paste(
     forsparqlprefix,
@@ -29,7 +29,7 @@ GetDimsubsetDescSparqlQuery<- function( forsparqlprefix, domainName, dimensions 
     "\n",
     "values (?variable ?prop) {",
     "\n",
-    paste0( "( ", paste0('"',sub("prop:", "", dimensions),'"' ), " ", dimensions, " )", collapse="\n" ),
+    paste0( "( ", paste0('"',sub("crnd-dimensions:", "", dimensions),'"' ), " ", dimensions, " )", collapse="\n" ),
     "}",
     "\n",
     "} ",

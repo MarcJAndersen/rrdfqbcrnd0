@@ -153,7 +153,7 @@ cube.measure.result.rq<- paste(forsparqlprefix, prval,
       "select * where {",
       "    ?s a qb:Observation  ;",
       paste("       qb:dataSet",  paste0("ds:",dsdName), " ;", sep=" ", collapse=" "),
-      "       prop:measure      ?measure ;      ",
+      "       crnd:measure      ?measure ;      ",
       "      optional{ ?s ", validation.measure$property, " ?result }      ",
       "} order by ?s"
 )
@@ -169,7 +169,7 @@ cube.measure.result<-  sparql.rdf(store, cube.measure.result.rq);
                                 "select * where {",
                               "    ?s a qb:Observation  ;",
                                 paste("       qb:dataSet",  paste0("ds:",dsdName), " ;", sep=" ", collapse=" "),
-                                "       prop:measure      ?measure ;      ",
+                                "       crnd:measure      ?measure ;      ",
                                 "      optional{ ?s ", validation.measure$property, " ?result }      ",
                                 " filter ( ?measure != ?result ) ",
                                 "} order by ?s"

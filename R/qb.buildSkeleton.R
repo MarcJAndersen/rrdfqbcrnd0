@@ -15,10 +15,9 @@ for (i in 1:nrow(skeletonSource)){
    ##DEBUG message ("Component:", component)
   #------------------  Dimensions ---------------------------------------------
   if (component == "dimension"){
-    # Class name is the compName with an uppercase first letter.
+    ## Class name is the compName with an uppercase first letter.
     compNameClass <- capitalize(toString(skeletonSource[i,"compName"]))
     ##DEBUG message ("Building: Dimension")
-    #  Example: prop:trt01a a qb:DimensionProperty
     add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
@@ -29,23 +28,12 @@ for (i in 1:nrow(skeletonSource)){
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
 
-    # Label for property. Example:   rdfs:label "Treatment Arm"@en .
+    ## Label for property. Example:   rdfs:label "Treatment Arm"@en .
     add.data.triple(store,
                     paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
 
-    # CODELIST triples for when codelist is present. Currently hardcoded for race,sex
-
-    ##DEBUG message ("DEBUG: Skeleton compName:",skeletonSource[i,"compName"] )
-
-    # qb:codeList and range to  dimensions. If some dimensions do not have codelists
-    # then invoke IF logic as per earlier development code when only sex and race
-    # had codelists.
-    #if (skeletonSource[i,"compName"] %in% c("sex", "race"))
-    #{
-
-    # Add qb:codelist and rdfs:range
       add.triple(store,
                  paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                  paste0(prefixlist$prefixQB, "codeList"),
@@ -55,10 +43,9 @@ for (i in 1:nrow(skeletonSource)){
                       paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                       "http://www.w3.org/2000/01/rdf-schema#range",
                       paste0(prefixlist$prefixCODE,compNameClass))
-    #}
-    # qb:ComponentSpecification
-    #     Example: dccs:trt01a a qb:ComponentSpecification ;
-    #                          qb:dimension prop:trt01a .
+
+    ## qb:ComponentSpecification
+
     add.triple(store,
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
@@ -75,8 +62,7 @@ for (i in 1:nrow(skeletonSource)){
   }
   #------------------  Measure ------------------------------------------------
   else if (component =="measure"){
-    # Property
-    #  Example: prop:trt01a a qb:DimensionProperty
+
     add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
@@ -86,14 +72,13 @@ for (i in 1:nrow(skeletonSource)){
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
-    # Label for property
-    # Example: prop:measure a qb:MeasureProperty ;
-    #                      rdfs:label "Value of the statistical measure"@en .
+
+    ## Label for property
     add.data.triple(store,
                     paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
-    # ComponentSpecification
+    ## ComponentSpecification
     add.triple(store,
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
@@ -112,7 +97,7 @@ for (i in 1:nrow(skeletonSource)){
   #------------------ Attributes ----------------------------------------------
   else if (component == "attribute"){
     ##DEBUG message ("Building: Attribute")
-    # Property
+    ## Property
     add.triple(store,
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
@@ -121,12 +106,12 @@ for (i in 1:nrow(skeletonSource)){
                paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
-    # Label for property
+    ## Label for property
     add.data.triple(store,
                     paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
-    # ComponentSpecification
+    ## ComponentSpecification
     add.triple(store,
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),

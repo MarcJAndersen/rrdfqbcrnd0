@@ -12,15 +12,18 @@
 Get.qb.crnd.prefixes<- function(
   domainName,
   namespaceStem="http://www.example.org/dc/",
-  domain.prefixes= c("prop", "dccs", "ds"),
+  domain.prefixes= c("dccs", "ds"),
   general.prefixes=c("code")
   ) {
 
+  ## TODO(mja) Handle crnd-* in a better way
+  
 custom.prefixes <-data.frame(
-  prefix=c(general.prefixes, domain.prefixes),
+  prefix=c(general.prefixes, domain.prefixes, "crnd-dimension", "crnd-attribute", "crnd-measure"),
   namespace=c(
     paste0(namespaceStem,general.prefixes,"/") ,
-    paste0(namespaceStem,domainName,"/",domain.prefixes,"/")
+    paste0(namespaceStem,domainName,"/",domain.prefixes,"/"),
+    paste0(namespaceStem,c("dimension","attribute","measure"),"#")
     )
   )
 
