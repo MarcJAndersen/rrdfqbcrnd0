@@ -92,7 +92,7 @@ value of the prefix, say ds, changes. Also, in case of two RDF data cubes are lo
 Now look at the generated cubes by loading the turtle files. 
 
 ```{r, echo=TRUE, results='asis'}
-dataCubeFile<- dm.cube.fn
+dataCubeFile<- demo.cube.fn
 # dataCubeFile<- ae.cube.fn
 ```
 
@@ -145,7 +145,7 @@ The cube components are shown in the next output.
 ```{r, echo=TRUE}
 componentsRq<- GetComponentSparqlQuery( forsparqlprefix, dsdName )
 components<- as.data.frame(sparql.rdf(checkCube, componentsRq), stringsAsFactors=FALSE)
-components$vn<- gsub("prop:","",components$p)
+components$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",components$p)
 knitr::kable(components[,c("vn", "label")])
 ```
 
@@ -153,7 +153,7 @@ The codelists are shown in the next output.
 ```{r, echo=TRUE}
 codelistsRq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
 codelists<- as.data.frame(sparql.rdf(checkCube, codelistsRq), stringsAsFactors=FALSE)
-codelists$vn<- gsub("prop:","",codelists$p)
+codelists$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",codelists$p)
 codelists$clc<- gsub("code:","",codelists$cl)
 knitr::kable(codelists[,c("vn", "clc", "prefLabel")])
 ```
@@ -180,7 +180,7 @@ observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimens
 cat(observationsRq)
 observations<- as.data.frame(sparql.rdf(checkCube, observationsRq ), stringsAsFactors=FALSE)
 knitr::kable(observations[ 1:10 ,
-   c(paste0(sub("prop:", "", dimensions), "value"),sub("prop:", "", attributes), "measure")])
+   c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions), "value"),sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", attributes), "measure")])
 
 ```
 
@@ -192,8 +192,8 @@ observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparql
 cat(observationsDescriptionRq)
 observationsDesc<- as.data.frame(sparql.rdf(checkCube, observationsDescriptionRq ), stringsAsFactors=FALSE)
 knitr::kable(observationsDesc[ 1:10 ,
-   c(paste0(rep(sub("prop:", "", dimensions),each=3), c("label", "value", "IRI")),
-     sub("prop:", "", attributes), "measure", "measureIRI" )]
+   c(paste0(rep(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions),each=3), c("label", "value", "IRI")),
+     sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", attributes), "measure", "measureIRI" )]
 )
 ```
 

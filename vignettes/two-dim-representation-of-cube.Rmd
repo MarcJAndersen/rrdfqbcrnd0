@@ -80,8 +80,8 @@ cols.rq<-  paste( forsparqlprefix,
 select distinct ?colno ?cellpartno
 where { 
 ?s a qb:Observation ; 
-prop:colno ?colno ;
-prop:cellpartno ?cellpartno .
+crnd-attribute:colno ?colno ;
+crnd-attribute:cellpartno ?cellpartno .
 }
 order by ?colno ?cellpartno
 ',
@@ -94,16 +94,16 @@ knitr::kable(cols)
 dimensions<- sparql.rdf(checkCube, GetDimensionsSparqlQuery( forsparqlprefix ) )
 attributesDf<- sparql.rdf(checkCube, GetAttributesSparqlQuery( forsparqlprefix ))
 
-## rowdim<- setdiff(union(dimensions,attributesDf), c("prop:saffl"))
-## rowdim<- union(dimensions,attributesDf), c("prop:saffl")
+## rowdim<- setdiff(union(dimensions,attributesDf), c("crnd-dimension:saffl"))
+## rowdim<- union(dimensions,attributesDf), c("crnd-dimension:saffl")
 
-## rowdim<- c("prop:saffl", "prop:race", "prop:sex", "prop:factor",
-## "prop:procedure", "prop:unit", "prop:denominator" )
+## rowdim<- c("crnd-dimension:saffl", "crnd-dimension:race", "crnd-dimension:sex", "crnd-dimension:factor",
+## "crnd-dimension:procedure", "crnd-attribute:unit", "crnd-dimension:denominator" )
 
-rowdim<- c("prop:rowno", "prop:agegr1", "prop:race", "prop:ethnic", "prop:sex" )
+rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex" )
 
-coldim<- c("prop:colno", "prop:cellpartno", "prop:trt01a", "prop:procedure", "prop:unit", "prop:denominator" )
-coldim<- c("prop:colno", "prop:cellpartno", "prop:trt01a" )
+coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a", "crnd-dimension:procedure", "crnd-attribute:unit", "crnd-dimension:denominator" )
+coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a" )
 
 qbtest<- GetTwoDimTableFromQb( checkCube, forsparqlprefix, domainName, rowdim, coldim )
 
@@ -123,9 +123,9 @@ colvarindex
 cellpartnoindex
 oD[,c("s","rowno","colno","cellpartno")]
 
-presrowvarvalue<- gsub("prop:(.*)","\\1value",rowdim)
-presrowvarIRI<- gsub("prop:(.*)","\\1IRI",rowdim)
-presrowvarlabel<- gsub("prop:(.*)","\\1label",rowdim)
+presrowvarvalue<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1value",rowdim)
+presrowvarIRI<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1IRI",rowdim)
+presrowvarlabel<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1label",rowdim)
 
 ## add code for embedding the cube as turtle
 ## determine cube compontents except observations,
@@ -231,7 +231,7 @@ if (cpindex>1) {
 cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">'), file=file, append=TRUE)
       
 for (prop in dimensions) {
-cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("prop:", "", prop)], '">'), file=file, append=TRUE)
+cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">'), file=file, append=TRUE)
 }
 
 ## formatting to applied to measure
@@ -284,16 +284,10 @@ Allocate 1 rightmost columns for unit, show it if not _NULL_.
 dimensions<- sparql.rdf(checkCube, GetDimensionsSparqlQuery( forsparqlprefix ) )
 attributesDf<- sparql.rdf(checkCube, GetAttributesSparqlQuery( forsparqlprefix ))
 
-## rowdim<- setdiff(union(dimensions,attributesDf), c("prop:saffl"))
-## rowdim<- union(dimensions,attributesDf), c("prop:saffl")
+rowdim<- c("crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex", "crnd-dimension:factor",
+"crnd-dimension:procedure", "crnd-attribute:unit", "crnd-dimension:denominator" )
 
-## rowdim<- c("prop:saffl", "prop:race", "prop:sex", "prop:factor",
-## "prop:procedure", "prop:unit", "prop:denominator" )
-
-rowdim<- c("prop:agegr1", "prop:race", "prop:ethnic", "prop:sex", "prop:factor",
-"prop:procedure", "prop:unit", "prop:denominator" )
-
-coldim<- c("prop:trt01a")
+coldim<- c("crnd-dimension:trt01a")
 
 qbtest<- GetTwoDimTableFromQb( checkCube, forsparqlprefix, domainName, rowdim, coldim )
 
@@ -318,8 +312,8 @@ for (rowno in 1:nrow(qbtest)) {
   prIdCol$unitvalue[rowno]<- qbtest$unit[rowno]
   currNidcol<-0
   if (qbtest$factor[rowno] %in% c("code:factor-proportion", "code:factor-quantity") ) {
-     for (rowid in setdiff(rowdim,c("prop:procedure","prop:unit", "prop:denominator"))) {
-       currRowLabel<- rowLabel$variable==gsub("prop:", "", rowid) & rowLabel$codeval==qbtest[rowno,gsub("prop:", "", rowid)]
+     for (rowid in setdiff(rowdim,c("crnd-dimension:procedure","crnd-attribute:unit", "crnd-dimension:denominator"))) {
+       currRowLabel<- rowLabel$variable==gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid) & rowLabel$codeval==qbtest[rowno,gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid)]
        if ( rowLabel$value[ currRowLabel ] != "_ALL_" ) {
          currNidcol<- currNidcol+1
          prIdCol[rowno, paste0("idcollabel",currNidcol ) ]<- rowLabel$label[ currRowLabel ]
@@ -328,8 +322,8 @@ for (rowno in 1:nrow(qbtest)) {
      }
      }
     else {
-      for (rowid in setdiff(rowdim,c("prop:procedure","prop:unit", "prop:denominator"))) {
-        currRowLabel<- rowLabel$variable==gsub("prop:", "", rowid) & rowLabel$codeval==qbtest[rowno,gsub("prop:", "", rowid)]
+      for (rowid in setdiff(rowdim,c("crnd-dimension:procedure","crnd-attribute:unit", "crnd-dimension:denominator"))) {
+        currRowLabel<- rowLabel$variable==gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid) & rowLabel$codeval==qbtest[rowno,gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid)]
         if ( rowLabel$value[ currRowLabel ] != "_ALL_" ) {
           currNidcol<- currNidcol+1
           ## XX for now only descriptive statistics
@@ -344,7 +338,7 @@ for (rowno in 1:nrow(qbtest)) {
 pr2IdCol<-   prIdCol[,c(paste0("idcolvalue",1:Nidcol),"procedurevalue", "unitvalue")]
 pr2IdCol
 
-rowdisplay<- c( "prop:sex", "prop:race", "prop:factor",  "prop:procedure",  "prop:unit", "prop:denominator")
+rowdisplay<- c( "crnd-dimension:sex", "crnd-dimension:race", "crnd-dimension:factor",  "crnd-dimension:procedure",  "crnd-attribute:unit", "crnd-dimension:denominator")
 
 presTable<- qbtest
 colnoseq<- attr(qbtest,"colnoseq")
@@ -418,9 +412,9 @@ cat("<table border>\n", file=file, append=TRUE)
 or<-1
 ## unique(oD$rowno)
 ## unique(oD$colno)
-presrowvarvalue<- gsub("prop:(.*)","\\1value",rowdim)
-presrowvarIRI<- gsub("prop:(.*)","\\1IRI",rowdim)
-presrowvarlabel<- gsub("prop:(.*)","\\1label",rowdim)
+presrowvarvalue<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1value",rowdim)
+presrowvarIRI<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1IRI",rowdim)
+presrowvarlabel<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1label",rowdim)
 presrowvarindex<- 1:length(rowdim)
 ## make the header row(s) for the columns
 ## TODO the code below does only work for this special case
@@ -462,7 +456,7 @@ for (rr in unique(oD$rowno)) {
 cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">'), file=file, append=TRUE)
       
 for (prop in dimensions) {
-cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("prop:", "", prop)], '">'), file=file, append=TRUE)
+cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">'), file=file, append=TRUE)
 }
       cat(paste0(oD$measure[or]), file=file, append=TRUE)
 

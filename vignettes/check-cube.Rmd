@@ -104,7 +104,7 @@ check.cube<- function(
 
 
 
-  ## Domain-specific prefixes:for /code/, /prop/, /dccs/ and /dataset/
+  ## Domain-specific prefixes
   custom.prefixes <-Get.qb.crnd.prefixes(domainName)
 
   ## Prefix for storing the results of check each measure in the data cube
@@ -193,14 +193,14 @@ cube.dimensionsattr<- sparql.rdf(cubeData, cube.dimensionsattr.Rq );
 selectexpr<-  paste(  "select * where {",
                     "    ?s a qb:Observation  ;",
                     paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse="\n"), "\n",
-                    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";", collapse="\n"),
+                    paste0( cube.dimensionsattr, " ", sub("crnd-dimension:|crnd-attribute:", "?", cube.dimensionsattr), ";", collapse="\n"),
                     "\n",
-                    "       prop:measure      ?measure ;      \n",
-                    "       prop:denominator      ?denominator .     \n",
-                    paste0( "optional{ ", sub("prop:", "?", cube.dimensionsattr), " ",
+                    "       crnd-measure:measure      ?measure ;      \n",
+                    "       crnd-attribute:denominator      ?denominator .     \n",
+                    paste0( "optional{ ", sub("crnd-dimension:|crnd-attribute:", "?", cube.dimensionsattr), " ",
                            "skos:prefLabel",
                            " ",
-                           sub("prop:", "?", cube.dimensionsattr), "value" ,
+                           sub("crnd-dimension:|crnd-attribute:", "?", cube.dimensionsattr), "value" ,
                            " . ", "}",
                            collapse="\n"),
                     "} ",
@@ -314,7 +314,7 @@ cube.measure.result<-  sparql.rdf(cubeData,
                                         "select * where {",
                                         "    ?s a qb:Observation  ;",
                                         paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
-                                        "       prop:measure      ?measure ;      ",
+                                        "       crnd-measure:measure      ?measure ;      ",
                                         "      optional{ ?s validmeas:result      ?result }      ",
                                         "} order by ?s"
                                         )
@@ -328,7 +328,7 @@ cube.check<- sparql.rdf(cubeData,
                               "select * where {",
                               "    ?s a qb:Observation  ;",
                               paste("       qb:dataSet",  ds.dataset, " ;", sep=" ", collapse=" "),
-                              "       prop:measure      ?measure ;      ",
+                              "       crnd-measure:measure      ?measure ;      ",
                               "      optional{ ?s validmeas:result      ?result }      ",
                               " filter ( ?measure != ?result ) ",
                               "} order by ?s"

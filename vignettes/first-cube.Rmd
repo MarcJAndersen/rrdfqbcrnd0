@@ -125,7 +125,7 @@ cube.codelists<- as.data.frame(sparql.rdf(cube, codelists.rq), stringsAsFactors=
 
 ## TODO instead of gsub make a more straightforward way
 ## TODO this involves a new version of the ph.recode function
-cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
+cube.codelists$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",cube.codelists$p)
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
 knitr::kable(print(cube.codelists[,c("vn", "clc", "prefLabel")]))
 
@@ -158,13 +158,13 @@ cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",
     "?s a qb:Observation  ;", "\n",
     paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
-    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";", collapse="\n"),
+    paste0( cube.dimensionsattr, " ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), ";", collapse="\n"),
     "\n",
-    "prop:measure      ?measure ;      \n",
-    paste0( "optional{ ", sub("prop:", "?", cube.dimensionsattr), " ",
+    "crnd-measure:measure      ?measure ;      \n",
+    paste0( "optional{ ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), " ",
            "skos:prefLabel",
            " ",
-           sub("prop:", "?", cube.dimensionsattr), "value" ,
+           sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
            collapse="\n"),
     "\n",
@@ -182,7 +182,7 @@ cat(cube.observations.rq)
 And finally the observations.
 ```{r}
 cube.observations<- as.data.frame(sparql.rdf(cube, cube.observations.rq ), stringsAsFactors=FALSE)
-knitr::kable(cube.observations[,c(paste0(sub("prop:", "", cube.dimensionsattr), "value"),"measure")])
+knitr::kable(cube.observations[,c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", cube.dimensionsattr), "value"),"measure")])
 ```
 
 The cube conformance with the integrity constraints can be checked using the RunQbIC function.
