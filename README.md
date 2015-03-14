@@ -227,6 +227,16 @@ Project Status
 
 The code here is under development - any thing may change until version 1.0.
 
+The first major change was to change the use of the prop: prefix to using 
+
+crnd-dimension	http://www.example.org/dc/dimension#
+crnd-attribute	http://www.example.org/dc/attribute#
+crnd-measure	http://www.example.org/dc/measure#
+
+In general the prop: is replaced 
+crnd-dimension:|crnd-attribute:|crnd-measure:
+
+
 Contact
 -------
 
