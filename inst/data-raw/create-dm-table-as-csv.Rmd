@@ -28,7 +28,13 @@ library(sqldf)
 # download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadsl)
 
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
-
+print(fnadsl)
+if (!file.exists(fnadsl)) {
+  fnadsl<- file.path("..", "extdata/sample-xpt", "adsl.xpt")
+  }
+if (!file.exists(fnadsl)) {
+  stop("File does not exist - ",fnadsl)
+}
 adsl<- read.xport(fnadsl)
 adsl$TRT01A<- as.character(adsl$TRT01A)
 adsl$RACE<- as.character(adsl$RACE)
