@@ -13,7 +13,7 @@
 qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix,
                                 dsdName, recode.list, procedure2format ) {
 
-colnames(obsData) <- tolower(colnames(obsData))  ## Convert column names to lowercase for later matching
+colnames(obsData) <- tolower(colnames(obsData))  ## TODO: not sure if needed - Convert column names to lowercase for later matching
 
 ## XX this could go into a function
 checkVars<- skeletonSource[ skeletonSource$compType %in% c("dimension","attribute"), "compName" ]
@@ -50,9 +50,15 @@ cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors
 
 ## TODO instead of gsub make a more straightforward way
 ## TOTO this involves a new version of the ph.recode function
-cube.codelists$vn<- gsub("crnd-dimension:","",cube.codelists$p)
-cube.codelists$vn<- gsub("crnd-attribute:","",cube.codelists$p)
-cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$p)
+## Next three lines classical error - starting from
+## cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
+## to
+## cube.codelists$vn<- gsub("crnd-dimension:","",cube.codelists$p)
+## cube.codelists$vn<- gsub("crnd-attribute:","",cube.codelists$p)
+## cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$p)
+cube.codelists$vn1<- gsub("crnd-dimension:","",cube.codelists$p)
+cube.codelists$vn2<- gsub("crnd-attribute:","",cube.codelists$vn1)
+cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$vn2)
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
 ## print(cube.codelists)
 
@@ -92,7 +98,7 @@ for (i in 1:nrow(obsData)){
     ## b. Create coded triple
     add.triple(store,
                   paste0(prefixlist$prefixDS, obsNum),
-                  paste0(prefixlist$prefixPROP, qbdim),
+                  paste0(prefixlist$`prefixCRND-MEASURE`, qbdim),
                   paste0(prefixlist$prefixCODE,vCoded))
   }
 
@@ -103,7 +109,7 @@ for (i in 1:nrow(obsData)){
 
   add.data.triple(store,
                   paste0(prefixlist$prefixDS, obsNum),
-                  paste0(prefixlist$prefixPROP, "measure"),
+                  paste0(prefixlist$`prefixCRND-MEASURE`, "measure"),
                   paste0(obsData[i,"measure"]),
                   xsdFormat)
 
@@ -112,12 +118,12 @@ for (i in 1:nrow(obsData)){
     if (qbattr %in% c("denominator")) {
    add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixPROP, "denominator"),
+                   paste0(prefixlist$`prefixCRND-ATTRIBUTE`, "denominator"),
                    paste0(obsData[i,"denominator"]))
     } else {
    add.data.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
-                   paste0(prefixlist$prefixPROP, qbattr),
+                   paste0(prefixlist$`prefixCRND-ATTRIBUTE`, qbattr),
                    paste0(obsData[i,qbattr]),
                    "string")
     }
