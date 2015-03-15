@@ -30,7 +30,7 @@ GetSQLFromCube<- function( store, xdsdName="adsl"  ) {
       } else {        
         vnx<- paste0( "a.", toupper(vn))
       }
-      if (vn %in% gsub("crnd-dimensions:", "", c(dimensions)) & ! (vn %in% c("factor", "procedure")) )  {
+      if (vn %in% gsub("crnd-dimension:", "", c(dimensions)) & ! (vn %in% c("factor", "procedure")) )  {
         if (x[paste0(vn,"value")] == "_ALL_") {
           selectExpr<- c(selectExpr, paste("'_ALL_' as", toupper(vn), collapse=" "))
         } else if (x[paste0(vn,"value")] == "_NONMISS_") {
@@ -86,8 +86,8 @@ GetSQLFromCube<- function( store, xdsdName="adsl"  ) {
 #  print(c(dimensions,attributes))
 
 
-  qbframe<- observations[,c(paste0(gsub("crnd-dimensions:","",dimensions),"value"),gsub("crnd-attributes:","",attributes))]
-  names(qbframe)[1:length(dimensions)]<- gsub("crnd-dimensions:","",dimensions)
+  qbframe<- observations[,c(paste0(gsub("crnd-dimension:","",dimensions),"value"),gsub("crnd-attribute:","",attributes))]
+  names(qbframe)[1:length(dimensions)]<- gsub("crnd-dimension:","",dimensions)
 
 
   list(summStatSQL=a,qbframe=qbframe)

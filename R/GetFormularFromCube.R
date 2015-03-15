@@ -23,7 +23,7 @@ print(observations)
 xx<- apply( observations, 1, function(x) {
 expr<- c()
 for (vn in names(x)) {
-if (vn %in% gsub("crnd-dimensions:", "", c(dimensions)) & ! (vn %in% c("factor", "procedure")) )  {
+if (vn %in% gsub("crnd-dimension:", "", c(dimensions)) & ! (vn %in% c("factor", "procedure")) )  {
   if (x[paste0(vn,"value")] != "_ALL_") { expr<- c(expr, vn) }
   }
 }

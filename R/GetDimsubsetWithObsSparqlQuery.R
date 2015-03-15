@@ -8,10 +8,10 @@ cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",
     "?s a qb:Observation  ;", "\n",
     paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
-    paste0( dimensions, " ", sub("crnd-dimensions:", "?", dimensions), ";", collapse="\n"),
+    paste0( dimensions, " ", sub("crnd-dimension:", "?", dimensions), ";", collapse="\n"),
     "\n",
     "} ",
-    "order by ",  paste0( sub("crnd-dimensions:", "?", dimensions), collapse=" "),
+    "order by ",  paste0( sub("crnd-dimension:", "?", dimensions), collapse=" "),
     "\n"
    )
 cube.observations.rq

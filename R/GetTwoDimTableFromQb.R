@@ -55,7 +55,7 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   ## XX need a function to determine variable (column names) from
   ## properties for each language (R, SAS etc)
 
-  colnamesRowDim<- sub("crnd-dimensions:", "", osub("crnd-attributes:", "", rowdim))
+  colnamesRowDim<- sub("crnd-dimension:", "", osub("crnd-attribute:", "", rowdim))
   uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
   colnames(uqr)<- colnamesRowDim
   ## XX assuming irowno is a unused column name
@@ -69,7 +69,7 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
 
   coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
   observationsColDim<- as.data.frame(sparql.rdf(store, coldimRq ), stringsAsFactors=FALSE)
-  colnamesColDim<- sub("crnd-dimensions:", "", osub("crnd-attributes:", "", coldim))
+  colnamesColDim<- sub("crnd-dimension:", "", osub("crnd-attribute:", "", coldim))
   ## using data.frame to handle the case where the result is a vector
   uqc<-data.frame(unique(observationsColDim[,colnamesColDim]), stringsAsFactors=FALSE)
   colnames(uqc)<- colnamesColDim
@@ -80,7 +80,7 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   observationsColDimE<-merge(observationsColDim,uqc, by=colnamesColDim, all=TRUE)
   ## head(observationsColDimE[,c("s","icolno")])
 
-  nIRIs<-  c(sub("crnd-dimensions:", "", dimensions), paste0(sub("crnd-dimensions:", "", dimensions), "IRI"),"measureIRI" )
+  nIRIs<-  c(sub("crnd-dimension:", "", dimensions), paste0(sub("crnd-dimension:", "", dimensions), "IRI"),"measureIRI" )
 
 
   prm<- regexec("^prefix +([^:]+): +<(.*)>$", strsplit(forsparqlprefix,"\n")[[1]])

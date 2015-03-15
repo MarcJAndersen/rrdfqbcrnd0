@@ -98,7 +98,7 @@ for (i in 1:nrow(obsData)){
     ## b. Create coded triple
     add.triple(store,
                   paste0(prefixlist$prefixDS, obsNum),
-                  paste0(prefixlist$`prefixCRND-MEASURE`, qbdim),
+                  paste0(prefixlist$`prefixCRND-DIMENSION`, qbdim),
                   paste0(prefixlist$prefixCODE,vCoded))
   }
 
