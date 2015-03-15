@@ -1,37 +1,39 @@
-@prefix dccs:  <http://www.example.org/dc/dm/dccs/> .
-@prefix code:  <http://www.example.org/dc/code/> .
-@prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
-@prefix pav:   <http://purl.org/pav> .
-@prefix owl:   <http://www.w3.org/2002/07/owl#> .
-@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
-@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix ds:    <http://www.example.org/dc/dm/ds/> .
-@prefix qb:    <http://purl.org/linked-data/cube#> .
-@prefix mms:   <http://rdf.cdisc.org/mms#> .
-@prefix dct:   <http://purl.org/dc/terms/> .
-@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix prop:  <http://www.example.org/dc/dm/prop/> .
-@prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/> .
-@prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix mms:   <http://rdf.cdisc.org/mms#> .
+@prefix crnd-dimension: <http://www.example.org/dc/dimension#> .
+@prefix crnd-measure: <http://www.example.org/dc/measure#> .
+@prefix code:  <http://www.example.org/dc/code/> .
+@prefix qb:    <http://purl.org/linked-data/cube#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dccs:  <http://www.example.org/dc/dm/dccs/> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix pav:   <http://purl.org/pav> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/> .
+@prefix ds:    <http://www.example.org/dc/dm/ds/> .
+@prefix crnd-attribute: <http://www.example.org/dc/attribute#> .
 
 dccs:saffl  a         qb:ComponentSpecification ;
         rdfs:label    "Safety Population Flag" ;
-        qb:dimension  prop:saffl .
+        qb:dimension  crnd-dimension:saffl .
 
-ds:obs2  a                qb:Observation ;
-        rdfs:label        "2" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "111"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-M ;
-        prop:trt01a       code:trt01a-_ALL_ ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs2  a                          qb:Observation ;
+        rdfs:label                  "2" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "111"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-M ;
+        crnd-measure:trt01a         code:trt01a-_ALL_ .
 
 code:sex-M  a                     code:Sex , skos:Concept ;
         cts:cdiscDefinition       "A person who belongs to the sex that normally produces sperm. The term is used to indicate biological sex distinctions, cultural gender role distinctions, or both. (NCI)" ;
@@ -42,82 +44,95 @@ code:sex-M  a                     code:Sex , skos:Concept ;
         skos:prefLabel            "M" ;
         skos:topConceptOf         code:sex .
 
-ds:obs11  a               qb:Observation ;
-        rdfs:label        "11" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "SEX" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "61.6279069767442"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-F ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs11  a                         qb:Observation ;
+        rdfs:label                  "11" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "SEX" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "61.6279069767442"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-F ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 code:trt01a  a                skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: trt01a"@en ;
         rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-Placebo ;
+        skos:hasTopConcept    code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
         skos:notation         "CL_TRT01A" ;
         skos:note             "Specifies the trt01a for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel        "Codelist scheme: trt01a"@en .
 
-ds:obs52  a               qb:Observation ;
-        rdfs:label        "52" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "8.28605059954093"^^xsd:double ;
-        prop:procedure    code:procedure-stdev ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs52  a                         qb:Observation ;
+        rdfs:label                  "52" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "8.28605059954093"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-stdev ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs24  a               qb:Observation ;
-        rdfs:label        "24" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "8"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+code:saffl-_NONMISS_  a    code:Saffl , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        skos:inScheme      code:saffl ;
+        skos:prefLabel     "_NONMISS_" ;
+        skos:topConceptOf  code:saffl .
+
+ds:obs24  a                         qb:Observation ;
+        rdfs:label                  "24" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "8"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 dccs:sex  a           qb:ComponentSpecification ;
         rdfs:label    "Sex (Gender)" ;
-        qb:dimension  prop:sex .
+        qb:dimension  crnd-dimension:sex .
 
-ds:obs65  a               qb:Observation ;
-        rdfs:label        "65" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "7.14285714285714"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+code:procedure-_NONMISS_
+        a                  code:Procedure , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "_NONMISS_" ;
+        skos:topConceptOf  code:procedure .
 
-ds:obs37  a               qb:Observation ;
-        rdfs:label        "37" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "108"^^xsd:double ;
-        prop:procedure    code:procedure-max ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs65  a                         qb:Observation ;
+        rdfs:label                  "65" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "7.14285714285714"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+
+ds:obs37  a                         qb:Observation ;
+        rdfs:label                  "37" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "108"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-max ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:race-WHITE  a                code:Race , skos:Concept ;
         cts:cdiscDefinition       "Denotes a person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White. (FDA)" ;
@@ -134,89 +149,95 @@ code:factor-AGE  a         code:Factor , skos:Concept ;
         skos:prefLabel     "AGE" ;
         skos:topConceptOf  code:factor .
 
-ds:obs31  a               qb:Observation ;
-        rdfs:label        "31" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "7.88609384869824"^^xsd:double ;
-        prop:procedure    code:procedure-stdev ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        skos:inScheme      code:sex ;
+        skos:prefLabel     "_NONMISS_" ;
+        skos:topConceptOf  code:sex .
+
+ds:obs31  a                         qb:Observation ;
+        rdfs:label                  "31" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "7.88609384869824"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-stdev ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:trt01a-_ALL_  a       code:Trt01a , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:trt01a ;
         skos:prefLabel     "_ALL_" ;
         skos:topConceptOf  code:trt01a .
 
-ds:obs7  a                qb:Observation ;
-        rdfs:label        "7" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "75.2093023255814"^^xsd:double ;
-        prop:procedure    code:procedure-mean ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs7  a                          qb:Observation ;
+        rdfs:label                  "7" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "75.2093023255814"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-mean ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs44  a               qb:Observation ;
-        rdfs:label        "44" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "10.7142857142857"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs44  a                         qb:Observation ;
+        rdfs:label                  "44" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "10.7142857142857"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs16  a               qb:Observation ;
-        rdfs:label        "16" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "86.2"^^xsd:double ;
-        prop:procedure    code:procedure-max ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs16  a                         qb:Observation ;
+        rdfs:label                  "16" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "86.2"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-max ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs57  a               qb:Observation ;
-        rdfs:label        "57" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "34"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-M ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs57  a                         qb:Observation ;
+        rdfs:label                  "57" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "34"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-M ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs29  a               qb:Observation ;
-        rdfs:label        "29" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "76"^^xsd:double ;
-        prop:procedure    code:procedure-median ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs29  a                         qb:Observation ;
+        rdfs:label                  "29" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "76"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-median ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:procedure-mean  a     code:Procedure , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -230,60 +251,57 @@ code:Sex  a              rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:sex ;
         rdfs:subClassOf  skos:Concept .
 
-ds:obs1  a                qb:Observation ;
-        rdfs:label        "1" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "143"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-F ;
-        prop:trt01a       code:trt01a-_ALL_ ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs1  a                          qb:Observation ;
+        rdfs:label                  "1" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "143"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-F ;
+        crnd-measure:trt01a         code:trt01a-_ALL_ .
 
-ds:obs10  a               qb:Observation ;
-        rdfs:label        "10" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "8.59016712714194"^^xsd:double ;
-        prop:procedure    code:procedure-stdev ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs10  a                         qb:Observation ;
+        rdfs:label                  "10" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "8.59016712714194"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-stdev ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-prop:denominator  a  rdf:Property , qb:AttributeProperty ;
-        rdfs:label  "Denominator for a proportion (oskr) subset on which a statistic is based" .
+ds:obs51  a                         qb:Observation ;
+        rdfs:label                  "51" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "51"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-min ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs51  a               qb:Observation ;
-        rdfs:label        "51" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "51"^^xsd:double ;
-        prop:procedure    code:procedure-min ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
-
-ds:obs23  a               qb:Observation ;
-        rdfs:label        "23" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "9.30232558139535"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs23  a                         qb:Observation ;
+        rdfs:label                  "23" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "9.30232558139535"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 code:factor-proportion
         a                  code:Factor , skos:Concept ;
@@ -292,31 +310,37 @@ code:factor-proportion
         skos:prefLabel     "proportion" ;
         skos:topConceptOf  code:factor .
 
-ds:obs64  a               qb:Observation ;
-        rdfs:label        "64" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "0"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs64  a                         qb:Observation ;
+        rdfs:label                  "64" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "0"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs36  a               qb:Observation ;
-        rdfs:label        "36" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "44"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-M ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+crnd-dimension:procedure
+        a            rdf:Property , qb:DimensionProperty ;
+        rdfs:label   "Statistical Procedure" ;
+        rdfs:range   code:Procedure ;
+        qb:codeList  code:procedure .
+
+ds:obs36  a                         qb:Observation ;
+        rdfs:label                  "36" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "44"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-M ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:sex-F  a                     code:Sex , skos:Concept ;
         cts:cdiscDefinition       "A person who belongs to the sex that normally produces ova. The term is used to indicate biological sex distinctions, or cultural gender role distinctions, or both. (NCI)" ;
@@ -327,156 +351,160 @@ code:sex-F  a                     code:Sex , skos:Concept ;
         skos:prefLabel            "F" ;
         skos:topConceptOf         code:sex .
 
-ds:obs49  a               qb:Observation ;
-        rdfs:label        "49" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "75.6666666666667"^^xsd:double ;
-        prop:procedure    code:procedure-mean ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs49  a                         qb:Observation ;
+        rdfs:label                  "49" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "75.6666666666667"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-mean ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+
+crnd-dimension:sex  a  rdf:Property , qb:DimensionProperty ;
+        rdfs:label   "Sex (Gender)" ;
+        rdfs:range   code:Sex ;
+        qb:codeList  code:sex .
 
 code:sex  a                   skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: sex"@en ;
         mms:inValueDomain     "C66731" ;
         rrdfqbcrnd0:codeType  "SDTM" ;
-        skos:hasTopConcept    code:sex-U , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
+        skos:hasTopConcept    code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
         skos:notation         "CL_SEX" ;
         skos:note             "Specifies the sex for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel        "Codelist scheme: sex"@en .
 
-prop:unit  a        rdf:Property , qb:AttributeProperty ;
-        rdfs:label  "Unit of measure" .
+ds:obs30  a                         qb:Observation ;
+        rdfs:label                  "30" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "56"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-min ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs30  a               qb:Observation ;
-        rdfs:label        "30" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "56"^^xsd:double ;
-        prop:procedure    code:procedure-min ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs6  a                          qb:Observation ;
+        rdfs:label                  "6" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "89"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-max ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs6  a                qb:Observation ;
-        rdfs:label        "6" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "89"^^xsd:double ;
-        prop:procedure    code:procedure-max ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs43  a                         qb:Observation ;
+        rdfs:label                  "43" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "1"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs43  a               qb:Observation ;
-        rdfs:label        "43" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "1"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs15  a                         qb:Observation ;
+        rdfs:label                  "15" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "33"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-M ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs15  a               qb:Observation ;
-        rdfs:label        "15" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "33"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-M ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+code:saffl-_ALL_  a        code:Saffl , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
+        skos:inScheme      code:saffl ;
+        skos:prefLabel     "_ALL_" ;
+        skos:topConceptOf  code:saffl .
 
-prop:sex  a          rdf:Property , qb:DimensionProperty ;
-        rdfs:label   "Sex (Gender)" ;
-        rdfs:range   code:Sex ;
-        qb:codeList  code:sex .
+ds:obs56  a                         qb:Observation ;
+        rdfs:label                  "56" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "50"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-F ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs56  a               qb:Observation ;
-        rdfs:label        "56" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "50"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-F ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
-
-ds:obs28  a               qb:Observation ;
-        rdfs:label        "28" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "74.3809523809524"^^xsd:double ;
-        prop:procedure    code:procedure-mean ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs28  a                         qb:Observation ;
+        rdfs:label                  "28" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "74.3809523809524"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-mean ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:race  a                  skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: race"@en ;
         mms:inValueDomain     "C74457" ;
         rrdfqbcrnd0:codeType  "SDTM" ;
-        skos:hasTopConcept    code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        skos:hasTopConcept    code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
         skos:notation         "CL_RACE" ;
         skos:note             "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel        "Codelist scheme: race"@en .
 
-prop:procedure  a    rdf:Property , qb:DimensionProperty ;
-        rdfs:label   "Statistical Procedure" ;
-        rdfs:range   code:Procedure ;
-        qb:codeList  code:procedure .
+code:race-_NONMISS_  a     code:Race , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        skos:inScheme      code:race ;
+        skos:prefLabel     "_NONMISS_" ;
+        skos:topConceptOf  code:race .
 
-ds:obs50  a               qb:Observation ;
-        rdfs:label        "50" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "77.5"^^xsd:double ;
-        prop:procedure    code:procedure-median ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs50  a                         qb:Observation ;
+        rdfs:label                  "50" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "77.5"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-median ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
 ds:dsd-DM  a          qb:DataStructureDefinition ;
         qb:component  dccs:sex , dccs:trt01a , dccs:saffl , dccs:factor , dccs:race , dccs:denominator , dccs:measure , dccs:procedure , dccs:unit .
 
-ds:obs22  a               qb:Observation ;
-        rdfs:label        "22" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "0"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs22  a                         qb:Observation ;
+        rdfs:label                  "22" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "0"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 code:Race  a             rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the race for each observation"@en ;
@@ -484,31 +512,31 @@ code:Race  a             rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:race ;
         rdfs:subClassOf  skos:Concept .
 
-ds:obs63  a               qb:Observation ;
-        rdfs:label        "63" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "0"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs63  a                         qb:Observation ;
+        rdfs:label                  "63" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "0"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs35  a               qb:Observation ;
-        rdfs:label        "35" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "40"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-F ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs35  a                         qb:Observation ;
+        rdfs:label                  "35" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "40"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-F ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:procedure-count  a    code:Procedure , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -516,23 +544,21 @@ code:procedure-count  a    code:Procedure , skos:Concept ;
         skos:prefLabel     "count" ;
         skos:topConceptOf  code:procedure .
 
-ds:obs48  a               qb:Observation ;
-        rdfs:label        "48" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "88"^^xsd:double ;
-        prop:procedure    code:procedure-max ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+crnd-measure:measure  a  rdf:Property , qb:MeasureProperty ;
+        rdfs:label  "Value of the statistical measure" .
 
-prop:race  a         rdf:Property , qb:DimensionProperty ;
-        rdfs:label   "Race" ;
-        rdfs:range   code:Race ;
-        qb:codeList  code:race .
+ds:obs48  a                         qb:Observation ;
+        rdfs:label                  "48" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "88"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-max ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
 code:procedure-median
         a                  code:Procedure , skos:Concept ;
@@ -541,21 +567,18 @@ code:procedure-median
         skos:prefLabel     "median" ;
         skos:topConceptOf  code:procedure .
 
-prop:measure  a     rdf:Property , qb:MeasureProperty ;
-        rdfs:label  "Value of the statistical measure" .
-
-ds:obs5  a                qb:Observation ;
-        rdfs:label        "5" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "230"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-WHITE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-_ALL_ ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs5  a                          qb:Observation ;
+        rdfs:label                  "5" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "230"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-WHITE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-_ALL_ .
 
 code:Trt01a  a           rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the trt01a for each observation"@en ;
@@ -569,70 +592,83 @@ code:procedure-stdev  a    code:Procedure , skos:Concept ;
         skos:prefLabel     "stdev" ;
         skos:topConceptOf  code:procedure .
 
-ds:obs42  a               qb:Observation ;
-        rdfs:label        "42" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "1.19047619047619"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs42  a                         qb:Observation ;
+        rdfs:label                  "42" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "1.19047619047619"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs14  a               qb:Observation ;
-        rdfs:label        "14" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "53"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-F ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+code:procedure-_ALL_  a    code:Procedure , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "_ALL_" ;
+        skos:topConceptOf  code:procedure .
 
-ds:obs55  a               qb:Observation ;
-        rdfs:label        "55" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "84"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs14  a                         qb:Observation ;
+        rdfs:label                  "14" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "53"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-F ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs27  a               qb:Observation ;
-        rdfs:label        "27" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "88"^^xsd:double ;
-        prop:procedure    code:procedure-max ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs55  a                         qb:Observation ;
+        rdfs:label                  "55" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "84"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs68  a               qb:Observation ;
-        rdfs:label        "68" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "78"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-WHITE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+code:trt01a-_NONMISS_
+        a                  code:Trt01a , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        skos:inScheme      code:trt01a ;
+        skos:prefLabel     "_NONMISS_" ;
+        skos:topConceptOf  code:trt01a .
+
+ds:obs27  a                         qb:Observation ;
+        rdfs:label                  "27" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "88"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-max ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+
+ds:obs68  a                         qb:Observation ;
+        rdfs:label                  "68" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "78"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-WHITE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
 code:trt01a-Xanomeline_High_Dose
         a                  code:Trt01a , skos:Concept ;
@@ -661,22 +697,25 @@ code:race-BLACK_OR_AFRICAN_AMERICAN
         skos:prefLabel            "BLACK OR AFRICAN AMERICAN" ;
         skos:topConceptOf         code:race .
 
-ds:obs21  a               qb:Observation ;
-        rdfs:label        "21" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "0"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+crnd-attribute:unit  a  rdf:Property , qb:AttributeProperty ;
+        rdfs:label  "Unit of measure" .
+
+ds:obs21  a                         qb:Observation ;
+        rdfs:label                  "21" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "0"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 dccs:procedure  a     qb:ComponentSpecification ;
         rdfs:label    "Statistical Procedure" ;
-        qb:dimension  prop:procedure .
+        qb:dimension  crnd-dimension:procedure .
 
 code:procedure-percent
         a                  code:Procedure , skos:Concept ;
@@ -685,31 +724,31 @@ code:procedure-percent
         skos:prefLabel     "percent" ;
         skos:topConceptOf  code:procedure .
 
-ds:obs62  a               qb:Observation ;
-        rdfs:label        "62" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "14.1235986486909"^^xsd:double ;
-        prop:procedure    code:procedure-stdev ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs62  a                         qb:Observation ;
+        rdfs:label                  "62" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "14.1235986486909"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-stdev ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs34  a               qb:Observation ;
-        rdfs:label        "34" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "84"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs34  a                         qb:Observation ;
+        rdfs:label                  "34" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "84"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:saffl-Y  a            code:Saffl , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -739,35 +778,48 @@ code:trt01a-Placebo  a     code:Trt01a , skos:Concept ;
         skos:prefLabel     "Placebo" ;
         skos:topConceptOf  code:trt01a .
 
-ds:obs47  a               qb:Observation ;
-        rdfs:label        "47" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "74"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-WHITE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs47  a                         qb:Observation ;
+        rdfs:label                  "47" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "74"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-WHITE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+
+ds:obs19  a                         qb:Observation ;
+        rdfs:label                  "19" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "34"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-min ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 dccs:measure  a     qb:ComponentSpecification ;
         rdfs:label  "Value of the statistical measure" ;
-        qb:measure  prop:measure .
+        qb:measure  crnd-measure:measure .
 
-ds:obs19  a               qb:Observation ;
-        rdfs:label        "19" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "34"^^xsd:double ;
-        prop:procedure    code:procedure-min ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "KG"^^xsd:string .
+crnd-dimension:trt01a
+        a            rdf:Property , qb:DimensionProperty ;
+        rdfs:label   "Treatment Arm" ;
+        rdfs:range   code:Trt01a ;
+        qb:codeList  code:trt01a .
+
+code:factor-_NONMISS_
+        a                  code:Factor , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "_NONMISS_" ;
+        skos:topConceptOf  code:factor .
 
 code:Factor  a           rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the factor for each observation"@en ;
@@ -775,39 +827,34 @@ code:Factor  a           rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:factor ;
         rdfs:subClassOf  skos:Concept .
 
-prop:saffl  a        rdf:Property , qb:DimensionProperty ;
-        rdfs:label   "Safety Population Flag" ;
-        rdfs:range   code:Saffl ;
-        qb:codeList  code:saffl .
+ds:obs4  a                          qb:Observation ;
+        rdfs:label                  "4" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "23"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-_ALL_ .
 
-ds:obs4  a                qb:Observation ;
-        rdfs:label        "4" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "23"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-_ALL_ ;
-        prop:unit         "_NULL_"^^xsd:string .
-
-ds:obs41  a               qb:Observation ;
-        rdfs:label        "41" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "14.6534333717795"^^xsd:double ;
-        prop:procedure    code:procedure-stdev ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs41  a                         qb:Observation ;
+        rdfs:label                  "41" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "14.6534333717795"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-stdev ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:race-_ALL_  a         code:Race , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:race ;
         skos:prefLabel     "_ALL_" ;
         skos:topConceptOf  code:race .
@@ -822,18 +869,23 @@ code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
         skos:prefLabel            "AMERICAN INDIAN OR ALASKA NATIVE" ;
         skos:topConceptOf         code:race .
 
-ds:obs13  a               qb:Observation ;
-        rdfs:label        "13" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "86"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs13  a                         qb:Observation ;
+        rdfs:label                  "13" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "86"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
+
+crnd-dimension:race  a  rdf:Property , qb:DimensionProperty ;
+        rdfs:label   "Race" ;
+        rdfs:range   code:Race ;
+        qb:codeList  code:race .
 
 code:Procedure  a        rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the procedure for each observation"@en ;
@@ -841,73 +893,73 @@ code:Procedure  a        rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:procedure ;
         rdfs:subClassOf  skos:Concept .
 
-ds:obs54  a               qb:Observation ;
-        rdfs:label        "54" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "SEX" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "40.4761904761905"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-M ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs54  a                         qb:Observation ;
+        rdfs:label                  "54" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "SEX" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "40.4761904761905"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-M ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs26  a               qb:Observation ;
-        rdfs:label        "26" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "78"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-WHITE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs26  a                         qb:Observation ;
+        rdfs:label                  "26" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "78"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-WHITE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs67  a               qb:Observation ;
-        rdfs:label        "67" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "92.8571428571429"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-WHITE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs67  a                         qb:Observation ;
+        rdfs:label                  "67" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "92.8571428571429"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-WHITE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs39  a               qb:Observation ;
-        rdfs:label        "39" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "69.2"^^xsd:double ;
-        prop:procedure    code:procedure-median ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs39  a                         qb:Observation ;
+        rdfs:label                  "39" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "69.2"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-median ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 dccs:unit  a          qb:ComponentSpecification ;
-        qb:attribute  prop:unit .
+        qb:attribute  crnd-attribute:unit .
 
-ds:obs20  a               qb:Observation ;
-        rdfs:label        "20" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "12.7715435329253"^^xsd:double ;
-        prop:procedure    code:procedure-stdev ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs20  a                         qb:Observation ;
+        rdfs:label                  "20" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "12.7715435329253"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-stdev ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 code:factor-WEIGHTBL  a    code:Factor , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -925,72 +977,78 @@ code:sex-UN  a                    code:Sex , skos:Concept ;
         skos:topConceptOf         code:sex .
 
 dccs:denominator  a   qb:ComponentSpecification ;
-        qb:attribute  prop:denominator .
+        qb:attribute  crnd-attribute:denominator .
 
-ds:obs61  a               qb:Observation ;
-        rdfs:label        "61" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "45.4"^^xsd:double ;
-        prop:procedure    code:procedure-min ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs61  a                         qb:Observation ;
+        rdfs:label                  "61" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "45.4"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-min ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs33  a               qb:Observation ;
-        rdfs:label        "33" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "SEX" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "52.3809523809524"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-M ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs33  a                         qb:Observation ;
+        rdfs:label                  "33" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "SEX" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "52.3809523809524"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-M ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs9  a                qb:Observation ;
-        rdfs:label        "9" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "52"^^xsd:double ;
-        prop:procedure    code:procedure-min ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "YEARS"^^xsd:string .
+ds:obs9  a                          qb:Observation ;
+        rdfs:label                  "9" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "52"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-min ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs46  a               qb:Observation ;
-        rdfs:label        "46" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "88.0952380952381"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-WHITE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs46  a                         qb:Observation ;
+        rdfs:label                  "46" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "88.0952380952381"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-WHITE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs18  a               qb:Observation ;
-        rdfs:label        "18" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "60.55"^^xsd:double ;
-        prop:procedure    code:procedure-median ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "KG"^^xsd:string .
+crnd-dimension:factor
+        a            rdf:Property , qb:DimensionProperty ;
+        rdfs:label   "Type of procedure (quantity, proportion...)" ;
+        rdfs:range   code:Factor ;
+        qb:codeList  code:factor .
+
+ds:obs18  a                         qb:Observation ;
+        rdfs:label                  "18" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "60.55"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-median ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 code:procedure-max  a      code:Procedure , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -998,18 +1056,18 @@ code:procedure-max  a      code:Procedure , skos:Concept ;
         skos:prefLabel     "max" ;
         skos:topConceptOf  code:procedure .
 
-ds:obs59  a               qb:Observation ;
-        rdfs:label        "59" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "67.2795180722892"^^xsd:double ;
-        prop:procedure    code:procedure-mean ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs59  a                         qb:Observation ;
+        rdfs:label                  "59" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "67.2795180722892"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-mean ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
 code:Saffl  a            rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the saffl for each observation"@en ;
@@ -1017,100 +1075,99 @@ code:Saffl  a            rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:saffl ;
         rdfs:subClassOf  skos:Concept .
 
-ds:obs3  a                qb:Observation ;
-        rdfs:label        "3" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "1"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-_ALL_ ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs3  a                          qb:Observation ;
+        rdfs:label                  "3" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "1"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-_ALL_ .
 
 code:saffl  a                 skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: saffl"@en ;
         rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:saffl-Y ;
+        skos:hasTopConcept    code:saffl-_ALL_ , code:saffl-_NONMISS_ , code:saffl-Y ;
         skos:notation         "CL_SAFFL" ;
         skos:note             "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel        "Codelist scheme: saffl"@en .
 
-ds:obs40  a               qb:Observation ;
-        rdfs:label        "40" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "41.7"^^xsd:double ;
-        prop:procedure    code:procedure-min ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs40  a                         qb:Observation ;
+        rdfs:label                  "40" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "41.7"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-min ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs12  a               qb:Observation ;
-        rdfs:label        "12" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "SEX" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "38.3720930232558"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-M ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs12  a                         qb:Observation ;
+        rdfs:label                  "12" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "SEX" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "38.3720930232558"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-M ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs53  a               qb:Observation ;
-        rdfs:label        "53" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "SEX" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "59.5238095238095"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-F ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs53  a                         qb:Observation ;
+        rdfs:label                  "53" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "SEX" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "59.5238095238095"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-F ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
-ds:obs25  a               qb:Observation ;
-        rdfs:label        "25" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "RACE" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "90.6976744186046"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-WHITE ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "_NULL_"^^xsd:string .
-
-prop:factor  a       rdf:Property , qb:DimensionProperty ;
-        rdfs:label   "Type of procedure (quantity, proportion...)" ;
-        rdfs:range   code:Factor ;
-        qb:codeList  code:factor .
+ds:obs25  a                         qb:Observation ;
+        rdfs:label                  "25" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "RACE" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "90.6976744186046"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-WHITE ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 dccs:factor  a        qb:ComponentSpecification ;
         rdfs:label    "Type of procedure (quantity, proportion...)" ;
-        qb:dimension  prop:factor .
+        qb:dimension  crnd-dimension:factor .
 
-ds:obs66  a               qb:Observation ;
-        rdfs:label        "66" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "6"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+crnd-attribute:denominator
+        a           rdf:Property , qb:AttributeProperty ;
+        rdfs:label  "Denominator for a proportion (oskr) subset on which a statistic is based" .
+
+ds:obs66  a                         qb:Observation ;
+        rdfs:label                  "66" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "6"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
 
 code:factor-quantity  a    code:Factor , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -1127,22 +1184,28 @@ code:race-ASIAN  a                code:Race , skos:Concept ;
         skos:prefLabel            "ASIAN" ;
         skos:topConceptOf         code:race .
 
-ds:obs38  a               qb:Observation ;
-        rdfs:label        "38" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "70.0047619047619"^^xsd:double ;
-        prop:procedure    code:procedure-mean ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs38  a                         qb:Observation ;
+        rdfs:label                  "38" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "70.0047619047619"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-mean ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 dccs:race  a          qb:ComponentSpecification ;
         rdfs:label    "Race" ;
-        qb:dimension  prop:race .
+        qb:dimension  crnd-dimension:race .
+
+code:factor-_ALL_  a       code:Factor , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "_ALL_" ;
+        skos:topConceptOf  code:factor .
 
 ds:dataset-DM  a             qb:DataSet ;
         rdfs:comment         "Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a"@en ;
@@ -1151,14 +1214,14 @@ ds:dataset-DM  a             qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DM ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-02-16T22:40:01+01:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-03-15T16:42:26-04:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.1.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DM-R-V-0-5-2.TTL" ;
         prov:wasDerivedFrom  "dm.AR.csv" .
 
 code:sex-_ALL_  a          code:Sex , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:sex ;
         skos:prefLabel     "_ALL_" ;
         skos:topConceptOf  code:sex .
@@ -1169,105 +1232,105 @@ code:procedure-min  a      code:Procedure , skos:Concept ;
         skos:prefLabel     "min" ;
         skos:topConceptOf  code:procedure .
 
-ds:obs60  a               qb:Observation ;
-        rdfs:label        "60" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "64.9"^^xsd:double ;
-        prop:procedure    code:procedure-median ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs60  a                         qb:Observation ;
+        rdfs:label                  "60" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "64.9"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-median ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+
+ds:obs32  a                         qb:Observation ;
+        rdfs:label                  "32" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "SEX" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-proportion ;
+        crnd-measure:measure        "47.6190476190476"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-percent ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-F ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
 code:factor  a                skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: factor"@en ;
         rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:factor-proportion , code:factor-WEIGHTBL , code:factor-quantity , code:factor-AGE ;
+        skos:hasTopConcept    code:factor-_ALL_ , code:factor-proportion , code:factor-WEIGHTBL , code:factor-_NONMISS_ , code:factor-quantity , code:factor-AGE ;
         skos:notation         "CL_FACTOR" ;
         skos:note             "Specifies the factor for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel        "Codelist scheme: factor"@en .
 
-ds:obs32  a               qb:Observation ;
-        rdfs:label        "32" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "SEX" ;
-        prop:factor       code:factor-proportion ;
-        prop:measure      "47.6190476190476"^^xsd:double ;
-        prop:procedure    code:procedure-percent ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-F ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs8  a                          qb:Observation ;
+        rdfs:label                  "8" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "YEARS"^^xsd:string ;
+        crnd-measure:factor         code:factor-AGE ;
+        crnd-measure:measure        "76"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-median ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
-ds:obs8  a                qb:Observation ;
-        rdfs:label        "8" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-AGE ;
-        prop:measure      "76"^^xsd:double ;
-        prop:procedure    code:procedure-median ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "YEARS"^^xsd:string .
-
-prop:trt01a  a       rdf:Property , qb:DimensionProperty ;
-        rdfs:label   "Treatment Arm" ;
-        rdfs:range   code:Trt01a ;
-        qb:codeList  code:trt01a .
+crnd-dimension:saffl  a  rdf:Property , qb:DimensionProperty ;
+        rdfs:label   "Safety Population Flag" ;
+        rdfs:range   code:Saffl ;
+        qb:codeList  code:saffl .
 
 dccs:trt01a  a        qb:ComponentSpecification ;
         rdfs:label    "Treatment Arm" ;
-        qb:dimension  prop:trt01a .
+        qb:dimension  crnd-dimension:trt01a .
 
-ds:obs45  a               qb:Observation ;
-        rdfs:label        "45" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_ALL_" ;
-        prop:factor       code:factor-quantity ;
-        prop:measure      "9"^^xsd:int ;
-        prop:procedure    code:procedure-count ;
-        prop:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_High_Dose ;
-        prop:unit         "_NULL_"^^xsd:string .
+ds:obs45  a                         qb:Observation ;
+        rdfs:label                  "45" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_ALL_" ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-measure:factor         code:factor-quantity ;
+        crnd-measure:measure        "9"^^xsd:int ;
+        crnd-measure:procedure      code:procedure-count ;
+        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
 
-ds:obs17  a               qb:Observation ;
-        rdfs:label        "17" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "62.7593023255814"^^xsd:double ;
-        prop:procedure    code:procedure-mean ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Placebo ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs17  a                         qb:Observation ;
+        rdfs:label                  "17" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "62.7593023255814"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-mean ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Placebo .
 
 code:procedure  a             skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: procedure"@en ;
         rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:procedure-stdev , code:procedure-max , code:procedure-mean , code:procedure-min , code:procedure-percent , code:procedure-count , code:procedure-median ;
+        skos:hasTopConcept    code:procedure-stdev , code:procedure-max , code:procedure-mean , code:procedure-_NONMISS_ , code:procedure-min , code:procedure-percent , code:procedure-_ALL_ , code:procedure-count , code:procedure-median ;
         skos:notation         "CL_PROCEDURE" ;
         skos:note             "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel        "Codelist scheme: procedure"@en .
 
-ds:obs58  a               qb:Observation ;
-        rdfs:label        "58" ;
-        qb:dataSet        ds:dataset-DM ;
-        prop:denominator  "_NULL_" ;
-        prop:factor       code:factor-WEIGHTBL ;
-        prop:measure      "106.1"^^xsd:double ;
-        prop:procedure    code:procedure-max ;
-        prop:race         code:race-_ALL_ ;
-        prop:saffl        code:saffl-Y ;
-        prop:sex          code:sex-_ALL_ ;
-        prop:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        prop:unit         "KG"^^xsd:string .
+ds:obs58  a                         qb:Observation ;
+        rdfs:label                  "58" ;
+        qb:dataSet                  ds:dataset-DM ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:unit         "KG"^^xsd:string ;
+        crnd-measure:factor         code:factor-WEIGHTBL ;
+        crnd-measure:measure        "106.1"^^xsd:double ;
+        crnd-measure:procedure      code:procedure-max ;
+        crnd-measure:race           code:race-_ALL_ ;
+        crnd-measure:saffl          code:saffl-Y ;
+        crnd-measure:sex            code:sex-_ALL_ ;
+        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
