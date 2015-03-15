@@ -19,28 +19,28 @@ for (i in 1:nrow(skeletonSource)){
     compNameClass <- capitalize(toString(skeletonSource[i,"compName"]))
     ##DEBUG message ("Building: Dimension")
     add.triple(store,
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+               paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "DimensionProperty"))
 
     add.triple(store,
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+               paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
 
     ## Label for property. Example:   rdfs:label "Treatment Arm"@en .
     add.data.triple(store,
-                    paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+                    paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
 
       add.triple(store,
-                 paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+                 paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]),
                  paste0(prefixlist$prefixQB, "codeList"),
                 paste0(prefixlist$prefixCODE,skeletonSource[i,"compName"]))
 
       add.triple(store,
-                      paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+                      paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]),
                       "http://www.w3.org/2000/01/rdf-schema#range",
                       paste0(prefixlist$prefixCODE,compNameClass))
 
@@ -53,7 +53,7 @@ for (i in 1:nrow(skeletonSource)){
     add.triple(store,
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixQB, "dimension"),
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]))
+               paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]))
 
     add.data.triple(store,
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
@@ -64,18 +64,18 @@ for (i in 1:nrow(skeletonSource)){
   else if (component =="measure"){
 
     add.triple(store,
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+               paste0(prefixlist$`prefixCRND-MEASURE`, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "MeasureProperty"))
 
     add.triple(store,
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+               paste0(prefixlist$`prefixCRND-MEASURE`, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
 
     ## Label for property
     add.data.triple(store,
-                    paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+                    paste0(prefixlist$`prefixCRND-MEASURE`, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
     ## ComponentSpecification
@@ -87,7 +87,7 @@ for (i in 1:nrow(skeletonSource)){
     add.triple(store,
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixQB, "measure"),
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]))
+               paste0(prefixlist$`prefixCRND-MEASURE`, skeletonSource[i,"compName"]))
 
     add.data.triple(store,
                     paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
@@ -99,16 +99,16 @@ for (i in 1:nrow(skeletonSource)){
     ##DEBUG message ("Building: Attribute")
     ## Property
     add.triple(store,
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+               paste0(prefixlist$`prefixCRND-ATTRIBUTE`, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixQB, "AttributeProperty") )
     add.triple(store,
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+               paste0(prefixlist$`prefixCRND-ATTRIBUTE`, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
     ## Label for property
     add.data.triple(store,
-                    paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]),
+                    paste0(prefixlist$`prefixCRND-ATTRIBUTE`, skeletonSource[i,"compName"]),
                     "http://www.w3.org/2000/01/rdf-schema#label",
                     paste0(skeletonSource[i,"compLabel"]))
     ## ComponentSpecification
@@ -119,7 +119,7 @@ for (i in 1:nrow(skeletonSource)){
     add.triple(store,
                paste0(prefixlist$prefixDCCS, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixQB, "attribute"),
-               paste0(prefixlist$prefixPROP, skeletonSource[i,"compName"]))
+               paste0(prefixlist$`prefixCRND-ATTRIBUTE`, skeletonSource[i,"compName"]))
     }else{
       message ("***ERROR: Undefined Component Type in compType column. Check source file")
   }
