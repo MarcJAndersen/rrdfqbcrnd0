@@ -16,7 +16,7 @@ Get.qb.crnd.prefixes<- function(
   general.prefixes=c("code")
   ) {
 
-  ## TODO(mja) Handle crnd-* in a better way
+  ## TODO(mja) Handle definition of crnd-* in a better way
   
 custom.prefixes <-data.frame(
   prefix=c(general.prefixes, domain.prefixes, "crnd-dimension", "crnd-attribute", "crnd-measure"),
