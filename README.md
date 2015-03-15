@@ -2,6 +2,8 @@
  
 R code for presenting Analysis Results Model - work from a subgroup of FDA/PhUSE Semantic Technology Project - with the purpose of representing resuls in RDF, see (http://www.phusewiki.org/wiki/index.php?title=Analysis_Results_Model)
 
+The code is under development - so not everything works as intended.
+
 Marc Andersen
 
 # Contact
