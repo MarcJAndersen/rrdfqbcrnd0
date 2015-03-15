@@ -26,14 +26,14 @@ ds:obs113  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "33"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "45.4"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-min ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-min ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "45.4"^^xsd:double .
 
 code:procedure  a             skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: procedure"@en ;
@@ -51,14 +51,14 @@ ds:obs90  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "25"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "1.1904761905"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "1.1904761905"^^xsd:double .
 
 ds:obs69  a                         qb:Observation ;
         rdfs:label                  "69" ;
@@ -68,14 +68,14 @@ ds:obs69  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "22"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_NONMISS_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_NONMISS_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs48  a                         qb:Observation ;
         rdfs:label                  "48" ;
@@ -85,14 +85,14 @@ ds:obs48  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "18"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_NONMISS_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_NONMISS_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 code:Agegr1  a           rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the agegr1 for each observation"@en ;
@@ -114,14 +114,14 @@ ds:obs27  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "6"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "76"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-median ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-median ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "76"^^xsd:double .
 
 code:sex  a                   skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: sex"@en ;
@@ -140,14 +140,14 @@ ds:obs121  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "38"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-NOT_HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "83"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-NOT_HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "83"^^xsd:int .
 
 ds:obs100  a                        qb:Observation ;
         rdfs:label                  "100" ;
@@ -157,14 +157,14 @@ ds:obs100  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "29"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "62.759302326"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-mean ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-mean ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "62.759302326"^^xsd:double .
 
 code:Ethnic  a           rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the ethnic for each observation"@en ;
@@ -195,14 +195,14 @@ ds:obs98  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "28"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "64.9"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-median ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-median ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "64.9"^^xsd:double .
 
 dccs:sex  a           qb:ComponentSpecification ;
         rdfs:label    "Sex (Gender)" ;
@@ -216,14 +216,14 @@ ds:obs77  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "23"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "92.857142857"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-WHITE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-WHITE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "92.857142857"^^xsd:double .
 
 ds:obs56  a                         qb:Observation ;
         rdfs:label                  "56" ;
@@ -233,14 +233,14 @@ ds:obs56  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "20"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-65-80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "47"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-65-80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "47"^^xsd:int .
 
 code:trt01a-Placebo  a     code:Trt01a , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -256,14 +256,14 @@ ds:obs35  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "9"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "71" ;
-        crnd-measure:procedure      code:procedure-q1 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-q1 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "71" .
 
 ds:obs4  a                          qb:Observation ;
         rdfs:label                  "4" ;
@@ -273,14 +273,14 @@ ds:obs4  a                          qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "1"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_NONMISS_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_NONMISS_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs14  a                         qb:Observation ;
         rdfs:label                  "14" ;
@@ -290,14 +290,14 @@ ds:obs14  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "3"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "34"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-M ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-M ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "34"^^xsd:int .
 
 ds:obs129  a                        qb:Observation ;
         rdfs:label                  "129" ;
@@ -307,14 +307,14 @@ ds:obs129  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "40"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "3"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "3"^^xsd:int .
 
 crnd-attribute:unit  a  rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Unit of measure" .
@@ -327,14 +327,14 @@ ds:obs108  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "31"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "56.75" ;
-        crnd-measure:procedure      code:procedure-q1 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-q1 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "56.75" .
 
 ds:obs85  a                         qb:Observation ;
         rdfs:label                  "85" ;
@@ -344,14 +344,14 @@ ds:obs85  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "25"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "0"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "0"^^xsd:int .
 
 ds:obs64  a                         qb:Observation ;
         rdfs:label                  "64" ;
@@ -361,14 +361,14 @@ ds:obs64  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "21"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "34.88372093"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "34.88372093"^^xsd:double .
 
 dccs:colno  a         qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:colno .
@@ -381,14 +381,14 @@ ds:obs43  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "18"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_NONMISS_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "86"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_NONMISS_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "86"^^xsd:int .
 
 ds:obs22  a                         qb:Observation ;
         rdfs:label                  "22" ;
@@ -398,14 +398,14 @@ ds:obs22  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "5"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "86" ;
-        crnd-measure:procedure      code:procedure-n ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-n ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "86" .
 
 crnd-dimension:race  a  rdf:Property , qb:DimensionProperty ;
         rdfs:label   "Race" ;
@@ -420,14 +420,14 @@ ds:obs116  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "36"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_NONMISS_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_NONMISS_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs93  a                         qb:Observation ;
         rdfs:label                  "93" ;
@@ -437,14 +437,14 @@ ds:obs93  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "26"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "14.653433372" ;
-        crnd-measure:procedure      code:procedure-std ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-std ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "14.653433372" .
 
 crnd-dimension:sex  a  rdf:Property , qb:DimensionProperty ;
         rdfs:label   "Sex (Gender)" ;
@@ -459,14 +459,14 @@ ds:obs72  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "22"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_NONMISS_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_NONMISS_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs51  a                         qb:Observation ;
         rdfs:label                  "51" ;
@@ -476,14 +476,14 @@ ds:obs51  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "19"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_65 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "11"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_65 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "11"^^xsd:int .
 
 code:agegr1-_NONMISS_
         a                  code:Agegr1 , skos:Concept ;
@@ -500,14 +500,14 @@ ds:obs30  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "7"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "74.380952381"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-mean ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-mean ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "74.380952381"^^xsd:double .
 
 crnd-dimension:trt01a
         a            rdf:Property , qb:DimensionProperty ;
@@ -531,14 +531,14 @@ ds:obs124  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "38"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-NOT_HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "96.511627907"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-NOT_HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "96.511627907"^^xsd:double .
 
 ds:obs103  a                        qb:Observation ;
         rdfs:label                  "103" ;
@@ -548,14 +548,14 @@ ds:obs103  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "30"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "74.4" ;
-        crnd-measure:procedure      code:procedure-q3 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-q3 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "74.4" .
 
 code:factor  a                skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: factor"@en ;
@@ -588,14 +588,14 @@ ds:obs80  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "24"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "6"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "6"^^xsd:int .
 
 ds:obs59  a                         qb:Observation ;
         rdfs:label                  "59" ;
@@ -605,14 +605,14 @@ ds:obs59  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "20"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-65-80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "55.952380952"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-65-80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "55.952380952"^^xsd:double .
 
 ds:obs38  a                         qb:Observation ;
         rdfs:label                  "38" ;
@@ -622,14 +622,14 @@ ds:obs38  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "10"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "88"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-max ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-max ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "88"^^xsd:double .
 
 code:race-WHITE  a         code:Race , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -645,14 +645,14 @@ ds:obs7  a                          qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "2"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "53"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-F ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-F ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "53"^^xsd:int .
 
 ds:obs17  a                         qb:Observation ;
         rdfs:label                  "17" ;
@@ -662,14 +662,14 @@ ds:obs17  a                         qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "3"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "40.476190476"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-M ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-M ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "40.476190476"^^xsd:double .
 
 crnd-attribute:denominator
         a           rdf:Property , qb:AttributeProperty ;
@@ -683,14 +683,14 @@ ds:obs132  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "40"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "3.5714285714"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "3.5714285714"^^xsd:double .
 
 ds:obs111  a                        qb:Observation ;
         rdfs:label                  "111" ;
@@ -700,14 +700,14 @@ ds:obs111  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "32"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "108"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-max ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-max ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "108"^^xsd:double .
 
 dccs:trt01a  a        qb:ComponentSpecification ;
         rdfs:label    "Treatment Arm" ;
@@ -755,14 +755,14 @@ ds:obs88  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "25"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "0"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "0"^^xsd:double .
 
 ds:obs67  a                         qb:Observation ;
         rdfs:label                  "67" ;
@@ -772,14 +772,14 @@ ds:obs67  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "22"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "86"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_NONMISS_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_NONMISS_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "86"^^xsd:int .
 
 ds:obs46  a                         qb:Observation ;
         rdfs:label                  "46" ;
@@ -789,14 +789,14 @@ ds:obs46  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "18"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_NONMISS_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_NONMISS_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 code:procedure-q3  a       code:Procedure , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -812,14 +812,14 @@ ds:obs25  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "6"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "76"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-median ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-median ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "76"^^xsd:double .
 
 code:ethnic-_ALL_  a       code:Ethnic , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
@@ -835,14 +835,14 @@ ds:obs119  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "36"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_NONMISS_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_NONMISS_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs96  a                         qb:Observation ;
         rdfs:label                  "96" ;
@@ -852,14 +852,14 @@ ds:obs96  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "27"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "84" ;
-        crnd-measure:procedure      code:procedure-n ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-n ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "84" .
 
 ds:obs75  a                         qb:Observation ;
         rdfs:label                  "75" ;
@@ -869,14 +869,14 @@ ds:obs75  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "23"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "74"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-WHITE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-WHITE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "74"^^xsd:int .
 
 ds:obs54  a                         qb:Observation ;
         rdfs:label                  "54" ;
@@ -886,14 +886,14 @@ ds:obs54  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "19"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_65 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "13.095238095"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_65 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "13.095238095"^^xsd:double .
 
 ds:obs33  a                         qb:Observation ;
         rdfs:label                  "33" ;
@@ -903,14 +903,14 @@ ds:obs33  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "8"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "80" ;
-        crnd-measure:procedure      code:procedure-q3 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-q3 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "80" .
 
 ds:obs2  a                          qb:Observation ;
         rdfs:label                  "2" ;
@@ -920,14 +920,14 @@ ds:obs2  a                          qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "1"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_NONMISS_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_NONMISS_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs12  a                         qb:Observation ;
         rdfs:label                  "12" ;
@@ -937,14 +937,14 @@ ds:obs12  a                         qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "2"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "47.619047619"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-F ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-F ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "47.619047619"^^xsd:double .
 
 ds:obs127  a                        qb:Observation ;
         rdfs:label                  "127" ;
@@ -954,14 +954,14 @@ ds:obs127  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "40"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "3"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "3"^^xsd:int .
 
 ds:obs106  a                        qb:Observation ;
         rdfs:label                  "106" ;
@@ -971,14 +971,14 @@ ds:obs106  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "31"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "53.5" ;
-        crnd-measure:procedure      code:procedure-q1 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-q1 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "53.5" .
 
 code:procedure-median
         a                  code:Procedure , skos:Concept ;
@@ -1002,14 +1002,14 @@ ds:obs83  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "24"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "7.1428571429"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "7.1428571429"^^xsd:double .
 
 ds:obs62  a                         qb:Observation ;
         rdfs:label                  "62" ;
@@ -1019,14 +1019,14 @@ ds:obs62  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "21"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "29"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "29"^^xsd:int .
 
 ds:obs41  a                         qb:Observation ;
         rdfs:label                  "41" ;
@@ -1036,14 +1036,14 @@ ds:obs41  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "11"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "51"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-min ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-min ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "51"^^xsd:double .
 
 ds:obs20  a                         qb:Observation ;
         rdfs:label                  "20" ;
@@ -1053,14 +1053,14 @@ ds:obs20  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "4"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "8.2860505995" ;
-        crnd-measure:procedure      code:procedure-std ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-std ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "8.2860505995" .
 
 code:procedure-count  a    code:Procedure , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -1076,14 +1076,14 @@ ds:obs114  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "33"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "41.7"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-min ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-min ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "41.7"^^xsd:double .
 
 code:Race  a             rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the race for each observation"@en ;
@@ -1099,14 +1099,14 @@ ds:obs91  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "26"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "12.771543533" ;
-        crnd-measure:procedure      code:procedure-std ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-std ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "12.771543533" .
 
 ds:obs70  a                         qb:Observation ;
         rdfs:label                  "70" ;
@@ -1116,14 +1116,14 @@ ds:obs70  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "22"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_NONMISS_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_NONMISS_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 code:agegr1-65-80  a       code:Agegr1 , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -1164,14 +1164,14 @@ ds:obs49  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "19"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_65 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "14"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_65 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "14"^^xsd:int .
 
 ds:obs28  a                         qb:Observation ;
         rdfs:label                  "28" ;
@@ -1181,14 +1181,14 @@ ds:obs28  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "7"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "75.209302326"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-mean ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-mean ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "75.209302326"^^xsd:double .
 
 dccs:agegr1  a        qb:ComponentSpecification ;
         rdfs:label    "Age group" ;
@@ -1214,14 +1214,14 @@ ds:obs122  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "38"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-NOT_HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "78"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-NOT_HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "78"^^xsd:int .
 
 crnd-attribute:colno  a  rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Column number for two dimensional represenation" .
@@ -1234,14 +1234,14 @@ ds:obs101  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "29"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "67.279518072"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-mean ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-mean ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "67.279518072"^^xsd:double .
 
 code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
         a                  code:Race , skos:Concept ;
@@ -1258,14 +1258,14 @@ ds:obs99  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "28"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "69.2"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-median ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-median ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "69.2"^^xsd:double .
 
 dccs:procedure  a     qb:ComponentSpecification ;
         rdfs:label    "Statistical Procedure" ;
@@ -1279,14 +1279,14 @@ ds:obs78  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "23"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "88.095238095"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-WHITE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-WHITE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "88.095238095"^^xsd:double .
 
 ds:obs57  a                         qb:Observation ;
         rdfs:label                  "57" ;
@@ -1296,14 +1296,14 @@ ds:obs57  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "20"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-65-80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "55"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-65-80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "55"^^xsd:int .
 
 ds:obs36  a                         qb:Observation ;
         rdfs:label                  "36" ;
@@ -1313,14 +1313,14 @@ ds:obs36  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "9"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "70.5" ;
-        crnd-measure:procedure      code:procedure-q1 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-q1 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "70.5" .
 
 ds:obs5  a                          qb:Observation ;
         rdfs:label                  "5" ;
@@ -1330,14 +1330,14 @@ ds:obs5  a                          qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "1"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_NONMISS_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_NONMISS_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs15  a                         qb:Observation ;
         rdfs:label                  "15" ;
@@ -1347,14 +1347,14 @@ ds:obs15  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "3"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "44"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-M ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-M ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "44"^^xsd:int .
 
 code:trt01a-_ALL_  a       code:Trt01a , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
@@ -1374,14 +1374,14 @@ ds:obs130  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "40"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "3.488372093"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "3.488372093"^^xsd:double .
 
 ds:obs109  a                        qb:Observation ;
         rdfs:label                  "109" ;
@@ -1391,14 +1391,14 @@ ds:obs109  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "32"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "86.2"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-max ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-max ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "86.2"^^xsd:double .
 
 ds:obs86  a                         qb:Observation ;
         rdfs:label                  "86" ;
@@ -1408,14 +1408,14 @@ ds:obs86  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "25"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "0"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "0"^^xsd:int .
 
 ds:obs65  a                         qb:Observation ;
         rdfs:label                  "65" ;
@@ -1425,14 +1425,14 @@ ds:obs65  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "21"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "34.523809524"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "34.523809524"^^xsd:double .
 
 ds:obs44  a                         qb:Observation ;
         rdfs:label                  "44" ;
@@ -1442,14 +1442,14 @@ ds:obs44  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "18"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_NONMISS_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_NONMISS_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 code:procedure-q1  a       code:Procedure , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -1465,14 +1465,14 @@ ds:obs23  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "5"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "84" ;
-        crnd-measure:procedure      code:procedure-n ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-n ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "84" .
 
 ds:dataset-DEMO  a           qb:DataSet ;
         rdfs:comment         "Example demographics table from demo.sas program"@en ;
@@ -1481,7 +1481,7 @@ ds:dataset-DEMO  a           qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DEMO ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-03-15T16:43:35-04:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-03-15T17:45:23-04:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.1.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DEMO-R-V-0-5-2.TTL" ;
@@ -1502,14 +1502,14 @@ ds:obs117  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "36"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_NONMISS_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_NONMISS_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 code:sex-F  a                     code:Sex , skos:Concept ;
         cts:cdiscDefinition       "A person who belongs to the sex that normally produces ova. The term is used to indicate biological sex distinctions, or cultural gender role distinctions, or both. (NCI)" ;
@@ -1534,14 +1534,14 @@ ds:obs94  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "27"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "86" ;
-        crnd-measure:procedure      code:procedure-n ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-n ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "86" .
 
 ds:obs73  a                         qb:Observation ;
         rdfs:label                  "73" ;
@@ -1551,14 +1551,14 @@ ds:obs73  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "23"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "78"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-WHITE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-WHITE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "78"^^xsd:int .
 
 ds:obs52  a                         qb:Observation ;
         rdfs:label                  "52" ;
@@ -1568,14 +1568,14 @@ ds:obs52  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "19"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_65 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "16.279069767"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_65 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "16.279069767"^^xsd:double .
 
 code:factor-_ALL_  a       code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
@@ -1591,14 +1591,14 @@ ds:obs31  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "8"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "82" ;
-        crnd-measure:procedure      code:procedure-q3 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-q3 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "82" .
 
 ds:obs10  a                         qb:Observation ;
         rdfs:label                  "10" ;
@@ -1608,14 +1608,14 @@ ds:obs10  a                         qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "2"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "61.627906977"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-F ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-F ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "61.627906977"^^xsd:double .
 
 ds:obs125  a                        qb:Observation ;
         rdfs:label                  "125" ;
@@ -1625,14 +1625,14 @@ ds:obs125  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "38"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-NOT_HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "92.857142857"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-NOT_HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "92.857142857"^^xsd:double .
 
 ds:obs104  a                        qb:Observation ;
         rdfs:label                  "104" ;
@@ -1642,14 +1642,14 @@ ds:obs104  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "30"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "77.8" ;
-        crnd-measure:procedure      code:procedure-q3 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-q3 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "77.8" .
 
 ds:obs81  a                         qb:Observation ;
         rdfs:label                  "81" ;
@@ -1659,14 +1659,14 @@ ds:obs81  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "24"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "9"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "9"^^xsd:int .
 
 ds:obs60  a                         qb:Observation ;
         rdfs:label                  "60" ;
@@ -1676,14 +1676,14 @@ ds:obs60  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "20"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-65-80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "65.476190476"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-65-80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "65.476190476"^^xsd:double .
 
 ds:obs39  a                         qb:Observation ;
         rdfs:label                  "39" ;
@@ -1693,14 +1693,14 @@ ds:obs39  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "10"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "88"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-max ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-max ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "88"^^xsd:double .
 
 ds:obs8  a                          qb:Observation ;
         rdfs:label                  "8" ;
@@ -1710,14 +1710,14 @@ ds:obs8  a                          qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "2"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "50"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-F ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-F ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "50"^^xsd:int .
 
 ds:obs18  a                         qb:Observation ;
         rdfs:label                  "18" ;
@@ -1727,14 +1727,14 @@ ds:obs18  a                         qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "3"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "52.380952381"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-M ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-M ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "52.380952381"^^xsd:double .
 
 code:trt01a-Xanomeline_High_Dose
         a                  code:Trt01a , skos:Concept ;
@@ -1754,14 +1754,14 @@ ds:obs112  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "33"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "34"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-min ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-min ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "34"^^xsd:double .
 
 code:trt01a  a                skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: trt01a"@en ;
@@ -1779,14 +1779,14 @@ ds:obs89  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "25"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "0"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "0"^^xsd:double .
 
 code:factor-quantity  a    code:Factor , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -1802,14 +1802,14 @@ ds:obs68  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "22"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_NONMISS_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_NONMISS_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs47  a                         qb:Observation ;
         rdfs:label                  "47" ;
@@ -1819,14 +1819,14 @@ ds:obs47  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "18"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_NONMISS_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_NONMISS_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 crnd-dimension:procedure
         a            rdf:Property , qb:DimensionProperty ;
@@ -1842,14 +1842,14 @@ ds:obs26  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "6"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "77.5"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-median ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-median ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "77.5"^^xsd:double .
 
 ds:obs120  a                        qb:Observation ;
         rdfs:label                  "120" ;
@@ -1859,14 +1859,14 @@ ds:obs120  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "36"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_NONMISS_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_NONMISS_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 code:ethnic-NOT_HISPANIC_OR_LATINO
         a                  code:Ethnic , skos:Concept ;
@@ -1890,14 +1890,14 @@ ds:obs97  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "28"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "60.55"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-median ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-median ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "60.55"^^xsd:double .
 
 ds:obs76  a                         qb:Observation ;
         rdfs:label                  "76" ;
@@ -1907,14 +1907,14 @@ ds:obs76  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "23"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "90.697674419"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-WHITE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-WHITE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "90.697674419"^^xsd:double .
 
 ds:obs55  a                         qb:Observation ;
         rdfs:label                  "55" ;
@@ -1924,14 +1924,14 @@ ds:obs55  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "20"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-65-80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "42"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-65-80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "42"^^xsd:int .
 
 code:agegr1-_80  a         code:Agegr1 , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -1947,14 +1947,14 @@ ds:obs34  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "9"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "69" ;
-        crnd-measure:procedure      code:procedure-q1 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-q1 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "69" .
 
 ds:obs3  a                          qb:Observation ;
         rdfs:label                  "3" ;
@@ -1964,14 +1964,14 @@ ds:obs3  a                          qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "1"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_NONMISS_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_NONMISS_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs13  a                         qb:Observation ;
         rdfs:label                  "13" ;
@@ -1981,14 +1981,14 @@ ds:obs13  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "3"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "33"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-M ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-M ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "33"^^xsd:int .
 
 dccs:unit  a          qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:unit .
@@ -2001,14 +2001,14 @@ ds:obs128  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "40"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "6"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "6"^^xsd:int .
 
 ds:obs107  a                        qb:Observation ;
         rdfs:label                  "107" ;
@@ -2018,14 +2018,14 @@ ds:obs107  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "31"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "55.8" ;
-        crnd-measure:procedure      code:procedure-q1 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-q1 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "55.8" .
 
 ds:obs84  a                         qb:Observation ;
         rdfs:label                  "84" ;
@@ -2035,14 +2035,14 @@ ds:obs84  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "24"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "10.714285714"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "10.714285714"^^xsd:double .
 
 ds:obs63  a                         qb:Observation ;
         rdfs:label                  "63" ;
@@ -2052,14 +2052,14 @@ ds:obs63  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "21"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "18"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "18"^^xsd:int .
 
 ds:obs42  a                         qb:Observation ;
         rdfs:label                  "42" ;
@@ -2069,14 +2069,14 @@ ds:obs42  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "11"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "56"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-min ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-min ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "56"^^xsd:double .
 
 code:ethnic-_NONMISS_
         a                  code:Ethnic , skos:Concept ;
@@ -2096,14 +2096,14 @@ ds:obs21  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "4"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "7.8860938487" ;
-        crnd-measure:procedure      code:procedure-std ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-std ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "7.8860938487" .
 
 ds:obs115  a                        qb:Observation ;
         rdfs:label                  "115" ;
@@ -2113,14 +2113,14 @@ ds:obs115  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "36"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_NONMISS_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "86"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_NONMISS_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "86"^^xsd:int .
 
 ds:obs92  a                         qb:Observation ;
         rdfs:label                  "92" ;
@@ -2130,14 +2130,14 @@ ds:obs92  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "26"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "14.123598649" ;
-        crnd-measure:procedure      code:procedure-std ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-std ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "14.123598649" .
 
 code:factor-proportion
         a                  code:Factor , skos:Concept ;
@@ -2154,14 +2154,14 @@ ds:obs71  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "22"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_NONMISS_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_NONMISS_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs50  a                         qb:Observation ;
         rdfs:label                  "50" ;
@@ -2171,14 +2171,14 @@ ds:obs50  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "19"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_65 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "8"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_65 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "8"^^xsd:int .
 
 ds:obs29  a                         qb:Observation ;
         rdfs:label                  "29" ;
@@ -2188,14 +2188,14 @@ ds:obs29  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "7"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "75.666666667"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-mean ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-mean ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "75.666666667"^^xsd:double .
 
 ds:obs123  a                        qb:Observation ;
         rdfs:label                  "123" ;
@@ -2205,14 +2205,14 @@ ds:obs123  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "38"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-NOT_HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "81"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-NOT_HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "81"^^xsd:int .
 
 code:agegr1  a                skos:ConceptScheme ;
         rdfs:label            "Codelist scheme: agegr1"@en ;
@@ -2230,14 +2230,14 @@ ds:obs102  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "29"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "70.004761905"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-mean ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-mean ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "70.004761905"^^xsd:double .
 
 crnd-dimension:agegr1
         a            rdf:Property , qb:DimensionProperty ;
@@ -2274,14 +2274,14 @@ ds:obs79  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "24"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "8"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "8"^^xsd:int .
 
 ds:obs58  a                         qb:Observation ;
         rdfs:label                  "58" ;
@@ -2291,14 +2291,14 @@ ds:obs58  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "20"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-65-80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "48.837209302"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-65-80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "48.837209302"^^xsd:double .
 
 ds:obs37  a                         qb:Observation ;
         rdfs:label                  "37" ;
@@ -2308,14 +2308,14 @@ ds:obs37  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "10"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "89"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-max ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-max ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "89"^^xsd:double .
 
 ds:obs6  a                          qb:Observation ;
         rdfs:label                  "6" ;
@@ -2325,14 +2325,14 @@ ds:obs6  a                          qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "1"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_NONMISS_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_NONMISS_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs16  a                         qb:Observation ;
         rdfs:label                  "16" ;
@@ -2342,14 +2342,14 @@ ds:obs16  a                         qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "3"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "38.372093023"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-M ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-M ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "38.372093023"^^xsd:double .
 
 ds:obs131  a                        qb:Observation ;
         rdfs:label                  "131" ;
@@ -2359,14 +2359,14 @@ ds:obs131  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "40"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "7.1428571429"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "7.1428571429"^^xsd:double .
 
 ds:obs110  a                        qb:Observation ;
         rdfs:label                  "110" ;
@@ -2376,14 +2376,14 @@ ds:obs110  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "32"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "106.1"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-max ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-max ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "106.1"^^xsd:double .
 
 code:sex-UN  a                    code:Sex , skos:Concept ;
         cts:cdiscDefinition       "A person (one of unisexual specimens) who is born with genitalia and/or secondary sexual characteristics of indeterminate sex, or which combine features of both sexes. (NCI)" ;
@@ -2402,14 +2402,14 @@ ds:obs87  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "25"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "1"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "1"^^xsd:int .
 
 dccs:ethnic  a        qb:ComponentSpecification ;
         rdfs:label    "Ethnic" ;
@@ -2423,14 +2423,14 @@ ds:obs66  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "21"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "21.428571429"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "21.428571429"^^xsd:double .
 
 ds:obs45  a                         qb:Observation ;
         rdfs:label                  "45" ;
@@ -2440,14 +2440,14 @@ ds:obs45  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "18"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_NONMISS_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "84"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_NONMISS_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "84"^^xsd:int .
 
 dccs:cellpartno  a    qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:cellpartno .
@@ -2460,14 +2460,14 @@ ds:obs24  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "5"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "84" ;
-        crnd-measure:procedure      code:procedure-n ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-n ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "84" .
 
 ds:obs118  a                        qb:Observation ;
         rdfs:label                  "118" ;
@@ -2477,14 +2477,14 @@ ds:obs118  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "36"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_NONMISS_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "100"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_NONMISS_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "100"^^xsd:double .
 
 code:Sex  a              rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the sex for each observation"@en ;
@@ -2500,14 +2500,14 @@ ds:obs95  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "27"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "83" ;
-        crnd-measure:procedure      code:procedure-n ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-n ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "83" .
 
 ds:obs74  a                         qb:Observation ;
         rdfs:label                  "74" ;
@@ -2517,14 +2517,14 @@ ds:obs74  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "23"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "78"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-WHITE ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-WHITE ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "78"^^xsd:int .
 
 ds:obs53  a                         qb:Observation ;
         rdfs:label                  "53" ;
@@ -2534,14 +2534,14 @@ ds:obs53  a                         qb:Observation ;
         crnd-attribute:denominator  "agegr1" ;
         crnd-attribute:rowno        "19"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_65 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "9.5238095238"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_65 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "9.5238095238"^^xsd:double .
 
 code:procedure-n  a        code:Procedure , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -2557,14 +2557,14 @@ ds:obs32  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "8"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "82" ;
-        crnd-measure:procedure      code:procedure-q3 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-q3 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "82" .
 
 code:procedure-percent
         a                  code:Procedure , skos:Concept ;
@@ -2581,14 +2581,14 @@ ds:obs1  a                          qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "1"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "86"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_NONMISS_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_NONMISS_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "86"^^xsd:int .
 
 ds:obs11  a                         qb:Observation ;
         rdfs:label                  "11" ;
@@ -2598,14 +2598,14 @@ ds:obs11  a                         qb:Observation ;
         crnd-attribute:denominator  "sex" ;
         crnd-attribute:rowno        "2"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "59.523809524"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-F ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_Low_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-F ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "59.523809524"^^xsd:double .
 
 crnd-attribute:cellpartno
         a           rdf:Property , qb:AttributeProperty ;
@@ -2626,14 +2626,14 @@ ds:obs126  a                        qb:Observation ;
         crnd-attribute:denominator  "ethnic" ;
         crnd-attribute:rowno        "38"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-NOT_HISPANIC_OR_LATINO ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "96.428571429"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-NOT_HISPANIC_OR_LATINO ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "96.428571429"^^xsd:double .
 
 ds:obs105  a                        qb:Observation ;
         rdfs:label                  "105" ;
@@ -2643,14 +2643,14 @@ ds:obs105  a                        qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "30"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-weightbl ;
-        crnd-measure:measure        "80.3" ;
-        crnd-measure:procedure      code:procedure-q3 ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-q3 ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "80.3" .
 
 code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
@@ -2666,14 +2666,14 @@ ds:obs82  a                         qb:Observation ;
         crnd-attribute:denominator  "race" ;
         crnd-attribute:rowno        "24"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-proportion ;
-        crnd-measure:measure        "9.3023255814"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-percent ;
-        crnd-measure:race           code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "9.3023255814"^^xsd:double .
 
 ds:obs61  a                         qb:Observation ;
         rdfs:label                  "61" ;
@@ -2683,14 +2683,14 @@ ds:obs61  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "21"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_80 ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "30"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_80 ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "30"^^xsd:int .
 
 ds:dsd-DEMO  a        qb:DataStructureDefinition ;
         qb:component  dccs:colno , dccs:sex , dccs:rowno , dccs:factor , dccs:measure , dccs:procedure , dccs:cellpartno , dccs:ethnic , dccs:trt01a , dccs:denominator , dccs:race , dccs:agegr1 , dccs:unit .
@@ -2713,14 +2713,14 @@ ds:obs40  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "11"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "52"^^xsd:double ;
-        crnd-measure:procedure      code:procedure-min ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-min ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "52"^^xsd:double .
 
 code:agegr1-_65  a         code:Agegr1 , skos:Concept ;
         rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
@@ -2736,14 +2736,14 @@ ds:obs9  a                          qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "2"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-quantity ;
-        crnd-measure:measure        "40"^^xsd:int ;
-        crnd-measure:procedure      code:procedure-count ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-F ;
-        crnd-measure:trt01a         code:trt01a-Xanomeline_High_Dose .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-F ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-measure:measure        "40"^^xsd:int .
 
 ds:obs19  a                         qb:Observation ;
         rdfs:label                  "19" ;
@@ -2753,14 +2753,14 @@ ds:obs19  a                         qb:Observation ;
         crnd-attribute:denominator  "" ;
         crnd-attribute:rowno        "4"^^xsd:string ;
         crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-measure:agegr1         code:agegr1-_ALL_ ;
-        crnd-measure:ethnic         code:ethnic-_ALL_ ;
-        crnd-measure:factor         code:factor-age ;
-        crnd-measure:measure        "8.5901671271" ;
-        crnd-measure:procedure      code:procedure-std ;
-        crnd-measure:race           code:race-_ALL_ ;
-        crnd-measure:sex            code:sex-_ALL_ ;
-        crnd-measure:trt01a         code:trt01a-Placebo .
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-age ;
+        crnd-dimension:procedure    code:procedure-std ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-measure:measure        "8.5901671271" .
 
 code:procedure-_ALL_  a    code:Procedure , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
