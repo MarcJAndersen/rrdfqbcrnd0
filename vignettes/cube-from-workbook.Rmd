@@ -43,7 +43,7 @@ The next statements demonstrates how to create two RDF data cubes
 according to the specfications in the excel spreadsheet. Note the
 contents of the RDF data cube is read from the csv file given by
 obsFileName in directory given by obsFileNameDirectory. The value
-```!example´´´ specifies that the file should be read from sample data
+"!example" specifies that the file should be read from sample data
 in the package. The dataCubeOutDirectory defines the directory name for
 the generated RDF data cube.
 
