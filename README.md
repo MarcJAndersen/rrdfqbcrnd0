@@ -1,15 +1,47 @@
-Private repository for R-RDF Data Cube for Clinical Research & Development
-==========================================================================
+# Repository for R-RDF Data Cube for Clinical Research & Development
  
-R code for presenting Analysis Results Model - work from a subgroup of FDA/PhUSE Semantic Technology Project - with the purpose of representing resuls in RDF.
-This is a private repository until I get comfortable with publishing code in the open :-)
-
-Please note: fields like author, contributors etc are presently not correct. 
+R code for presenting Analysis Results Model - work from a subgroup of FDA/PhUSE Semantic Technology Project - with the purpose of representing resuls in RDF, see (http://www.phusewiki.org/wiki/index.php?title=Analysis_Results_Model)
 
 Marc Andersen
 
-Introduction
-------------
+# Contact
+
+For more information about the Analysis Results Model subgroup, please
+visit the Wiki at [phusewiki.org]() or go straight to
+[http://www.phusewiki.org/wiki/index.php?title=Analysis_Results_Model]()
+
+
+# Introduction
+
+
+
+## Install the rrdfqbcrnd0 package
+
+### Install in R from local directory using Rstudio
+Obtain the package as a zip file, for example by downloading from GitHub (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
+
+Extract the zip file to a directory of your choosing. 
+
+Go to the directory and open the rrdfqbcrnd0.Rproj file.
+
+### Clone from GitHub and start useing Rstudio
+
+Clone the repository (https://github.com/MarcJAndersen/rrdfqbcrnd0.git).
+
+Go to the directory and open the rrdfqbcrnd0.Rproj file.
+
+### Install in R from GitHub
+
+To install the rrdfqbcrnd0 package use
+
+```r
+library(devtools)
+install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= TRUE)
+packageVersion("devtools")
+```
+
+Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
+
 
 ## Setup of R
 
@@ -61,40 +93,14 @@ on the packages github page. Well, almost, due changes in install_github, you ne
 library(devtools)
 install_github("egonw/rrdf", subdir="rrdflibs")
 install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE)
+```
+
+To check if the installation was successfull use:
+```r
 library(rrdflibs)
 library(rrdf)
-# check the version loaded
 packageVersion("rrdf")
 ```
-
-
-## Install the rrdfqbcrnd0 package
-
-### Install in R from local directory using Rstudio
-Obtain the package as a zip file, for example by downloading from GitHub (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
-
-Extract the zip file to a directory of your choosing. 
-
-Go to the directory and open the rrdfqbcrnd0.Rproj file.
-
-### Clone from GitHub and start use Rstudio
-
-Clone the repository (https://github.com/MarcJAndersen/rrdfqbcrnd0.git).
-
-Go to the directory and open the rrdfqbcrnd0.Rproj file.
-
-### Install in R from GitHub
-
-To install the rrdfqbcrnd0 package use
-
-```r
-library(devtools)
-install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= TRUE)
-packageVersion("devtools")
-```
-
-Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
-
 
 ## Other issues 
 
@@ -213,8 +219,7 @@ The code is based on incremental development of
 Comments to code and functionality:
 * Ian, Tim, Marc, Ippei, Marcelina
 
-Persons
--------
+# Acknowledgements and contributers in general
 
 * Ian
 * Tim
@@ -222,8 +227,8 @@ Persons
 * Ippei
 * Marcelina
  
-Project Status
---------------
+# Project Status
+
 
 The code here is under development - any thing may change until version 1.0.
 
@@ -236,13 +241,22 @@ crnd-measure	http://www.example.org/dc/measure#
 In general the prop: is replaced 
 crnd-dimension:|crnd-attribute:|crnd-measure:
 
+The prefixes are stored in a data.frame set from the function Get.qb.crnd.prefixes when creating a cube.
+The data.frame is converted into a list in 
+This is used extensively in buildCodelist.R, qb.buildObservations.R and qb.buildSkeleton.R.
 
-Contact
--------
+Here is how prefixes are defined:
+```{r, eval=FALSE}
+domainName<- "DEMOG-T123"
+custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
+  common.prefixes <-data.frame(
+  prefix=names( Get.default.crnd.prefixes() ),
+  namespace=as.character( Get.default.crnd.prefixes() )
+  )
+prefixes<- rbind(common.prefixes, custom.prefixes)                                                
+prefixlist<- qb.def.prefixlist(store, prefixes)
+```
 
-For more information about the Analysis Results Model subgroup, please
-visit the Wiki at [phusewiki.org]() or go straight to
-[http://www.phusewiki.org/wiki/index.php?title=Analysis_Results_Model]()
 
 Create HTML version
 -------------------
