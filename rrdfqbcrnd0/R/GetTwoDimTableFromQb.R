@@ -14,7 +14,7 @@
 ##'
 
 
-## COnsider
+## TODO: Consider
 ## rownamefunc function for deriving rownames
 ## colnamefunc function for columnnames
 
@@ -44,18 +44,18 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   ## cat(observationsDescriptionRq)
   observationsDesc<- as.data.frame(sparql.rdf(store, observationsDescriptionRq ), stringsAsFactors=FALSE)
  
-  ## XX should also return desciptive labels for the dimensions
+  ## ToDo: should also return desciptive labels for the dimensions
   rowdimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, rowdim )
   observationsRowDim<- as.data.frame(sparql.rdf(store, rowdimRq ), stringsAsFactors=FALSE)
 
-  ## XX getting the column names (variable) names for the row dimensions
+  ## ToDo: getting the column names (variable) names for the row dimensions
   ## this could be a return parameter from a function like GetDimsubsetWithObsSparqlQuery
   ## to ensure that the naming convention was systematic
 
-  ## XX need a function to determine variable (column names) from
+  ## ToDo: need a function to determine variable (column names) from
   ## properties for each language (R, SAS etc)
 
-  colnamesRowDim<- sub("crnd-dimension:", "", osub("crnd-attribute:", "", rowdim))
+  colnamesRowDim<- gsub("crnd-dimension:|crnd-attribute:", "", rowdim)
   uqr<-data.frame(unique(observationsRowDim[,colnamesRowDim]), stringsAsFactors=FALSE)
   colnames(uqr)<- colnamesRowDim
   ## XX assuming irowno is a unused column name
@@ -69,7 +69,7 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
 
   coldimRq<- GetDimsubsetWithObsSparqlQuery( forsparqlprefix, domainName, coldim )
   observationsColDim<- as.data.frame(sparql.rdf(store, coldimRq ), stringsAsFactors=FALSE)
-  colnamesColDim<- sub("crnd-dimension:", "", osub("crnd-attribute:", "", coldim))
+  colnamesColDim<- gsub("crnd-dimension:|crnd-attribute:", "", coldim)
   ## using data.frame to handle the case where the result is a vector
   uqc<-data.frame(unique(observationsColDim[,colnamesColDim]), stringsAsFactors=FALSE)
   colnames(uqc)<- colnamesColDim
@@ -87,31 +87,19 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   ll<-regmatches(strsplit(forsparqlprefix,"\n")[[1]],prm)
   res<-data.frame(matrix(unlist(ll),ncol=3,byrow=TRUE),stringsAsFactors=FALSE)
 
-## XX should have a function for this
+## ToDo: should have a function for this
   observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-attribute:", as.character(res[res[,2]=="crnd-attribute",3]), x)})
   observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-dimension:", as.character(res[res[,2]=="crnd-dimension",3]), x)})
   observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-measure:", as.character(res[res[,2]=="crnd-measure",3]), x)})
   observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^ds:", as.character(res[res[,2]=="ds",3]), x)})
   observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^code:", as.character(res[res[,2]=="code",3]), x)})
   
-  ## names(observationsDesc)
-  ## head(observationsColDimE)
-  ## names(observationsColDimE)
-  
-  ## any(duplicated(observationsRowDimE$s))
-  ## any(duplicated(observationsColDimE$s))
-
   obsRowIcolno<- merge( observationsRowDimE[,c("s","irowno")], observationsColDimE[,c("s","icolno")], by="s", all=TRUE)
-  ## any(duplicated(obsRowIcolno$s))
-  ## duplicated(obsRowIcolno[,c("irowno","icolno")])
-  ## any(duplicated(obsRowIcolno[,c("irowno","icolno")]))
   if (any(duplicated(obsRowIcolno[,c("irowno","icolno")]))) {
     stop("Unexpected an observation is not uniquely identified by row and column number")
   }
 
   if (any(duplicated(obsRowIcolno[,c("irowno","icolno")]))) {
-##  obsRowIcolno[ which(duplicated(obsRowIcolno[,c("irowno","icolno")])), ]
-    ##  obsRowIcolno
     stop("unexpected duplicates - see program code")
   }
 

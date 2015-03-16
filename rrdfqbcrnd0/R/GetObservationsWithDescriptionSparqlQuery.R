@@ -16,7 +16,7 @@ GetObservationsWithDescriptionSparqlQuery<- function( forsparqlprefix, domainNam
     paste("qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
     paste0( dimensions, " ", sub("crnd-dimension:", "?", dimensions), ";", collapse="\n"),
     "\n",
-    paste0( attributes, " ", sub("crnd-dimension:", "?", attributes), ";", collapse="\n"),
+    paste0( attributes, " ", sub("crnd-attribute:", "?", attributes), ";", collapse="\n"),
     "\n",                          
     "crnd-measure:measure      ?measure .      \n",
     paste0( "optional{ ", sub("crnd-dimension:", "?", dimensions), " ",
@@ -43,7 +43,7 @@ GetObservationsWithDescriptionSparqlQuery<- function( forsparqlprefix, domainNam
     "BIND( IRI( ?s ) AS ?measureIRI)",                              
     "\n",
     "} ",
-## TODO(mja) Make more clever way os sorting    
+## TODO(mja) Make more clever way of sorting    
 ##    "ORDER BY ?olabel",
     "\n"
     )

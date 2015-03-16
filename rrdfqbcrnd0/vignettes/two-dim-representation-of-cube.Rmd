@@ -16,63 +16,67 @@ First load the package.
 library(rrdfqbcrnd0)
 ```
 
-# Generating RDF data cube from specification in a spreadsheet and export as turtle file
+# Loading DEMO data 
 
-The generation of RDF data cube can be specified in a spreadsheet.
-
-## DM data 
-The outputs below shows the generation of the DM RDF data cube.
+The DEMO data exists as a turtle file in the sample-rdf directory.
 
 ```{r, eval=TRUE}
-RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
-cat("DM cube stored as ", dm.cube.fn, "\n")
-```
 
-## DEMO data 
-The outputs below shows the generation of the DEMO RDF data cube.
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.TTL", package="rrdfqbcrnd0")
+store <- new.rdf()  # Initialize
+cat("Loading ", dataCubeFile, "\n")
+load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+summarize.rdf(store)
 
-
-```{r, eval=TRUE}
-RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
-cat("DEMO cube stored as ", demo.cube.fn, "\n")
-
-dataCubeFile<- demo.cube.fn
-checkCube <- new.rdf()  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
-summarize.rdf(checkCube)
-
-dsdName<- GetDsdNameFromCube( checkCube )
-domainName<- GetDomainNameFromCube( checkCube )
+dsdName<- GetDsdNameFromCube( store )
+domainName<- GetDomainNameFromCube( store )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
-View observation "ds:obs7"
+View a specific observation. The observation is specified in the values part of the SPARQL query.
 
 ```{r, eval=TRUE}
-observations.rq<-  paste( forsparqlprefix,
+cube.observations.rq<-  paste( forsparqlprefix,
 '
 select *
 where { 
 ?s a qb:Observation ; 
 ?p ?o .
 values (?s) {
-(ds:obs7)
+(ds:obs29)
 }
 }
-limit 30
 ',
 "\n"                               
 )
 
-cube.observations<- sparql.rdf(checkCube, cube.observations.rq)
+cube.observations<- sparql.rdf(store, cube.observations.rq)
 knitr::kable(cube.observations)
 
 ```
 
 
-## Current - 10-mar-2015
+# Current - 15-mar-2015
+
+The following code is under development. It creates a HTML file
+extdata/sample-cfg/test.html showing a two dimensional representation
+of the table with drag and drop. The observations are stored as RDFa
+in the HTML. Pending: including the rest of the cube into the
+html. Consider if in each cell only the observation and measure should
+be referenced and not all properties and objects for the observation.
+
+
+The HTML includes green-turtle
+(https://github.com/alexmilowski/green-turtle), jquery
+(http://jquery.com/) and jqueryUI (http://jqueryui.com/).  In my setup
+I store the project under packages, and can symlink to the files from the
+extdata/sample-cfg directory.
+
+    cd extdata/sample-cfg
+    ln -s ~/packages/green-turtle/build/RDFa.min.1.4.0.js 
+    ln -s ~/packages/green-turtle/build/RDFaProcessor.min.1.4.0.js 
+    ln -s ~/packages/jquery-2.1.3.min/jquery-2.1.3.min.js .
+    ln -s ~/packages/jquery-ui-1.11.3.custom .
 
 ```{r, echo=TRUE}
 cols.rq<-  paste( forsparqlprefix,
@@ -88,29 +92,20 @@ order by ?colno ?cellpartno
 "\n"                               
 )
 
-cols<- sparql.rdf(checkCube, cols.rq)
+cols<- sparql.rdf(store, cols.rq)
 knitr::kable(cols)
 
-dimensions<- sparql.rdf(checkCube, GetDimensionsSparqlQuery( forsparqlprefix ) )
-attributesDf<- sparql.rdf(checkCube, GetAttributesSparqlQuery( forsparqlprefix ))
-
-## rowdim<- setdiff(union(dimensions,attributesDf), c("crnd-dimension:saffl"))
-## rowdim<- union(dimensions,attributesDf), c("crnd-dimension:saffl")
-
-## rowdim<- c("crnd-dimension:saffl", "crnd-dimension:race", "crnd-dimension:sex", "crnd-dimension:factor",
-## "crnd-dimension:procedure", "crnd-attribute:unit", "crnd-dimension:denominator" )
+dimensions<- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
+attributesDf<- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
 
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex" )
-
-coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a", "crnd-dimension:procedure", "crnd-attribute:unit", "crnd-dimension:denominator" )
 coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a" )
 
-qbtest<- GetTwoDimTableFromQb( checkCube, forsparqlprefix, domainName, rowdim, coldim )
+qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
 
-qbtest
-names(attributes(qbtest))
-options(width=200)
-knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
+## names(attributes(qbtest))
+## options(width=200)
+## knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
 
 oDx<-attr(qbtest,"observationsDesc")
 oDxx<- oDx[! is.na(oDx$s),]
@@ -156,6 +151,7 @@ cat('
 }
 #drop{
     width:300px;
+    background-color:green;
     float:left;
     padding:10px;
 }
@@ -181,7 +177,13 @@ function drop(ev)
 ev.preventDefault();
 var data=ev.dataTransfer.getData("Text");
 console.log("Dropping: ", data);
-ev.target.appendChild(document.getElementById(data));
+// from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
+var nodeCopy = document.getElementById(data).cloneNode(true);
+nodeCopy.id = "copy"+nodeCopy.id;
+// end from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
+var newelem = document.createElement("P");
+newelem.appendChild(nodeCopy);
+ev.target.appendChild(newelem);
 }
 
 $(document).ready(function(){
@@ -255,11 +257,11 @@ cat("</table>\n", file=file, append=TRUE)
 cat("</div>\n", file=file, append=TRUE)
 
 cat('
-<div id="drop">
-Drag and drop a row to here.
+<div id="droparea">
+Drag and drop over the green text below.
 <table>
 <tr><td>
-<span  style="width:100px" id="div1" ondrop="drop(event)" ondragover="allowDrop(event)">Got it</span>
+<span  style="width:100px" id="drop" ondrop="drop(event)" ondragover="allowDrop(event)">Drop here...</span>
 </td></tr>
 </table>
 </div> 
@@ -272,222 +274,6 @@ cat('
 print(file)
 
 ```
-
-## Create the two dimensional representation
-
-For sex, race and factor show the label and the level if the level is not _ALL_.
-If factor is code:factor-AGE then show the label.
-Allocate 1 rightmost columns for the procedure.
-Allocate 1 rightmost columns for unit, show it if not _NULL_.
-
-```{r, echo=TRUE}
-dimensions<- sparql.rdf(checkCube, GetDimensionsSparqlQuery( forsparqlprefix ) )
-attributesDf<- sparql.rdf(checkCube, GetAttributesSparqlQuery( forsparqlprefix ))
-
-rowdim<- c("crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex", "crnd-dimension:factor",
-"crnd-dimension:procedure", "crnd-attribute:unit", "crnd-dimension:denominator" )
-
-coldim<- c("crnd-dimension:trt01a")
-
-qbtest<- GetTwoDimTableFromQb( checkCube, forsparqlprefix, domainName, rowdim, coldim )
-
-qbtest
-names(attributes(qbtest))
-
-## attr(qbtest,"obsURI")
-
-## show the data frame with measures for observations and dimensions and attributes
-qbtest
-## show the rowLabel dataset
-rowLabel<- attr(qbtest,"rowLabelDf")
-rowLabel
-prColspan<- data.frame( unit=integer(nrow(qbtest)), proc=integer(nrow(qbtest)), idcol1= integer(nrow(qbtest)), stringsAsFactors=FALSE  )
-prIdCol<- data.frame( procedurevalue=character(nrow(qbtest)), unitvalue=character(nrow(qbtest)), stringsAsFactors=FALSE )
-rowno<-5
-rowid<- rowdim[1]
-## travers all values to determine number of identification columns
-Nidcol<- 1
-for (rowno in 1:nrow(qbtest)) {
-  prIdCol$procedurevalue[rowno]<- rowLabel$value[ rowLabel$codeval==qbtest$procedure[rowno] ]
-  prIdCol$unitvalue[rowno]<- qbtest$unit[rowno]
-  currNidcol<-0
-  if (qbtest$factor[rowno] %in% c("code:factor-proportion", "code:factor-quantity") ) {
-     for (rowid in setdiff(rowdim,c("crnd-dimension:procedure","crnd-attribute:unit", "crnd-dimension:denominator"))) {
-       currRowLabel<- rowLabel$variable==gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid) & rowLabel$codeval==qbtest[rowno,gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid)]
-       if ( rowLabel$value[ currRowLabel ] != "_ALL_" ) {
-         currNidcol<- currNidcol+1
-         prIdCol[rowno, paste0("idcollabel",currNidcol ) ]<- rowLabel$label[ currRowLabel ]
-         prIdCol[rowno, paste0("idcolvalue",currNidcol ) ]<- rowLabel$value[ currRowLabel ]
-       }
-     }
-     }
-    else {
-      for (rowid in setdiff(rowdim,c("crnd-dimension:procedure","crnd-attribute:unit", "crnd-dimension:denominator"))) {
-        currRowLabel<- rowLabel$variable==gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid) & rowLabel$codeval==qbtest[rowno,gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", rowid)]
-        if ( rowLabel$value[ currRowLabel ] != "_ALL_" ) {
-          currNidcol<- currNidcol+1
-          ## XX for now only descriptive statistics
-          prIdCol[rowno, paste0("idcollabel",currNidcol ) ]<- rowLabel$value[ currRowLabel ]
-          prIdCol[rowno, paste0("idcolvalue",currNidcol ) ]<- " "
-        }
-      }
-    }
-     Nidcol<- max( Nidcol, currNidcol )
-   }
-  
-pr2IdCol<-   prIdCol[,c(paste0("idcolvalue",1:Nidcol),"procedurevalue", "unitvalue")]
-pr2IdCol
-
-rowdisplay<- c( "crnd-dimension:sex", "crnd-dimension:race", "crnd-dimension:factor",  "crnd-dimension:procedure",  "crnd-attribute:unit", "crnd-dimension:denominator")
-
-presTable<- qbtest
-colnoseq<- attr(qbtest,"colnoseq")
-rownoseq<- attr(qbtest,"rownoseq")
-observationsDesc<-attr(qbtest,"observationsDesc")
-for (colno in colnoseq) {
-   presTable[,paste0("col", colno)]<- rep( NA, length(rownoseq))
- }
-for (colno in colnoseq) {
-   for (rowno in rownoseq) {
-     presTable[rowno,paste0("col", colno)]<- observationsDesc[observationsDesc$rowno==rowno & observationsDesc$colno==colno, "measure"]
-}
-}
-
-presTable
-
-```
-
-Approach for making html code see library(Hmisc), html.data.frame.
-To make the usual N, % - introduce a new attibute sub column with 1 for N and 2 for %, 1 for all other statistics. Then the table can be made by defining columns from TRT01A and sub column.
-
-```{r, echo=TRUE}
-colLabel<- attr(qbtest,"colLabelDf")
-colLabel
-options(width=300)
-file<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "test.html")
-# file<- file.path(tempdir(),"test.html")
-append<- TRUE
-print(file)
-oD<-attr(qbtest,"observationsDesc")
-names(oD)
-cat("<!DOCTYPE HTML>\n", file=file, append=FALSE)
-cat('
-<html>
-<head>
-<meta charset="UTF-8">
-<title>DEMO table as html</title>
-   <link rel="stylesheet" href="jquery-ui-1.11.3.custom/jquery-ui.css"/>
-   <script src="jquery-2.1.3.min.js"></script>
-   <script src="jquery-ui-1.11.3.custom/jquery-ui.min.js"></script>
-   <script src="RDFa.min.1.4.0.js"></script>
-</head>
-<script>
-"use strict";
-
-function allowDrop(ev)
-{
-ev.preventDefault();
-}
-
-function drag(ev)
-{
-ev.dataTransfer.setData("Text",ev.target.id);
-console.log("Dragging: ", ev.target.id);
-}
-
-function drop(ev)
-{
-ev.preventDefault();
-var data=ev.dataTransfer.getData("Text");
-console.log("Dropping: ", data);
-ev.target.appendChild(document.getElementById(data));
-}
-</script>
-<body>
-<h1>DEMO table as RDFa</h1>
-'
-, file=file, append=TRUE)
-
-cat("<table border>\n", file=file, append=TRUE)
-or<-1
-## unique(oD$rowno)
-## unique(oD$colno)
-presrowvarvalue<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1value",rowdim)
-presrowvarIRI<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1IRI",rowdim)
-presrowvarlabel<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1label",rowdim)
-presrowvarindex<- 1:length(rowdim)
-## make the header row(s) for the columns
-## TODO the code below does only work for this special case
-cat("<tr>", file=file, append=TRUE)
-for (vi in presrowvarindex) {
-    cat("<th>", file=file, append=TRUE)
-      ## next line is for simple fly-over
-      cat(paste0("<a title=\"", oD[1, presrowvarIRI[vi]], "\">", oD[or,presrowvarlabel[vi]], "</a>"), file=file, append=TRUE)
-    cat("</th>", file=file, append=TRUE)
-    }
-  for (cc in unique(oD$colno)) {
-    cat("<th>", file=file, append=TRUE)
-      cat(paste0("<a title=\"", colLabel$codeval[cc], "\">", colLabel$value[cc], "</a>"), file=file, append=TRUE)
-      }
-    cat("</th>", file=file, append=TRUE)
-
-cat("</tr>", file=file, append=TRUE)
-for (rr in unique(oD$rowno)) {
-  cat("<tr>", file=file, append=TRUE)
-  ## make the row identification
-  for (vi in presrowvarindex) {
-    cat("<td>", file=file, append=TRUE)
-      ## next line is for simple fly-over
-      cat(paste0("<a title=\"", oD[or, presrowvarIRI[vi]], "\">", oD[or,presrowvarvalue[vi]], "</a>"), file=file, append=TRUE)
-    cat("</td>", file=file, append=TRUE)
-    }
-  for (cc in unique(oD$colno)) {
-    ## assign to cell id="obs11" class="showrow"
-    cat("<td>", file=file, append=TRUE)
-    if (oD$rowno[or]==rr & oD$colno[or]==cc) {
-## The observation
-      
-      ## next line is for simple fly-over
-      cat(paste0("<a title=\"", oD$measureIRI[or], "\">"), file=file, append=TRUE)
-
-      cat(paste0('<span resource="', oD$s[or],'"',
-                 ' typeof="qb:Observation" draggable="true" ondragstart="drag(event)" >'),
-          file=file, append=TRUE)
-cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">'), file=file, append=TRUE)
-      
-for (prop in dimensions) {
-cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">'), file=file, append=TRUE)
-}
-      cat(paste0(oD$measure[or]), file=file, append=TRUE)
-
-for (prop in dimensions) {
-cat( '</span>', file=file, append=TRUE)
-}
-cat( '</span>', file=file, append=TRUE)
-cat( '</span>', file=file, append=TRUE)
-
-      cat(paste0("</a>"), file=file, append=TRUE)
-      or<- or+1
-      }
-    cat("</td>", file=file, append=TRUE)
-  }
-cat("</tr>", file=file, append=TRUE)
-  }
-cat("</table>\n", file=file, append=TRUE)
-cat('
-</body>
-</html>
-', file=file, append=TRUE)
-print(file)
-
-```
-
-To get it working with the scripts and links above:
-
-ln -s ~/packages/green-turtle/build/RDFa.min.1.4.0.js 
-ln -s ~/packages/green-turtle/build/RDFaProcessor.min.1.4.0.js 
-ln -s ~/packages/jquery-2.1.3.min/jquery-2.1.3.min.js .
-ln -s ~/packages/jquery-ui-1.11.3.custom .
 
 # Session information
 ```{r, echo=TRUE}

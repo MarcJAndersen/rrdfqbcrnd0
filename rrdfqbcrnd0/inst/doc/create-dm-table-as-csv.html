@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-03-14" />
+<meta name="date" content="2015-03-15" />
 
 <title>Create DM table as csv file</title>
 
@@ -54,7 +54,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 <div id="header">
 <h1 class="title">Create DM table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-03-14</em></h4>
+<h4 class="date"><em>2015-03-15</em></h4>
 </div>
 
 
@@ -76,7 +76,7 @@ code > span.er { color: #ff0000; font-weight: bold; }
 
 fnadsl&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-xpt&quot;</span>, <span class="st">&quot;adsl.xpt&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrnd0&quot;</span>)
 <span class="kw">print</span>(fnadsl)</code></pre>
-<p>[1] “”</p>
+<p>[1] “/home/ma/R/x86_64-redhat-linux-gnu-library/3.1/rrdfqbcrnd0/extdata/sample-xpt/adsl.xpt”</p>
 <pre class="sourceCode r"><code class="sourceCode r">if (!<span class="kw">file.exists</span>(fnadsl)) {
   fnadsl&lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;..&quot;</span>, <span class="st">&quot;extdata/sample-xpt&quot;</span>, <span class="st">&quot;adsl.xpt&quot;</span>)
   }
@@ -104,7 +104,7 @@ dataCubeFile&lt;-<span class="st"> </span><span class="kw">system.file</span>(<s
 checkCube &lt;-<span class="st"> </span><span class="kw">new.rdf</span>(<span class="dt">ontology=</span><span class="ot">FALSE</span>)  <span class="co"># Initialize</span>
 <span class="kw">load.rdf</span>(dataCubeFile, <span class="dt">format=</span><span class="st">&quot;TURTLE&quot;</span>, <span class="dt">appendTo=</span> checkCube)
 <span class="kw">summarize.rdf</span>(checkCube)</code></pre>
-<p>[1] “Number of triples: 1192”</p>
+<p>[1] “Number of triples: 1256”</p>
 <pre class="sourceCode r"><code class="sourceCode r">stmtSQL&lt;-<span class="st"> </span><span class="kw">GetSQLFromCube</span>(checkCube) 
 
 <span class="kw">cat</span>(stmtSQL$summStatSQL) </code></pre>
@@ -134,7 +134,7 @@ tempfile&lt;-<span class="st"> </span><span class="kw">file.path</span>(<span cl
 <span class="kw">cat</span>(<span class="kw">paste</span>(<span class="st">&quot;in.text&lt;- '&quot;</span>, in.text,<span class="st">&quot;'</span><span class="ch">\n</span><span class="st">&quot;</span>,<span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>), <span class="dt">file=</span>tempfile,<span class="dt">append=</span><span class="ot">TRUE</span>)
 <span class="kw">cat</span>(<span class="kw">paste</span>(<span class="st">&quot;se.text&lt;- '&quot;</span>, se.text,<span class="st">&quot;'</span><span class="ch">\n</span><span class="st">&quot;</span>,<span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>), <span class="dt">file=</span>tempfile,<span class="dt">append=</span><span class="ot">TRUE</span>)
 <span class="kw">print</span>(tempfile)</code></pre>
-<p>[1] “/tmp/RtmpZGuY7d/temp-code.R”</p>
+<p>[1] “/tmp/Rtmpki73Yj/temp-code.R”</p>
 </div>
 <div id="define-sql-statements-directly" class="section level2">
 <h2>Define SQL statements directly</h2>

@@ -84,7 +84,9 @@ Note: by specifying prefix the output is made shown using the
 prefixes. When the prefixes are defined to the RRDF, here as part of
 the turle file, then the output is also shown using the prefixes. This
 makes the output more readable.  This may be a disadvantage if the
-value of the prefix, say ds, changes. Also, in case of two RDF data cubes are loaded into the model, then it makes no sense to have the ds prefix.
+value of the prefix, say ds, changes. Also, in case of two RDF data
+cubes are loaded into the model, then it makes no sense to have the ds
+prefix.
 
 
 # Input the generated turtle file
@@ -94,6 +96,7 @@ Now look at the generated cubes by loading the turtle files.
 ```{r, echo=TRUE, results='asis'}
 dataCubeFile<- demo.cube.fn
 # dataCubeFile<- ae.cube.fn
+# dataCubeFile<- dm.cube.fn
 ```
 
 The rest of the code only depends on the value of dataCubeFile.
@@ -195,9 +198,8 @@ knitr::kable(observationsDesc[ 1:10 ,
    c(paste0(rep(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions),each=3), c("label", "value", "IRI")),
      sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", attributes), "measure", "measureIRI" )]
 )
+
 ```
-
-
 
 ### Notes
 
