@@ -15,12 +15,13 @@ visit the Wiki at [phusewiki.org]() or go straight to
 
 # Introduction
 
-
-
 ## Install the rrdfqbcrnd0 package
 
 ### Install in R from local directory using Rstudio
-Obtain the package as a zip file, for example by downloading from GitHub (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
+
+Obtain the package as a zip file, for example by downloading from
+GitHub
+(https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
 
 Extract the zip file to a directory of your choosing. 
 
@@ -38,26 +39,29 @@ To install the rrdfqbcrnd0 package use
 
 ```r
 library(devtools)
-install_github("MarcJAndersen/rrdfqbcrnd0", auth_token="xxx", build_vignettes= TRUE)
-packageVersion("devtools")
+packageVersion("devtools") ## check the version of devTools
+install_github("MarcJAndersen/rrdfqbcrnd0", build_vignettes= TRUE)
 ```
-
-Replace xxx above with the auth_token generated from the page (https://github.com/settings/tokens/new).
-
 
 ## Setup of R
 
 ### Note for Linux
 
-Note for Linux: Check if there are distribution specific packages for the components. For example for Fedora, these RCurl exists as package R-RCurl and XML as R-XML, eg yum install R-RCurl R-XML.
+Note for Linux: Check if there are distribution specific packages for
+the components. For example for Fedora, these RCurl exists as package
+R-RCurl and XML as R-XML, eg yum install R-RCurl R-XML.
 
-If RCurl install fails, it may be resolved by first installing the libcurl and libcurl-devel packages (on fedora: install.packages( c( "RCurl"). 
+If RCurl install fails, it may be resolved by first installing the
+libcurl and libcurl-devel packages (on fedora: install.packages( c(
+"RCurl").
 
 ### Note for Windows
 
-To build packages on windows install the [Rtools](http://cran.r-project.org/bin/windows/Rtools/).
+To build packages on windows install the
+[Rtools](http://cran.r-project.org/bin/windows/Rtools/).
 
-For updating the devtools package follow the instructions on the github page for [devtools](https://github.com/hadley/devtools).
+For updating the devtools package follow the instructions on the
+github page for [devtools](https://github.com/hadley/devtools).
 
 ## Required R packages
 
@@ -73,7 +77,8 @@ These packages are mentioned under Imports: section in the DESCRIPTION file.
 
 ### Packages for developing the rrdfqbcrnd0 package
 
-For using and developing the rrdfqbcrnd0 package uses the following packages must be installed:
+For using and developing the rrdfqbcrnd0 package these packages must be installed:
+
 ```r
 install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
 ```
@@ -87,9 +92,10 @@ install.packages( c( "foreign", "sqldf" ) )
 
 ### The RRDF package
 
-Finally, the [rrdf](https://github.com/egonw/rrdf) package must be
-installed. The packages must be installed accoding to the instructions
-on the packages github page. Well, almost, due changes in install_github, you need to use
+The [rrdf](https://github.com/egonw/rrdf) performs the interaction
+with a Apache Jena triple store.  The packages must be installed
+accoding to the instructions on the packages github page. Well,
+almost, due changes in install_github, you need to use
 
 ```r
 library(devtools)
@@ -131,10 +137,11 @@ sessionInfo()
 packageVersion("rrdf")
 ```
 
-Developing
-----------
+# Developing
 
-Here are the commands I use for developing. The [ggplot2 development](http://cran.r-project.org/web/packages/ggplot2/vignettes/development.html) webpage also provides suggestions for development strategies.
+Here are the commands I use for developing. The
+[ggplot2 development](http://cran.r-project.org/web/packages/ggplot2/vignettes/development.html)
+webpage also provides suggestions for development strategies.
 
 TIP: To single step line by line use ESS in emacs
 
@@ -187,14 +194,13 @@ In a script to actually add a foo use:
 devtools::use_data(foo) 
 ```
  
-Makefile in root directory
-########################
+## Makefile in root directory
 
 The makefile in the root directory is used for keeping track of the tasks to do before releasing the package. It would make sense to split the file into several makefiles going into the applicable subdirectories - that will be done when it is agreed on how to do it.
 
 
-References, hints and acknowlegements
--------------------------------------
+# References, hints and acknowlegements
+
 
 [R](http://www.r-project.org/)
 
@@ -206,16 +212,15 @@ References, hints and acknowlegements
 
 [Contributing to ggplot2 development](http://cran.r-project.org/web/packages/ggplot2/vignettes/development.html)
 
-History
--------
+# History
  
 The code is based on incremental development of
 * CSV file with analysis results for a sample demographics table (Ian)
 * snippets of SPARQL and R code (Marc and Tim)
 * R script reading CSV files and generating rdf data cube (Tim)
 * R code update and and addition of AE analysis results and verification of resuts (Marc)
-* Creation of skeleton R package (Ippei)
-* Restructure R script into R pacakge (Marc)
+* Test code and skeleton R package (Ippei)
+* Restructure R script into R package (Marc)
 * Update code and create R package with vignettes (Marc)
 
 Comments to code and functionality:
@@ -258,7 +263,6 @@ custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
 prefixes<- rbind(common.prefixes, custom.prefixes)                                                
 prefixlist<- qb.def.prefixlist(store, prefixes)
 ```
-
 
 Create HTML version
 -------------------
