@@ -1,17 +1,17 @@
 # RStudio files
-.Rproj.user
-.Rproj.user/
+rrdfqbcrnd0/.Rproj.user
+rrdfqbcrnd0/.Rproj.user/
 # History files
 .Rhistory
 .RData
 # inst/doc
-build/
-man/
+rrdfqbcrnd0/build/
+rrdfqbcrnd0/man/
 *.Rmd~
 *.R~
 .#*
 *~
 
-inst/extdata/sample-workflow/demo-export-csv.log
-inst/extdata/sample-workflow/demo-export-csv.lst
-inst/extdata/sample-workflow/demo.log
+rrdfqbcrnd0/inst/extdata/sample-workflow/demo-export-csv.log
+rrdfqbcrnd0/inst/extdata/sample-workflow/demo-export-csv.lst
+rrdfqbcrnd0/inst/extdata/sample-workflow/demo.log
