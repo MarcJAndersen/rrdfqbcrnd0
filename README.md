@@ -27,7 +27,7 @@ Extract the zip file to a directory of your choosing.
 
 Go to the directory and open the rrdfqbcrnd0.Rproj file.
 
-### Clone from GitHub and start useing Rstudio
+### Clone from GitHub and start using Rstudio
 
 Clone the repository (https://github.com/MarcJAndersen/rrdfqbcrnd0.git).
 
@@ -40,7 +40,7 @@ To install the rrdfqbcrnd0 package use
 ```r
 library(devtools)
 packageVersion("devtools") ## check the version of devTools
-install_github("MarcJAndersen/rrdfqbcrnd0", build_vignettes= TRUE)
+install_github("MarcJAndersen/rrdfqbcrnd0", subdir="rrdfqbcrnd0", build_vignettes= TRUE)
 ```
 
 ## Setup of R
