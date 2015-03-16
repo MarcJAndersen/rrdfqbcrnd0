@@ -1,0 +1,11 @@
+```r
+store<- new.rdf(ontology=FALSE)
+add.prefix(store, prefix="dc", namespace="http://www.example.org/")
+add.triple(store,"ex:aa","ex:i1","9876")
+add.triple(store,"ex:bb","ex:i2","1234")
+add.triple(store,"http://www.example.org/aa","ex:i3","24543")
+store
+sparql.rdf(store, "select * where { ?s ?p ?o }")
+
+```
+
