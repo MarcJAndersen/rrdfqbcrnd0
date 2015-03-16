@@ -198,7 +198,7 @@ Here we remove one of the dimensions from the cube in observation ds:obs1. Note:
 ```{r, eval=FALSE}
 remove.triple(cubeData,
   subject="http://www.example.org/dc/example/ds/obs1",
-  predicate="http://www.example.org/dc/example/prop/category",
+  predicate="http://www.example.org/dc/dimension#category",
   object="http://www.example.org/dc/code/category-AA-group")
 icres<- RunQbIC( cubeData, forsparqlprefix )
 knitr::kable(icres)
