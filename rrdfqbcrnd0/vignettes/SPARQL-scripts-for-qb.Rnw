@@ -1,0 +1,61 @@
+%% \VignetteIndexEntry{SPARQL scripts for RDF data cubes}
+%% \VignetteEngine{knitr::knitr}
+%% \usepackage[utf8]{inputenc}
+%% \SweaveUTF8
+
+\documentclass[10pt]{beamer}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{listings}
+
+\title{SPARQL scripts for RDF data cubes}
+
+
+\author{Marc Andersen, mja@statgroup.dk}
+
+
+\begin{document}
+\lstset{language=SPARQL}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color
+  basicstyle=\footnotesize,        % size of fonts used for the code
+  breaklines=true,                 % automatic line breaking only at whitespace
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},       % keyword style
+  stringstyle=\color{mymauve},     % string literal style
+}
+First load the package.
+<<setup, include=FALSE,echo=FALSE>>=
+library(rrdfqbcrnd0)
+@
+
+\section{SPARQL scripts}
+
+The package uses SPARQL scripts to access the RRDF triple store.
+This is implemented by having a function generating the SPARQL script.
+This vignettes shows the contents of the scripts. Some of the scripts are parametrised by one or more paramteres. The parameter are shown with as $p, $q etc.
+
+The display of script is done by the following function.
+
+% http://stackoverflow.com/questions/21660673/styling-r-output-with-knitr
+% http://tex.stackexchange.com/questions/100088/r-code-linebreaks-and-code-highlighting-in-knitr
+% https://github.com/yihui/knitr/blob/master/inst/examples/knitr-listings.Rnw
+% http://tex.stackexchange.com/questions/14927/listing-syntax-highlighting-for-sparql-query
+% https://github.com/yihui/knitr/blob/master/inst/examples/knitr-themes.Rnw
+% https://github.com/yihui/knitr-examples/blob/master/098-highlight-python.Rnw
+\begin{lstlisting}[language=SPARQL]
+select * where {?s ?p ?o}
+\end{lstlisting}
+
+% https://www.overleaf.com/latex/examples/syntax-highlighting-in-latex-with-the-listings-package/jxnppmxxvsvk
+% https://www.sharelatex.com/learn/Code_Highlighting_with_minted#Reference_guide
+% http://www.andre-simon.de/
+% <<<hi-sparql, engine='n3'>>=
+% select * where {?s ?p ?o}
+% @ 
+
+\end{document}
+

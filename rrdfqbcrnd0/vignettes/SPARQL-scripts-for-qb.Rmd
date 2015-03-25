@@ -1,0 +1,31 @@
+---
+title: "SPARQL scripts for RDF data cubes"
+author: "PhuseSubTeamAnalysisResults@example.org"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{SPARQL scripts for RDF data cubes}
+  %\VignetteEngine{knitr::knitr}
+  %\usepackage[utf8]{inputenc}
+  %\SweaveUTF8
+---
+
+# Setup
+
+First load the package.
+```{r, eval=TRUE}
+library(rrdfqbcrnd0)
+```
+
+# SPARQL scripts
+
+The package uses SPARQL scripts to access the RRDF triple store.
+This is implemented by having a function generating the SPARQL script.
+This vignettes shows the contents of the scripts. Some of the scripts are parametrised by one or more paramteres. The parameter are shown with as $p, $q etc.
+
+The display of script is done by the following function.
+
+```sparql
+select * where {?s ?p ?o}
+```
+
+
