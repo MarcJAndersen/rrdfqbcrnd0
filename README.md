@@ -1,7 +1,7 @@
 # Repository for R-RDF Data Cube for Clinical Research & Development
  
 R code for presenting Analysis Results Model - work from a subgroup of
-FDA/PhUSE Semantic Technology Project - with the purpose of
+PhUSE Semantic Technology Project - with the purpose of
 representing resuls in RDF, see
 (http://www.phusewiki.org/wiki/index.php?title=Analysis_Results_Model)
 
@@ -187,14 +187,17 @@ crnd-dimension	http://www.example.org/dc/dimension#
 crnd-attribute	http://www.example.org/dc/attribute#
 crnd-measure	http://www.example.org/dc/measure#
 
-In general the prop: is replaced 
+In general the prop: is replaced with 
 crnd-dimension:|crnd-attribute:|crnd-measure:
 
 The prefixes are stored in a data.frame set from the function Get.qb.crnd.prefixes when creating a cube.
-The data.frame is converted into a list in 
-This is used extensively in buildCodelist.R, qb.buildObservations.R and qb.buildSkeleton.R.
 
-Here is how prefixes are defined:
+The data.frame is converted into a list using qb.def.prefixlist. The list of prefixes is  
+used extensively in buildCodelist.R, qb.buildObservations.R and qb.buildSkeleton.R.
+
+The variable forsparqlprefix contains the prefix used for queries.
+
+Here is how prefixes are defined and use:
 ```{r, eval=FALSE}
 domainName<- "DEMOG-T123"
 custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
@@ -204,6 +207,8 @@ custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
   )
 prefixes<- rbind(common.prefixes, custom.prefixes)                                                
 prefixlist<- qb.def.prefixlist(store, prefixes)
+
+forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
 Create HTML version
