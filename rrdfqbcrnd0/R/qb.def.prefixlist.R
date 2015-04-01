@@ -1,9 +1,10 @@
-##' Add prefixes to a rrdf store
+##' Add prefixes to a rrdf store and returns list of with prefixes
 ##'
 ##' Sideeffect: the prefixes are added to the store
 ##' @param store A rrdf store, if NULL then not added to a store
 ##' @param prefixes A data.frame with column prefix and namespace
 ##' @return The list with member names prefixUPPERCASEPREFIX and namespace as value
+##' TODO(mja): this should be changed - at least the naming, or use another data structure 
 qb.def.prefixlist<- function(store=NULL, prefixes) {
 pl<- list();
 
