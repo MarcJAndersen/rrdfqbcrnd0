@@ -2,6 +2,9 @@
 title: "SPARQL scripts for RDF data cubes"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
+output: 
+  html_document
+  pdf_document
 vignette: >
   %\VignetteIndexEntry{SPARQL scripts for RDF data cubes}
   %\VignetteEngine{knitr::knitr}
@@ -16,16 +19,39 @@ First load the package.
 library(rrdfqbcrnd0)
 ```
 
+```{r, eval=FALSE}
+knitr::knit("vignettes/SPARQL-scripts-for-qb.Rmd")
+markdown::markdownToHTML("SPARQL-scripts-for-qb.md",output="test.html")
+
+     
+rmarkdown::render("vignettes/SPARQL-scripts-for-qb.Rmd", rmarkdown::html_document())
+rmarkdown::render("vignettes/SPARQL-scripts-for-qb.Rmd", rmarkdown::pdf_document())
+
+```
+
 # SPARQL scripts
 
-The package uses SPARQL scripts to access the RRDF triple store.
-This is implemented by having a function generating the SPARQL script.
-This vignettes shows the contents of the scripts. Some of the scripts are parametrised by one or more paramteres. The parameter are shown with as $p, $q etc.
+The package uses SPARQL scripts to access the RRDF triple store.  This
+is implemented by having a function generating the SPARQL script.
+This vignettes shows the contents of the scripts. Some of the scripts
+are parametrised by one or more paramteres. The parameter are shown
+with as $p, $q etc.
 
 The display of script is done by the following function.
 
-```sparql
-select * where {?s ?p ?o}
+## SPARQL query for attributes in RDF data cube
+
+To make this work in markdown two blanks has to be added at the end of line according to markdown syntax.
+```{r mksp1}
+forsparqlprefix<- GetForSparqlPrefix( "$myQbName" )
+sparql.rq<- GetAttributesSparqlQuery( forsparqlprefix )
+fn<- file.path(tempdir(), "sp1.rq" )
+cat( "## @knitr sp1", gsub("\\n", "  \n", sparql.rq), sep="  \n", file=fn)
+knitr::read_chunk( fn, from=c(1))
+readLines(fn)
+```
+
+```{r sp1, asis=TRUE, engine='highlight', engine.opts='-l -S n3 --inline-css -O md'}
 ```
 
 

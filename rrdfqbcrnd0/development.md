@@ -75,6 +75,16 @@ http://rmarkdown.rstudio.com/html_document_format.html#html-fragments
 Example 
 https://gist.github.com/yihui/3422133
 
+% http://stackoverflow.com/questions/21660673/styling-r-output-with-knitr
+% http://tex.stackexchange.com/questions/100088/r-code-linebreaks-and-code-highlighting-in-knitr
+% https://github.com/yihui/knitr/blob/master/inst/examples/knitr-listings.Rnw
+% http://tex.stackexchange.com/questions/14927/listing-syntax-highlighting-for-sparql-query
+% https://github.com/yihui/knitr/blob/master/inst/examples/knitr-themes.Rnw
+% https://github.com/yihui/knitr-examples/blob/master/098-highlight-python.Rnw
+% https://www.overleaf.com/latex/examples/syntax-highlighting-in-latex-with-the-listings-package/jxnppmxxvsvk
+% https://www.sharelatex.com/learn/Code_Highlighting_with_minted#Reference_guide
+% http://www.andre-simon.de/
+
 Here is a skeleton for getting output highlighted.
 
 This show how to call the highlight engine.
@@ -82,19 +92,25 @@ This show how to call the highlight engine.
 select * where {?s ?p ?o}
 ```
 
-This code make a temporary file sp2.rq with knitr chunk name sp2.
-The file is then made available as a chunk for knitr. Finally the contents of the file is printed.
+To make this work in markdown two blanks has to be added at the end of line according to markdown syntax.
 ```{r mksp1}
-fn<- file.path(tempdir(), "sp2.rq" )
-rq<- "select * where {?subject ?property ?object}"
-cat( "## @knitr sp2", rq, sep="\n", file=fn)
+forsparqlprefix<- GetForSparqlPrefix( "$myQbName" )
+sparql.rq<- GetAttributesSparqlQuery( forsparqlprefix )
+fn<- file.path(tempdir(), "sp1.rq" )
+cat( "## @knitr sp1", gsub("\\n", "  \n", sparql.rq), sep="  \n", file=fn)
 knitr::read_chunk( fn, from=c(1))
-cat(readLines(fn))
+readLines(fn)
 ```
 
-The following code includes the chunk.
-```{r sp2, engine='highlight', engine.opts='-l -S n3 --inline-css -O md'}
+```{r sp1, asis=TRUE, engine='highlight', engine.opts='-l -S n3 --inline-css -O md'}
 ```
 
-highlight -S n3 test.rq 
+The (http://www.andre-simon.de/doku/highlight/en/highlight.php)[highlight] package can take a input file and output it many formats with the code highlighted. Below is one-liner example showing highlighting of a short SPARQL query as html. The option --inline-css embeds the CSS in the html file. If the option is not present, the CSS is written to file highlight.css and reffered to in the generated html. The second line opens the file in the default browser.
+```
+echo -e "prefix a: <bb.bb>\\nselect * where {?s ?p ?o}" | highlight --inline-css -S n3 > highlight-simple-example.html
+xdg-open highlight-simple-example.html
+```
 
+```{r engine='bash'}
+echo -e "prefix a: <bb.bb>\\nselect * where {?s ?p ?o}" | highlight --inline-css -S n3
+```
