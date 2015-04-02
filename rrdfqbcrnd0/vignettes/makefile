@@ -1,6 +1,6 @@
 
 
-all: check-cube.pdf check-ic.pdf cube-from-workbook.pdf first-cube.pdf howto-create-vignette.pdf SPARQL-query.pdf
+all: check-cube.pdf check-ic.pdf cube-from-workbook.pdf first-cube.pdf howto-create-vignette.pdf SPARQL-query.pdf SPARQL-scripts-for-qb.md
 
 clean: 
 
