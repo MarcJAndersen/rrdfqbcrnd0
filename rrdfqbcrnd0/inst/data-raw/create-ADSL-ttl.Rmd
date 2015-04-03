@@ -17,7 +17,6 @@ This script creates a turtle version of the ADSL dataset.
 library(rrdf)
 
 library(foreign)
-xptdirectory<- tempdir()
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 adsl<-read.xport(fnadsl)
 
