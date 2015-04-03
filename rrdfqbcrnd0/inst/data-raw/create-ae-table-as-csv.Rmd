@@ -23,12 +23,9 @@ require(sqldf)
 
 xptdirectory<- tempdir()
 
-fnadae<- paste(xptdirectory,"/", "adae", ".xpt",sep="")
-
-download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt", fnadae)
+fnadae<- system.file("extdata/sample-xpt", "adae.xpt", package="rrdfqbcrnd0")
 
 adae<- read.xport(fnadae)
-
 
 aesummay.e<- sqldf("select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA", stringsAsFactors=FALSE )
 aesoc.e<- sqldf("select TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC", stringsAsFactors=FALSE )
