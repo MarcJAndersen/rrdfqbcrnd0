@@ -1,5 +1,5 @@
 # Start fuseki using
-# (CFGFILE=${PWD}/fuseki-config-example.ttl ;cd /opt/jena-fuseki-1.1.1; ./fuseki-server --config=${CFGFILE} ) 
+# (CFGFILE=${PWD}/fuseki-config-example.ttl ;cd /opt/jena-fuseki-2.0.0; ./fuseki-server --config=${CFGFILE} ) 
 
 @prefix :        <#> .
 @prefix fuseki:  <http://jena.apache.org/fuseki#> .
