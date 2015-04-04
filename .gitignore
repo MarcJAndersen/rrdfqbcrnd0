@@ -11,7 +11,13 @@ rrdfqbcrnd0/man/
 *.R~
 .#*
 *~
-
 rrdfqbcrnd0/inst/extdata/sample-workflow/demo-export-csv.log
 rrdfqbcrnd0/inst/extdata/sample-workflow/demo-export-csv.lst
 rrdfqbcrnd0/inst/extdata/sample-workflow/demo.log
+rrdfqbcrnd0.Rcheck/
+rrdfqbcrnd0/R/TAGS
+rrdfqbcrnd0/inst/extdata/sample-cfg/RDFa.min.1.4.0.js
+rrdfqbcrnd0/inst/extdata/sample-cfg/RDFaProcessor.min.1.4.0.js
+rrdfqbcrnd0/inst/extdata/sample-cfg/jquery-2.1.3.min.js
+rrdfqbcrnd0/inst/extdata/sample-cfg/jquery-ui-1.11.3.custom
+
