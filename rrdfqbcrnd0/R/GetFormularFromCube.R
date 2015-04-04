@@ -3,11 +3,12 @@
 ##' 
 ##' @param store The name for the rrdf store
 ##' @return expression with the formulars representing the RDF data cube
+##' @inheritParams GetObservationsSparqlQuery
 
-GetFormularFromCube<- function( store ) {
+GetFormularFromCube<- function( store, forsparqlprefixcommon  ) {
 
-dsdName<- GetDsdNameFromCube( store )
-domainName<- GetDomainNameFromCube( store )
+dsdName<- GetDsdNameFromCube( store, forsparqlprefixcommon )
+domainName<- GetDomainNameFromCube( store, forsparqlprefixcommon )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 
 dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )

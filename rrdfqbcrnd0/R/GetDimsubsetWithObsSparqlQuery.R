@@ -1,8 +1,9 @@
-##' SPARQL query giving observations for a subset of observatition from RDF data cube
+##' SPARQL query giving observations for a subset of observations from RDF data cube
 ##' @param forsparqlprefix PREFIX part of SPARQL query
 ##' @param domainName domainName for the RRDF cube
 ##' @param dimensionsorattrs vector of dimensions or attributes
 ##' @return SPARQL query
+##' @family SPARQL queries
 GetDimsubsetWithObsSparqlQuery<- function( forsparqlprefix, domainName, dimensionsorattrs ) {
 cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",

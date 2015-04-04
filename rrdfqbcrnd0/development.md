@@ -4,7 +4,7 @@ Here are the commands I use for developing. The
 [ggplot2 development](http://cran.r-project.org/web/packages/ggplot2/vignettes/development.html)
 webpage also provides suggestions for development strategies.
 
-TIP: To single step line by line use ESS in emacs
+TIP: To single step line by line use ESS in emacs. For starting directory for R process in emacs use the same directory as this file.
 
 TIP: To single step line by line use rstudio 
 
@@ -14,11 +14,18 @@ TIP: In Rstudio I open README.md (this file) and execute code lines one by one.
 library(knitr)
 library(devtools)
 devtools::load_all()
+
+## If documentation provided by files in R directory have changed
 devtools::document()
-devtools::test()
-devtools::check()
-devtools::install()
+## Build the vignettes
 devtools::build_vignettes()
+## Run the test
+devtools::test()
+## Check if the package is valid
+devtools::check()
+## Install the package
+devtools::install()
+## 
 ```
 
 ## Commands used for developing

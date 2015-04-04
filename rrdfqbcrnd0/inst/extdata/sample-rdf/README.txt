@@ -1,4 +1,5 @@
 SPARQL snippets to find difference between two graphs.
+
 Source for SPARQL code: http://stackoverflow.com/questions/17323636/comparing-sparql-graphs
 
 select * where {

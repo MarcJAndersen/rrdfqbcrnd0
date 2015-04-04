@@ -3,6 +3,7 @@
 ##' @inheritParams GetObservationsSparqlQuery
 ##' @param dsdName Dataset Descriptor Name
 ##' @return SPARQL query
+##' @family SPARQL queries
 GetComponentSparqlQuery<- function( forsparqlprefix, dsdName ) {
 codelists.rq<-   paste(forsparqlprefix,
 '

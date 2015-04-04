@@ -5,9 +5,12 @@
 ##' @param xdsdName The name of the data frame with data
 ##' @return SQL expression with the formulars representing the RDF data cube
 
-GetSQLFromCube<- function( store, xdsdName="adsl"  ) {
+GetSQLFromCube<- function( store, dsdName=NULL, xdsdName="adsl"  ) {
 
-  dsdName<- GetDsdNameFromCube( store )
+  if (is.null(dsdName)) {
+    dsdName<- GetDsdNameFromCube( store )
+  }
+
   domainName<- GetDomainNameFromCube( store )
   forsparqlprefix<- GetForSparqlPrefix( domainName )
 

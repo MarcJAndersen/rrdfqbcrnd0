@@ -2,6 +2,7 @@
 ##'
 ##' @param forsparqlprefix PREFIX statements for SPARQL query
 ##' @return SPARQL query
+##' @family SPARQL queries
 GetDimensionsSparqlQuery<- function( forsparqlprefix ) {
 dimensions.rq<-   paste(forsparqlprefix,
 '

@@ -1,6 +1,7 @@
 ##' Run the RDF data cube Integrity Constraints
 ##' The present version does not run IC-20 and IC-21.
-##' The function could be extend to print the result or return the result as data frame.
+##' Note TODO(mja): RRDF does not support the ASK query. This is handled
+##' by converting ASK to SELECT.
 ##' 
 ##' @param model a RRDF model containing one or more date cubes
 ##' @param doForCI character vector of specific integrity checks to run
@@ -29,10 +30,11 @@ RunQbIC<- function(model, forsparqlprefix, doForIC=NULL ) {
 ##    cat(icSelectRq,"\n")
     cube.ic<- sparql.rdf(model, paste( forsparqlprefix, icSelectRq  )  )
     vicfail[nic] <- nrow(cube.ic)   
-    message(" -- ", nrow(cube.ic), " rows returned" )
+    message(" -- ", nrow(cube.ic), " rows returned (0 is pass, >0 fail)" )
    }
 }
-
+  message("IC-20 and IC-21 are currently not implemented")
+  
   ICres<- data.frame( ictitle=victitle[1:nic], icfail=vicfail[1:nic] )
 }
 

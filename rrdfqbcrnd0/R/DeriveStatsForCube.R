@@ -1,7 +1,7 @@
 ##' Derive the descriptive statistics defined in a cube
 ##' 
+##' @inheritParams GetObservationsSparqlQuery
 ##' @param store a RRDF store containing one or more date cubes
-##' @param forsparqlprefix PREFIX part of SPARQL query
 ##' @param domainName domainName for the RRDF cube
 ##' @param dsdName Dataset Descriptor Name
 ##' @param dataSet data.frame containing dataset to validate against/derive measures
@@ -30,18 +30,13 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdname, dataS
   ## print(codelist.all)
   subsetting.dimensions<- list();
 
-  ## the variable name/column name in the data frame should be part of the datacube
-  ## this would remove the need for the workaround below using gsub
+  ## TODO(mja): the variable name/column name in the data frame should be part of the datacube.
+  ## This would remove the need for the workaround below using gsub
   for (i in 1:nrow(codelist.all))
     {
       subsetting.dimensions[[ gsub("[^:]*:","", codelist.all[i,"p"]) ]] <-
         as.character(codelist.all[i,"cl"])
     }
-
-
-  dsdName<- GetDsdNameFromCube( store )
-  domainName<- GetDomainNameFromCube( store )
-  forsparqlprefix<- GetForSparqlPrefix( domainName )
 
   dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
   dimensions<- sparql.rdf(store, dimensionsRq)
@@ -83,7 +78,7 @@ if (nrow(observations )<1) {
     thisrow<-  observations[r,]
 ## print(thisrow)
 
-    ## TODO handle _NONMISS_
+    ## TODO(mja): handle _NONMISS_, see GetSQLFromCube.R for approach
     data.subset.logical<- rep(TRUE, nrow(dataSet))
     for (v in names(subsetting.dimensions)) {
 ##       print( c(v, thisrow[v ],  subsetting.dimensions[[ v ]] ) )

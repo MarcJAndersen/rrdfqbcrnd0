@@ -1,19 +1,15 @@
 ##' Get dsdname for the RDF data cube
 ##' TODO: change the way domainname is used - should only use the dsdName
-##' @param store RRDF store with one RDF data cube
+##' @inheritParams GetDsdNameSparqlQuery
 ##' @return the dsdName for the cube
+GetDsdNameFromCube<- function( store, forsparqlprefixcommon=GetForSparqlPrefix() ) {
 
-GetDsdNameFromCube<- function( store ) {
-
-tempstr<- as.character(sparql.rdf(store,
-'
-select ?s
-where {
-?s a <http://purl.org/linked-data/cube#DataStructureDefinition>
-} limit 1
-'
-))
-tempstrvec<- unlist(strsplit( tempstr, "/"))
+tempstr<- as.character(sparql.rdf(store, GetDsdNameSparqlQuery( forsparqlprefixcommon )))
+if (length(tempstr)>1) {
+  warning("Got ", tempstr, " with more than one DSD name in the RDF model",
+          "\nWill proceed with the first")
+}
+tempstrvec<- unlist(strsplit( tempstr[[1]], "/"))
 dsdName<- tempstrvec[length(tempstrvec)]
 
 dsdName

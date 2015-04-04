@@ -7,13 +7,8 @@
 ##' @return Character string with PREFIX statements delimited by CR
 GetForSparqlPrefix<- function( domainName=NULL, common.prefixes=NULL, custom.prefixes=NULL  ) {
 
-if (is.null(common.prefixes)) {
-
-  common.prefixes <- data.frame(
-    prefix=gsub("^prefix","",names(Get.default.crnd.prefixes())),
-    namespace=as.character(Get.default.crnd.prefixes() ),
-    stringsAsFactors=FALSE
-    )
+if (is.null(common.prefixes)) { 
+  common.prefixes <- GetCommonPrefixDf()
 }
 
 if (is.null(custom.prefixes)) {

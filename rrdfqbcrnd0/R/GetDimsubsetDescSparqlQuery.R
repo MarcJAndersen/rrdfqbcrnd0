@@ -3,6 +3,7 @@
 ##' @param domainName domainName for the RRDF cube
 ##' @param dimensions dimensions
 ##' @return SPARQL query
+##' @family SPARQL queries
 ##
 ##
 ## Testing
