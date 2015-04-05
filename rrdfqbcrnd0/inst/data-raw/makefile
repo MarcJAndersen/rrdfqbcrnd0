@@ -1,6 +1,8 @@
-all: create-qb-CDISC-prefix.Rmd qbIClist AEtable DMtable create-ADSL-ttl.Rmd \
-store-cdisc-rdf-as-rrdf.Rmd   \
-use-demo-ttl.Rmd create-demo-ttl.Rmd create-qb-IC-dataset.Rmd
+all: \
+create-qb-CDISC-prefix.Rmd store-cdisc-rdf-as-rrdf.Rmd create-qb-IC-dataset.Rmd \
+populate-sample-xpt.Rmd  qbIClist AEtable DMtable create-ADSL-ttl.Rmd \
+create-qb-examples-as-ttl.Rmd \
+use-demo-ttl.Rmd  using-arq.html
 
 
 clean:
@@ -17,6 +19,9 @@ qbIClist: ../data/qbIClist.rda
 
 ../data/qbIClist.rda: create-qb-IC-dataset.pdf 
 
+using-arq.html: using-arq.Rmd
+	$(R_HOME)/bin/Rscript -e "knitr::knit2html('using-arq.Rmd')"
+	mv -f using-arq.html ../doc
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"
@@ -24,10 +29,9 @@ qbIClist: ../data/qbIClist.rda
 
 # not clever rule - also creates HTML version
 %.pdf: %.Rmd
-	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','all')"
+	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
 	mv -f $*.pdf ../doc
-	mv -f $*.html ../doc
 
-%.html: %.Rmd
-	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','html_document')"
-	mv -f $*.html ../doc
+# %.html: %.Rmd
+# 	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','html_document')"
+# 	mv -f $*.html ../doc
