@@ -9,6 +9,10 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+# Introduction
+This is a somewhat convoluted script. The idea is to take an existing cube structure and derive the results. That was usefull initially to extend a cube. Now, it is not as usefull. So the script may seem pointless.
+TODO(mja): fix it.
+
 # Create DM sample table as CSV file and other files
 
 This script creates the result and codelist for a simple DM table.
@@ -20,16 +24,13 @@ knit(input="inst/data-raw/create-qb-IC-dataset.Rmd",
 
 ## Get the data and prepare for derivation of summary statistics
 
-```{r, results='asis', eval=TRUE}
+```{r}
 
 library(rrdfqbcrnd0)
 
 library(foreign)
 library(sqldf)
 
-# xptdirectory<- tempdir()
-#fnadsl<- paste(xptdirectory,"/", "adsl", ".xpt",sep="")
-# download.file("http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt", fnadsl)
 
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 print(fnadsl)
@@ -62,7 +63,7 @@ records where the combination of values lead to 0 observations. This
 is handled below, in a not so clever way. A better approach would be
 to include the concept of a skeleton in the SQL statements.
 
-```{r, results='asis', eval=TRUE}
+```{r}
 
 library(rrdfqbcrnd0)
 
@@ -82,7 +83,7 @@ names(adsl.summ.stat.res)<- tolower(gsub("(a|b)\\.","", names(adsl.summ.stat.res
 
 ## Store the SQL statements to a file
 
-```{r, results='asis', eval=TRUE}
+```{r}
 
 res.text<- stmtSQL$summStatSQL
 
@@ -114,7 +115,7 @@ The statements below are inserted from the file generated above.
 Work-around: add SELECT statments below corresponding to the desired statistics.
 Update the .csv file, and re-create the cube. Repeat until done. This is of course not the ideal way; waiting to the formular interface to the cube.
 
-```{r, results='asis', eval=TRUE}
+```{r}
 res.text<- "
 SELECT a.TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SEX, a.SAFFL
 UNION
@@ -237,7 +238,7 @@ select * from qbframe;
 
 ### Evaluate the SQL code
 
-```{r, results='asis', eval=TRUE}
+```{r}
 
 adsl.summ.stat.res<- sqldf( res.text )
 # adsl.summ.stat$unit<- "_NULL_"
@@ -257,17 +258,18 @@ sqldf()
 
 Note: the new csv file should be moved manually to the extdata/sample-cfg directory.
 
-```{r, results='asis', eval=TRUE}
+```{r}
 
 adsl.summ.stat<- merge(qbframe,adsl.summ.stat.res,by=names(qbframe),all=TRUE)
 # adsl.summ.stat<- merge(stmtSQL$qbframe,adsl.summ.stat.res,all=TRUE)
 adsl.summ.stat$measure[ is.na(adsl.summ.stat$measure) & adsl.summ.stat$procedure=="count" ]<- 0
 adsl.summ.stat
 
-## dmtableFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
-dmtableFile<- file.path(tempdir(),"temp-dm.AR.csv")
+dmtableFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+## dmtableFile<- file.path(tempdir(),"temp-dm.AR.csv")
 
 write.csv(adsl.summ.stat, file=dmtableFile, row.names=FALSE)
+cat("Written to ", dmtableFile, "\n")
 
 
 ```
@@ -275,7 +277,7 @@ write.csv(adsl.summ.stat, file=dmtableFile, row.names=FALSE)
 ### Compare results from SQL with the input / previously generated
 
 
-```{r, results='asis', eval=TRUE}
+```{r}
 
 colorder<- c( "saffl", "trt01a", "race", "sex", "procedure", "factor", "denominator", "unit", "measure")
 

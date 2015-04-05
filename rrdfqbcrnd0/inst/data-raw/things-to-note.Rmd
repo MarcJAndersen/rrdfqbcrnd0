@@ -9,3 +9,171 @@ sparql.rdf(store, "select * where { ?s ?p ?o }")
 
 ```
 
+
+
+
+```{r, eval=TRUE}
+forsparqlprefix<-"
+prefix prov:  <http://www.w3.org/ns/prov#>
+prefix mms:   <http://rdf.cdisc.org/mms#>
+prefix crnd-dimension:	<http://www.example.org/dc/dimension#>
+prefix crnd-attribute:	<http://www.example.org/dc/attribute#>
+prefix crnd-measure:	<http://www.example.org/dc/measure#>
+prefix code:  <http://www.example.org/dc/code/>
+prefix qb:    <http://purl.org/linked-data/cube#>
+prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+prefix dccs:  <http://www.example.org/dc/demo/dccs/>
+prefix dcat:  <http://www.w3.org/ns/dcat#>
+prefix pav:   <http://purl.org/pav>
+prefix dct:   <http://purl.org/dc/terms/>
+prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
+prefix owl:   <http://www.w3.org/2002/07/owl#>
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix cts:   <http://rdf.cdisc.org/ct/schema#>
+prefix skos:  <http://www.w3.org/2004/02/skos/core#>
+prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>
+prefix ds:    <http://www.example.org/dc/demo/ds/>
+"
+
+dsdname.rq<- "
+select ?s
+where {
+?s a qb:DataStructureDefinition
+} 
+"
+DataStructureDefinition<- data.frame(sparql.rdf(store, paste( forsparqlprefix, dsdname.rq)), stringsAsFactors=FALSE )
+knitr::kable(DataStructureDefinition)
+
+dimensions.rq<- "
+select *
+where {
+?s a qb:DataStructureDefinition .
+?s qb:component [ qb:dimension ?qbdimension ] .
+OPTIONAL { ?s qb:component [ qb:order ?qborder] . }
+
+} 
+"
+dimensions<- data.frame(sparql.rdf(store, paste( forsparqlprefix, dimensions.rq)), stringsAsFactors=FALSE )
+knitr::kable(dimensions)
+
+rq<-  paste( forsparqlprefix,
+'
+select ?dsd ?obs ?qborder ?qbdimension ?dimvalue ?dimvalueLabel
+where { 
+?obs a qb:Observation ; 
+?qbdimension ?dimvalue ;
+.
+{ select * where {
+?dsd a qb:DataStructureDefinition .
+?dsd qb:component [ qb:dimension ?qbdimension ] .
+OPTIONAL {?dsd qb:component [ qb:order ?qborder] .}
+} }
+
+OPTIONAL { ?dimvalue skos:prefLabel ?dimvalueLabel}
+
+values (?dsd ?obs) {
+(ds:dsd-DEMO ds:obs114)
+}
+}
+order by ?dsd ?obs ?qborder ?qbdimension 
+# limit 30
+',
+"\n"                               
+)
+
+cube.observations<- sparql.rdf(store, rq)
+knitr::kable(cube.observations)
+
+## Identify which dimensions are used for selection
+rq<-  paste( forsparqlprefix,
+'
+select ?dsd ?obs ?qborder ?qbdimension ?dimvalue ?dimvalueLabel ?subsetting ?factorvalueLabel ?procedurevalue ?procedureLabel ?variable
+where { 
+?obs a qb:Observation ; 
+?qbdimension ?dimvalue ;
+.
+{ select * where {
+?dsd a qb:DataStructureDefinition .
+?dsd qb:component [ qb:dimension ?qbdimension ] .
+OPTIONAL {?dsd qb:component [ qb:order ?qborder] .}
+} }
+
+OPTIONAL { ?obs crnd-dimension:factor ?factorvalue . ?factorvalue skos:prefLabel ?factorvalueLabel }
+OPTIONAL { ?obs crnd-dimension:procedure ?procedurevalue . ?procedurevalue skos:prefLabel ?procedureLabel }
+
+OPTIONAL { ?dimvalue skos:prefLabel ?dimvalueLabel}
+
+
+BIND( (?qbdimension NOT IN (crnd-dimension:procedure, crnd-dimension:factor) &&  ?dimvalueLabel != "_ALL_" ) AS ?subsetting )
+
+BIND( replace(  str(?qbdimension), str(crnd-dimension:), " " )  AS ?variable )
+
+values (?dsd ?obs) {
+(ds:dsd-DEMO ds:obs29)
+}
+}
+order by ?dsd ?obs ?qborder ?qbdimension 
+# limit 30
+',
+"\n"                               
+)
+
+cube.observations<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
+knitr::kable(cube.observations)
+
+cat(
+paste(
+paste( "Variable", cube.observations$factorvalueLabel[1], sep=" ", collapse=""),
+paste( "Statistics ", cube.observations$procedureLabel[1], sep=" ", collapse=""),
+paste( "Selection criteria ", cube.observations$variable[cube.observations$subsetting=="true"], "=", cube.observations$dimvalueLabel[cube.observations$subsetting=="true"], sep=" ", collapse="\n" ),
+"",
+sep="\n", collapse="\n")
+)
+
+dsname<-"adsl"
+
+## using list for key-value lookup to function for descriptive statistic
+univfunc<- list(
+  "code:procedure-mean"         =function(x){mean(x,na.rm=TRUE)},
+  "code:procedure-stddev"       =function(x){sd(x,na.rm=TRUE)},
+  "code:procedure-median"       =function(x){median(x,na.rm=TRUE)},
+  "code:procedure-min"          =function(x){min(x,na.rm=TRUE)},
+  "code:procedure-max"          =function(x){max(x,na.rm=TRUE)},
+  "code:procedure-count"        =length,
+  "code:procedure-countdistinct"=function(x){length(unique(x))}
+  )
+
+cat(
+univfunc[[locase(cube.observations$procedurevalue[1])]], "(", dsname, "$", cube.observations$factorvalueLabel[1],
+"[", 
+paste(
+paste0( dsname, "$", gsub(" *", "", cube.observations$variable[cube.observations$subsetting=="true"]),
+"==",
+'"',cube.observations$dimvalueLabel[cube.observations$subsetting=="true"], '"',sep=""),
+sep=" & ", collapse="\n"),
+"]",
+")",
+sep="", collapse="\n")
+
+
+
+paste(
+paste( "Variable", cube.observations$factorvalueLabel[1], sep=" ", collapse=""),
+
+paste( "Selection criteria ", cube.observations$variable[cube.observations$subsetting=="true"], "=", cube.observations$dimvalueLabel[cube.observations$subsetting=="true"], sep=" ", collapse="\n" ),
+"",
+sep="\n", collapse="\n")
+)
+
+require(foreign)
+xptdirectory<- tempdir()
+
+fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
+adsl<-read.xport(fnadsl)
+names(adsl)<- tolower(names(adsl))
+
+min(adsl$weightbl[adsl$trt01a =="Xanomeline High Dose" & adsl$weightbl])
+
+## sprintf("%4.0f", min(adsl$weightbl[adsl$trt01a =="Xanomeline High Dose" & adsl$weightbl]))
+
+```

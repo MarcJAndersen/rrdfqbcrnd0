@@ -11,7 +11,14 @@ vignette: >
 
 # Populate sample-xpt with example file in SAS transport xpt format
 
-This script downloads example files from phuse script repository (https://github.com/phuse-org/phuse-scripts) and stores the files in the corresponding example directory.
+This script creates the result and codelist for a simple AE table.
+The script is currently written to be executed manually.
+
+TODO(mja): automate execution of script
+
+This script downloads example files from phuse script repository
+(https://github.com/phuse-org/phuse-scripts) and stores the files in
+the corresponding example directory.
 
 ```{r, results='asis', eval=FALSE}
 library(devtools)

@@ -1,0 +1,43 @@
+---
+title: "Create DEMO table as csv file"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create DEMO table from csv file}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Create DEMO sample table from CSV file
+
+This script creates the result and codelist for a simple DEMO table.
+
+```{r, eval=TRUE}
+library(rrdfqbcrnd0)
+
+RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+
+demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
+cat("DEMO cube stored as ", demo.cube.fn, "\n")
+file.rename( demo.cube.fn, system.file("extdata/sample-rdf", package="rrdfqbcrnd0"))
+
+dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
+cat("DM cube stored as ", dm.cube.fn, "\n")
+file.rename( dm.cube.fn, system.file("extdata/sample-rdf", package="rrdfqbcrnd0"))
+
+ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
+cat("AE cube stored as ", ae.cube.fn, "\n")
+file.rename( ae.cube.fn, system.file("extdata/sample-rdf", package="rrdfqbcrnd0"))
+
+
+```
+
+### Check the statistics
+
+```{r, eval=TRUE}
+
+stmtSQL<- GetSQLFromCube(checkCube) 
+cat(stmtSQL$summStatSQL) 
+
+```
