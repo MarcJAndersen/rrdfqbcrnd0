@@ -203,20 +203,26 @@ hr {
 <body>
 <h2>Introduction</h2>
 
-<p>This vignette shows how to create a very simple RDF data cube from </p>
+<p>This vignette shows how to </p>
 
 <ul>
-<li>data </li>
-<li>metadata<br/></li>
+<li>create a very simple RDF data cube from data and metadata<br/></li>
+<li>query the cube using SPARQL</li>
+<li>execute the RDF data cube integrity checks</li>
 </ul>
 
-<h2>Setup</h2>
+<h1>Setup</h1>
 
-<pre><code class="r">library (rrdf)
-library(rrdfqbcrnd0)
+<pre><code class="r">library(rrdfqbcrnd0)
 </code></pre>
 
+<h1>Create RDF data cube</h1>
+
+<p>The RDF data cube will be created from two data.frames containing data and metadata.</p>
+
 <h2>Define data</h2>
+
+<p>The data are defined as data frame.</p>
 
 <pre><code class="r">obsData&lt;- data.frame(
   category=c(&quot;AA-group&quot;, &quot;BB-group&quot;),
@@ -258,6 +264,8 @@ knitr::kable(obsData)
 </tbody></table>
 
 <h2>Define meta data</h2>
+
+<p>The metadata are also defined as data frame.</p>
 
 <pre><code class="r">cubeMetadata&lt;- data.frame(
   compType=c(&quot;dimension&quot;, &quot;dimension&quot;, &quot;dimension&quot;, &quot;unit&quot;, &quot;denominator&quot;, &quot;measure&quot;, &quot;metadata&quot;),
@@ -345,51 +353,77 @@ knitr::kable(cubeMetadata)
 <pre><code class="r">outcube&lt;- BuildCubeFromDataFrames(cubeMetadata, obsData )
 </code></pre>
 
-<p>The RDF data cube is serialized in turtle format and stored as</p>
+<p>This shows a simple use of the BuildCubeFromDataFrames function. </p>
+
+<p>The RDF data cube is serialized in turtle format and stored as a text file in</p>
 
 <pre><code class="r">outcube
 </code></pre>
 
-<pre><code>## [1] &quot;/tmp/RtmphSzATh/DC-EXAMPLE-R-V-0-0-0.TTL&quot;
+<pre><code>## [1] &quot;/tmp/RtmpamVRoT/DC-EXAMPLE-R-V-0-0-0.TTL&quot;
 </code></pre>
 
-<h2>Looking at the RDF data cube</h2>
+<h1>Query the cube using SPARQL</h1>
 
-<p>Now look at the generated cubes by loading the turle files. Note: by specifying prefix the output contains is shown using the prefixes.
-Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.</p>
+<p>Now take a look at the generated cubes by loading the turle file.</p>
 
 <pre><code class="r">dataCubeFile&lt;- outcube
 </code></pre>
 
-<pre><code class="r"># the rest of the code only depends on the value of dataCubeFile 
-checkCube &lt;- new.rdf(ontology=FALSE)  # Initialize
-load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= checkCube)
-summarize.rdf(checkCube)
+<p>The rest of the code only depends on the value of dataCubeFile.</p>
+
+<pre><code class="r">cube &lt;- new.rdf()  # Initialize
+load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= cube)
+summarize.rdf(cube)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 129&quot;
+<pre><code>## [1] &quot;Number of triples: 214&quot;
 </code></pre>
 
-<pre><code class="r"># determine the domain name; used for defining prefixes
-# TODO: reconsider the use of domain specific prefixes
-
-# TODO: make this simpler - the only purpose is find the dsdName
-# TODO: a qb:DataStructureDefinition, and for domainname, say, the DM in ds:dsd-DM
-tempstr&lt;- as.character(sparql.rdf(checkCube, &quot;select ?s where { ?s a &lt;http://purl.org/linked-data/cube#DataStructureDefinition&gt; } limit 1&quot;))
-tempstrvec&lt;- unlist(strsplit( tempstr, &quot;/&quot;))
-dsdName&lt;- tempstrvec[length(tempstrvec)]
-domainName&lt;- strsplit(dsdName,&quot;-&quot;)[[1]][[2]]
-
-common.prefixes &lt;- data.frame(
-    prefix=gsub(&quot;^prefix&quot;,&quot;&quot;,names(Get.default.crnd.prefixes())),
-    namespace=as.character(Get.default.crnd.prefixes() )
-    )
-custom.prefixes &lt;-Get.qb.crnd.prefixes(tolower(domainName))
-
-forsparqlprefix&lt;- Get.rq.prefix.df(rbind(common.prefixes, custom.prefixes))
+<pre><code class="r">## TODO: reconsider the use of domain specific prefixes
+dsdName&lt;- GetDsdNameFromCube( cube )
+domainName&lt;- GetDomainNameFromCube( cube )
+cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot; )
 </code></pre>
 
-<p>The next statement shows the first 10 triples in the cube.</p>
+<pre><code>## dsdName  dsd-EXAMPLE , domainName  EXAMPLE
+</code></pre>
+
+<pre><code class="r">forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
+cat(forsparqlprefix,&quot;\n&quot;)
+</code></pre>
+
+<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
+## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
+## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
+## prefix pav: &lt;http://purl.org/pav&gt;
+## prefix dct: &lt;http://purl.org/dc/terms/&gt;
+## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
+## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
+## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
+## prefix code: &lt;http://www.example.org/dc/code/&gt;
+## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;
+## prefix ds: &lt;http://www.example.org/dc/example/ds/&gt;
+## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
+## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
+## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
+## 
+</code></pre>
+
+<p>The variable forsparqlprefix contains the prefix statements applicable
+for the present data cube. The use of prefixes makes the SPARQL query
+shorter, and more readable. The present version of the package defines
+namespaces dccs: and ds: where the domainname is included.
+TODO: Consider other approach for including the domainname, or use other concept.</p>
+
+<p>The next statement shows the first 10 triples in the cube. This will
+most often not be of interest, as the RRDF cube contain general
+definition and not the specific cube triples.</p>
 
 <table><thead>
 <tr>
@@ -399,58 +433,59 @@ forsparqlprefix&lt;- Get.rq.prefix.df(rbind(common.prefixes, custom.prefixes))
 </tr>
 </thead><tbody>
 <tr>
-<td align="left">dccs:measure</td>
-<td align="left">qb:measure</td>
-<td align="left">prop:measure</td>
-</tr>
-<tr>
-<td align="left">dccs:measure</td>
-<td align="left">rdfs:label</td>
-<td align="left">Denominator</td>
-</tr>
-<tr>
-<td align="left">dccs:measure</td>
+<td align="left">rdf:rest</td>
 <td align="left">rdf:type</td>
-<td align="left">qb:ComponentSpecification</td>
+<td align="left">rdf:Property</td>
 </tr>
 <tr>
-<td align="left">code:Category</td>
-<td align="left">rdfs:subClassOf</td>
-<td align="left">skos:Concept</td>
+<td align="left">rdf:rest</td>
+<td align="left">rdfs:domain</td>
+<td align="left">rdf:List</td>
 </tr>
 <tr>
-<td align="left">code:Category</td>
-<td align="left">rdfs:seeAlso</td>
-<td align="left">code:category</td>
+<td align="left">rdf:rest</td>
+<td align="left">rdfs:range</td>
+<td align="left">rdf:List</td>
 </tr>
 <tr>
-<td align="left">code:Category</td>
-<td align="left">rdfs:label</td>
-<td align="left">Class for code list: category</td>
+<td align="left">rdf:rest</td>
+<td align="left">rdfs:subPropertyOf</td>
+<td align="left">rdf:rest</td>
 </tr>
 <tr>
-<td align="left">code:Category</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Specifies the category for each observation</td>
-</tr>
-<tr>
-<td align="left">code:Category</td>
-<td align="left">rdf:type</td>
-<td align="left">owl:Class</td>
-</tr>
-<tr>
-<td align="left">code:Category</td>
+<td align="left">rdf:List</td>
 <td align="left">rdf:type</td>
 <td align="left">rdfs:Class</td>
 </tr>
 <tr>
-<td align="left">code:category-AA-group</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:category</td>
+<td align="left">rdf:List</td>
+<td align="left">rdfs:subClassOf</td>
+<td align="left">rdfs:Resource</td>
+</tr>
+<tr>
+<td align="left">code:Category</td>
+<td align="left">rdfs:subClassOf</td>
+<td align="left">rdfs:Resource</td>
+</tr>
+<tr>
+<td align="left">rdf:predicate</td>
+<td align="left">rdf:type</td>
+<td align="left">rdf:Property</td>
+</tr>
+<tr>
+<td align="left">rdf:predicate</td>
+<td align="left">rdfs:domain</td>
+<td align="left">rdf:Statement</td>
+</tr>
+<tr>
+<td align="left">rdf:predicate</td>
+<td align="left">rdfs:subPropertyOf</td>
+<td align="left">rdf:predicate</td>
 </tr>
 </tbody></table>
 
-<p>The next statement shows the first 30 triples in the cube, where the subject is a qb:Observation.</p>
+<p>The next statement gets the first 30 triples in the cube, 
+where the subject is a qb:Observation, and shows the first 15 triples.</p>
 
 <pre><code class="r">cube.observations2.rq&lt;-  paste( forsparqlprefix,
 &#39;
@@ -461,8 +496,8 @@ limit 30
 &quot;\n&quot;                               
 )
 
-cube.observations2&lt;- sparql.rdf(checkCube, cube.observations2.rq)
-knitr::kable(head(cube.observations2, 10))
+cube.observations2&lt;- sparql.rdf(cube, cube.observations2.rq)
+knitr::kable(head(cube.observations2, 15))
 </code></pre>
 
 <table><thead>
@@ -474,32 +509,22 @@ knitr::kable(head(cube.observations2, 10))
 </thead><tbody>
 <tr>
 <td align="left">ds:obs1</td>
-<td align="left">prop:unit</td>
-<td align="left">subject</td>
-</tr>
-<tr>
-<td align="left">ds:obs1</td>
-<td align="left">prop:procedure</td>
-<td align="left">code:procedure-count</td>
-</tr>
-<tr>
-<td align="left">ds:obs1</td>
-<td align="left">prop:measure</td>
+<td align="left">crnd-measure:measure</td>
 <td align="left">123</td>
 </tr>
 <tr>
 <td align="left">ds:obs1</td>
-<td align="left">prop:factor</td>
+<td align="left">crnd-dimension:procedure</td>
+<td align="left">code:procedure-count</td>
+</tr>
+<tr>
+<td align="left">ds:obs1</td>
+<td align="left">crnd-dimension:factor</td>
 <td align="left">code:factor-quantity</td>
 </tr>
 <tr>
 <td align="left">ds:obs1</td>
-<td align="left">prop:denominator</td>
-<td align="left"></td>
-</tr>
-<tr>
-<td align="left">ds:obs1</td>
-<td align="left">prop:category</td>
+<td align="left">crnd-dimension:category</td>
 <td align="left">code:category-AA-group</td>
 </tr>
 <tr>
@@ -519,18 +544,92 @@ knitr::kable(head(cube.observations2, 10))
 </tr>
 <tr>
 <td align="left">ds:obs2</td>
-<td align="left">prop:unit</td>
-<td align="left">subject</td>
+<td align="left">crnd-measure:measure</td>
+<td align="left">456</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">crnd-dimension:procedure</td>
+<td align="left">code:procedure-count</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">crnd-dimension:factor</td>
+<td align="left">code:factor-quantity</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">crnd-dimension:category</td>
+<td align="left">code:category-BB-group</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">qb:dataSet</td>
+<td align="left">ds:dataset-EXAMPLE</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">rdfs:label</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">ds:obs2</td>
+<td align="left">rdf:type</td>
+<td align="left">qb:Observation</td>
 </tr>
 </tbody></table>
 
-<p>The codelists are shown in the next output.</p>
+<p>The SPARQL query for codelists are shown in the next output.</p>
 
-<pre><code>##          vn               clc prefLabel
-## 1  category category-AA-group  AA-group
-## 2  category category-BB-group  BB-group
-## 3    factor   factor-quantity  quantity
-## 4 procedure   procedure-count     count
+<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
+## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
+## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
+## prefix pav: &lt;http://purl.org/pav&gt;
+## prefix dct: &lt;http://purl.org/dc/terms/&gt;
+## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
+## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
+## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
+## prefix code: &lt;http://www.example.org/dc/code/&gt;
+## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;
+## prefix ds: &lt;http://www.example.org/dc/example/ds/&gt;
+## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
+## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
+## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
+##  
+## select distinct ?p ?cl ?prefLabel
+## where {
+## ?DataStructureDefinition a qb:DataStructureDefinition ;
+##    qb:component ?component .
+## ?component a qb:ComponentSpecification .
+## ?component qb:dimension ?p .
+## ?p qb:codeList ?c .
+## ?c skos:hasTopConcept ?cl .
+## ?cl skos:prefLabel ?prefLabel .
+## values ( ?DataStructureDefinition ) {
+##  (ds:dsd-EXAMPLE) 
+## }
+## }
+## order by ?p ?cl ?prefLabel
+</code></pre>
+
+<p>Executing the SPARQL query gives the code list as a data frame.</p>
+
+<pre><code>##           vn                 clc prefLabel
+## 1   category   category-AA-group  AA-group
+## 2   category   category-BB-group  BB-group
+## 3   category      category-_ALL_     _ALL_
+## 4   category  category-_NONMISS_ _NONMISS_
+## 5     factor        factor-_ALL_     _ALL_
+## 6     factor    factor-_NONMISS_ _NONMISS_
+## 7     factor     factor-quantity  quantity
+## 8  procedure     procedure-_ALL_     _ALL_
+## 9  procedure procedure-_NONMISS_ _NONMISS_
+## 10 procedure     procedure-count     count
 </code></pre>
 
 <table><thead>
@@ -551,9 +650,39 @@ knitr::kable(head(cube.observations2, 10))
 <td align="left">BB-group</td>
 </tr>
 <tr>
+<td align="left">category</td>
+<td align="left">category-<em>ALL</em></td>
+<td align="left"><em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">category</td>
+<td align="left">category-<em>NONMISS</em></td>
+<td align="left"><em>NONMISS</em></td>
+</tr>
+<tr>
+<td align="left">factor</td>
+<td align="left">factor-<em>ALL</em></td>
+<td align="left"><em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">factor</td>
+<td align="left">factor-<em>NONMISS</em></td>
+<td align="left"><em>NONMISS</em></td>
+</tr>
+<tr>
 <td align="left">factor</td>
 <td align="left">factor-quantity</td>
 <td align="left">quantity</td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-<em>ALL</em></td>
+<td align="left"><em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">procedure</td>
+<td align="left">procedure-<em>NONMISS</em></td>
+<td align="left"><em>NONMISS</em></td>
 </tr>
 <tr>
 <td align="left">procedure</td>
@@ -571,14 +700,14 @@ select * where
 &#39;,
 &quot;\n&quot;
 )
-cube.dimensions&lt;- as.data.frame(sparql.rdf(checkCube, cube.dimensions.rq), stringsAsFactors=FALSE)
+cube.dimensions&lt;- as.data.frame(sparql.rdf(cube, cube.dimensions.rq), stringsAsFactors=FALSE)
 knitr::kable(print(cube.dimensions))
 </code></pre>
 
-<pre><code>##                p
-## 1    prop:factor
-## 2 prop:procedure
-## 3  prop:category
+<pre><code>##                          p
+## 1    crnd-dimension:factor
+## 2 crnd-dimension:procedure
+## 3  crnd-dimension:category
 </code></pre>
 
 <table><thead>
@@ -587,13 +716,13 @@ knitr::kable(print(cube.dimensions))
 </tr>
 </thead><tbody>
 <tr>
-<td align="left">prop:factor</td>
+<td align="left">crnd-dimension:factor</td>
 </tr>
 <tr>
-<td align="left">prop:procedure</td>
+<td align="left">crnd-dimension:procedure</td>
 </tr>
 <tr>
-<td align="left">prop:category</td>
+<td align="left">crnd-dimension:category</td>
 </tr>
 </tbody></table>
 
@@ -618,15 +747,17 @@ knitr::kable(print(cube.dimensions))
 ## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
 ## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
 ## prefix code: &lt;http://www.example.org/dc/code/&gt;
-## prefix prop: &lt;http://www.example.org/dc/example/prop/&gt;
 ## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;
 ## prefix ds: &lt;http://www.example.org/dc/example/ds/&gt;
+## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
+## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
+## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
 ##  select * where { ?s a qb:Observation  ; 
 ##         qb:dataSet ds:dataset-EXAMPLE  ; 
-##  prop:factor ?factor;
-## prop:procedure ?procedure;
-## prop:category ?category; 
-##  prop:measure      ?measure ;      
+##  crnd-dimension:factor ?factor;
+## crnd-dimension:procedure ?procedure;
+## crnd-dimension:category ?category; 
+##  crnd-measure:measure      ?measure ;      
 ##  optional{ ?factor skos:prefLabel ?factorvalue . }
 ## optional{ ?procedure skos:prefLabel ?procedurevalue . }
 ## optional{ ?category skos:prefLabel ?categoryvalue . } 
@@ -635,8 +766,8 @@ knitr::kable(print(cube.dimensions))
 
 <p>And finally the observations.</p>
 
-<pre><code class="r">cube.observations&lt;- as.data.frame(sparql.rdf(checkCube, cube.observations.rq ), stringsAsFactors=FALSE)
-knitr::kable(cube.observations[,c(paste0(sub(&quot;prop:&quot;, &quot;&quot;, cube.dimensionsattr), &quot;value&quot;),&quot;measure&quot;)])
+<pre><code class="r">cube.observations&lt;- as.data.frame(sparql.rdf(cube, cube.observations.rq ), stringsAsFactors=FALSE)
+knitr::kable(cube.observations[,c(paste0(sub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:&quot;, &quot;&quot;, cube.dimensionsattr), &quot;value&quot;),&quot;measure&quot;)])
 </code></pre>
 
 <table><thead>
@@ -660,6 +791,332 @@ knitr::kable(cube.observations[,c(paste0(sub(&quot;prop:&quot;, &quot;&quot;, cu
 <td align="left">456</td>
 </tr>
 </tbody></table>
+
+<h1>Evaluating RDF data cube integrity constraints</h1>
+
+<p>The cube conformance with the integrity constraints can be checked
+using the RunQbIC function. The integrity checks are SPARQL queries
+are stored in the list qbIClist.  The checks uses the RDF data cube
+vocabulary. Therefore the RDF model must contain the RDF data cube
+vocabulary.</p>
+
+<pre><code class="r">cubeVocabularyFn&lt;- system.file(&quot;extdata/CUBE-standards-rdf&quot;,&quot;cube.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
+cubeVocabulary&lt;- load.rdf(cubeVocabularyFn,format=&quot;TURTLE&quot;)
+cubeData&lt;- combine.rdf( cubeVocabulary, cube)
+</code></pre>
+
+<p>Note, this is not very interesting, as the cube is small.
+The evaluation of the integrity contraints takes a while.</p>
+
+<pre><code class="r">icres&lt;- RunQbIC( cubeData, forsparqlprefix )
+</code></pre>
+
+<pre><code>## Executing IC-1.  Unique DataSet
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-2. Unique DSD
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-3. DSD includes measure
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-4. Dimensions have range
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-5. Concept dimensions have code lists
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-6. Only attributes may be optional
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-7. Slice Keys must be declared
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-8. Slice Keys consistent with DSD
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-9. Unique slice structure
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-10. Slice dimensions complete
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-11. All dimensions required
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-12. No duplicate observations
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-13. Required attributes
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-14. All measures present
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-15. Measure dimension consistent
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-16. Single measure on measure dimension observation
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-17. All measures present in measures dimension cube 
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-18. Consistent data set links
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-19a. Codes from code list
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-19b. Codes from code list
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## IC-20 and IC-21 are currently not implemented
+</code></pre>
+
+<pre><code class="r">knitr::kable(icres)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">ictitle</th>
+<th align="right">icfail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">IC-1.  Unique DataSet</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-2. Unique DSD</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-3. DSD includes measure</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-4. Dimensions have range</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-5. Concept dimensions have code lists</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-6. Only attributes may be optional</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-7. Slice Keys must be declared</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-8. Slice Keys consistent with DSD</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-9. Unique slice structure</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-10. Slice dimensions complete</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-11. All dimensions required</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-12. No duplicate observations</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-13. Required attributes</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-14. All measures present</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-15. Measure dimension consistent</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-16. Single measure on measure dimension observation</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-17. All measures present in measures dimension cube</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-18. Consistent data set links</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-19a. Codes from code list</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-19b. Codes from code list</td>
+<td align="right">0</td>
+</tr>
+</tbody></table>
+
+<p>Here we remove one of the dimensions from the cube in observationo
+ds:obs1. Note: for the remove.triple function the components must be
+given as the full qualified URI. The expected result is that IC-11
+fails.</p>
+
+<pre><code class="r">remove.triple(cubeData,
+  subject=&quot;http://www.example.org/dc/example/ds/obs1&quot;,
+  predicate=&quot;http://www.example.org/dc/dimension#category&quot;,
+  object=&quot;http://www.example.org/dc/code/category-AA-group&quot;)
+icres&lt;- RunQbIC( cubeData, forsparqlprefix )
+</code></pre>
+
+<pre><code>## Executing IC-1.  Unique DataSet
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-2. Unique DSD
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-3. DSD includes measure
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-4. Dimensions have range
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-5. Concept dimensions have code lists
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-6. Only attributes may be optional
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-7. Slice Keys must be declared
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-8. Slice Keys consistent with DSD
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-9. Unique slice structure
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-10. Slice dimensions complete
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-11. All dimensions required
+##  -- 1 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-12. No duplicate observations
+##  -- 2 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-13. Required attributes
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-14. All measures present
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-15. Measure dimension consistent
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-16. Single measure on measure dimension observation
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-17. All measures present in measures dimension cube 
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-18. Consistent data set links
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-19a. Codes from code list
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## Executing IC-19b. Codes from code list
+##  -- 0 rows returned (0 is pass, &gt;0 fail)
+## IC-20 and IC-21 are currently not implemented
+</code></pre>
+
+<pre><code class="r">knitr::kable(icres)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">ictitle</th>
+<th align="right">icfail</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">IC-1.  Unique DataSet</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-2. Unique DSD</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-3. DSD includes measure</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-4. Dimensions have range</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-5. Concept dimensions have code lists</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-6. Only attributes may be optional</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-7. Slice Keys must be declared</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-8. Slice Keys consistent with DSD</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-9. Unique slice structure</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-10. Slice dimensions complete</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-11. All dimensions required</td>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="left">IC-12. No duplicate observations</td>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="left">IC-13. Required attributes</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-14. All measures present</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-15. Measure dimension consistent</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-16. Single measure on measure dimension observation</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-17. All measures present in measures dimension cube</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-18. Consistent data set links</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-19a. Codes from code list</td>
+<td align="right">0</td>
+</tr>
+<tr>
+<td align="left">IC-19b. Codes from code list</td>
+<td align="right">0</td>
+</tr>
+</tbody></table>
+
+<p>IC-12 also fails; examining the SPARQL query shows why.</p>
+
+<pre><code class="r">cat(qbIClist[[&quot;ic-12&quot;]]$rq,&quot;\n&quot;)
+</code></pre>
+
+<pre><code>## ASK {
+##   FILTER( ?allEqual )
+##   {
+##     # For each pair of observations test if all the dimension values are the same
+##     SELECT (MIN(?equal) AS ?allEqual) WHERE {
+##         ?obs1 qb:dataSet ?dataset .
+##         ?obs2 qb:dataSet ?dataset .
+##         FILTER (?obs1 != ?obs2)
+##         ?dataset qb:structure/qb:component/qb:componentProperty ?dim .
+##         ?dim a qb:DimensionProperty .
+##         ?obs1 ?dim ?value1 .
+##         ?obs2 ?dim ?value2 .
+##         BIND( ?value1 = ?value2 AS ?equal)
+##     } GROUP BY ?obs1 ?obs2
+##   }
+## }
+## 
+</code></pre>
+
+<p>As RRDF does not support the ASK query, the number of triples selected
+are returned.</p>
 
 </body>
 

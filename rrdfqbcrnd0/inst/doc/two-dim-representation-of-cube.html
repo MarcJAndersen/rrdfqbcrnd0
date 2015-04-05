@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Setup</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Setup</h1>
+
+<p>First load the package.</p>
+
+<pre><code class="r">library(rrdfqbcrnd0)
+</code></pre>
+
+<h1>Loading DEMO data</h1>
+
+<p>The DEMO data exists as a turtle file in the sample-rdf directory.</p>
+
+<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;)
+store &lt;- new.rdf()  # Initialize
+cat(&quot;Loading &quot;, dataCubeFile, &quot;\n&quot;)
+</code></pre>
+
+<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.TTL
+</code></pre>
+
+<pre><code class="r">load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
+summarize.rdf(store)
+</code></pre>
+
+<pre><code>## [1] &quot;Number of triples: 2689&quot;
+</code></pre>
+
+<pre><code class="r">dsdName&lt;- GetDsdNameFromCube( store )
+domainName&lt;- GetDomainNameFromCube( store )
+forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
+</code></pre>
+
+<p>View a specific observation. The observation is specified in the values part of the SPARQL query.</p>
+
+<pre><code class="r">cube.observations.rq&lt;-  paste( forsparqlprefix,
+&#39;
+select *
+where { 
+?s a qb:Observation ; 
+?p ?o .
+values (?s) {
+(ds:obs29)
+}
+}
+&#39;,
+&quot;\n&quot;                               
+)
+
+cube.observations&lt;- sparql.rdf(store, cube.observations.rq)
+knitr::kable(cube.observations)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-dimension:factor</td>
+<td align="left">code:factor-age</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-dimension:procedure</td>
+<td align="left">code:procedure-mean</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-dimension:race</td>
+<td align="left">code:race-<em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-attribute:unit</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-measure:measure</td>
+<td align="left">75.666666667</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-dimension:sex</td>
+<td align="left">code:sex-<em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">rdf:type</td>
+<td align="left">qb:Observation</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-attribute:rowno</td>
+<td align="left">7</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">qb:dataSet</td>
+<td align="left">ds:dataset-DEMO</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-dimension:trt01a</td>
+<td align="left">code:trt01a-Xanomeline_Low_Dose</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-dimension:ethnic</td>
+<td align="left">code:ethnic-<em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-attribute:cellpartno</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">rdfs:label</td>
+<td align="left">29</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-attribute:denominator</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-attribute:colno</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">ds:obs29</td>
+<td align="left">crnd-dimension:agegr1</td>
+<td align="left">code:agegr1-<em>ALL</em></td>
+</tr>
+</tbody></table>
+
+<h1>Current - 15-mar-2015</h1>
+
+<p>The following code is under development. It creates a HTML file
+extdata/sample-cfg/test.html showing a two dimensional representation
+of the table with drag and drop. The observations are stored as RDFa
+in the HTML. Pending: including the rest of the cube into the
+html. Consider if in each cell only the observation and measure should
+be referenced and not all properties and objects for the observation.</p>
+
+<p>The HTML includes green-turtle
+(<a href="https://github.com/alexmilowski/green-turtle">https://github.com/alexmilowski/green-turtle</a>), jquery
+(<a href="http://jquery.com/">http://jquery.com/</a>) and jqueryUI (<a href="http://jqueryui.com/">http://jqueryui.com/</a>).  In my setup
+I store the project under packages, and can symlink to the files from the
+extdata/sample-cfg directory.</p>
+
+<pre><code>cd extdata/sample-cfg
+ln -s ~/packages/green-turtle/build/RDFa.min.1.4.0.js 
+ln -s ~/packages/green-turtle/build/RDFaProcessor.min.1.4.0.js 
+ln -s ~/packages/jquery-2.1.3.min/jquery-2.1.3.min.js .
+ln -s ~/packages/jquery-ui-1.11.3.custom .
+</code></pre>
+
+<pre><code class="r">cols.rq&lt;-  paste( forsparqlprefix,
+&#39;
+select distinct ?colno ?cellpartno
+where { 
+?s a qb:Observation ; 
+crnd-attribute:colno ?colno ;
+crnd-attribute:cellpartno ?cellpartno .
+}
+order by ?colno ?cellpartno
+&#39;,
+&quot;\n&quot;                               
+)
+
+cols&lt;- sparql.rdf(store, cols.rq)
+knitr::kable(cols)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">colno</th>
+<th align="left">cellpartno</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+</tbody></table>
+
+<pre><code class="r">dimensions&lt;- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
+attributesDf&lt;- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
+
+rowdim&lt;- c(&quot;crnd-attribute:rowno&quot;, &quot;crnd-dimension:agegr1&quot;, &quot;crnd-dimension:race&quot;, &quot;crnd-dimension:ethnic&quot;, &quot;crnd-dimension:sex&quot; )
+coldim&lt;- c(&quot;crnd-attribute:colno&quot;, &quot;crnd-attribute:cellpartno&quot;, &quot;crnd-dimension:trt01a&quot; )
+
+qbtest&lt;- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
+
+## names(attributes(qbtest))
+## options(width=200)
+## knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
+
+oDx&lt;-attr(qbtest,&quot;observationsDesc&quot;)
+oDxx&lt;- oDx[! is.na(oDx$s),]
+oD&lt;- oDxx[order(strtoi(oDxx$rowno)),]
+presrowvarindex&lt;- unique(oD$rowno)
+colvarindex&lt;- unique(oD$colno)
+cellpartnoindex&lt;- unique(oD$cellpartno)
+presrowvarindex
+</code></pre>
+
+<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;18&quot; &quot;19&quot; &quot;20&quot;
+## [15] &quot;21&quot; &quot;22&quot; &quot;23&quot; &quot;24&quot; &quot;25&quot; &quot;26&quot; &quot;27&quot; &quot;28&quot; &quot;29&quot; &quot;30&quot; &quot;31&quot; &quot;32&quot; &quot;33&quot; &quot;36&quot;
+## [29] &quot;38&quot; &quot;40&quot;
+</code></pre>
+
+<pre><code class="r">colvarindex
+</code></pre>
+
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;
+</code></pre>
+
+<pre><code class="r">cellpartnoindex
+</code></pre>
+
+<pre><code>## [1] &quot;1&quot; &quot;2&quot;
+</code></pre>
+
+<pre><code class="r">oD[,c(&quot;s&quot;,&quot;rowno&quot;,&quot;colno&quot;,&quot;cellpartno&quot;)]
+</code></pre>
+
+<pre><code>##             s rowno colno cellpartno
+## 1     ds:obs1     1     1          1
+## 2     ds:obs4     1     1          2
+## 3     ds:obs2     1     2          1
+## 4     ds:obs5     1     2          2
+## 5     ds:obs3     1     3          1
+## 6     ds:obs6     1     3          2
+## 31    ds:obs7     2     1          1
+## 32   ds:obs10     2     1          2
+## 33    ds:obs8     2     2          1
+## 34   ds:obs11     2     2          2
+## 35    ds:obs9     2     3          1
+## 36   ds:obs12     2     3          2
+## 97   ds:obs13     3     1          1
+## 98   ds:obs16     3     1          2
+## 99   ds:obs14     3     2          1
+## 100  ds:obs17     3     2          2
+## 101  ds:obs15     3     3          1
+## 102  ds:obs18     3     3          2
+## 139  ds:obs19     4     1          1
+## 141  ds:obs20     4     2          1
+## 143  ds:obs21     4     3          1
+## 151  ds:obs22     5     1          1
+## 153  ds:obs23     5     2          1
+## 155  ds:obs24     5     3          1
+## 157  ds:obs25     6     1          1
+## 159  ds:obs26     6     2          1
+## 161  ds:obs27     6     3          1
+## 163  ds:obs28     7     1          1
+## 165  ds:obs29     7     2          1
+## 167  ds:obs30     7     3          1
+## 169  ds:obs31     8     1          1
+## 171  ds:obs32     8     2          1
+## 173  ds:obs33     8     3          1
+## 175  ds:obs34     9     1          1
+## 177  ds:obs35     9     2          1
+## 179  ds:obs36     9     3          1
+## 7    ds:obs37    10     1          1
+## 9    ds:obs38    10     2          1
+## 11   ds:obs39    10     3          1
+## 13   ds:obs40    11     1          1
+## 15   ds:obs41    11     2          1
+## 17   ds:obs42    11     3          1
+## 19   ds:obs43    18     1          1
+## 20   ds:obs46    18     1          2
+## 21   ds:obs44    18     2          1
+## 22   ds:obs47    18     2          2
+## 23   ds:obs45    18     3          1
+## 24   ds:obs48    18     3          2
+## 25   ds:obs49    19     1          1
+## 26   ds:obs52    19     1          2
+## 27   ds:obs50    19     2          1
+## 28   ds:obs53    19     2          2
+## 29   ds:obs51    19     3          1
+## 30   ds:obs54    19     3          2
+## 37   ds:obs55    20     1          1
+## 38   ds:obs58    20     1          2
+## 39   ds:obs56    20     2          1
+## 40   ds:obs59    20     2          2
+## 41   ds:obs57    20     3          1
+## 42   ds:obs60    20     3          2
+## 43   ds:obs61    21     1          1
+## 44   ds:obs64    21     1          2
+## 45   ds:obs62    21     2          1
+## 46   ds:obs65    21     2          2
+## 47   ds:obs63    21     3          1
+## 48   ds:obs66    21     3          2
+## 49   ds:obs67    22     1          1
+## 50   ds:obs70    22     1          2
+## 51   ds:obs68    22     2          1
+## 52   ds:obs71    22     2          2
+## 53   ds:obs69    22     3          1
+## 54   ds:obs72    22     3          2
+## 55   ds:obs73    23     1          1
+## 56   ds:obs76    23     1          2
+## 57   ds:obs74    23     2          1
+## 58   ds:obs77    23     2          2
+## 59   ds:obs75    23     3          1
+## 60   ds:obs78    23     3          2
+## 61   ds:obs79    24     1          1
+## 62   ds:obs82    24     1          2
+## 63   ds:obs80    24     2          1
+## 64   ds:obs83    24     2          2
+## 65   ds:obs81    24     3          1
+## 66   ds:obs84    24     3          2
+## 67   ds:obs85    25     1          1
+## 68   ds:obs88    25     1          2
+## 69   ds:obs86    25     2          1
+## 70   ds:obs89    25     2          2
+## 71   ds:obs87    25     3          1
+## 72   ds:obs90    25     3          2
+## 73   ds:obs91    26     1          1
+## 75   ds:obs92    26     2          1
+## 77   ds:obs93    26     3          1
+## 79   ds:obs94    27     1          1
+## 81   ds:obs95    27     2          1
+## 83   ds:obs96    27     3          1
+## 85   ds:obs97    28     1          1
+## 87   ds:obs98    28     2          1
+## 89   ds:obs99    28     3          1
+## 91  ds:obs100    29     1          1
+## 93  ds:obs101    29     2          1
+## 95  ds:obs102    29     3          1
+## 103 ds:obs103    30     1          1
+## 105 ds:obs104    30     2          1
+## 107 ds:obs105    30     3          1
+## 109 ds:obs106    31     1          1
+## 111 ds:obs107    31     2          1
+## 113 ds:obs108    31     3          1
+## 115 ds:obs109    32     1          1
+## 117 ds:obs110    32     2          1
+## 119 ds:obs111    32     3          1
+## 121 ds:obs112    33     1          1
+## 123 ds:obs113    33     2          1
+## 125 ds:obs114    33     3          1
+## 127 ds:obs115    36     1          1
+## 128 ds:obs118    36     1          2
+## 129 ds:obs116    36     2          1
+## 130 ds:obs119    36     2          2
+## 131 ds:obs117    36     3          1
+## 132 ds:obs120    36     3          2
+## 133 ds:obs121    38     1          1
+## 134 ds:obs124    38     1          2
+## 135 ds:obs122    38     2          1
+## 136 ds:obs125    38     2          2
+## 137 ds:obs123    38     3          1
+## 138 ds:obs126    38     3          2
+## 145 ds:obs127    40     1          1
+## 146 ds:obs130    40     1          2
+## 147 ds:obs128    40     2          1
+## 148 ds:obs131    40     2          2
+## 149 ds:obs129    40     3          1
+## 150 ds:obs132    40     3          2
+</code></pre>
+
+<pre><code class="r">presrowvarvalue&lt;- gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:(.*)&quot;,&quot;\\1value&quot;,rowdim)
+presrowvarIRI&lt;- gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:(.*)&quot;,&quot;\\1IRI&quot;,rowdim)
+presrowvarlabel&lt;- gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:(.*)&quot;,&quot;\\1label&quot;,rowdim)
+
+## add code for embedding the cube as turtle
+## determine cube compontents except observations,
+## as the observations are stored as RDFa
+file&lt;- file.path(system.file(&quot;extdata/sample-cfg&quot;, package=&quot;rrdfqbcrnd0&quot;), &quot;test.html&quot;)
+# file&lt;- file.path(tempdir(),&quot;test.html&quot;)
+append&lt;- TRUE
+print(file)
+</code></pre>
+
+<pre><code>## [1] &quot;/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/test.html&quot;
+</code></pre>
+
+<pre><code class="r">cat(&quot;&lt;!DOCTYPE HTML&gt;\n&quot;, file=file, append=FALSE)
+cat(&#39;
+&lt;html&gt;
+  &lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;DEMO table as html&lt;/title&gt;
+   &lt;script src=&quot;jquery-2.1.3.min.js&quot;&gt;&lt;/script&gt;
+   &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery-ui-1.11.3.custom/jquery-ui.css&quot;/&gt;
+   &lt;script src=&quot;jquery-ui-1.11.3.custom/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
+   &lt;script src=&quot;RDFa.min.1.4.0.js&quot;&gt;&lt;/script&gt;
+
+&lt;style&gt;
+#table {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:1000px;
+    width:750px;
+    float:left;
+    padding:5px;
+}
+#drop{
+    width:300px;
+    background-color:green;
+    float:left;
+    padding:10px;
+}
+&lt;/style&gt;
+
+&lt;/head&gt;
+&lt;script&gt;
+&quot;use strict&quot;;
+
+function allowDrop(ev)
+{
+ev.preventDefault();
+}
+
+function drag(ev)
+{
+ev.dataTransfer.setData(&quot;Text&quot;,ev.target.id);
+console.log(&quot;Dragging: &quot;, ev.target.id);
+}
+
+function drop(ev)
+{
+ev.preventDefault();
+var data=ev.dataTransfer.getData(&quot;Text&quot;);
+console.log(&quot;Dropping: &quot;, data);
+// from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
+var nodeCopy = document.getElementById(data).cloneNode(true);
+nodeCopy.id = &quot;copy&quot;+nodeCopy.id;
+// end from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
+var newelem = document.createElement(&quot;P&quot;);
+newelem.appendChild(nodeCopy);
+ev.target.appendChild(newelem);
+}
+
+$(document).ready(function(){
+
+GreenTurtle.attach(document)
+
+})
+
+&lt;/script&gt;
+&lt;body&gt;
+&lt;h1&gt;DEMO table as RDFa&lt;/h1&gt;
+&#39;
+, file=file, append=TRUE)
+
+cat(&#39;&lt;div id=&quot;container&quot;&gt;&#39;, file=file, append=TRUE)
+
+cat(&quot;&lt;div id=&#39;table&#39;&gt;\n&quot;, file=file, append=TRUE)
+cat(&quot;&lt;table border&gt;\n&quot;, file=file, append=TRUE)
+or&lt;-1
+
+## make the header row(s) for the columns
+
+for (rr in presrowvarindex) {
+  cat(&quot;&lt;tr&gt;&quot;, file=file, append=TRUE)
+print(rr)
+  ## make the row identification
+  for (cc in colvarindex) {
+print(cc)
+    cat(&quot;&lt;td&gt;&quot;, file=file, append=TRUE)
+cpindex&lt;-0
+    for (cp in cellpartnoindex) {
+print(cp)
+cpindex&lt;- cpindex+1
+if (cpindex&gt;1) {
+## separator between cells should be taken from data
+      cat(&quot; &quot;, file=file, append=TRUE)
+}
+    if (oD$rowno[or]==rr &amp; oD$colno[or]==cc &amp; oD$cellpartno[or]==cp ) {
+## The observation
+      ## next line is for simple fly-over
+      cat(paste0(&quot;&lt;a title=\&quot;&quot;, oD$measureIRI[or], &quot;\&quot;&gt;&quot;), file=file, append=TRUE)
+
+      cat(paste0(&#39;&lt;span &#39;, &#39;id=&quot;&#39;, gsub(&quot;ds:&quot;,&quot;&quot;,oD$s[or]), &#39;&quot;&#39;,
+                 &#39;resource=&quot;&#39;, oD$s[or],&#39;&quot;&#39;,
+                 &#39; typeof=&quot;qb:Observation&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; &gt;&#39;),
+          file=file, append=TRUE)
+cat(paste0(&#39;&lt;span property=&quot;qb:dataSet&quot; resource=&quot;&#39;, &#39;ds:&#39;, dsdName,&#39;&quot;&gt;&#39;), file=file, append=TRUE)
+
+for (prop in dimensions) {
+cat( paste0(&#39;&lt;span property=&quot;&#39;, prop, &#39;&quot;&#39;, &#39; resource=&quot;&#39;, oD[or, gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:&quot;, &quot;&quot;, prop)], &#39;&quot;&gt;&#39;), file=file, append=TRUE)
+}
+
+## formatting to applied to measure
+      cat(paste0(oD$measure[or]), file=file, append=TRUE)
+
+for (prop in dimensions) {
+cat( &#39;&lt;/span&gt;&#39;, file=file, append=TRUE)
+}
+cat( &#39;&lt;/span&gt;&#39;, file=file, append=TRUE)
+cat( &#39;&lt;/span&gt;&#39;, file=file, append=TRUE)
+
+      cat(paste0(&quot;&lt;/a&gt;&quot;), file=file, append=TRUE)
+      or&lt;- or+1
+    }
+    }
+    cat(&quot;&lt;/td&gt;&quot;, file=file, append=TRUE)
+  }
+cat(&quot;&lt;/tr&gt;&quot;, file=file, append=TRUE)
+  }
+</code></pre>
+
+<pre><code>## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;4&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;5&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;6&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;7&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;8&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;9&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;10&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;11&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;18&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;19&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;20&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;21&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;22&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;23&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;24&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;25&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;26&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;27&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;28&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;29&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;30&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;31&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;32&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;33&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;36&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;38&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;40&quot;
+## [1] &quot;1&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;2&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+## [1] &quot;3&quot;
+## [1] &quot;1&quot;
+## [1] &quot;2&quot;
+</code></pre>
+
+<pre><code class="r">cat(&quot;&lt;/table&gt;\n&quot;, file=file, append=TRUE)
+cat(&quot;&lt;/div&gt;\n&quot;, file=file, append=TRUE)
+
+cat(&#39;
+&lt;div id=&quot;droparea&quot;&gt;
+Drag and drop over the green text below.
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;
+&lt;span  style=&quot;width:100px&quot; id=&quot;drop&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;Drop here...&lt;/span&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/div&gt; 
+&#39;,  file=file, append=TRUE)                 
+cat(&#39;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&#39;, file=file, append=TRUE)
+print(file)
+</code></pre>
+
+<pre><code>## [1] &quot;/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/test.html&quot;
+</code></pre>
+
+<h1>Session information</h1>
+
+<pre><code class="r">sessionInfo()
+</code></pre>
+
+<pre><code>## R version 3.1.2 (2014-10-31)
+## Platform: x86_64-redhat-linux-gnu (64-bit)
+## 
+## locale:
+##  [1] LC_CTYPE=en_GB.utf8          LC_NUMERIC=C                
+##  [3] LC_TIME=en_GB.utf8           LC_COLLATE=en_GB.utf8       
+##  [5] LC_MONETARY=en_GB.utf8       LC_MESSAGES=en_GB.utf8      
+##  [7] LC_PAPER=en_GB.utf8          LC_NAME=en_GB.utf8          
+##  [9] LC_ADDRESS=en_GB.utf8        LC_TELEPHONE=en_GB.utf8     
+## [11] LC_MEASUREMENT=en_GB.utf8    LC_IDENTIFICATION=en_GB.utf8
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] rrdfqbcrnd0_0.1.1 RCurl_1.95-4.5    bitops_1.0-6     
+##  [4] xlsx_0.5.7        xlsxjars_0.6.1    rrdf_2.1.0       
+##  [7] rrdflibs_1.4.0    rJava_0.9-6       devtools_1.7.0   
+## [10] knitr_1.9        
+## 
+## loaded via a namespace (and not attached):
+##  [1] compiler_3.1.2 digest_0.6.8   evaluate_0.5.5 formatR_1.0   
+##  [5] highr_0.4      markdown_0.7.4 Rcpp_0.11.4    roxygen2_4.1.0
+##  [9] stringr_0.6.2  tools_3.1.2
+</code></pre>
+
+</body>
+
+</html>

@@ -1,5 +1,4 @@
 ## ------------------------------------------------------------------------
-library (rrdf)
 library(rrdfqbcrnd0)
 
 ## ------------------------------------------------------------------------
@@ -31,31 +30,19 @@ outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 outcube
 
 ## ------------------------------------------------------------------------
-
 dataCubeFile<- outcube
 
 ## ------------------------------------------------------------------------
-# the rest of the code only depends on the value of dataCubeFile 
-checkCube <- new.rdf(ontology=FALSE)  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
-summarize.rdf(checkCube)
-# determine the domain name; used for defining prefixes
-# TODO: reconsider the use of domain specific prefixes
+cube <- new.rdf()  # Initialize
+load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
+summarize.rdf(cube)
 
-# TODO: make this simpler - the only purpose is find the dsdName
-# TODO: a qb:DataStructureDefinition, and for domainname, say, the DM in ds:dsd-DM
-tempstr<- as.character(sparql.rdf(checkCube, "select ?s where { ?s a <http://purl.org/linked-data/cube#DataStructureDefinition> } limit 1"))
-tempstrvec<- unlist(strsplit( tempstr, "/"))
-dsdName<- tempstrvec[length(tempstrvec)]
-domainName<- strsplit(dsdName,"-")[[1]][[2]]
-
-common.prefixes <- data.frame(
-    prefix=gsub("^prefix","",names(Get.default.crnd.prefixes())),
-    namespace=as.character(Get.default.crnd.prefixes() )
-    )
-custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
-
-forsparqlprefix<- Get.rq.prefix.df(rbind(common.prefixes, custom.prefixes))
+## TODO: reconsider the use of domain specific prefixes
+dsdName<- GetDsdNameFromCube( cube )
+domainName<- GetDomainNameFromCube( cube )
+cat("dsdName ", dsdName, ", domainName ", domainName, "\n" )
+forsparqlprefix<- GetForSparqlPrefix( domainName )
+cat(forsparqlprefix,"\n")
 
 ## ----, echo=FALSE--------------------------------------------------------
 
@@ -68,7 +55,7 @@ limit 10
 "\n"
 )
 
-cube.observations1<- sparql.rdf(checkCube, cube.observations1.rq  )
+cube.observations1<- sparql.rdf(cube, cube.observations1.rq  )
 knitr::kable(head(cube.observations1, 10))
 
 ## ------------------------------------------------------------------------
@@ -82,37 +69,20 @@ limit 30
 "\n"                               
 )
 
-cube.observations2<- sparql.rdf(checkCube, cube.observations2.rq)
-knitr::kable(head(cube.observations2, 10))
+cube.observations2<- sparql.rdf(cube, cube.observations2.rq)
+knitr::kable(head(cube.observations2, 15))
 
 
 ## ----, echo=FALSE--------------------------------------------------------
+codelists.rq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
+cat(codelists.rq)
 
-codelists.rq<-   paste(forsparqlprefix,
-'
-select distinct ?p ?cl ?prefLabel
-where {
-?DataStructureDefinition a qb:DataStructureDefinition ;
-   qb:component ?component .
-?component a qb:ComponentSpecification .
-?component qb:dimension ?p .
-?p qb:codeList ?c .
-?c skos:hasTopConcept ?cl .
-?cl skos:prefLabel ?prefLabel .
-values ( ?DataStructureDefinition ) {
-',
-paste0( "(", "ds:", dsdName, ")"),
-'
-}
-}
-order by ?p ?cl ?prefLabel
-'
-)
+## ----, echo=FALSE--------------------------------------------------------
+cube.codelists<- as.data.frame(sparql.rdf(cube, codelists.rq), stringsAsFactors=FALSE)
 
-cube.codelists<- as.data.frame(sparql.rdf(checkCube, codelists.rq), stringsAsFactors=FALSE)
-# TODO instead of gsub make a more straightforward way
-# TOTO this involves a new version of the ph.recode function
-cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
+## TODO instead of gsub make a more straightforward way
+## TODO this involves a new version of the ph.recode function
+cube.codelists$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",cube.codelists$p)
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
 knitr::kable(print(cube.codelists[,c("vn", "clc", "prefLabel")]))
 
@@ -126,13 +96,13 @@ select * where
 ',
 "\n"
 )
-cube.dimensions<- as.data.frame(sparql.rdf(checkCube, cube.dimensions.rq), stringsAsFactors=FALSE)
+cube.dimensions<- as.data.frame(sparql.rdf(cube, cube.dimensions.rq), stringsAsFactors=FALSE)
 knitr::kable(print(cube.dimensions))
 
 
 ## ----, echo=FALSE--------------------------------------------------------
 
-cube.dimensionsattr<- sparql.rdf(checkCube,
+cube.dimensionsattr<- sparql.rdf(cube,
   paste(forsparqlprefix,
 "select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }"
 ))
@@ -141,13 +111,13 @@ cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",
     "?s a qb:Observation  ;", "\n",
     paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
-    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";", collapse="\n"),
+    paste0( cube.dimensionsattr, " ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), ";", collapse="\n"),
     "\n",
-    "prop:measure      ?measure ;      \n",
-    paste0( "optional{ ", sub("prop:", "?", cube.dimensionsattr), " ",
+    "crnd-measure:measure      ?measure ;      \n",
+    paste0( "optional{ ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), " ",
            "skos:prefLabel",
            " ",
-           sub("prop:", "?", cube.dimensionsattr), "value" ,
+           sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
            collapse="\n"),
     "\n",
@@ -157,14 +127,29 @@ cube.observations.rq<-  paste( forsparqlprefix,
 
 
 ## ------------------------------------------------------------------------
-
 cat(cube.observations.rq)
 
 ## ------------------------------------------------------------------------
+cube.observations<- as.data.frame(sparql.rdf(cube, cube.observations.rq ), stringsAsFactors=FALSE)
+knitr::kable(cube.observations[,c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", cube.dimensionsattr), "value"),"measure")])
 
+## ------------------------------------------------------------------------
+cubeVocabularyFn<- system.file("extdata/CUBE-standards-rdf","cube.ttl", package="rrdfqbcrnd0")
+cubeVocabulary<- load.rdf(cubeVocabularyFn,format="TURTLE")
+cubeData<- combine.rdf( cubeVocabulary, cube)
 
-cube.observations<- as.data.frame(sparql.rdf(checkCube, cube.observations.rq ), stringsAsFactors=FALSE)
-knitr::kable(cube.observations[,c(paste0(sub("prop:", "", cube.dimensionsattr), "value"),"measure")])
+## ------------------------------------------------------------------------
+icres<- RunQbIC( cubeData, forsparqlprefix )
+knitr::kable(icres)
 
+## ------------------------------------------------------------------------
+remove.triple(cubeData,
+  subject="http://www.example.org/dc/example/ds/obs1",
+  predicate="http://www.example.org/dc/dimension#category",
+  object="http://www.example.org/dc/code/category-AA-group")
+icres<- RunQbIC( cubeData, forsparqlprefix )
+knitr::kable(icres)
 
+## ------------------------------------------------------------------------
+cat(qbIClist[["ic-12"]]$rq,"\n")
 

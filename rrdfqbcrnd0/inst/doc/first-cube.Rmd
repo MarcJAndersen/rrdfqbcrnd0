@@ -9,17 +9,21 @@ vignette: >
 ---
 
 ## Introduction
-This vignette shows how to create a very simple RDF data cube from 
-- data 
-- metadata  
+This vignette shows how to 
+- create a very simple RDF data cube from data and metadata  
+- query the cube using SPARQL
+- execute the RDF data cube integrity checks
 
-## Setup
+# Setup
 ```{r}
-library (rrdf)
 library(rrdfqbcrnd0)
 ```
 
+# Create RDF data cube
+The RDF data cube will be created from two data.frames containing data and metadata.
+
 ## Define data
+The data are defined as data frame.
 ```{r}
 obsData<- data.frame(
   category=c("AA-group", "BB-group"),
@@ -33,6 +37,7 @@ knitr::kable(obsData)
 ```
 
 ## Define meta data
+The metadata are also defined as data frame.
 ```{r}
 cubeMetadata<- data.frame(
   compType=c("dimension", "dimension", "dimension", "unit", "denominator", "measure", "metadata"),
@@ -51,47 +56,47 @@ The RDF data cube for the data above is created using
 ```{r}
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
+This shows a simple use of the BuildCubeFromDataFrames function. 
 
-The RDF data cube is serialized in turtle format and stored as
+The RDF data cube is serialized in turtle format and stored as a text file in
 ```{r}
 outcube
 ```
 
-## Looking at the RDF data cube
+# Query the cube using SPARQL
 
-Now look at the generated cubes by loading the turle files. Note: by specifying prefix the output contains is shown using the prefixes.
-Note for future: This may be a disadvantage if the value of the prefix, say ds, changes.
+Now take a look at the generated cubes by loading the turle file.
+
 
 ```{r}
-
 dataCubeFile<- outcube
 ```
 
+The rest of the code only depends on the value of dataCubeFile.
+
 ```{r}
-# the rest of the code only depends on the value of dataCubeFile 
-checkCube <- new.rdf(ontology=FALSE)  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
-summarize.rdf(checkCube)
-# determine the domain name; used for defining prefixes
-# TODO: reconsider the use of domain specific prefixes
+cube <- new.rdf()  # Initialize
+load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
+summarize.rdf(cube)
 
-# TODO: make this simpler - the only purpose is find the dsdName
-# TODO: a qb:DataStructureDefinition, and for domainname, say, the DM in ds:dsd-DM
-tempstr<- as.character(sparql.rdf(checkCube, "select ?s where { ?s a <http://purl.org/linked-data/cube#DataStructureDefinition> } limit 1"))
-tempstrvec<- unlist(strsplit( tempstr, "/"))
-dsdName<- tempstrvec[length(tempstrvec)]
-domainName<- strsplit(dsdName,"-")[[1]][[2]]
-
-common.prefixes <- data.frame(
-    prefix=gsub("^prefix","",names(Get.default.crnd.prefixes())),
-    namespace=as.character(Get.default.crnd.prefixes() )
-    )
-custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
-
-forsparqlprefix<- Get.rq.prefix.df(rbind(common.prefixes, custom.prefixes))
+## TODO: reconsider the use of domain specific prefixes
+dsdName<- GetDsdNameFromCube( cube )
+domainName<- GetDomainNameFromCube( cube )
+cat("dsdName ", dsdName, ", domainName ", domainName, "\n" )
+forsparqlprefix<- GetForSparqlPrefix( domainName )
+cat(forsparqlprefix,"\n")
 ```
 
-The next statement shows the first 10 triples in the cube.
+The variable forsparqlprefix contains the prefix statements applicable
+for the present data cube. The use of prefixes makes the SPARQL query
+shorter, and more readable. The present version of the package defines
+namespaces dccs: and ds: where the domainname is included.
+TODO: Consider other approach for including the domainname, or use other concept.
+
+The next statement shows the first 10 triples in the cube. This will
+most often not be of interest, as the RRDF cube contain general
+definition and not the specific cube triples.
+
 ```{r, echo=FALSE}
 
 cube.observations1.rq<- paste( forsparqlprefix,
@@ -103,11 +108,12 @@ limit 10
 "\n"
 )
 
-cube.observations1<- sparql.rdf(checkCube, cube.observations1.rq  )
+cube.observations1<- sparql.rdf(cube, cube.observations1.rq  )
 knitr::kable(head(cube.observations1, 10))
 ```
 
-The next statement shows the first 30 triples in the cube, where the subject is a qb:Observation.
+The next statement gets the first 30 triples in the cube, 
+where the subject is a qb:Observation, and shows the first 15 triples.
 ```{r}
 
 cube.observations2.rq<-  paste( forsparqlprefix,
@@ -119,39 +125,24 @@ limit 30
 "\n"                               
 )
 
-cube.observations2<- sparql.rdf(checkCube, cube.observations2.rq)
-knitr::kable(head(cube.observations2, 10))
+cube.observations2<- sparql.rdf(cube, cube.observations2.rq)
+knitr::kable(head(cube.observations2, 15))
 
 ```
 
-The codelists are shown in the next output.
+The SPARQL query for codelists are shown in the next output.
 ```{r, echo=FALSE}
+codelists.rq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
+cat(codelists.rq)
+```
 
-codelists.rq<-   paste(forsparqlprefix,
-'
-select distinct ?p ?cl ?prefLabel
-where {
-?DataStructureDefinition a qb:DataStructureDefinition ;
-   qb:component ?component .
-?component a qb:ComponentSpecification .
-?component qb:dimension ?p .
-?p qb:codeList ?c .
-?c skos:hasTopConcept ?cl .
-?cl skos:prefLabel ?prefLabel .
-values ( ?DataStructureDefinition ) {
-',
-paste0( "(", "ds:", dsdName, ")"),
-'
-}
-}
-order by ?p ?cl ?prefLabel
-'
-)
+Executing the SPARQL query gives the code list as a data frame.
+```{r, echo=FALSE}
+cube.codelists<- as.data.frame(sparql.rdf(cube, codelists.rq), stringsAsFactors=FALSE)
 
-cube.codelists<- as.data.frame(sparql.rdf(checkCube, codelists.rq), stringsAsFactors=FALSE)
-# TODO instead of gsub make a more straightforward way
-# TOTO this involves a new version of the ph.recode function
-cube.codelists$vn<- gsub("prop:","",cube.codelists$p)
+## TODO instead of gsub make a more straightforward way
+## TODO this involves a new version of the ph.recode function
+cube.codelists$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",cube.codelists$p)
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
 knitr::kable(print(cube.codelists[,c("vn", "clc", "prefLabel")]))
 
@@ -167,7 +158,7 @@ select * where
 ',
 "\n"
 )
-cube.dimensions<- as.data.frame(sparql.rdf(checkCube, cube.dimensions.rq), stringsAsFactors=FALSE)
+cube.dimensions<- as.data.frame(sparql.rdf(cube, cube.dimensions.rq), stringsAsFactors=FALSE)
 knitr::kable(print(cube.dimensions))
 
 ```
@@ -175,7 +166,7 @@ knitr::kable(print(cube.dimensions))
 And finally the SPARQL query for observations.
 ```{r, echo=FALSE}
 
-cube.dimensionsattr<- sparql.rdf(checkCube,
+cube.dimensionsattr<- sparql.rdf(cube,
   paste(forsparqlprefix,
 "select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }"
 ))
@@ -184,13 +175,13 @@ cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",
     "?s a qb:Observation  ;", "\n",
     paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
-    paste0( cube.dimensionsattr, " ", sub("prop:", "?", cube.dimensionsattr), ";", collapse="\n"),
+    paste0( cube.dimensionsattr, " ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), ";", collapse="\n"),
     "\n",
-    "prop:measure      ?measure ;      \n",
-    paste0( "optional{ ", sub("prop:", "?", cube.dimensionsattr), " ",
+    "crnd-measure:measure      ?measure ;      \n",
+    paste0( "optional{ ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), " ",
            "skos:prefLabel",
            " ",
-           sub("prop:", "?", cube.dimensionsattr), "value" ,
+           sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
            collapse="\n"),
     "\n",
@@ -202,16 +193,55 @@ cube.observations.rq<-  paste( forsparqlprefix,
 
 This is the query for getting the observations
 ```{r}
-
 cat(cube.observations.rq)
 ```
 
 And finally the observations.
 ```{r}
-
-
-cube.observations<- as.data.frame(sparql.rdf(checkCube, cube.observations.rq ), stringsAsFactors=FALSE)
-knitr::kable(cube.observations[,c(paste0(sub("prop:", "", cube.dimensionsattr), "value"),"measure")])
-
-
+cube.observations<- as.data.frame(sparql.rdf(cube, cube.observations.rq ), stringsAsFactors=FALSE)
+knitr::kable(cube.observations[,c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", cube.dimensionsattr), "value"),"measure")])
 ```
+
+# Evaluating RDF data cube integrity constraints 
+
+The cube conformance with the integrity constraints can be checked
+using the RunQbIC function. The integrity checks are SPARQL queries
+are stored in the list qbIClist.  The checks uses the RDF data cube
+vocabulary. Therefore the RDF model must contain the RDF data cube
+vocabulary.
+
+```{r} 
+cubeVocabularyFn<- system.file("extdata/CUBE-standards-rdf","cube.ttl", package="rrdfqbcrnd0")
+cubeVocabulary<- load.rdf(cubeVocabularyFn,format="TURTLE")
+cubeData<- combine.rdf( cubeVocabulary, cube)
+```
+
+Note, this is not very interesting, as the cube is small.
+The evaluation of the integrity contraints takes a while.
+```{r}
+icres<- RunQbIC( cubeData, forsparqlprefix )
+knitr::kable(icres)
+```
+
+Here we remove one of the dimensions from the cube in observationo
+ds:obs1. Note: for the remove.triple function the components must be
+given as the full qualified URI. The expected result is that IC-11
+fails.
+
+```{r}
+remove.triple(cubeData,
+  subject="http://www.example.org/dc/example/ds/obs1",
+  predicate="http://www.example.org/dc/dimension#category",
+  object="http://www.example.org/dc/code/category-AA-group")
+icres<- RunQbIC( cubeData, forsparqlprefix )
+knitr::kable(icres)
+```        
+
+IC-12 also fails; examining the SPARQL query shows why.
+
+```{r}
+cat(qbIClist[["ic-12"]]$rq,"\n")
+```
+
+As RRDF does not support the ASK query, the number of triples selected
+are returned.
