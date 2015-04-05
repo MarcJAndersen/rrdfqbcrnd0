@@ -124,6 +124,16 @@ export RSTUDIO_PANDOC=`which pandoc | xargs dirname`
 ```
 ([source](http://stackoverflow.com/questions/26803652/devtoolsbuild-vignettes-yields-error-invalid-version-specification-pandoc))
 
+The SPARQL queries are shown in knitr using the highlight package. Install highlight by
+```bash
+sudo yum install highlight
+```
+
+To install pandoc use
+```bash
+sudo yum install pandoc pandoc-citeproc pandoc-pdf
+```
+
 For executing pandoc, there following packages may be need: framed, titling.
 ([source](https://github.com/rstudio/rmarkdown/issues/39)
 

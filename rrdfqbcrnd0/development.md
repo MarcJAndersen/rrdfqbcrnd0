@@ -19,8 +19,8 @@ devtools::load_all()
 devtools::document()
 ## Build the vignettes
 devtools::build_vignettes()
-## Run the test
-devtools::test()
+## Run the testd
+evtools::test()
 ## Check if the package is valid
 devtools::check()
 ## Install the package
