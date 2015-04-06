@@ -22,7 +22,7 @@ custom.prefixes <-data.frame(
   prefix=c(general.prefixes, domain.prefixes, "crnd-dimension", "crnd-attribute", "crnd-measure"),
   namespace=c(
     paste0(namespaceStem,general.prefixes,"/") ,
-    paste0(namespaceStem,domainName,"/",domain.prefixes,"/"),
+    paste0(namespaceStem,tolower(domainName),"/",domain.prefixes,"/"),
     paste0(namespaceStem,c("dimension","attribute","measure"),"#")
     )
   )
