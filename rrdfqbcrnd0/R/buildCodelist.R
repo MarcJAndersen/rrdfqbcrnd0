@@ -31,6 +31,9 @@ remote.endpoint
   ## codeNoBlank - used in URI formation
   ## SDTM: cdiscSumbissionValue -> code  (the term to be coded)
   if (codeType=="DATA"){
+    if (! dimName %in% names(obsData)) {
+      stop( dimName, " not a column in input obsData")
+    }
     codeSource <- as.data.frame(unique(obsData[,dimName])) #Unique values as dataframe
     colnames(codeSource) <- ("code")  ## Rename to match SDTM approach
   }
