@@ -32,7 +32,7 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 cat("DM cube stored as ", dm.cube.fn, "\n")
 targetFile<- file.path(targetDir,"DC-DM-sample.ttl")
 
-if (file.copy( dm.cube.fn, targetFile)) {
+if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
   cat("DM cube copied to ", targetFile, "\n")
 }
 
@@ -40,7 +40,7 @@ if (file.copy( dm.cube.fn, targetFile)) {
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 cat("AE cube stored as ", ae.cube.fn, "\n")
 targetFile<- file.path(targetDir,"DC-AE-sample.ttl")
-if (file.copy( ae.cube.fn, targetFile)) {
+if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
   cat("AE cube copied to ", targetFile, "\n")
 }
 
@@ -59,7 +59,7 @@ demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 cat("DEMO cube stored as ", demo.cube.fn, "\n")
 targetFile<- file.path(targetDir,"DC-DEMO-sample.ttl")
 
-if (file.copy( demo.cube.fn, targetFile)) {
+if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
    cat("DEMO cube copied to ", targetFile, "\n")
  }
 

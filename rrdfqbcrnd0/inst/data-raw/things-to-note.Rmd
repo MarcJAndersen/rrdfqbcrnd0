@@ -271,6 +271,26 @@ filename<-"DC-demo.json-ld"
 .jcall("com/github/egonw/rrdf/RJenaHelper", "V", "saveRdf", store, filename, format)
 ```
 
+## Debugging adding triples
+
+Below is a function replacing _add.triples_
+
+```{r, eval=FALSE}
+debug.add.data.triple<- function( cubeData,
+subject,
+predicate,
+data, type) {
+
+print(cbind(subject=subject,predicate=predicate,data=data,type=type))
+      
+add.data.triple( cubeData,
+subject=subject,
+predicate=predicate,
+data=data, type=type)
+
+} 
+```
+
 
 ## At the end of each scipt
 
