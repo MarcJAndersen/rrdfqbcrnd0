@@ -13,10 +13,10 @@ vignette: >
 
 # Preliminaries
 
-When developing, the script is intented to run from the package root after the setup for development as defined in the README.md. 
-```{r, results='asis', eval=FALSE}
-knit(input="inst/data-raw/store-cdisc-rdf-as-rrdf.Rmd",
-     output="inst/data-raw/store-cdisc-rdf-as-rrdf.md")
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
 ```
 
 ## Directory for storing rdf.cdisc.org and RDF data cube specification
@@ -128,6 +128,9 @@ message(".. total number of triples: ", summarize.rdf.noprint(cdisc.rdf) )
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
 
+The following is experimental and not needed for the present
+package. See below for explanation.
+
 ```{r, results='asis', eval=TRUE}
 
 rdf.cdisc.org.URLstem<- "https://github.com/phuse-org/rdf.cdisc.org/raw/master"
@@ -170,6 +173,8 @@ summarize.rdf(results.fuseki)
 ### Using the script with jena arq
 The generated SPARQL query works with arq when using a local endpoint.
 The code below is expected to run in the directory given by tempdir().
+Replace _get-rdf.disc.org.rq_ with the path to the generated file (see above).
+
 ```
 export JENAROOT=/opt/apache-jena-2.12.1
 export PATH=$PATH:$JENAROOT/bin

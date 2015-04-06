@@ -1,3 +1,38 @@
+---
+title: "Create AE table as csv file"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Create AE table as csv file}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+# Code snippets that may be of use.
+
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
+```
+
+## Comment on earlier setup, delete if not needed.
+
+When developing, the script is intented to run from the package root as
+```{r, results='asis', eval=FALSE}
+knit("inst/data-raw/create-qb-CDISC-prefix.Rmd")
+```
+
+knit runs the script in the data-raw directory, so it would be
+expected to use pkg=".." to store the qbIClist in the data directory
+However, it did not work - hence the setwd below-
+
+Data are stored in the data directory, following [R packages by Hadley Wickham](http://r-pkgs.had.co.nz/data.html) and [Writing R Extensions](http://cran.r-project.org/doc/manuals/R-exts.pdf).
+
+
+## Check RRDF works
+
 ```r
 store<- new.rdf(ontology=FALSE)
 add.prefix(store, prefix="dc", namespace="http://www.example.org/")
@@ -10,9 +45,9 @@ sparql.rdf(store, "select * where { ?s ?p ?o }")
 ```
 
 
+## SPARQL queries for cube
 
-
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 forsparqlprefix<-"
 prefix prov:  <http://www.w3.org/ns/prov#>
 prefix mms:   <http://rdf.cdisc.org/mms#>
@@ -177,3 +212,51 @@ min(adsl$weightbl[adsl$trt01a =="Xanomeline High Dose" & adsl$weightbl])
 ## sprintf("%4.0f", min(adsl$weightbl[adsl$trt01a =="Xanomeline High Dose" & adsl$weightbl]))
 
 ```
+
+
+## Compare results from SQL with the input / previously generated
+
+
+```{r, eval=FALSE}
+
+colorder<- c( "saffl", "trt01a", "race", "sex", "procedure", "factor", "denominator", "unit", "measure")
+
+# dmtablecompareFile<- system.file("extdata/sample-cfg", "dm-prev.AR.csv", package="rrdfqbcrnd0")
+dmtablecompareFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+
+dmtable<- read.csv(dmtablecompareFile,stringsAsFactors=FALSE)
+names(dmtable)<-tolower(names(dmtable))
+## str(dmtable)
+Sort <- function(DF) DF[do.call(order, DF),]
+fromCSV.for.all.equal<- Sort(dmtable[,colorder])
+## str(adsl.summ.stat)
+xadsl.summ.stat<- adsl.summ.stat[,colorder]
+fromSQL.for.all.equal<- Sort(xadsl.summ.stat[ , intersect(names(fromCSV.for.all.equal),names(xadsl.summ.stat)) ])
+all.equal(fromCSV.for.all.equal, fromSQL.for.all.equal, check.attributes = FALSE)
+compare<-merge(fromSQL.for.all.equal, fromCSV.for.all.equal,by=setdiff(colorder,"measure"),all=TRUE)
+## simple criteria - should also include relative difference
+compare$isequal<- abs(compare$measure.x - compare$measure.y ) < 1e-6
+compare
+
+```
+
+## Make graph of dependencies in Makefile
+
+The DAG defined in the Makefile could be usefull to show.
+See (http://stackoverflow.com/questions/2376837/creating-a-directed-acyclic-graph-out-of-recursive-nmake-makefile).
+
+Essentailly _make -n -p_ gives the relevant output, which then could be parsed and displayed.
+
+## At the end of each scipt
+
+Add the following - note it should be possible to generate it automatically.
+
+
+How to compile this file into HTML
+
+Start an R-session in the same directory as the file and issue:
+```{r, eval=FALSE}
+library(knitr)
+knit2html("XX.Rmd")
+```
+Alternatively, use invoke R from the command line with parameters for executing knit2html.

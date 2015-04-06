@@ -4,12 +4,11 @@ author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
 ---
 
-# Preliminaries
-
-When developing, the script is intented to run from the package root after the setup for development as defined in the README.md. 
-```{r, results='asis', eval=FALSE}
-knit(input="inst/data-raw/create-qb-IC-dataset.Rmd",
-     output="inst/data-raw/create-qb-IC-dataset.md")
+## Setup 
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
 ```
 
 # R-code
@@ -18,7 +17,7 @@ IC-19 is two queries, so it is split into IC-19a and IC-19b: For IC-20
 and IC-21 special handling are needed. The queries are templates and
 the value of p should be inserted as $p in the template.
 
-```{r, results='asis', eval=FALSE}
+```{r}
 
 library(RCurl)
 library(XML)
@@ -102,7 +101,7 @@ for (i in 1:(length(both)-1)) {
 
 
 Here are the integrity constraints:
-```{r, results='asis', eval=FALSE}
+```{r}
 for (icname in names(qbIClist)) {
   ##    fileConn<-file(paste0(icname, ".rq"))
   icall<- qbIClist[[icname]]
@@ -110,23 +109,13 @@ for (icname in names(qbIClist)) {
 ##    close(fileConn)
   }
 ```
+TODO(mja): show the SPARQL code in a highlight environment
 
-Data are stored in the data directory, following [R packages by Hadley Wickham](http://r-pkgs.had.co.nz/data.html) and [Writing R Extensions](http://cran.r-project.org/doc/manuals/R-exts.pdf).
+This stores the qbIClist in the data directory
 
-knit runs the script in the data-raw directory, so it would be
-expected to use pkg="../.." to store the qbIClist in the data directory
-However, it did not work - hence the setwd below-
-```{r, results='asis', eval=FALSE}
-devtools::use_data(qbIClist,pgk="../..",overwrite=TRUE)
-```
+TODO(mja): Consider making qbIClist an internal data set
 
-```{r, results='asis', eval=FALSE}
-
-# This stores the qbIClist in the data directory
-# Consider making it internal
-
+```{r}
 devtools::use_data(qbIClist,overwrite=TRUE)
-
 print("Done")
-
 ```

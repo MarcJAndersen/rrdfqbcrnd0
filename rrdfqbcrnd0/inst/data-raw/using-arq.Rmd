@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 ---
 
-# SPARQL scripts for the demographics cube (DC-DEMO-sample.TTL)
+# SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)
 
 The examples below uses `arq` from Apache Jena (http://jena.apache.org). To install arq - download and unpack the latest version of apache-jena from (http://jena.apache.org/download/index.cgi). Put the executable `arq` in the path, or invoke `arq` with the full path to the directory with arq.
 
@@ -20,14 +20,14 @@ right way to do it.  So, ignore the repeated cd ..
 ## Get dimensions
 ```{r, engine='bash'}
 cd ../extdata/sample-rdf
-arq --data DC-DEMO-sample.TTL --query DEMOdimensions.rq 
+arq --data DC-DEMO-sample.ttl --query DEMOdimensions.rq 
 ```
 
 ## Get attributes
 
 ```{r, engine='bash'}
 cd ../extdata/sample-rdf
-arq --data DC-DEMO-sample.TTL --query DEMOattributes.rq 
+arq --data DC-DEMO-sample.ttl --query DEMOattributes.rq 
 ```
 
 ## Get observations
@@ -36,15 +36,6 @@ The SPARQL script shows for each observation the dimension, attributes and measu
 Note: in the HTML version the output below can be scrolled using the left and right arrow.
 ```{r, engine='bash'}
 cd ../extdata/sample-rdf
-arq --data DC-DEMO-sample.TTL --query DEMOobservations.rq 
+arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq 
 ```
 
-
-# How to compile this file into HTML
-
-Start an R-session in the same directory as the file and issue:
-```{r, eval=FALSE}
-library(knitr)
-knit2html("using-arq.Rmd")
-```
-Alternatively, use invoke R from the command line with parameters for executing knit2html.

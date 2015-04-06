@@ -10,16 +10,20 @@ vignette: >
 ---
 
 # Introduction
-This is a somewhat convoluted script. The idea is to take an existing cube structure and derive the results. That was usefull initially to extend a cube. Now, it is not as usefull. So the script may seem pointless.
-TODO(mja): fix it.
+
+This is a somewhat convoluted script. The idea is to take an existing
+cube structure and derive the results. That was usefull initially to
+extend a cube. Now, it is not as usefull. So the script may seem
+pointless.  TODO(mja): fix it.
 
 # Create DM sample table as CSV file and other files
 
 This script creates the result and codelist for a simple DM table.
 
-```{r, results='asis', eval=FALSE}
-knit(input="inst/data-raw/create-qb-IC-dataset.Rmd",
-     output="inst/data-raw/create-qb-IC-dataset.md")
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
 ```
 
 ## Get the data and prepare for derivation of summary statistics
@@ -256,8 +260,6 @@ sqldf()
 
 ### Combine generated results with the cube frame and write CSV file
 
-Note: the new csv file should be moved manually to the extdata/sample-cfg directory.
-
 ```{r}
 
 adsl.summ.stat<- merge(qbframe,adsl.summ.stat.res,by=names(qbframe),all=TRUE)
@@ -265,37 +267,11 @@ adsl.summ.stat<- merge(qbframe,adsl.summ.stat.res,by=names(qbframe),all=TRUE)
 adsl.summ.stat$measure[ is.na(adsl.summ.stat$measure) & adsl.summ.stat$procedure=="count" ]<- 0
 adsl.summ.stat
 
-dmtableFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
+dmtableFile<- file.path( system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "dm.AR.csv" )
 ## dmtableFile<- file.path(tempdir(),"temp-dm.AR.csv")
 
 write.csv(adsl.summ.stat, file=dmtableFile, row.names=FALSE)
 cat("Written to ", dmtableFile, "\n")
 
-
-```
-
-### Compare results from SQL with the input / previously generated
-
-
-```{r}
-
-colorder<- c( "saffl", "trt01a", "race", "sex", "procedure", "factor", "denominator", "unit", "measure")
-
-# dmtablecompareFile<- system.file("extdata/sample-cfg", "dm-prev.AR.csv", package="rrdfqbcrnd0")
-dmtablecompareFile<- system.file("extdata/sample-cfg", "dm.AR.csv", package="rrdfqbcrnd0")
-
-dmtable<- read.csv(dmtablecompareFile,stringsAsFactors=FALSE)
-names(dmtable)<-tolower(names(dmtable))
-## str(dmtable)
-Sort <- function(DF) DF[do.call(order, DF),]
-fromCSV.for.all.equal<- Sort(dmtable[,colorder])
-## str(adsl.summ.stat)
-xadsl.summ.stat<- adsl.summ.stat[,colorder]
-fromSQL.for.all.equal<- Sort(xadsl.summ.stat[ , intersect(names(fromCSV.for.all.equal),names(xadsl.summ.stat)) ])
-all.equal(fromCSV.for.all.equal, fromSQL.for.all.equal, check.attributes = FALSE)
-compare<-merge(fromSQL.for.all.equal, fromCSV.for.all.equal,by=setdiff(colorder,"measure"),all=TRUE)
-## simple criteria - should also include relative difference
-compare$isequal<- abs(compare$measure.x - compare$measure.y ) < 1e-6
-compare
 
 ```

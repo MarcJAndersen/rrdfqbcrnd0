@@ -14,14 +14,13 @@ vignette: >
 This script creates the result and codelist for a simple AE table.
 The script is currently written to be executed manually.
 
-TODO(mja): automate execution of script
-
-```{r, results='asis', eval=FALSE}
-library(devtools)
-devtools::load_all()
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
 ```
 
-```{r, eval=FALSE}
+```{r}
 require(foreign)
 require(sqldf)
 

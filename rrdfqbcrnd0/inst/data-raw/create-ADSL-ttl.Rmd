@@ -11,11 +11,17 @@ vignette: >
 
 # Create turtle version of ADSL dataset
 
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
+```
+
 This script creates a turtle version of the ADSL dataset.
 
-```{r, eval=FALSE}
-library(rrdf)
+The script uses SQLite to export the ADSL dataset, and d2rq (http://d2rq.org/) to create a turle version of the file.
 
+```{r}
 library(foreign)
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 adsl<-read.xport(fnadsl)
@@ -36,11 +42,23 @@ tfile <- tempfile()
 con <- dbConnect(m, dbname = tfile)
 dbWriteTable(con, "adsl", adsl)
 dbDisconnect(con)
-## show the file name
-tfile
-system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
+cat("SQLite database stored as ", tfile, "\n")
+
+dumpFn<- tempfile()
+system(paste("sqlite3", tfile, ".dump >", dumpFn, sep=" "))
+cat("SQLite database dump in ", dumpFn, "\n")
+
+dumpAfterSedFn <- tempfile()
+
+sedCmd<- paste("sed", "-e 's/TEXT/VARCHAR(1000)/g; s/\"MMSETOT\" REAL/\"MMSETOT\" REAL, PRIMARY KEY (USUBJID)/; s/\"adsl\"/adsl/g; 1,2 d; $ d; ' ", dumpFn, ">", dumpAfterSedFn, sep=" ")
+system(sedCmd)
+cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
+
+## Check only expected changes were applied
+## not run due to large output
+## system(paste("diff", dumpFn, dumpAfterSedFn, sep=" "))
+
 ## The change below are for now to be applied manually!
-## In /tmp/xx.sql:
 ##   change TEXT to VARCHAR(1000)
 ##   remove top 2 lines with PRAGMA
 ##   in insert statements replace "adsl"  with adsl
@@ -52,8 +70,15 @@ system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
 ## d2rq documentationsee file:///opt/d2rq-0.8.1/doc/dump-rdf.html
 
 ## -b option does not work with -l
-system(paste("/opt/d2rq-0.8.1/generate-mapping  -o /tmp/adsl-map.ttl -l /tmp/xx.sql"))
-system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://www.example.org/datasets/ -o /tmp/adsl.ttl -l /tmp/xx.sql /tmp/adsl-map.ttl"))
+
+adslmapttlFn<- file.path(tempdir(), "adsl-map.ttl")
+adslttlFn<- file.path(tempdir(), "adsl.ttl")
+
+d2rqbaseURL<- "http://www.example.org/datasets/"
+
+system(paste("/opt/d2rq-0.8.1/generate-mapping  -o ", adslmapttlFn, " -l ", dumpAfterSedFn))
+system(paste("/opt/d2rq-0.8.1/dump-rdf -b ", d2rqbaseURL,  " -o ",
+             adslttlFn, " -l ", dumpAfterSedFn, " ", adslmapttlFn) )
  
 
 ### This could maybe also work ..
@@ -73,16 +98,22 @@ system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://www.example.org/datasets/ -o /t
 ## system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
 ## system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://localhost:3030/ -o /tmp/adsl.ttl -l /tmp/xx.sql"))
 
+targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
+if (file.copy(adslmapttlFn, targetDir)) {
+cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
+}
 
+if (file.copy(adslttlFn, targetDir)) {
+cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
+}
 
 ```
 
-Note: the TTL file should be moved manually to the extdata/sample-rdf directory.
 
 
 ### Read in the file
 
-```{r, eval=FALSE}
+```{r}
 
 dataFilemap<- system.file("extdata/sample-rdf", "adsl-map.ttl", package="rrdfqbcrnd0")
 dataFilemap
@@ -118,16 +149,14 @@ res
 
 
 
-rq<-"
-select * where {
-<http://www.example.org/datasets/ADSL/01-718-1254> ?p ?o .
-}
-"
+s<- paste0("<", d2rqbaseURL,"ADSL/01-718-1254>")
+rq<-paste0("select * where {", s, " ?p ?o . }" )
+print(rq)
 
 res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
 str(res)
-res$pclean<- gsub("http://localhost/datasets/vocab/ADSL_", "", res$p)
-res[,c("pclean","o")]
+res$pclean<- gsub(paste0(d2rqbaseURL,"vocab/ADSL_"), "", res$p)
+knitr::kable(res[,c("p","o")])
 
 
 ```

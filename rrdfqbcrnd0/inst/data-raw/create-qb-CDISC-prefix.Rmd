@@ -9,14 +9,21 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
+# Create prefixes for use with CDISC standards in RDF
+
+## Setup 
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
+```
+
 # Prefixes for the package
 
 This script creates a list with the prefix used for the package.
 The prefix corresponds to the usual values.
 
 ```{r, results='asis', eval=TRUE}
-
-library(devtools)
 
 qbCDISCprefixes<-  list(
  "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
@@ -37,25 +44,7 @@ qbCDISCprefixes<-  list(
 
 ```
 
-When developing, the script is intented to run from the package root as
-```{r, results='asis', eval=FALSE}
-knit("inst/data-raw/create-qb-CDISC-prefix.Rmd")
-```
 
-knit runs the script in the data-raw directory, so it would be
-expected to use pkg=".." to store the qbIClist in the data directory
-However, it did not work - hence the setwd below-
-
-Data are stored in the data directory, following [R packages by Hadley Wickham](http://r-pkgs.had.co.nz/data.html) and [Writing R Extensions](http://cran.r-project.org/doc/manuals/R-exts.pdf).
-
-
-```{r, results='asis', eval=TRUE}
-
-# not needed when working directory is package root
-# but needed when run using the knitr command above
-setwd("../..")
+```{r}
 devtools::use_data(qbCDISCprefixes,overwrite=TRUE)
-
-print("Done")
-
 ```

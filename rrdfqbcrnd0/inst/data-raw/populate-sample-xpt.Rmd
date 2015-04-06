@@ -20,12 +20,14 @@ This script downloads example files from phuse script repository
 (https://github.com/phuse-org/phuse-scripts) and stores the files in
 the corresponding example directory.
 
-```{r, results='asis', eval=FALSE}
-library(devtools)
-devtools::load_all()
+```{r}
+knitr::read_chunk("setup.R")
+```
+```{r setup}
 ```
 
-```{r, results='asis', eval=FALSE}
+
+```{r}
 
 repositoryURL<- "https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data"
 
