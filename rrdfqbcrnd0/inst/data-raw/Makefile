@@ -24,20 +24,20 @@ ADAEXPT=../extdata/sample-xpt/adae.xpt
 ADSLXPT=../extdata/sample-xpt/adsl.xpt
 
 
-RDAQBICLIST=../data/qbIClist.rda
-RDAQBCDISCPREFIXES=../data/qbCDISCprefixes.rda
+RDAQBICLIST=../../data/qbIClist.rda
+RDAQBCDISCPREFIXES=../../data/qbCDISCprefixes.rda
 
 CDISCRDFZIP=../extdata/CDISC-standards-rdf/cdisc-rdf.zip
 
 XPTS= ${ADAEXPT} ${ADDMXPT}
 CSVS= ${CSVAE} ${CSVDM} 
 
-RDAS= ${RDAQBICLIST}
+RDAS= ${RDAQBICLIST} ${RDAQBCDISCPREFIXES}
 
 EXAMPLES=use-demo-ttl.html  using-arq.html
 
 FORDOC= ${HTMLS} ${MDS}
-TARGETS=${CDISCRDFZIP} ${RDAQBICLIST} ${RDAQBCDISCPREFIXES} ${RDAS} ${TTLS} ${XPTS} ${CSVS} ${FORDOC}
+TARGETS=${CDISCRDFZIP} ${RDAS} ${TTLS} ${XPTS} ${CSVS} ${FORDOC}
 
 RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
@@ -63,10 +63,11 @@ ${CSVDM} create-dm-table-as-csv.html: create-dm-table-as-csv.Rmd
 ${CDISCRDFZIP} store-cdisc-rdf-as-rrdf.html: store-cdisc-rdf-as-rrdf.Rmd
 	${RKNIT2HTML}
 
-${RDAQBCDISCPREFIXES} create-qb-IC-dataset.html: create-qb-IC-dataset.Rmd
+${RDAQBICLIST} create-qb-IC-dataset.html: create-qb-IC-dataset.Rmd
 	${RKNIT2HTML}
 
-${RDAQBICLIST} create-qb-CDISC-prefix.html: create-qb-CDISC-prefix.Rmd
+${RDAQBCDISCPREFIXES} create-qb-CDISC-prefix.html: create-qb-CDISC-prefix.Rmd
+	echo Creating $@
 	${RKNIT2HTML}
 
 ${QBTTLS} create-qb-examples-as-ttl.html: create-qb-examples-as-ttl.Rmd ${CSVAE} ${CSVDM} ${CSVDEMO}

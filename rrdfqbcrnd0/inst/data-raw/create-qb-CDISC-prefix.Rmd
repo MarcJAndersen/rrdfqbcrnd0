@@ -23,7 +23,7 @@ knitr::read_chunk("setup.R")
 This script creates a list with the prefix used for the package.
 The prefix corresponds to the usual values.
 
-```{r, results='asis', eval=TRUE}
+```{r}
 
 qbCDISCprefixes<-  list(
  "rdf"= "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ,
