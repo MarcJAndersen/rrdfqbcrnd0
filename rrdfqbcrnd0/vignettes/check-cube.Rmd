@@ -39,7 +39,12 @@ domainName<- GetDomainNameFromCube( store )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 custom.prefixes <-Get.qb.crnd.prefixes(domainName)
 
-  ## Prefix for storing the results of check each measure in the data cube
+common.prefixes <-data.frame(
+  prefix=names( Get.default.crnd.prefixes() ),
+  namespace=as.character( Get.default.crnd.prefixes() )
+  )
+
+ ## Prefix for storing the results of check each measure in the data cube
 
   validation.mesure.prefix<- data.frame(
     prefix=c("validmeas"),
