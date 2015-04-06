@@ -2,10 +2,11 @@
 ##'
 ##' 
 ##' @param store The name for the rrdf store
-##' @param xdsdName The name of the data frame with data
+##' @param dsdName The name of the data frame with data (results)
+##' @param srcDsName The name of the data frame with underlying data (source)
 ##' @return SQL expression with the formulars representing the RDF data cube
 
-GetSQLFromCube<- function( store, dsdName=NULL, xdsdName="adsl"  ) {
+GetSQLFromCube<- function( store, dsdName=NULL, srcDsName="adsl"  ) {
 
   if (is.null(dsdName)) {
     dsdName<- GetDsdNameFromCube( store )
@@ -70,10 +71,10 @@ GetSQLFromCube<- function( store, dsdName=NULL, xdsdName="adsl"  ) {
             paste0("'",x["unit"],"'"," as unit"), 
             paste0( derivExpr, " as measure"), sep=", "
              ),
-          "from ", xdsdName, " as a",
+          "from ", srcDsName, " as a",
           ifelse( x["procedurevalue"] %in% c("percent"),
                  paste0( ", ",
-                        "(select distinct ", toupper(tolower(x["denominator"])), " from ", xdsdName, ") as b")
+                        "(select distinct ", toupper(tolower(x["denominator"])), " from ", srcDsName, ") as b")
                  , " "
                  ),
           "group by ", paste(groupbyExpr, collapse=", "),
