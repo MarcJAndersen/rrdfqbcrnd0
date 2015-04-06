@@ -40,7 +40,8 @@ aetable$unit<- "_NULL_"
 aetable$denominator<- "_NULL_"
 names(aetable)<- tolower(names(aetable))
 
-aetableFile<- system.file("extdata/sample-cfg", "ae.AR.csv", package="rrdfqbcrnd0")
+targetDir<- system.file("extdata/sample-cfg", package="rrdfqbcrnd0")
+aetableFile<- file.path(targetDir, "ae.AR.csv")
 write.csv(aetable, file=aetableFile,row.names=FALSE)
 cat("Written to ", aetableFile, "\n")
 
@@ -48,7 +49,7 @@ recode.aesoc.list<- sqldf("select distinct AESOC from adae", stringsAsFactors=FA
 names(recode.aesoc.list)<- tolower(names(recode.aesoc.list))
 recode.aesoc.list<- rbind(recode.aesoc.list, data.frame(aesoc="_ALL_"))
 for (i in 1:nrow(recode.aesoc.list)) { recode.aesoc.list[i,"recodeto"]<- encodetouri(as.character(recode.aesoc.list[i,1])) }
-aesocFile<- system.file("extdata/sample-cfg", "ae.aesoc.AR.csv", package="rrdfqbcrnd0")
+aesocFile<- file.path(targetDir, "ae.aesoc.AR.csv" )
 write.csv(recode.aesoc.list, file=aesocFile, row.names=FALSE)
 cat("Written to ", aesocFile, "\n")
 
@@ -57,7 +58,7 @@ names(recode.aedecod.list)<- tolower(names(recode.aedecod.list))
 recode.aedecod.list<- rbind(recode.aedecod.list, data.frame(aedecod="_ALL_"))
 for (i in 1:nrow(recode.aedecod.list)) { recode.aedecod.list[i,"recodeto"]<- encodetouri(as.character(recode.aedecod.list[i,1])) }
 
-aedecodFile<- system.file("extdata/sample-cfg", "ae.aedecod.AR.csv", package="rrdfqbcrnd0")
+aedecodFile<- file.path(targetDir, "ae.aedecod.AR.csv")
 write.csv(recode.aedecod.list, file=aedecodFile, row.names=FALSE)
 cat("Written to ", aedecodFile, "\n")
 
