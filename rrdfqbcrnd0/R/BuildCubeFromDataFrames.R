@@ -30,7 +30,7 @@ if (dataCubeOutDirectory=="!temporary" ) {
 dataCubeOutDirectory<- tempdir()
 }
   
-dataCubeFileName  <- paste0("DC-", domainName,"-R-V-",cubeVersion,".TTL")   
+dataCubeFileName  <- paste0("DC-", domainName,"-R-V-",cubeVersion,".ttl")   
 dataCubeFile      <- file.path(dataCubeOutDirectory,dataCubeFileName) # Full path to cube
 
 # Get the analysis results - which will be the Cube Observation data       
@@ -63,7 +63,6 @@ store <- new.rdf()  # Initialize
 #             prefixRDFS holds value http://www.w3.org/2000/01/rdf-schema#
 
 prefixlist<- qb.def.prefixlist(store, prefixes)
-
 
 qb.buildSkeleton(store, prefixlist, obsData, skeletonSource)
 
