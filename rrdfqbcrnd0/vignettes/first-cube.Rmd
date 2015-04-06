@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 vignette: >
   %\VignetteIndexEntry{Create simple RDF data qube}
   %\VignetteEngine{knitr::rmarkdown}
-  %\usepackage[utf8]{inputenc}
+  \usepackage[utf8]{inputenc}
 ---
 
 ## Introduction
