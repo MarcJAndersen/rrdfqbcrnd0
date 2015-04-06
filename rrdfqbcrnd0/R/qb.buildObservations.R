@@ -72,8 +72,10 @@ recode.list<-by(cube.codelists, cube.codelists$vn, function(x){
   )
 }
 
+obs.width<- floor(log10(nrow(obsData)))+1
 for (i in 1:nrow(obsData)){
-  obsNum <- paste0("obs",i) ## consider this being the rownames
+  ## TODO(mja): consider this being the rownames
+  obsNum <- paste0("obs",formatC(i,flag="0",width=obs.width)) 
 
   add.triple(store,
              paste0(prefixlist$prefixDS, obsNum),
