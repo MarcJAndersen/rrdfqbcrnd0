@@ -57,7 +57,7 @@ The command below creates the data-raw directories for the reproducing the datas
 devtools::use_data_raw() 
 ```
 
-In a script to actually add a foo use:
+In a script to actually add a data set _foo_ use:
 ```
 devtools::use_data(foo) 
 ```
