@@ -48,7 +48,7 @@ check.cube<- function(
   dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt",
   ds.dataset= "ds:dataset-DM",
   qbfiledir= system.file("extdata/sample-rdf", package="rrdfqbcrnd0"),
-  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
+  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0"),
   domainName="dm",
   RDFCubeWorkbook = system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
   ) {
@@ -57,7 +57,7 @@ check.cube<- function(
   ## dsURL= NULL
   ## ds.dataset= "ds:dataset-demog"
   ## qbfiledir= system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
-  ## qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
+  ## qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0")
   ## domainName="demog"
   ## RDFCubeWorkbook = NULL
 
@@ -347,7 +347,7 @@ check.cube(
    obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
    dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt",
    ds.dataset= "ds:dataset-DM",
- qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
+ qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0"),
  domain="dm",
  RDFCubeWorkbook=NULL
  )
@@ -356,7 +356,7 @@ check.cube(
 obsFile=paste(tempdir(),"/", "adae", ".xpt",sep=""),
 dsURL= "https://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adae.xpt",
 ds.dataset= "ds:dataset-AE",
-qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0"),
+qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfqbcrnd0"),
 domain="ae",
 RDFCubeWorkbook=NULL
 )
@@ -365,7 +365,7 @@ check.cube(
   obsFile=paste(tempdir(),"/", "adsl", ".xpt",sep=""),
   dsURL= NULL,
   ds.dataset= "ds:dataset-DM",
-  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0"),
+  qbfile= system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0"),
   domain="dm",
   RDFCubeWorkbook=NULL
  )
@@ -374,7 +374,7 @@ check.cube(
  obsFile=paste(tempdir(),"/", "adae", ".xpt",sep=""),
  dsURL=  NULL,
  ds.dataset= "ds:dataset-AE",
- qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.TTL", package="rrdfqbcrnd0"),
+ qbfile= system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfqbcrnd0"),
  domain="ae",
  RDFCubeWorkbook=NULL
  )

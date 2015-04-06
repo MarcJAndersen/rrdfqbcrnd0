@@ -12,7 +12,7 @@ vignette: >
   %\SweaveUTF8
 ---
 
-# SPARQL scripts for the demographics cube (DC-DEMO-sample.TTL)
+# SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)
 
 
 ## Setup
@@ -51,7 +51,7 @@ rmarkdown::render("vignettes/SPARQL-scripts-for-qb.Rmd", rmarkdown::pdf_document
 The rrdfqbcrnd0 package uses SPARQL scripts to access the RRDF triple
 store.  This is implemented by having a function generating the SPARQL
 script. The generated SPARQL scripts are shown here for the
-demographics cube in DC-DEMO-sample.TTL.
+demographics cube in DC-DEMO-sample.ttl.
 
 The turtle file and the scrips are stored in
 ```{r}
@@ -63,7 +63,7 @@ system.file("extdata/sample-xpt", package="rrdfqbcrnd0")
 The DEMO data exists as a turtle file in the sample-rdf directory.
 
 ```{r}
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.TTL", package="rrdfqbcrnd0")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 store <- new.rdf()  # Initialize
 cat("Loading ", dataCubeFile, "\n")
 load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
