@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Create AE sample table as CSV file and other files</title>
+<title>Populate sample-xpt with example file in SAS transport xpt format</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,10 +201,16 @@ hr {
 </head>
 
 <body>
-<h1>Create AE sample table as CSV file and other files</h1>
+<h1>Populate sample-xpt with example file in SAS transport xpt format</h1>
 
 <p>This script creates the result and codelist for a simple AE table.
 The script is currently written to be executed manually.</p>
+
+<p>TODO(mja): automate execution of script</p>
+
+<p>This script downloads example files from phuse script repository
+(<a href="https://github.com/phuse-org/phuse-scripts">https://github.com/phuse-org/phuse-scripts</a>) and stores the files in
+the corresponding example directory.</p>
 
 <pre><code class="r">knitr::read_chunk(&quot;setup.R&quot;)
 </code></pre>
@@ -230,76 +236,215 @@ The script is currently written to be executed manually.</p>
 <pre><code>## Warning: character(0)
 </code></pre>
 
-<pre><code class="r">require(foreign)
+<pre><code class="r">repositoryURL&lt;- &quot;https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data&quot;
+
+fnadae&lt;- file.path( system.file(&quot;extdata/sample-xpt&quot;, package=&quot;rrdfqbcrnd0&quot;), &quot;adae.xpt&quot; )
+message(&quot;Downloading to &quot;, fnadae )
+</code></pre>
+
+<pre><code>## Downloading to /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adae.xpt
+</code></pre>
+
+<pre><code class="r">downloadURL&lt;-paste0(repositoryURL, &quot;/&quot;, &quot;adae.xpt&quot;)
+message(&quot;Downloading from &quot;, downloadURL )
+</code></pre>
+
+<pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data/adae.xpt
+</code></pre>
+
+<pre><code class="r">download.file( downloadURL, fnadae, method=&quot;curl&quot;)
+
+fnadae&lt;- file.path( system.file(&quot;extdata/sample-xpt&quot;, package=&quot;rrdfqbcrnd0&quot;), &quot;adsl.xpt&quot; )
+message(&quot;Downloading to &quot;, fnadsl )
+</code></pre>
+
+<pre><code>## Error in message(&quot;Downloading to &quot;, fnadsl): object &#39;fnadsl&#39; not found
+</code></pre>
+
+<pre><code class="r">downloadURL&lt;-paste0(repositoryURL, &quot;/&quot;, &quot;adsl.xpt&quot;)
+message(&quot;Downloading from &quot;, downloadURL )
+</code></pre>
+
+<pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data/adsl.xpt
+</code></pre>
+
+<pre><code class="r">download.file( downloadURL, fnadsl, method=&quot;curl&quot;)
+</code></pre>
+
+<pre><code>## Error in download.file(downloadURL, fnadsl, method = &quot;curl&quot;): object &#39;fnadsl&#39; not found
+</code></pre>
+
+<pre><code class="r">if (require(foreign)) {
+fnadae&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adae.xpt&quot;, package=&quot;rrdfqbcrnd0&quot;)
+message(&quot;Reading SAS transport file &quot;, fnadae )
+adae&lt;-read.xport(fnadae)
+str(adae)
+fnadsl&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adsl.xpt&quot;, package=&quot;rrdfqbcrnd0&quot;)
+message(&quot;Reading SAS transport file &quot;, fnadsl )
+adsl&lt;-read.xport(fnadsl)
+str(adsl)
+
+## sasxport.get should create dataset with dates
+## lookup.xport(fnadsl)
+## adslX&lt;- Hmisc::sasxport.get(fnadsl,format=lookup.xport(fnadsl))
+## adslX&lt;- Hmisc::sasxport.get(fnadsl,format=lookup.xport(testFile)$FORMAT)
+## adslX&lt;- Hmisc::sasxport.get(fnadsl,method=&quot;sas&quot;)
+## names(adslX)
+## str(adslX$trtsdt)
+
+## this works as expected
+## testFile &lt;- system.file(&#39;extdata&#39;, &#39;test2.xpt&#39;, package=&quot;SASxport&quot;)
+## w&lt;-Hmisc::sasxport.get(testFile)
+## str(w$test)
+
+## looks like it is easier to do own data conversion
+## str(head(Hmisc:::importConvertDateTime(adsl$TRTSDT, &quot;date&quot;, &quot;sas&quot;)))
+}
 </code></pre>
 
 <pre><code>## Loading required package: foreign
+## Reading SAS transport file /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adae.xpt
 </code></pre>
 
-<pre><code class="r">require(sqldf)
+<p>&#39;data.frame&#39;:   1191 obs. of  55 variables:
+ $ STUDYID : Factor w/ 1 level &ldquo;CDISCPILOT01&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ SITEID  : Factor w/ 17 levels &ldquo;701&rdquo;,&ldquo;702&rdquo;,&ldquo;703&rdquo;,..: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ USUBJID : Factor w/ 225 levels &ldquo;01-701-1015&rdquo;,..: 1 1 1 2 2 2 2 3 3 4 &hellip;
+ $ TRTA    : Factor w/ 3 levels &ldquo;Placebo&rdquo;,&ldquo;Xanomeline High Dose&rdquo;,..: 1 1 1 1 1 1 1 2 2 2 &hellip;
+ $ TRTAN   : num  0 0 0 0 0 0 0 81 81 81 &hellip;
+ $ AGE     : num  63 63 63 64 64 64 64 71 71 77 &hellip;
+ $ AGEGR1  : Factor w/ 3 levels &ldquo;<65",">80&rdquo;,&ldquo;65-80&rdquo;: 1 1 1 1 1 1 1 3 3 3 &hellip;
+ $ AGEGR1N : num  1 1 1 1 1 1 1 2 2 2 &hellip;
+ $ RACE    : Factor w/ 3 levels &ldquo;AMERICAN INDIAN OR ALASKA NATIVE&rdquo;,..: 3 3 3 3 3 3 3 3 3 3 &hellip;
+ $ RACEN   : num  1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ SEX     : Factor w/ 2 levels &ldquo;F&rdquo;,&ldquo;M&rdquo;: 1 1 1 2 2 2 2 2 2 1 &hellip;
+ $ SAFFL   : Factor w/ 1 level &ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ TRTSDT  : num  19725 19725 19725 19210 19210 &hellip;
+ $ TRTEDT  : num  19906 19906 19906 19237 19237 &hellip;
+ $ ASTDT   : num  19726 19726 19732 19212 19212 &hellip;
+ $ ASTDTF  : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;D&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ ASTDY   : num  2 2 8 3 3 22 3 3 21 58 &hellip;
+ $ AENDT   : num  NA NA 19734 19235 NA &hellip;
+ $ AENDY   : num  NA NA 10 26 NA NA 26 NA NA NA &hellip;
+ $ ADURN   : num  NA NA 3 24 NA NA 24 NA NA NA &hellip;
+ $ ADURU   : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;DAY&rdquo;: 1 1 2 2 1 1 2 1 1 1 &hellip;
+ $ AETERM  : Factor w/ 242 levels &ldquo;ABDOMINAL DISCOMFORT&rdquo;,..: 16 21 85 102 102 34 102 16 21 21 &hellip;
+ $ AELLT   : Factor w/ 326 levels &ldquo;ABDOMINAL CRAMPS&rdquo;,..: 32 26 97 112 200 41 112 23 26 26 &hellip;
+ $ AELLTCD : num  NA NA NA NA NA NA NA NA NA NA &hellip;
+ $ AEDECOD : Factor w/ 242 levels &ldquo;ABDOMINAL DISCOMFORT&rdquo;,..: 16 21 85 102 102 34 102 16 21 21 &hellip;
+ $ AEPTCD  : num  NA NA NA NA NA NA NA NA NA NA &hellip;
+ $ AEHLT   : Factor w/ 242 levels &ldquo;HLT_0003&rdquo;,&ldquo;HLT_0005&rdquo;,..: 191 99 48 89 89 125 89 191 99 99 &hellip;
+ $ AEHLTCD : num  NA NA NA NA NA NA NA NA NA NA &hellip;
+ $ AEHLGT  : Factor w/ 242 levels &ldquo;HLGT_0004&rdquo;,&ldquo;HLGT_0005&rdquo;,..: 44 111 187 60 60 24 60 44 111 111 &hellip;
+ $ AEHLGTCD: num  NA NA NA NA NA NA NA NA NA NA &hellip;
+ $ AEBODSYS: Factor w/ 23 levels &ldquo;CARDIAC DISORDERS&rdquo;,..: 6 6 5 20 20 1 20 6 6 6 &hellip;
+ $ AESOC   : Factor w/ 23 levels &ldquo;CARDIAC DISORDERS&rdquo;,..: 6 6 5 20 20 1 20 6 6 6 &hellip;
+ $ AESOCCD : num  NA NA NA NA NA NA NA NA NA NA &hellip;
+ $ AESEV   : Factor w/ 3 levels &ldquo;MILD&rdquo;,&ldquo;MODERATE&rdquo;,..: 1 1 1 1 2 1 1 1 1 1 &hellip;
+ $ AESER   : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AESCAN  : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AESCONG : Factor w/ 1 level &ldquo;N&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AESDISAB: Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AESDTH  : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AESHOSP : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AESLIFE : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AESOD   : Factor w/ 1 level &ldquo;N&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AEREL   : Factor w/ 5 levels &ldquo;&rdquo;,&ldquo;NONE&rdquo;,&ldquo;POSSIBLE&rdquo;,..: 4 4 5 3 4 3 3 3 4 4 &hellip;
+ $ AEACN   : Factor w/ 1 level &ldquo;&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AEOUT   : Factor w/ 3 levels &ldquo;FATAL&rdquo;,&ldquo;NOT RECOVERED/NOT RESOLVED&rdquo;,..: 2 2 3 2 2 2 3 2 2 2 &hellip;
+ $ AESEQ   : num  1 2 3 1 2 3 4 1 2 1 &hellip;
+ $ TRTEMFL : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 2 2 2 2 2 2 2 2 2 2 &hellip;
+ $ AOCCFL  : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 2 1 1 2 1 1 1 2 1 2 &hellip;
+ $ AOCCSFL : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 2 1 2 2 1 2 1 2 1 2 &hellip;
+ $ AOCCPFL : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 2 2 2 2 1 2 1 2 2 2 &hellip;
+ $ AOCC02FL: Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AOCC03FL: Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ AOCC04FL: Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ CQ01NAM : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;DERMATOLOGIC EVENTS&rdquo;: 2 2 1 2 2 1 2 2 2 2 &hellip;
+ $ AOCC01FL: Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 2 1 1 2 1 1 1 2 1 2 &hellip;</p>
+
+<pre><code>## Reading SAS transport file /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adsl.xpt
 </code></pre>
 
-<pre><code>## Loading required package: sqldf
-## Loading required package: gsubfn
-## Loading required package: proto
-## Loading required package: RSQLite
-## Loading required package: DBI
+<p>&#39;data.frame&#39;:   254 obs. of  48 variables:
+ $ STUDYID : Factor w/ 1 level &ldquo;CDISCPILOT01&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ USUBJID : Factor w/ 254 levels &ldquo;01-701-1015&rdquo;,..: 1 2 3 4 5 6 7 8 9 10 &hellip;
+ $ SUBJID  : Factor w/ 254 levels &ldquo;1001&rdquo;,&ldquo;1002&rdquo;,..: 10 16 21 26 27 36 64 74 76 77 &hellip;
+ $ SITEID  : Factor w/ 17 levels &ldquo;701&rdquo;,&ldquo;702&rdquo;,&ldquo;703&rdquo;,..: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ SITEGR1 : Factor w/ 11 levels &ldquo;701&rdquo;,&ldquo;703&rdquo;,&ldquo;704&rdquo;,..: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ ARM     : Factor w/ 3 levels &ldquo;Placebo&rdquo;,&ldquo;Xanomeline High Dose&rdquo;,..: 1 1 2 3 2 1 3 3 3 1 &hellip;
+ $ TRT01P  : Factor w/ 3 levels &ldquo;Placebo&rdquo;,&ldquo;Xanomeline High Dose&rdquo;,..: 1 1 2 3 2 1 3 3 3 1 &hellip;
+ $ TRT01PN : num  0 0 81 54 81 0 54 54 54 0 &hellip;
+ $ TRT01A  : Factor w/ 3 levels &ldquo;Placebo&rdquo;,&ldquo;Xanomeline High Dose&rdquo;,..: 1 1 2 3 2 1 3 3 3 1 &hellip;
+ $ TRT01AN : num  0 0 81 54 81 0 54 54 54 0 &hellip;
+ $ TRTSDT  : num  19725 19210 19558 19800 19905 &hellip;
+ $ TRTEDT  : num  19906 19237 19737 19813 20087 &hellip;
+ $ TRTDUR  : num  182 28 180 14 183 26 190 10 55 182 &hellip;
+ $ AVGDD   : num  0 0 77.7 54 76.9 0 54 54 54 0 &hellip;
+ $ CUMDOSE : num  0 0 13986 756 14067 &hellip;
+ $ AGE     : num  63 64 71 74 77 85 68 81 84 52 &hellip;
+ $ AGEGR1  : Factor w/ 3 levels &ldquo;<65",">80&rdquo;,&ldquo;65-80&rdquo;: 1 1 3 3 3 2 3 2 2 1 &hellip;
+ $ AGEGR1N : num  1 1 2 2 2 3 2 3 3 1 &hellip;
+ $ AGEU    : Factor w/ 1 level &ldquo;YEARS&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ RACE    : Factor w/ 3 levels &ldquo;AMERICAN INDIAN OR ALASKA NATIVE&rdquo;,..: 3 3 3 3 3 3 3 3 3 3 &hellip;
+ $ RACEN   : num  1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ SEX     : Factor w/ 2 levels &ldquo;F&rdquo;,&ldquo;M&rdquo;: 1 2 2 2 1 1 2 1 2 2 &hellip;
+ $ ETHNIC  : Factor w/ 2 levels &ldquo;HISPANIC OR LATINO&rdquo;,..: 1 1 2 2 2 2 2 2 2 2 &hellip;
+ $ SAFFL   : Factor w/ 1 level &ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ ITTFL   : Factor w/ 1 level &ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ EFFFL   : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 2 2 2 2 2 2 2 2 2 2 &hellip;
+ $ COMP8FL : Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 2 1 2 1 2 1 2 1 2 2 &hellip;
+ $ COMP16FL: Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 2 1 2 1 2 1 2 1 1 2 &hellip;
+ $ COMP24FL: Factor w/ 2 levels &ldquo;N&rdquo;,&ldquo;Y&rdquo;: 2 1 2 1 2 1 2 1 1 2 &hellip;
+ $ DISCONFL: Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 1 2 1 2 1 2 1 2 2 1 &hellip;
+ $ DSRAEFL : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 1 2 1 1 1 2 1 2 2 1 &hellip;
+ $ DTHFL   : Factor w/ 2 levels &ldquo;&rdquo;,&ldquo;Y&rdquo;: 1 1 1 1 1 1 1 1 1 1 &hellip;
+ $ BMIBL   : num  25.1 30.4 31.4 28.8 26.1 30.4 27.3 23.9 23.9 21.9 &hellip;
+ $ BMIBLGR1: Factor w/ 3 levels &ldquo;<25",">=30&rdquo;,&ldquo;25-<30": 3 2 2 3 3 2 3 1 1 1 ...
+ $ HEIGHTBL: num  147 163 178 175 155 ...
+ $ WEIGHTBL: num  54.4 80.3 99.3 88.5 62.6 67.1 78 59.9 78.9 71.2 ...
+ $ EDUCLVL : num  16 14 16 12 9 8 18 22 12 14 ...
+ $ DISONSDT: num  18382 16871 18247 18111 18899 ...
+ $ DURDIS  : num  43.9 76.4 42.8 55.3 32.9 ...
+ $ DURDSGR1: Factor w/ 2 levels "<12",">=12&rdquo;: 2 2 2 2 2 2 2 2 2 2 &hellip;
+ $ VISIT1DT: num  19718 19196 19550 19792 19898 &hellip;
+ $ RFSTDTC : Factor w/ 205 levels &ldquo;2012-07-09&rdquo;,&ldquo;2012-07-20&rdquo;,..: 171 6 113 192 204 61 170 9 31 190 &hellip;
+ $ RFENDTC : Factor w/ 211 levels &ldquo;2012-09-01&rdquo;,&ldquo;2012-09-02&rdquo;,..: 188 2 136 167 210 39 189 3 16 200 &hellip;
+ $ VISNUMEN: num  12 5 12 5 12 6 12 4 8 12 &hellip;
+ $ RFENDT  : num  19906 19238 19737 19827 20087 &hellip;
+ $ DCDECOD : Factor w/ 9 levels &ldquo;ADVERSE EVENT&rdquo;,..: 2 1 2 8 2 1 2 1 1 2 &hellip;
+ $ DCREASCD: Factor w/ 10 levels &ldquo;Adverse Event&rdquo;,..: 2 1 2 9 2 1 2 1 1 2 &hellip;
+ $ MMSETOT : num  23 23 23 23 21 23 10 23 20 20 &hellip;</p>
+
+<pre><code class="r">if (require(SASxport)) {
+
+fnadsl&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adsl.xpt&quot;, package=&quot;rrdfqbcrnd0&quot;)
+message(&quot;Reading SAS transport file &quot;, fnadsl, include.formats=TRUE )
+print(SASxport::lookup.xport(fnadsl))
+adsl&lt;-SASxport::read.xport(fnadsl, include.formats=TRUE,verbose=TRUE)
+str(adsl)
+## do not understand why this is not a date
+## running the example for SASxport::read.xport
+## testFile &lt;- system.file(&#39;extdata&#39;, &#39;test2.xpt&#39;, package=&quot;SASxport&quot;)
+## w &lt;- read.xport(testFile)
+## class(w)
+## sapply(w, head)
+## shows SAS date times are imported as DATETIME
+## w$TEST$DT1
+## but SAS date are not imported
+## w$TEST$D1
+str(adsl$ADSL$TRTSDT)
+
+fnadae&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adae.xpt&quot;, package=&quot;rrdfqbcrnd0&quot;)
+message(&quot;Reading SAS transport file &quot;, fnadae )
+print(SASxport::lookup.xport(fnadae))
+adae&lt;-SASxport::read.xport(fnadae, include.formats=TRUE)
+str(adae)
+
+}
 </code></pre>
 
-<pre><code class="r">fnadae&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adae.xpt&quot;, package=&quot;rrdfqbcrnd0&quot;)
-adae&lt;- read.xport(fnadae)
-
-aesummay.e&lt;- sqldf(&quot;select TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure from adae group by TRTA&quot;, stringsAsFactors=FALSE )
-</code></pre>
-
-<pre><code>## Loading required package: tcltk
-</code></pre>
-
-<pre><code class="r">aesoc.e&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC&quot;, stringsAsFactors=FALSE )
-aesocpt.e&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, AEDECOD, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD&quot;, stringsAsFactors=FALSE )
-
-aesummay.n&lt;- sqldf(&quot;select TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure from adae group by TRTA&quot;, stringsAsFactors=FALSE )
-aesoc.n&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC&quot;, stringsAsFactors=FALSE )
-aesocpt.n&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, AEDECOD, &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD&quot;, stringsAsFactors=FALSE )
-
-aetable&lt;- rbind(aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n )
-aetable$unit&lt;- &quot;_NULL_&quot;
-aetable$denominator&lt;- &quot;_NULL_&quot;
-names(aetable)&lt;- tolower(names(aetable))
-
-targetDir&lt;- system.file(&quot;extdata/sample-cfg&quot;, package=&quot;rrdfqbcrnd0&quot;)
-aetableFile&lt;- file.path(targetDir, &quot;ae.AR.csv&quot;)
-write.csv(aetable, file=aetableFile,row.names=FALSE)
-cat(&quot;Written to &quot;, aetableFile, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.AR.csv
-</code></pre>
-
-<pre><code class="r">recode.aesoc.list&lt;- sqldf(&quot;select distinct AESOC from adae&quot;, stringsAsFactors=FALSE)
-names(recode.aesoc.list)&lt;- tolower(names(recode.aesoc.list))
-recode.aesoc.list&lt;- rbind(recode.aesoc.list, data.frame(aesoc=&quot;_ALL_&quot;))
-for (i in 1:nrow(recode.aesoc.list)) { recode.aesoc.list[i,&quot;recodeto&quot;]&lt;- encodetouri(as.character(recode.aesoc.list[i,1])) }
-aesocFile&lt;- file.path(targetDir, &quot;ae.aesoc.AR.csv&quot; )
-write.csv(recode.aesoc.list, file=aesocFile, row.names=FALSE)
-cat(&quot;Written to &quot;, aesocFile, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.aesoc.AR.csv
-</code></pre>
-
-<pre><code class="r">recode.aedecod.list&lt;- sqldf(&quot;select distinct AEDECOD from adae&quot;, stringsAsFactors=FALSE )
-names(recode.aedecod.list)&lt;- tolower(names(recode.aedecod.list))
-recode.aedecod.list&lt;- rbind(recode.aedecod.list, data.frame(aedecod=&quot;_ALL_&quot;))
-for (i in 1:nrow(recode.aedecod.list)) { recode.aedecod.list[i,&quot;recodeto&quot;]&lt;- encodetouri(as.character(recode.aedecod.list[i,1])) }
-
-aedecodFile&lt;- file.path(targetDir, &quot;ae.aedecod.AR.csv&quot;)
-write.csv(recode.aedecod.list, file=aedecodFile, row.names=FALSE)
-cat(&quot;Written to &quot;, aedecodFile, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.aedecod.AR.csv
-</code></pre>
+<p>TODO(mja): move the example data into a separate package.</p>
 
 </body>
 
