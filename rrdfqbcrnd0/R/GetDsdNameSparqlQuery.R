@@ -1,6 +1,6 @@
 ##' SPARQL query for DataStructureDefinition in RDF data cube
 ##'
-##' @inheritParams GetObservationsSparqlQuery
+##' @inheritParams GetDomainNameFromCube
 ##' @return SPARQL query
 ##' @family SPARQL queries
 GetDsdNameSparqlQuery<- function( forsparqlprefixcommon=GetForSparqlPrefix() ) {
