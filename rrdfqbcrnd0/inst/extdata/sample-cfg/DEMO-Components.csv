@@ -1,7 +1,9 @@
 compType,compName,codeType,nciDomainValue,compLabel,Comment
 dimension,trt01a,DATA,,Treatment Arm,
 dimension,sex,SDTM,C66731,Sex (Gender),
-dimension,saffl,DATA,,Safety Population Flag,
+dimension,race,DATA,C74457,Race
+dimension,ethnic,DATA,,Ethnic
+dimension,agegr1,DATA,,Age group
 dimension,procedure,DATA,,Statistical Procedure,
 dimension,factor,DATA,,"Type of procedure (quantity, proportion...)",
 measure,measure,,,Value of the statistical measure,
