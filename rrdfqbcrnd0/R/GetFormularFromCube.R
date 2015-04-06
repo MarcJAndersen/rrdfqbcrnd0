@@ -1,9 +1,7 @@
 ##' Get formular for the summary statistics in RDF data cube
 ##'
-##' 
-##' @param store The name for the rrdf store
+##' @inheritParams GetDomainNameFromCube
 ##' @return expression with the formulars representing the RDF data cube
-##' @inheritParams GetObservationsSparqlQuery
 
 GetFormularFromCube<- function( store, forsparqlprefixcommon  ) {
 

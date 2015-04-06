@@ -4,7 +4,7 @@
 ##' by converting ASK to SELECT.
 ##' 
 ##' @param model a RRDF model containing one or more date cubes
-##' @param doForCI character vector of specific integrity checks to run
+##' @param doForIC character vector of specific integrity checks to run
 ##' @inheritParams GetObservationsSparqlQuery
 ##' @return data.frame with columns ICtitle, ICfailobs
 ##' 
