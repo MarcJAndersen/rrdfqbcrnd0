@@ -37,8 +37,7 @@ remote.endpoint
     codeSource <- as.data.frame(unique(obsData[,dimName])) #Unique values as dataframe
     colnames(codeSource) <- ("code")  ## Rename to match SDTM approach
   }
-  
-  if (codeType=="SDTM"){
+  else if (codeType=="SDTM"){
 ## TODO: change : prefix to the usual SDTM terminilogy prefix    
     CDISCsparqlprefix<-'
 prefix : <http://rdf.cdisc.org/sdtm-terminology#>
@@ -65,7 +64,10 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
       ## print(is.data.frame(codeSource))
     }
   }
-  
+  else {
+    message("ERROR: unknown codeType ", codeType, " for ", dimName )
+  }
+    
   ##  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
   ##    print(codeSource)
   ##  print(names(codeSource))
