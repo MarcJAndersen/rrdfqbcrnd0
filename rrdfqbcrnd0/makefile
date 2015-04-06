@@ -3,7 +3,7 @@ PACKAGENAME=rrdfqbcrnd0
 all: createRD data-raw rbuildforce rcheck rbuild
 
 cleantempemacs:
-	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#*
+	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
 
 rbuildforce: 
 	cd ..; R CMD build --force ${PACKAGENAME}
@@ -12,7 +12,7 @@ rbuildforce:
 # see http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-packages
 # see http://stackoverflow.com/questions/15324705/should-there-be-a-package-subfolder-in-a-github-package-repo?lq=1
 rcheck: 
-	cd ..; R CMD check --as-cran ${PACKAGENAME}_0.1.tar.gz
+	cd ..; R CMD check --as-cran ${PACKAGENAME}*.tar.gz
 
 rbuild: 
 	cd ..; R CMD build  ${PACKAGENAME}
