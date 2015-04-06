@@ -43,7 +43,7 @@ where {
 ?s a qb:Observation ; 
 ?p ?o .
 values (?s) {
-(ds:obs29)
+(ds:obs029)
 }
 }
 ',
@@ -71,6 +71,7 @@ The HTML includes green-turtle
 (http://jquery.com/) and jqueryUI (http://jqueryui.com/).  In my setup
 I store the project under packages, and can symlink to the files from the
 extdata/sample-cfg directory.
+
 
     cd extdata/sample-cfg
     ln -s ~/packages/green-turtle/build/RDFa.min.1.4.0.js 
