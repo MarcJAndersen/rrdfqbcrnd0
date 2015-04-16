@@ -15,6 +15,8 @@ This vignette shows how to
 - execute the RDF data cube integrity checks
 
 # Setup
+
+The next command is not needed if the package have been loaded throug devtools::load_all().
 ```{r}
 library(rrdfqbcrnd0)
 ```
@@ -23,7 +25,7 @@ library(rrdfqbcrnd0)
 The RDF data cube will be created from two data.frames containing data and metadata.
 
 ## Define data
-The data are defined as data frame.
+The data are defined as data frame, and the data frame is displayed.
 ```{r}
 obsData<- data.frame(
   category=c("AA-group", "BB-group"),
@@ -37,7 +39,7 @@ knitr::kable(obsData)
 ```
 
 ## Define meta data
-The metadata are also defined as data frame.
+The metadata used for generating the RDF data cube are also defined as data frame and displayed.
 ```{r}
 cubeMetadata<- data.frame(
   compType=c("dimension", "dimension", "dimension", "unit", "denominator", "measure", "metadata"),
@@ -57,10 +59,11 @@ The RDF data cube for the data above is created using
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
 This shows a simple use of the BuildCubeFromDataFrames function. 
+The warning message grom log4j can be ignored.
 
 The RDF data cube is serialized in turtle format and stored as a text file in
 ```{r}
-outcube
+cat(normalizePath(outcube))
 ```
 
 # Query the cube using SPARQL
@@ -73,12 +76,16 @@ dataCubeFile<- outcube
 ```
 
 The rest of the code only depends on the value of dataCubeFile.
+The code demonstrates the use of the rrdf library.
 
 ```{r}
 cube <- new.rdf()  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
 summarize.rdf(cube)
+```
 
+The next statements are needed for the current implementation of the cube, and may change in future versions.
+```{r}
 ## TODO: reconsider the use of domain specific prefixes
 dsdName<- GetDsdNameFromCube( cube )
 domainName<- GetDomainNameFromCube( cube )
@@ -112,8 +119,8 @@ cube.observations1<- sparql.rdf(cube, cube.observations1.rq  )
 knitr::kable(head(cube.observations1, 10))
 ```
 
-The next statement gets the first 30 triples in the cube, 
-where the subject is a qb:Observation, and shows the first 15 triples.
+The next statement gets the first 30 triples in the cube where 
+the subject is a qb:Observation, and shows the first 15 triples.
 ```{r}
 
 cube.observations2.rq<-  paste( forsparqlprefix,
@@ -173,20 +180,19 @@ cube.dimensionsattr<- sparql.rdf(cube,
 
 cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",
-    "?s a qb:Observation  ;", "\n",
-    paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
-    paste0( cube.dimensionsattr, " ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), ";", collapse="\n"),
-    "\n",
-    "crnd-measure:measure      ?measure ;      \n",
-    paste0( "optional{ ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), " ",
+    "     ?s a qb:Observation  ;",
+    paste("     qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), 
+    paste0( "     ", cube.dimensionsattr, " ", 
+            sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), ";", collapse="\n"),
+    "     crnd-measure:measure      ?measure ;",
+    paste0( "     optional{ ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), " ",
            "skos:prefLabel",
            " ",
            sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
            collapse="\n"),
-    "\n",
     "} ",
-    "\n"
+    sep="\n"
    )
 
 ```
@@ -196,7 +202,7 @@ This is the query for getting the observations
 cat(cube.observations.rq)
 ```
 
-And finally the observations.
+And finally the observations, which is expected be the same as the starting data set.
 ```{r}
 cube.observations<- as.data.frame(sparql.rdf(cube, cube.observations.rq ), stringsAsFactors=FALSE)
 knitr::kable(cube.observations[,c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", cube.dimensionsattr), "value"),"measure")])
@@ -243,5 +249,5 @@ IC-12 also fails; examining the SPARQL query shows why.
 cat(qbIClist[["ic-12"]]$rq,"\n")
 ```
 
-As RRDF does not support the ASK query, the number of triples selected
-are returned.
+As RRDF does not support the ASK query, the IC queries are changed 
+to a SELECT query returning the number of triples selected.
