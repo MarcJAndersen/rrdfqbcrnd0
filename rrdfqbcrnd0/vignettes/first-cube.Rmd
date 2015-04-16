@@ -101,7 +101,7 @@ namespaces dccs: and ds: where the domainname is included.
 TODO: Consider other approach for including the domainname, or use other concept.
 
 The next statement shows the first 10 triples in the cube. This will
-most often not be of interest, as the RRDF cube contain general
+most often not be of interest, as the RDF cube contain general
 definition and not the specific cube triples.
 
 ```{r, echo=FALSE}
