@@ -59,7 +59,7 @@ The RDF data cube for the data above is created using
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
 This shows a simple use of the BuildCubeFromDataFrames function. 
-The warning message grom log4j can be ignored.
+The warning message from log4j can be ignored.
 
 The RDF data cube is serialized in turtle format and stored as a text file in
 ```{r}
