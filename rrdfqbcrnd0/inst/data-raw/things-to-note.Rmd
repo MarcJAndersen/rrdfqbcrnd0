@@ -253,7 +253,7 @@ Essentailly _make -n -p_ gives the relevant output, which then could be parsed a
 library(rrdf)
 library(rrdfqbcrnd0)
 store<- new.rdf()
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.TTL", package="rrdfqbcrnd0")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 print(dataCubeFile)
 load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
