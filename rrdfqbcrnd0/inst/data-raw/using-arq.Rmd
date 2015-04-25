@@ -11,11 +11,15 @@ The examples below uses `arq` from Apache Jena (http://jena.apache.org). To inst
 
 The use of arq is described many places, see for example (http://www.learningsparql.com/).
 
-All `arq` commands below are to be run in the inst/extdata/sample-rdf
-directory. The cd below in each code block is included because I could
-not find a quick way to get the code chunk executed in that
-directory. knitr is flexible enough to do it, I have not yet found the
-right way to do it.  So, ignore the repeated cd ..
+All `arq` commands below are to be run in the directory with the
+sample files, which is `inst/extdata/sample-rdf` directory or
+`extdata/sample-rdf` depending on the whether the development version
+or the installed version of the package is used.
+
+The cd below in each code block is included because I could not find a
+quick way to get the code chunk executed in that directory. knitr is
+flexible enough to do it, I have not yet found the right way to do it.
+So, ignore the repeated cd ..
 
 ## Get dimensions
 ```{r, engine='bash'}
