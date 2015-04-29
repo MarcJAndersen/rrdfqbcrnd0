@@ -1,6 +1,13 @@
 # Setup for developing
 
-The recommended approach is to get a copy of the package either by using git to clone the repository from (https://github.com/MarcJAndersen/rrdfqbcrnd0), or to obtain the package as a zip file, for example by downloading from GitHub (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip). Then extract the zip file to a directory of your choosing, and go to the subdirectory of rrdfqncrnd0 also named rrdfqncrnd0 and open the rrdfqbcrnd0.Rproj file.
+The recommended approach is to get a copy of the package either by
+using git to clone the repository from
+(https://github.com/MarcJAndersen/rrdfqbcrnd0), or to obtain the
+package as a zip file, for example by downloading from GitHub
+(https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip). Then
+extract the zip file to a directory of your choosing, and go to the
+subdirectory of rrdfqncrnd0 also named rrdfqncrnd0 and open the
+rrdfqbcrnd0.Rproj file.
 
 # Developing
 
@@ -12,9 +19,19 @@ library(knitr)
 library(devtools)
 devtools::load_all()
 ```
-Please note: in R-studio if the Knit function is used, then when a library(rrdfqbcrnd0) command is issued as in all vignettes, then the current version of the R-package installed will be used. This may be different from developmnent packages, but the vignette is the development package version. So, it is recommend to install the package first, for example using devtools::install().
 
-The next commands are most often used when checking the building of the package or making a installation of the package from the source. The makefile is intented to be the way to build the package (make rbuild).
+Please note: in R-studio if the Knit function is used, then when a
+library(rrdfqbcrnd0) command is issued as in all vignettes, then the
+current version of the R-package installed will be used. This may be
+different from developmnent packages, but the vignette is the
+development package version. So, it is recommend to install the
+package first, for example using devtools::install().
+
+The next commands are most often used when checking the building of
+the package or making a installation of the package from the
+source. The makefile is intented to be the way to build the package
+(make rbuild).
+
 ```r
 ## If documentation provided by files in R directory have changed
 devtools::document()
@@ -29,7 +46,9 @@ devtools::install()
 ## 
 ```
 
-TIP: For starting directory for the R process in use the directory this file resides in. The other examples may depend on this, and enables devtools::load_all() to load the package.
+TIP: For starting directory for the R process in use the directory
+this file resides in. The other examples may depend on this, and
+enables devtools::load_all() to load the package.
 
 TIP: To single step line by line use ESS in emacs. 
 
