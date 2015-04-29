@@ -362,3 +362,21 @@ xdg-open highlight-simple-example.html
 echo -e "prefix a: <bb.bb>\\nselect * where {?s ?p ?o}" | highlight --inline-css -S n3
 ```
 
+## Generating markdown files from Rmd
+
+```{r, eval=FALSE}
+library(yaml)
+rmdFiles<-list.files("vignettes",pattern=".*\\.Rmd$",full.names=TRUE)
+rmdFiles
+lines<- readLines( rmdFiles[1] )
+if (any(yamlHeaderLno<- which( lines == "---")) ) {
+  fromLno<- yamlHeaderLno[1]
+  toLno<- yamlHeaderLno[2]
+  message("Has YAML header from ", fromLno, " to ", toLno)
+  print( yaml.load(
+    paste(lines[ (fromLno+1) : (toLno-1) ], collapse="\n")
+    ))
+  }
+knit(rmdFiles[1])
+
+```
