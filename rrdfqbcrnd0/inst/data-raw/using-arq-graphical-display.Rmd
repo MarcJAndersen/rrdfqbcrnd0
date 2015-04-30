@@ -4,7 +4,7 @@ author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 ---
-
+ 
 # Graphical display of results from SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)
 
 The examples below uses `arq` from Apache Jena
