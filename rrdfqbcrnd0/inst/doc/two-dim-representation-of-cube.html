@@ -212,12 +212,12 @@ hr {
 
 <p>The DEMO data exists as a turtle file in the sample-rdf directory.</p>
 
-<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;)
+<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
 store &lt;- new.rdf()  # Initialize
 cat(&quot;Loading &quot;, dataCubeFile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.TTL
+<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
 </code></pre>
 
 <pre><code class="r">load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
@@ -241,7 +241,7 @@ where {
 ?s a qb:Observation ; 
 ?p ?o .
 values (?s) {
-(ds:obs29)
+(ds:obs029)
 }
 }
 &#39;,
@@ -260,84 +260,84 @@ knitr::kable(cube.observations)
 </tr>
 </thead><tbody>
 <tr>
-<td align="left">ds:obs29</td>
+<td align="left">ds:obs029</td>
 <td align="left">crnd-dimension:factor</td>
 <td align="left">code:factor-age</td>
 </tr>
 <tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-dimension:procedure</td>
-<td align="left">code:procedure-mean</td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-dimension:race</td>
-<td align="left">code:race-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-attribute:unit</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-measure:measure</td>
-<td align="left">75.666666667</td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-dimension:sex</td>
-<td align="left">code:sex-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">rdf:type</td>
-<td align="left">qb:Observation</td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-attribute:rowno</td>
-<td align="left">7</td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">qb:dataSet</td>
-<td align="left">ds:dataset-DEMO</td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-dimension:trt01a</td>
-<td align="left">code:trt01a-Xanomeline_Low_Dose</td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-dimension:ethnic</td>
-<td align="left">code:ethnic-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs29</td>
+<td align="left">ds:obs029</td>
 <td align="left">crnd-attribute:cellpartno</td>
 <td align="left">1</td>
 </tr>
 <tr>
-<td align="left">ds:obs29</td>
-<td align="left">rdfs:label</td>
-<td align="left">29</td>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-measure:measure</td>
+<td align="left">75.666666667</td>
 </tr>
 <tr>
-<td align="left">ds:obs29</td>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-dimension:race</td>
+<td align="left">code:race-<em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-dimension:sex</td>
+<td align="left">code:sex-<em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-dimension:procedure</td>
+<td align="left">code:procedure-mean</td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">rdf:type</td>
+<td align="left">qb:Observation</td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-dimension:trt01a</td>
+<td align="left">code:trt01a-Xanomeline_Low_Dose</td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-attribute:rowno</td>
+<td align="left">7</td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-attribute:unit</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-dimension:agegr1</td>
+<td align="left">code:agegr1-<em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">qb:dataSet</td>
+<td align="left">ds:dataset-DEMO</td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-dimension:ethnic</td>
+<td align="left">code:ethnic-<em>ALL</em></td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
 <td align="left">crnd-attribute:denominator</td>
 <td align="left"></td>
 </tr>
 <tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-attribute:colno</td>
-<td align="left">2</td>
+<td align="left">ds:obs029</td>
+<td align="left">rdfs:label</td>
+<td align="left">29</td>
 </tr>
 <tr>
-<td align="left">ds:obs29</td>
-<td align="left">crnd-dimension:agegr1</td>
-<td align="left">code:agegr1-<em>ALL</em></td>
+<td align="left">ds:obs029</td>
+<td align="left">crnd-attribute:colno</td>
+<td align="left">2</td>
 </tr>
 </tbody></table>
 
@@ -454,105 +454,105 @@ presrowvarindex
 </code></pre>
 
 <pre><code>##             s rowno colno cellpartno
-## 1     ds:obs1     1     1          1
-## 2     ds:obs4     1     1          2
-## 3     ds:obs2     1     2          1
-## 4     ds:obs5     1     2          2
-## 5     ds:obs3     1     3          1
-## 6     ds:obs6     1     3          2
-## 31    ds:obs7     2     1          1
-## 32   ds:obs10     2     1          2
-## 33    ds:obs8     2     2          1
-## 34   ds:obs11     2     2          2
-## 35    ds:obs9     2     3          1
-## 36   ds:obs12     2     3          2
-## 97   ds:obs13     3     1          1
-## 98   ds:obs16     3     1          2
-## 99   ds:obs14     3     2          1
-## 100  ds:obs17     3     2          2
-## 101  ds:obs15     3     3          1
-## 102  ds:obs18     3     3          2
-## 139  ds:obs19     4     1          1
-## 141  ds:obs20     4     2          1
-## 143  ds:obs21     4     3          1
-## 151  ds:obs22     5     1          1
-## 153  ds:obs23     5     2          1
-## 155  ds:obs24     5     3          1
-## 157  ds:obs25     6     1          1
-## 159  ds:obs26     6     2          1
-## 161  ds:obs27     6     3          1
-## 163  ds:obs28     7     1          1
-## 165  ds:obs29     7     2          1
-## 167  ds:obs30     7     3          1
-## 169  ds:obs31     8     1          1
-## 171  ds:obs32     8     2          1
-## 173  ds:obs33     8     3          1
-## 175  ds:obs34     9     1          1
-## 177  ds:obs35     9     2          1
-## 179  ds:obs36     9     3          1
-## 7    ds:obs37    10     1          1
-## 9    ds:obs38    10     2          1
-## 11   ds:obs39    10     3          1
-## 13   ds:obs40    11     1          1
-## 15   ds:obs41    11     2          1
-## 17   ds:obs42    11     3          1
-## 19   ds:obs43    18     1          1
-## 20   ds:obs46    18     1          2
-## 21   ds:obs44    18     2          1
-## 22   ds:obs47    18     2          2
-## 23   ds:obs45    18     3          1
-## 24   ds:obs48    18     3          2
-## 25   ds:obs49    19     1          1
-## 26   ds:obs52    19     1          2
-## 27   ds:obs50    19     2          1
-## 28   ds:obs53    19     2          2
-## 29   ds:obs51    19     3          1
-## 30   ds:obs54    19     3          2
-## 37   ds:obs55    20     1          1
-## 38   ds:obs58    20     1          2
-## 39   ds:obs56    20     2          1
-## 40   ds:obs59    20     2          2
-## 41   ds:obs57    20     3          1
-## 42   ds:obs60    20     3          2
-## 43   ds:obs61    21     1          1
-## 44   ds:obs64    21     1          2
-## 45   ds:obs62    21     2          1
-## 46   ds:obs65    21     2          2
-## 47   ds:obs63    21     3          1
-## 48   ds:obs66    21     3          2
-## 49   ds:obs67    22     1          1
-## 50   ds:obs70    22     1          2
-## 51   ds:obs68    22     2          1
-## 52   ds:obs71    22     2          2
-## 53   ds:obs69    22     3          1
-## 54   ds:obs72    22     3          2
-## 55   ds:obs73    23     1          1
-## 56   ds:obs76    23     1          2
-## 57   ds:obs74    23     2          1
-## 58   ds:obs77    23     2          2
-## 59   ds:obs75    23     3          1
-## 60   ds:obs78    23     3          2
-## 61   ds:obs79    24     1          1
-## 62   ds:obs82    24     1          2
-## 63   ds:obs80    24     2          1
-## 64   ds:obs83    24     2          2
-## 65   ds:obs81    24     3          1
-## 66   ds:obs84    24     3          2
-## 67   ds:obs85    25     1          1
-## 68   ds:obs88    25     1          2
-## 69   ds:obs86    25     2          1
-## 70   ds:obs89    25     2          2
-## 71   ds:obs87    25     3          1
-## 72   ds:obs90    25     3          2
-## 73   ds:obs91    26     1          1
-## 75   ds:obs92    26     2          1
-## 77   ds:obs93    26     3          1
-## 79   ds:obs94    27     1          1
-## 81   ds:obs95    27     2          1
-## 83   ds:obs96    27     3          1
-## 85   ds:obs97    28     1          1
-## 87   ds:obs98    28     2          1
-## 89   ds:obs99    28     3          1
+## 1   ds:obs001     1     1          1
+## 2   ds:obs004     1     1          2
+## 3   ds:obs002     1     2          1
+## 4   ds:obs005     1     2          2
+## 5   ds:obs003     1     3          1
+## 6   ds:obs006     1     3          2
+## 31  ds:obs007     2     1          1
+## 32  ds:obs010     2     1          2
+## 33  ds:obs008     2     2          1
+## 34  ds:obs011     2     2          2
+## 35  ds:obs009     2     3          1
+## 36  ds:obs012     2     3          2
+## 97  ds:obs013     3     1          1
+## 98  ds:obs016     3     1          2
+## 99  ds:obs014     3     2          1
+## 100 ds:obs017     3     2          2
+## 101 ds:obs015     3     3          1
+## 102 ds:obs018     3     3          2
+## 139 ds:obs019     4     1          1
+## 141 ds:obs020     4     2          1
+## 143 ds:obs021     4     3          1
+## 151 ds:obs022     5     1          1
+## 153 ds:obs023     5     2          1
+## 155 ds:obs024     5     3          1
+## 157 ds:obs025     6     1          1
+## 159 ds:obs026     6     2          1
+## 161 ds:obs027     6     3          1
+## 163 ds:obs028     7     1          1
+## 165 ds:obs029     7     2          1
+## 167 ds:obs030     7     3          1
+## 169 ds:obs031     8     1          1
+## 171 ds:obs032     8     2          1
+## 173 ds:obs033     8     3          1
+## 175 ds:obs034     9     1          1
+## 177 ds:obs035     9     2          1
+## 179 ds:obs036     9     3          1
+## 7   ds:obs037    10     1          1
+## 9   ds:obs038    10     2          1
+## 11  ds:obs039    10     3          1
+## 13  ds:obs040    11     1          1
+## 15  ds:obs041    11     2          1
+## 17  ds:obs042    11     3          1
+## 19  ds:obs043    18     1          1
+## 20  ds:obs046    18     1          2
+## 21  ds:obs044    18     2          1
+## 22  ds:obs047    18     2          2
+## 23  ds:obs045    18     3          1
+## 24  ds:obs048    18     3          2
+## 25  ds:obs049    19     1          1
+## 26  ds:obs052    19     1          2
+## 27  ds:obs050    19     2          1
+## 28  ds:obs053    19     2          2
+## 29  ds:obs051    19     3          1
+## 30  ds:obs054    19     3          2
+## 37  ds:obs055    20     1          1
+## 38  ds:obs058    20     1          2
+## 39  ds:obs056    20     2          1
+## 40  ds:obs059    20     2          2
+## 41  ds:obs057    20     3          1
+## 42  ds:obs060    20     3          2
+## 43  ds:obs061    21     1          1
+## 44  ds:obs064    21     1          2
+## 45  ds:obs062    21     2          1
+## 46  ds:obs065    21     2          2
+## 47  ds:obs063    21     3          1
+## 48  ds:obs066    21     3          2
+## 49  ds:obs067    22     1          1
+## 50  ds:obs070    22     1          2
+## 51  ds:obs068    22     2          1
+## 52  ds:obs071    22     2          2
+## 53  ds:obs069    22     3          1
+## 54  ds:obs072    22     3          2
+## 55  ds:obs073    23     1          1
+## 56  ds:obs076    23     1          2
+## 57  ds:obs074    23     2          1
+## 58  ds:obs077    23     2          2
+## 59  ds:obs075    23     3          1
+## 60  ds:obs078    23     3          2
+## 61  ds:obs079    24     1          1
+## 62  ds:obs082    24     1          2
+## 63  ds:obs080    24     2          1
+## 64  ds:obs083    24     2          2
+## 65  ds:obs081    24     3          1
+## 66  ds:obs084    24     3          2
+## 67  ds:obs085    25     1          1
+## 68  ds:obs088    25     1          2
+## 69  ds:obs086    25     2          1
+## 70  ds:obs089    25     2          2
+## 71  ds:obs087    25     3          1
+## 72  ds:obs090    25     3          2
+## 73  ds:obs091    26     1          1
+## 75  ds:obs092    26     2          1
+## 77  ds:obs093    26     3          1
+## 79  ds:obs094    27     1          1
+## 81  ds:obs095    27     2          1
+## 83  ds:obs096    27     3          1
+## 85  ds:obs097    28     1          1
+## 87  ds:obs098    28     2          1
+## 89  ds:obs099    28     3          1
 ## 91  ds:obs100    29     1          1
 ## 93  ds:obs101    29     2          1
 ## 95  ds:obs102    29     3          1
@@ -1061,8 +1061,9 @@ print(file)
 <pre><code class="r">sessionInfo()
 </code></pre>
 
-<pre><code>## R version 3.1.2 (2014-10-31)
+<pre><code>## R version 3.1.3 (2015-03-09)
 ## Platform: x86_64-redhat-linux-gnu (64-bit)
+## Running under: Fedora 21 (Twenty One)
 ## 
 ## locale:
 ##  [1] LC_CTYPE=en_GB.utf8          LC_NUMERIC=C                
@@ -1076,15 +1077,15 @@ print(file)
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] rrdfqbcrnd0_0.1.1 RCurl_1.95-4.5    bitops_1.0-6     
-##  [4] xlsx_0.5.7        xlsxjars_0.6.1    rrdf_2.1.0       
-##  [7] rrdflibs_1.4.0    rJava_0.9-6       devtools_1.7.0   
-## [10] knitr_1.9        
+##  [1] foreign_0.8-62    rrdfqbcrnd0_0.1.2 RCurl_1.95-4.5   
+##  [4] bitops_1.0-6      xlsx_0.5.7        xlsxjars_0.6.1   
+##  [7] rrdf_2.1.0        rrdflibs_1.4.0    rJava_0.9-6      
+## [10] devtools_1.7.0    knitr_1.9        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] compiler_3.1.2 digest_0.6.8   evaluate_0.5.5 formatR_1.0   
-##  [5] highr_0.4      markdown_0.7.4 Rcpp_0.11.4    roxygen2_4.1.0
-##  [9] stringr_0.6.2  tools_3.1.2
+##  [1] digest_0.6.8    evaluate_0.5.5  formatR_1.0     highr_0.4      
+##  [5] htmltools_0.2.6 markdown_0.7.4  Rcpp_0.11.4     rmarkdown_0.5.1
+##  [9] roxygen2_4.1.0  stringr_0.6.2   tools_3.1.3     yaml_2.1.13
 </code></pre>
 
 </body>

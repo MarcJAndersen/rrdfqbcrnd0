@@ -3,7 +3,7 @@ library(rrdfqbcrnd0)
 
 ## ----, eval=TRUE---------------------------------------------------------
 
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.TTL", package="rrdfqbcrnd0")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 store <- new.rdf()  # Initialize
 cat("Loading ", dataCubeFile, "\n")
 load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
@@ -21,7 +21,7 @@ where {
 ?s a qb:Observation ; 
 ?p ?o .
 values (?s) {
-(ds:obs29)
+(ds:obs029)
 }
 }
 ',

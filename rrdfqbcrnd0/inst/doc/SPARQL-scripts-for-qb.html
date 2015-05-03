@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>SPARQL scripts for the demographics cube (DC-DEMO-sample.TTL)</title>
+<title>SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,7 +201,7 @@ hr {
 </head>
 
 <body>
-<h1>SPARQL scripts for the demographics cube (DC-DEMO-sample.TTL)</h1>
+<h1>SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)</h1>
 
 <h2>Setup</h2>
 
@@ -228,7 +228,7 @@ invisible(fn)
 <p>The rrdfqbcrnd0 package uses SPARQL scripts to access the RRDF triple
 store.  This is implemented by having a function generating the SPARQL
 script. The generated SPARQL scripts are shown here for the
-demographics cube in DC-DEMO-sample.TTL.</p>
+demographics cube in DC-DEMO-sample.ttl.</p>
 
 <p>The turtle file and the scrips are stored in</p>
 
@@ -242,12 +242,12 @@ demographics cube in DC-DEMO-sample.TTL.</p>
 
 <p>The DEMO data exists as a turtle file in the sample-rdf directory.</p>
 
-<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.TTL&quot;, package=&quot;rrdfqbcrnd0&quot;)
+<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
 store &lt;- new.rdf()  # Initialize
 cat(&quot;Loading &quot;, dataCubeFile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.TTL
+<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
 </code></pre>
 
 <pre><code class="r">load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
@@ -494,27 +494,27 @@ knitr::kable(head(observations,2))
 <td align="left"><em>ALL</em></td>
 </tr>
 <tr>
-<td align="left">ds:obs25</td>
+<td align="left">ds:obs014</td>
 <td align="left">code:ethnic-<em>ALL</em></td>
 <td align="left">code:race-<em>ALL</em></td>
-<td align="left">code:procedure-median</td>
+<td align="left">code:procedure-count</td>
 <td align="left">code:agegr1-<em>ALL</em></td>
-<td align="left">code:factor-age</td>
-<td align="left">code:trt01a-Placebo</td>
-<td align="left">code:sex-<em>ALL</em></td>
+<td align="left">code:factor-quantity</td>
+<td align="left">code:trt01a-Xanomeline_Low_Dose</td>
+<td align="left">code:sex-M</td>
 <td align="left">1</td>
-<td align="left">1</td>
+<td align="left">2</td>
 <td align="left"></td>
 <td align="left">NA</td>
-<td align="left">6</td>
-<td align="left">76</td>
+<td align="left">3</td>
+<td align="left">34</td>
 <td align="left"><em>ALL</em></td>
 <td align="left"><em>ALL</em></td>
-<td align="left">median</td>
+<td align="left">count</td>
 <td align="left"><em>ALL</em></td>
-<td align="left">age</td>
-<td align="left">Placebo</td>
-<td align="left"><em>ALL</em></td>
+<td align="left">quantity</td>
+<td align="left">Xanomeline Low Dose</td>
+<td align="left">M</td>
 </tr>
 </tbody></table>
 

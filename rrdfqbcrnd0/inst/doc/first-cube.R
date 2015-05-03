@@ -27,7 +27,7 @@ knitr::kable(cubeMetadata)
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 
 ## ------------------------------------------------------------------------
-outcube
+cat(normalizePath(outcube))
 
 ## ------------------------------------------------------------------------
 dataCubeFile<- outcube
@@ -37,6 +37,7 @@ cube <- new.rdf()  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
 summarize.rdf(cube)
 
+## ------------------------------------------------------------------------
 ## TODO: reconsider the use of domain specific prefixes
 dsdName<- GetDsdNameFromCube( cube )
 domainName<- GetDomainNameFromCube( cube )
@@ -109,20 +110,19 @@ cube.dimensionsattr<- sparql.rdf(cube,
 
 cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",
-    "?s a qb:Observation  ;", "\n",
-    paste("       qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), "\n",
-    paste0( cube.dimensionsattr, " ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), ";", collapse="\n"),
-    "\n",
-    "crnd-measure:measure      ?measure ;      \n",
-    paste0( "optional{ ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), " ",
+    "     ?s a qb:Observation  ;",
+    paste("     qb:dataSet",  paste0( "ds:", "dataset", "-", domainName), " ;", sep=" ", collapse="\n"), 
+    paste0( "     ", cube.dimensionsattr, " ", 
+            sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), ";", collapse="\n"),
+    "     crnd-measure:measure      ?measure ;",
+    paste0( "     optional{ ", sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), " ",
            "skos:prefLabel",
            " ",
            sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "?", cube.dimensionsattr), "value" ,
            " . ", "}",
            collapse="\n"),
-    "\n",
     "} ",
-    "\n"
+    sep="\n"
    )
 
 

@@ -22,8 +22,13 @@ ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 cat("AE cube stored as ", ae.cube.fn, "\n")
 
 ## ----, eval=TRUE---------------------------------------------------------
-RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
-demo.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DEMO" )
+demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfqbcrnd0")
+demoObsData <- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
+
+demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", package="rrdfqbcrnd0")
+demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
+
+demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 cat("DEMO cube stored as ", demo.cube.fn, "\n")
 
 ## ----, echo=TRUE, results='asis'-----------------------------------------
@@ -114,7 +119,7 @@ knitr::kable(dimensionsattr)
 ## ----, echo=TRUE---------------------------------------------------------
 workbookMetadataRq<- GetMetaDataInWorkbookFormatSparqlQuery( forsparqlprefix )
 metadata<- sparql.rdf(checkCube, workbookMetadataRq)
-cubeVersion<- gsub("-",".", gsub("DC-.*-R-V-([^\\.]+).TTL", "\\1", metadata[ metadata[,2]=="distribution", "compLabel"], perl=TRUE))
+cubeVersion<- gsub("-",".", gsub("DC-.*-R-V-([^\\.]+).ttl", "\\1", metadata[ metadata[,2]=="distribution", "compLabel"], perl=TRUE))
 metadataX<- rbind(metadata, cbind(compType="metadata", compName="cubeVersion", compLabel=cubeVersion))
 knitr::kable(metadataX)
 

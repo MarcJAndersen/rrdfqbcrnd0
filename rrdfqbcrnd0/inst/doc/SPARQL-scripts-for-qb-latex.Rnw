@@ -1,4 +1,4 @@
-%% \VignetteIndexEntry{SPARQL scripts for RDF data cubes}
+%% \VignetteIndexEntry{SPARQL scripts for RDF data cubes (latex version)}
 %% \VignetteEngine{knitr::knitr}
 %% \usepackage[utf8]{inputenc}
 %% \SweaveUTF8
@@ -36,7 +36,7 @@ library(rrdfqbcrnd0)
 @
 
 <<setup00, include=FALSE,echo=FALSE,eval=FALSE>>=
-knitr::knit("vignettes/SPARQL-scripts-for-qb.Rnw")
+knitr::knit("vignettes/SPARQL-scripts-for-qb-latex.Rnw")
 @
 
 <<setup01>>=

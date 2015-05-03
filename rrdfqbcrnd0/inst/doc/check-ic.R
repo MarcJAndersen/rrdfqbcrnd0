@@ -1,8 +1,7 @@
 ## ----, results='asis', eval=TRUE-----------------------------------------
-
 library(rrdfqbcrnd0)
 
-qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.TTL", package="rrdfqbcrnd0")
+qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0")
 cube<- load.rdf( qbfile, format="TURTLE")
 
 dsdName<- GetDsdNameFromCube( cube )

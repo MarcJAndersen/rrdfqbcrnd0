@@ -2,7 +2,7 @@
 library(rrdfqbcrnd0)
 
 ## ----setup00, include=FALSE,echo=FALSE,eval=FALSE------------------------
-#  knitr::knit("vignettes/SPARQL-scripts-for-qb.Rnw")
+#  knitr::knit("vignettes/SPARQL-scripts-for-qb-latex.Rnw")
 
 ## ----setup01-------------------------------------------------------------
 cat("Empty statment to make the script pass the R build of vignette")
