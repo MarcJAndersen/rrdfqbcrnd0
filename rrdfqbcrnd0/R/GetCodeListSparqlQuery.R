@@ -7,7 +7,7 @@
 GetCodeListSparqlQuery<- function( forsparqlprefix, dsdName ) {
 codelists.rq<-   paste(forsparqlprefix,
 '
-select distinct ?p ?cl ?prefLabel
+select distinct ?p ?vn ?cl ?prefLabel 
 where {
 ?DataStructureDefinition a qb:DataStructureDefinition ;
    qb:component ?component .
@@ -16,6 +16,7 @@ where {
 ?p qb:codeList ?c .
 ?c skos:hasTopConcept ?cl .
 ?cl skos:prefLabel ?prefLabel .
+OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn } 
 values ( ?DataStructureDefinition ) {
 ',
 paste0( "(", "ds:", dsdName, ")"),

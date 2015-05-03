@@ -139,6 +139,12 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                     paste0(prefixlist$prefixRRDFQBCRND0, "codeType"),
                     paste0(codeType)
                     )
+  ## Should only be added if R data set is available
+  add.data.triple(store,
+                   paste0(prefixlist$prefixCODE,dimName),
+                    paste0(prefixlist$prefixRRDFQBCRND0, "R-columnname"),
+                    paste0(dimName)
+                    )
 
   if (codeType=="SDTM"){
       add.data.triple(store,
