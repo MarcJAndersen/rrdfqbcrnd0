@@ -142,6 +142,12 @@ sudo yum -y install texlive-framed
 sudo yum -y install texlive-titling
 ```
 
+Usefull stand-alone tools for working with RDF data may be installed:
+```bash
+sudo yum install raptor2
+sudo yum install graphviz
+```
+
 ### Version of packages
 Verify that you have the applicable versions. It appears unnessary, but version issues have more than once been the root cause of malfunction.
 
