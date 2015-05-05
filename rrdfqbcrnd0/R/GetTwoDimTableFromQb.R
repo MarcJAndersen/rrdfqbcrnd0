@@ -37,8 +37,8 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
 ##  if (! setequal(union(rowdim,coldim),union(dimensions,attributes)) ) {
 ##    stop("union of rowdim and coldim is not the union of dimensions and attributes in the cube")
 ##  }
-  if ( length(intersect(rowdim,coldim)) ) {
-    stop("rowdim and coldim are not disjoint")
+  if ( length(intersect(rowdim,coldim))>0 ) {
+    stop("rowdim and coldim are not disjoint:", intersect(rowdim,coldim))
   }
   observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
   ## cat(observationsDescriptionRq)
@@ -88,13 +88,29 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
   res<-data.frame(matrix(unlist(ll),ncol=3,byrow=TRUE),stringsAsFactors=FALSE)
 
 ## ToDo: should have a function for this
-  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-attribute:", as.character(res[res[,2]=="crnd-attribute",3]), x)})
-  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-dimension:", as.character(res[res[,2]=="crnd-dimension",3]), x)})
-  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^crnd-measure:", as.character(res[res[,2]=="crnd-measure",3]), x)})
-  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^ds:", as.character(res[res[,2]=="ds",3]), x)})
-  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),function(x) {gsub("^code:", as.character(res[res[,2]=="code",3]), x)})
+
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),
+  function(x) {gsub("^crnd-attribute:",
+  as.character(res[res[,2]=="crnd-attribute",3]), x)})
   
-  obsRowIcolno<- merge( observationsRowDimE[,c("s","irowno")], observationsColDimE[,c("s","icolno")], by="s", all=TRUE)
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),
+  function(x) {gsub("^crnd-dimension:",
+  as.character(res[res[,2]=="crnd-dimension",3]), x)})
+
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),
+  function(x) {gsub("^crnd-measure:",
+  as.character(res[res[,2]=="crnd-measure",3]), x)})
+
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),
+  function(x) {gsub("^ds:", as.character(res[res[,2]=="ds",3]), x)})
+
+  observationsDesc[, nIRIs]<- apply(observationsDesc[, nIRIs],c(1,2),
+  function(x) {gsub("^code:", as.character(res[res[,2]=="code",3]),
+  x)})
+  
+  obsRowIcolno<- merge( observationsRowDimE[,c("s","irowno")],
+                        observationsColDimE[,c("s","icolno")], by="s", all=TRUE)
+
   if (any(duplicated(obsRowIcolno[,c("irowno","icolno")]))) {
     stop("Unexpected an observation is not uniquely identified by row and column number")
   }
@@ -105,7 +121,9 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
 
   observationsDescX<- merge( observationsDesc, obsRowIcolno, by="s", all=TRUE)
 
-  tableFrame<- data.frame(irowno=rep(irownoseq, each=length(icolnoseq) ), icolno=rep(icolnoseq, times=length(irownoseq) ), stringsAsFactors=FALSE )
+  tableFrame<- data.frame(irowno=rep(irownoseq, each=length(icolnoseq) ),
+                          icolno=rep(icolnoseq, times=length(irownoseq) ),
+                          stringsAsFactors=FALSE )
 
   observationsDescXX<- merge( tableFrame, observationsDescX, by=c("irowno","icolno"), sort=TRUE, all=TRUE)
 
