@@ -44,13 +44,14 @@ ds:obs11  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "61.6279069767442"^^xsd:double .
 
-code:trt01a  a                skos:ConceptScheme ;
-        rdfs:label            "Codelist scheme: trt01a"@en ;
-        rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
-        skos:notation         "CL_TRT01A" ;
-        skos:note             "Specifies the trt01a for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel        "Codelist scheme: trt01a"@en .
+code:trt01a  a                    skos:ConceptScheme ;
+        rdfs:label                "Codelist scheme: trt01a"@en ;
+        rrdfqbcrnd0:R-columnname  "trt01a" ;
+        rrdfqbcrnd0:codeType      "DATA" ;
+        skos:hasTopConcept        code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
+        skos:notation             "CL_TRT01A" ;
+        skos:note                 "Specifies the trt01a for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel            "Codelist scheme: trt01a"@en .
 
 ds:obs52  a                         qb:Observation ;
         rdfs:label                  "52" ;
@@ -369,14 +370,15 @@ crnd-dimension:sex  a  rdf:Property , qb:DimensionProperty ;
         rdfs:range   code:Sex ;
         qb:codeList  code:sex .
 
-code:sex  a                   skos:ConceptScheme ;
-        rdfs:label            "Codelist scheme: sex"@en ;
-        mms:inValueDomain     "C66731" ;
-        rrdfqbcrnd0:codeType  "SDTM" ;
-        skos:hasTopConcept    code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
-        skos:notation         "CL_SEX" ;
-        skos:note             "Specifies the sex for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel        "Codelist scheme: sex"@en .
+code:sex  a                       skos:ConceptScheme ;
+        rdfs:label                "Codelist scheme: sex"@en ;
+        mms:inValueDomain         "C66731" ;
+        rrdfqbcrnd0:R-columnname  "sex" ;
+        rrdfqbcrnd0:codeType      "SDTM" ;
+        skos:hasTopConcept        code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
+        skos:notation             "CL_SEX" ;
+        skos:note                 "Specifies the sex for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel            "Codelist scheme: sex"@en .
 
 ds:obs30  a                         qb:Observation ;
         rdfs:label                  "30" ;
@@ -462,14 +464,15 @@ ds:obs28  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "74.3809523809524"^^xsd:double .
 
-code:race  a                  skos:ConceptScheme ;
-        rdfs:label            "Codelist scheme: race"@en ;
-        mms:inValueDomain     "C74457" ;
-        rrdfqbcrnd0:codeType  "SDTM" ;
-        skos:hasTopConcept    code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        skos:notation         "CL_RACE" ;
-        skos:note             "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel        "Codelist scheme: race"@en .
+code:race  a                      skos:ConceptScheme ;
+        rdfs:label                "Codelist scheme: race"@en ;
+        mms:inValueDomain         "C74457" ;
+        rrdfqbcrnd0:R-columnname  "race" ;
+        rrdfqbcrnd0:codeType      "SDTM" ;
+        skos:hasTopConcept        code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        skos:notation             "CL_RACE" ;
+        skos:note                 "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel            "Codelist scheme: race"@en .
 
 code:race-_NONMISS_  a     code:Race , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
@@ -1088,13 +1091,14 @@ code:Saffl  a            rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:saffl ;
         rdfs:subClassOf  skos:Concept .
 
-code:saffl  a                 skos:ConceptScheme ;
-        rdfs:label            "Codelist scheme: saffl"@en ;
-        rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:saffl-_ALL_ , code:saffl-_NONMISS_ , code:saffl-Y ;
-        skos:notation         "CL_SAFFL" ;
-        skos:note             "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel        "Codelist scheme: saffl"@en .
+code:saffl  a                     skos:ConceptScheme ;
+        rdfs:label                "Codelist scheme: saffl"@en ;
+        rrdfqbcrnd0:R-columnname  "saffl" ;
+        rrdfqbcrnd0:codeType      "DATA" ;
+        skos:hasTopConcept        code:saffl-_ALL_ , code:saffl-Y , code:saffl-_NONMISS_ ;
+        skos:notation             "CL_SAFFL" ;
+        skos:note                 "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel            "Codelist scheme: saffl"@en .
 
 ds:obs40  a                         qb:Observation ;
         rdfs:label                  "40" ;
@@ -1214,7 +1218,7 @@ ds:dataset-DM  a             qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DM ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-05-03T20:55:50+02:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-05-06T00:29:29+02:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.1.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DM-R-V-0-5-2.ttl" ;
@@ -1245,13 +1249,14 @@ ds:obs60  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "64.9"^^xsd:double .
 
-code:factor  a                skos:ConceptScheme ;
-        rdfs:label            "Codelist scheme: factor"@en ;
-        rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:factor-_ALL_ , code:factor-proportion , code:factor-WEIGHTBL , code:factor-_NONMISS_ , code:factor-quantity , code:factor-AGE ;
-        skos:notation         "CL_FACTOR" ;
-        skos:note             "Specifies the factor for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel        "Codelist scheme: factor"@en .
+code:factor  a                    skos:ConceptScheme ;
+        rdfs:label                "Codelist scheme: factor"@en ;
+        rrdfqbcrnd0:R-columnname  "factor" ;
+        rrdfqbcrnd0:codeType      "DATA" ;
+        skos:hasTopConcept        code:factor-_ALL_ , code:factor-proportion , code:factor-WEIGHTBL , code:factor-_NONMISS_ , code:factor-quantity , code:factor-AGE ;
+        skos:notation             "CL_FACTOR" ;
+        skos:note                 "Specifies the factor for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel            "Codelist scheme: factor"@en .
 
 ds:obs32  a                         qb:Observation ;
         rdfs:label                  "32" ;
@@ -1314,13 +1319,14 @@ ds:obs17  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "62.7593023255814"^^xsd:double .
 
-code:procedure  a             skos:ConceptScheme ;
-        rdfs:label            "Codelist scheme: procedure"@en ;
-        rrdfqbcrnd0:codeType  "DATA" ;
-        skos:hasTopConcept    code:procedure-stdev , code:procedure-max , code:procedure-mean , code:procedure-_NONMISS_ , code:procedure-min , code:procedure-percent , code:procedure-_ALL_ , code:procedure-count , code:procedure-median ;
-        skos:notation         "CL_PROCEDURE" ;
-        skos:note             "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel        "Codelist scheme: procedure"@en .
+code:procedure  a                 skos:ConceptScheme ;
+        rdfs:label                "Codelist scheme: procedure"@en ;
+        rrdfqbcrnd0:R-columnname  "procedure" ;
+        rrdfqbcrnd0:codeType      "DATA" ;
+        skos:hasTopConcept        code:procedure-stdev , code:procedure-max , code:procedure-mean , code:procedure-_NONMISS_ , code:procedure-min , code:procedure-percent , code:procedure-_ALL_ , code:procedure-count , code:procedure-median ;
+        skos:notation             "CL_PROCEDURE" ;
+        skos:note                 "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel            "Codelist scheme: procedure"@en .
 
 ds:obs58  a                         qb:Observation ;
         rdfs:label                  "58" ;
