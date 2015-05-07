@@ -56,6 +56,26 @@ knitr::kable(cube.observations)
 
 ```
 
+View formating...
+
+```{r, eval=TRUE}
+cube.measurefmt.rq<-  paste( forsparqlprefix,
+'
+select distinct ?procedure ?measurefmt
+where { 
+?s a qb:Observation ; 
+crnd-dimension:procedure ?procedure ;
+crnd-attribute:measurefmt ?measurefmt .
+}
+',
+"\n"                               
+)
+
+cube.measurefmt<- sparql.rdf(store, cube.measurefmt.rq)
+knitr::kable(cube.measurefmt)
+
+```
+
 
 # Current - 06-may-2015
 
@@ -103,8 +123,11 @@ idrow<-  c( "aesocvalue", "aedecodvalue" )
 
 # For demo table
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex" )
-coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a" )
 idrow<-  c( "agegr1value", "racevalue", "ethnicvalue", "sexvalue" )
+
+rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex", "crnd-dimension:procedure" )
+coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a" )
+idrow<-  c( "agegr1value", "racevalue", "ethnicvalue", "sexvalue", "procedurevalue" )
 
 outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, domainName, dimensions, rowdim, coldim, idrow, htmlfile=NULL )
 outhtmlfile

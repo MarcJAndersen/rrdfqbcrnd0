@@ -52,6 +52,13 @@ if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
 demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfqbcrnd0")
 demoObsData <- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
 
+# add measurefmt; quick hack
+if (!( "measurefmt" %in% names(demoObsData))) {
+demoObsData$measurefmt<- "%6.1f"
+demoObsData$measurefmt[ demoObsData$procedure %in% c("n", "nmiss", "count") ]<- "%6.0f"
+sprintf( demoObsData$measurefmt, demoObsData$measure)
+}
+
 demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", package="rrdfqbcrnd0")
 demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 

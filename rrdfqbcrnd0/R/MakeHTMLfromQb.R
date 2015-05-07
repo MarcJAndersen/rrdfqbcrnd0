@@ -17,6 +17,10 @@ qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldi
 oDx<-attr(qbtest,"observationsDesc")
 oDxx<- oDx[! is.na(oDx$s),]
 oD<- oDxx[order(strtoi(oDxx$rowno)),]
+  ## TODO(mja): ensure measurefmt is always defined - this is a quick fix
+if (!("measurefmt" %in% names(oD))) {
+  oD$measurefmt<- " "
+}
 presrowvarindex<- unique(oD$rowno)
 colvarindex<- unique(oD$colno)
 cellpartnoindex<- unique(oD$cellpartno)
@@ -134,15 +138,16 @@ for (rr in presrowvarindex) {
 
   for (cc in colvarindex) {
 # print(cc)
-    cat("<td>", file=htmlfile, append=TRUE)
+#    cat("<td>", file=htmlfile, append=TRUE)
 cpindex<-0
     for (cp in cellpartnoindex) {
 # print(cp)
 cpindex<- cpindex+1
-if (cpindex>1) {
-## separator between cells should be taken from data
-      cat(" ", file=htmlfile, append=TRUE)
-}
+    cat("<td>", file=htmlfile, append=TRUE)
+## if (cpindex>1) {
+## ## separator between cells should be taken from data
+##       cat(" ", file=htmlfile, append=TRUE)
+## }
     if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
 ## The observation
       ## next line is for simple fly-over
@@ -159,7 +164,12 @@ cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dime
 }
 
 ## formatting to applied to measure
+if (oD$measurefmt[or] != " ") {
+      cat(sprintf(oD$measurefmt[or],as.numeric(oD$measure[or])), file=htmlfile, append=TRUE)
+}
+else {
       cat(paste0(oD$measure[or]), file=htmlfile, append=TRUE)
+}
 
 for (prop in dimensions) {
 cat( '</span>\n', file=htmlfile, append=TRUE)
@@ -170,9 +180,10 @@ cat( '</span>\n', file=htmlfile, append=TRUE)
 
       cat(paste0("</a>\n"), file=htmlfile, append=TRUE)
       or<- or+1
-    }
-    }
     cat("</td>\n", file=htmlfile, append=TRUE)
+    }
+    }
+#    cat("</td>\n", file=htmlfile, append=TRUE)
   }
 cat("</tr>", "\n", file=htmlfile, append=TRUE)
   }
