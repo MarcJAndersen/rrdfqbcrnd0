@@ -6,7 +6,7 @@
 ##' @return path to file with HTML
 ##  ' @examples 
 
-MakeHTMLfromQb<- function( store, forsparqlprefix, domainName, dimensions, rowdim, coldim, idrow, htmlfile=NULL ) {
+MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile=NULL ) {
   
 qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
 
@@ -32,9 +32,14 @@ cellpartnoindex
 oD[,c("s","rowno","colno","cellpartno")]
 }
 
-presrowvarvalue<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1value",rowdim)
-presrowvarIRI<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1IRI",rowdim)
-presrowvarlabel<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:(.*)","\\1label",rowdim)
+Showit()
+
+presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value",rowdim)
+presrowvarIRI<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2IRI",rowdim)
+presrowvarlabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label",rowdim)
+
+presidcolvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value", idcol)
+presidcollabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label", idcol)
 
 ## add code for embedding the cube as turtle
 ## determine cube compontents except observations,
@@ -52,66 +57,83 @@ cat('
   <head>
 <meta charset="UTF-8">
 <title>DEMO table as html</title>
+',
+'    
    <script src="jquery-2.1.3.min.js"></script>
    <link rel="stylesheet" href="jquery-ui-1.11.3.custom/jquery-ui.css"/>
    <script src="jquery-ui-1.11.3.custom/jquery-ui.min.js"></script>
    <script src="RDFa.min.1.4.0.js"></script>
-
-<style>
-#table {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:1000px;
-    width:750px;
-    float:left;
-    padding:5px;
-}
-#drop{
-    width:300px;
-    background-color:green;
-    float:left;
-    padding:10px;
-}
+',
+## '    
+## <style>
+## #table {
+##     line-height:30px;
+##     background-color:#eeeeee;
+##     height:1000px;
+##     width:750px;
+##     float:left;
+##     padding:5px;
+## }
+## #drop{
+##     width:300px;
+##     background-color:green;
+##     float:left;
+##     padding:10px;
+## }
+## ',
+'    
 </style>
 
 </head>
 <script>
 "use strict";
+'
+    ,
+## '    
+## function allowDrop(ev)
+## {
+## ev.preventDefault();
+## }
 
-function allowDrop(ev)
+## function drag(ev)
+## {
+## ev.dataTransfer.setData("Text",ev.target.id);
+## console.log("Dragging: ", ev.target.id);
+## }
+
+## function drop(ev)
+## {
+## ev.preventDefault();
+## var data=ev.dataTransfer.getData("Text");
+## console.log("Dropping: ", data);
+## // from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
+## var nodeCopy = document.getElementById(data).cloneNode(true);
+## nodeCopy.id = "copy"+nodeCopy.id;
+## // end from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
+## var newelem = document.createElement("P");
+## newelem.appendChild(nodeCopy);
+## ev.target.appendChild(newelem);
+## }
+
+## $(document).ready(function(){
+
+## GreenTurtle.attach(document)
+
+## })
+## ',
+'
+function obsclick(obssubject)
 {
-ev.preventDefault();
-}
-
-function drag(ev)
-{
-ev.dataTransfer.setData("Text",ev.target.id);
-console.log("Dragging: ", ev.target.id);
-}
-
-function drop(ev)
-{
-ev.preventDefault();
-var data=ev.dataTransfer.getData("Text");
-console.log("Dropping: ", data);
-// from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
-var nodeCopy = document.getElementById(data).cloneNode(true);
-nodeCopy.id = "copy"+nodeCopy.id;
-// end from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
-var newelem = document.createElement("P");
-newelem.appendChild(nodeCopy);
-ev.target.appendChild(newelem);
-}
-
-$(document).ready(function(){
-
-GreenTurtle.attach(document)
-
-})
-                  
+  alert("Observation " + obssubject )
+}  
+'
+,    
+'                 
 </script>
 <body>
-<h1>DEMO table as RDFa</h1>
+  <h1>',
+dsdName,
+'</h1>
 '
 , file=htmlfile, append=TRUE)
 
@@ -119,10 +141,39 @@ cat('<div id="container">', file=htmlfile, append=TRUE)
 
 cat("<div id='table'>\n", file=htmlfile, append=TRUE)
 cat("<table border>\n", file=htmlfile, append=TRUE)
-or<- 1
 
 ## make the header row(s) for the columns
 
+headerrowvarindex<- c(1)
+or<- 1
+
+for (rr in headerrowvarindex) {
+  cat("<tr>", file=htmlfile, append=TRUE)
+# print(rr)
+
+  ## START make the row identification
+    for (rowidname in idrow) {
+    cat("<th>", rowidname,  "</th>", file=htmlfile, append=TRUE)
+    }
+  ## END make the row identification
+  
+
+  for (cc in colvarindex) {
+     cpindex<-0
+    for (cp in cellpartnoindex) {
+    cpindex<- cpindex+1
+    cat("<th>", file=htmlfile, append=TRUE)
+      cat( oD[or, presidcolvalue ] , file=htmlfile, append=TRUE)
+      or<- or+1
+     }
+
+    cat("</th>\n", file=htmlfile, append=TRUE)
+    }
+cat("</tr>", "\n", file=htmlfile, append=TRUE)
+  }
+
+## data rows
+or<- 1
 for (rr in presrowvarindex) {
   cat("<tr>", file=htmlfile, append=TRUE)
 # print(rr)
@@ -151,17 +202,25 @@ cpindex<- cpindex+1
     if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
 ## The observation
       ## next line is for simple fly-over
-      cat(paste0("<a title=\"", oD$measureIRI[or], "\">\n" ), file=htmlfile, append=TRUE)
+      cat(paste0("<a title=\"", oD$measureIRI[or], "\"",
+" onclick=obsclick(\"", oD$measureIRI[or], "\")",
+">\n" ), file=htmlfile, append=TRUE)
 
       cat(paste0('<span ', 'id="', gsub("ds:","",oD$s[or]), '"',
                  'resource="', oD$s[or],'"',
-                 ' typeof="qb:Observation" draggable="true" ondragstart="drag(event)" >\n' ),
+                 ' typeof="qb:Observation" ',
+## TODO(mja): how to use draggable: Disable draggable for now
+## ' draggable="true" ondragstart="drag(event)"',
+'>\n' ),
           file=htmlfile, append=TRUE)
-cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">\n' ), file=htmlfile, append=TRUE)
-      
-for (prop in dimensions) {
-cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">\n' ), file=htmlfile, append=TRUE)
-}
+
+## TODO(mja) how to store dataSet information
+## cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">\n' ), file=htmlfile, append=TRUE)
+
+## TODO(mja) how to show dimensions       
+## for (prop in dimensions) {
+## cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">\n' ), file=htmlfile, append=TRUE)
+## }
 
 ## formatting to applied to measure
 if (oD$measurefmt[or] != " ") {
@@ -171,11 +230,13 @@ else {
       cat(paste0(oD$measure[or]), file=htmlfile, append=TRUE)
 }
 
-for (prop in dimensions) {
-cat( '</span>\n', file=htmlfile, append=TRUE)
-}
+## for (prop in dimensions) {
+## cat( '</span>\n', file=htmlfile, append=TRUE)
+## }
 
-cat( '</span>\n', file=htmlfile, append=TRUE)
+## dataSet information
+## cat( '</span>\n', file=htmlfile, append=TRUE)
+
 cat( '</span>\n', file=htmlfile, append=TRUE)
 
       cat(paste0("</a>\n"), file=htmlfile, append=TRUE)
@@ -190,16 +251,18 @@ cat("</tr>", "\n", file=htmlfile, append=TRUE)
 cat("</table>\n", file=htmlfile, append=TRUE)
 cat("</div>\n", file=htmlfile, append=TRUE)
 
-cat('
-<div id="droparea">
-Drag and drop over the green text below.
-<table>
-<tr><td>
-<span  style="width:100px" id="drop" ondrop="drop(event)" ondragover="allowDrop(event)">Drop here...</span>
-</td></tr>
-</table>
-</div> 
-',  file=htmlfile, append=TRUE)                 
+## TODO(mja): consider how to use this with dropping
+## cat('
+## <div id="droparea">
+## Drag and drop over the green text below.
+## <table>
+## <tr><td>
+## <span  style="width:100px" id="drop" ondrop="drop(event)" ondragover="allowDrop(event)">Drop here...</span>
+## </td></tr>
+## </table>
+## </div> 
+## ',  file=htmlfile, append=TRUE)                 
+
 cat('
 </div>
 </body>
