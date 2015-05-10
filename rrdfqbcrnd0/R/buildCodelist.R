@@ -19,8 +19,8 @@ buildCodelist <- function(
   codeType,
   nciDomainValue,
   dimName,
-remote.endpoint  
-#  codelist.source
+  remote.endpoint  
+  ##  codelist.source
   )
 {
   dimName <- tolower(dimName)        ## dimName in all lower case is default
@@ -38,7 +38,7 @@ remote.endpoint
     colnames(codeSource) <- ("code")  ## Rename to match SDTM approach
   }
   else if (codeType=="SDTM"){
-## TODO: change : prefix to the usual SDTM terminilogy prefix    
+    ## TODO: change : prefix to the usual SDTM terminology prefix    
     CDISCsparqlprefix<-'
 prefix : <http://rdf.cdisc.org/sdtm-terminology#>
 prefix cts:   <http://rdf.cdisc.org/ct/schema#>
@@ -67,7 +67,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
   else {
     message("ERROR: unknown codeType ", codeType, " for ", dimName )
   }
-    
+  
   ##  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
   ##    print(codeSource)
   ##  print(names(codeSource))
@@ -76,7 +76,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"]))
   }
 
-  #############################################################################
+#############################################################################
   ## SKELETON
   ## --------- Class ---------
   add.triple(store,
@@ -107,52 +107,52 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                   paste0("Specifies the ", dimName, " for each observation"),
                   lang="en")
 
-   ## --------- ConceptScheme ---------
-   add.triple(store,
-              paste0(prefixlist$prefixCODE,dimName),
-              paste0(prefixlist$prefixRDF,"type" ),
-              paste0(prefixlist$prefixSKOS, "ConceptScheme"))
-   add.data.triple(store,
-                   paste0(prefixlist$prefixCODE,dimName),
-                   paste0(prefixlist$prefixSKOS,"prefLabel"),
-                   paste0("Codelist scheme: ", dimName),
-                   lang="en")
-   add.data.triple(store,
-                   paste0(prefixlist$prefixCODE,dimName),
-                   paste0(prefixlist$prefixRDFS,"label"),
-                   paste0("Codelist scheme: ", dimName),
-                   lang="en")
-   add.data.triple(store,
-                   paste0(prefixlist$prefixCODE,dimName),
-                   paste0(prefixlist$prefixSKOS,"note"),
-                   paste0("Specifies the ", dimName, " for each observation, group of obs. or all categories (_ALL_)label "),
-                   lang="en")
-   ## skos:notation is uppercase by convention. Eg: CL_SEX, CL_RACE
-   add.data.triple(store,
-                   paste0(prefixlist$prefixCODE,dimName),
-                   paste0(prefixlist$prefixSKOS,"notation"),
-                   paste0("CL_",toupper(dimName)))
+  ## --------- ConceptScheme ---------
+  add.triple(store,
+             paste0(prefixlist$prefixCODE,dimName),
+             paste0(prefixlist$prefixRDF,"type" ),
+             paste0(prefixlist$prefixSKOS, "ConceptScheme"))
+  add.data.triple(store,
+                  paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixSKOS,"prefLabel"),
+                  paste0("Codelist scheme: ", dimName),
+                  lang="en")
+  add.data.triple(store,
+                  paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixRDFS,"label"),
+                  paste0("Codelist scheme: ", dimName),
+                  lang="en")
+  add.data.triple(store,
+                  paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixSKOS,"note"),
+                  paste0("Specifies the ", dimName, " for each observation, group of obs. or all categories (_ALL_)label "),
+                  lang="en")
+  ## skos:notation is uppercase by convention. Eg: CL_SEX, CL_RACE
+  add.data.triple(store,
+                  paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixSKOS,"notation"),
+                  paste0("CL_",toupper(dimName)))
 
-   ## Add rrdfqbcrnd0 information
-       add.data.triple(store,
-                   paste0(prefixlist$prefixCODE,dimName),
-                    paste0(prefixlist$prefixRRDFQBCRND0, "codeType"),
-                    paste0(codeType)
-                    )
+  ## Add rrdfqbcrnd0 information
+  add.data.triple(store,
+                  paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixRRDFQBCRND0, "codeType"),
+                  paste0(codeType)
+                  )
   ## Should only be added if R data set is available
   add.data.triple(store,
-                   paste0(prefixlist$prefixCODE,dimName),
-                    paste0(prefixlist$prefixRRDFQBCRND0, "R-columnname"),
-                    paste0(dimName)
-                    )
+                  paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixRRDFQBCRND0, "R-columnname"),
+                  paste0(dimName)
+                  )
 
   if (codeType=="SDTM"){
-      add.data.triple(store,
-                   paste0(prefixlist$prefixCODE,dimName),
+    add.data.triple(store,
+                    paste0(prefixlist$prefixCODE,dimName),
                     paste0(prefixlist$prefixMMS,"inValueDomain"),
                     paste0(nciDomainValue)
-                      )
-    }
+                    )
+  }
 
   
   ## --------- hasTopConcept ---------
@@ -165,7 +165,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
   }
 
   
-  #############################################################################
+#############################################################################
   ## Code values
   for (i in 1:nrow(codeSource)) {
     add.triple(store,
@@ -185,67 +185,85 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                paste0(prefixlist$prefixSKOS,"inScheme"),
                paste0(prefixlist$prefixCODE, dimName))
     add.data.triple(store,
-                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                      paste0(prefixlist$prefixSKOS,"prefLabel"),
+                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                    paste0(prefixlist$prefixSKOS,"prefLabel"),
                     paste0(codeSource[i,"code"]))
 
 
-   ## Document when the codes come from the source data without reconciliation
+    ## Document when the codes come from the source data without reconciliation
     ##   against other sources.
     if (codeType=="DATA"){
-       add.data.triple(store,
-                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                    paste0(prefixlist$prefixRDFS, "comment"),
-                    "Coded values from data source. No reconciliation against another source",
-                    lang="en")
+      add.data.triple(store,
+                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      paste0(prefixlist$prefixRDFS, "comment"),
+                      "Coded values from data source. No reconciliation against another source",
+                      lang="en")
     }
     ## SDTM Terminology
     ##  Additional triples availble from the SDTM Terminology file.
     if (codeType=="SDTM"){
       add.data.triple(store,
-                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                    paste0(prefixlist$prefixCTS,"cdiscSynonyms"),
-                    paste0(codeSource[i,"cdiscSynonyms"]))
+                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      paste0(prefixlist$prefixCTS,"cdiscSynonyms"),
+                      paste0(codeSource[i,"cdiscSynonyms"]))
 
       ## Remove the prefix colon to specify the value directly (without prefix)
       nciDomain<-gsub(":","",codeSource[i,"nciDomain"])
 
       ## ?  MMS may be incorrect here. How refer back to sdtm-terminology?
       add.data.triple(store,
-                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                    paste0(prefixlist$prefixMMS,"nciDomain"),
-                    paste(nciDomain))
-     add.data.triple(store,
-                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                    paste0(prefixlist$prefixSKOS,"prefLabel"),
-                    paste0(codeSource[i,"code"]))
-     add.data.triple(store,
-                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                    paste0(prefixlist$prefixCTS,"cdiscDefinition"),
-                    paste0(codeSource[i,"cdiscDefinition"]))
+                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      paste0(prefixlist$prefixMMS,"nciDomain"),
+                      paste(nciDomain))
+      add.data.triple(store,
+                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      paste0(prefixlist$prefixSKOS,"prefLabel"),
+                      paste0(codeSource[i,"code"]))
+      add.data.triple(store,
+                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      paste0(prefixlist$prefixCTS,"cdiscDefinition"),
+                      paste0(codeSource[i,"cdiscDefinition"]))
 
-     add.data.triple(store,
-                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-                    paste0(prefixlist$prefixCTS,"cdiscSubmissionValue"),
-                    paste0(codeSource[i,"code"]))
+      add.data.triple(store,
+                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      paste0(prefixlist$prefixCTS,"cdiscSubmissionValue"),
+                      paste0(codeSource[i,"code"]))
 
     }
   }
 
-     ## _NONMISS_
-     ##   Cross reference:  _NONMISS_ creation for TopConcept.
-     ## TODO: Create function that creates _NONMISS_ based on either presence in data
-     ##       or function parameter.
-     ##      It is merely concidental that the Terminology values in the current
-     ##       example both have _NONMISS_ .  This logic MUST change.
+  ## _NONMISS_
+  ##   Cross reference:  _NONMISS_ creation for TopConcept.
+  ## TODO: Create function that creates _NONMISS_ based on either presence in data
+  ##       or function parameter.
+  ##      It is merely concidental that the Terminology values in the current
+  ##       example both have _NONMISS_ .  This logic MUST change.
 
+  
+  if ( dimName=="procedure") {
+    ## TODO(mja): not straightforward, make more clear
+    proc<-GetDescrStatProcedure()
+    for (i in 1:nrow(codeSource)){
+      codeSubj <- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
+      codeSubjInList<- paste0("code:",dimName,"-",codeSource[i,"codeNoBlank"])
+      if (codeSubjInList %in% names(proc)) {
+        add.data.triple(store,
+                        codeSubj,
+                        paste0(prefixlist$prefixRDFS, "comment"),
+                        paste0(c("R statement for derivation: ", 
+                               deparse(proc[[codeSubjInList]]$fun)), collapse="\n"
+                               )
+                        )
+      }
+    }
+  } else {
+      
+      add.triple(store,
+                 paste0(prefixlist$prefixCODE,dimName),
+                 paste0(prefixlist$prefixSKOS, "hasTopConcept"),
+                 paste0(prefixlist$prefixCODE,dimName,"-_NONMISS_"))
 
-    add.triple(store,
-              paste0(prefixlist$prefixCODE,dimName),
-              paste0(prefixlist$prefixSKOS, "hasTopConcept"),
-              paste0(prefixlist$prefixCODE,dimName,"-_NONMISS_"))
-
-     add.triple(store,
+      add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
                  paste0(prefixlist$prefixRDF,"type" ),
                  paste0(prefixlist$prefixSKOS,"Concept"))
@@ -253,7 +271,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                  paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
                  paste0(prefixlist$prefixRDF,"type" ),
                  paste0(prefixlist$prefixCODE, capDimName))
-     add.triple(store,
+      add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
                  paste0(prefixlist$prefixSKOS,"topConceptOf"),
                  paste0(prefixlist$prefixCODE, dimName))
@@ -268,19 +286,19 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
       add.data.triple(store,
                       paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
                       paste0(prefixlist$prefixRDFS, "comment"),
-                      "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values.",
-                     lang="en")
+                      "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values.",
+                      lang="en")
 
-     # _ALL_
-     #   Cross reference:  _ALL_ creation for TopConcept.
-     # TODO: Create function that creates _ALL_ based on either presence in data
-     #       or function parameter.
-     #       It is merely concidental that the Terminology values in the current
-     #       example both have _ALL_ .  This logic MUST change.
-    add.triple(store,
-              paste0(prefixlist$prefixCODE,dimName),
-              paste0(prefixlist$prefixSKOS, "hasTopConcept"),
-              paste0(prefixlist$prefixCODE,dimName,"-_ALL_"))
+      ## _ALL_
+      ##   Cross reference:  _ALL_ creation for TopConcept.
+      ## TODO: Create function that creates _ALL_ based on either presence in data
+      ##       or function parameter.
+      ##       It is merely concidental that the Terminology values in the current
+      ##       example both have _ALL_ .  This logic MUST change.
+      add.triple(store,
+                 paste0(prefixlist$prefixCODE,dimName),
+                 paste0(prefixlist$prefixSKOS, "hasTopConcept"),
+                 paste0(prefixlist$prefixCODE,dimName,"-_ALL_"))
 
       add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
@@ -290,7 +308,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                  paste0(prefixlist$prefixRDF,"type" ),
                  paste0(prefixlist$prefixCODE, capDimName))
-     add.triple(store,
+      add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                  paste0(prefixlist$prefixSKOS,"topConceptOf"),
                  paste0(prefixlist$prefixCODE, dimName))
@@ -306,7 +324,8 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                       paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                       paste0(prefixlist$prefixRDFS, "comment"),
                       "NON-CDISC: Represents all codelist categories.",
-                     lang="en")
-
-  invisible(TRUE)
-} 
+                      lang="en")
+    }
+    
+    invisible(TRUE)
+  } 

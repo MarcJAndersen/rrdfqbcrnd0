@@ -58,7 +58,7 @@ code:procedure  a                 skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: procedure"@en ;
         rrdfqbcrnd0:R-columnname  "procedure" ;
         rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:procedure-max , code:procedure-std , code:procedure-mean , code:procedure-_NONMISS_ , code:procedure-min , code:procedure-percent , code:procedure-_ALL_ , code:procedure-count , code:procedure-q3 , code:procedure-n , code:procedure-median , code:procedure-q1 ;
+        skos:hasTopConcept        code:procedure-max , code:procedure-std , code:procedure-mean , code:procedure-min , code:procedure-percent , code:procedure-count , code:procedure-q3 , code:procedure-n , code:procedure-median , code:procedure-q1 ;
         skos:notation             "CL_PROCEDURE" ;
         skos:note                 "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel            "Codelist scheme: procedure"@en .
@@ -118,7 +118,7 @@ ds:obs021  a                        qb:Observation ;
         crnd-measure:measure        "7.8860938487" .
 
 code:race-_NONMISS_  a     code:Race , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:race ;
         skos:prefLabel     "_NONMISS_" ;
         skos:topConceptOf  code:race .
@@ -221,7 +221,7 @@ ds:obs071  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 code:procedure-min  a      code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    min(x, na.rm = TRUE)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "min" ;
         skos:topConceptOf  code:procedure .
@@ -530,7 +530,7 @@ ds:obs003  a                        qb:Observation ;
 
 code:agegr1-_NONMISS_
         a                  code:Agegr1 , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:agegr1 ;
         skos:prefLabel     "_NONMISS_" ;
         skos:topConceptOf  code:agegr1 .
@@ -815,7 +815,7 @@ code:factor-age  a         code:Factor , skos:Concept ;
         skos:topConceptOf  code:factor .
 
 code:procedure-std  a      code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    sd(x, na.rm = TRUE)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "std" ;
         skos:topConceptOf  code:procedure .
@@ -857,7 +857,7 @@ ds:obs019  a                        qb:Observation ;
         crnd-measure:measure        "8.5901671271" .
 
 code:procedure-q3  a       code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    quantile(x, probs = c(0.75), na.rm = TRUE)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "q3" ;
         skos:topConceptOf  code:procedure .
@@ -1032,7 +1032,7 @@ ds:obs098  a                        qb:Observation ;
 
 code:procedure-median
         a                  code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    median(x, na.rm = TRUE)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "median" ;
         skos:topConceptOf  code:procedure .
@@ -1054,13 +1054,6 @@ ds:obs077  a                        qb:Observation ;
         crnd-dimension:sex          code:sex-_ALL_ ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "92.857142857"^^xsd:double .
-
-code:procedure-_NONMISS_
-        a                  code:Procedure , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
-        skos:inScheme      code:procedure ;
-        skos:prefLabel     "_NONMISS_" ;
-        skos:topConceptOf  code:procedure .
 
 ds:obs056  a                        qb:Observation ;
         rdfs:label                  "56" ;
@@ -1117,7 +1110,7 @@ ds:obs014  a                        qb:Observation ;
         crnd-measure:measure        "34"^^xsd:int .
 
 code:procedure-count  a    code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    length(x)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "count" ;
         skos:topConceptOf  code:procedure .
@@ -1225,7 +1218,7 @@ ds:obs022  a                        qb:Observation ;
         crnd-measure:measure        "86" .
 
 code:procedure-max  a      code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    max(x, na.rm = TRUE)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "max" ;
         skos:topConceptOf  code:procedure .
@@ -1237,7 +1230,7 @@ code:Trt01a  a           rdfs:Class , owl:Class ;
         rdfs:subClassOf  skos:Concept .
 
 code:procedure-mean  a     code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    mean(x, na.rm = TRUE)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "mean" ;
         skos:topConceptOf  code:procedure .
@@ -1262,7 +1255,7 @@ ds:obs001  a                        qb:Observation ;
 
 code:trt01a-_NONMISS_
         a                  code:Trt01a , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        rdfs:comment       "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
         skos:inScheme      code:trt01a ;
         skos:prefLabel     "_NONMISS_" ;
         skos:topConceptOf  code:trt01a .
@@ -1545,7 +1538,7 @@ ds:obs017  a                        qb:Observation ;
         crnd-measure:measure        "40.476190476"^^xsd:double .
 
 code:procedure-q1  a       code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    quantile(x, probs = c(0.25), na.rm = TRUE)\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "q1" ;
         skos:topConceptOf  code:procedure .
@@ -1557,7 +1550,7 @@ ds:dataset-DEMO  a           qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DEMO ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-05-08T00:58:43+02:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-05-10T22:57:54+02:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.1.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DEMO-R-V-0-5-2.ttl" ;
@@ -1977,7 +1970,7 @@ code:ethnic-NOT_HISPANIC_OR_LATINO
 
 code:factor-_NONMISS_
         a                  code:Factor , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        rdfs:comment       "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
         skos:inScheme      code:factor ;
         skos:prefLabel     "_NONMISS_" ;
         skos:topConceptOf  code:factor .
@@ -2209,7 +2202,7 @@ ds:obs015  a                        qb:Observation ;
 
 code:ethnic-_NONMISS_
         a                  code:Ethnic , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:ethnic ;
         skos:prefLabel     "_NONMISS_" ;
         skos:topConceptOf  code:ethnic .
@@ -2734,14 +2727,14 @@ ds:obs005  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 code:procedure-n  a        code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    length(x[!is.na(x)])\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "n" ;
         skos:topConceptOf  code:procedure .
 
 code:procedure-percent
         a                  code:Procedure , skos:Concept ;
-        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "R statement for derivation: \nfunction (x) \n{\n    -1\n}" , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:procedure ;
         skos:prefLabel     "percent" ;
         skos:topConceptOf  code:procedure .
@@ -2830,7 +2823,7 @@ ds:obs076  a                        qb:Observation ;
         crnd-measure:measure        "90.697674419"^^xsd:double .
 
 code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the SUM of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
+        rdfs:comment       "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values."@en ;
         skos:inScheme      code:sex ;
         skos:prefLabel     "_NONMISS_" ;
         skos:topConceptOf  code:sex .
@@ -2907,9 +2900,3 @@ code:agegr1-_65  a         code:Agegr1 , skos:Concept ;
         skos:inScheme      code:agegr1 ;
         skos:prefLabel     "<65" ;
         skos:topConceptOf  code:agegr1 .
-
-code:procedure-_ALL_  a    code:Procedure , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
-        skos:inScheme      code:procedure ;
-        skos:prefLabel     "_ALL_" ;
-        skos:topConceptOf  code:procedure .
