@@ -43,3 +43,11 @@ cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq 
 ```
 
+## Get definition for procedure (descriptive statistics)
+
+The SPARQL script shows 
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq 
+```
+
