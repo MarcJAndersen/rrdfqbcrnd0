@@ -18,26 +18,8 @@ prefix ds: <http://www.example.org/dc/demo/ds/>
 prefix crnd-dimension: <http://www.example.org/dc/dimension#>  
 prefix crnd-attribute: <http://www.example.org/dc/attribute#>  
 prefix crnd-measure: <http://www.example.org/dc/measure#>  
- select * where { ?s a qb:Observation  ;   
-        qb:dataSet ds:dataset-DEMO  ;   
- crnd-dimension:ethnic ?ethnic;  
-crnd-dimension:race ?race;  
-crnd-dimension:procedure ?procedure;  
-crnd-dimension:agegr1 ?agegr1;  
-crnd-dimension:factor ?factor;  
-crnd-dimension:trt01a ?trt01a;  
-crnd-dimension:sex ?sex; crnd-attribute:cellpartno ?cellpartno;  
-crnd-attribute:measurefmt ?measurefmt;  
-crnd-attribute:colno ?colno;  
-crnd-attribute:denominator ?denominator;  
-crnd-attribute:unit ?unit;  
-crnd-attribute:rowno ?rowno; crnd-measure:measure      ?measure ;        
- optional{ ?ethnic skos:prefLabel ?ethnicvalue . }  
-optional{ ?race skos:prefLabel ?racevalue . }  
-optional{ ?procedure skos:prefLabel ?procedurevalue . }  
-optional{ ?agegr1 skos:prefLabel ?agegr1value . }  
-optional{ ?factor skos:prefLabel ?factorvalue . }  
-optional{ ?trt01a skos:prefLabel ?trt01avalue . }  
-optional{ ?sex skos:prefLabel ?sexvalue . }   
+select ?s ?p ?o where { 
+?s ?p ?o
+values (?s) {(code:procedure-median)}
  }    
 
