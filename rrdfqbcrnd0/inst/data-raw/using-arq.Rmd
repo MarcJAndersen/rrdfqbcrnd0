@@ -43,11 +43,28 @@ cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq 
 ```
 
-## Get definition for procedure (descriptive statistics)
+## Get definition for all descriptive statistics
 
-The SPARQL script shows 
+The SPARQL script shows how the function definition for the descriptive statistics is stored in the cube.
 ```{r, engine='bash'}
 cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq 
 ```
+
+## Get definition for descriptive statistics median
+
+The SPARQL script shows how the function definition for the descriptive statistics is stored in the cube.
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOprocedure-median.rq 
+```
+
+## Get information for selection of data
+
+The SPARQL script shows how the information for selecting data for derivation of univariate statistics is present in the cube.
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOobservations-R-selection.rq
+```
+
 
