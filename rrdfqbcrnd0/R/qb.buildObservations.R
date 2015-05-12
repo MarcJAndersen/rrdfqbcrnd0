@@ -17,6 +17,9 @@ colnames(obsData) <- tolower(colnames(obsData))  ## TODO: not sure if needed - C
 
 ## XX this could go into a function
 checkVars<- skeletonSource[ skeletonSource$compType %in% c("dimension","attribute"), "compName" ]
+if (length(setdiff(checkVars,names(obsData)))>0) {
+  stop("Expected variables ", setdiff(checkVars,names(obsData)), " not found in data")
+} else {
 dupObs<-duplicated(obsData[, checkVars])
 if (any(dupObs)) {
 ## idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
@@ -25,7 +28,7 @@ if (any(dupObs)) {
   print( obsData[which(dupObs | dupObsRev ), ] )
   stop("Duplicated observations in obsData. Varibables that should be unique: ", paste0(checkVars,collapse=", "))
 }
-                        
+}                         
 if (is.null(procedure2format)) {
     procedure2format<- list("count"="int",
                          "countdistinct"="int",
