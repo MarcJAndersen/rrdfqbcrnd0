@@ -384,10 +384,14 @@ knit(rmdFiles[1])
 # SPARQL queries with path
 
 Path trick from
-http://stackoverflow.com/questions/22210295/arbitrary-path-length-query-in-sparql/22210531#22210531
-http://stackoverflow.com/questions/5198889/calculate-length-of-path-between-nodes
-http://stackoverflow.com/questions/17523804/is-it-possible-to-get-the-position-of-an-element-in-an-rdf-collection-in-sparql
-http://www.w3.org/TR/sparql11-query/#propertypath-examples
+(http://stackoverflow.com/questions/22210295/arbitrary-path-length-query-in-sparql/22210531#22210531)
+(http://stackoverflow.com/questions/5198889/calculate-length-of-path-between-nodes)
+(http://stackoverflow.com/questions/17523804/is-it-possible-to-get-the-position-of-an-element-in-an-rdf-collection-in-sparql)
+
+Main example:
+(http://stackoverflow.com/questions/26698675/sparql-property-path-queries-with-arbitrary-properties?rq=1)
+
+(http://www.w3.org/TR/sparql11-query/#propertypath-examples)
 
 ```{r, eval=FALSE}
 library(rrdf)
