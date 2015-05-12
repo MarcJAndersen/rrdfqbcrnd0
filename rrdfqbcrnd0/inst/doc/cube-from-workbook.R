@@ -16,20 +16,29 @@ knitr::kable(cubeMetadata[ cubeMetadata$compType=="metadata",c("compName","compL
 
 ## ----, eval=TRUE---------------------------------------------------------
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
-cat("DM cube stored as ", dm.cube.fn, "\n")
+cat("DM cube stored as ", normalizePath(dm.cube.fn), "\n")
 
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
-cat("AE cube stored as ", ae.cube.fn, "\n")
+cat("AE cube stored as ", normalizePath(ae.cube.fn), "\n")
 
 ## ----, eval=TRUE---------------------------------------------------------
 demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfqbcrnd0")
 demoObsData <- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
 
+##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
+##TODO inst/data-raw/create-qb-examples-as-ttl.Rmd
+if (!( "measurefmt" %in% names(demoObsData))) {
+demoObsData$measurefmt<- "%6.1f"
+demoObsData$measurefmt[ demoObsData$procedure %in% c("n", "nmiss", "count") ]<- "%6.0f"
+## sprintf( demoObsData$measurefmt, demoObsData$measure)
+}
+
 demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", package="rrdfqbcrnd0")
 demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 
+
 demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
-cat("DEMO cube stored as ", demo.cube.fn, "\n")
+cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 
 ## ----, echo=TRUE, results='asis'-----------------------------------------
 dataCubeFile<- demo.cube.fn

@@ -208,31 +208,98 @@ hr {
 <pre><code class="r">library(rrdfqbcrnd0)
 </code></pre>
 
-<h1>Loading DEMO data</h1>
+<h1>Current - 08-may-2015</h1>
 
-<p>The DEMO data exists as a turtle file in the sample-rdf directory.</p>
+<p>The following code is under development. It creates HTML files
+under extdata/sample-cfg showing a two dimensional representation
+of the RDF data cube.</p>
 
-<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
+<p>Here are some the features that are evaluated</p>
+
+<ul>
+<li>drag and drop of measure - could be used for creating a new table from existing</li>
+<li>store RDF as RDFa - could be used to embed the whole cube in the file; looks like it gets to big</li>
+</ul>
+
+<p>Pending: including the rest of the cube into the
+html. Consider if in each cell only the observation and measure should
+be referenced and not all properties and objects for the observation.</p>
+
+<p>The HTML includes green-turtle
+(<a href="https://github.com/alexmilowski/green-turtle">https://github.com/alexmilowski/green-turtle</a>), jquery
+(<a href="http://jquery.com/">http://jquery.com/</a>) and jqueryUI (<a href="http://jqueryui.com/">http://jqueryui.com/</a>).</p>
+
+<p>In my setup I store the project under packages, and can symlink to the
+files from the extdata/sample-cfg directory.</p>
+
+<pre><code>cd extdata/sample-cfg
+ln -s ~/packages/green-turtle/build/RDFa.min.1.4.0.js 
+ln -s ~/packages/green-turtle/build/RDFaProcessor.min.1.4.0.js 
+ln -s ~/packages/jquery-2.1.3.min/jquery-2.1.3.min.js .
+ln -s ~/packages/jquery-ui-1.11.3.custom .
+</code></pre>
+
+<pre><code class="r">MakeTable&lt;- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
+
 store &lt;- new.rdf()  # Initialize
 cat(&quot;Loading &quot;, dataCubeFile, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
-</code></pre>
-
-<pre><code class="r">load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
+load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
 summarize.rdf(store)
-</code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 2689&quot;
-</code></pre>
-
-<pre><code class="r">dsdName&lt;- GetDsdNameFromCube( store )
+dsdName&lt;- GetDsdNameFromCube( store )
 domainName&lt;- GetDomainNameFromCube( store )
 forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
+
+dimensions&lt;- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
+attributesDf&lt;- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
+
+outhtmlfile&lt;- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile )
+
+outhtmlfile
+}
 </code></pre>
 
-<p>View a specific observation. The observation is specified in the values part of the SPARQL query.</p>
+<h2>Create AE html example</h2>
+
+<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-AE-sample.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
+htmlfile&lt;- file.path(system.file(&quot;extdata/sample-cfg&quot;, package=&quot;rrdfqbcrnd0&quot;), &quot;DC-AE-sample.html&quot;)
+rowdim&lt;- c(&quot;crnd-attribute:rowno&quot;, &quot;crnd-dimension:aesoc&quot;, &quot;crnd-dimension:aedecod&quot; )
+coldim&lt;- c(&quot;crnd-attribute:colno&quot;, &quot;crnd-attribute:cellpartno&quot;, &quot;crnd-dimension:trta&quot; )
+# idrow is a function of rowdim; writing it directly is easier for now
+idrow&lt;-  c( &quot;aesocvalue&quot;, &quot;aedecodvalue&quot; )
+idcol&lt;-  c( &quot;crnd-dimension:trta&quot; )
+resHtmlFile&lt;- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
+</code></pre>
+
+<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-AE-sample.ttl 
+## [1] &quot;Number of triples: 23316&quot;
+</code></pre>
+
+<h2>Create DEMO html example</h2>
+
+<pre><code class="r">dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
+htmlfile&lt;- file.path(system.file(&quot;extdata/sample-cfg&quot;, package=&quot;rrdfqbcrnd0&quot;), &quot;DC-DEMO-sample.html&quot;)
+
+coldim&lt;- c(&quot;crnd-attribute:colno&quot;, &quot;crnd-attribute:cellpartno&quot;, &quot;crnd-dimension:trt01a&quot; )
+rowdim&lt;- c(&quot;crnd-attribute:rowno&quot;, &quot;crnd-dimension:agegr1&quot;, &quot;crnd-dimension:race&quot;, &quot;crnd-dimension:ethnic&quot;, &quot;crnd-dimension:sex&quot; )
+idrow&lt;-  c( &quot;agegr1value&quot;, &quot;racevalue&quot;, &quot;ethnicvalue&quot;, &quot;sexvalue&quot; )
+idcol&lt;-  c( &quot;crnd-dimension:trt01a&quot; )
+
+## Does not work
+## # rowdim&lt;- c(&quot;crnd-attribute:rowno&quot;, &quot;crnd-dimension:agegr1&quot;, &quot;crnd-dimension:race&quot;, &quot;crnd-dimension:ethnic&quot;, &quot;crnd-dimension:sex&quot;, &quot;crnd-dimension:procedure&quot; )
+## # idrow&lt;-  c( &quot;agegr1value&quot;, &quot;racevalue&quot;, &quot;ethnicvalue&quot;, &quot;sexvalue&quot;, &quot;procedurevalue&quot; )
+resHtmlFile&lt;- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
+</code></pre>
+
+<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl 
+## [1] &quot;Number of triples: 2895&quot;
+</code></pre>
+
+<h2>For development</h2>
+
+<h3>View a specific observation.</h3>
+
+<p>The observation is specified in the values part of the SPARQL query.</p>
 
 <pre><code class="r">cube.observations.rq&lt;-  paste( forsparqlprefix,
 &#39;
@@ -301,6 +368,11 @@ knitr::kable(cube.observations)
 </tr>
 <tr>
 <td align="left">ds:obs029</td>
+<td align="left">crnd-attribute:measurefmt</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">ds:obs029</td>
 <td align="left">crnd-attribute:rowno</td>
 <td align="left">7</td>
 </tr>
@@ -341,47 +413,84 @@ knitr::kable(cube.observations)
 </tr>
 </tbody></table>
 
-<h1>Current - 15-mar-2015</h1>
+<h3>View formating of measure</h3>
 
-<p>The following code is under development. It creates a HTML file
-extdata/sample-cfg/test.html showing a two dimensional representation
-of the table with drag and drop. The observations are stored as RDFa
-in the HTML. Pending: including the rest of the cube into the
-html. Consider if in each cell only the observation and measure should
-be referenced and not all properties and objects for the observation.</p>
-
-<p>The HTML includes green-turtle
-(<a href="https://github.com/alexmilowski/green-turtle">https://github.com/alexmilowski/green-turtle</a>), jquery
-(<a href="http://jquery.com/">http://jquery.com/</a>) and jqueryUI (<a href="http://jqueryui.com/">http://jqueryui.com/</a>).  In my setup
-I store the project under packages, and can symlink to the files from the
-extdata/sample-cfg directory.</p>
-
-<pre><code>cd extdata/sample-cfg
-ln -s ~/packages/green-turtle/build/RDFa.min.1.4.0.js 
-ln -s ~/packages/green-turtle/build/RDFaProcessor.min.1.4.0.js 
-ln -s ~/packages/jquery-2.1.3.min/jquery-2.1.3.min.js .
-ln -s ~/packages/jquery-ui-1.11.3.custom .
-</code></pre>
-
-<pre><code class="r">cols.rq&lt;-  paste( forsparqlprefix,
+<pre><code class="r">cube.measurefmt.rq&lt;-  paste( forsparqlprefix,
 &#39;
-select distinct ?colno ?cellpartno
+select distinct ?procedure ?measurefmt
 where { 
 ?s a qb:Observation ; 
-crnd-attribute:colno ?colno ;
-crnd-attribute:cellpartno ?cellpartno .
+crnd-dimension:procedure ?procedure ;
+crnd-attribute:measurefmt ?measurefmt .
 }
-order by ?colno ?cellpartno
 &#39;,
 &quot;\n&quot;                               
 )
 
-cols&lt;- sparql.rdf(store, cols.rq)
+cube.measurefmt&lt;- sparql.rdf(store, cube.measurefmt.rq)
+knitr::kable(cube.measurefmt)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">procedure</th>
+<th align="left">measurefmt</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">code:procedure-q3</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-count</td>
+<td align="left">%6.0f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-percent</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-std</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-min</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-n</td>
+<td align="left">%6.0f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-median</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-q1</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-max</td>
+<td align="left">%6.1f</td>
+</tr>
+<tr>
+<td align="left">code:procedure-mean</td>
+<td align="left">%6.1f</td>
+</tr>
+</tbody></table>
+
+<h3>Columns</h3>
+
+<p>The contents of the </p>
+
+<pre><code class="r">cols.rq&lt;- GetRownoColnoCellpartnoSparqlQuery( forsparqlprefix )
+cols&lt;- data.frame(sparql.rdf(store, cols.rq))
 knitr::kable(cols)
 </code></pre>
 
 <table><thead>
 <tr>
+<th align="left">rowno</th>
 <th align="left">colno</th>
 <th align="left">cellpartno</th>
 </tr>
@@ -389,672 +498,664 @@ knitr::kable(cols)
 <tr>
 <td align="left">1</td>
 <td align="left">1</td>
+<td align="left">1</td>
 </tr>
 <tr>
+<td align="left">1</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">10</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">11</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">18</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">19</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">2</td>
 <td align="left">1</td>
 <td align="left">2</td>
 </tr>
 <tr>
 <td align="left">2</td>
+<td align="left">2</td>
 <td align="left">1</td>
 </tr>
 <tr>
 <td align="left">2</td>
 <td align="left">2</td>
+<td align="left">2</td>
 </tr>
 <tr>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">20</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">21</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">22</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">23</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">24</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">25</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">25</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">25</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">25</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">25</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">25</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">26</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">26</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">26</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">27</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">27</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">27</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">28</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">28</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">28</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">29</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">29</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">29</td>
 <td align="left">3</td>
 <td align="left">1</td>
 </tr>
 <tr>
 <td align="left">3</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">1</td>
 <td align="left">2</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">30</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">30</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">30</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">31</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">32</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">32</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">32</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">33</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">33</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">33</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">36</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">36</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">36</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">36</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">36</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">36</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">38</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">38</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">38</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">38</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">38</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">38</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">40</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">40</td>
+<td align="left">1</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">40</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">40</td>
+<td align="left">2</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">40</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">40</td>
+<td align="left">3</td>
+<td align="left">2</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">7</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">8</td>
+<td align="left">3</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">1</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">2</td>
+<td align="left">1</td>
+</tr>
+<tr>
+<td align="left">9</td>
+<td align="left">3</td>
+<td align="left">1</td>
 </tr>
 </tbody></table>
-
-<pre><code class="r">dimensions&lt;- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
-attributesDf&lt;- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
-
-rowdim&lt;- c(&quot;crnd-attribute:rowno&quot;, &quot;crnd-dimension:agegr1&quot;, &quot;crnd-dimension:race&quot;, &quot;crnd-dimension:ethnic&quot;, &quot;crnd-dimension:sex&quot; )
-coldim&lt;- c(&quot;crnd-attribute:colno&quot;, &quot;crnd-attribute:cellpartno&quot;, &quot;crnd-dimension:trt01a&quot; )
-
-qbtest&lt;- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
-
-## names(attributes(qbtest))
-## options(width=200)
-## knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
-
-oDx&lt;-attr(qbtest,&quot;observationsDesc&quot;)
-oDxx&lt;- oDx[! is.na(oDx$s),]
-oD&lt;- oDxx[order(strtoi(oDxx$rowno)),]
-presrowvarindex&lt;- unique(oD$rowno)
-colvarindex&lt;- unique(oD$colno)
-cellpartnoindex&lt;- unique(oD$cellpartno)
-presrowvarindex
-</code></pre>
-
-<pre><code>##  [1] &quot;1&quot;  &quot;2&quot;  &quot;3&quot;  &quot;4&quot;  &quot;5&quot;  &quot;6&quot;  &quot;7&quot;  &quot;8&quot;  &quot;9&quot;  &quot;10&quot; &quot;11&quot; &quot;18&quot; &quot;19&quot; &quot;20&quot;
-## [15] &quot;21&quot; &quot;22&quot; &quot;23&quot; &quot;24&quot; &quot;25&quot; &quot;26&quot; &quot;27&quot; &quot;28&quot; &quot;29&quot; &quot;30&quot; &quot;31&quot; &quot;32&quot; &quot;33&quot; &quot;36&quot;
-## [29] &quot;38&quot; &quot;40&quot;
-</code></pre>
-
-<pre><code class="r">colvarindex
-</code></pre>
-
-<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;
-</code></pre>
-
-<pre><code class="r">cellpartnoindex
-</code></pre>
-
-<pre><code>## [1] &quot;1&quot; &quot;2&quot;
-</code></pre>
-
-<pre><code class="r">oD[,c(&quot;s&quot;,&quot;rowno&quot;,&quot;colno&quot;,&quot;cellpartno&quot;)]
-</code></pre>
-
-<pre><code>##             s rowno colno cellpartno
-## 1   ds:obs001     1     1          1
-## 2   ds:obs004     1     1          2
-## 3   ds:obs002     1     2          1
-## 4   ds:obs005     1     2          2
-## 5   ds:obs003     1     3          1
-## 6   ds:obs006     1     3          2
-## 31  ds:obs007     2     1          1
-## 32  ds:obs010     2     1          2
-## 33  ds:obs008     2     2          1
-## 34  ds:obs011     2     2          2
-## 35  ds:obs009     2     3          1
-## 36  ds:obs012     2     3          2
-## 97  ds:obs013     3     1          1
-## 98  ds:obs016     3     1          2
-## 99  ds:obs014     3     2          1
-## 100 ds:obs017     3     2          2
-## 101 ds:obs015     3     3          1
-## 102 ds:obs018     3     3          2
-## 139 ds:obs019     4     1          1
-## 141 ds:obs020     4     2          1
-## 143 ds:obs021     4     3          1
-## 151 ds:obs022     5     1          1
-## 153 ds:obs023     5     2          1
-## 155 ds:obs024     5     3          1
-## 157 ds:obs025     6     1          1
-## 159 ds:obs026     6     2          1
-## 161 ds:obs027     6     3          1
-## 163 ds:obs028     7     1          1
-## 165 ds:obs029     7     2          1
-## 167 ds:obs030     7     3          1
-## 169 ds:obs031     8     1          1
-## 171 ds:obs032     8     2          1
-## 173 ds:obs033     8     3          1
-## 175 ds:obs034     9     1          1
-## 177 ds:obs035     9     2          1
-## 179 ds:obs036     9     3          1
-## 7   ds:obs037    10     1          1
-## 9   ds:obs038    10     2          1
-## 11  ds:obs039    10     3          1
-## 13  ds:obs040    11     1          1
-## 15  ds:obs041    11     2          1
-## 17  ds:obs042    11     3          1
-## 19  ds:obs043    18     1          1
-## 20  ds:obs046    18     1          2
-## 21  ds:obs044    18     2          1
-## 22  ds:obs047    18     2          2
-## 23  ds:obs045    18     3          1
-## 24  ds:obs048    18     3          2
-## 25  ds:obs049    19     1          1
-## 26  ds:obs052    19     1          2
-## 27  ds:obs050    19     2          1
-## 28  ds:obs053    19     2          2
-## 29  ds:obs051    19     3          1
-## 30  ds:obs054    19     3          2
-## 37  ds:obs055    20     1          1
-## 38  ds:obs058    20     1          2
-## 39  ds:obs056    20     2          1
-## 40  ds:obs059    20     2          2
-## 41  ds:obs057    20     3          1
-## 42  ds:obs060    20     3          2
-## 43  ds:obs061    21     1          1
-## 44  ds:obs064    21     1          2
-## 45  ds:obs062    21     2          1
-## 46  ds:obs065    21     2          2
-## 47  ds:obs063    21     3          1
-## 48  ds:obs066    21     3          2
-## 49  ds:obs067    22     1          1
-## 50  ds:obs070    22     1          2
-## 51  ds:obs068    22     2          1
-## 52  ds:obs071    22     2          2
-## 53  ds:obs069    22     3          1
-## 54  ds:obs072    22     3          2
-## 55  ds:obs073    23     1          1
-## 56  ds:obs076    23     1          2
-## 57  ds:obs074    23     2          1
-## 58  ds:obs077    23     2          2
-## 59  ds:obs075    23     3          1
-## 60  ds:obs078    23     3          2
-## 61  ds:obs079    24     1          1
-## 62  ds:obs082    24     1          2
-## 63  ds:obs080    24     2          1
-## 64  ds:obs083    24     2          2
-## 65  ds:obs081    24     3          1
-## 66  ds:obs084    24     3          2
-## 67  ds:obs085    25     1          1
-## 68  ds:obs088    25     1          2
-## 69  ds:obs086    25     2          1
-## 70  ds:obs089    25     2          2
-## 71  ds:obs087    25     3          1
-## 72  ds:obs090    25     3          2
-## 73  ds:obs091    26     1          1
-## 75  ds:obs092    26     2          1
-## 77  ds:obs093    26     3          1
-## 79  ds:obs094    27     1          1
-## 81  ds:obs095    27     2          1
-## 83  ds:obs096    27     3          1
-## 85  ds:obs097    28     1          1
-## 87  ds:obs098    28     2          1
-## 89  ds:obs099    28     3          1
-## 91  ds:obs100    29     1          1
-## 93  ds:obs101    29     2          1
-## 95  ds:obs102    29     3          1
-## 103 ds:obs103    30     1          1
-## 105 ds:obs104    30     2          1
-## 107 ds:obs105    30     3          1
-## 109 ds:obs106    31     1          1
-## 111 ds:obs107    31     2          1
-## 113 ds:obs108    31     3          1
-## 115 ds:obs109    32     1          1
-## 117 ds:obs110    32     2          1
-## 119 ds:obs111    32     3          1
-## 121 ds:obs112    33     1          1
-## 123 ds:obs113    33     2          1
-## 125 ds:obs114    33     3          1
-## 127 ds:obs115    36     1          1
-## 128 ds:obs118    36     1          2
-## 129 ds:obs116    36     2          1
-## 130 ds:obs119    36     2          2
-## 131 ds:obs117    36     3          1
-## 132 ds:obs120    36     3          2
-## 133 ds:obs121    38     1          1
-## 134 ds:obs124    38     1          2
-## 135 ds:obs122    38     2          1
-## 136 ds:obs125    38     2          2
-## 137 ds:obs123    38     3          1
-## 138 ds:obs126    38     3          2
-## 145 ds:obs127    40     1          1
-## 146 ds:obs130    40     1          2
-## 147 ds:obs128    40     2          1
-## 148 ds:obs131    40     2          2
-## 149 ds:obs129    40     3          1
-## 150 ds:obs132    40     3          2
-</code></pre>
-
-<pre><code class="r">presrowvarvalue&lt;- gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:(.*)&quot;,&quot;\\1value&quot;,rowdim)
-presrowvarIRI&lt;- gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:(.*)&quot;,&quot;\\1IRI&quot;,rowdim)
-presrowvarlabel&lt;- gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:(.*)&quot;,&quot;\\1label&quot;,rowdim)
-
-## add code for embedding the cube as turtle
-## determine cube compontents except observations,
-## as the observations are stored as RDFa
-file&lt;- file.path(system.file(&quot;extdata/sample-cfg&quot;, package=&quot;rrdfqbcrnd0&quot;), &quot;test.html&quot;)
-# file&lt;- file.path(tempdir(),&quot;test.html&quot;)
-append&lt;- TRUE
-print(file)
-</code></pre>
-
-<pre><code>## [1] &quot;/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/test.html&quot;
-</code></pre>
-
-<pre><code class="r">cat(&quot;&lt;!DOCTYPE HTML&gt;\n&quot;, file=file, append=FALSE)
-cat(&#39;
-&lt;html&gt;
-  &lt;head&gt;
-&lt;meta charset=&quot;UTF-8&quot;&gt;
-&lt;title&gt;DEMO table as html&lt;/title&gt;
-   &lt;script src=&quot;jquery-2.1.3.min.js&quot;&gt;&lt;/script&gt;
-   &lt;link rel=&quot;stylesheet&quot; href=&quot;jquery-ui-1.11.3.custom/jquery-ui.css&quot;/&gt;
-   &lt;script src=&quot;jquery-ui-1.11.3.custom/jquery-ui.min.js&quot;&gt;&lt;/script&gt;
-   &lt;script src=&quot;RDFa.min.1.4.0.js&quot;&gt;&lt;/script&gt;
-
-&lt;style&gt;
-#table {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:1000px;
-    width:750px;
-    float:left;
-    padding:5px;
-}
-#drop{
-    width:300px;
-    background-color:green;
-    float:left;
-    padding:10px;
-}
-&lt;/style&gt;
-
-&lt;/head&gt;
-&lt;script&gt;
-&quot;use strict&quot;;
-
-function allowDrop(ev)
-{
-ev.preventDefault();
-}
-
-function drag(ev)
-{
-ev.dataTransfer.setData(&quot;Text&quot;,ev.target.id);
-console.log(&quot;Dragging: &quot;, ev.target.id);
-}
-
-function drop(ev)
-{
-ev.preventDefault();
-var data=ev.dataTransfer.getData(&quot;Text&quot;);
-console.log(&quot;Dropping: &quot;, data);
-// from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
-var nodeCopy = document.getElementById(data).cloneNode(true);
-nodeCopy.id = &quot;copy&quot;+nodeCopy.id;
-// end from http://stackoverflow.com/questions/13007582/html5-drag-and-copy
-var newelem = document.createElement(&quot;P&quot;);
-newelem.appendChild(nodeCopy);
-ev.target.appendChild(newelem);
-}
-
-$(document).ready(function(){
-
-GreenTurtle.attach(document)
-
-})
-
-&lt;/script&gt;
-&lt;body&gt;
-&lt;h1&gt;DEMO table as RDFa&lt;/h1&gt;
-&#39;
-, file=file, append=TRUE)
-
-cat(&#39;&lt;div id=&quot;container&quot;&gt;&#39;, file=file, append=TRUE)
-
-cat(&quot;&lt;div id=&#39;table&#39;&gt;\n&quot;, file=file, append=TRUE)
-cat(&quot;&lt;table border&gt;\n&quot;, file=file, append=TRUE)
-or&lt;-1
-
-## make the header row(s) for the columns
-
-for (rr in presrowvarindex) {
-  cat(&quot;&lt;tr&gt;&quot;, file=file, append=TRUE)
-print(rr)
-  ## make the row identification
-  for (cc in colvarindex) {
-print(cc)
-    cat(&quot;&lt;td&gt;&quot;, file=file, append=TRUE)
-cpindex&lt;-0
-    for (cp in cellpartnoindex) {
-print(cp)
-cpindex&lt;- cpindex+1
-if (cpindex&gt;1) {
-## separator between cells should be taken from data
-      cat(&quot; &quot;, file=file, append=TRUE)
-}
-    if (oD$rowno[or]==rr &amp; oD$colno[or]==cc &amp; oD$cellpartno[or]==cp ) {
-## The observation
-      ## next line is for simple fly-over
-      cat(paste0(&quot;&lt;a title=\&quot;&quot;, oD$measureIRI[or], &quot;\&quot;&gt;&quot;), file=file, append=TRUE)
-
-      cat(paste0(&#39;&lt;span &#39;, &#39;id=&quot;&#39;, gsub(&quot;ds:&quot;,&quot;&quot;,oD$s[or]), &#39;&quot;&#39;,
-                 &#39;resource=&quot;&#39;, oD$s[or],&#39;&quot;&#39;,
-                 &#39; typeof=&quot;qb:Observation&quot; draggable=&quot;true&quot; ondragstart=&quot;drag(event)&quot; &gt;&#39;),
-          file=file, append=TRUE)
-cat(paste0(&#39;&lt;span property=&quot;qb:dataSet&quot; resource=&quot;&#39;, &#39;ds:&#39;, dsdName,&#39;&quot;&gt;&#39;), file=file, append=TRUE)
-
-for (prop in dimensions) {
-cat( paste0(&#39;&lt;span property=&quot;&#39;, prop, &#39;&quot;&#39;, &#39; resource=&quot;&#39;, oD[or, gsub(&quot;crnd-dimension:|crnd-attribute:|crnd-measure:&quot;, &quot;&quot;, prop)], &#39;&quot;&gt;&#39;), file=file, append=TRUE)
-}
-
-## formatting to applied to measure
-      cat(paste0(oD$measure[or]), file=file, append=TRUE)
-
-for (prop in dimensions) {
-cat( &#39;&lt;/span&gt;&#39;, file=file, append=TRUE)
-}
-cat( &#39;&lt;/span&gt;&#39;, file=file, append=TRUE)
-cat( &#39;&lt;/span&gt;&#39;, file=file, append=TRUE)
-
-      cat(paste0(&quot;&lt;/a&gt;&quot;), file=file, append=TRUE)
-      or&lt;- or+1
-    }
-    }
-    cat(&quot;&lt;/td&gt;&quot;, file=file, append=TRUE)
-  }
-cat(&quot;&lt;/tr&gt;&quot;, file=file, append=TRUE)
-  }
-</code></pre>
-
-<pre><code>## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;4&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;5&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;6&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;7&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;8&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;9&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;10&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;11&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;18&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;19&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;20&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;21&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;22&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;23&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;24&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;25&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;26&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;27&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;28&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;29&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;30&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;31&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;32&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;33&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;36&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;38&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;40&quot;
-## [1] &quot;1&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;2&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-## [1] &quot;3&quot;
-## [1] &quot;1&quot;
-## [1] &quot;2&quot;
-</code></pre>
-
-<pre><code class="r">cat(&quot;&lt;/table&gt;\n&quot;, file=file, append=TRUE)
-cat(&quot;&lt;/div&gt;\n&quot;, file=file, append=TRUE)
-
-cat(&#39;
-&lt;div id=&quot;droparea&quot;&gt;
-Drag and drop over the green text below.
-&lt;table&gt;
-&lt;tr&gt;&lt;td&gt;
-&lt;span  style=&quot;width:100px&quot; id=&quot;drop&quot; ondrop=&quot;drop(event)&quot; ondragover=&quot;allowDrop(event)&quot;&gt;Drop here...&lt;/span&gt;
-&lt;/td&gt;&lt;/tr&gt;
-&lt;/table&gt;
-&lt;/div&gt; 
-&#39;,  file=file, append=TRUE)                 
-cat(&#39;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-&#39;, file=file, append=TRUE)
-print(file)
-</code></pre>
-
-<pre><code>## [1] &quot;/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/test.html&quot;
-</code></pre>
 
 <h1>Session information</h1>
 
@@ -1077,15 +1178,16 @@ print(file)
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] foreign_0.8-62    rrdfqbcrnd0_0.1.2 RCurl_1.95-4.5   
-##  [4] bitops_1.0-6      xlsx_0.5.7        xlsxjars_0.6.1   
-##  [7] rrdf_2.1.0        rrdflibs_1.4.0    rJava_0.9-6      
-## [10] devtools_1.7.0    knitr_1.9        
+##  [1] rrdfqbcrnd0_0.1.3 testthat_0.9.1    foreign_0.8-62   
+##  [4] RCurl_1.95-4.5    bitops_1.0-6      xlsx_0.5.7       
+##  [7] xlsxjars_0.6.1    rrdf_2.1.0        rrdflibs_1.4.0   
+## [10] rJava_0.9-6       devtools_1.7.0    knitr_1.9        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] digest_0.6.8    evaluate_0.5.5  formatR_1.0     highr_0.4      
-##  [5] htmltools_0.2.6 markdown_0.7.4  Rcpp_0.11.4     rmarkdown_0.5.1
-##  [9] roxygen2_4.1.0  stringr_0.6.2   tools_3.1.3     yaml_2.1.13
+##  [1] compiler_3.1.3  digest_0.6.8    evaluate_0.5.5  formatR_1.0    
+##  [5] highr_0.4       htmltools_0.2.6 markdown_0.7.4  Rcpp_0.11.4    
+##  [9] rmarkdown_0.5.1 roxygen2_4.1.0  stringr_0.6.2   tools_3.1.3    
+## [13] yaml_2.1.13
 </code></pre>
 
 </body>

@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-04-29" />
+<meta name="date" content="2015-05-13" />
 
 <title>Execute SPARQL integrity constraints on a data cube</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Execute SPARQL integrity constraints on a data cube</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-04-29</em></h4>
+<h4 class="date"><em>2015-05-13</em></h4>
 </div>
 
 <div id="TOC">
@@ -84,7 +84,7 @@ forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
 
 cdisc.rdf&lt;- Load.cdisc.standards()</code></pre>
 <pre><code>## Start loading rdf.cdisc.org contents from /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165643</code></pre>
+## Done loading rdf.cdisc.org contents, number of triples: 165614</code></pre>
 <pre class="r"><code>cubeData&lt;- combine.rdf( cube, cdisc.rdf)</code></pre>
 <p>rrdf does not implement the ASK query. As a work around the query is transformed to a <code>SELECT (COUNT(*) ...)</code> or <code>SELECT *</code> gitquery.</p>
 <pre class="r"><code>str(cubeData)</code></pre>

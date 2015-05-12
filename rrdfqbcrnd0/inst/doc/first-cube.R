@@ -27,7 +27,7 @@ knitr::kable(cubeMetadata)
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 
 ## ------------------------------------------------------------------------
-cat(normalizePath(outcube))
+cat(normalizePath(outcube),"\n")
 
 ## ------------------------------------------------------------------------
 dataCubeFile<- outcube
@@ -83,7 +83,7 @@ cube.codelists<- as.data.frame(sparql.rdf(cube, codelists.rq), stringsAsFactors=
 
 ## TODO instead of gsub make a more straightforward way
 ## TODO this involves a new version of the ph.recode function
-cube.codelists$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",cube.codelists$p)
+## TODO(mja): change the GetCodeListSparqlQuery to plain text versions of the clc also
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
 knitr::kable(print(cube.codelists[,c("vn", "clc", "prefLabel")]))
 

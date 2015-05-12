@@ -10,7 +10,7 @@
 
 <meta name="author" content="PhuseSubTeamAnalysisResults@example.org" />
 
-<meta name="date" content="2015-04-29" />
+<meta name="date" content="2015-05-13" />
 
 <title>Create simple RDF data qube</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create simple RDF data qube</h1>
 <h4 class="author"><em><a href="mailto:PhuseSubTeamAnalysisResults@example.org">PhuseSubTeamAnalysisResults@example.org</a></em></h4>
-<h4 class="date"><em>2015-04-29</em></h4>
+<h4 class="date"><em>2015-05-13</em></h4>
 </div>
 
 <div id="TOC">
@@ -227,8 +227,8 @@ knitr::kable(cubeMetadata)</code></pre>
 <pre class="r"><code>outcube&lt;- BuildCubeFromDataFrames(cubeMetadata, obsData )</code></pre>
 <p>This shows a simple use of the BuildCubeFromDataFrames function. The warning message from log4j can be ignored.</p>
 <p>The RDF data cube is serialized in turtle format and stored as a text file in</p>
-<pre class="r"><code>cat(normalizePath(outcube))</code></pre>
-<pre><code>## /tmp/RtmpgBRMb9/DC-EXAMPLE-R-V-0-0-0.ttl</code></pre>
+<pre class="r"><code>cat(normalizePath(outcube),&quot;\n&quot;)</code></pre>
+<pre><code>## /tmp/RtmpnN7ihA/DC-EXAMPLE-R-V-0-0-0.ttl</code></pre>
 </div>
 </div>
 <div id="query-the-cube-using-sparql" class="section level1">
@@ -445,7 +445,7 @@ knitr::kable(head(cube.observations2, 15))</code></pre>
 ## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
 ## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
 ##  
-## select distinct ?p ?cl ?prefLabel
+## select distinct ?p ?vn ?cl ?prefLabel 
 ## where {
 ## ?DataStructureDefinition a qb:DataStructureDefinition ;
 ##    qb:component ?component .
@@ -454,23 +454,22 @@ knitr::kable(head(cube.observations2, 15))</code></pre>
 ## ?p qb:codeList ?c .
 ## ?c skos:hasTopConcept ?cl .
 ## ?cl skos:prefLabel ?prefLabel .
+## OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn } 
 ## values ( ?DataStructureDefinition ) {
 ##  (ds:dsd-EXAMPLE) 
 ## }
 ## }
 ## order by ?p ?cl ?prefLabel</code></pre>
 <p>Executing the SPARQL query gives the code list as a data frame.</p>
-<pre><code>##           vn                 clc prefLabel
-## 1   category   category-AA-group  AA-group
-## 2   category   category-BB-group  BB-group
-## 3   category      category-_ALL_     _ALL_
-## 4   category  category-_NONMISS_ _NONMISS_
-## 5     factor        factor-_ALL_     _ALL_
-## 6     factor    factor-_NONMISS_ _NONMISS_
-## 7     factor     factor-quantity  quantity
-## 8  procedure     procedure-_ALL_     _ALL_
-## 9  procedure procedure-_NONMISS_ _NONMISS_
-## 10 procedure     procedure-count     count</code></pre>
+<pre><code>##          vn                clc prefLabel
+## 1  category  category-AA-group  AA-group
+## 2  category  category-BB-group  BB-group
+## 3  category     category-_ALL_     _ALL_
+## 4  category category-_NONMISS_ _NONMISS_
+## 5    factor       factor-_ALL_     _ALL_
+## 6    factor   factor-_NONMISS_ _NONMISS_
+## 7    factor    factor-quantity  quantity
+## 8 procedure    procedure-count     count</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -514,16 +513,6 @@ knitr::kable(head(cube.observations2, 15))</code></pre>
 <td align="left">factor</td>
 <td align="left">factor-quantity</td>
 <td align="left">quantity</td>
-</tr>
-<tr class="even">
-<td align="left">procedure</td>
-<td align="left">procedure-<em>ALL</em></td>
-<td align="left"><em>ALL</em></td>
-</tr>
-<tr class="odd">
-<td align="left">procedure</td>
-<td align="left">procedure-<em>NONMISS</em></td>
-<td align="left"><em>NONMISS</em></td>
 </tr>
 <tr class="even">
 <td align="left">procedure</td>

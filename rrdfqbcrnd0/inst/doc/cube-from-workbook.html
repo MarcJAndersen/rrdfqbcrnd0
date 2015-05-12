@@ -384,23 +384,17 @@ in the package. The dataCubeOutDirectory defines the directory name for
 the generated RDF data cube.</p>
 
 <pre><code class="r">dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
+cat(&quot;DM cube stored as &quot;, normalizePath(dm.cube.fn), &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Start loading rdf.cdisc.org contents from /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165614
-</code></pre>
-
-<pre><code class="r">cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## DM cube stored as  /tmp/RtmpgBRMb9/DC-DM-R-V-0-5-2.ttl
+<pre><code>## DM cube stored as  /tmp/RtmpnN7ihA/DC-DM-R-V-0-5-2.ttl
 </code></pre>
 
 <pre><code class="r">ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )
-cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)
+cat(&quot;AE cube stored as &quot;, normalizePath(ae.cube.fn), &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## AE cube stored as  /tmp/RtmpgBRMb9/DC-AE-R-V-0-5-2.ttl
+<pre><code>## AE cube stored as  /tmp/RtmpnN7ihA/DC-AE-R-V-0-5-2.ttl
 </code></pre>
 
 <h1>Create from demo data PhUSE scripting program</h1>
@@ -420,14 +414,23 @@ running the SAS program.</p>
 <pre><code class="r">demoObsDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;demo.AR.csv&quot;, package=&quot;rrdfqbcrnd0&quot;)
 demoObsData &lt;- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
 
+##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
+##TODO inst/data-raw/create-qb-examples-as-ttl.Rmd
+if (!( &quot;measurefmt&quot; %in% names(demoObsData))) {
+demoObsData$measurefmt&lt;- &quot;%6.1f&quot;
+demoObsData$measurefmt[ demoObsData$procedure %in% c(&quot;n&quot;, &quot;nmiss&quot;, &quot;count&quot;) ]&lt;- &quot;%6.0f&quot;
+## sprintf( demoObsData$measurefmt, demoObsData$measure)
+}
+
 demoMetaDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;DEMO-Components.csv&quot;, package=&quot;rrdfqbcrnd0&quot;)
 demoMetaData &lt;- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 
+
 demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )
-cat(&quot;DEMO cube stored as &quot;, demo.cube.fn, &quot;\n&quot;)
+cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## DEMO cube stored as  /tmp/RtmpgBRMb9/DC-DEMO-R-V-0-5-2.ttl
+<pre><code>## DEMO cube stored as  /tmp/RtmpnN7ihA/DC-DEMO-R-V-0-5-2.ttl
 </code></pre>
 
 <h3>Notes</h3>
@@ -470,7 +473,7 @@ load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= checkCube)
 summarize.rdf(checkCube)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 2689&quot;
+<pre><code>## [1] &quot;Number of triples: 2895&quot;
 </code></pre>
 
 <h2>Get the values in the cube</h2>
@@ -747,16 +750,6 @@ knitr::kable(codelists[,c(&quot;vn&quot;, &quot;clc&quot;, &quot;prefLabel&quot;
 </tr>
 <tr>
 <td align="left">procedure</td>
-<td align="left">procedure-<em>ALL</em></td>
-<td align="left"><em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-<em>NONMISS</em></td>
-<td align="left"><em>NONMISS</em></td>
-</tr>
-<tr>
-<td align="left">procedure</td>
 <td align="left">procedure-count</td>
 <td align="left">count</td>
 </tr>
@@ -938,6 +931,9 @@ knitr::kable(attributes)
 <td align="left">crnd-attribute:cellpartno</td>
 </tr>
 <tr>
+<td align="left">crnd-attribute:measurefmt</td>
+</tr>
+<tr>
 <td align="left">crnd-attribute:colno</td>
 </tr>
 <tr>
@@ -987,6 +983,7 @@ cat(observationsRq)
 ## crnd-dimension:factor ?factor;
 ## crnd-dimension:trt01a ?trt01a;
 ## crnd-dimension:sex ?sex; crnd-attribute:cellpartno ?cellpartno;
+## crnd-attribute:measurefmt ?measurefmt;
 ## crnd-attribute:colno ?colno;
 ## crnd-attribute:denominator ?denominator;
 ## crnd-attribute:unit ?unit;
@@ -1016,6 +1013,7 @@ knitr::kable(observations[ 1:10 ,
 <th align="left">trt01avalue</th>
 <th align="left">sexvalue</th>
 <th align="left">cellpartno</th>
+<th align="left">measurefmt</th>
 <th align="left">colno</th>
 <th align="left">denominator</th>
 <th align="left">unit</th>
@@ -1032,6 +1030,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Placebo</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">1</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1047,6 +1046,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Xanomeline Low Dose</td>
 <td align="left">M</td>
 <td align="left">1</td>
+<td align="left">%6.0f</td>
 <td align="left">2</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1062,6 +1062,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Xanomeline Low Dose</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">2</td>
 <td align="left">race</td>
 <td align="left">NA</td>
@@ -1077,6 +1078,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Placebo</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">1</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1092,6 +1094,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Placebo</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">1</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1107,6 +1110,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Placebo</td>
 <td align="left">M</td>
 <td align="left">1</td>
+<td align="left">%6.0f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1122,6 +1126,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Placebo</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left">ethnic</td>
 <td align="left">NA</td>
@@ -1137,6 +1142,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Xanomeline High Dose</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">3</td>
 <td align="left">race</td>
 <td align="left">NA</td>
@@ -1152,6 +1158,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Xanomeline High Dose</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">1</td>
+<td align="left">%6.0f</td>
 <td align="left">3</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1167,6 +1174,7 @@ knitr::kable(observations[ 1:10 ,
 <td align="left">Placebo</td>
 <td align="left"><em>ALL</em></td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left">race</td>
 <td align="left">NA</td>
@@ -1213,6 +1221,7 @@ cat(observationsDescriptionRq)
 ## crnd-dimension:trt01a ?trt01a;
 ## crnd-dimension:sex ?sex; 
 ##  crnd-attribute:cellpartno ?cellpartno;
+## crnd-attribute:measurefmt ?measurefmt;
 ## crnd-attribute:colno ?colno;
 ## crnd-attribute:denominator ?denominator;
 ## crnd-attribute:unit ?unit;
@@ -1274,6 +1283,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <th align="left">sexvalue</th>
 <th align="left">sexIRI</th>
 <th align="left">cellpartno</th>
+<th align="left">measurefmt</th>
 <th align="left">colno</th>
 <th align="left">denominator</th>
 <th align="left">unit</th>
@@ -1305,6 +1315,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">1</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1335,6 +1346,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left">M</td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">1</td>
+<td align="left">%6.0f</td>
 <td align="left">2</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1365,6 +1377,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">2</td>
 <td align="left">race</td>
 <td align="left">NA</td>
@@ -1395,6 +1408,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">1</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1425,6 +1439,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">1</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1455,6 +1470,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left">M</td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">1</td>
+<td align="left">%6.0f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1485,6 +1501,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left">ethnic</td>
 <td align="left">NA</td>
@@ -1515,6 +1532,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">3</td>
 <td align="left">race</td>
 <td align="left">NA</td>
@@ -1545,6 +1563,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">1</td>
+<td align="left">%6.0f</td>
 <td align="left">3</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -1575,6 +1594,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 <td align="left"><em>ALL</em></td>
 <td align="left">crnd-dimension:sex</td>
 <td align="left">2</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left">race</td>
 <td align="left">NA</td>
@@ -1658,6 +1678,12 @@ knitr::kable(dimensionsattr)
 <tr>
 <td align="left">attribute</td>
 <td align="left">crnd-attribute:cellpartno</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">attribute</td>
+<td align="left">crnd-attribute:measurefmt</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
@@ -1780,15 +1806,15 @@ knitr::kable(metadataX)
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] foreign_0.8-62    rrdfqbcrnd0_0.1.2 RCurl_1.95-4.5   
-##  [4] bitops_1.0-6      xlsx_0.5.7        xlsxjars_0.6.1   
-##  [7] rrdf_2.1.0        rrdflibs_1.4.0    rJava_0.9-6      
-## [10] devtools_1.7.0    knitr_1.9        
+##  [1] rrdfqbcrnd0_0.1.3 testthat_0.9.1    foreign_0.8-62   
+##  [4] RCurl_1.95-4.5    bitops_1.0-6      xlsx_0.5.7       
+##  [7] xlsxjars_0.6.1    rrdf_2.1.0        rrdflibs_1.4.0   
+## [10] rJava_0.9-6       devtools_1.7.0    knitr_1.9        
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] digest_0.6.8    evaluate_0.5.5  formatR_1.0     htmltools_0.2.6
-##  [5] Rcpp_0.11.4     rmarkdown_0.5.1 roxygen2_4.1.0  stringr_0.6.2  
-##  [9] tools_3.1.3     yaml_2.1.13
+##  [1] compiler_3.1.3  digest_0.6.8    evaluate_0.5.5  formatR_1.0    
+##  [5] htmltools_0.2.6 Rcpp_0.11.4     rmarkdown_0.5.1 roxygen2_4.1.0 
+##  [9] stringr_0.6.2   tools_3.1.3     yaml_2.1.13
 </code></pre>
 
 </body>

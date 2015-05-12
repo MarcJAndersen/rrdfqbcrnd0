@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2015-04-29" />
+<meta name="date" content="2015-05-13" />
 
 <title>Derive results in RDF data cube and compare with results in data cube</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Derive results in RDF data cube and compare with results in data cube</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2015-04-29</em></h4>
+<h4 class="date"><em>2015-05-13</em></h4>
 </div>
 
 <div id="TOC">
@@ -96,7 +96,7 @@ cat(&quot;Reading turtle definition from &quot;, dataCubeFile, &quot;\n&quot;)</
 <pre><code>## Reading turtle definition from  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DM-sample.ttl</code></pre>
 <pre class="r"><code>load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
 summarize.rdf(store)</code></pre>
-<pre><code>## [1] &quot;Number of triples: 1311&quot;</code></pre>
+<pre><code>## [1] &quot;Number of triples: 1310&quot;</code></pre>
 <pre class="r"><code>dsdName&lt;- GetDsdNameFromCube( store )
 domainName&lt;- GetDomainNameFromCube( store )
 forsparqlprefix&lt;- GetForSparqlPrefix( domainName )

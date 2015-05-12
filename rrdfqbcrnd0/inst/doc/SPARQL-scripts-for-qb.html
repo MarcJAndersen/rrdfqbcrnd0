@@ -254,7 +254,7 @@ cat(&quot;Loading &quot;, dataCubeFile, &quot;\n&quot;)
 summarize.rdf(store)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 2689&quot;
+<pre><code>## [1] &quot;Number of triples: 2895&quot;
 </code></pre>
 
 <p>For the functions in the package the datasets definition in the cube is needed.</p>
@@ -375,6 +375,9 @@ knitr::kable(attributes)
 <td align="left">crnd-attribute:cellpartno</td>
 </tr>
 <tr>
+<td align="left">crnd-attribute:measurefmt</td>
+</tr>
+<tr>
 <td align="left">crnd-attribute:colno</td>
 </tr>
 <tr>
@@ -426,6 +429,7 @@ mdwrite( observationsRq, &quot;DEMOobservations&quot; )
 <span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">dimension</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">factor</span> ?factor<span style="color:#000000">;</span><br/>
 <span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">dimension</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">trt01a</span> ?trt01a<span style="color:#000000">;</span><br/>
 <span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">dimension</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">sex</span> ?sex<span style="color:#000000">;</span> <span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">attribute</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">cellpartno</span> ?cellpartno<span style="color:#000000">;</span><br/>
+<span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">attribute</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">measurefmt</span> ?measurefmt<span style="color:#000000">;</span><br/>
 <span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">attribute</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">colno</span> ?colno<span style="color:#000000">;</span><br/>
 <span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">attribute</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">denominator</span> ?denominator<span style="color:#000000">;</span><br/>
 <span style="color:#010181">crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">attribute</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">unit</span> ?unit<span style="color:#000000">;</span><br/>
@@ -456,6 +460,7 @@ knitr::kable(head(observations,2))
 <th align="left">trt01a</th>
 <th align="left">sex</th>
 <th align="left">cellpartno</th>
+<th align="left">measurefmt</th>
 <th align="left">colno</th>
 <th align="left">denominator</th>
 <th align="left">unit</th>
@@ -480,6 +485,7 @@ knitr::kable(head(observations,2))
 <td align="left">code:trt01a-Placebo</td>
 <td align="left">code:sex-<em>ALL</em></td>
 <td align="left">1</td>
+<td align="left">%6.1f</td>
 <td align="left">1</td>
 <td align="left"></td>
 <td align="left">NA</td>
@@ -503,6 +509,7 @@ knitr::kable(head(observations,2))
 <td align="left">code:trt01a-Xanomeline_Low_Dose</td>
 <td align="left">code:sex-M</td>
 <td align="left">1</td>
+<td align="left">%6.0f</td>
 <td align="left">2</td>
 <td align="left"></td>
 <td align="left">NA</td>
