@@ -146,6 +146,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                   paste0(dimName)
                   )
 
+
   if (codeType=="SDTM"){
     add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName),
@@ -168,42 +169,67 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
 #############################################################################
   ## Code values
   for (i in 1:nrow(codeSource)) {
+    subjcode<- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
+    codeSubj<- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
+
     add.triple(store,
-               paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+               codeSubj,
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixSKOS, "Concept"))
     add.triple(store,
-               paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+               codeSubj,
                paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixCODE, capDimName))
     add.triple(store,
-               paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+               codeSubj,
                paste0(prefixlist$prefixSKOS,"topConceptOf"),
                paste0(prefixlist$prefixCODE, dimName))
     add.triple(store,
-               paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+               codeSubj,
                paste0(prefixlist$prefixSKOS,"inScheme"),
                paste0(prefixlist$prefixCODE, dimName))
     add.data.triple(store,
-                    paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                    codeSubj,
                     paste0(prefixlist$prefixSKOS,"prefLabel"),
                     paste0(codeSource[i,"code"]))
 
+    if (codeSource[i,"code"]!="_ALL_" & codeSource[i,"code"]!="_NONMISS_") {
+    add.data.triple(store,
+                  codeSubj,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionoperator"),
+                  "=="
+                  )
+
+    ## TODO(mja): consider adding type here ...
+    if (mode(codeSource[i,"code"])=="character") {
+    add.data.triple(store,
+                  codeSubj,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
+                  paste0('\\"',codeSource[i,"code"], '\\"')
+                    )
+  }  else {
+    add.data.triple(store,
+                  codeSubj,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
+                  paste0(codeSource[i,"code"])
+                    )
+    }
+  }
 
     ## Document when the codes come from the source data without reconciliation
     ##   against other sources.
-    if (codeType=="DATA"){
+    if (codeType=="DATA" & dimName!="procedure"){
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      codeSubj,
                       paste0(prefixlist$prefixRDFS, "comment"),
                       "Coded values from data source. No reconciliation against another source",
                       lang="en")
     }
     ## SDTM Terminology
-    ##  Additional triples availble from the SDTM Terminology file.
+    ##  Additional triples available from the SDTM Terminology file.
     if (codeType=="SDTM"){
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      codeSubj,
                       paste0(prefixlist$prefixCTS,"cdiscSynonyms"),
                       paste0(codeSource[i,"cdiscSynonyms"]))
 
@@ -212,20 +238,20 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
 
       ## ?  MMS may be incorrect here. How refer back to sdtm-terminology?
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      codeSubj,
                       paste0(prefixlist$prefixMMS,"nciDomain"),
                       paste(nciDomain))
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      codeSubj,
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
                       paste0(codeSource[i,"code"]))
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      codeSubj,
                       paste0(prefixlist$prefixCTS,"cdiscDefinition"),
                       paste0(codeSource[i,"cdiscDefinition"]))
 
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+                      codeSubj,
                       paste0(prefixlist$prefixCTS,"cdiscSubmissionValue"),
                       paste0(codeSource[i,"code"]))
 
@@ -244,16 +270,19 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     ## TODO(mja): not straightforward, make more clear
     proc<-GetDescrStatProcedure()
     for (i in 1:nrow(codeSource)){
-      codeSubj <- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
       codeSubjInList<- paste0("code:",dimName,"-",codeSource[i,"codeNoBlank"])
+      codeSubj<- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
       if (codeSubjInList %in% names(proc)) {
         add.data.triple(store,
                         codeSubj,
-                        paste0(prefixlist$prefixRDFS, "comment"),
-                        paste0(c("R statement for derivation: ", 
-                               deparse(proc[[codeSubjInList]]$fun)), collapse="\n"
-                               )
+                        paste0(prefixlist$prefixRRDFQBCRND0, "RdescStatDefFun"),
+                        paste0(deparse(proc[[codeSubjInList]]$fun), collapse=" ")
                         )
+      add.data.triple(store,
+                      codeSubj,
+                      paste0(prefixlist$prefixRDFS, "comment"),
+                      paste("Descriptive statistics", codeSource[i,"codeNoBlank"], sep=" ", collapse=" "),
+                      lang="en")
       }
     }
   } else {
@@ -263,31 +292,40 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                  paste0(prefixlist$prefixSKOS, "hasTopConcept"),
                  paste0(prefixlist$prefixCODE,dimName,"-_NONMISS_"))
 
+      codeSubj<- paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_")
       add.triple(store,
-                 paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
+                 codeSubj,
                  paste0(prefixlist$prefixRDF,"type" ),
                  paste0(prefixlist$prefixSKOS,"Concept"))
       add.triple(store,
-                 paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
+                 codeSubj,
                  paste0(prefixlist$prefixRDF,"type" ),
                  paste0(prefixlist$prefixCODE, capDimName))
       add.triple(store,
-                 paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
+                 codeSubj,
                  paste0(prefixlist$prefixSKOS,"topConceptOf"),
                  paste0(prefixlist$prefixCODE, dimName))
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
+                      codeSubj,
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
                       "_NONMISS_")
       add.triple(store,
-                 paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
+                 codeSubj,
                  paste0(prefixlist$prefixSKOS,"inScheme"),
                  paste0(prefixlist$prefixCODE, dimName))
       add.data.triple(store,
-                      paste0(prefixlist$prefixCODE, dimName,"-_NONMISS_"),
+                      codeSubj,
                       paste0(prefixlist$prefixRDFS, "comment"),
-                      "NON-CDISC: Represents the count of all non-missing codelist categories. Does not include category U (unknown) or missing values.",
+                      "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values.",
                       lang="en")
+
+      add.data.triple(store,
+                  codeSubj,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionfunction"),
+                  "is.na"
+                  )
+
+      
 
       ## _ALL_
       ##   Cross reference:  _ALL_ creation for TopConcept.
