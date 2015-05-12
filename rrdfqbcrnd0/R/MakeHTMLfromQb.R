@@ -1,10 +1,12 @@
-##' @inheritParams GetObservationsSparqlQuery
+##' Make HTML table representing RDF data cube
 ##' @param store RDF data store containing cube
 ##' @param rowdim Row dimensions
 ##' @param coldim Column dimensions
+##' @param idrow idrows
+##' @param idcol idcols
 ##' @param htmlfile path to file with HTML
 ##' @return path to file with HTML
-##  ' @examples 
+##' @inheritParams GetObservationsSparqlQuery
 
 MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile=NULL ) {
   
