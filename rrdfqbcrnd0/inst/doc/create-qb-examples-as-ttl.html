@@ -242,19 +242,19 @@ dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
 </code></pre>
 
 <pre><code>## Start loading rdf.cdisc.org contents from /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165643
+## Done loading rdf.cdisc.org contents, number of triples: 165614
 </code></pre>
 
 <pre><code class="r">cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## DM cube stored as  /tmp/Rtmpy8nTUb/DC-DM-R-V-0-5-2.ttl
+<pre><code>## DM cube stored as  /tmp/RtmpurtnzB/DC-DM-R-V-0-5-2.ttl
 </code></pre>
 
 <pre><code class="r">targetFile&lt;- file.path(targetDir,&quot;DC-DM-sample.ttl&quot;)
 
 if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
-  cat(&quot;DM cube copied to &quot;, targetFile, &quot;\n&quot;)
+  cat(&quot;DM cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
 }
 </code></pre>
 
@@ -265,12 +265,12 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## AE cube stored as  /tmp/Rtmpy8nTUb/DC-AE-R-V-0-5-2.ttl
+<pre><code>## AE cube stored as  /tmp/RtmpurtnzB/DC-AE-R-V-0-5-2.ttl
 </code></pre>
 
 <pre><code class="r">targetFile&lt;- file.path(targetDir,&quot;DC-AE-sample.ttl&quot;)
 if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
-  cat(&quot;AE cube copied to &quot;, targetFile, &quot;\n&quot;)
+  cat(&quot;AE cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
 }
 </code></pre>
 
@@ -282,20 +282,28 @@ if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
 <pre><code class="r">demoObsDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;demo.AR.csv&quot;, package=&quot;rrdfqbcrnd0&quot;)
 demoObsData &lt;- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
 
+##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
+##TODO inst/data-raw/create-qb-examples-as-ttl.Rmd
+if (!( &quot;measurefmt&quot; %in% names(demoObsData))) {
+demoObsData$measurefmt&lt;- &quot;%6.1f&quot;
+demoObsData$measurefmt[ demoObsData$procedure %in% c(&quot;n&quot;, &quot;nmiss&quot;, &quot;count&quot;) ]&lt;- &quot;%6.0f&quot;
+## sprintf( demoObsData$measurefmt, demoObsData$measure)
+}
+
 demoMetaDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;DEMO-Components.csv&quot;, package=&quot;rrdfqbcrnd0&quot;)
 demoMetaData &lt;- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 
 demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )
-cat(&quot;DEMO cube stored as &quot;, demo.cube.fn, &quot;\n&quot;)
+cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## DEMO cube stored as  /tmp/Rtmpy8nTUb/DC-DEMO-R-V-0-5-2.ttl
+<pre><code>## DEMO cube stored as  /tmp/RtmpurtnzB/DC-DEMO-R-V-0-5-2.ttl
 </code></pre>
 
 <pre><code class="r">targetFile&lt;- file.path(targetDir,&quot;DC-DEMO-sample.ttl&quot;)
 
 if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
-   cat(&quot;DEMO cube copied to &quot;, targetFile, &quot;\n&quot;)
+   cat(&quot;DEMO cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
  }
 </code></pre>
 

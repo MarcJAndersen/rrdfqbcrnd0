@@ -1,7 +1,7 @@
 ---
 title: "Store CDISC RDF as RRDF data model"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-04-06"
+date: "2015-05-12"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
@@ -190,7 +190,7 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 ## Loading /home/ma/projects/phrmwg/rdf-data-cube/cube.ttl ..
 ## .. total number of triples: 165644
 ## Final rdf.cdisc.org rrdf store, number of triples: 165644
-## rrdf store saved to turle file: /tmp/RtmpCjkxAd/cdisc-rdf.ttl
+## rrdf store saved to turle file: /tmp/Rtmpfv917y/cdisc-rdf.ttl
 ## Writing to zip file /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 ```
 
@@ -200,7 +200,7 @@ message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size 
 ```
 
 ```
-## File /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-04-06 22:41:51 size 2314229 bytes
+## File /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-05-12 22:13:10 size 2314222 bytes
 ```
 
 ### Loading using Load.cdisc.standards 

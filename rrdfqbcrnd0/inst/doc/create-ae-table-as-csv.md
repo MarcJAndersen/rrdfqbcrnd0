@@ -1,7 +1,7 @@
 ---
 title: "Create AE table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-04-06"
+date: "2015-05-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create AE table as csv file}
@@ -68,7 +68,13 @@ require(sqldf)
 fnadae<- system.file("extdata/sample-xpt", "adae.xpt", package="rrdfqbcrnd0")
 adae<- read.xport(fnadae)
 
-aesummay.e<- sqldf("select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA", stringsAsFactors=FALSE )
+
+## by treatment
+aesummay.trta.e<- sqldf("
+select distinct TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD,
+       'count' as procedure, 'quantity' as factor, count(*) as measure
+from adae group by TRTA
+", stringsAsFactors=FALSE )
 ```
 
 ```
@@ -76,14 +82,120 @@ aesummay.e<- sqldf("select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'c
 ```
 
 ```r
-aesoc.e<- sqldf("select TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC", stringsAsFactors=FALSE )
-aesocpt.e<- sqldf("select TRTA, SAFFL, AESOC, AEDECOD, 'count' as procedure, 'quantity' as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD", stringsAsFactors=FALSE )
+aesoc.trta.e<- sqldf("
+select distinct TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD,
+       'count' as procedure, 'quantity' as factor, count(*) as measure
+from adae group by TRTA, SAFFL, AESOC
+", stringsAsFactors=FALSE )
 
-aesummay.n<- sqldf("select TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA", stringsAsFactors=FALSE )
-aesoc.n<- sqldf("select TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC", stringsAsFactors=FALSE )
-aesocpt.n<- sqldf("select TRTA, SAFFL, AESOC, AEDECOD, 'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD", stringsAsFactors=FALSE )
+aesocpt.trta.e<- sqldf("
+select distinct TRTA, SAFFL, AESOC, AEDECOD,
+       'count' as procedure, 'quantity' as factor, count(*) as measure
+from adae group by TRTA, SAFFL, AESOC, AEDECOD
+", stringsAsFactors=FALSE )
 
-aetable<- rbind(aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n )
+aesummay.trta.n<- sqldf("
+select distinct TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD,
+       'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure
+from adae group by TRTA
+", stringsAsFactors=FALSE )
+
+aesoc.trta.n<- sqldf("
+select distinct TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD,
+       'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure
+from adae group by TRTA, SAFFL, AESOC
+", stringsAsFactors=FALSE )
+
+aesocpt.trta.n<- sqldf("
+select distinct TRTA, SAFFL, AESOC, AEDECOD,
+       'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure
+from adae group by TRTA, SAFFL, AESOC, AEDECOD
+", stringsAsFactors=FALSE )
+
+## over treatment
+aesummay.e<- sqldf("
+select distinct '_ALL_' as TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD,
+       'count' as procedure, 'quantity' as factor, count(*) as measure
+from adae 
+", stringsAsFactors=FALSE )
+
+aesoc.e<- sqldf("
+select distinct '_ALL_' as TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD,
+       'count' as procedure, 'quantity' as factor, count(*) as measure
+from adae group by SAFFL, AESOC
+", stringsAsFactors=FALSE )
+
+aesocpt.e<- sqldf("
+select distinct '_ALL_' as TRTA, SAFFL, AESOC, AEDECOD,
+       'count' as procedure, 'quantity' as factor, count(*) as measure
+from adae group by SAFFL, AESOC, AEDECOD
+", stringsAsFactors=FALSE )
+
+aesummay.n<- sqldf("
+select distinct '_ALL_' as TRTA, SAFFL, '_ALL_' as AESOC, '_ALL_' as AEDECOD,
+       'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure
+from adae 
+", stringsAsFactors=FALSE )
+
+aesoc.n<- sqldf("
+select distinct '_ALL_' as TRTA, SAFFL, AESOC, '_ALL_' as AEDECOD,
+       'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure
+from adae group by SAFFL, AESOC
+", stringsAsFactors=FALSE )
+
+aesocpt.n<- sqldf("
+select distinct '_ALL_' as TRTA, SAFFL, AESOC, AEDECOD,
+       'countdistinct' as procedure, 'USUBJID' as factor, count(distinct USUBJID) as measure
+from adae group by SAFFL, AESOC, AEDECOD
+", stringsAsFactors=FALSE )
+
+aetable.trta<- rbind(
+  aesummay.trta.e, aesummay.trta.n, aesoc.trta.e, aesoc.trta.n, aesocpt.trta.e, aesocpt.trta.n
+  )
+
+aetable.all<- rbind(
+  aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n
+  )
+
+aetable.rows<- rbind(
+  aesummay.e, aesoc.e, aesocpt.e
+  )
+
+rowstosort<- aetable.rows[,c("AESOC", "AEDECOD" )]
+rows<- do.call(order, rowstosort)
+rowno.df<- rowstosort[rows,] 
+rowno.df$rowno<- seq(nrow(rowstosort))
+
+colstosort<- unique(aetable.trta[,c("TRTA" )])
+cols<- order( colstosort)
+colno.df<- data.frame(TRTA=colstosort[cols] )
+colno.df$colno<- seq(length(colstosort))
+colno.df<- rbind(colno.df, data.frame( TRTA="_ALL_", colno=4))
+
+aetable.1<- rbind( aetable.trta, aetable.all )
+aetable.2<- merge( aetable.1, rowno.df, by=c("AESOC", "AEDECOD" ) )
+aetable.3 <- merge( aetable.2, colno.df, by=c("TRTA" ) )
+
+aetable.4<-aetable.3[,c("TRTA", "AESOC", "AEDECOD", "procedure")]
+aetable<- aetable.3[do.call(order, aetable.4),]
+aetable$cellpartno<- ifelse(aetable$procedure=="count", 1, 2)
+kable(aetable)
+```
+
+```
+## Error in eval(expr, envir, enclos): could not find function "kable"
+```
+
+```r
+check<- aetable[,c("rowno", "colno", "cellpartno" )]
+dupObs<-duplicated(check)
+if (any(dupObs)) {
+## idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
+  dupObsRev<-  duplicated(check, fromLast=TRUE)
+  kable( aetable[which(dupObs | dupObsRev ), ] )
+    stop("Unexpected an observation is not uniquely identified by row, column and cellpart number")
+  }
+
 aetable$unit<- "_NULL_"
 aetable$denominator<- "_NULL_"
 names(aetable)<- tolower(names(aetable))

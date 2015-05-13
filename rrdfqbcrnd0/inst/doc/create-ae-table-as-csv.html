@@ -249,20 +249,130 @@ The script is currently written to be executed manually.</p>
 <pre><code class="r">fnadae&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adae.xpt&quot;, package=&quot;rrdfqbcrnd0&quot;)
 adae&lt;- read.xport(fnadae)
 
-aesummay.e&lt;- sqldf(&quot;select TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure from adae group by TRTA&quot;, stringsAsFactors=FALSE )
+
+## by treatment
+aesummay.trta.e&lt;- sqldf(&quot;
+select distinct TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
+from adae group by TRTA
+&quot;, stringsAsFactors=FALSE )
 </code></pre>
 
 <pre><code>## Loading required package: tcltk
 </code></pre>
 
-<pre><code class="r">aesoc.e&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC&quot;, stringsAsFactors=FALSE )
-aesocpt.e&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, AEDECOD, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD&quot;, stringsAsFactors=FALSE )
+<pre><code class="r">aesoc.trta.e&lt;- sqldf(&quot;
+select distinct TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
+from adae group by TRTA, SAFFL, AESOC
+&quot;, stringsAsFactors=FALSE )
 
-aesummay.n&lt;- sqldf(&quot;select TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure from adae group by TRTA&quot;, stringsAsFactors=FALSE )
-aesoc.n&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD, &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC&quot;, stringsAsFactors=FALSE )
-aesocpt.n&lt;- sqldf(&quot;select TRTA, SAFFL, AESOC, AEDECOD, &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure from adae group by TRTA, SAFFL, AESOC, AEDECOD&quot;, stringsAsFactors=FALSE )
+aesocpt.trta.e&lt;- sqldf(&quot;
+select distinct TRTA, SAFFL, AESOC, AEDECOD,
+       &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
+from adae group by TRTA, SAFFL, AESOC, AEDECOD
+&quot;, stringsAsFactors=FALSE )
 
-aetable&lt;- rbind(aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n )
+aesummay.trta.n&lt;- sqldf(&quot;
+select distinct TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
+from adae group by TRTA
+&quot;, stringsAsFactors=FALSE )
+
+aesoc.trta.n&lt;- sqldf(&quot;
+select distinct TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
+from adae group by TRTA, SAFFL, AESOC
+&quot;, stringsAsFactors=FALSE )
+
+aesocpt.trta.n&lt;- sqldf(&quot;
+select distinct TRTA, SAFFL, AESOC, AEDECOD,
+       &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
+from adae group by TRTA, SAFFL, AESOC, AEDECOD
+&quot;, stringsAsFactors=FALSE )
+
+## over treatment
+aesummay.e&lt;- sqldf(&quot;
+select distinct &#39;_ALL_&#39; as TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
+from adae 
+&quot;, stringsAsFactors=FALSE )
+
+aesoc.e&lt;- sqldf(&quot;
+select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
+from adae group by SAFFL, AESOC
+&quot;, stringsAsFactors=FALSE )
+
+aesocpt.e&lt;- sqldf(&quot;
+select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, AEDECOD,
+       &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
+from adae group by SAFFL, AESOC, AEDECOD
+&quot;, stringsAsFactors=FALSE )
+
+aesummay.n&lt;- sqldf(&quot;
+select distinct &#39;_ALL_&#39; as TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
+from adae 
+&quot;, stringsAsFactors=FALSE )
+
+aesoc.n&lt;- sqldf(&quot;
+select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
+       &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
+from adae group by SAFFL, AESOC
+&quot;, stringsAsFactors=FALSE )
+
+aesocpt.n&lt;- sqldf(&quot;
+select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, AEDECOD,
+       &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
+from adae group by SAFFL, AESOC, AEDECOD
+&quot;, stringsAsFactors=FALSE )
+
+aetable.trta&lt;- rbind(
+  aesummay.trta.e, aesummay.trta.n, aesoc.trta.e, aesoc.trta.n, aesocpt.trta.e, aesocpt.trta.n
+  )
+
+aetable.all&lt;- rbind(
+  aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n
+  )
+
+aetable.rows&lt;- rbind(
+  aesummay.e, aesoc.e, aesocpt.e
+  )
+
+rowstosort&lt;- aetable.rows[,c(&quot;AESOC&quot;, &quot;AEDECOD&quot; )]
+rows&lt;- do.call(order, rowstosort)
+rowno.df&lt;- rowstosort[rows,] 
+rowno.df$rowno&lt;- seq(nrow(rowstosort))
+
+colstosort&lt;- unique(aetable.trta[,c(&quot;TRTA&quot; )])
+cols&lt;- order( colstosort)
+colno.df&lt;- data.frame(TRTA=colstosort[cols] )
+colno.df$colno&lt;- seq(length(colstosort))
+colno.df&lt;- rbind(colno.df, data.frame( TRTA=&quot;_ALL_&quot;, colno=4))
+
+aetable.1&lt;- rbind( aetable.trta, aetable.all )
+aetable.2&lt;- merge( aetable.1, rowno.df, by=c(&quot;AESOC&quot;, &quot;AEDECOD&quot; ) )
+aetable.3 &lt;- merge( aetable.2, colno.df, by=c(&quot;TRTA&quot; ) )
+
+aetable.4&lt;-aetable.3[,c(&quot;TRTA&quot;, &quot;AESOC&quot;, &quot;AEDECOD&quot;, &quot;procedure&quot;)]
+aetable&lt;- aetable.3[do.call(order, aetable.4),]
+aetable$cellpartno&lt;- ifelse(aetable$procedure==&quot;count&quot;, 1, 2)
+kable(aetable)
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;kable&quot;
+</code></pre>
+
+<pre><code class="r">check&lt;- aetable[,c(&quot;rowno&quot;, &quot;colno&quot;, &quot;cellpartno&quot; )]
+dupObs&lt;-duplicated(check)
+if (any(dupObs)) {
+## idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
+  dupObsRev&lt;-  duplicated(check, fromLast=TRUE)
+  kable( aetable[which(dupObs | dupObsRev ), ] )
+    stop(&quot;Unexpected an observation is not uniquely identified by row, column and cellpart number&quot;)
+  }
+
 aetable$unit&lt;- &quot;_NULL_&quot;
 aetable$denominator&lt;- &quot;_NULL_&quot;
 names(aetable)&lt;- tolower(names(aetable))

@@ -1,7 +1,7 @@
 ---
 title: "Create ADSL as TTL file"
 author: "mja@statgroup.dk"
-date: "2015-04-06"
+date: "2015-05-13"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create ADSL as TTL file}
@@ -91,7 +91,7 @@ cat("SQLite database stored as ", tfile, "\n")
 ```
 
 ```
-## SQLite database stored as  /tmp/RtmpVpVTDb/file625c3c847e10
+## SQLite database stored as  /tmp/RtmpXswCVF/filec01f517e65
 ```
 
 ```r
@@ -101,7 +101,7 @@ cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
 ```
-## SQLite database dump in  /tmp/RtmpVpVTDb/file625c686da541
+## SQLite database dump in  /tmp/RtmpXswCVF/filec01ae8903b
 ```
 
 ```r
@@ -113,7 +113,7 @@ cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
 ```
-## SQLite database dump modified stored as  /tmp/RtmpVpVTDb/file625c69e65036
+## SQLite database dump modified stored as  /tmp/RtmpXswCVF/filec0166ea2bd5
 ```
 
 ```r
@@ -168,7 +168,7 @@ cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
 ```
 
 ```
-## File  /tmp/RtmpVpVTDb/adsl-map.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+## File  /tmp/RtmpXswCVF/adsl-map.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 ```
 
 ```r
@@ -178,7 +178,7 @@ cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
 ```
 
 ```
-## File  /tmp/RtmpVpVTDb/adsl.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+## File  /tmp/RtmpXswCVF/adsl.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 ```
 
 
