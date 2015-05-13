@@ -105,12 +105,26 @@ resHtmlFile<- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
 
 ## For development
 
+### Setup
+
+```{r, eval=TRUE}
+store <- new.rdf()  # Initialize
+cat("Loading ", dataCubeFile, "\n")
+load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+summarize.rdf(store)
+
+dsdName<- GetDsdNameFromCube( store )
+domainName<- GetDomainNameFromCube( store )
+forsparqlprefix<- GetForSparqlPrefix( domainName )
+```
+
 
 ### View a specific observation.
 
 The observation is specified in the values part of the SPARQL query.
 
 ```{r, eval=TRUE}
+
 cube.observations.rq<-  paste( forsparqlprefix,
 '
 select *
