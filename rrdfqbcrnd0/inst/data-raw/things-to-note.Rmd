@@ -435,4 +435,158 @@ knitr::kable(res)
 
 ```
 
->
+## Extracting information from Rd files
+
+Also, I have considered dumping all R documentation to RDF an see what could come out of that.
+
+
+The documentation is stored internally in Rd format (http://developer.r-project.org/parseRd.pdf); which  have some sort of resemblance with TeX.
+The rrdfqbcrnd0 package  attempts to use the R documentation facility extensively (see http://r-pkgs.had.co.nz/man.html#man)– so I have been interested in not use making the documentation, but also use it.
+
+There are some good questions/answers on stackoverflow:
+    How to access the help/documentation .rd source files in R? http://stackoverflow.com/questions/7495685/how-to-access-the-help-documentation-rd-source-files-in-r
+    Access elements from R's Rd file? http://stackoverflow.com/questions/17909081/access-elements-from-rs-rd-file?lq=1
+
+```{r, eval=FALSE}
+library(rrdf)
+library(tools)
+db <- Rd_db("stats")
+# grep("median.Rd",names(db),value=TRUE)
+# medianRD<-db[grep("median.Rd",names(db))]
+# medianRD
+# str(medianRD)
+# str(medianRD[[1]])
+
+rdlistttl<- function( ll,level=0,fn="" ) {
+  if (is.atomic(ll)) {
+    cat( paste0( '"""', gsub("\\\\","\\\\\\\\", gsub('"', '#x22', ll)), '""" '), sep=" \n", file=fn )
+  } else {
+      hasTAG<- FALSE
+    if (!is.null(attr(ll,"Rd_tag"))) {
+      hasTAG<- TRUE
+      cat( "[", " ", ":has", gsub("\\\\","",attr(ll,"Rd_tag")), " ( \n", sep="", file=fn )
+    }
+    if (is.list(ll)) {
+      if (length(ll)>0) {
+      for (i in seq(length(ll))) {
+        rdlistttl(ll[[i]],level+1, fn=fn )
+      }
+      }
+    }
+    if (hasTAG) {
+      cat(  ") ]\n",sep="", file=fn )
+    }
+  } 
+}
+
+store<- new.rdf()
+ttlname<- "stats.ttl"
+ottl <- file(ttlname, "w")  # open an output file connection
+cat("@prefix : <http://example.org/Rd/0.1/> .", "\n", file=ottl)
+for (i in seq(length(db))) {
+# for (i in 1:4) {
+message("Processing ", i, "/", length(db), " ", names(db)[i] )
+cat( ":stats_", gsub("^ +","",gsub("\\.", "_", names(db)[i])), " ", ":RdDoc", " (", "\n", sep="", file=ottl)
+rdlistttl(db[i], fn=ottl)
+cat(" ) .\n", file=ottl)
+}
+close(ottl)
+load.rdf(ttlname, format = "TURTLE", appendTo=store)
+save.rdf(store, "stats-save.ttl", format = "TURTLE")
+
+sparql.rdf( store, "select distinct ?p where {?s ?p ?o}")
+
+sparql.rdf( store, "
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct ?keyword
+where {?s :haskeyword [ rdf:first ?keyword ]}
+order by ?keyword
+")
+```
+
+This gives a list of the functions withs keyword "univar".
+```{r, eval=FALSE}
+sparql.rdf( store, "
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct ?name ?title ?keyword
+where {
+?s :RdDoc ?col.
+ ?col rdf:rest*/rdf:first ?sname .
+?sname :hasname [ rdf:first ?name ] . 
+?col rdf:rest*/rdf:first ?stitle .
+?stitle :hastitle [ rdf:first ?title ] . 
+ ?col rdf:rest*/rdf:first ?skeyword .
+?skeyword :haskeyword [ rdf:first ?keyword ] . 
+values (?keyword) { ('univar') }
+}
+order by ?name
+")
+
+```
+
+This gives a list of the functions with the keywords combined.
+```{r, eval=FALSE}
+sparql.rdf( store, "
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct ?name ?title (group_concat(?keyword ; separator = ', ') as ?allkeywords)
+where {
+?s :RdDoc ?col.
+?col rdf:rest*/rdf:first ?sname .
+?sname :hasname [ rdf:first ?name ] . 
+OPTIONAL { ?col rdf:rest*/rdf:first ?stitle .
+?stitle :hastitle [ rdf:first ?title ] . }
+OPTIONAL { ?col rdf:rest*/rdf:first ?skeyword .
+?skeyword :haskeyword [ rdf:first ?keyword ] . }
+}
+group by ?name ?title
+order by ?name
+")
+
+```
+
+The following executes very slow.
+```{r, eval=FALSE}
+sparql.rdf( store, "
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct *
+where {
+?s :RdDoc ?s1 .
+?s1 !(rdf:type)+/:hasname [ rdf:first ?name ] .
+?s1 !(rdf:type)+/:hastitle [ rdf:first ?title ] .
+}
+order by ?name
+")
+
+sparql.rdf( store, "
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct *
+where {
+?s :RdDoc/!(rdf:type)+/:hasname [ rdf:first ?name ] .
+?s :RdDoc/!(rdf:type)+/:hastitle [ rdf:first ?title ] .
+}
+order by ?name
+")
+```
+
+
+
+This is what I would like to be able to do; but it was to slow.
+
+```{r, eval=FALSE}
+sparql.rdf( store, '
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct *
+where {
+?s :RdDoc/!(rdf:type)+/:hasname [ rdf:first ?name ] .
+?s :RdDoc/!(rdf:type)+/:hastitle [ rdf:first ?title ] .
+?s :RdDoc/!(rdf:type)+/:haskeyword [ rdf:first "ts" ] .
+}
+order by ?name
+')
+```
