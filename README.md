@@ -28,13 +28,13 @@ GitHub
 
 Extract the zip file to a directory of your choosing. 
 
-Go to the directory and open the rrdfqbcrnd0.Rproj file.
+Go to the directory, change to rrdfqbcrnd0 subdirectory and open the rrdfqbcrnd0.Rproj file.
 
 ### Clone from GitHub and start using Rstudio
 
 Clone the repository (https://github.com/MarcJAndersen/rrdfqbcrnd0.git).
 
-Go to the directory and open the rrdfqbcrnd0.Rproj file.
+Go to the directory, change to rrdfqbcrnd0 subdirectory and open the rrdfqbcrnd0.Rproj file.
 
 ### Install in R from GitHub
 
@@ -149,7 +149,7 @@ sudo yum install graphviz
 ```
 
 ### Version of packages
-Verify that you have the applicable versions. It appears unnessary, but version issues have more than once been the root cause of malfunction.
+Verify that you have the applicable versions. It may appear unnecessary, but version issues have more than once been the root cause of malfunction.
 
 ```r
 sessionInfo()
