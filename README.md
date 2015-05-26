@@ -19,6 +19,15 @@ visit the Wiki at [phusewiki.org]() or go straight to
 # Introduction
 
 ## Install the rrdfqbcrnd0 package
+There are several ways to install the package, with the most straightforward presented first.
+
+### Install as a package
+
+From (https://github.com/MarcJAndersen/rrdfqbcrnd0/tree/master/ReleasePackages) download the most recent version. As of May 26, 2015 the most recent version is (https://github.com/MarcJAndersen/rrdfqbcrnd0/blob/master/ReleasePackages/rrdfqbcrnd0_0.1.4.tar.gz)[rrdfqbcrnd0_0.1.4.tar.gz]. In R issue
+```r
+install.packages("rrdfqbcrnd0_0.1.4.tar.gz")
+```
+This is assuming that the downloaded rrdfqbcrnd0_0.1.4.tar.gz is stored in the current working directory of the R process.
 
 ### Install in R from local directory using Rstudio
 
