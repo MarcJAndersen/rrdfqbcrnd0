@@ -1,5 +1,5 @@
 # Start fuseki using
-# (CFGFILE=${PWD}/fuseki-crnd-config-example.ttl ;cd /opt/apache-jena-fuseki-2.0.0; ./fuseki-server --config=${CFGFILE} ) 
+# (CFGFILE=${PWD}/fuseki-crnd-example-config.ttl ;cd /opt/apache-jena-fuseki-2.0.0; ./fuseki-server --config=${CFGFILE} ) 
 
 @prefix :        <#> .
 @prefix fuseki:  <http://jena.apache.org/fuseki#> .
@@ -40,10 +40,10 @@ tdb:GraphTDB    rdfs:subClassOf  ja:Model .
    .
 
 <#modelDft> a ja:MemoryModel ;
-        ja:content [ ja:externalContent <file:adsl-map.ttl> ;
-        ja:content [ ja:externalContent <file:adsl.ttl> ;
-        ja:content [ ja:externalContent <file:DC-AE-sample.TTL> ;
-        ja:content [ ja:externalContent <file:DC-DEMO-sample.TTL> ;
-        ja:content [ ja:externalContent <file:DC-DM-sample.TTL> ;
+        ja:content [ ja:externalContent <file:adsl-map.ttl> ];
+        ja:content [ ja:externalContent <file:adsl.ttl> ];
+        ja:content [ ja:externalContent <file:DC-AE-sample.ttl> ];
+        ja:content [ ja:externalContent <file:DC-DEMO-sample.ttl> ];
+        ja:content [ ja:externalContent <file:DC-DM-sample.ttl> ];
 	.
 
