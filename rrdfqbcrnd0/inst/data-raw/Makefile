@@ -51,7 +51,7 @@ clean:
 installDoc:
 	cp ${FORDOC} ../doc
 
-${ADAEXPT} ${ADDMXPT}: populate-sample-xpt.Rmd
+${ADAEXPT} ${ADDMXPT} populate-sample-xpt.html: populate-sample-xpt.Rmd
 	${RKNIT2HTML}
 
 ${CSVAE} create-ae-table-as-csv.html: create-ae-table-as-csv.Rmd ${ADAEXPT} 
