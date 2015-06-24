@@ -166,7 +166,7 @@ select * where
 "\n"
 )
 cube.dimensions<- as.data.frame(sparql.rdf(cube, cube.dimensions.rq), stringsAsFactors=FALSE)
-knitr::kable(print(cube.dimensions))
+knitr::kable(cube.dimensions)
 
 ```
 
