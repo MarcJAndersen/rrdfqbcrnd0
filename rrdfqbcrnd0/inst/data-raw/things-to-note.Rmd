@@ -34,6 +34,7 @@ Data are stored in the data directory, following [R packages by Hadley Wickham](
 ## Check RRDF works
 
 ```r
+library(rrdf)
 store<- new.rdf(ontology=FALSE)
 add.prefix(store, prefix="dc", namespace="http://www.example.org/")
 add.triple(store,"ex:aa","ex:i1","9876")
@@ -364,6 +365,8 @@ echo -e "prefix a: <bb.bb>\\nselect * where {?s ?p ?o}" | highlight --inline-css
 
 ## Generating markdown files from Rmd
 
+Rmd files contains a YAML header. The code below identifies the YAML header. A possible use is to make a copy of the file without the YAML header. Revisiting this, I found this is adressed in (https://github.com/yihui/knitr/issues/965)[Proposed function: knitr::custom_knit #965] and (http://stackoverflow.com/questions/23622307/strip-yaml-from-child-docs-in-knitr)[Strip YAML from child docs in knitr].
+
 ```{r, eval=FALSE}
 library(yaml)
 rmdFiles<-list.files("vignettes",pattern=".*\\.Rmd$",full.names=TRUE)
@@ -448,7 +451,6 @@ There are some good questions/answers on stackoverflow:
     Access elements from R's Rd file? http://stackoverflow.com/questions/17909081/access-elements-from-rs-rd-file?lq=1
 
 ```{r, eval=FALSE}
-library(rrdf)
 library(tools)
 db <- Rd_db("stats")
 # grep("median.Rd",names(db),value=TRUE)
@@ -459,7 +461,7 @@ db <- Rd_db("stats")
 
 rdlistttl<- function( ll,level=0,fn="" ) {
   if (is.atomic(ll)) {
-    cat( paste0( '"""', gsub("\\\\","\\\\\\\\", gsub('"', '#x22', ll)), '""" '), sep=" \n", file=fn )
+    cat( paste0( '"""', gsub("\\\\","\\\\\\\\", gsub('"', '#x22', ll)), '""" '), sep="\n", file=fn )
   } else {
       hasTAG<- FALSE
     if (!is.null(attr(ll,"Rd_tag"))) {
@@ -479,6 +481,7 @@ rdlistttl<- function( ll,level=0,fn="" ) {
   } 
 }
 
+library(rrdf)
 store<- new.rdf()
 ttlname<- "stats.ttl"
 ottl <- file(ttlname, "w")  # open an output file connection
@@ -491,23 +494,25 @@ rdlistttl(db[i], fn=ottl)
 cat(" ) .\n", file=ottl)
 }
 close(ottl)
+
 load.rdf(ttlname, format = "TURTLE", appendTo=store)
-save.rdf(store, "stats-save.ttl", format = "TURTLE")
+check<- sparql.rdf( store, "select distinct ?p where {?s ?p ?o}")
 
-sparql.rdf( store, "select distinct ?p where {?s ?p ?o}")
-
-sparql.rdf( store, "
+keywords<- data.frame(sparql.rdf( store, "
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix : <http://example.org/Rd/0.1/>
 select distinct ?keyword
 where {?s :haskeyword [ rdf:first ?keyword ]}
 order by ?keyword
-")
+"))
+
+knitr::kable(keywords)
+
 ```
 
 This gives a list of the functions withs keyword "univar".
 ```{r, eval=FALSE}
-sparql.rdf( store, "
+univar.name.title.keyword<- data.frame(sparql.rdf( store, "
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix : <http://example.org/Rd/0.1/>
 select distinct ?name ?title ?keyword
@@ -522,13 +527,15 @@ where {
 values (?keyword) { ('univar') }
 }
 order by ?name
-")
+"))
+
+knitr::kable(univar.name.title.keyword)
 
 ```
 
 This gives a list of the functions with the keywords combined.
 ```{r, eval=FALSE}
-sparql.rdf( store, "
+univar.name.title.keyword.comb<- data.frame(sparql.rdf( store, "
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix : <http://example.org/Rd/0.1/>
 select distinct ?name ?title (group_concat(?keyword ; separator = ', ') as ?allkeywords)
@@ -543,23 +550,54 @@ OPTIONAL { ?col rdf:rest*/rdf:first ?skeyword .
 }
 group by ?name ?title
 order by ?name
-")
+"))
+
+knitr::kable(univar.name.title.keyword.comb)
 
 ```
 
-The following executes very slow.
+The following executes very slow and/or give "java.lang.OutOfMemoryError: GC overhead limit exceeded".
+
+Each .Rd file is represented as nested collections. So the name, title and keyword can appears any where. This got me trying to use paths to identify the them. Turns out it does not work in first attemps.
+
 ```{r, eval=FALSE}
-sparql.rdf( store, "
+doc.entries.1<- data.frame(sparql.rdf( store, "
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 prefix : <http://example.org/Rd/0.1/>
-select distinct *
+select distinct ?s ?s1
+where {
+?s :RdDoc ?s1 .
+}
+"))
+knitr::kable(doc.entries.1)
+
+slow.1<- data.frame(sparql.rdf( store, "
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct ?s ?name ?title
 where {
 ?s :RdDoc ?s1 .
 ?s1 !(rdf:type)+/:hasname [ rdf:first ?name ] .
 ?s1 !(rdf:type)+/:hastitle [ rdf:first ?title ] .
+values(?s) {(:stats_median_Rd)}
 }
 order by ?name
-")
+"))
+knitr::kable(slow.1)
+
+
+slow.2<- data.frame(sparql.rdf( store, "
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct ?s ?name ?title
+where {
+{select distinct ?s ?s1 where {?s :RdDoc ?s1 .} limit 2}
+?s1 !(rdf:type)+/:hasname [ rdf:first ?name ] .
+?s1 !(rdf:type)+/:hastitle [ rdf:first ?title ] .
+}
+order by ?name
+"))
+knitr::kable(slow.2)
 
 sparql.rdf( store, "
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -589,4 +627,14 @@ where {
 }
 order by ?name
 ')
+```
+
+```{r, eval=FALSE}
+sparql.rdf( store, '
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix : <http://example.org/Rd/0.1/>
+select distinct ?name ?title where {?s :hasname [ rdf:first ?name ]; :hastitle [ rdf:first ?title ] }
+')
+
+
 ```
