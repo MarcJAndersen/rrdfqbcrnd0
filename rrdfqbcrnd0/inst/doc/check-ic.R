@@ -1,4 +1,4 @@
-## ----, results='asis', eval=TRUE-----------------------------------------
+## ---- results='asis', eval=TRUE------------------------------------------
 library(rrdfqbcrnd0)
 
 qbfile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0")
@@ -14,7 +14,7 @@ cubeData<- combine.rdf( cube, cdisc.rdf)
 
 
 
-## ----, results='asis', eval=TRUE-----------------------------------------
+## ---- results='asis', eval=TRUE------------------------------------------
 str(cubeData)
 for (icall in qbIClist) {
 #  print(names(icall))
@@ -28,11 +28,11 @@ for (icall in qbIClist) {
 }
 
 
-## ----, results='asis', eval=TRUE-----------------------------------------
+## ---- results='asis', eval=TRUE------------------------------------------
 icres<- RunQbIC( cubeData, forsparqlprefix )
 knitr::kable(icres)
 
-## ----, results='asis', eval=TRUE-----------------------------------------
+## ---- results='asis', eval=TRUE------------------------------------------
 qbfile1<- system.file("extdata/sample-rdf", "example.ttl", package="rrdfqbcrnd0")
 cube1<- load.rdf( qbfile1, format="TURTLE")
 
@@ -41,7 +41,7 @@ cubeData1<- combine.rdf( cube1, cdisc.rdf)
 icres1<- RunQbIC( cubeData1, forsparqlprefix )
 knitr::kable(icres1)
 
-## ----, results='asis', eval=TRUE-----------------------------------------
+## ---- results='asis', eval=TRUE------------------------------------------
 qbfile2<- system.file("extdata/sample-rdf", "example-fails-IC14.ttl", package="rrdfqbcrnd0")
 cube2<- load.rdf( qbfile2, format="TURTLE")
 

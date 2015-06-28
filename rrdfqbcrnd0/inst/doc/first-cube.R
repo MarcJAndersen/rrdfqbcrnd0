@@ -45,7 +45,7 @@ cat("dsdName ", dsdName, ", domainName ", domainName, "\n" )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 cat(forsparqlprefix,"\n")
 
-## ----, echo=FALSE--------------------------------------------------------
+## ---- echo=FALSE---------------------------------------------------------
 
 cube.observations1.rq<- paste( forsparqlprefix,
 '
@@ -74,11 +74,11 @@ cube.observations2<- sparql.rdf(cube, cube.observations2.rq)
 knitr::kable(head(cube.observations2, 15))
 
 
-## ----, echo=FALSE--------------------------------------------------------
+## ---- echo=FALSE---------------------------------------------------------
 codelists.rq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
 cat(codelists.rq)
 
-## ----, echo=FALSE--------------------------------------------------------
+## ---- echo=FALSE---------------------------------------------------------
 cube.codelists<- as.data.frame(sparql.rdf(cube, codelists.rq), stringsAsFactors=FALSE)
 
 ## TODO instead of gsub make a more straightforward way
@@ -101,7 +101,7 @@ cube.dimensions<- as.data.frame(sparql.rdf(cube, cube.dimensions.rq), stringsAsF
 knitr::kable(print(cube.dimensions))
 
 
-## ----, echo=FALSE--------------------------------------------------------
+## ---- echo=FALSE---------------------------------------------------------
 
 cube.dimensionsattr<- sparql.rdf(cube,
   paste(forsparqlprefix,

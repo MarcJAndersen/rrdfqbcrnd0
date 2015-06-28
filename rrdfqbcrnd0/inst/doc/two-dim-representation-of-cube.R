@@ -1,7 +1,7 @@
-## ----, eval=TRUE---------------------------------------------------------
+## ---- eval=TRUE----------------------------------------------------------
 library(rrdfqbcrnd0)
 
-## ----, echo=TRUE---------------------------------------------------------
+## ---- echo=TRUE----------------------------------------------------------
 MakeTable<- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
 
 store <- new.rdf()  # Initialize
@@ -22,7 +22,7 @@ outhtmlfile
 }
 
 
-## ----, echo=TRUE---------------------------------------------------------
+## ---- echo=TRUE----------------------------------------------------------
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfqbcrnd0")
 htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "DC-AE-sample.html")
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:aesoc", "crnd-dimension:aedecod" )
@@ -33,7 +33,7 @@ idcol<-  c( "crnd-dimension:trta" )
 resHtmlFile<- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
 
 
-## ----, echo=TRUE---------------------------------------------------------
+## ---- echo=TRUE----------------------------------------------------------
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "DC-DEMO-sample.html")
 
@@ -48,7 +48,18 @@ idcol<-  c( "crnd-dimension:trt01a" )
 resHtmlFile<- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
 
 
-## ----, eval=TRUE---------------------------------------------------------
+## ---- eval=TRUE----------------------------------------------------------
+store <- new.rdf()  # Initialize
+cat("Loading ", dataCubeFile, "\n")
+load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+summarize.rdf(store)
+
+dsdName<- GetDsdNameFromCube( store )
+domainName<- GetDomainNameFromCube( store )
+forsparqlprefix<- GetForSparqlPrefix( domainName )
+
+## ---- eval=TRUE----------------------------------------------------------
+
 cube.observations.rq<-  paste( forsparqlprefix,
 '
 select *
@@ -67,7 +78,7 @@ cube.observations<- sparql.rdf(store, cube.observations.rq)
 knitr::kable(cube.observations)
 
 
-## ----, eval=TRUE---------------------------------------------------------
+## ---- eval=TRUE----------------------------------------------------------
 cube.measurefmt.rq<-  paste( forsparqlprefix,
 '
 select distinct ?procedure ?measurefmt
@@ -84,12 +95,12 @@ cube.measurefmt<- sparql.rdf(store, cube.measurefmt.rq)
 knitr::kable(cube.measurefmt)
 
 
-## ----, echo=TRUE---------------------------------------------------------
+## ---- echo=TRUE----------------------------------------------------------
 cols.rq<- GetRownoColnoCellpartnoSparqlQuery( forsparqlprefix )
 cols<- data.frame(sparql.rdf(store, cols.rq))
 knitr::kable(cols)
 
 
-## ----, echo=TRUE---------------------------------------------------------
+## ---- echo=TRUE----------------------------------------------------------
 sessionInfo()
 

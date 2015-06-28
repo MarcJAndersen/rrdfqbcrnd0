@@ -1,4 +1,4 @@
-## ----, eval=TRUE---------------------------------------------------------
+## ---- eval=TRUE----------------------------------------------------------
 library(rrdfqbcrnd0)
 
 ## ----helperfunction------------------------------------------------------
@@ -10,7 +10,7 @@ knitr::read_chunk( fn, from=c(1))
 invisible(fn)
 }
 
-## ----, eval=FALSE, echo=FALSE--------------------------------------------
+## ---- eval=FALSE, echo=FALSE---------------------------------------------
 #  knitr::knit("vignettes/SPARQL-scripts-for-qb.Rmd")
 #  markdown::markdownToHTML("SPARQL-scripts-for-qb.md",output="SPARQL-scripts-for-qb.html")
 #  
@@ -59,7 +59,7 @@ mdwrite( observationsRq, "DEMOobservations" )
 observations<- sparql.rdf(store, observationsRq)
 knitr::kable(head(observations,2))
 
-## ----, eval=FALSE, echo=FALSE--------------------------------------------
+## ---- eval=FALSE, echo=FALSE---------------------------------------------
 #  db <- Rd_db("rrdfqbcrnd0")
 #  keywords <- lapply(db, tools:::.Rd_get_metadata, "keyword")
 #  db$qbIClist.Rd

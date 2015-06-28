@@ -271,8 +271,8 @@ idcol&lt;-  c( &quot;crnd-dimension:trta&quot; )
 resHtmlFile&lt;- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
 </code></pre>
 
-<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-AE-sample.ttl 
-## [1] &quot;Number of triples: 23316&quot;
+<pre><code>## Loading  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-AE-sample.ttl 
+## [1] &quot;Number of triples: 23867&quot;
 </code></pre>
 
 <h2>Create DEMO html example</h2>
@@ -291,11 +291,32 @@ idcol&lt;-  c( &quot;crnd-dimension:trt01a&quot; )
 resHtmlFile&lt;- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
 </code></pre>
 
-<pre><code>## Loading  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl 
+<pre><code>## Loading  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl 
 ## [1] &quot;Number of triples: 2895&quot;
 </code></pre>
 
 <h2>For development</h2>
+
+<h3>Setup</h3>
+
+<pre><code class="r">store &lt;- new.rdf()  # Initialize
+cat(&quot;Loading &quot;, dataCubeFile, &quot;\n&quot;)
+</code></pre>
+
+<pre><code>## Loading  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
+</code></pre>
+
+<pre><code class="r">load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
+summarize.rdf(store)
+</code></pre>
+
+<pre><code>## [1] &quot;Number of triples: 2895&quot;
+</code></pre>
+
+<pre><code class="r">dsdName&lt;- GetDsdNameFromCube( store )
+domainName&lt;- GetDomainNameFromCube( store )
+forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
+</code></pre>
 
 <h3>View a specific observation.</h3>
 
@@ -1162,32 +1183,32 @@ knitr::kable(cols)
 <pre><code class="r">sessionInfo()
 </code></pre>
 
-<pre><code>## R version 3.1.3 (2015-03-09)
+<pre><code>## R version 3.2.0 (2015-04-16)
 ## Platform: x86_64-redhat-linux-gnu (64-bit)
-## Running under: Fedora 21 (Twenty One)
+## Running under: Fedora 22 (Twenty Two)
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_GB.utf8          LC_NUMERIC=C                
-##  [3] LC_TIME=en_GB.utf8           LC_COLLATE=en_GB.utf8       
-##  [5] LC_MONETARY=en_GB.utf8       LC_MESSAGES=en_GB.utf8      
-##  [7] LC_PAPER=en_GB.utf8          LC_NAME=en_GB.utf8          
-##  [9] LC_ADDRESS=en_GB.utf8        LC_TELEPHONE=en_GB.utf8     
-## [11] LC_MEASUREMENT=en_GB.utf8    LC_IDENTIFICATION=en_GB.utf8
+##  [1] LC_CTYPE=en_GB.UTF-8          LC_NUMERIC=C                 
+##  [3] LC_TIME=en_GB.UTF-8           LC_COLLATE=en_GB.UTF-8       
+##  [5] LC_MONETARY=en_GB.UTF-8       LC_MESSAGES=en_GB.UTF-8      
+##  [7] LC_PAPER=en_GB.UTF-8          LC_NAME=en_GB.UTF-8          
+##  [9] LC_ADDRESS=en_GB.UTF-8        LC_TELEPHONE=en_GB.UTF-8     
+## [11] LC_MEASUREMENT=en_GB.UTF-8    LC_IDENTIFICATION=en_GB.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-##  [1] rrdfqbcrnd0_0.1.3 testthat_0.9.1    foreign_0.8-62   
-##  [4] RCurl_1.95-4.5    bitops_1.0-6      xlsx_0.5.7       
-##  [7] xlsxjars_0.6.1    rrdf_2.1.0        rrdflibs_1.4.0   
-## [10] rJava_0.9-6       devtools_1.7.0    knitr_1.9        
+##  [1] foreign_0.8-63    rrdfqbcrnd0_0.1.4 RCurl_1.95-4.6   
+##  [4] bitops_1.0-5      xlsx_0.5.7        xlsxjars_0.6.1   
+##  [7] rrdf_2.1.0        rrdflibs_1.4.0    rJava_0.9-6      
+## [10] devtools_1.8.0    knitr_1.10.5     
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] compiler_3.1.3  digest_0.6.8    evaluate_0.5.5  formatR_1.0    
-##  [5] highr_0.4       htmltools_0.2.6 markdown_0.7.4  Rcpp_0.11.4    
-##  [9] rmarkdown_0.5.1 roxygen2_4.1.0  stringr_0.6.2   tools_3.1.3    
-## [13] yaml_2.1.13
+##  [1] Rcpp_0.11.6     roxygen2_4.1.1  digest_0.6.8    formatR_1.2    
+##  [5] git2r_0.10.1    magrittr_1.5    evaluate_0.7    highr_0.5      
+##  [9] stringi_0.4-1   curl_0.8        xml2_0.1.1      tools_3.2.0    
+## [13] stringr_1.0.0   markdown_0.7.7  rversions_1.0.1 memoise_0.2.1
 </code></pre>
 
 </body>
