@@ -220,10 +220,18 @@ observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparql
 cat(observationsDescriptionRq)
 observationsDesc<- as.data.frame(sparql.rdf(checkCube, observationsDescriptionRq ), stringsAsFactors=FALSE)
 knitr::kable(observationsDesc[ 1:10 ,
-   c(paste0(rep(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions),each=3), c("label", "value", "IRI")),
-     sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", attributes), "measure", "measureIRI" )]
-)
+     c(paste0(rep(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions),each=3),
+       c("label", "value", "IRI")),
+       sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", attributes), "measure", "measureIRI"
+       )]
+       )
 
+```
+
+## Get formular expression
+
+```{r, echo=TRUE}
+GetFormularFromCube( checkCube, forsparqlprefix )
 ```
 
 ### Notes
