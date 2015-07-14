@@ -18,7 +18,7 @@ attributes<- sparql.rdf(store, attributesRq)
 observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
 observations<- as.data.frame(sparql.rdf(store, observationsRq ), stringsAsFactors=FALSE)
 
-print(observations)
+## print(observations)
 xx<- apply( observations, 1, function(x) {
 expr<- c()
 for (vn in names(x)) {
