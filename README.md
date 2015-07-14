@@ -61,7 +61,7 @@ install_github("MarcJAndersen/rrdfqbcrnd0", subdir="rrdfqbcrnd0", build_vignette
 
 Note for Linux: Check if there are distribution specific packages for
 the components. For example for Fedora, these RCurl exists as package
-R-RCurl and XML as R-XML, eg yum install R-RCurl R-XML.
+R-RCurl and XML as R-XML, eg `dnf install R-RCurl R-XML`.
 
 If RCurl install fails, it may be resolved by first installing the
 libcurl and libcurl-devel packages (on fedora: install.packages( c(
@@ -135,26 +135,31 @@ export RSTUDIO_PANDOC=`which pandoc | xargs dirname`
 
 The SPARQL queries are shown in knitr using the highlight package. Install highlight by
 ```bash
-sudo yum install highlight
+sudo dnf install highlight
 ```
 
 To install pandoc use
 ```bash
-sudo yum install pandoc pandoc-citeproc pandoc-pdf
+sudo dnf install pandoc pandoc-citeproc pandoc-pdf
 ```
 
 For executing pandoc, there following packages may be need: framed, titling.
 ([source](https://github.com/rstudio/rmarkdown/issues/39)
 
 ```bash
-sudo yum -y install texlive-framed
-sudo yum -y install texlive-titling
+sudo dnf -y install texlive-framed
+sudo dnf -y install texlive-titling
 ```
 
 Usefull stand-alone tools for working with RDF data may be installed:
 ```bash
-sudo yum install raptor2
-sudo yum install graphviz
+sudo dnf install raptor2
+sudo dnf install graphviz
+```
+
+RCurl may need libssh2-devel should be installed:
+```bash
+sudo dnf install libssh2-devel
 ```
 
 ### Version of packages
