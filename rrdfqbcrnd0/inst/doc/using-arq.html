@@ -165,7 +165,10 @@ hr {
 <body>
 <h1>SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)</h1>
 
-<p>The examples below uses <code>arq</code> from Apache Jena (<a href="http://jena.apache.org">http://jena.apache.org</a>). To install arq - download and unpack the latest version of apache-jena from (<a href="http://jena.apache.org/download/index.cgi">http://jena.apache.org/download/index.cgi</a>). Put the executable <code>arq</code> in the path, or invoke <code>arq</code> with the full path to the directory with arq.</p>
+<p>The examples below uses <code>arq</code> from Apache Jena (<a href="http://jena.apache.org">http://jena.apache.org</a>). To install arq - download and unpack the latest version of apache-jena from (<a href="http://jena.apache.org/download/index.cgi">http://jena.apache.org/download/index.cgi</a>).
+Then you need some way of invoking <code>arq</code>; I use a not-so-good-approach: cd ~/bin; ln -s /opt/apache-jena-2.13.0/bin/arq .&ldquo;.</p>
+
+<p>Given a SPARQL query and RDF data, <code>arq</code> returns the result of the query. So this is the command line way of making a SPARQL query.</p>
 
 <p>The use of arq is described many places, see for example (<a href="http://www.learningsparql.com/">http://www.learningsparql.com/</a>).</p>
 
@@ -365,7 +368,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq
 
 <h2>Get definition for all descriptive statistics</h2>
 
-<p>The SPARQL script shows how the function definition for the descriptive statistics is stored in the cube.</p>
+<p>The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.</p>
 
 <pre><code class="bash">cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq 

@@ -1,13 +1,16 @@
 ---
 title: "Using ARQ to make SPARQL queries"
 author: "mja@statgroup.dk"
-date: "2015-05-13"
+date: "2015-07-23"
 output: rmarkdown::html_vignette
 ---
 
 # SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)
 
-The examples below uses `arq` from Apache Jena (http://jena.apache.org). To install arq - download and unpack the latest version of apache-jena from (http://jena.apache.org/download/index.cgi). Put the executable `arq` in the path, or invoke `arq` with the full path to the directory with arq.
+The examples below uses `arq` from Apache Jena (http://jena.apache.org). To install arq - download and unpack the latest version of apache-jena from (http://jena.apache.org/download/index.cgi).
+Then you need some way of invoking `arq`; I use a not-so-good-approach: `cd ~/bin; ln -s /opt/apache-jena-2.13.0/bin/arq .".
+
+Given a SPARQL query and RDF data, `arq` returns the result of the query. So this is the command line way of making a SPARQL query.
 
 The use of arq is described many places, see for example (http://www.learningsparql.com/).
 
@@ -214,7 +217,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq
 
 ## Get definition for all descriptive statistics
 
-The SPARQL script shows how the function definition for the descriptive statistics is stored in the cube.
+The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.
 
 ```bash
 cd ../extdata/sample-rdf
