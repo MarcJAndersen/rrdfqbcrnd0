@@ -5,7 +5,8 @@ HTMLS= create-qb-CDISC-prefix.html store-cdisc-rdf-as-rrdf.html create-qb-IC-dat
 populate-sample-xpt.html  create-ADSL-ttl.html \
 create-dm-table-as-csv.html create-ae-table-as-csv.html \
 create-qb-examples-as-ttl.html \
-use-demo-ttl.html  using-arq.html using-python.html
+use-demo-ttl.html  using-arq.html \
+codelist-procedure.Rmd using-python.html
 
 MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 
@@ -83,6 +84,9 @@ using-arq.html: using-arq.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl
 	${RKNIT2HTML}
 
 using-python.html: using-python.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl
+	${RKNIT2HTML}
+
+codelist-procedure.html: codelist-procedure.Rmd 
 	${RKNIT2HTML}
 
 # %.pdf: %.Rnw

@@ -270,6 +270,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     ## TODO(mja): not straightforward, make more clear
     proc<-GetDescrStatProcedure()
     for (i in 1:nrow(codeSource)){
+        ## The two variables should be the same codeSubjInList and codeSubj
       codeSubjInList<- paste0("code:",dimName,"-",codeSource[i,"codeNoBlank"])
       codeSubj<- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
       if (codeSubjInList %in% names(proc)) {

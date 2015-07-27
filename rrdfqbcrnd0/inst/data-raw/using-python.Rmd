@@ -11,6 +11,10 @@ The examples below uses `rdflib` from (https://github.com/RDFLib/rdflib).
 
 As of 28-jun-2015 the code is still in development.
 
+## Requirement
+
+The python package `rdflib` must be installed, see description at (https://github.com/RDFLib/rdflib).
+
 ## Get dimensions
 ```{r, engine='python'}
 from rdflib import Graph
