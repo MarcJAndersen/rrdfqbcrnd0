@@ -220,6 +220,8 @@ pointless.  TODO(mja): fix it.</p>
 
 <pre><code>## Loading rrdfqbcrnd0
 ## Loading required package: rrdf
+## Loading required package: rJava
+## Loading required package: methods
 ## Loading required package: rrdflibs
 ## Loading required package: xlsx
 ## Loading required package: xlsxjars
@@ -254,7 +256,7 @@ library(sqldf)
 print(fnadsl)
 </code></pre>
 
-<pre><code>## [1] &quot;/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adsl.xpt&quot;
+<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adsl.xpt&quot;
 </code></pre>
 
 <pre><code class="r">if (!file.exists(fnadsl)) {
@@ -293,7 +295,7 @@ load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= checkCube)
 summarize.rdf(checkCube)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 1262&quot;
+<pre><code>## [1] &quot;Number of triples: 1308&quot;
 </code></pre>
 
 <pre><code class="r">stmtSQL&lt;- GetSQLFromCube(checkCube) 
@@ -369,7 +371,7 @@ cat(paste(&quot;se.text&lt;- &#39;&quot;, se.text,&quot;&#39;\n&quot;,collapse=&
 print(tempfile)
 </code></pre>
 
-<pre><code>## [1] &quot;/tmp/RtmpfjUXBB/temp-code.R&quot;
+<pre><code>## [1] &quot;/tmp/RtmpBrrbis/temp-code.R&quot;
 </code></pre>
 
 <h2>Define SQL statements directly</h2>
@@ -693,7 +695,7 @@ write.csv(adsl.summ.stat, file=dmtableFile, row.names=FALSE)
 cat(&quot;Written to &quot;, dmtableFile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/dm.AR.csv
+<pre><code>## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/dm.AR.csv
 </code></pre>
 
 </body>

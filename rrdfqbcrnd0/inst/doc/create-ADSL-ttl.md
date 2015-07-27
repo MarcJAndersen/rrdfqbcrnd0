@@ -1,7 +1,7 @@
 ---
 title: "Create ADSL as TTL file"
 author: "mja@statgroup.dk"
-date: "2015-05-13"
+date: "2015-07-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create ADSL as TTL file}
@@ -23,6 +23,8 @@ devtools::load_all(pkg="../..")
 ```
 ## Loading rrdfqbcrnd0
 ## Loading required package: rrdf
+## Loading required package: rJava
+## Loading required package: methods
 ## Loading required package: rrdflibs
 ## Loading required package: xlsx
 ## Loading required package: xlsxjars
@@ -91,7 +93,7 @@ cat("SQLite database stored as ", tfile, "\n")
 ```
 
 ```
-## SQLite database stored as  /tmp/RtmpXswCVF/filec01f517e65
+## SQLite database stored as  /tmp/RtmpEkbq1Q/file599861dfc3e9
 ```
 
 ```r
@@ -101,7 +103,7 @@ cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
 ```
-## SQLite database dump in  /tmp/RtmpXswCVF/filec01ae8903b
+## SQLite database dump in  /tmp/RtmpEkbq1Q/file59983057635a
 ```
 
 ```r
@@ -113,7 +115,7 @@ cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
 ```
-## SQLite database dump modified stored as  /tmp/RtmpXswCVF/filec0166ea2bd5
+## SQLite database dump modified stored as  /tmp/RtmpEkbq1Q/file5998442db9a7
 ```
 
 ```r
@@ -168,7 +170,7 @@ cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
 ```
 
 ```
-## File  /tmp/RtmpXswCVF/adsl-map.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+## File  /tmp/RtmpEkbq1Q/adsl-map.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 ```
 
 ```r
@@ -178,7 +180,7 @@ cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
 ```
 
 ```
-## File  /tmp/RtmpXswCVF/adsl.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+## File  /tmp/RtmpEkbq1Q/adsl.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 ```
 
 
@@ -192,7 +194,7 @@ dataFilemap
 ```
 
 ```
-## [1] "/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl-map.ttl"
+## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl-map.ttl"
 ```
 
 ```r
@@ -201,7 +203,7 @@ dataFile
 ```
 
 ```
-## [1] "/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl.ttl"
+## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl.ttl"
 ```
 
 ```r
@@ -240,8 +242,8 @@ str(res)
 
 ```
 ## 'data.frame':	20 obs. of  3 variables:
-##  $ mapColumn   : chr  "map:ADSL_DISONSDT" "map:ADSL_HEIGHTBL" "map:ADSL_TRTSDT" "map:ADSL_AGE" ...
-##  $ d2rqcolumn  : chr  "ADSL.DISONSDT" "ADSL.HEIGHTBL" "ADSL.TRTSDT" "ADSL.AGE" ...
+##  $ mapColumn   : chr  "map:ADSL_TRT01AN" "map:ADSL_VISIT1DT" "map:ADSL_TRTSDT" "map:ADSL_TRT01PN" ...
+##  $ d2rqcolumn  : chr  "ADSL.TRT01AN" "ADSL.VISIT1DT" "ADSL.TRTSDT" "ADSL.TRT01PN" ...
 ##  $ d2rqdatatype: chr  "xsd:double" "xsd:double" "xsd:double" "xsd:double" ...
 ```
 
@@ -251,26 +253,26 @@ res
 
 ```
 ##            mapColumn    d2rqcolumn d2rqdatatype
-## 1  map:ADSL_DISONSDT ADSL.DISONSDT   xsd:double
-## 2  map:ADSL_HEIGHTBL ADSL.HEIGHTBL   xsd:double
+## 1   map:ADSL_TRT01AN  ADSL.TRT01AN   xsd:double
+## 2  map:ADSL_VISIT1DT ADSL.VISIT1DT   xsd:double
 ## 3    map:ADSL_TRTSDT   ADSL.TRTSDT   xsd:double
-## 4       map:ADSL_AGE      ADSL.AGE   xsd:double
-## 5    map:ADSL_RFENDT   ADSL.RFENDT   xsd:double
-## 6  map:ADSL_VISNUMEN ADSL.VISNUMEN   xsd:double
-## 7   map:ADSL_EDUCLVL  ADSL.EDUCLVL   xsd:double
-## 8  map:ADSL_VISIT1DT ADSL.VISIT1DT   xsd:double
-## 9  map:ADSL_WEIGHTBL ADSL.WEIGHTBL   xsd:double
-## 10  map:ADSL_CUMDOSE  ADSL.CUMDOSE   xsd:double
-## 11    map:ADSL_BMIBL    ADSL.BMIBL   xsd:double
-## 12   map:ADSL_TRTDUR   ADSL.TRTDUR   xsd:double
-## 13   map:ADSL_TRTEDT   ADSL.TRTEDT   xsd:double
-## 14  map:ADSL_TRT01AN  ADSL.TRT01AN   xsd:double
+## 4   map:ADSL_TRT01PN  ADSL.TRT01PN   xsd:double
+## 5     map:ADSL_RACEN    ADSL.RACEN   xsd:double
+## 6  map:ADSL_DISONSDT ADSL.DISONSDT   xsd:double
+## 7  map:ADSL_WEIGHTBL ADSL.WEIGHTBL   xsd:double
+## 8   map:ADSL_AGEGR1N  ADSL.AGEGR1N   xsd:double
+## 9    map:ADSL_TRTDUR   ADSL.TRTDUR   xsd:double
+## 10  map:ADSL_EDUCLVL  ADSL.EDUCLVL   xsd:double
+## 11   map:ADSL_TRTEDT   ADSL.TRTEDT   xsd:double
+## 12      map:ADSL_AGE      ADSL.AGE   xsd:double
+## 13 map:ADSL_HEIGHTBL ADSL.HEIGHTBL   xsd:double
+## 14 map:ADSL_VISNUMEN ADSL.VISNUMEN   xsd:double
 ## 15   map:ADSL_DURDIS   ADSL.DURDIS   xsd:double
-## 16  map:ADSL_MMSETOT  ADSL.MMSETOT   xsd:double
-## 17  map:ADSL_AGEGR1N  ADSL.AGEGR1N   xsd:double
-## 18    map:ADSL_AVGDD    ADSL.AVGDD   xsd:double
-## 19    map:ADSL_RACEN    ADSL.RACEN   xsd:double
-## 20  map:ADSL_TRT01PN  ADSL.TRT01PN   xsd:double
+## 16    map:ADSL_AVGDD    ADSL.AVGDD   xsd:double
+## 17  map:ADSL_CUMDOSE  ADSL.CUMDOSE   xsd:double
+## 18    map:ADSL_BMIBL    ADSL.BMIBL   xsd:double
+## 19   map:ADSL_RFENDT   ADSL.RFENDT   xsd:double
+## 20  map:ADSL_MMSETOT  ADSL.MMSETOT   xsd:double
 ```
 
 ```r

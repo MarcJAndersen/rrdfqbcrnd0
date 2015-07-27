@@ -1,7 +1,7 @@
 ---
 title: "Populate sample-xpt directory with example file in SAS transport xpt format"
 author: "mja@statgroup.dk"
-date: "2015-05-03"
+date: "2015-07-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Populate sample-xpt directory with example file in SAS transport xpt format}
@@ -32,6 +32,8 @@ devtools::load_all(pkg="../..")
 ```
 ## Loading rrdfqbcrnd0
 ## Loading required package: rrdf
+## Loading required package: rJava
+## Loading required package: methods
 ## Loading required package: rrdflibs
 ## Loading required package: xlsx
 ## Loading required package: xlsxjars
@@ -59,7 +61,7 @@ message("Downloading to ", fnadae )
 ```
 
 ```
-## Downloading to /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adae.xpt
+## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adae.xpt
 ```
 
 ```r
@@ -131,7 +133,7 @@ str(adsl)
 
 ```
 ## Loading required package: foreign
-## Reading SAS transport file /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adae.xpt
+## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adae.xpt
 ```
 
 'data.frame':	1191 obs. of  55 variables:
@@ -192,7 +194,7 @@ str(adsl)
  $ AOCC01FL: Factor w/ 2 levels "","Y": 2 1 1 2 1 1 1 2 1 2 ...
 
 ```
-## Reading SAS transport file /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adsl.xpt
+## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adsl.xpt
 ```
 
 'data.frame':	254 obs. of  48 variables:

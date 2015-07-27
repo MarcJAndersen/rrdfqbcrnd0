@@ -1,7 +1,7 @@
 ---
 title: "Create AE table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-05-13"
+date: "2015-07-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create AE table as csv file}
@@ -26,6 +26,8 @@ devtools::load_all(pkg="../..")
 ```
 ## Loading rrdfqbcrnd0
 ## Loading required package: rrdf
+## Loading required package: rJava
+## Loading required package: methods
 ## Loading required package: rrdflibs
 ## Loading required package: xlsx
 ## Loading required package: xlsxjars
@@ -207,7 +209,7 @@ cat("Written to ", aetableFile, "\n")
 ```
 
 ```
-## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.AR.csv
+## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.AR.csv
 ```
 
 ```r
@@ -221,7 +223,7 @@ cat("Written to ", aesocFile, "\n")
 ```
 
 ```
-## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.aesoc.AR.csv
+## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.aesoc.AR.csv
 ```
 
 ```r
@@ -236,5 +238,5 @@ cat("Written to ", aedecodFile, "\n")
 ```
 
 ```
-## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.aedecod.AR.csv
+## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/ae.aedecod.AR.csv
 ```

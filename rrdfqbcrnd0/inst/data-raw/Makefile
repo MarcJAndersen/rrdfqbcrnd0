@@ -5,8 +5,8 @@ HTMLS= create-qb-CDISC-prefix.html store-cdisc-rdf-as-rrdf.html create-qb-IC-dat
 populate-sample-xpt.html  create-ADSL-ttl.html \
 create-dm-table-as-csv.html create-ae-table-as-csv.html \
 create-qb-examples-as-ttl.html \
-use-demo-ttl.html  using-arq.html \
-codelist-procedure.Rmd using-python.html
+use-demo-ttl.html  using-arq.html using-arq-graphical-display.html \
+codelist-procedure.html using-python.html
 
 MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 
@@ -50,7 +50,9 @@ clean:
 	rm -f ${TARGETS}
 
 installDoc:
+	mkdir -p ../doc/figure
 	cp ${FORDOC} ../doc
+	cp figure/* ../doc/figure
 
 ${ADAEXPT} ${ADDMXPT} populate-sample-xpt.html: populate-sample-xpt.Rmd
 	${RKNIT2HTML}
@@ -81,6 +83,9 @@ use-demo-ttl.html: use-demo-ttl.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl
 	${RKNIT2HTML}
 
 using-arq.html: using-arq.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl
+	${RKNIT2HTML}
+
+using-arq-graphical-display.html: using-arq-graphical-display.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl
 	${RKNIT2HTML}
 
 using-python.html: using-python.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl

@@ -1,0 +1,13 @@
+digraph {
+	rankdir = LR;
+	charset="utf-8";
+
+
+	// Resources
+
+	// Anonymous nodes
+
+	// Literals
+
+	label="\n\nModel:\n(Unknown)";
+}

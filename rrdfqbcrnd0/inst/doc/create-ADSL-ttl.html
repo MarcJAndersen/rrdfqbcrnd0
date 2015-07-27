@@ -211,6 +211,8 @@ hr {
 
 <pre><code>## Loading rrdfqbcrnd0
 ## Loading required package: rrdf
+## Loading required package: rJava
+## Loading required package: methods
 ## Loading required package: rrdflibs
 ## Loading required package: xlsx
 ## Loading required package: xlsxjars
@@ -269,7 +271,7 @@ dbWriteTable(con, &quot;adsl&quot;, adsl)
 <pre><code class="r">cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database stored as  /tmp/RtmpXswCVF/filec01f517e65
+<pre><code>## SQLite database stored as  /tmp/RtmpEkbq1Q/file599861dfc3e9
 </code></pre>
 
 <pre><code class="r">dumpFn&lt;- tempfile()
@@ -277,7 +279,7 @@ system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&qu
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump in  /tmp/RtmpXswCVF/filec01ae8903b
+<pre><code>## SQLite database dump in  /tmp/RtmpEkbq1Q/file59983057635a
 </code></pre>
 
 <pre><code class="r">dumpAfterSedFn &lt;- tempfile()
@@ -287,7 +289,7 @@ system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump modified stored as  /tmp/RtmpXswCVF/filec0166ea2bd5
+<pre><code>## SQLite database dump modified stored as  /tmp/RtmpEkbq1Q/file5998442db9a7
 </code></pre>
 
 <pre><code class="r">## Check only expected changes were applied
@@ -340,7 +342,7 @@ cat( &quot;File &quot;, adslmapttlFn, &quot; copied to &quot;, targetDir, &quot;
 }
 </code></pre>
 
-<pre><code>## File  /tmp/RtmpXswCVF/adsl-map.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+<pre><code>## File  /tmp/RtmpEkbq1Q/adsl-map.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 </code></pre>
 
 <pre><code class="r">if (file.copy(adslttlFn, targetDir)) {
@@ -348,7 +350,7 @@ cat( &quot;File &quot;, adslttlFn, &quot; copied to &quot;, targetDir, &quot;\n&
 }
 </code></pre>
 
-<pre><code>## File  /tmp/RtmpXswCVF/adsl.ttl  copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+<pre><code>## File  /tmp/RtmpEkbq1Q/adsl.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 </code></pre>
 
 <h3>Read in the file</h3>
@@ -357,14 +359,14 @@ cat( &quot;File &quot;, adslttlFn, &quot; copied to &quot;, targetDir, &quot;\n&
 dataFilemap
 </code></pre>
 
-<pre><code>## [1] &quot;/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl-map.ttl&quot;
+<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl-map.ttl&quot;
 </code></pre>
 
 <pre><code class="r">dataFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adsl.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
 dataFile
 </code></pre>
 
-<pre><code>## [1] &quot;/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl.ttl&quot;
+<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl.ttl&quot;
 </code></pre>
 
 <pre><code class="r">store &lt;- new.rdf()  # Initialize
@@ -399,8 +401,8 @@ str(res)
 </code></pre>
 
 <pre><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
-##  $ mapColumn   : chr  &quot;map:ADSL_DISONSDT&quot; &quot;map:ADSL_HEIGHTBL&quot; &quot;map:ADSL_TRTSDT&quot; &quot;map:ADSL_AGE&quot; ...
-##  $ d2rqcolumn  : chr  &quot;ADSL.DISONSDT&quot; &quot;ADSL.HEIGHTBL&quot; &quot;ADSL.TRTSDT&quot; &quot;ADSL.AGE&quot; ...
+##  $ mapColumn   : chr  &quot;map:ADSL_TRT01AN&quot; &quot;map:ADSL_VISIT1DT&quot; &quot;map:ADSL_TRTSDT&quot; &quot;map:ADSL_TRT01PN&quot; ...
+##  $ d2rqcolumn  : chr  &quot;ADSL.TRT01AN&quot; &quot;ADSL.VISIT1DT&quot; &quot;ADSL.TRTSDT&quot; &quot;ADSL.TRT01PN&quot; ...
 ##  $ d2rqdatatype: chr  &quot;xsd:double&quot; &quot;xsd:double&quot; &quot;xsd:double&quot; &quot;xsd:double&quot; ...
 </code></pre>
 
@@ -408,26 +410,26 @@ str(res)
 </code></pre>
 
 <pre><code>##            mapColumn    d2rqcolumn d2rqdatatype
-## 1  map:ADSL_DISONSDT ADSL.DISONSDT   xsd:double
-## 2  map:ADSL_HEIGHTBL ADSL.HEIGHTBL   xsd:double
+## 1   map:ADSL_TRT01AN  ADSL.TRT01AN   xsd:double
+## 2  map:ADSL_VISIT1DT ADSL.VISIT1DT   xsd:double
 ## 3    map:ADSL_TRTSDT   ADSL.TRTSDT   xsd:double
-## 4       map:ADSL_AGE      ADSL.AGE   xsd:double
-## 5    map:ADSL_RFENDT   ADSL.RFENDT   xsd:double
-## 6  map:ADSL_VISNUMEN ADSL.VISNUMEN   xsd:double
-## 7   map:ADSL_EDUCLVL  ADSL.EDUCLVL   xsd:double
-## 8  map:ADSL_VISIT1DT ADSL.VISIT1DT   xsd:double
-## 9  map:ADSL_WEIGHTBL ADSL.WEIGHTBL   xsd:double
-## 10  map:ADSL_CUMDOSE  ADSL.CUMDOSE   xsd:double
-## 11    map:ADSL_BMIBL    ADSL.BMIBL   xsd:double
-## 12   map:ADSL_TRTDUR   ADSL.TRTDUR   xsd:double
-## 13   map:ADSL_TRTEDT   ADSL.TRTEDT   xsd:double
-## 14  map:ADSL_TRT01AN  ADSL.TRT01AN   xsd:double
+## 4   map:ADSL_TRT01PN  ADSL.TRT01PN   xsd:double
+## 5     map:ADSL_RACEN    ADSL.RACEN   xsd:double
+## 6  map:ADSL_DISONSDT ADSL.DISONSDT   xsd:double
+## 7  map:ADSL_WEIGHTBL ADSL.WEIGHTBL   xsd:double
+## 8   map:ADSL_AGEGR1N  ADSL.AGEGR1N   xsd:double
+## 9    map:ADSL_TRTDUR   ADSL.TRTDUR   xsd:double
+## 10  map:ADSL_EDUCLVL  ADSL.EDUCLVL   xsd:double
+## 11   map:ADSL_TRTEDT   ADSL.TRTEDT   xsd:double
+## 12      map:ADSL_AGE      ADSL.AGE   xsd:double
+## 13 map:ADSL_HEIGHTBL ADSL.HEIGHTBL   xsd:double
+## 14 map:ADSL_VISNUMEN ADSL.VISNUMEN   xsd:double
 ## 15   map:ADSL_DURDIS   ADSL.DURDIS   xsd:double
-## 16  map:ADSL_MMSETOT  ADSL.MMSETOT   xsd:double
-## 17  map:ADSL_AGEGR1N  ADSL.AGEGR1N   xsd:double
-## 18    map:ADSL_AVGDD    ADSL.AVGDD   xsd:double
-## 19    map:ADSL_RACEN    ADSL.RACEN   xsd:double
-## 20  map:ADSL_TRT01PN  ADSL.TRT01PN   xsd:double
+## 16    map:ADSL_AVGDD    ADSL.AVGDD   xsd:double
+## 17  map:ADSL_CUMDOSE  ADSL.CUMDOSE   xsd:double
+## 18    map:ADSL_BMIBL    ADSL.BMIBL   xsd:double
+## 19   map:ADSL_RFENDT   ADSL.RFENDT   xsd:double
+## 20  map:ADSL_MMSETOT  ADSL.MMSETOT   xsd:double
 </code></pre>
 
 <pre><code class="r">s&lt;- paste0(&quot;&lt;&quot;, d2rqbaseURL,&quot;ADSL/01-718-1254&gt;&quot;)

@@ -1,7 +1,7 @@
 ---
 title: "Create DEMO table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-05-13"
+date: "2015-07-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DEMO table from csv file}
@@ -25,6 +25,8 @@ devtools::load_all(pkg="../..")
 ```
 ## Loading rrdfqbcrnd0
 ## Loading required package: rrdf
+## Loading required package: rJava
+## Loading required package: methods
 ## Loading required package: rrdflibs
 ## Loading required package: xlsx
 ## Loading required package: xlsxjars
@@ -57,8 +59,8 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 ```
 
 ```
-## Start loading rdf.cdisc.org contents from /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165614
+## Start loading rdf.cdisc.org contents from /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+## Done loading rdf.cdisc.org contents, number of triples: 165643
 ```
 
 ```r
@@ -66,7 +68,7 @@ cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
 ```
-## DM cube stored as  /tmp/RtmpurtnzB/DC-DM-R-V-0-5-2.ttl
+## DM cube stored as  /tmp/RtmpJtWNmM/DC-DM-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -78,7 +80,7 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 ```
 
 ```
-## DM cube copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DM-sample.ttl
+## DM cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DM-sample.ttl
 ```
 
 ```r
@@ -87,7 +89,7 @@ cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
 ```
-## AE cube stored as  /tmp/RtmpurtnzB/DC-AE-R-V-0-5-2.ttl
+## AE cube stored as  /tmp/RtmpJtWNmM/DC-AE-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -98,7 +100,7 @@ if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
 ```
 
 ```
-## AE cube copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-AE-sample.ttl
+## AE cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-AE-sample.ttl
 ```
 
 ## RDF data cube in csv files
@@ -124,7 +126,7 @@ cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
 ```
-## DEMO cube stored as  /tmp/RtmpurtnzB/DC-DEMO-R-V-0-5-2.ttl
+## DEMO cube stored as  /tmp/RtmpJtWNmM/DC-DEMO-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -136,6 +138,6 @@ if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
 ```
 
 ```
-## DEMO cube copied to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
+## DEMO cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
 ```
 

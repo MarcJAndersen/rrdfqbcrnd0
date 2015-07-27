@@ -14,9 +14,10 @@ This vignette shows
 
 # Setup
 
-The next command is not needed if the package have been loaded throug devtools::load_all().
 ```{r}
-library(rrdfqbcrnd0)
+knitr::read_chunk("setup.R")
+```
+```{r setup}
 ```
 
 # Create RDF data cube
@@ -163,7 +164,8 @@ cat(construct.codelists.rq)
 
 ```{r, echo=FALSE}
 procedure.codelist.store<- construct.rdf(cube, construct.codelists.rq)
-procedure.codelist.fn <- file.path(tempdir(),"procedure-code-list.ttl" ) # Full path to file
+targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
+procedure.codelist.fn <- file.path(targetDir,"procedure-code-list.ttl" ) # Full path to file
 outcodelist<- save.rdf(procedure.codelist.store, procedure.codelist.fn, format="TURTLE")
 
 ```

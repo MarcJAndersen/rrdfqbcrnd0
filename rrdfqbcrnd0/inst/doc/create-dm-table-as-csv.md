@@ -1,7 +1,7 @@
 ---
 title: "Create DM table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-05-10"
+date: "2015-07-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DM table as csv file}
@@ -32,6 +32,8 @@ devtools::load_all(pkg="../..")
 ```
 ## Loading rrdfqbcrnd0
 ## Loading required package: rrdf
+## Loading required package: rJava
+## Loading required package: methods
 ## Loading required package: rrdflibs
 ## Loading required package: xlsx
 ## Loading required package: xlsxjars
@@ -72,7 +74,7 @@ print(fnadsl)
 ```
 
 ```
-## [1] "/home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adsl.xpt"
+## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-xpt/adsl.xpt"
 ```
 
 ```r
@@ -116,7 +118,7 @@ summarize.rdf(checkCube)
 ```
 
 ```
-## [1] "Number of triples: 1262"
+## [1] "Number of triples: 1308"
 ```
 
 ```r
@@ -200,7 +202,7 @@ print(tempfile)
 ```
 
 ```
-## [1] "/tmp/RtmpfjUXBB/temp-code.R"
+## [1] "/tmp/RtmpBrrbis/temp-code.R"
 ```
 
 ## Define SQL statements directly
@@ -543,5 +545,5 @@ cat("Written to ", dmtableFile, "\n")
 ```
 
 ```
-## Written to  /home/ma/projects/R-packages/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/dm.AR.csv
+## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-cfg/dm.AR.csv
 ```
