@@ -6,8 +6,11 @@ populate-sample-xpt.html  create-ADSL-ttl.html \
 create-dm-table-as-csv.html create-ae-table-as-csv.html \
 create-qb-examples-as-ttl.html \
 use-demo-ttl.html  using-arq.html using-arq-graphical-display.html \
-codelist-procedure.html using-python.html
+codelist-procedure.html using-python.html reporting-process.html
 
+# not possible directly from .Rmd PDFS=reporting-process.pdf
+
+# List of files with .md extension
 MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 
 ADSLTTL=../extdata/sample-rdf/adsl-map.ttl ../extdata/sample-rdf/adsl.ttl
@@ -37,11 +40,13 @@ RDAS= ${RDAQBICLIST} ${RDAQBCDISCPREFIXES}
 
 EXAMPLES=use-demo-ttl.html  using-arq.html
 
-FORDOC= ${HTMLS} ${MDS}
+FORDOC= ${HTMLS} ${MDS} ${PDFS}
+
 TARGETS=${CDISCRDFZIP} ${RDAS} ${TTLS} ${XPTS} ${CSVS} ${FORDOC}
 
 RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
+RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 
 
 all: ${TARGETS}
@@ -93,6 +98,15 @@ using-python.html: using-python.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl
 
 codelist-procedure.html: codelist-procedure.Rmd 
 	${RKNIT2HTML}
+
+reporting-process.html: reporting-process.Rmd
+	${RKNIT2HTML}
+
+reporting-process.md: reporting-process.Rmd
+	${RKNIT2MD}
+
+reporting-process.pdf: reporting-process.Rmd
+	${RKNIT2PDF}
 
 # %.pdf: %.Rnw
 # 	${RKNIT2PDF}
