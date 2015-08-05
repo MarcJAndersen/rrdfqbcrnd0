@@ -271,7 +271,7 @@ dbWriteTable(con, &quot;adsl&quot;, adsl)
 <pre><code class="r">cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database stored as  /tmp/RtmpEkbq1Q/file599861dfc3e9
+<pre><code>## SQLite database stored as  /tmp/Rtmp0yKAmq/file21b6270477cf
 </code></pre>
 
 <pre><code class="r">dumpFn&lt;- tempfile()
@@ -279,7 +279,7 @@ system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&qu
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump in  /tmp/RtmpEkbq1Q/file59983057635a
+<pre><code>## SQLite database dump in  /tmp/Rtmp0yKAmq/file21b63ca9a3c0
 </code></pre>
 
 <pre><code class="r">dumpAfterSedFn &lt;- tempfile()
@@ -289,7 +289,7 @@ system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump modified stored as  /tmp/RtmpEkbq1Q/file5998442db9a7
+<pre><code>## SQLite database dump modified stored as  /tmp/Rtmp0yKAmq/file21b6319d193b
 </code></pre>
 
 <pre><code class="r">## Check only expected changes were applied
@@ -342,7 +342,7 @@ cat( &quot;File &quot;, adslmapttlFn, &quot; copied to &quot;, targetDir, &quot;
 }
 </code></pre>
 
-<pre><code>## File  /tmp/RtmpEkbq1Q/adsl-map.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+<pre><code>## File  /tmp/Rtmp0yKAmq/adsl-map.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 </code></pre>
 
 <pre><code class="r">if (file.copy(adslttlFn, targetDir)) {
@@ -350,7 +350,7 @@ cat( &quot;File &quot;, adslttlFn, &quot; copied to &quot;, targetDir, &quot;\n&
 }
 </code></pre>
 
-<pre><code>## File  /tmp/RtmpEkbq1Q/adsl.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+<pre><code>## File  /tmp/Rtmp0yKAmq/adsl.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 </code></pre>
 
 <h3>Read in the file</h3>
