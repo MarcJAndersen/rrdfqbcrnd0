@@ -1,0 +1,81 @@
+---
+title: "POC: Clinical Research And Development (CRND) RDF Data Cube Structure created Using Literate Programming Techniques"
+author: "Marc Andersen"
+date: "`r Sys.Date()`"
+output:
+  knitr:::html_vignette:
+    number_sections: yes
+vignette: >
+  %\VignetteIndexEntry{POC: Clinical Research And Development (CRND) RDF Data Cube Structure created Using Literate Programming Techniques}
+  %\VignetteEngine{knitr::rmarkdown_notangle}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Thanks to
+
+[Literate Programming](http://en.wikipedia.org/wiki/Literate_programming) (LP) technique
+
+Setup for the Literate Programming based on the **rlp** package is available on Github: https://github.com/yihui/rlp. 
+
+# Setup
+
+Following the **rlp** package the **knitr** chunk options are set as:
+
+```{r setup, purl=FALSE}
+knitr::opts_chunk$set(eval = FALSE, tidy = FALSE)
+```
+The R code:
+* is written in this document
+* extracted using the `purl` command defined in the Makefile in the package root directory.
+* documented using **roxygen2** syntax.
+
+The `Makefile` is
+
+```{r engine='cat', engine.opts=list(lang='Makefile'), code=readLines('../Makefile'), purl=FALSE}
+```
+
+To execute R-code but not put it in the extracted output, use: `{r eval=TRUE, purl=FALSE}`.
+
+
+```{r}
+##' Dummy function used for defining all paramter with Roxygen2
+##' 
+##' List all parameters used
+##' @param store the RRDF store
+##' @param defDataSet defines the cube dataset
+##' @param defDSD define the cube data set definition. data.frame with one row for each item
+##' @param defCodeList define the cube codelist. data.frame with one row for each code level, and columns for dimension name (variable name), value (as charactere), RDF data type (?)
+##' @return not defined
+dummy<- function(store,defDataSet,defDSD,defCodeList) {
+FALSE
+}
+```
+
+The expansion of the URIs should be handled using the Jena function expandPrefix.
+See http://stackoverflow.com/questions/5698583/resolve-prefix-programatically-jena
+
+```{r}
+##' Helper function used for adding triples stored in a data.frame
+##' 
+##' It is assumed that the first 4 columns contains the subject, property and object and datatype
+##' The subject and property are expanded URI. The object is character.
+##' @inheritParams addTriplesFromDF
+##' ##' @return not defined
+expandTriplesFromDF<- function(RPrefixMap,triplesDF) {
+    expandedTriplesDF<- triplesDF
+}
+```
+
+```{r}
+##' Helper function used for adding triples stored in a data.frame
+##' 
+##' It is assumed that the first 4 columns contains the subject, property and object and datatype
+##' The subject and property are expanded URI. The object is character.
+##' @inheritParams dummy
+##' @param triplesDF
+##' @return not defined
+addTriplesFromDF<- function(store,triplesDF) {
+FALSE
+}
+```
+
