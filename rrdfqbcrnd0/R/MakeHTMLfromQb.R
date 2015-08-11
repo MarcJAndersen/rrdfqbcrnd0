@@ -8,7 +8,7 @@
 ##' @return path to file with HTML
 ##' @inheritParams GetObservationsSparqlQuery
 
-MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile=NULL ) {
+MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile=NULL, useRDFa=TRUE ) {
   
 qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
 
@@ -60,12 +60,13 @@ cat('
 <meta charset="UTF-8">
 <title>DEMO table as html</title>
 ',
+ifelse(useRDFa,
 '    
    <script src="jquery-2.1.3.min.js"></script>
    <link rel="stylesheet" href="jquery-ui-1.11.3.custom/jquery-ui.css"/>
    <script src="jquery-ui-1.11.3.custom/jquery-ui.min.js"></script>
    <script src="RDFa.min.1.4.0.js"></script>
-',
+', ''),
 ## '    
 ## <style>
 ## #table {
@@ -204,7 +205,9 @@ cpindex<- cpindex+1
     if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
 ## The observation
       ## next line is for simple fly-over
-      cat(paste0("<a title=\"", oD$measureIRI[or], "\"",
+if (useRDFa) {
+
+        cat(paste0("<a title=\"", oD$measureIRI[or], "\"",
 " onclick=obsclick(\"", oD$measureIRI[or], "\")",
 ">\n" ), file=htmlfile, append=TRUE)
 
@@ -215,7 +218,12 @@ cpindex<- cpindex+1
 ## ' draggable="true" ondragstart="drag(event)"',
 '>\n' ),
           file=htmlfile, append=TRUE)
+} else {
+        cat(paste0("<a href=\"", oD$measureIRI[or], "\"",
+">\n" ), file=htmlfile, append=TRUE)
 
+}
+        
 ## TODO(mja) how to store dataSet information
 ## cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">\n' ), file=htmlfile, append=TRUE)
 
@@ -239,8 +247,9 @@ else {
 ## dataSet information
 ## cat( '</span>\n', file=htmlfile, append=TRUE)
 
+if (useRDFa) {
 cat( '</span>\n', file=htmlfile, append=TRUE)
-
+}
       cat(paste0("</a>\n"), file=htmlfile, append=TRUE)
       or<- or+1
     cat("</td>\n", file=htmlfile, append=TRUE)
