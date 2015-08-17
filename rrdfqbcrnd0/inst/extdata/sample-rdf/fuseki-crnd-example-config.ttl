@@ -1,3 +1,5 @@
+#
+# fuseki configuration file for loading rrdfqbcrdn0 turtle files
 # Start fuseki using
 # (CFGFILE=${PWD}/fuseki-crnd-example-config.ttl ;cd /opt/apache-jena-fuseki-2.0.0; ./fuseki-server --config=${CFGFILE} ) 
 
@@ -11,7 +13,7 @@
 
 [] rdf:type fuseki:Server ;
    fuseki:services (
-     <#servicerexample>
+     <#armexample>
    ) .
 
 # Custom code.
@@ -25,8 +27,8 @@ tdb:GraphTDB    rdfs:subClassOf  ja:Model .
 ## Updatable in-memory dataset.
 
 ## ---------------------------------------------------------------
-<#servicerexample> rdf:type fuseki:Service ;
-    fuseki:name                     "example" ;    # http://host:port/books
+<#armexample> rdf:type fuseki:Service ;
+    fuseki:name                     "arm" ;    # http://host:port/arm
     fuseki:serviceQuery             "query" ;    # SPARQL query service
     fuseki:serviceReadGraphStore    "get" ;      # SPARQL Graph store protocol (read only)
     fuseki:dataset                   <#dataset> ;
