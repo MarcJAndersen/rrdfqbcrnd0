@@ -16,6 +16,7 @@ MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 ADSLTTL=../extdata/sample-rdf/adsl-map.ttl ../extdata/sample-rdf/adsl.ttl
 
 QBTTLS=../extdata/sample-rdf/DC-AE-sample.ttl ../extdata/sample-rdf/DC-DM-sample.ttl ../extdata/sample-rdf/DC-DEMO-sample.ttl
+
 TTLS= ${QBTTLS} ${ADSLTTL}
 
 CSVAE=../extdata/sample-cfg/ae.AR.csv ../extdata/sample-cfg/ae.aesoc.AR.csv ../extdata/sample-cfg/ae.aedecod.AR.csv

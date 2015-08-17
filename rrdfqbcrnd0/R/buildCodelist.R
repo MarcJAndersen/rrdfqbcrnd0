@@ -151,11 +151,11 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     ## Should only be added if data available in D2RQ format
     ## ToDo(mja): the stem for the URI for the property is hard coded - this should be changed to use a prefix
     ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
-    if (!is.null(underlDataSetName) ) {
-        add.data.triple(store,
+    if (!is.null(underlDataSetName) & codeType=="DATA" & dimName!="procedure" & dimName!="factor") {
+        add.triple(store,
                   paste0(prefixlist$prefixCODE,dimName),
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-PropertyBridge"),
-                  paste0("<", "http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", dimName, ">")
+                  paste0("http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", toupper(dimName))
                   )
     }
 

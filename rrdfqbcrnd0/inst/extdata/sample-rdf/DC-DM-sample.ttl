@@ -49,6 +49,8 @@ ds:obs11  a                         qb:Observation ;
 
 code:trt01a  a                    skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: trt01a"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                "<http://www.example.org/datasets/vocab/ADSL_trt01a>" ;
         rrdfqbcrnd0:R-columnname  "trt01a" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
@@ -389,6 +391,8 @@ crnd-dimension:sex  a  rdf:Property , qb:DimensionProperty ;
 code:sex  a                       skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: sex"@en ;
         mms:inValueDomain         "C66731" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                "<http://www.example.org/datasets/vocab/ADSL_sex>" ;
         rrdfqbcrnd0:R-columnname  "sex" ;
         rrdfqbcrnd0:codeType      "SDTM" ;
         skos:hasTopConcept        code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
@@ -483,6 +487,8 @@ ds:obs28  a                         qb:Observation ;
 code:race  a                      skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: race"@en ;
         mms:inValueDomain         "C74457" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                "<http://www.example.org/datasets/vocab/ADSL_race>" ;
         rrdfqbcrnd0:R-columnname  "race" ;
         rrdfqbcrnd0:codeType      "SDTM" ;
         skos:hasTopConcept        code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
@@ -1159,6 +1165,8 @@ code:Saffl  a            rdfs:Class , owl:Class ;
 
 code:saffl  a                     skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: saffl"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                "<http://www.example.org/datasets/vocab/ADSL_saffl>" ;
         rrdfqbcrnd0:R-columnname  "saffl" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:saffl-_ALL_ , code:saffl-Y , code:saffl-_NONMISS_ ;
@@ -1290,7 +1298,7 @@ ds:dataset-DM  a             qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DM ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-07-27T19:39:03+02:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-08-17T15:08:19+02:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.2.1 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DM-R-V-0-5-2.ttl" ;
@@ -1327,6 +1335,8 @@ ds:obs60  a                         qb:Observation ;
 
 code:factor  a                    skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: factor"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                "<http://www.example.org/datasets/vocab/ADSL_factor>" ;
         rrdfqbcrnd0:R-columnname  "factor" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:factor-_ALL_ , code:factor-proportion , code:factor-WEIGHTBL , code:factor-_NONMISS_ , code:factor-quantity , code:factor-AGE ;
@@ -1397,6 +1407,8 @@ ds:obs17  a                         qb:Observation ;
 
 code:procedure  a                 skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: procedure"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                "<http://www.example.org/datasets/vocab/ADSL_procedure>" ;
         rrdfqbcrnd0:R-columnname  "procedure" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:procedure-stdev , code:procedure-max , code:procedure-mean , code:procedure-min , code:procedure-percent , code:procedure-count , code:procedure-median ;

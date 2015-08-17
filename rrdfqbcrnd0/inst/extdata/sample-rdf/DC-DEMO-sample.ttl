@@ -557,6 +557,8 @@ crnd-dimension:trt01a
 
 code:race  a                      skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: race"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_RACE> ;
         rrdfqbcrnd0:R-columnname  "race" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:race-_NONMISS_ , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
@@ -1612,7 +1614,7 @@ ds:dataset-DEMO  a           qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DEMO ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-07-27T19:39:21+02:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-08-17T15:22:53+02:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.2.1 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DEMO-R-V-0-5-2.ttl" ;
@@ -1923,6 +1925,8 @@ ds:obs112  a                        qb:Observation ;
 
 code:trt01a  a                    skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: trt01a"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_TRT01A> ;
         rrdfqbcrnd0:R-columnname  "trt01a" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
@@ -2432,6 +2436,8 @@ ds:obs123  a                        qb:Observation ;
 
 code:agegr1  a                    skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: agegr1"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_AGEGR1> ;
         rrdfqbcrnd0:R-columnname  "agegr1" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:agegr1-_ALL_ , code:agegr1-65-80 , code:agegr1-_80 , code:agegr1-_NONMISS_ , code:agegr1-_65 ;
@@ -2501,6 +2507,8 @@ ds:obs073  a                        qb:Observation ;
 
 code:ethnic  a                    skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: ethnic"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_ETHNIC> ;
         rrdfqbcrnd0:R-columnname  "ethnic" ;
         rrdfqbcrnd0:codeType      "DATA" ;
         skos:hasTopConcept        code:ethnic-_NONMISS_ , code:ethnic-HISPANIC_OR_LATINO , code:ethnic-_ALL_ , code:ethnic-NOT_HISPANIC_OR_LATINO ;
