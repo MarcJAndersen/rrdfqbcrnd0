@@ -18,31 +18,53 @@ prefix ds: <http://www.example.org/dc/demo/ds/>
 prefix crnd-dimension: <http://www.example.org/dc/dimension#>  
 prefix crnd-attribute: <http://www.example.org/dc/attribute#>  
 prefix crnd-measure: <http://www.example.org/dc/measure#>  
-## subquery - get the columns and selection operator
-## needs to get the factor / dependend variable
 
-## select only the ?record where there are the same number of matches as
-## there are ?colProperty
-select ?record ?colProperty ?Rselectionvalue where {
-
+## Still need to transpose the data - this will be mapping specific
+select ?record ?p ?o where {
+  ?record ?p ?o .
+{  
+# This gives the records in the data set
+select ?record ?CountCrit (count(*) as ?XCountCrit) where {
 ?record ?colProperty ?Rselectionvalue  .
 {  
-select distinct ?colProperty ?Rselectionoperator ?Rselectionvalue
+# repeating the same query twice - should not be necessary 
+  select ?obs ?colProperty ?Rselectionvalue
 where {
        ?obs ?propdim ?dimvalue .
   ?propdim a qb:DimensionProperty .
   ?propdim qb:codeList ?codelist .
-  #  ?dim rrdfqbcrnd0:R-columnname ?Rcolumnname .
-  optional {  ?dimvalue rrdfqbcrnd0:R-selectionoperator ?Rselectionoperator . }
-  optional {  ?dimvalue rrdfqbcrnd0:R-selectionvalue  ?Rselectionvalue . }
+ ?dimvalue rrdfqbcrnd0:R-selectionoperator ?Rselectionoperator . 
+  optional { ?dimvalue rrdfqbcrnd0:R-selectionvalue  ?Rselectionvalue . } 
   ?codelist rrdfqbcrnd0:codeType ?rrdfqbcrnd0codeType .
   ?codelist rrdfqbcrnd0:R-columnname ?rrdfqbcrnd0Rcolumnname .
   ?codelist rrdfqbcrnd0:D2RQ-PropertyBridge ?colProperty .
   # works for one observations - assumes correct also for more observations
-  values (?obs) {(ds:obs027)}
+  values (?obs) {(ds:obs079)}
   filter (?rrdfqbcrnd0Rcolumnname != "procedure" && ?rrdfqbcrnd0Rcolumnname != "factor"
-	  && BOUND(?Rselectionoperator)  && isIRI(?colProperty) && ?Rselectionoperator = "==" )
- }    
+	   && ?Rselectionoperator = "==" )
+}
+}
+{  
+    select (count(?obs) as ?CountCrit )
+where {
+       ?obs ?propdim ?dimvalue .
+  ?propdim a qb:DimensionProperty .
+  ?propdim qb:codeList ?codelist .
+ ?dimvalue rrdfqbcrnd0:R-selectionoperator ?Rselectionoperator . 
+  optional { ?dimvalue rrdfqbcrnd0:R-selectionvalue  ?Rselectionvalue . } 
+  ?codelist rrdfqbcrnd0:codeType ?rrdfqbcrnd0codeType .
+  ?codelist rrdfqbcrnd0:R-columnname ?rrdfqbcrnd0Rcolumnname .
+  ?codelist rrdfqbcrnd0:D2RQ-PropertyBridge ?colProperty .
+  # works for one observations - assumes correct also for more observations
+  values (?obs) {(ds:obs079)}
+  filter (?rrdfqbcrnd0Rcolumnname != "procedure" && ?rrdfqbcrnd0Rcolumnname != "factor"
+	   && ?Rselectionoperator = "==" )
+}
+}
+
+}
+group by ?record ?CountCrit
+having (?CountCrit = ?XCountCrit)
+order by ?record ?CountCrit
 }
 }  
-###
