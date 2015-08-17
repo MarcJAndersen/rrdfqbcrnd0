@@ -93,5 +93,13 @@ cd ../extdata/sample-rdf
 arq --data adsl.ttl --query ADSL-record.rq
 ```
 
+## Get underlying data for one cube observation
+
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data adsl.ttl DC-DEMO-sample.ttl --query DEMOobservations-R-data.rq
+```
+
+
 # How to run this .Rmd file
 .. add text ..
