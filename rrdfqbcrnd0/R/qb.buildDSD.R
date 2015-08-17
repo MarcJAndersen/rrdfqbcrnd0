@@ -7,7 +7,7 @@
 ##' @param skeletonSource data.frame with skeleton source
 ##' @param dsdURIwoprefix DSD URI
 ##' @param dsdName DSD name
-##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title, PAVnodes
+##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title, PAVnodes, obsDataSetName
 ##' @param remote.endpoint Remote endpoint, if NULL use local version of CDISC RDF standards
 ##' @return Always TRUE
 qb.buildDSD<- function(store,
@@ -26,6 +26,7 @@ qb.buildDSD<- function(store,
     label="Demographics results data set.",
     distribution="dataCubeFileName",
     obsfilename="the name of the input file",
+    obsDataSetName="the name for the data set (D2RQ)",
     title="Demographics Analysis Results",
     PAVnodes=list(
       createdOn=gsub("(\\d\\d)$", ":\\1",strftime(Sys.time(),"%Y-%m-%dT%H:%M:%S%z")),
@@ -140,6 +141,7 @@ for (i in 1:nrow(skeletonSource)){
                 codeType=skeletonSource[i,"codeType"],
                 nciDomainValue=skeletonSource[i,"nciDomainValue"],
                 dimName=skeletonSource[i,"compName"],
+                underlDataSetName=extra$obsDataSetName,
                 remote.endpoint=remote.endpoint                
 #                codelist.source=codelist.source
                 )

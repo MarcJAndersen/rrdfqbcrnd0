@@ -9,6 +9,7 @@
 ##' "SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query
 ##' @param nciDomainValue When codetype="SDTM" the nciDomain used for identifying the codelist
 ##' @param dimName the name of the dimension - for codeType="DATA" the name of the variable in the data frame ObsData
+##' @param underlDataSetName underlying data set name. Used for finding name for D2RQ propertybridge. If NULL then not used. 
 ##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
@@ -19,7 +20,8 @@ buildCodelist <- function(
   codeType,
   nciDomainValue,
   dimName,
-  remote.endpoint  
+  underlDataSetName=NULL,
+  remote.endpoint=NULL
   ##  codelist.source
   )
 {
@@ -146,6 +148,16 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
                   paste0(dimName)
                   )
 
+    ## Should only be added if data available in D2RQ format
+    ## ToDo(mja): the stem for the URI for the property is hard coded - this should be changed to use a prefix
+    ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
+    if (!is.null(underlDataSetName) ) {
+        add.data.triple(store,
+                  paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-PropertyBridge"),
+                  paste0("<", "http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", dimName, ">")
+                  )
+    }
 
   if (codeType=="SDTM"){
     add.data.triple(store,

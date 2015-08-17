@@ -19,7 +19,9 @@ cubeLabel<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="labe
 cubeTitle<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="title",defaultValue="** no title given **" )
 domainName<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="domainName",defaultValue="notgiven" )
 obsFile<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="obsFileName",defaultValue="notgiven" )
-
+obsURL<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="obsURL",defaultValue="notgiven" )
+obsDataSetName<- toupper(tools::file_path_sans_ext(basename(obsURL)))
+        
 # Output file format: DC-<domain>-R-Vn-n-(n).TTL . Also used in dcat:distribution
 # NOTE: For pav:Version (dot, notdash) and output file name
 cubeVersion <- gsub("\\.","-",GetValueFromMetadata(cubeMetadata,compType="metadata",compName="cubeVersion",defaultValue="0.0.0" ))
@@ -75,8 +77,9 @@ qb.buildDSD(store, prefixlist, obsData, skeletonSource,
               label=cubeLabel,
               distribution=dataCubeFileName,
               obsfilename=obsFile,
+              obsDataSetName=obsDataSetName,
               title=cubeTitle,
-    PAVnodes=list(
+              PAVnodes=list(
       createdOn=gsub("(\\d\\d)$", ":\\1",strftime(Sys.time(),"%Y-%m-%dT%H:%M:%S%z")),
       createdBy="username or session name",
       pavVersion="0.0.0",
