@@ -79,3 +79,81 @@ FALSE
 }
 ```
 
+# Details on dimensions and code lists for univariate statistics
+
+# 5. Specifics for analysis results
+
+This section describes how the RDF data cube is used for storing analysis results.
+
+## 5.1 Observation
+
+Below is one observation representing the median for the variable
+weightbl for the treatment group Xanomeline Low Dose. There is no
+subsetting of age group, ethnic group, race nor sex. For descriptive
+statistics the link between an observation and the underlying is given
+from: the qb:dataset defines the dataset with the underlying data the
+dimension related to variables in the data set defines the subsetting,
+with a special code - identified by the code name contains _ALL_ -
+representing that the is no subsetting on this variable the dimension
+procedure defines the univariate descriptive statistic the dimension
+factor defines which variable in the dataset the univariate statistics
+is derived from
+
+ds:DEMOG-T-11/obsNum098  a           qb:Observation ;
+        rdfs:label                  "98" ;
+        qb:dataSet                  ds:DEMOG-T-1-1;
+        crnd-attribute:denominator  "" ;
+        crnd-attribute:unit         "NA"^^xsd:string ;
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
+        crnd-dimension:procedure    code:procedure-median ;
+        crnd-dimension:race         code:race-_ALL_ ;
+        crnd-dimension:sex          code:sex-_ALL_ ;
+        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-measure:measure        "64.9"^^xsd:double .
+See https://github.com/MarcJAndersen/rrdfqbcrnd0/blob/master/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl 
+
+## 5.2 Dimension for univariate statistics
+Below is the code list for representing the median. 
+code:procedure-median
+        a                             code:Procedure , skos:Concept ;
+        rdfs:comment                  "Descriptive statistics median"@en ;
+        skos:inScheme                 code:procedure ;
+        skos:prefLabel                "median" ;
+        skos:topConceptOf             code:procedure .
+See https://github.com/MarcJAndersen/rrdfqbcrnd0/blob/master/rrdfqbcrnd0/inst/doc/using-arq.md#get-definition-for-descriptive-statistics-median
+
+## 5.3 Attributes for univariate statistics
+Additional information on the observation is captured in the attributes. For descriptive statistics this is:
+        crnd-attribute:denominator  "" ;
+        crnd-attribute:unit         "NA"^^xsd:string ;
+
+### 5.3.1 crnd-attribute:denominator
+This attribute is used for the code:procedure-percent and identifies the variable or variables used for defining the denominator. However, if instead another code, say code:procedure-percent-univ, is introduced and the notion of more general percentages with more than one variable used as denominator as something else than univariate statistics (which makes sense), then this attribute is not needed.
+
+### 5.3.2 crnd-attribute:unit
+
+The unit is part of the interpretation of the measure. The RDF data cube specification discusses the use of the data cube. In the ADAM specifications the unit is implicit for each variable and not part of the data, whereas for SDTM the unit is captured as a separate variable. It is considered to use the unit as dimension, as the same results may be reported in different units. In diabetes HbA1c is reported both as % and also as mmol/mol. The CDISC ADAM guidelines specifies to use one variable for each version of the measure value, but that may also make it more difficult to identify the same result.
+
+### 5.4 URI Pattern
+The table below shows the URI patterns for the concepts discussed above. The notion of providing URI patterns follows http://csarven.ca/linked-sdmx-data#uri-patterns.
+
+
+Entity type                 | URI Pattern
+-----------                 | -----------
+qb:DataStructureDefinition  | 
+qb:ComponentSpecification   | 
+qb:DataSet                  | 
+qb:Observation              | 
+skos:Collection | 
+skos:ConceptScheme | 
+skos:Concept, | 
+sdmx:Concept | 
+owl:Class, | 
+rdfs:Class | 
+rdf:Property, | 
+qb:ComponentProperty | 
+qb:DimensionProperty | 
+qb:MeasureProperty | 
+
