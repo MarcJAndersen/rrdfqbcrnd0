@@ -1,7 +1,7 @@
 compType,compName,codeType,nciDomainValue,compLabel,Comment
 dimension,trt01a,DATA,,Treatment Arm,
 dimension,sex,SDTM,C66731,Sex (Gender),
-dimension,race,DATA,C74457,Race
+dimension,race,SDTM,C74457,Race
 dimension,ethnic,DATA,,Ethnic
 dimension,agegr1,DATA,,Age group
 dimension,procedure,DATA,,Statistical Procedure,
