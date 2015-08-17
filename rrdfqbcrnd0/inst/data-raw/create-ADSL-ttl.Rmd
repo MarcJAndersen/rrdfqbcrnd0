@@ -11,6 +11,8 @@ vignette: >
 
 # Create turtle version of ADSL dataset
 
+## Setup
+
 ```{r}
 knitr::read_chunk("setup.R")
 ```
@@ -20,19 +22,28 @@ knitr::read_chunk("setup.R")
 This script creates a turtle version of the ADSL dataset.
 
 The script uses SQLite to export the ADSL dataset, and d2rq (http://d2rq.org/) to create a turle version of the file.
+In the code below it is assumed that d2rq is installed in the directory `/opt/d2rq-0.8.1`.
 
 ```{r}
 library(foreign)
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 adsl<-read.xport(fnadsl)
+```
 
-## Use other method for reading sas - see elsewhere
+The present code uses `read.xport` to input the sas dataset. Other methods are avialable allowing access to more of the meta data in the datasets.
 
-## http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf
+Next step is to dump the data as a SQL dump, that will serve as input
+to D2RQ.  For dumping the data `sqlite` is used as it is the easies to
+setup. The R-package `RSQLite`
+(http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf) provides
+access to `sqlite`.
+
+```{r}
 ## install.packages("RSQLite")
+```
 
-## Create a SQL dump - here using RSQLite - could also create the dump programically
-
+The SQL dump is created by transfering the R data.frame to SQLite, and the invoking sqlite to create a dump.
+```{r}
 library(RSQLite)
 ## create a SQLite instance and create one connection.
 m <- dbDriver("SQLite")
@@ -47,10 +58,23 @@ cat("SQLite database stored as ", tfile, "\n")
 dumpFn<- tempfile()
 system(paste("sqlite3", tfile, ".dump >", dumpFn, sep=" "))
 cat("SQLite database dump in ", dumpFn, "\n")
+```
 
+Next step is to process the dump, so the SQL can be used as input to d2rq.
+The changes applied are:
+*  change TEXT to VARCHAR(1000)
+*  remove top 2 lines with PRAGMA
+*  in insert statements replace "adsl"  with adsl
+*  after "MMSETOT" REAL add a comma (",") and a new line with PRIMARY KEY (USUBJID)
+
+This could maybe be simplified using  RSQlite on dbSendQuery-methods, see (https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html).
+For d2rq documentation see (file:///opt/d2rq-0.8.1/doc/dump-rdf.html).
+
+```{r}
 dumpAfterSedFn <- tempfile()
-
-sedCmd<- paste("sed", "-e 's/TEXT/VARCHAR(1000)/g; s/\"MMSETOT\" REAL/\"MMSETOT\" REAL, PRIMARY KEY (USUBJID)/; s/\"adsl\"/adsl/g; 1,2 d; $ d; ' ", dumpFn, ">", dumpAfterSedFn, sep=" ")
+sedCmd<- paste("sed",
+               "-e 's/TEXT/VARCHAR(1000)/g; s/\"MMSETOT\" REAL/\"MMSETOT\" REAL, PRIMARY KEY (USUBJID)/; s/\"adsl\"/adsl/g; 1,2 d; $ d; ' ",
+               dumpFn, ">", dumpAfterSedFn, sep=" ")
 system(sedCmd)
 cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 
@@ -58,29 +82,40 @@ cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ## not run due to large output
 ## system(paste("diff", dumpFn, dumpAfterSedFn, sep=" "))
 
-## The change below are for now to be applied manually!
-##   change TEXT to VARCHAR(1000)
-##   remove top 2 lines with PRAGMA
-##   in insert statements replace "adsl"  with adsl
-##   after "MMSETOT" REAL add a comma (",") and a new line with
-##   PRIMARY KEY (USUBJID)
-##
-## see also RSQlite on dbSendQuery-methods - that can make more
-## https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html
-## d2rq documentationsee file:///opt/d2rq-0.8.1/doc/dump-rdf.html
-
-## -b option does not work with -l
 
 adslmapttlFn<- file.path(tempdir(), "adsl-map.ttl")
 adslttlFn<- file.path(tempdir(), "adsl.ttl")
 
 d2rqbaseURL<- "http://www.example.org/datasets/"
 
-system(paste("/opt/d2rq-0.8.1/generate-mapping  -o ", adslmapttlFn, " -l ", dumpAfterSedFn))
-system(paste("/opt/d2rq-0.8.1/dump-rdf -b ", d2rqbaseURL,  " -o ",
-             adslttlFn, " -l ", dumpAfterSedFn, " ", adslmapttlFn) )
+## -b option does not work with -l
+## /opt/d2rq-0.8.1/generate-mapping reports Unknown argument: -b
+system(paste("/opt/d2rq-0.8.1/generate-mapping",
+             " -l ", dumpAfterSedFn,
+             " -o ", adslmapttlFn
+             ))
+
+system(paste("/opt/d2rq-0.8.1/dump-rdf",
+             " -b ", d2rqbaseURL,
+             " -o ", adslttlFn,
+             " -l ", dumpAfterSedFn,
+             " ", adslmapttlFn
+             ))
  
 
+
+targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
+if (file.copy(adslmapttlFn, targetDir)) {
+cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
+}
+
+if (file.copy(adslttlFn, targetDir)) {
+cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
+}
+
+```
+
+```{r}
 ### This could maybe also work ..
 ## m <- dbDriver("SQLite")
 ## tfile <- tempfile()
@@ -94,25 +129,14 @@ system(paste("/opt/d2rq-0.8.1/dump-rdf -b ", d2rqbaseURL,  " -o ",
 ## dbWriteTable(con, "adsl", adsl,append=TRUE)
 ## dbDisconnect(con)
 ## tfile
-
-## system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
-## system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://localhost:3030/ -o /tmp/adsl.ttl -l /tmp/xx.sql"))
-
-targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
-if (file.copy(adslmapttlFn, targetDir)) {
-cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
-}
-
-if (file.copy(adslttlFn, targetDir)) {
-cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
-}
-
 ```
-
 
 
 ### Read in the file
 
+This section demostrates how to access the data for the ADSL dataset.
+
+First the data are loaded into a RDF model.
 ```{r}
 
 dataFilemap<- system.file("extdata/sample-rdf", "adsl-map.ttl", package="rrdfqbcrnd0")
@@ -124,39 +148,48 @@ store <- new.rdf()  # Initialize
 load.rdf(dataFilemap, format="TURTLE", appendTo= store)
 load.rdf(dataFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
+```
 
-rq<-"
-prefix map: <#> 
-prefix db: <> 
-prefix vocab: <vocab/> 
+Next step is to make a query showing the mappings
+```{r}
+mapping.rq<-"
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
 prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> 
 prefix jdbc: <http://d2rq.org/terms/jdbc/> 
 select * where {
-?mapColumn a d2rq:PropertyBridge ;
-  d2rq:column ?d2rqcolumn ;
-  d2rq:datatype ?d2rqdatatype 
-.
-# ?mapColumn ?p ?o.
+   ?mapColumn a d2rq:PropertyBridge ;
+                d2rq:column ?d2rqcolumn .
+   optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }
 }
 "
 
-res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
-str(res)
-res
+cat(mapping.rq,"\n")
+
+resmapping<- data.frame(sparql.rdf(store, mapping.rq),stringsAsFactors=FALSE)
+str(resmapping)
+knitr::kable(resmapping)
+```
 
 
+The code below gets the all values in one record
+```{r}
 
-s<- paste0("<", d2rqbaseURL,"ADSL/01-718-1254>")
-rq<-paste0("select * where {", s, " ?p ?o . }" )
-print(rq)
+s<- paste0("<", d2rqbaseURL,c("ADSL/01-718-1254"), ">")
 
-res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
-str(res)
-res$pclean<- gsub(paste0(d2rqbaseURL,"vocab/ADSL_"), "", res$p)
-knitr::kable(res[,c("p","o")])
+records.rq<-paste("select * ",
+           "where { ?s ?p ?o.",
+           " values(?s) {",
+           paste("(",s,")", collapse="\n"),
+           "}",
+           "}", sep="\n", collapse="\n" )
+cat(records.rq,"\n")
+
+records.res<- data.frame(sparql.rdf(store, records.rq),stringsAsFactors=FALSE)
+str(records.res)
+records.res$pclean<- gsub(paste0(d2rqbaseURL,"vocab/ADSL_"), "", records.res$p)
+knitr::kable(records.res[,c("s", "p","o")])
 
 
 ```
