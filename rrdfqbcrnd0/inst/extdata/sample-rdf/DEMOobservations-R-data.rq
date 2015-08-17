@@ -20,6 +20,13 @@ prefix crnd-attribute: <http://www.example.org/dc/attribute#>
 prefix crnd-measure: <http://www.example.org/dc/measure#>  
 ## subquery - get the columns and selection operator
 ## needs to get the factor / dependend variable
+
+## select only the ?record where there are the same number of matches as
+## there are ?colProperty
+select ?record ?colProperty ?Rselectionvalue where {
+
+?record ?colProperty ?Rselectionvalue  .
+{  
 select distinct ?colProperty ?Rselectionoperator ?Rselectionvalue
 where {
        ?obs ?propdim ?dimvalue .
@@ -34,6 +41,8 @@ where {
   # works for one observations - assumes correct also for more observations
   values (?obs) {(ds:obs027)}
   filter (?rrdfqbcrnd0Rcolumnname != "procedure" && ?rrdfqbcrnd0Rcolumnname != "factor"
-	  && BOUND(?Rselectionoperator)  && isIRI(?colProperty) )
+	  && BOUND(?Rselectionoperator)  && isIRI(?colProperty) && ?Rselectionoperator = "==" )
  }    
-
+}
+}  
+###
