@@ -118,7 +118,7 @@ ds:obs021  a                        qb:Observation ;
         crnd-measure:measure        "7.8860938487" .
 
 code:race-_NONMISS_  a     code:Race , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
                 "is.na" ;
         skos:inScheme      code:race ;
@@ -134,6 +134,8 @@ code:Agegr1  a           rdfs:Class , owl:Class ;
 code:sex  a                       skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: sex"@en ;
         mms:inValueDomain         "C66731" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_SEX> ;
         rrdfqbcrnd0:R-columnname  "sex" ;
         rrdfqbcrnd0:codeType      "SDTM" ;
         skos:hasTopConcept        code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
@@ -557,11 +559,12 @@ crnd-dimension:trt01a
 
 code:race  a                      skos:ConceptScheme ;
         rdfs:label                "Codelist scheme: race"@en ;
+        mms:inValueDomain         "C74457" ;
         rrdfqbcrnd0:D2RQ-PropertyBridge
                 <http://www.example.org/datasets/vocab/ADSL_RACE> ;
         rrdfqbcrnd0:R-columnname  "race" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:race-_NONMISS_ , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        rrdfqbcrnd0:codeType      "SDTM" ;
+        skos:hasTopConcept        code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
         skos:notation             "CL_RACE" ;
         skos:note                 "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
         skos:prefLabel            "Codelist scheme: race"@en .
@@ -719,8 +722,11 @@ ds:obs011  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "59.523809524"^^xsd:double .
 
-code:race-WHITE  a                    code:Race , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+code:race-WHITE  a                    skos:Concept , code:Race ;
+        cts:cdiscDefinition           "Denotes a person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White. (FDA)" ;
+        cts:cdiscSubmissionValue      "WHITE" ;
+        cts:cdiscSynonyms             "NA" ;
+        mms:nciDomain                 "C74457.C41261" ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "WHITE" ;
@@ -1219,6 +1225,19 @@ ds:obs064  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "34.88372093"^^xsd:double .
 
+code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER
+        a                             code:Race , skos:Concept ;
+        cts:cdiscDefinition           "Denotes a person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. The term covers particularly people who identify themselves as part-Hawaiian, Native Hawaiian, Guamanian or Chamorro, Carolinian, Samoan, Chuu. (FDA)" ;
+        cts:cdiscSubmissionValue      "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ;
+        cts:cdiscSynonyms             "NA" ;
+        mms:nciDomain                 "C74457.C41219" ;
+        rrdfqbcrnd0:R-selectionoperator
+                "==" ;
+        rrdfqbcrnd0:R-selectionvalue  "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ;
+        skos:inScheme                 code:race ;
+        skos:prefLabel                "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ;
+        skos:topConceptOf             code:race .
+
 ds:obs043  a                        qb:Observation ;
         rdfs:label                  "43" ;
         qb:dataSet                  ds:dataset-DEMO ;
@@ -1372,16 +1391,6 @@ ds:obs101  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "67.279518072"^^xsd:double .
 
-code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
-        a                             code:Race , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "==" ;
-        rrdfqbcrnd0:R-selectionvalue  "AMERICAN INDIAN OR ALASKA NATIVE" ;
-        skos:inScheme                 code:race ;
-        skos:prefLabel                "AMERICAN INDIAN OR ALASKA NATIVE" ;
-        skos:topConceptOf             code:race .
-
 ds:obs093  a                        qb:Observation ;
         rdfs:label                  "93" ;
         qb:dataSet                  ds:dataset-DEMO ;
@@ -1399,6 +1408,31 @@ ds:obs093  a                        qb:Observation ;
         crnd-dimension:sex          code:sex-_ALL_ ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "14.653433372" .
+
+code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+        a                             code:Race , skos:Concept ;
+        cts:cdiscDefinition           "A person having origins in any of the original peoples of North and South America (including Central America), and who maintains tribal affiliation or community attachment. (FDA)" ;
+        cts:cdiscSubmissionValue      "AMERICAN INDIAN OR ALASKA NATIVE" ;
+        cts:cdiscSynonyms             "NA" ;
+        mms:nciDomain                 "C74457.C41259" ;
+        rrdfqbcrnd0:R-selectionoperator
+                "==" ;
+        rrdfqbcrnd0:R-selectionvalue  "AMERICAN INDIAN OR ALASKA NATIVE" ;
+        skos:inScheme                 code:race ;
+        skos:prefLabel                "AMERICAN INDIAN OR ALASKA NATIVE" ;
+        skos:topConceptOf             code:race .
+
+code:race-ASIAN  a                    skos:Concept , code:Race ;
+        cts:cdiscDefinition           "A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (FDA)" ;
+        cts:cdiscSubmissionValue      "ASIAN" ;
+        cts:cdiscSynonyms             "NA" ;
+        mms:nciDomain                 "C74457.C41260" ;
+        rrdfqbcrnd0:R-selectionoperator
+                "==" ;
+        rrdfqbcrnd0:R-selectionvalue  "ASIAN" ;
+        skos:inScheme                 code:race ;
+        skos:prefLabel                "ASIAN" ;
+        skos:topConceptOf             code:race .
 
 ds:obs072  a                        qb:Observation ;
         rdfs:label                  "72" ;
@@ -1614,7 +1648,7 @@ ds:dataset-DEMO  a           qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DEMO ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-08-17T15:22:53+02:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-08-17T22:36:34+02:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.2.1 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DEMO-R-V-0-5-2.ttl" ;
@@ -2536,7 +2570,10 @@ ds:obs052  a                        qb:Observation ;
 
 code:race-BLACK_OR_AFRICAN_AMERICAN
         a                             code:Race , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        cts:cdiscDefinition           "A person having origins in any of the black racial groups of Africa. Terms such as \"Haitian\" or \"Negro\" can be used in addition to \"Black or African American.\" (FDA)" ;
+        cts:cdiscSubmissionValue      "BLACK OR AFRICAN AMERICAN" ;
+        cts:cdiscSynonyms             "NA" ;
+        mms:nciDomain                 "C74457.C16352" ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "BLACK OR AFRICAN AMERICAN" ;
@@ -3000,7 +3037,7 @@ ds:obs013  a                        qb:Observation ;
         crnd-measure:measure        "33"^^xsd:int .
 
 code:race-_ALL_  a         code:Race , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
+        rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:race ;
         skos:prefLabel     "_ALL_" ;
         skos:topConceptOf  code:race .
