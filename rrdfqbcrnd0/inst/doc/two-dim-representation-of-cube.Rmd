@@ -64,7 +64,7 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 dimensions<- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
 attributesDf<- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
 
-outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile )
+outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile, useRDFa=FALSE )
 
 outhtmlfile
 }
@@ -82,6 +82,7 @@ coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:
 idrow<-  c( "aesocvalue", "aedecodvalue" )
 idcol<-  c( "crnd-dimension:trta" )
 resHtmlFile<- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
+cat(normalizePath(resHtmlFile),"\n")
 
 ```
 
@@ -100,6 +101,7 @@ idcol<-  c( "crnd-dimension:trt01a" )
 ## # rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex", "crnd-dimension:procedure" )
 ## # idrow<-  c( "agegr1value", "racevalue", "ethnicvalue", "sexvalue", "procedurevalue" )
 resHtmlFile<- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
+cat(normalizePath(resHtmlFile),"\n")
 
 ```
 
