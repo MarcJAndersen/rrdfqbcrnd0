@@ -55,23 +55,22 @@ files from the extdata/sample-cfg directory.
 
 ```{r, echo=TRUE}
 MakeTable<- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
+    store <- new.rdf()  # Initialize
+    cat("Loading ", dataCubeFile, "\n")
+    load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+    summarize.rdf(store)
+    dsdName<- GetDsdNameFromCube( store )
+    domainName<- GetDomainNameFromCube( store )
+    forsparqlprefix<- GetForSparqlPrefix( domainName )
 
-store <- new.rdf()  # Initialize
-cat("Loading ", dataCubeFile, "\n")
-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
-summarize.rdf(store)
+    dimensions<- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
+    attributesDf<- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
 
-dsdName<- GetDsdNameFromCube( store )
-domainName<- GetDomainNameFromCube( store )
-forsparqlprefix<- GetForSparqlPrefix( domainName )
+    outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName,
+                                 dimensions, rowdim, coldim, idrow, idcol,
+                                 htmlfile, useRDFa=FALSE, compactDimColumns=FALSE)
 
-dimensions<- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
-attributesDf<- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
-
-    outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile, useRDFa=FALSE,
-                                 compactDimColumns=FALSE)
-
-outhtmlfile
+    outhtmlfile
 }
 
 ```
@@ -96,14 +95,12 @@ cat("HTML stored as: ", normalizePath(resHtmlFile), "\n")
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "DC-DEMO-sample.html")
 
-coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a" )
+coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a", "crnd-dimension:factor", "crnd-dimension:procedure" )
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex" )
 idrow<-  c( "agegr1value", "racevalue", "ethnicvalue", "sexvalue" )
+## idcol<-  c( "crnd-dimension:trt01a" )
 idcol<-  c( "crnd-dimension:trt01a" )
 
-## Does not work
-## # rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex", "crnd-dimension:procedure" )
-## # idrow<-  c( "agegr1value", "racevalue", "ethnicvalue", "sexvalue", "procedurevalue" )
 resHtmlFile<- MakeTable( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol )
 cat("HTML stored as: ", normalizePath(resHtmlFile), "\n")
 
@@ -124,6 +121,32 @@ domainName<- GetDomainNameFromCube( store )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
+### Check GetTwoDimTableFromQb
+
+```{r, eval=TRUE}
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
+    store <- new.rdf()  # Initialize
+    cat("Loading ", dataCubeFile, "\n")
+    load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+    dsdName<- GetDsdNameFromCube( store )
+    domainName<- GetDomainNameFromCube( store )
+    forsparqlprefix<- GetForSparqlPrefix( domainName )
+coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a" )
+rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race",
+           "crnd-dimension:ethnic", "crnd-dimension:sex", "crnd-dimension:procedure" )
+xqbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
+
+    dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
+    dimensions<- sparql.rdf(store, dimensionsRq)
+
+    attributesRq<- GetAttributesSparqlQuery( forsparqlprefix )
+    attributes<- sparql.rdf(store, attributesRq)
+
+observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
+    observationsDesc<- as.data.frame(sparql.rdf(store, observationsDescriptionRq ), stringsAsFactors=FALSE)
+
+
+```
 
 ### View a specific observation.
 

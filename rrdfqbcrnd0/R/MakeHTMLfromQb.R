@@ -7,12 +7,14 @@
 ##' @param htmlfile path to file with HTML
 ##' @param useRDFa if TRUE include RDFa markup (default)
 ##' @param compactDimColumns if TRUE compact dimension columns and add pretty header (default)
+##' @param showProcedure If TRUE show in each row the projection procedurevalue
 ##' @return path to file with HTML
 ##' @inheritParams GetObservationsSparqlQuery
 
 MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
                           dimensions, rowdim, coldim, idrow, idcol,
-                          htmlfile=NULL, useRDFa=TRUE, compactDimColumns=TRUE ) {
+                          htmlfile=NULL, useRDFa=TRUE, compactDimColumns=TRUE,
+                          showProcedure=TRUE ) {
     
     qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
 
@@ -23,6 +25,7 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
     oDx<-attr(qbtest,"observationsDesc")
     oDxx<- oDx[! is.na(oDx$s),]
     oD<- oDxx[order(strtoi(oDxx$rowno)),]
+    print(colnames(oD))
     ## TODO(mja): ensure measurefmt is always defined - this is a quick fix
     if (!("measurefmt" %in% names(oD))) {
         oD$measurefmt<- " "
@@ -38,7 +41,7 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
         oD[,c("s","rowno","colno","cellpartno")]
     }
 
-    Showit()
+    ## Showit()
 
     presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value",rowdim)
     presrowvarIRI<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2IRI",rowdim)
@@ -153,21 +156,41 @@ dsdName,
         useidrow<- vector(mode="character",length=0)
         hasallidrow<- vector(mode="character",length=0)
         useidheader<- vector(mode="character",length=0)
+        maxNoOfNonALL<-0
         # has to use to OR approach to identify the cells that goes in the same rowno!! 
+        or<- 1
         for (rr in presrowvarindex) {
+            thisNoOfNonALL<-0
             for (rowidname in idrow) {
-                ## cat("Row ", rr, ", rowidname", rowidname, ", contents: ", oD[rr,rowidname],  "\n")
-                if ( is.na(oD[rr,rowidname]) || oD[rr,rowidname]=="_ALL_" ) {
+##                cat("Row ", rr, ", or ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n")
+                if ( is.na(oD[or,rowidname]) || oD[or,rowidname]=="_ALL_" ) {
                     if (!is.element(rowidname,hasallidrow) ) {
                         hasallidrow<- c(hasallidrow, rowidname)
+                    } 
+                } else {
+                        thisNoOfNonALL<-thisNoOfNonALL+1
+                    }
+            }
+##            cat("THis no columns with not ALL ", thisNoOfNonALL, "\n" )
+
+            maxNoOfNonALL<- max(maxNoOfNonALL, thisNoOfNonALL)
+
+            ## Advance to next row
+            for (cc in colvarindex) {
+                cpindex<-0
+                for (cp in cellpartnoindex) {
+                    cpindex<- cpindex+1
+                    if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
+                        or<- or+1
                     }
                 }
             }
         }
-        cat("ID rows ", idrow, "\n")
-        cat("ID rows with at least one _ALL_ value", hasallidrow, "\n")
+##        cat("Max no columns with not ALL ", maxNoOfNonALL, "\n" )
+##        cat("ID rows ", idrow, "\n")
+##        cat("ID rows with at least one _ALL_ value", hasallidrow, "\n")
         alwaysshowidrow<- setdiff(idrow, hasallidrow)
-        cat("ID rows with no _ALL_ value", alwaysshowidrow, "\n")
+##        cat("ID rows with no _ALL_ value", alwaysshowidrow, "\n")
     }
     
     ## make the header row(s) for the columns
@@ -189,6 +212,13 @@ dsdName,
         }
         
 
+        ## START identify all column related information to be projected into column
+        if (showProcedure) {
+        cat("<th>", "Statistics",  "</th>", file=htmlfile, append=TRUE)
+        cat("<th>", "Variable",  "</th>", file=htmlfile, append=TRUE)
+        }
+        ## END identify all column related information to be projected into column
+        
         for (cc in colvarindex) {
             cpindex<-0
             for (cp in cellpartnoindex) {
@@ -217,7 +247,33 @@ dsdName,
         }
         ## END make the row identification
         
+        ## START identify all column related information to be projected into column
+        if (showProcedure) {
+        xor<- or
+        xrowid<- rep("", length(cellpartnoindex))
+        yrowid<- rep("", length(cellpartnoindex))
 
+        for (cc in colvarindex) {
+              cpindex<-0
+              for (cp in cellpartnoindex) {
+                  cpindex<- cpindex+1
+                if (oD$rowno[xor]==rr & oD$colno[xor]==cc & oD$cellpartno[xor]==cp ) {
+                    if (!is.na(oD$procedurevalue[xor]) && xrowid[cpindex]=="") {
+                        xrowid[cpindex]<-oD$procedurevalue[xor]
+                    }
+                    if (!is.na(oD$factorvalue[xor]) && yrowid[cpindex]=="") {
+                        yrowid[cpindex]<-oD$factorvalue[xor]
+                    }
+                    xor<- xor+1
+                }
+            }
+        }
+        cat("<td>", paste(xrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
+        cat("<td>", paste(yrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
+        }
+        
+        ## END identify all column related information to be projected into column
+        ## 
         for (cc in colvarindex) {
                                         # print(cc)
                                         #    cat("<td>", file=htmlfile, append=TRUE)
@@ -268,6 +324,7 @@ dsdName,
                         cat(paste0(oD$measure[or]), file=htmlfile, append=TRUE)
                     }
 
+                    
                     ## for (prop in dimensions) {
                     ## cat( '</span>\n', file=htmlfile, append=TRUE)
                     ## }
