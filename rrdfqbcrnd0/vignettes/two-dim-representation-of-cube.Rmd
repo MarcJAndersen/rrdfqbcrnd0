@@ -32,6 +32,10 @@ html. Consider if in each cell only the observation and measure should
 be referenced and not all properties and objects for the observation.
 
 
+## Using with RDFa
+
+The function `MakeHTMLfromQb` is used to create the HTML file. When invoked with `useRDFa=TRUE` the generated HTML will contain RDFa markup.
+
 The HTML includes green-turtle
 (https://github.com/alexmilowski/green-turtle), jquery
 (http://jquery.com/) and jqueryUI (http://jqueryui.com/).
@@ -64,7 +68,8 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 dimensions<- sparql.rdf(store, GetDimensionsSparqlQuery( forsparqlprefix ) )
 attributesDf<- sparql.rdf(store, GetAttributesSparqlQuery( forsparqlprefix ))
 
-outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile, useRDFa=FALSE )
+    outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile, useRDFa=FALSE,
+                                 compactDimColumns=FALSE)
 
 outhtmlfile
 }

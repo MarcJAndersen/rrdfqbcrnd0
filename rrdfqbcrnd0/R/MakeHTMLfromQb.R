@@ -5,63 +5,67 @@
 ##' @param idrow idrows
 ##' @param idcol idcols
 ##' @param htmlfile path to file with HTML
+##' @param useRDFa if TRUE include RDFa markup (default)
+##' @param compactDimColumns if TRUE compact dimension columns and add pretty header (default)
 ##' @return path to file with HTML
 ##' @inheritParams GetObservationsSparqlQuery
 
-MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName, dimensions, rowdim, coldim, idrow, idcol, htmlfile=NULL, useRDFa=TRUE ) {
-  
-qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
+MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
+                          dimensions, rowdim, coldim, idrow, idcol,
+                          htmlfile=NULL, useRDFa=TRUE, compactDimColumns=TRUE ) {
+    
+    qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
 
-## names(attributes(qbtest))
-## options(width=200)
-## knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
+    ## names(attributes(qbtest))
+    ## options(width=200)
+    ## knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
 
-oDx<-attr(qbtest,"observationsDesc")
-oDxx<- oDx[! is.na(oDx$s),]
-oD<- oDxx[order(strtoi(oDxx$rowno)),]
-  ## TODO(mja): ensure measurefmt is always defined - this is a quick fix
-if (!("measurefmt" %in% names(oD))) {
-  oD$measurefmt<- " "
-}
-presrowvarindex<- unique(oD$rowno)
-colvarindex<- unique(oD$colno)
-cellpartnoindex<- unique(oD$cellpartno)
+    oDx<-attr(qbtest,"observationsDesc")
+    oDxx<- oDx[! is.na(oDx$s),]
+    oD<- oDxx[order(strtoi(oDxx$rowno)),]
+    ## TODO(mja): ensure measurefmt is always defined - this is a quick fix
+    if (!("measurefmt" %in% names(oD))) {
+        oD$measurefmt<- " "
+    }
+    presrowvarindex<- unique(oD$rowno)
+    colvarindex<- unique(oD$colno)
+    cellpartnoindex<- unique(oD$cellpartno)
 
-Showit<- function() {
-  presrowvarindex
-colvarindex
-cellpartnoindex
-oD[,c("s","rowno","colno","cellpartno")]
-}
+    Showit<- function() {
+        presrowvarindex
+        colvarindex
+        cellpartnoindex
+        oD[,c("s","rowno","colno","cellpartno")]
+    }
 
-Showit()
+    Showit()
 
-presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value",rowdim)
-presrowvarIRI<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2IRI",rowdim)
-presrowvarlabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label",rowdim)
+    presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value",rowdim)
+    presrowvarIRI<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2IRI",rowdim)
+    presrowvarlabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label",rowdim)
 
-presidcolvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value", idcol)
-presidcollabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label", idcol)
+    presidcolvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value", idcol)
+    presidcollabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label", idcol)
 
-## add code for embedding the cube as turtle
-## determine cube compontents except observations,
-## as the observations are stored as RDFa
+    ## add code for embedding the cube as turtle
+    ## determine cube compontents except observations,
+    ## as the observations are stored as RDFa
 
-if (is.null(htmlfile)) {
-  htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "test.html")
-  # htmlfile<- file.path(tempdir(),"test.html")
-}
+    if (is.null(htmlfile)) {
+        htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "test.html")
+                                        # htmlfile<- file.path(tempdir(),"test.html")
+    }
 
-append<- TRUE
-cat("<!DOCTYPE HTML>\n", file=htmlfile, append=FALSE)
-cat('
+    append<- TRUE
+    cat("<!DOCTYPE HTML>\n", file=htmlfile, append=FALSE)
+    cat('
 <html>
   <head>
 <meta charset="UTF-8">
 <title>DEMO table as html</title>
 ',
 ifelse(useRDFa,
-'    
+       '    
    <script src="jquery-2.1.3.min.js"></script>
    <link rel="stylesheet" href="jquery-ui-1.11.3.custom/jquery-ui.css"/>
    <script src="jquery-ui-1.11.3.custom/jquery-ui.min.js"></script>
@@ -91,7 +95,7 @@ ifelse(useRDFa,
 <script>
 "use strict";
 '
-    ,
+,
 ## '    
 ## function allowDrop(ev)
 ## {
@@ -140,147 +144,171 @@ dsdName,
 '
 , file=htmlfile, append=TRUE)
 
-cat('<div id="container">', file=htmlfile, append=TRUE)
+    cat('<div id="container">', file=htmlfile, append=TRUE)
 
-cat("<div id='table'>\n", file=htmlfile, append=TRUE)
-cat("<table border>\n", file=htmlfile, append=TRUE)
+    cat("<div id='table'>\n", file=htmlfile, append=TRUE)
+    cat("<table border>\n", file=htmlfile, append=TRUE)
 
-## make the header row(s) for the columns
-
-headerrowvarindex<- c(1)
-or<- 1
-
-for (rr in headerrowvarindex) {
-  cat("<tr>", file=htmlfile, append=TRUE)
-# print(rr)
-
-  ## START make the row identification
-    for (rowidname in idrow) {
-    cat("<th>", rowidname,  "</th>", file=htmlfile, append=TRUE)
+    if (TRUE || compactDimColumns) {
+        useidrow<- vector(mode="character",length=0)
+        hasallidrow<- vector(mode="character",length=0)
+        useidheader<- vector(mode="character",length=0)
+        # has to use to OR approach to identify the cells that goes in the same rowno!! 
+        for (rr in presrowvarindex) {
+            for (rowidname in idrow) {
+                ## cat("Row ", rr, ", rowidname", rowidname, ", contents: ", oD[rr,rowidname],  "\n")
+                if ( is.na(oD[rr,rowidname]) || oD[rr,rowidname]=="_ALL_" ) {
+                    if (!is.element(rowidname,hasallidrow) ) {
+                        hasallidrow<- c(hasallidrow, rowidname)
+                    }
+                }
+            }
+        }
+        cat("ID rows ", idrow, "\n")
+        cat("ID rows with at least one _ALL_ value", hasallidrow, "\n")
+        alwaysshowidrow<- setdiff(idrow, hasallidrow)
+        cat("ID rows with no _ALL_ value", alwaysshowidrow, "\n")
     }
-  ## END make the row identification
-  
+    
+    ## make the header row(s) for the columns
 
-  for (cc in colvarindex) {
-     cpindex<-0
-    for (cp in cellpartnoindex) {
-    cpindex<- cpindex+1
-    cat("<th>", file=htmlfile, append=TRUE)
-      cat( oD[or, presidcolvalue ] , file=htmlfile, append=TRUE)
-      or<- or+1
-     }
+    headerrowvarindex<- c(1)
+    or<- 1
 
-    cat("</th>\n", file=htmlfile, append=TRUE)
-    }
-cat("</tr>", "\n", file=htmlfile, append=TRUE)
-  }
+    for (rr in headerrowvarindex) {
+        cat("<tr>", file=htmlfile, append=TRUE)
+                                        # print(rr)
 
-## data rows
-or<- 1
-for (rr in presrowvarindex) {
-  cat("<tr>", file=htmlfile, append=TRUE)
-# print(rr)
-
-  ## START make the row identification
-    if (oD$rowno[or]==rr) {
-    for (rowidname in idrow) {
-    cat("<td>", oD[or,rowidname],  "</td>", file=htmlfile, append=TRUE)
-    }
-    }
-  ## END make the row identification
-  
-
-  for (cc in colvarindex) {
-# print(cc)
-#    cat("<td>", file=htmlfile, append=TRUE)
-cpindex<-0
-    for (cp in cellpartnoindex) {
-# print(cp)
-cpindex<- cpindex+1
-    cat("<td>", file=htmlfile, append=TRUE)
-## if (cpindex>1) {
-## ## separator between cells should be taken from data
-##       cat(" ", file=htmlfile, append=TRUE)
-## }
-    if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
-## The observation
-      ## next line is for simple fly-over
-if (useRDFa) {
-
-        cat(paste0("<a title=\"", oD$measureIRI[or], "\"",
-" onclick=obsclick(\"", oD$measureIRI[or], "\")",
-">\n" ), file=htmlfile, append=TRUE)
-
-      cat(paste0('<span ', 'id="', gsub("ds:","",oD$s[or]), '"',
-                 'resource="', oD$s[or],'"',
-                 ' typeof="qb:Observation" ',
-## TODO(mja): how to use draggable: Disable draggable for now
-## ' draggable="true" ondragstart="drag(event)"',
-'>\n' ),
-          file=htmlfile, append=TRUE)
-} else {
-        cat(paste0("<a href=\"", oD$measureIRI[or], "\"",
-">\n" ), file=htmlfile, append=TRUE)
-
-}
+        if (!compactDimColumns) {
+            ## START make the row identification
+            for (rowidname in idrow) {
+                cat("<th>", rowidname,  "</th>", file=htmlfile, append=TRUE)
+            }
+            ## END make the row identification
+        } else {
+        }
         
-## TODO(mja) how to store dataSet information
-## cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">\n' ), file=htmlfile, append=TRUE)
 
-## TODO(mja) how to show dimensions       
-## for (prop in dimensions) {
-## cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">\n' ), file=htmlfile, append=TRUE)
-## }
+        for (cc in colvarindex) {
+            cpindex<-0
+            for (cp in cellpartnoindex) {
+                cpindex<- cpindex+1
+                cat("<th>", file=htmlfile, append=TRUE)
+                cat( oD[or, presidcolvalue ] , file=htmlfile, append=TRUE)
+                or<- or+1
+            }
 
-## formatting to applied to measure
-if (oD$measurefmt[or] != " ") {
-      cat(sprintf(oD$measurefmt[or],as.numeric(oD$measure[or])), file=htmlfile, append=TRUE)
-}
-else {
-      cat(paste0(oD$measure[or]), file=htmlfile, append=TRUE)
-}
-
-## for (prop in dimensions) {
-## cat( '</span>\n', file=htmlfile, append=TRUE)
-## }
-
-## dataSet information
-## cat( '</span>\n', file=htmlfile, append=TRUE)
-
-if (useRDFa) {
-cat( '</span>\n', file=htmlfile, append=TRUE)
-}
-      cat(paste0("</a>\n"), file=htmlfile, append=TRUE)
-      or<- or+1
-    cat("</td>\n", file=htmlfile, append=TRUE)
+            cat("</th>\n", file=htmlfile, append=TRUE)
+        }
+        cat("</tr>", "\n", file=htmlfile, append=TRUE)
     }
+
+    ## data rows
+    or<- 1
+    for (rr in presrowvarindex) {
+        cat("<tr>", file=htmlfile, append=TRUE)
+                                        # print(rr)
+
+        ## START make the row identification
+        if (oD$rowno[or]==rr) {
+            for (rowidname in idrow) {
+                cat("<td>", oD[or,rowidname],  "</td>", file=htmlfile, append=TRUE)
+            }
+        }
+        ## END make the row identification
+        
+
+        for (cc in colvarindex) {
+                                        # print(cc)
+                                        #    cat("<td>", file=htmlfile, append=TRUE)
+            cpindex<-0
+            for (cp in cellpartnoindex) {
+                                        # print(cp)
+                cpindex<- cpindex+1
+                cat("<td>", file=htmlfile, append=TRUE)
+                ## if (cpindex>1) {
+                ## ## separator between cells should be taken from data
+                ##       cat(" ", file=htmlfile, append=TRUE)
+                ## }
+                if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
+                    ## The observation
+                    ## next line is for simple fly-over
+                    if (useRDFa) {
+
+                        cat(paste0("<a title=\"", oD$measureIRI[or], "\"",
+                                   " onclick=obsclick(\"", oD$measureIRI[or], "\")",
+                                   ">\n" ), file=htmlfile, append=TRUE)
+
+                        cat(paste0('<span ', 'id="', gsub("ds:","",oD$s[or]), '"',
+                                   'resource="', oD$s[or],'"',
+                                   ' typeof="qb:Observation" ',
+                                   ## TODO(mja): how to use draggable: Disable draggable for now
+                                   ## ' draggable="true" ondragstart="drag(event)"',
+                                   '>\n' ),
+                            file=htmlfile, append=TRUE)
+                    } else {
+                        cat(paste0("<a href=\"", oD$measureIRI[or], "\"",
+                                   ">\n" ), file=htmlfile, append=TRUE)
+
+                    }
+                    
+                    ## TODO(mja) how to store dataSet information
+                    ## cat(paste0('<span property="qb:dataSet" resource="', 'ds:', dsdName,'">\n' ), file=htmlfile, append=TRUE)
+
+                    ## TODO(mja) how to show dimensions       
+                    ## for (prop in dimensions) {
+                    ## cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">\n' ), file=htmlfile, append=TRUE)
+                    ## }
+
+                    ## formatting to applied to measure
+                    if (oD$measurefmt[or] != " ") {
+                        cat(sprintf(oD$measurefmt[or],as.numeric(oD$measure[or])), file=htmlfile, append=TRUE)
+                    }
+                    else {
+                        cat(paste0(oD$measure[or]), file=htmlfile, append=TRUE)
+                    }
+
+                    ## for (prop in dimensions) {
+                    ## cat( '</span>\n', file=htmlfile, append=TRUE)
+                    ## }
+
+                    ## dataSet information
+                    ## cat( '</span>\n', file=htmlfile, append=TRUE)
+
+                    if (useRDFa) {
+                        cat( '</span>\n', file=htmlfile, append=TRUE)
+                    }
+                    cat(paste0("</a>\n"), file=htmlfile, append=TRUE)
+                    or<- or+1
+                    cat("</td>\n", file=htmlfile, append=TRUE)
+                }
+            }
+                                        #    cat("</td>\n", file=htmlfile, append=TRUE)
+        }
+        cat("</tr>", "\n", file=htmlfile, append=TRUE)
     }
-#    cat("</td>\n", file=htmlfile, append=TRUE)
-  }
-cat("</tr>", "\n", file=htmlfile, append=TRUE)
-  }
-cat("</table>\n", file=htmlfile, append=TRUE)
-cat("</div>\n", file=htmlfile, append=TRUE)
+    cat("</table>\n", file=htmlfile, append=TRUE)
+    cat("</div>\n", file=htmlfile, append=TRUE)
 
-## TODO(mja): consider how to use this with dropping
-## cat('
-## <div id="droparea">
-## Drag and drop over the green text below.
-## <table>
-## <tr><td>
-## <span  style="width:100px" id="drop" ondrop="drop(event)" ondragover="allowDrop(event)">Drop here...</span>
-## </td></tr>
-## </table>
-## </div> 
-## ',  file=htmlfile, append=TRUE)                 
+    ## TODO(mja): consider how to use this with dropping
+    ## cat('
+    ## <div id="droparea">
+    ## Drag and drop over the green text below.
+    ## <table>
+    ## <tr><td>
+    ## <span  style="width:100px" id="drop" ondrop="drop(event)" ondragover="allowDrop(event)">Drop here...</span>
+    ## </td></tr>
+    ## </table>
+    ## </div> 
+    ## ',  file=htmlfile, append=TRUE)                 
 
-cat('
+    cat('
 </div>
 </body>
 </html>
 ', file=htmlfile, append=TRUE)
 
 
-htmlfile
+    htmlfile
 
 }
