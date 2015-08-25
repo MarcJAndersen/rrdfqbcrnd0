@@ -97,7 +97,7 @@ arq --data adsl.ttl --query ADSL-record.rq
 
 ```{r, engine='bash'}
 cd ../extdata/sample-rdf
-arq --data adsl.ttl DC-DEMO-sample.ttl --query DEMOobservations-R-data.rq
+arq --data adsl.ttl --data DC-DEMO-sample.ttl --query DEMOobservations-R-data.rq
 ```
 
 
