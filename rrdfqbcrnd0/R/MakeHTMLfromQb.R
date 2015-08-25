@@ -43,9 +43,10 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
 
     ## Showit()
 
-    presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value",rowdim)
-    presrowvarIRI<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2IRI",rowdim)
-    presrowvarlabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label",rowdim)
+    # Determine variable names in Od dataframe
+    presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value", rowdim)
+    presrowvarIRI  <- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2IRI",   rowdim)
+    presrowvarlabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label", rowdim)
 
     presidcolvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value", idcol)
     presidcollabel<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2label", idcol)
@@ -259,10 +260,10 @@ dsdName,
                   cpindex<- cpindex+1
                 if (oD$rowno[xor]==rr & oD$colno[xor]==cc & oD$cellpartno[xor]==cp ) {
                     if (!is.na(oD$procedurevalue[xor]) && xrowid[cpindex]=="") {
-                        xrowid[cpindex]<-oD$procedurevalue[xor]
+                        xrowid[cpindex]<-paste0("<a href=\"",oD$procedure[xor],"\">",  oD$procedurevalue[xor], "</a>",collapse="")
                     }
                     if (!is.na(oD$factorvalue[xor]) && yrowid[cpindex]=="") {
-                        yrowid[cpindex]<-oD$factorvalue[xor]
+                        yrowid[cpindex]<-paste0("<a href=\"",oD$factor[xor],"\">",  oD$factorvalue[xor], "</a>",collapse="")
                     }
                     xor<- xor+1
                 }
