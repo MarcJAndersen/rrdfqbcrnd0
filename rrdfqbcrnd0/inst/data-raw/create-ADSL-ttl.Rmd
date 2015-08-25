@@ -30,7 +30,10 @@ fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 adsl<-read.xport(fnadsl)
 ```
 
-The present code uses `read.xport` to input the sas dataset. Other methods are avialable allowing access to more of the meta data in the datasets.
+The present code uses `read.xport` to input the sas dataset.
+TODO: Date variables are note handled correctly. Other
+methods are available allowing access to more of the meta data in the
+datasets.
 
 Next step is to dump the data as a SQL dump, that will serve as input
 to D2RQ.  For dumping the data `sqlite` is used as it is the easies to
@@ -92,6 +95,7 @@ d2rqbaseURL<- "http://www.example.org/datasets/"
 ## /opt/d2rq-0.8.1/generate-mapping reports Unknown argument: -b
 system(paste("/opt/d2rq-0.8.1/generate-mapping",
              " -l ", dumpAfterSedFn,
+             " -b ", d2rqbaseURL,
              " -o ", adslmapttlFn
              ))
 
