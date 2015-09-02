@@ -206,7 +206,11 @@ dsdName,
         if (!compactDimColumns) {
             ## START make the row identification
             for (rowidname in idrow) {
-                cat("<th>", rowidname,  "</th>", file=htmlfile, append=TRUE)
+                ##                cat("<th>", rowidname,  "</th>", file=htmlfile, append=TRUE)
+                ## this is not a long term approach
+                cat("<th><a href=\"",oD[or,gsub("(^.*)value$","\\1IRI",rowidname)],"\">", oD[or,gsub("(^.*)value$","\\1label",rowidname)],  "</a></th>", file=htmlfile, append=TRUE)
+                
+
             }
             ## END make the row identification
         } else {
@@ -215,21 +219,27 @@ dsdName,
 
         ## START identify all column related information to be projected into column
         if (showProcedure) {
-        cat("<th>", "Statistics",  "</th>", file=htmlfile, append=TRUE)
         cat("<th>", "Variable",  "</th>", file=htmlfile, append=TRUE)
+        cat("<th>", "Statistics",  "</th>", file=htmlfile, append=TRUE)
         }
         ## END identify all column related information to be projected into column
         
         for (cc in colvarindex) {
             cpindex<-0
+            cat("<th colspan=\"", length(cellpartnoindex), "\">", file=htmlfile, append=TRUE)
+            prevvalue<- " "
             for (cp in cellpartnoindex) {
                 cpindex<- cpindex+1
-                cat("<th>", file=htmlfile, append=TRUE)
-                cat( oD[or, presidcolvalue ] , file=htmlfile, append=TRUE)
+##                cat( oD[or, presidcolvalue ] , file=htmlfile, append=TRUE)
+                ## TODO: make better solution
+                if (prevvalue != oD[or,presidcolvalue]) {
+                    cat("<a href=\"",oD[or,gsub("(^.*)value$","\\1",presidcolvalue)],"\">", oD[or,presidcolvalue],  "</a>", file=htmlfile, append=TRUE)
+                    prevvalue<- oD[or,presidcolvalue]
+                }
                 or<- or+1
             }
-
             cat("</th>\n", file=htmlfile, append=TRUE)
+
         }
         cat("</tr>", "\n", file=htmlfile, append=TRUE)
     }
@@ -243,7 +253,9 @@ dsdName,
         ## START make the row identification
         if (oD$rowno[or]==rr) {
             for (rowidname in idrow) {
-                cat("<td>", oD[or,rowidname],  "</td>", file=htmlfile, append=TRUE)
+##                cat("<td>", oD[or,rowidname],  "</td>", file=htmlfile, append=TRUE)
+                ## this is not a long term approach
+                cat("<td><a href=\"",oD[or,gsub("(^.*)value$","\\1",rowidname)],"\">", oD[or,rowidname], "</a></th>", file=htmlfile, append=TRUE)
             }
         }
         ## END make the row identification
@@ -259,18 +271,18 @@ dsdName,
               for (cp in cellpartnoindex) {
                   cpindex<- cpindex+1
                 if (oD$rowno[xor]==rr & oD$colno[xor]==cc & oD$cellpartno[xor]==cp ) {
-                    if (!is.na(oD$procedurevalue[xor]) && xrowid[cpindex]=="") {
-                        xrowid[cpindex]<-paste0("<a href=\"",oD$procedure[xor],"\">",  oD$procedurevalue[xor], "</a>",collapse="")
-                    }
                     if (!is.na(oD$factorvalue[xor]) && yrowid[cpindex]=="") {
                         yrowid[cpindex]<-paste0("<a href=\"",oD$factor[xor],"\">",  oD$factorvalue[xor], "</a>",collapse="")
+                    }
+                    if (!is.na(oD$procedurevalue[xor]) && xrowid[cpindex]=="") {
+                        xrowid[cpindex]<-paste0("<a href=\"",oD$procedure[xor],"\">",  oD$procedurevalue[xor], "</a>",collapse="")
                     }
                     xor<- xor+1
                 }
             }
         }
-        cat("<td>", paste(xrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
         cat("<td>", paste(yrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
+        cat("<td>", paste(xrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
         }
         
         ## END identify all column related information to be projected into column
