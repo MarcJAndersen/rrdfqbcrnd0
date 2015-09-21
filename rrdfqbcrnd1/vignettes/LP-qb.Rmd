@@ -99,7 +99,7 @@ procedure defines the univariate descriptive statistic the dimension
 factor defines which variable in the dataset the univariate statistics
 is derived from
 
-ds:DEMOG-T-11/obsNum098  a           qb:Observation ;
+	ds:DEMOG-T-11/obsNum098  a           qb:Observation ;
         rdfs:label                  "98" ;
         qb:dataSet                  ds:DEMOG-T-1-1;
         crnd-attribute:denominator  "" ;
@@ -112,11 +112,13 @@ ds:DEMOG-T-11/obsNum098  a           qb:Observation ;
         crnd-dimension:sex          code:sex-_ALL_ ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "64.9"^^xsd:double .
+
 See https://github.com/MarcJAndersen/rrdfqbcrnd0/blob/master/rrdfqbcrnd0/inst/extdata/sample-rdf/DC-DEMO-sample.ttl 
 
 ## 5.2 Dimension for univariate statistics
 Below is the code list for representing the median. 
-code:procedure-median
+
+	code:procedure-median
         a                             code:Procedure , skos:Concept ;
         rdfs:comment                  "Descriptive statistics median"@en ;
         skos:inScheme                 code:procedure ;
@@ -126,6 +128,7 @@ See https://github.com/MarcJAndersen/rrdfqbcrnd0/blob/master/rrdfqbcrnd0/inst/do
 
 ## 5.3 Attributes for univariate statistics
 Additional information on the observation is captured in the attributes. For descriptive statistics this is:
+
         crnd-attribute:denominator  "" ;
         crnd-attribute:unit         "NA"^^xsd:string ;
 
@@ -140,20 +143,20 @@ The unit is part of the interpretation of the measure. The RDF data cube specifi
 The table below shows the URI patterns for the concepts discussed above. The notion of providing URI patterns follows http://csarven.ca/linked-sdmx-data#uri-patterns.
 
 
-Entity type                 | URI Pattern
------------                 | -----------
-qb:DataStructureDefinition  | 
-qb:ComponentSpecification   | 
-qb:DataSet                  | 
-qb:Observation              | 
-skos:Collection | 
-skos:ConceptScheme | 
-skos:Concept, | 
-sdmx:Concept | 
-owl:Class, | 
-rdfs:Class | 
-rdf:Property, | 
-qb:ComponentProperty | 
-qb:DimensionProperty | 
-qb:MeasureProperty | 
+	Entity type                 | URI Pattern
+	-----------                 | -----------
+	qb:DataStructureDefinition  | 
+	qb:ComponentSpecification   | 
+	qb:DataSet                  | 
+	qb:Observation              | 
+	skos:Collection | 
+	skos:ConceptScheme | 
+	skos:Concept, | 
+	sdmx:Concept | 
+	owl:Class, | 
+	rdfs:Class | 
+	rdf:Property, | 
+	qb:ComponentProperty | 
+	qb:DimensionProperty | 
+	qb:MeasureProperty | 
 
