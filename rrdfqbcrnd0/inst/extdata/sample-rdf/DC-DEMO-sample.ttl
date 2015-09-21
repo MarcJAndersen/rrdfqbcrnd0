@@ -19,6 +19,7 @@
 @prefix prov:  <http://www.w3.org/ns/prov#> .
 
 ds:obs113  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "113" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -37,6 +38,7 @@ ds:obs113  a                        qb:Observation ;
         crnd-measure:measure        "45.4"^^xsd:double .
 
 ds:obs084  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "84" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -64,6 +66,7 @@ code:procedure  a                 skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: procedure"@en .
 
 ds:obs063  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "63" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -82,6 +85,7 @@ ds:obs063  a                        qb:Observation ;
         crnd-measure:measure        "18"^^xsd:int .
 
 ds:obs042  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "42" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -100,6 +104,7 @@ ds:obs042  a                        qb:Observation ;
         crnd-measure:measure        "56"^^xsd:double .
 
 ds:obs021  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "21" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -144,6 +149,7 @@ code:sex  a                       skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: sex"@en .
 
 ds:obs121  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "121" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -162,6 +168,7 @@ ds:obs121  a                        qb:Observation ;
         crnd-measure:measure        "83"^^xsd:int .
 
 ds:obs100  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "100" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -189,6 +196,7 @@ crnd-attribute:rowno  a  rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Row number for two dimensional represenation" .
 
 ds:obs092  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "92" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -207,6 +215,7 @@ ds:obs092  a                        qb:Observation ;
         crnd-measure:measure        "14.123598649" .
 
 ds:obs071  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "71" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -235,6 +244,7 @@ code:procedure-min  a                 code:Procedure , skos:Concept ;
         skos:topConceptOf             code:procedure .
 
 ds:obs050  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "50" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -254,6 +264,8 @@ ds:obs050  a                        qb:Observation ;
 
 code:factor-weightbl  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_weightbl> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "weightbl" ;
@@ -266,6 +278,7 @@ dccs:sex  a           qb:ComponentSpecification ;
         qb:dimension  crnd-dimension:sex .
 
 ds:obs029  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "29" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -284,6 +297,7 @@ ds:obs029  a                        qb:Observation ;
         crnd-measure:measure        "75.666666667"^^xsd:double .
 
 ds:obs008  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "8" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -311,6 +325,7 @@ code:trt01a-Placebo  a                code:Trt01a , skos:Concept ;
         skos:topConceptOf             code:trt01a .
 
 ds:obs129  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "129" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -332,6 +347,7 @@ crnd-attribute:unit  a  rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Unit of measure" .
 
 ds:obs108  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "108" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -350,6 +366,7 @@ ds:obs108  a                        qb:Observation ;
         crnd-measure:measure        "56.75" .
 
 ds:obs079  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "79" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -368,6 +385,7 @@ ds:obs079  a                        qb:Observation ;
         crnd-measure:measure        "8"^^xsd:int .
 
 ds:obs058  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "58" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -386,6 +404,7 @@ ds:obs058  a                        qb:Observation ;
         crnd-measure:measure        "48.837209302"^^xsd:double .
 
 ds:obs037  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "37" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -404,6 +423,7 @@ ds:obs037  a                        qb:Observation ;
         crnd-measure:measure        "89"^^xsd:double .
 
 ds:obs016  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "16" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -430,6 +450,7 @@ crnd-dimension:race  a  rdf:Property , qb:DimensionProperty ;
         qb:codeList  code:race .
 
 ds:obs116  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "116" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -448,6 +469,7 @@ ds:obs116  a                        qb:Observation ;
         crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs087  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "87" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -466,6 +488,7 @@ ds:obs087  a                        qb:Observation ;
         crnd-measure:measure        "1"^^xsd:int .
 
 ds:obs066  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "66" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -484,6 +507,7 @@ ds:obs066  a                        qb:Observation ;
         crnd-measure:measure        "21.428571429"^^xsd:double .
 
 ds:obs045  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "45" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -507,6 +531,7 @@ crnd-dimension:sex  a  rdf:Property , qb:DimensionProperty ;
         qb:codeList  code:sex .
 
 ds:obs024  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "24" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -525,6 +550,7 @@ ds:obs024  a                        qb:Observation ;
         crnd-measure:measure        "84" .
 
 ds:obs003  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "3" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -570,6 +596,7 @@ code:race  a                      skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: race"@en .
 
 ds:obs124  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "124" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -588,6 +615,7 @@ ds:obs124  a                        qb:Observation ;
         crnd-measure:measure        "96.511627907"^^xsd:double .
 
 ds:obs103  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "103" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -627,6 +655,7 @@ code:sex-M  a                         code:Sex , skos:Concept ;
         skos:topConceptOf             code:sex .
 
 ds:obs095  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "95" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -651,6 +680,7 @@ crnd-dimension:factor
         qb:codeList  code:factor .
 
 ds:obs074  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "74" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -669,6 +699,7 @@ ds:obs074  a                        qb:Observation ;
         crnd-measure:measure        "78"^^xsd:int .
 
 ds:obs053  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "53" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -687,6 +718,7 @@ ds:obs053  a                        qb:Observation ;
         crnd-measure:measure        "9.5238095238"^^xsd:double .
 
 ds:obs032  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "32" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -705,6 +737,7 @@ ds:obs032  a                        qb:Observation ;
         crnd-measure:measure        "82" .
 
 ds:obs011  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "11" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -739,6 +772,7 @@ crnd-attribute:denominator
         rdfs:label  "Denominator for a proportion (oskr) subset on which a statistic is based" .
 
 ds:obs132  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "132" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -757,6 +791,7 @@ ds:obs132  a                        qb:Observation ;
         crnd-measure:measure        "3.5714285714"^^xsd:double .
 
 ds:obs111  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "111" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -800,6 +835,7 @@ code:sex-U  a                         skos:Concept , code:Sex ;
         skos:topConceptOf             code:sex .
 
 ds:obs082  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "82" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -818,6 +854,7 @@ ds:obs082  a                        qb:Observation ;
         crnd-measure:measure        "9.3023255814"^^xsd:double .
 
 ds:obs061  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "61" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -841,6 +878,8 @@ dccs:factor  a        qb:ComponentSpecification ;
 
 code:factor-age  a                    code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_age> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "age" ;
@@ -859,6 +898,7 @@ code:procedure-std  a                 code:Procedure , skos:Concept ;
         skos:topConceptOf             code:procedure .
 
 ds:obs040  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "40" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -877,6 +917,7 @@ ds:obs040  a                        qb:Observation ;
         crnd-measure:measure        "52"^^xsd:double .
 
 ds:obs019  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "19" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -911,6 +952,7 @@ code:ethnic-_ALL_  a       code:Ethnic , skos:Concept ;
         skos:topConceptOf  code:ethnic .
 
 ds:obs119  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "119" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -929,6 +971,7 @@ ds:obs119  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs090  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "90" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -947,6 +990,7 @@ ds:obs090  a                        qb:Observation ;
         crnd-measure:measure        "1.1904761905"^^xsd:double .
 
 ds:obs069  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "69" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -965,6 +1009,7 @@ ds:obs069  a                        qb:Observation ;
         crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs048  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "48" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -983,6 +1028,7 @@ ds:obs048  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs027  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "27" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1001,6 +1047,7 @@ ds:obs027  a                        qb:Observation ;
         crnd-measure:measure        "76"^^xsd:double .
 
 ds:obs006  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "6" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1019,6 +1066,7 @@ ds:obs006  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs127  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "127" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1037,6 +1085,7 @@ ds:obs127  a                        qb:Observation ;
         crnd-measure:measure        "3"^^xsd:int .
 
 ds:obs106  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "106" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1055,6 +1104,7 @@ ds:obs106  a                        qb:Observation ;
         crnd-measure:measure        "53.5" .
 
 ds:obs098  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "98" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1084,6 +1134,7 @@ code:procedure-median
         skos:topConceptOf             code:procedure .
 
 ds:obs077  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "77" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1102,6 +1153,7 @@ ds:obs077  a                        qb:Observation ;
         crnd-measure:measure        "92.857142857"^^xsd:double .
 
 ds:obs056  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "56" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1120,6 +1172,7 @@ ds:obs056  a                        qb:Observation ;
         crnd-measure:measure        "47"^^xsd:int .
 
 ds:obs035  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "35" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1138,6 +1191,7 @@ ds:obs035  a                        qb:Observation ;
         crnd-measure:measure        "71" .
 
 ds:obs014  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "14" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1166,6 +1220,7 @@ code:procedure-count  a               code:Procedure , skos:Concept ;
         skos:topConceptOf             code:procedure .
 
 ds:obs114  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "114" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1190,6 +1245,7 @@ code:Race  a             rdfs:Class , owl:Class ;
         rdfs:subClassOf  skos:Concept .
 
 ds:obs085  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "85" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1208,6 +1264,7 @@ ds:obs085  a                        qb:Observation ;
         crnd-measure:measure        "0"^^xsd:int .
 
 ds:obs064  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "64" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1239,6 +1296,7 @@ code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER
         skos:topConceptOf             code:race .
 
 ds:obs043  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "43" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1266,6 +1324,7 @@ code:agegr1-65-80  a                  code:Agegr1 , skos:Concept ;
         skos:topConceptOf             code:agegr1 .
 
 ds:obs022  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "22" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1310,6 +1369,7 @@ code:procedure-mean  a                code:Procedure , skos:Concept ;
         skos:topConceptOf             code:procedure .
 
 ds:obs001  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "1" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1353,6 +1413,7 @@ code:sex-_ALL_  a          code:Sex , skos:Concept ;
         skos:topConceptOf  code:sex .
 
 ds:obs122  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "122" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1374,6 +1435,7 @@ crnd-attribute:colno  a  rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Column number for two dimensional represenation" .
 
 ds:obs101  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "101" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1392,6 +1454,7 @@ ds:obs101  a                        qb:Observation ;
         crnd-measure:measure        "67.279518072"^^xsd:double .
 
 ds:obs093  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "93" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1435,6 +1498,7 @@ code:race-ASIAN  a                    skos:Concept , code:Race ;
         skos:topConceptOf             code:race .
 
 ds:obs072  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "72" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1453,6 +1517,7 @@ ds:obs072  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs051  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "51" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1475,6 +1540,7 @@ dccs:procedure  a     qb:ComponentSpecification ;
         qb:dimension  crnd-dimension:procedure .
 
 ds:obs030  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "30" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1493,6 +1559,7 @@ ds:obs030  a                        qb:Observation ;
         crnd-measure:measure        "74.380952381"^^xsd:double .
 
 ds:obs009  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "9" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1521,6 +1588,7 @@ dccs:race  a          qb:ComponentSpecification ;
         qb:dimension  crnd-dimension:race .
 
 ds:obs130  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "130" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1539,6 +1607,7 @@ ds:obs130  a                        qb:Observation ;
         crnd-measure:measure        "3.488372093"^^xsd:double .
 
 ds:obs109  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "109" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1560,6 +1629,7 @@ dccs:measurefmt  a    qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:measurefmt .
 
 ds:obs080  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "80" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1578,6 +1648,7 @@ ds:obs080  a                        qb:Observation ;
         crnd-measure:measure        "6"^^xsd:int .
 
 ds:obs059  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "59" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1596,6 +1667,7 @@ ds:obs059  a                        qb:Observation ;
         crnd-measure:measure        "55.952380952"^^xsd:double .
 
 ds:obs038  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "38" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1614,6 +1686,7 @@ ds:obs038  a                        qb:Observation ;
         crnd-measure:measure        "88"^^xsd:double .
 
 ds:obs017  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "17" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1648,8 +1721,8 @@ ds:dataset-DEMO  a           qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DEMO ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-08-25T17:26:59+02:00"^^xsd:dateTime ;
-        pav:createdWith      "R Version 3.2.1 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
+        pav:createdOn        "2015-09-21T17:43:32+02:00"^^xsd:dateTime ;
+        pav:createdWith      "R Version 3.2.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DEMO-R-V-0-5-2.ttl" ;
         prov:wasDerivedFrom  "demo.AR.csv" .
@@ -1665,6 +1738,7 @@ code:trt01a-Xanomeline_Low_Dose
         skos:topConceptOf             code:trt01a .
 
 ds:obs117  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "117" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1701,6 +1775,7 @@ code:agegr1-_ALL_  a       code:Agegr1 , skos:Concept ;
         skos:topConceptOf  code:agegr1 .
 
 ds:obs088  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "88" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1723,6 +1798,7 @@ crnd-attribute:measurefmt
         rdfs:label  "Format for sprintf" .
 
 ds:obs067  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "67" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1741,6 +1817,7 @@ ds:obs067  a                        qb:Observation ;
         crnd-measure:measure        "86"^^xsd:int .
 
 ds:obs046  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "46" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1759,6 +1836,7 @@ ds:obs046  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs025  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "25" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1777,6 +1855,7 @@ ds:obs025  a                        qb:Observation ;
         crnd-measure:measure        "76"^^xsd:double .
 
 ds:obs004  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "4" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1801,6 +1880,7 @@ code:factor-_ALL_  a       code:Factor , skos:Concept ;
         skos:topConceptOf  code:factor .
 
 ds:obs125  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "125" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1819,6 +1899,7 @@ ds:obs125  a                        qb:Observation ;
         crnd-measure:measure        "92.857142857"^^xsd:double .
 
 ds:obs104  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "104" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1837,6 +1918,7 @@ ds:obs104  a                        qb:Observation ;
         crnd-measure:measure        "77.8" .
 
 ds:obs096  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "96" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1855,6 +1937,7 @@ ds:obs096  a                        qb:Observation ;
         crnd-measure:measure        "84" .
 
 ds:obs075  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "75" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1873,6 +1956,7 @@ ds:obs075  a                        qb:Observation ;
         crnd-measure:measure        "74"^^xsd:int .
 
 ds:obs054  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "54" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1891,6 +1975,7 @@ ds:obs054  a                        qb:Observation ;
         crnd-measure:measure        "13.095238095"^^xsd:double .
 
 ds:obs033  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "33" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1909,6 +1994,7 @@ ds:obs033  a                        qb:Observation ;
         crnd-measure:measure        "80" .
 
 ds:obs012  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "12" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1940,6 +2026,7 @@ crnd-measure:measure  a  rdf:Property , qb:MeasureProperty ;
         rdfs:label  "Value of the statistical measure" .
 
 ds:obs112  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "112" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -1969,6 +2056,7 @@ code:trt01a  a                    skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: trt01a"@en .
 
 ds:obs083  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "83" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -1987,6 +2075,7 @@ ds:obs083  a                        qb:Observation ;
         crnd-measure:measure        "7.1428571429"^^xsd:double .
 
 ds:obs062  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "62" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2005,6 +2094,7 @@ ds:obs062  a                        qb:Observation ;
         crnd-measure:measure        "29"^^xsd:int .
 
 ds:obs041  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "41" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2024,6 +2114,8 @@ ds:obs041  a                        qb:Observation ;
 
 code:factor-quantity  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_quantity> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "quantity" ;
@@ -2032,6 +2124,7 @@ code:factor-quantity  a               code:Factor , skos:Concept ;
         skos:topConceptOf             code:factor .
 
 ds:obs020  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "20" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2056,6 +2149,7 @@ crnd-dimension:procedure
         qb:codeList  code:procedure .
 
 ds:obs120  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "120" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2093,6 +2187,7 @@ code:factor-_NONMISS_
         skos:topConceptOf  code:factor .
 
 ds:obs091  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "91" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2111,6 +2206,7 @@ ds:obs091  a                        qb:Observation ;
         crnd-measure:measure        "12.771543533" .
 
 ds:obs070  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "70" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2129,6 +2225,7 @@ ds:obs070  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs049  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "49" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2147,6 +2244,7 @@ ds:obs049  a                        qb:Observation ;
         crnd-measure:measure        "14"^^xsd:int .
 
 ds:obs028  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "28" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2165,6 +2263,7 @@ ds:obs028  a                        qb:Observation ;
         crnd-measure:measure        "75.209302326"^^xsd:double .
 
 ds:obs007  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "7" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2195,6 +2294,7 @@ dccs:unit  a          qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:unit .
 
 ds:obs128  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "128" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2213,6 +2313,7 @@ ds:obs128  a                        qb:Observation ;
         crnd-measure:measure        "6"^^xsd:int .
 
 ds:obs107  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "107" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2231,6 +2332,7 @@ ds:obs107  a                        qb:Observation ;
         crnd-measure:measure        "55.8" .
 
 ds:obs099  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "99" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2249,6 +2351,7 @@ ds:obs099  a                        qb:Observation ;
         crnd-measure:measure        "69.2"^^xsd:double .
 
 ds:obs078  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "78" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2267,6 +2370,7 @@ ds:obs078  a                        qb:Observation ;
         crnd-measure:measure        "88.095238095"^^xsd:double .
 
 ds:obs057  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "57" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2285,6 +2389,7 @@ ds:obs057  a                        qb:Observation ;
         crnd-measure:measure        "55"^^xsd:int .
 
 ds:obs036  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "36" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2303,6 +2408,7 @@ ds:obs036  a                        qb:Observation ;
         crnd-measure:measure        "70.5" .
 
 ds:obs015  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "15" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2333,6 +2439,7 @@ dccs:rowno  a         qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:rowno .
 
 ds:obs115  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "115" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2351,6 +2458,7 @@ ds:obs115  a                        qb:Observation ;
         crnd-measure:measure        "86"^^xsd:int .
 
 ds:obs086  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "86" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2369,6 +2477,7 @@ ds:obs086  a                        qb:Observation ;
         crnd-measure:measure        "0"^^xsd:int .
 
 ds:obs065  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "65" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2387,6 +2496,7 @@ ds:obs065  a                        qb:Observation ;
         crnd-measure:measure        "34.523809524"^^xsd:double .
 
 ds:obs044  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "44" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2407,6 +2517,8 @@ ds:obs044  a                        qb:Observation ;
 code:factor-proportion
         a                             code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_proportion> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "proportion" ;
@@ -2415,6 +2527,7 @@ code:factor-proportion
         skos:topConceptOf             code:factor .
 
 ds:obs023  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "23" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2433,6 +2546,7 @@ ds:obs023  a                        qb:Observation ;
         crnd-measure:measure        "84" .
 
 ds:obs002  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "2" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2451,6 +2565,7 @@ ds:obs002  a                        qb:Observation ;
         crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs123  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "123" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2480,6 +2595,7 @@ code:agegr1  a                    skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: agegr1"@en .
 
 ds:obs102  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "102" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2504,6 +2620,7 @@ crnd-dimension:agegr1
         qb:codeList  code:agegr1 .
 
 ds:obs094  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "94" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2522,6 +2639,7 @@ ds:obs094  a                        qb:Observation ;
         crnd-measure:measure        "86" .
 
 ds:obs073  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "73" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2551,6 +2669,7 @@ code:ethnic  a                    skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: ethnic"@en .
 
 ds:obs052  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "52" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2588,6 +2707,7 @@ crnd-dimension:ethnic
         qb:codeList  code:ethnic .
 
 ds:obs031  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "31" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2606,6 +2726,7 @@ ds:obs031  a                        qb:Observation ;
         crnd-measure:measure        "82" .
 
 ds:obs010  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "10" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2624,6 +2745,7 @@ ds:obs010  a                        qb:Observation ;
         crnd-measure:measure        "61.627906977"^^xsd:double .
 
 ds:obs131  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "131" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2642,6 +2764,7 @@ ds:obs131  a                        qb:Observation ;
         crnd-measure:measure        "7.1428571429"^^xsd:double .
 
 ds:obs110  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "110" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2672,6 +2795,7 @@ code:sex-UN  a                        code:Sex , skos:Concept ;
         skos:topConceptOf             code:sex .
 
 ds:obs081  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "81" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2690,6 +2814,7 @@ ds:obs081  a                        qb:Observation ;
         crnd-measure:measure        "9"^^xsd:int .
 
 ds:obs060  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "60" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2708,6 +2833,7 @@ ds:obs060  a                        qb:Observation ;
         crnd-measure:measure        "65.476190476"^^xsd:double .
 
 ds:obs039  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "39" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2730,6 +2856,7 @@ dccs:ethnic  a        qb:ComponentSpecification ;
         qb:dimension  crnd-dimension:ethnic .
 
 ds:obs018  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "18" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2751,6 +2878,7 @@ dccs:cellpartno  a    qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:cellpartno .
 
 ds:obs118  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "118" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2769,6 +2897,7 @@ ds:obs118  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs089  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "89" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2787,6 +2916,7 @@ ds:obs089  a                        qb:Observation ;
         crnd-measure:measure        "0"^^xsd:double .
 
 ds:obs068  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "68" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2811,6 +2941,7 @@ code:Sex  a              rdfs:Class , owl:Class ;
         rdfs:subClassOf  skos:Concept .
 
 ds:obs047  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "47" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2829,6 +2960,7 @@ ds:obs047  a                        qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 ds:obs026  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "26" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2847,6 +2979,7 @@ ds:obs026  a                        qb:Observation ;
         crnd-measure:measure        "77.5"^^xsd:double .
 
 ds:obs005  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "5" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2900,6 +3033,7 @@ code:ethnic-HISPANIC_OR_LATINO
         skos:topConceptOf             code:ethnic .
 
 ds:obs126  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "126" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2918,6 +3052,7 @@ ds:obs126  a                        qb:Observation ;
         crnd-measure:measure        "96.428571429"^^xsd:double .
 
 ds:obs105  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "105" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2936,6 +3071,7 @@ ds:obs105  a                        qb:Observation ;
         crnd-measure:measure        "80.3" .
 
 ds:obs097  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "97" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2954,6 +3090,7 @@ ds:obs097  a                        qb:Observation ;
         crnd-measure:measure        "60.55"^^xsd:double .
 
 ds:obs076  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "76" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "2"^^xsd:string ;
@@ -2980,6 +3117,7 @@ code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
         skos:topConceptOf  code:sex .
 
 ds:obs055  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "55" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -2998,6 +3136,7 @@ ds:obs055  a                        qb:Observation ;
         crnd-measure:measure        "42"^^xsd:int .
 
 ds:obs034  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "34" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;
@@ -3019,6 +3158,7 @@ ds:dsd-DEMO  a        qb:DataStructureDefinition ;
         qb:component  dccs:colno , dccs:sex , dccs:rowno , dccs:factor , dccs:measure , dccs:procedure , dccs:cellpartno , dccs:ethnic , dccs:trt01a , dccs:denominator , dccs:race , dccs:measurefmt , dccs:agegr1 , dccs:unit .
 
 ds:obs013  a                        qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "13" ;
         qb:dataSet                  ds:dataset-DEMO ;
         crnd-attribute:cellpartno   "1"^^xsd:string ;

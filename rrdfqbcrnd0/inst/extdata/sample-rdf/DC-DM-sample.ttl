@@ -35,6 +35,7 @@ code:sex-M  a                         code:Sex , skos:Concept ;
         skos:topConceptOf             code:sex .
 
 ds:obs11  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "11" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
@@ -59,6 +60,7 @@ code:trt01a  a                    skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: trt01a"@en .
 
 ds:obs52  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "52" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -80,6 +82,7 @@ code:saffl-_NONMISS_  a    code:Saffl , skos:Concept ;
         skos:topConceptOf  code:saffl .
 
 ds:obs24  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "24" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -97,6 +100,7 @@ dccs:sex  a           qb:ComponentSpecification ;
         qb:dimension  crnd-dimension:sex .
 
 ds:obs65  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "65" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -110,6 +114,7 @@ ds:obs65  a                         qb:Observation ;
         crnd-measure:measure        "7.14285714285714"^^xsd:double .
 
 ds:obs37  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "37" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -123,6 +128,7 @@ ds:obs37  a                         qb:Observation ;
         crnd-measure:measure        "108"^^xsd:double .
 
 ds:obs09  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "9" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -149,6 +155,8 @@ code:race-WHITE  a                    skos:Concept , code:Race ;
 
 code:factor-AGE  a                    code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_AGE> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "AGE" ;
@@ -165,6 +173,7 @@ code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
         skos:topConceptOf  code:sex .
 
 ds:obs31  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "31" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -184,6 +193,7 @@ code:trt01a-_ALL_  a       code:Trt01a , skos:Concept ;
         skos:topConceptOf  code:trt01a .
 
 ds:obs03  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "3" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -197,6 +207,7 @@ ds:obs03  a                         qb:Observation ;
         crnd-measure:measure        "1"^^xsd:int .
 
 ds:obs44  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "44" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -210,6 +221,7 @@ ds:obs44  a                         qb:Observation ;
         crnd-measure:measure        "10.7142857142857"^^xsd:double .
 
 ds:obs16  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "16" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -223,6 +235,7 @@ ds:obs16  a                         qb:Observation ;
         crnd-measure:measure        "86.2"^^xsd:double .
 
 ds:obs57  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "57" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -236,6 +249,7 @@ ds:obs57  a                         qb:Observation ;
         crnd-measure:measure        "34"^^xsd:int .
 
 ds:obs29  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "29" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -265,6 +279,7 @@ code:Sex  a              rdfs:Class , owl:Class ;
         rdfs:subClassOf  skos:Concept .
 
 ds:obs10  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "10" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -278,6 +293,7 @@ ds:obs10  a                         qb:Observation ;
         crnd-measure:measure        "8.59016712714194"^^xsd:double .
 
 ds:obs51  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "51" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -291,6 +307,7 @@ ds:obs51  a                         qb:Observation ;
         crnd-measure:measure        "51"^^xsd:double .
 
 ds:obs23  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "23" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -306,6 +323,8 @@ ds:obs23  a                         qb:Observation ;
 code:factor-proportion
         a                             code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_proportion> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "proportion" ;
@@ -314,6 +333,7 @@ code:factor-proportion
         skos:topConceptOf             code:factor .
 
 ds:obs64  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "64" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -333,6 +353,7 @@ crnd-dimension:procedure
         qb:codeList  code:procedure .
 
 ds:obs36  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "36" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -358,6 +379,7 @@ code:sex-F  a                         code:Sex , skos:Concept ;
         skos:topConceptOf             code:sex .
 
 ds:obs08  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "8" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -371,6 +393,7 @@ ds:obs08  a                         qb:Observation ;
         crnd-measure:measure        "76"^^xsd:double .
 
 ds:obs49  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "49" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -401,6 +424,7 @@ code:sex  a                       skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: sex"@en .
 
 ds:obs30  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "30" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -414,6 +438,7 @@ ds:obs30  a                         qb:Observation ;
         crnd-measure:measure        "56"^^xsd:double .
 
 ds:obs02  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "2" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -427,6 +452,7 @@ ds:obs02  a                         qb:Observation ;
         crnd-measure:measure        "111"^^xsd:int .
 
 ds:obs43  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "43" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -440,6 +466,7 @@ ds:obs43  a                         qb:Observation ;
         crnd-measure:measure        "1"^^xsd:int .
 
 ds:obs15  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "15" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -459,6 +486,7 @@ code:saffl-_ALL_  a        code:Saffl , skos:Concept ;
         skos:topConceptOf  code:saffl .
 
 ds:obs56  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "56" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -472,6 +500,7 @@ ds:obs56  a                         qb:Observation ;
         crnd-measure:measure        "50"^^xsd:int .
 
 ds:obs28  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "28" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -505,6 +534,7 @@ code:race-_NONMISS_  a     code:Race , skos:Concept ;
         skos:topConceptOf  code:race .
 
 ds:obs50  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "50" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -521,6 +551,7 @@ ds:dsd-DM  a          qb:DataStructureDefinition ;
         qb:component  dccs:sex , dccs:trt01a , dccs:saffl , dccs:factor , dccs:race , dccs:denominator , dccs:measure , dccs:procedure , dccs:unit .
 
 ds:obs22  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "22" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -540,6 +571,7 @@ code:Race  a             rdfs:Class , owl:Class ;
         rdfs:subClassOf  skos:Concept .
 
 ds:obs63  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "63" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -553,6 +585,7 @@ ds:obs63  a                         qb:Observation ;
         crnd-measure:measure        "0"^^xsd:double .
 
 ds:obs35  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "35" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -566,6 +599,7 @@ ds:obs35  a                         qb:Observation ;
         crnd-measure:measure        "40"^^xsd:int .
 
 ds:obs07  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "7" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -592,6 +626,7 @@ crnd-measure:measure  a  rdf:Property , qb:MeasureProperty ;
         rdfs:label  "Value of the statistical measure" .
 
 ds:obs48  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "48" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -616,6 +651,7 @@ code:procedure-median
         skos:topConceptOf             code:procedure .
 
 ds:obs01  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "1" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -645,6 +681,7 @@ code:procedure-stdev  a               code:Procedure , skos:Concept ;
         skos:topConceptOf             code:procedure .
 
 ds:obs42  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "42" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -658,6 +695,7 @@ ds:obs42  a                         qb:Observation ;
         crnd-measure:measure        "1.19047619047619"^^xsd:double .
 
 ds:obs14  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "14" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -671,6 +709,7 @@ ds:obs14  a                         qb:Observation ;
         crnd-measure:measure        "53"^^xsd:int .
 
 ds:obs55  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "55" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -693,6 +732,7 @@ code:trt01a-_NONMISS_
         skos:topConceptOf  code:trt01a .
 
 ds:obs27  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "27" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -706,6 +746,7 @@ ds:obs27  a                         qb:Observation ;
         crnd-measure:measure        "88"^^xsd:double .
 
 ds:obs68  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "68" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -758,6 +799,7 @@ crnd-attribute:unit  a  rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Unit of measure" .
 
 ds:obs21  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "21" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -786,6 +828,7 @@ code:procedure-percent
         skos:topConceptOf             code:procedure .
 
 ds:obs62  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "62" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -799,6 +842,7 @@ ds:obs62  a                         qb:Observation ;
         crnd-measure:measure        "14.1235986486909"^^xsd:double .
 
 ds:obs34  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "34" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -812,6 +856,7 @@ ds:obs34  a                         qb:Observation ;
         crnd-measure:measure        "84"^^xsd:int .
 
 ds:obs06  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "6" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -865,6 +910,7 @@ code:trt01a-Placebo  a                code:Trt01a , skos:Concept ;
         skos:topConceptOf             code:trt01a .
 
 ds:obs47  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "47" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -878,6 +924,7 @@ ds:obs47  a                         qb:Observation ;
         crnd-measure:measure        "74"^^xsd:int .
 
 ds:obs19  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "19" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -916,6 +963,7 @@ code:Factor  a           rdfs:Class , owl:Class ;
         rdfs:subClassOf  skos:Concept .
 
 ds:obs41  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "41" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -948,6 +996,7 @@ code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
         skos:topConceptOf             code:race .
 
 ds:obs13  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "13" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -972,6 +1021,7 @@ code:Procedure  a        rdfs:Class , owl:Class ;
         rdfs:subClassOf  skos:Concept .
 
 ds:obs54  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "54" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
@@ -985,6 +1035,7 @@ ds:obs54  a                         qb:Observation ;
         crnd-measure:measure        "40.4761904761905"^^xsd:double .
 
 ds:obs26  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "26" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -998,6 +1049,7 @@ ds:obs26  a                         qb:Observation ;
         crnd-measure:measure        "78"^^xsd:int .
 
 ds:obs67  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "67" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -1011,6 +1063,7 @@ ds:obs67  a                         qb:Observation ;
         crnd-measure:measure        "92.8571428571429"^^xsd:double .
 
 ds:obs39  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "39" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1027,6 +1080,7 @@ dccs:unit  a          qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:unit .
 
 ds:obs20  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "20" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1041,6 +1095,8 @@ ds:obs20  a                         qb:Observation ;
 
 code:factor-WEIGHTBL  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_WEIGHTBL> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "WEIGHTBL" ;
@@ -1064,6 +1120,7 @@ dccs:denominator  a   qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:denominator .
 
 ds:obs61  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "61" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1077,6 +1134,7 @@ ds:obs61  a                         qb:Observation ;
         crnd-measure:measure        "45.4"^^xsd:double .
 
 ds:obs33  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "33" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
@@ -1090,6 +1148,7 @@ ds:obs33  a                         qb:Observation ;
         crnd-measure:measure        "52.3809523809524"^^xsd:double .
 
 ds:obs05  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "5" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -1103,6 +1162,7 @@ ds:obs05  a                         qb:Observation ;
         crnd-measure:measure        "230"^^xsd:int .
 
 ds:obs46  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "46" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -1122,6 +1182,7 @@ crnd-dimension:factor
         qb:codeList  code:factor .
 
 ds:obs18  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "18" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1145,6 +1206,7 @@ code:procedure-max  a                 code:Procedure , skos:Concept ;
         skos:topConceptOf             code:procedure .
 
 ds:obs59  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "59" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1175,6 +1237,7 @@ code:saffl  a                     skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: saffl"@en .
 
 ds:obs40  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "40" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1188,6 +1251,7 @@ ds:obs40  a                         qb:Observation ;
         crnd-measure:measure        "41.7"^^xsd:double .
 
 ds:obs12  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "12" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
@@ -1201,6 +1265,7 @@ ds:obs12  a                         qb:Observation ;
         crnd-measure:measure        "38.3720930232558"^^xsd:double .
 
 ds:obs53  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "53" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
@@ -1214,6 +1279,7 @@ ds:obs53  a                         qb:Observation ;
         crnd-measure:measure        "59.5238095238095"^^xsd:double .
 
 ds:obs25  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "25" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
@@ -1235,6 +1301,7 @@ crnd-attribute:denominator
         rdfs:label  "Denominator for a proportion (oskr) subset on which a statistic is based" .
 
 ds:obs66  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "66" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -1249,6 +1316,8 @@ ds:obs66  a                         qb:Observation ;
 
 code:factor-quantity  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_quantity> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "quantity" ;
@@ -1269,6 +1338,7 @@ code:race-ASIAN  a                    skos:Concept , code:Race ;
         skos:topConceptOf             code:race .
 
 ds:obs38  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "38" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1298,8 +1368,8 @@ ds:dataset-DM  a             qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DM ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-08-25T17:26:16+02:00"^^xsd:dateTime ;
-        pav:createdWith      "R Version 3.2.1 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
+        pav:createdOn        "2015-09-21T17:43:21+02:00"^^xsd:dateTime ;
+        pav:createdWith      "R Version 3.2.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DM-R-V-0-5-2.ttl" ;
         prov:wasDerivedFrom  "dm.AR.csv" .
@@ -1321,6 +1391,7 @@ code:procedure-min  a                 code:Procedure , skos:Concept ;
         skos:topConceptOf             code:procedure .
 
 ds:obs60  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "60" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1343,6 +1414,7 @@ code:factor  a                    skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: factor"@en .
 
 ds:obs32  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "32" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
@@ -1361,6 +1433,7 @@ crnd-dimension:saffl  a  rdf:Property , qb:DimensionProperty ;
         qb:codeList  code:saffl .
 
 ds:obs04  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "4" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -1378,6 +1451,7 @@ dccs:trt01a  a        qb:ComponentSpecification ;
         qb:dimension  crnd-dimension:trt01a .
 
 ds:obs45  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "45" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
@@ -1391,6 +1465,7 @@ ds:obs45  a                         qb:Observation ;
         crnd-measure:measure        "9"^^xsd:int .
 
 ds:obs17  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "17" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
@@ -1413,6 +1488,7 @@ code:procedure  a                 skos:ConceptScheme ;
         skos:prefLabel            "Codelist scheme: procedure"@en .
 
 ds:obs58  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "58" ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
