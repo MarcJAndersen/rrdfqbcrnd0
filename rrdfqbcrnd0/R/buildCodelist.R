@@ -228,7 +228,19 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     }
   }
 
-    ## Document when the codes come from the source data without reconciliation
+
+    ## Should only be added if data available in D2RQ format
+    ## ToDo(mja): the stem for the URI for the property is hard coded - this should be changed to use a prefix
+    ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
+    if (!is.null(underlDataSetName) & dimName=="factor") {
+        add.triple(store,
+                  codeSubj,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-PropertyBridge"),
+                  paste0("http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", codeSource[i,"code"] )
+                  )
+    }
+
+      ## Document when the codes come from the source data without reconciliation
     ##   against other sources.
     if (codeType=="DATA" & dimName!="procedure"){
       add.data.triple(store,
