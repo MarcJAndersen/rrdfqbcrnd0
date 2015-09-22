@@ -1,6 +1,6 @@
 
 
-all: check-cube.pdf check-ic.pdf cube-from-workbook.pdf first-cube.pdf howto-create-vignette.pdf SPARQL-query.pdf SPARQL-scripts-for-qb.md
+all: check-cube.md check-ic.md cube-from-workbook.md first-cube.md howto-create-vignette.md SPARQL-query.md SPARQL-scripts-for-qb.md
 
 clean: 
 
@@ -8,9 +8,12 @@ clean:
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"
 
 # not clever rule - also creates HTML version
-%.pdf: %.Rmd
-	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','all')"
+# disabled 2015-09-22 MJA - does not work
+# %.pdf: %.Rmd
+# 	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
 
+%.md: %.Rmd
+	$(R_HOME)/bin/Rscript -e "knitr::knit('$*.Rmd')"
 
 %.html: %.Rmd
 	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','html_document')"
