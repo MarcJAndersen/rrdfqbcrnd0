@@ -95,7 +95,6 @@ d2rqbaseURL<- "http://www.example.org/datasets/"
 ## /opt/d2rq-0.8.1/generate-mapping reports Unknown argument: -b
 system(paste("/opt/d2rq-0.8.1/generate-mapping",
              " -l ", dumpAfterSedFn,
-             " -b ", d2rqbaseURL,
              " -o ", adslmapttlFn
              ))
 
@@ -109,12 +108,12 @@ system(paste("/opt/d2rq-0.8.1/dump-rdf",
 
 
 targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
-if (file.copy(adslmapttlFn, targetDir)) {
-cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
+if (file.copy(adslmapttlFn, targetDir, overwrite = TRUE)) {
+cat( "File ", adslmapttlFn, " copied to directory ", targetDir, "\n")
 }
 
-if (file.copy(adslttlFn, targetDir)) {
-cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
+if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
+cat( "File ", adslttlFn, " copied to directory ", targetDir, "\n")
 }
 
 ```
