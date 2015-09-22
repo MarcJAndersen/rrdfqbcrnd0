@@ -236,7 +236,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
         add.triple(store,
                   codeSubj,
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-PropertyBridge"),
-                  paste0("http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", codeSource[i,"code"] )
+                  paste0("http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", toupper(codeSource[i,"code"]) )
                   )
     }
 
