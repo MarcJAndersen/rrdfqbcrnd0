@@ -152,10 +152,21 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     ## ToDo(mja): the stem for the URI for the property is hard coded - this should be changed to use a prefix
     ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
     if (!is.null(underlDataSetName) & dimName!="procedure" & dimName!="factor") {
+        datasetname.subject<- paste0(prefixlist$prefixRRDFQBCRND0,toupper(underlDataSetName),"_", toupper(dimName))
         add.triple(store,
                   paste0(prefixlist$prefixCODE,dimName),
+                  paste0(prefixlist$prefixRRDFQBCRND0, "DataSetRefD2RQ"),
+                  datasetname.subject
+                  )
+        add.triple(store,
+                  datasetname.subject,
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-PropertyBridge"),
                   paste0("http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", toupper(dimName))
+                  )
+        add.data.triple(store,
+                  datasetname.subject,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
+                  toupper(underlDataSetName)
                   )
     }
 
@@ -232,11 +243,22 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     ## Should only be added if data available in D2RQ format
     ## ToDo(mja): the stem for the URI for the property is hard coded - this should be changed to use a prefix
     ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
-    if (!is.null(underlDataSetName) & dimName=="factor") {
+    if (!is.null(underlDataSetName) & dimName=="factor" & ! (codeSource[i,"code"] %in% c("quantity","proportion") ) ) {
+        datasetname.subject<- paste0(prefixlist$prefixRRDFQBCRND0,toupper(underlDataSetName),"_", toupper(codeSource[i,"code"]))
         add.triple(store,
                   codeSubj,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "DataSetRefD2RQ"),
+                  datasetname.subject
+                  )
+        add.triple(store,
+                  datasetname.subject,
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-PropertyBridge"),
                   paste0("http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", toupper(codeSource[i,"code"]) )
+                  )
+        add.data.triple(store,
+                  datasetname.subject,
+                  paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
+                  toupper(underlDataSetName)
                   )
     }
 

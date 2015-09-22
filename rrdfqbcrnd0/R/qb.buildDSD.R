@@ -133,6 +133,12 @@ add.data.triple(store,
                 extra$obsfilename
                 )  # The source .CSV data file
 
+add.data.triple(store,
+                paste0(prefixlist$prefixDS, dsdURIwoprefix),
+                paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
+                extra$obsDataSetName
+                )  # D2RQ DataSetName
+    
 for (i in 1:nrow(skeletonSource)){
   if (skeletonSource[i,"compType"]=="dimension") {
   buildCodelist(store,
