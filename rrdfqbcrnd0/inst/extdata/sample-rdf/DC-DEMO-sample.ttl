@@ -136,17 +136,16 @@ code:Agegr1  a           rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:agegr1 ;
         rdfs:subClassOf  skos:Concept .
 
-code:sex  a                       skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: sex"@en ;
-        mms:inValueDomain         "C66731" ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_SEX> ;
-        rrdfqbcrnd0:R-columnname  "sex" ;
-        rrdfqbcrnd0:codeType      "SDTM" ;
-        skos:hasTopConcept        code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
-        skos:notation             "CL_SEX" ;
-        skos:note                 "Specifies the sex for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: sex"@en .
+code:sex  a                         skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: sex"@en ;
+        mms:inValueDomain           "C66731" ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_SEX ;
+        rrdfqbcrnd0:R-columnname    "sex" ;
+        rrdfqbcrnd0:codeType        "SDTM" ;
+        skos:hasTopConcept          code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
+        skos:notation               "CL_SEX" ;
+        skos:note                   "Specifies the sex for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: sex"@en .
 
 ds:obs121  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -264,8 +263,7 @@ ds:obs050  a                        qb:Observation ;
 
 code:factor-weightbl  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_WEIGHTBL> ;
+        rrdfqbcrnd0:DataSetRefD2RQ    rrdfqbcrnd0:ADSL_WEIGHTBL ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "weightbl" ;
@@ -449,6 +447,11 @@ crnd-dimension:race  a  rdf:Property , qb:DimensionProperty ;
         rdfs:range   code:Race ;
         qb:codeList  code:race .
 
+rrdfqbcrnd0:ADSL_AGEGR1
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_AGEGR1> .
+
 ds:obs116  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "116" ;
@@ -583,17 +586,16 @@ crnd-dimension:trt01a
         rdfs:range   code:Trt01a ;
         qb:codeList  code:trt01a .
 
-code:race  a                      skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: race"@en ;
-        mms:inValueDomain         "C74457" ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_RACE> ;
-        rrdfqbcrnd0:R-columnname  "race" ;
-        rrdfqbcrnd0:codeType      "SDTM" ;
-        skos:hasTopConcept        code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        skos:notation             "CL_RACE" ;
-        skos:note                 "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: race"@en .
+code:race  a                        skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: race"@en ;
+        mms:inValueDomain           "C74457" ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_RACE ;
+        rrdfqbcrnd0:R-columnname    "race" ;
+        rrdfqbcrnd0:codeType        "SDTM" ;
+        skos:hasTopConcept          code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        skos:notation               "CL_RACE" ;
+        skos:note                   "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: race"@en .
 
 ds:obs124  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -878,8 +880,7 @@ dccs:factor  a        qb:ComponentSpecification ;
 
 code:factor-age  a                    code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_AGE> ;
+        rrdfqbcrnd0:DataSetRefD2RQ    rrdfqbcrnd0:ADSL_AGE ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "age" ;
@@ -1208,6 +1209,11 @@ ds:obs014  a                        qb:Observation ;
         crnd-dimension:sex          code:sex-M ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "34"^^xsd:int .
+
+rrdfqbcrnd0:ADSL_RACE
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_RACE> .
 
 code:procedure-count  a               code:Procedure , skos:Concept ;
         rdfs:comment                  "Descriptive statistics count"@en ;
@@ -1714,18 +1720,19 @@ code:procedure-q1  a                  code:Procedure , skos:Concept ;
         skos:prefLabel                "q1" ;
         skos:topConceptOf             code:procedure .
 
-ds:dataset-DEMO  a           qb:DataSet ;
-        rdfs:comment         "Example demographics table from demo.sas program"@en ;
-        rdfs:label           "Demographics results data set."@en ;
-        dct:description      "Data from demo.sas program"@en ;
-        dct:title            "Demographics Analysis Results"^^xsd:string ;
-        qb:structure         ds:dsd-DEMO ;
-        pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-09-22T10:51:03+02:00"^^xsd:dateTime ;
-        pav:createdWith      "R Version 3.2.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
-        pav:version          "0.0.0" ;
-        dcat:distribution    "DC-DEMO-R-V-0-5-2.ttl" ;
-        prov:wasDerivedFrom  "demo.AR.csv" .
+ds:dataset-DEMO  a                    qb:DataSet ;
+        rdfs:comment                  "Example demographics table from demo.sas program"@en ;
+        rdfs:label                    "Demographics results data set."@en ;
+        dct:description               "Data from demo.sas program"@en ;
+        dct:title                     "Demographics Analysis Results"^^xsd:string ;
+        qb:structure                  ds:dsd-DEMO ;
+        pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
+        pav:createdOn                 "2015-09-22T21:21:49+02:00"^^xsd:dateTime ;
+        pav:createdWith               "R Version 3.2.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
+        pav:version                   "0.0.0" ;
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL" ;
+        dcat:distribution             "DC-DEMO-R-V-0-5-2.ttl" ;
+        prov:wasDerivedFrom           "demo.AR.csv" .
 
 code:trt01a-Xanomeline_Low_Dose
         a                             code:Trt01a , skos:Concept ;
@@ -2044,16 +2051,15 @@ ds:obs112  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "34"^^xsd:double .
 
-code:trt01a  a                    skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: trt01a"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_TRT01A> ;
-        rrdfqbcrnd0:R-columnname  "trt01a" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
-        skos:notation             "CL_TRT01A" ;
-        skos:note                 "Specifies the trt01a for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: trt01a"@en .
+code:trt01a  a                      skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: trt01a"@en ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_TRT01A ;
+        rrdfqbcrnd0:R-columnname    "trt01a" ;
+        rrdfqbcrnd0:codeType        "DATA" ;
+        skos:hasTopConcept          code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
+        skos:notation               "CL_TRT01A" ;
+        skos:note                   "Specifies the trt01a for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: trt01a"@en .
 
 ds:obs083  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -2114,8 +2120,6 @@ ds:obs041  a                        qb:Observation ;
 
 code:factor-quantity  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_QUANTITY> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "quantity" ;
@@ -2517,8 +2521,6 @@ ds:obs044  a                        qb:Observation ;
 code:factor-proportion
         a                             code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_PROPORTION> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "proportion" ;
@@ -2583,16 +2585,15 @@ ds:obs123  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "81"^^xsd:int .
 
-code:agegr1  a                    skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: agegr1"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_AGEGR1> ;
-        rrdfqbcrnd0:R-columnname  "agegr1" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:agegr1-_ALL_ , code:agegr1-65-80 , code:agegr1-_80 , code:agegr1-_NONMISS_ , code:agegr1-_65 ;
-        skos:notation             "CL_AGEGR1" ;
-        skos:note                 "Specifies the agegr1 for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: agegr1"@en .
+code:agegr1  a                      skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: agegr1"@en ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_AGEGR1 ;
+        rrdfqbcrnd0:R-columnname    "agegr1" ;
+        rrdfqbcrnd0:codeType        "DATA" ;
+        skos:hasTopConcept          code:agegr1-_ALL_ , code:agegr1-65-80 , code:agegr1-_80 , code:agegr1-_NONMISS_ , code:agegr1-_65 ;
+        skos:notation               "CL_AGEGR1" ;
+        skos:note                   "Specifies the agegr1 for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: agegr1"@en .
 
 ds:obs102  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -2657,16 +2658,20 @@ ds:obs073  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "78"^^xsd:int .
 
-code:ethnic  a                    skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: ethnic"@en ;
+code:ethnic  a                      skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: ethnic"@en ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_ETHNIC ;
+        rrdfqbcrnd0:R-columnname    "ethnic" ;
+        rrdfqbcrnd0:codeType        "DATA" ;
+        skos:hasTopConcept          code:ethnic-_NONMISS_ , code:ethnic-HISPANIC_OR_LATINO , code:ethnic-_ALL_ , code:ethnic-NOT_HISPANIC_OR_LATINO ;
+        skos:notation               "CL_ETHNIC" ;
+        skos:note                   "Specifies the ethnic for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: ethnic"@en .
+
+rrdfqbcrnd0:ADSL_TRT01A
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL" ;
         rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_ETHNIC> ;
-        rrdfqbcrnd0:R-columnname  "ethnic" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:ethnic-_NONMISS_ , code:ethnic-HISPANIC_OR_LATINO , code:ethnic-_ALL_ , code:ethnic-NOT_HISPANIC_OR_LATINO ;
-        skos:notation             "CL_ETHNIC" ;
-        skos:note                 "Specifies the ethnic for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: ethnic"@en .
+                <http://www.example.org/datasets/vocab/ADSL_TRT01A> .
 
 ds:obs052  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -2934,11 +2939,26 @@ ds:obs068  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "84"^^xsd:int .
 
+rrdfqbcrnd0:ADSL_AGE  rrdfqbcrnd0:D2RQ-DataSetName
+                "ADSL" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_AGE> .
+
+rrdfqbcrnd0:ADSL_WEIGHTBL
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_WEIGHTBL> .
+
 code:Sex  a              rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the sex for each observation"@en ;
         rdfs:label       "Class for code list: sex"@en ;
         rdfs:seeAlso     code:sex ;
         rdfs:subClassOf  skos:Concept .
+
+rrdfqbcrnd0:ADSL_SEX  rrdfqbcrnd0:D2RQ-DataSetName
+                "ADSL" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_SEX> .
 
 ds:obs047  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -3115,6 +3135,11 @@ code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
         skos:inScheme      code:sex ;
         skos:prefLabel     "_NONMISS_" ;
         skos:topConceptOf  code:sex .
+
+rrdfqbcrnd0:ADSL_ETHNIC
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADSL_ETHNIC> .
 
 ds:obs055  a                        qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;

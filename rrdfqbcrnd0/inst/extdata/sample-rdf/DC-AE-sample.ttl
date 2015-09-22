@@ -3748,8 +3748,7 @@ ds:obs0507  a                       qb:Observation ;
 
 code:factor-USUBJID  a                code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADAE_USUBJID> ;
+        rrdfqbcrnd0:DataSetRefD2RQ    rrdfqbcrnd0:ADAE_USUBJID ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "USUBJID" ;
@@ -5565,6 +5564,11 @@ ds:obs0523  a                       qb:Observation ;
         crnd-dimension:saffl        code:saffl-Y ;
         crnd-dimension:trta         code:trta-Xanomeline_High_Dose ;
         crnd-measure:measure        "7"^^xsd:int .
+
+rrdfqbcrnd0:ADAE_TRTA
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADAE" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADAE_TRTA> .
 
 ds:obs1173  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -8867,6 +8871,11 @@ ds:obs1063  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-_ALL_ ;
         crnd-measure:measure        "73"^^xsd:int .
 
+rrdfqbcrnd0:ADAE_SAFFL
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADAE" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADAE_SAFFL> .
+
 code:aedecod-PRODUCTIVE_COUGH
         a                             code:Aedecod , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
@@ -8944,6 +8953,11 @@ ds:obs0720  a                       qb:Observation ;
         crnd-dimension:saffl        code:saffl-Y ;
         crnd-dimension:trta         code:trta-Xanomeline_Low_Dose ;
         crnd-measure:measure        "1"^^xsd:int .
+
+rrdfqbcrnd0:ADAE_USUBJID
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADAE" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADAE_USUBJID> .
 
 ds:obs1076  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -9766,16 +9780,15 @@ ds:obs1071  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-_ALL_ ;
         crnd-measure:measure        "2"^^xsd:int .
 
-code:trta  a                      skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: trta"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADAE_TRTA> ;
-        rrdfqbcrnd0:R-columnname  "trta" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:trta-Xanomeline_High_Dose , code:trta-Placebo , code:trta-Xanomeline_Low_Dose , code:trta-_ALL_ , code:trta-_NONMISS_ ;
-        skos:notation             "CL_TRTA" ;
-        skos:note                 "Specifies the trta for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: trta"@en .
+code:trta  a                        skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: trta"@en ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADAE_TRTA ;
+        rrdfqbcrnd0:R-columnname    "trta" ;
+        rrdfqbcrnd0:codeType        "DATA" ;
+        skos:hasTopConcept          code:trta-Xanomeline_High_Dose , code:trta-Placebo , code:trta-Xanomeline_Low_Dose , code:trta-_ALL_ , code:trta-_NONMISS_ ;
+        skos:notation               "CL_TRTA" ;
+        skos:note                   "Specifies the trta for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: trta"@en .
 
 ds:obs1249  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -12827,6 +12840,23 @@ ds:obs1059  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-_ALL_ ;
         crnd-measure:measure        "2"^^xsd:int .
 
+ds:obs1353  a                       qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
+        rdfs:label                  "1353" ;
+        qb:dataSet                  ds:dataset-AE ;
+        crnd-attribute:cellpartno   "1"^^xsd:string ;
+        crnd-attribute:colno        "4"^^xsd:string ;
+        crnd-attribute:denominator  "_NULL_" ;
+        crnd-attribute:rowno        "240"^^xsd:string ;
+        crnd-attribute:unit         "_NULL_"^^xsd:string ;
+        crnd-dimension:aedecod      code:aedecod-ERYTHEMA ;
+        crnd-dimension:aesoc        code:aesoc-SKIN_AND_SUBCUTANEOUS_TISSUE_DISORDERS ;
+        crnd-dimension:factor       code:factor-quantity ;
+        crnd-dimension:procedure    code:procedure-count ;
+        crnd-dimension:saffl        code:saffl-Y ;
+        crnd-dimension:trta         code:trta-_ALL_ ;
+        crnd-measure:measure        "59"^^xsd:int .
+
 ds:obs0497  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "497" ;
@@ -12854,22 +12884,10 @@ code:aedecod-LOWER_RESPIRATORY_TRACT_INFECTION
         skos:prefLabel                "LOWER RESPIRATORY TRACT INFECTION" ;
         skos:topConceptOf             code:aedecod .
 
-ds:obs1353  a                       qb:Observation ;
-        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
-        rdfs:label                  "1353" ;
-        qb:dataSet                  ds:dataset-AE ;
-        crnd-attribute:cellpartno   "1"^^xsd:string ;
-        crnd-attribute:colno        "4"^^xsd:string ;
-        crnd-attribute:denominator  "_NULL_" ;
-        crnd-attribute:rowno        "240"^^xsd:string ;
-        crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:aedecod      code:aedecod-ERYTHEMA ;
-        crnd-dimension:aesoc        code:aesoc-SKIN_AND_SUBCUTANEOUS_TISSUE_DISORDERS ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:trta         code:trta-_ALL_ ;
-        crnd-measure:measure        "59"^^xsd:int .
+rrdfqbcrnd0:ADAE_AEDECOD
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADAE" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADAE_AEDECOD> .
 
 ds:obs0244  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -13209,18 +13227,19 @@ ds:obs0311  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-Xanomeline_High_Dose ;
         crnd-measure:measure        "2"^^xsd:int .
 
-ds:dataset-AE  a             qb:DataSet ;
-        rdfs:comment         "Adverse event sample table"@en ;
-        rdfs:label           "Adverse Events results data set"@en ;
-        dct:description      "Cube with 6 dimensions and 1 measure (measure)"@en ;
-        dct:title            "Adverse Event Analysis Results"^^xsd:string ;
-        qb:structure         ds:dsd-AE ;
-        pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-09-22T10:51:01+02:00"^^xsd:dateTime ;
-        pav:createdWith      "R Version 3.2.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
-        pav:version          "0.0.0" ;
-        dcat:distribution    "DC-AE-R-V-0-5-2.ttl" ;
-        prov:wasDerivedFrom  "ae.AR.csv" .
+ds:dataset-AE  a                      qb:DataSet ;
+        rdfs:comment                  "Adverse event sample table"@en ;
+        rdfs:label                    "Adverse Events results data set"@en ;
+        dct:description               "Cube with 6 dimensions and 1 measure (measure)"@en ;
+        dct:title                     "Adverse Event Analysis Results"^^xsd:string ;
+        qb:structure                  ds:dsd-AE ;
+        pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
+        pav:createdOn                 "2015-09-22T21:21:38+02:00"^^xsd:dateTime ;
+        pav:createdWith               "R Version 3.2.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
+        pav:version                   "0.0.0" ;
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADAE" ;
+        dcat:distribution             "DC-AE-R-V-0-5-2.ttl" ;
+        prov:wasDerivedFrom           "ae.AR.csv" .
 
 ds:obs1139  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -14325,8 +14344,6 @@ ds:obs1227  a                       qb:Observation ;
 
 code:factor-quantity  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADAE_QUANTITY> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "quantity" ;
@@ -16053,16 +16070,15 @@ ds:obs1230  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-_ALL_ ;
         crnd-measure:measure        "1"^^xsd:int .
 
-code:aesoc  a                     skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: aesoc"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADAE_AESOC> ;
-        rrdfqbcrnd0:R-columnname  "aesoc" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:aesoc-GASTROINTESTINAL_DISORDERS , code:aesoc-CARDIAC_DISORDERS , code:aesoc-VASCULAR_DISORDERS , code:aesoc-EYE_DISORDERS , code:aesoc-SURGICAL_AND_MEDICAL_PROCEDURES , code:aesoc-RENAL_AND_URINARY_DISORDERS , code:aesoc-PSYCHIATRIC_DISORDERS , code:aesoc-EAR_AND_LABYRINTH_DISORDERS , code:aesoc-METABOLISM_AND_NUTRITION_DISORDERS , code:aesoc-INVESTIGATIONS , code:aesoc-SKIN_AND_SUBCUTANEOUS_TISSUE_DISORDERS , code:aesoc-REPRODUCTIVE_SYSTEM_AND_BREAST_DISORDERS , code:aesoc-NERVOUS_SYSTEM_DISORDERS , code:aesoc-CONGENITAL__FAMILIAL_AND_GENETIC_DISORDERS , code:aesoc-GENERAL_DISORDERS_AND_ADMINISTRATION_SITE_CONDITIONS , code:aesoc-IMMUNE_SYSTEM_DISORDERS , code:aesoc-_NONMISS_ , code:aesoc-INFECTIONS_AND_INFESTATIONS , code:aesoc-RESPIRATORY__THORACIC_AND_MEDIASTINAL_DISORDERS , code:aesoc-_ALL_ , code:aesoc-SOCIAL_CIRCUMSTANCES , code:aesoc-MUSCULOSKELETAL_AND_CONNECTIVE_TISSUE_DISORDERS , code:aesoc-NEOPLASMS_BENIGN__MALIGNANT_AND_UNSPECIFIED__INCL_CYSTS_AND_POLYPS_ , code:aesoc-INJURY__POISONING_AND_PROCEDURAL_COMPLICATIONS , code:aesoc-HEPATOBILIARY_DISORDERS ;
-        skos:notation             "CL_AESOC" ;
-        skos:note                 "Specifies the aesoc for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: aesoc"@en .
+code:aesoc  a                       skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: aesoc"@en ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADAE_AESOC ;
+        rrdfqbcrnd0:R-columnname    "aesoc" ;
+        rrdfqbcrnd0:codeType        "DATA" ;
+        skos:hasTopConcept          code:aesoc-GASTROINTESTINAL_DISORDERS , code:aesoc-CARDIAC_DISORDERS , code:aesoc-VASCULAR_DISORDERS , code:aesoc-EYE_DISORDERS , code:aesoc-SURGICAL_AND_MEDICAL_PROCEDURES , code:aesoc-RENAL_AND_URINARY_DISORDERS , code:aesoc-PSYCHIATRIC_DISORDERS , code:aesoc-EAR_AND_LABYRINTH_DISORDERS , code:aesoc-METABOLISM_AND_NUTRITION_DISORDERS , code:aesoc-INVESTIGATIONS , code:aesoc-SKIN_AND_SUBCUTANEOUS_TISSUE_DISORDERS , code:aesoc-REPRODUCTIVE_SYSTEM_AND_BREAST_DISORDERS , code:aesoc-NERVOUS_SYSTEM_DISORDERS , code:aesoc-CONGENITAL__FAMILIAL_AND_GENETIC_DISORDERS , code:aesoc-GENERAL_DISORDERS_AND_ADMINISTRATION_SITE_CONDITIONS , code:aesoc-IMMUNE_SYSTEM_DISORDERS , code:aesoc-_NONMISS_ , code:aesoc-INFECTIONS_AND_INFESTATIONS , code:aesoc-RESPIRATORY__THORACIC_AND_MEDIASTINAL_DISORDERS , code:aesoc-_ALL_ , code:aesoc-SOCIAL_CIRCUMSTANCES , code:aesoc-MUSCULOSKELETAL_AND_CONNECTIVE_TISSUE_DISORDERS , code:aesoc-NEOPLASMS_BENIGN__MALIGNANT_AND_UNSPECIFIED__INCL_CYSTS_AND_POLYPS_ , code:aesoc-INJURY__POISONING_AND_PROCEDURAL_COMPLICATIONS , code:aesoc-HEPATOBILIARY_DISORDERS ;
+        skos:notation               "CL_AESOC" ;
+        skos:note                   "Specifies the aesoc for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: aesoc"@en .
 
 ds:obs0121  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -17114,6 +17130,11 @@ ds:obs0155  a                       qb:Observation ;
         crnd-dimension:saffl        code:saffl-Y ;
         crnd-dimension:trta         code:trta-Placebo ;
         crnd-measure:measure        "4"^^xsd:int .
+
+rrdfqbcrnd0:ADAE_AESOC
+        rrdfqbcrnd0:D2RQ-DataSetName  "ADAE" ;
+        rrdfqbcrnd0:D2RQ-PropertyBridge
+                <http://www.example.org/datasets/vocab/ADAE_AESOC> .
 
 ds:obs1011  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -19730,16 +19751,15 @@ ds:obs1200  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-_ALL_ ;
         crnd-measure:measure        "1"^^xsd:int .
 
-code:saffl  a                     skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: saffl"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADAE_SAFFL> ;
-        rrdfqbcrnd0:R-columnname  "saffl" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:saffl-_ALL_ , code:saffl-Y , code:saffl-_NONMISS_ ;
-        skos:notation             "CL_SAFFL" ;
-        skos:note                 "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: saffl"@en .
+code:saffl  a                       skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: saffl"@en ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADAE_SAFFL ;
+        rrdfqbcrnd0:R-columnname    "saffl" ;
+        rrdfqbcrnd0:codeType        "DATA" ;
+        skos:hasTopConcept          code:saffl-_ALL_ , code:saffl-Y , code:saffl-_NONMISS_ ;
+        skos:notation               "CL_SAFFL" ;
+        skos:note                   "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: saffl"@en .
 
 ds:obs0816  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -24790,16 +24810,15 @@ ds:obs0010  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-Placebo ;
         crnd-measure:measure        "1"^^xsd:int .
 
-code:aedecod  a                   skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: aedecod"@en ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADAE_AEDECOD> ;
-        rrdfqbcrnd0:R-columnname  "aedecod" ;
-        rrdfqbcrnd0:codeType      "DATA" ;
-        skos:hasTopConcept        code:aedecod-BURNING_SENSATION , code:aedecod-CATARACT_OPERATION , code:aedecod-PALPITATIONS , code:aedecod-COUGH , code:aedecod-AMNESIA , code:aedecod-COLON_CANCER , code:aedecod-INCONTINENCE , code:aedecod-WOUND , code:aedecod-MICTURITION_URGENCY , code:aedecod-DIARRHOEA , code:aedecod-SUPRAVENTRICULAR_EXTRASYSTOLES , code:aedecod-TACHYCARDIA , code:aedecod-RASH , code:aedecod-ASTHENIA , code:aedecod-BUNDLE_BRANCH_BLOCK_RIGHT , code:aedecod-PELVIC_PAIN , code:aedecod-URINARY_TRACT_INFECTION , code:aedecod-ATRIOVENTRICULAR_BLOCK_SECOND_DEGREE , code:aedecod-PRURITUS , code:aedecod-CONSTIPATION , code:aedecod-ULCER , code:aedecod-HIP_FRACTURE , code:aedecod-EMPHYSEMA , code:aedecod-PROSTATE_CANCER , code:aedecod-DELIRIUM , code:aedecod-APPLICATION_SITE_IRRITATION , code:aedecod-LETHARGY , code:aedecod-TRANSIENT_ISCHAEMIC_ATTACK , code:aedecod-COMPLETED_SUICIDE , code:aedecod-HOT_FLUSH , code:aedecod-SINUS_ARRHYTHMIA , code:aedecod-EYE_ALLERGY , code:aedecod-GASTROENTERITIS_VIRAL , code:aedecod-SHOULDER_PAIN , code:aedecod-HIATUS_HERNIA , code:aedecod-EXCORIATION , code:aedecod-PAIN , code:aedecod-SINUS_BRADYCARDIA , code:aedecod-MYALGIA , code:aedecod-FLANK_PAIN , code:aedecod-BRADYCARDIA , code:aedecod-SWELLING , code:aedecod-CHEST_DISCOMFORT , code:aedecod-BLOOD_ALKALINE_PHOSPHATASE_INCREASED , code:aedecod-DEPRESSED_MOOD , code:aedecod-APPLICATION_SITE_PAIN , code:aedecod-DRUG_ERUPTION , code:aedecod-DYSPHONIA , code:aedecod-TINNITUS , code:aedecod-CONJUNCTIVAL_HAEMORRHAGE , code:aedecod-FEELING_ABNORMAL , code:aedecod-CONFUSIONAL_STATE , code:aedecod-NEUTROPHIL_COUNT_INCREASED , code:aedecod-CALCULUS_URETHRAL , code:aedecod-DERMATITIS_ATOPIC , code:aedecod-VENTRICULAR_SEPTAL_DEFECT , code:aedecod-CYST , code:aedecod-ABDOMINAL_PAIN , code:aedecod-RHINORRHOEA , code:aedecod-ATRIAL_FLUTTER , code:aedecod-HALLUCINATION , code:aedecod-DYSPNOEA , code:aedecod-SALIVARY_HYPERSECRETION , code:aedecod-NIGHTMARE , code:aedecod-CHILLS , code:aedecod-SKIN_EXFOLIATION , code:aedecod-SKIN_ULCER , code:aedecod-BUNDLE_BRANCH_BLOCK_LEFT , code:aedecod-HYPERTENSION , code:aedecod-INFLAMMATION , code:aedecod-HYPERCHOLESTEROLAEMIA , code:aedecod-APPLICATION_SITE_DISCOLOURATION , code:aedecod-STOMACH_DISCOMFORT , code:aedecod-ALCOHOL_USE , code:aedecod-URTICARIA , code:aedecod-RASH_MACULO-PAPULAR , code:aedecod-APPLICATION_SITE_ERYTHEMA , code:aedecod-HEART_RATE_INCREASED , code:aedecod-BLOOD_GLUCOSE_INCREASED , code:aedecod-INSOMNIA , code:aedecod-WEIGHT_DECREASED , code:aedecod-SKIN_LESION_EXCISION , code:aedecod-MALAISE , code:aedecod-IRRITABILITY , code:aedecod-PARAESTHESIA , code:aedecod-APPLICATION_SITE_PRURITUS , code:aedecod-RALES , code:aedecod-FEELING_COLD , code:aedecod-ANXIETY , code:aedecod-SYNCOPE_VASOVAGAL , code:aedecod-DERMATITIS_CONTACT , code:aedecod-CARDIAC_FAILURE_CONGESTIVE , code:aedecod-FALL , code:aedecod-PARKINSON_S_DISEASE , code:aedecod-PHARYNGOLARYNGEAL_PAIN , code:aedecod-CONJUNCTIVITIS , code:aedecod-ELECTROCARDIOGRAM_T_WAVE_AMPLITUDE_DECREASED , code:aedecod-MUSCLE_SPASMS , code:aedecod-MALIGNANT_FIBROUS_HISTIOCYTOMA , code:aedecod-DELUSION , code:aedecod-CERVICITIS , code:aedecod-BRONCHITIS , code:aedecod-ABDOMINAL_DISCOMFORT , code:aedecod-ALLERGIC_GRANULOMATOUS_ANGIITIS , code:aedecod-RASH_PRURITIC , code:aedecod-SYNCOPE , code:aedecod-SOMNOLENCE , code:aedecod-APPLICATION_SITE_SWELLING , code:aedecod-HYPERHIDROSIS , code:aedecod-ATRIOVENTRICULAR_BLOCK_FIRST_DEGREE , code:aedecod-DISORIENTATION , code:aedecod-HEART_RATE_IRREGULAR , code:aedecod-CYSTOSCOPY , code:aedecod-UPPER_RESPIRATORY_TRACT_INFECTION , code:aedecod-GLAUCOMA , code:aedecod-NASOPHARYNGITIS , code:aedecod-DIZZINESS , code:aedecod-BALANCE_DISORDER , code:aedecod-APPLICATION_SITE_DESQUAMATION , code:aedecod-COLD_SWEAT , code:aedecod-ALOPECIA , code:aedecod-ORTHOSTATIC_HYPOTENSION , code:aedecod-GASTROOESOPHAGEAL_REFLUX_DISEASE , code:aedecod-ENURESIS , code:aedecod-WOUND_HAEMORRHAGE , code:aedecod-PARTIAL_SEIZURES_WITH_SECONDARY_GENERALISATION , code:aedecod-VOMITING , code:aedecod-LISTLESS , code:aedecod-APPLICATION_SITE_DERMATITIS , code:aedecod-SKIN_ODOUR_ABNORMAL , code:aedecod-POLLAKIURIA , code:aedecod-MUSCULAR_WEAKNESS , code:aedecod-PYREXIA , code:aedecod-SEASONAL_ALLERGY , code:aedecod-CELLULITIS , code:aedecod-APPLICATION_SITE_REACTION , code:aedecod-CARDIAC_DISORDER , code:aedecod-VERTIGO , code:aedecod-EAR_PAIN , code:aedecod-RECTAL_HAEMORRHAGE , code:aedecod-DYSPHAGIA , code:aedecod-BLOOD_CREATINE_PHOSPHOKINASE_INCREASED , code:aedecod-APPLICATION_SITE_DISCHARGE , code:aedecod-PHARYNGEAL_ERYTHEMA , code:aedecod-ACROCHORDON_EXCISION , code:aedecod-FACIAL_BONES_FRACTURE , code:aedecod-HEADACHE , code:aedecod-COMPLEX_PARTIAL_SEIZURES , code:aedecod-SKIN_IRRITATION , code:aedecod-APPLICATION_SITE_VESICLES , code:aedecod-BLOOD_URINE_PRESENT , code:aedecod-EYE_SWELLING , code:aedecod-DECREASED_APPETITE , code:aedecod-CONTUSION , code:aedecod-CERUMEN_IMPACTION , code:aedecod-GLOSSITIS , code:aedecod-HEMIANOPIA_HOMONYMOUS , code:aedecod-WOLFF-PARKINSON-WHITE_SYNDROME , code:aedecod-INFLUENZA , code:aedecod-OEDEMA , code:aedecod-EYE_LASER_SURGERY , code:aedecod-FATIGUE , code:aedecod-HYPOTENSION , code:aedecod-ELECTROCARDIOGRAM_T_WAVE_INVERSION , code:aedecod-DEHYDRATION , code:aedecod-OEDEMA_PERIPHERAL , code:aedecod-FLATULENCE , code:aedecod-RASH_PAPULAR , code:aedecod-EAR_INFECTION , code:aedecod-RASH_ERYTHEMATOUS , code:aedecod-HYPONATRAEMIA , code:aedecod-NASAL_MUCOSA_BIOPSY , code:aedecod-_ALL_ , code:aedecod-MYOCARDIAL_INFARCTION , code:aedecod-VENTRICULAR_EXTRASYSTOLES , code:aedecod-NAUSEA , code:aedecod-COGNITIVE_DISORDER , code:aedecod-HALLUCINATION__VISUAL , code:aedecod-LOWER_RESPIRATORY_TRACT_INFECTION , code:aedecod-ACTINIC_KERATOSIS , code:aedecod-APPLICATION_SITE_WARMTH , code:aedecod-BIOPSY , code:aedecod-ARTHRALGIA , code:aedecod-VENTRICULAR_HYPERTROPHY , code:aedecod-APPLICATION_SITE_INDURATION , code:aedecod-BODY_TEMPERATURE_INCREASED , code:aedecod-WHITE_BLOOD_CELL_COUNT_INCREASED , code:aedecod-SUDDEN_DEATH , code:aedecod-URINE_ANALYSIS_ABNORMAL , code:aedecod-EYE_PRURITUS , code:aedecod-ARTHRITIS , code:aedecod-APPLICATION_SITE_BLEEDING , code:aedecod-CYSTITIS , code:aedecod-APPLICATION_SITE_PERSPIRATION , code:aedecod-STUPOR , code:aedecod-HAEMOPTYSIS , code:aedecod-ATRIAL_HYPERTROPHY , code:aedecod-VIRAL_INFECTION , code:aedecod-PAIN_IN_EXTREMITY , code:aedecod-DIABETES_MELLITUS , code:aedecod-LOCALISED_INFECTION , code:aedecod-ATRIAL_FIBRILLATION , code:aedecod-PRODUCTIVE_COUGH , code:aedecod-_NONMISS_ , code:aedecod-HYPERSOMNIA , code:aedecod-SECRETION_DISCHARGE , code:aedecod-APPLICATION_SITE_URTICARIA , code:aedecod-AGITATION , code:aedecod-HYPERBILIRUBINAEMIA , code:aedecod-VAGINAL_MYCOSIS , code:aedecod-ONYCHOMYCOSIS , code:aedecod-GASTROINTESTINAL_HAEMORRHAGE , code:aedecod-BLISTER , code:aedecod-PNEUMONIA , code:aedecod-BLOOD_CHOLESTEROL_INCREASED , code:aedecod-LIBIDO_DECREASED , code:aedecod-RESTLESSNESS , code:aedecod-HYPERSENSITIVITY , code:aedecod-SKIN_LACERATION , code:aedecod-INCREASED_APPETITE , code:aedecod-PSYCHOMOTOR_HYPERACTIVITY , code:aedecod-RESPIRATORY_TRACT_CONGESTION , code:aedecod-JOINT_DISLOCATION , code:aedecod-FOOD_CRAVING , code:aedecod-CHEST_PAIN , code:aedecod-NEPHROLITHIASIS , code:aedecod-HORDEOLUM , code:aedecod-POSTNASAL_DRIP , code:aedecod-ERYTHEMA , code:aedecod-VISION_BLURRED , code:aedecod-ELECTROCARDIOGRAM_ST_SEGMENT_DEPRESSION , code:aedecod-NASAL_CONGESTION , code:aedecod-PAROSMIA , code:aedecod-BENIGN_PROSTATIC_HYPERPLASIA , code:aedecod-COORDINATION_ABNORMAL , code:aedecod-RHINITIS , code:aedecod-DYSPEPSIA , code:aedecod-PRURITUS_GENERALISED , code:aedecod-EPISTAXIS , code:aedecod-BIOPSY_PROSTATE , code:aedecod-DYSURIA , code:aedecod-BACK_PAIN , code:aedecod-PARAESTHESIA_ORAL , code:aedecod-SUPRAVENTRICULAR_TACHYCARDIA ;
-        skos:notation             "CL_AEDECOD" ;
-        skos:note                 "Specifies the aedecod for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: aedecod"@en .
+code:aedecod  a                     skos:ConceptScheme ;
+        rdfs:label                  "Codelist scheme: aedecod"@en ;
+        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADAE_AEDECOD ;
+        rrdfqbcrnd0:R-columnname    "aedecod" ;
+        rrdfqbcrnd0:codeType        "DATA" ;
+        skos:hasTopConcept          code:aedecod-BURNING_SENSATION , code:aedecod-CATARACT_OPERATION , code:aedecod-PALPITATIONS , code:aedecod-COUGH , code:aedecod-AMNESIA , code:aedecod-COLON_CANCER , code:aedecod-INCONTINENCE , code:aedecod-WOUND , code:aedecod-MICTURITION_URGENCY , code:aedecod-DIARRHOEA , code:aedecod-SUPRAVENTRICULAR_EXTRASYSTOLES , code:aedecod-TACHYCARDIA , code:aedecod-RASH , code:aedecod-ASTHENIA , code:aedecod-BUNDLE_BRANCH_BLOCK_RIGHT , code:aedecod-PELVIC_PAIN , code:aedecod-URINARY_TRACT_INFECTION , code:aedecod-ATRIOVENTRICULAR_BLOCK_SECOND_DEGREE , code:aedecod-PRURITUS , code:aedecod-CONSTIPATION , code:aedecod-ULCER , code:aedecod-HIP_FRACTURE , code:aedecod-EMPHYSEMA , code:aedecod-PROSTATE_CANCER , code:aedecod-DELIRIUM , code:aedecod-APPLICATION_SITE_IRRITATION , code:aedecod-LETHARGY , code:aedecod-TRANSIENT_ISCHAEMIC_ATTACK , code:aedecod-COMPLETED_SUICIDE , code:aedecod-HOT_FLUSH , code:aedecod-SINUS_ARRHYTHMIA , code:aedecod-EYE_ALLERGY , code:aedecod-GASTROENTERITIS_VIRAL , code:aedecod-SHOULDER_PAIN , code:aedecod-HIATUS_HERNIA , code:aedecod-EXCORIATION , code:aedecod-PAIN , code:aedecod-SINUS_BRADYCARDIA , code:aedecod-MYALGIA , code:aedecod-FLANK_PAIN , code:aedecod-BRADYCARDIA , code:aedecod-SWELLING , code:aedecod-CHEST_DISCOMFORT , code:aedecod-BLOOD_ALKALINE_PHOSPHATASE_INCREASED , code:aedecod-DEPRESSED_MOOD , code:aedecod-APPLICATION_SITE_PAIN , code:aedecod-DRUG_ERUPTION , code:aedecod-DYSPHONIA , code:aedecod-TINNITUS , code:aedecod-CONJUNCTIVAL_HAEMORRHAGE , code:aedecod-FEELING_ABNORMAL , code:aedecod-CONFUSIONAL_STATE , code:aedecod-NEUTROPHIL_COUNT_INCREASED , code:aedecod-CALCULUS_URETHRAL , code:aedecod-DERMATITIS_ATOPIC , code:aedecod-VENTRICULAR_SEPTAL_DEFECT , code:aedecod-CYST , code:aedecod-ABDOMINAL_PAIN , code:aedecod-RHINORRHOEA , code:aedecod-ATRIAL_FLUTTER , code:aedecod-HALLUCINATION , code:aedecod-DYSPNOEA , code:aedecod-SALIVARY_HYPERSECRETION , code:aedecod-NIGHTMARE , code:aedecod-CHILLS , code:aedecod-SKIN_EXFOLIATION , code:aedecod-SKIN_ULCER , code:aedecod-BUNDLE_BRANCH_BLOCK_LEFT , code:aedecod-HYPERTENSION , code:aedecod-INFLAMMATION , code:aedecod-HYPERCHOLESTEROLAEMIA , code:aedecod-APPLICATION_SITE_DISCOLOURATION , code:aedecod-STOMACH_DISCOMFORT , code:aedecod-ALCOHOL_USE , code:aedecod-URTICARIA , code:aedecod-RASH_MACULO-PAPULAR , code:aedecod-APPLICATION_SITE_ERYTHEMA , code:aedecod-HEART_RATE_INCREASED , code:aedecod-BLOOD_GLUCOSE_INCREASED , code:aedecod-INSOMNIA , code:aedecod-WEIGHT_DECREASED , code:aedecod-SKIN_LESION_EXCISION , code:aedecod-MALAISE , code:aedecod-IRRITABILITY , code:aedecod-PARAESTHESIA , code:aedecod-APPLICATION_SITE_PRURITUS , code:aedecod-RALES , code:aedecod-FEELING_COLD , code:aedecod-ANXIETY , code:aedecod-SYNCOPE_VASOVAGAL , code:aedecod-DERMATITIS_CONTACT , code:aedecod-CARDIAC_FAILURE_CONGESTIVE , code:aedecod-FALL , code:aedecod-PARKINSON_S_DISEASE , code:aedecod-PHARYNGOLARYNGEAL_PAIN , code:aedecod-CONJUNCTIVITIS , code:aedecod-ELECTROCARDIOGRAM_T_WAVE_AMPLITUDE_DECREASED , code:aedecod-MUSCLE_SPASMS , code:aedecod-MALIGNANT_FIBROUS_HISTIOCYTOMA , code:aedecod-DELUSION , code:aedecod-CERVICITIS , code:aedecod-BRONCHITIS , code:aedecod-ABDOMINAL_DISCOMFORT , code:aedecod-ALLERGIC_GRANULOMATOUS_ANGIITIS , code:aedecod-RASH_PRURITIC , code:aedecod-SYNCOPE , code:aedecod-SOMNOLENCE , code:aedecod-APPLICATION_SITE_SWELLING , code:aedecod-HYPERHIDROSIS , code:aedecod-ATRIOVENTRICULAR_BLOCK_FIRST_DEGREE , code:aedecod-DISORIENTATION , code:aedecod-HEART_RATE_IRREGULAR , code:aedecod-CYSTOSCOPY , code:aedecod-UPPER_RESPIRATORY_TRACT_INFECTION , code:aedecod-GLAUCOMA , code:aedecod-NASOPHARYNGITIS , code:aedecod-DIZZINESS , code:aedecod-BALANCE_DISORDER , code:aedecod-APPLICATION_SITE_DESQUAMATION , code:aedecod-COLD_SWEAT , code:aedecod-ALOPECIA , code:aedecod-ORTHOSTATIC_HYPOTENSION , code:aedecod-GASTROOESOPHAGEAL_REFLUX_DISEASE , code:aedecod-ENURESIS , code:aedecod-WOUND_HAEMORRHAGE , code:aedecod-PARTIAL_SEIZURES_WITH_SECONDARY_GENERALISATION , code:aedecod-VOMITING , code:aedecod-LISTLESS , code:aedecod-APPLICATION_SITE_DERMATITIS , code:aedecod-SKIN_ODOUR_ABNORMAL , code:aedecod-POLLAKIURIA , code:aedecod-MUSCULAR_WEAKNESS , code:aedecod-PYREXIA , code:aedecod-SEASONAL_ALLERGY , code:aedecod-CELLULITIS , code:aedecod-APPLICATION_SITE_REACTION , code:aedecod-CARDIAC_DISORDER , code:aedecod-VERTIGO , code:aedecod-EAR_PAIN , code:aedecod-RECTAL_HAEMORRHAGE , code:aedecod-DYSPHAGIA , code:aedecod-BLOOD_CREATINE_PHOSPHOKINASE_INCREASED , code:aedecod-APPLICATION_SITE_DISCHARGE , code:aedecod-PHARYNGEAL_ERYTHEMA , code:aedecod-ACROCHORDON_EXCISION , code:aedecod-FACIAL_BONES_FRACTURE , code:aedecod-HEADACHE , code:aedecod-COMPLEX_PARTIAL_SEIZURES , code:aedecod-SKIN_IRRITATION , code:aedecod-APPLICATION_SITE_VESICLES , code:aedecod-BLOOD_URINE_PRESENT , code:aedecod-EYE_SWELLING , code:aedecod-DECREASED_APPETITE , code:aedecod-CONTUSION , code:aedecod-CERUMEN_IMPACTION , code:aedecod-GLOSSITIS , code:aedecod-HEMIANOPIA_HOMONYMOUS , code:aedecod-WOLFF-PARKINSON-WHITE_SYNDROME , code:aedecod-INFLUENZA , code:aedecod-OEDEMA , code:aedecod-EYE_LASER_SURGERY , code:aedecod-FATIGUE , code:aedecod-HYPOTENSION , code:aedecod-ELECTROCARDIOGRAM_T_WAVE_INVERSION , code:aedecod-DEHYDRATION , code:aedecod-OEDEMA_PERIPHERAL , code:aedecod-FLATULENCE , code:aedecod-RASH_PAPULAR , code:aedecod-EAR_INFECTION , code:aedecod-RASH_ERYTHEMATOUS , code:aedecod-HYPONATRAEMIA , code:aedecod-NASAL_MUCOSA_BIOPSY , code:aedecod-_ALL_ , code:aedecod-MYOCARDIAL_INFARCTION , code:aedecod-VENTRICULAR_EXTRASYSTOLES , code:aedecod-NAUSEA , code:aedecod-COGNITIVE_DISORDER , code:aedecod-HALLUCINATION__VISUAL , code:aedecod-LOWER_RESPIRATORY_TRACT_INFECTION , code:aedecod-ACTINIC_KERATOSIS , code:aedecod-APPLICATION_SITE_WARMTH , code:aedecod-BIOPSY , code:aedecod-ARTHRALGIA , code:aedecod-VENTRICULAR_HYPERTROPHY , code:aedecod-APPLICATION_SITE_INDURATION , code:aedecod-BODY_TEMPERATURE_INCREASED , code:aedecod-WHITE_BLOOD_CELL_COUNT_INCREASED , code:aedecod-SUDDEN_DEATH , code:aedecod-URINE_ANALYSIS_ABNORMAL , code:aedecod-EYE_PRURITUS , code:aedecod-ARTHRITIS , code:aedecod-APPLICATION_SITE_BLEEDING , code:aedecod-CYSTITIS , code:aedecod-APPLICATION_SITE_PERSPIRATION , code:aedecod-STUPOR , code:aedecod-HAEMOPTYSIS , code:aedecod-ATRIAL_HYPERTROPHY , code:aedecod-VIRAL_INFECTION , code:aedecod-PAIN_IN_EXTREMITY , code:aedecod-DIABETES_MELLITUS , code:aedecod-LOCALISED_INFECTION , code:aedecod-ATRIAL_FIBRILLATION , code:aedecod-PRODUCTIVE_COUGH , code:aedecod-_NONMISS_ , code:aedecod-HYPERSOMNIA , code:aedecod-SECRETION_DISCHARGE , code:aedecod-APPLICATION_SITE_URTICARIA , code:aedecod-AGITATION , code:aedecod-HYPERBILIRUBINAEMIA , code:aedecod-VAGINAL_MYCOSIS , code:aedecod-ONYCHOMYCOSIS , code:aedecod-GASTROINTESTINAL_HAEMORRHAGE , code:aedecod-BLISTER , code:aedecod-PNEUMONIA , code:aedecod-BLOOD_CHOLESTEROL_INCREASED , code:aedecod-LIBIDO_DECREASED , code:aedecod-RESTLESSNESS , code:aedecod-HYPERSENSITIVITY , code:aedecod-SKIN_LACERATION , code:aedecod-INCREASED_APPETITE , code:aedecod-PSYCHOMOTOR_HYPERACTIVITY , code:aedecod-RESPIRATORY_TRACT_CONGESTION , code:aedecod-JOINT_DISLOCATION , code:aedecod-FOOD_CRAVING , code:aedecod-CHEST_PAIN , code:aedecod-NEPHROLITHIASIS , code:aedecod-HORDEOLUM , code:aedecod-POSTNASAL_DRIP , code:aedecod-ERYTHEMA , code:aedecod-VISION_BLURRED , code:aedecod-ELECTROCARDIOGRAM_ST_SEGMENT_DEPRESSION , code:aedecod-NASAL_CONGESTION , code:aedecod-PAROSMIA , code:aedecod-BENIGN_PROSTATIC_HYPERPLASIA , code:aedecod-COORDINATION_ABNORMAL , code:aedecod-RHINITIS , code:aedecod-DYSPEPSIA , code:aedecod-PRURITUS_GENERALISED , code:aedecod-EPISTAXIS , code:aedecod-BIOPSY_PROSTATE , code:aedecod-DYSURIA , code:aedecod-BACK_PAIN , code:aedecod-PARAESTHESIA_ORAL , code:aedecod-SUPRAVENTRICULAR_TACHYCARDIA ;
+        skos:notation               "CL_AEDECOD" ;
+        skos:note                   "Specifies the aedecod for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel              "Codelist scheme: aedecod"@en .
 
 ds:obs0988  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
