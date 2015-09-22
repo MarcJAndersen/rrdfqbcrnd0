@@ -1,7 +1,7 @@
 ---
 title: "Create ADSL as TTL file"
 author: "mja@statgroup.dk"
-date: "2015-08-05"
+date: "2015-09-22"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create ADSL as TTL file}
@@ -10,6 +10,8 @@ vignette: >
 ---
 
 # Create turtle version of ADSL dataset
+
+## Setup
 
 
 ```r
@@ -45,20 +47,34 @@ devtools::load_all(pkg="../..")
 This script creates a turtle version of the ADSL dataset.
 
 The script uses SQLite to export the ADSL dataset, and d2rq (http://d2rq.org/) to create a turle version of the file.
+In the code below it is assumed that d2rq is installed in the directory `/opt/d2rq-0.8.1`.
 
 
 ```r
 library(foreign)
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrnd0")
 adsl<-read.xport(fnadsl)
+```
 
-## Use other method for reading sas - see elsewhere
+The present code uses `read.xport` to input the sas dataset.
+TODO: Date variables are note handled correctly. Other
+methods are available allowing access to more of the meta data in the
+datasets.
 
-## http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf
+Next step is to dump the data as a SQL dump, that will serve as input
+to D2RQ.  For dumping the data `sqlite` is used as it is the easies to
+setup. The R-package `RSQLite`
+(http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf) provides
+access to `sqlite`.
+
+
+```r
 ## install.packages("RSQLite")
+```
 
-## Create a SQL dump - here using RSQLite - could also create the dump programically
+The SQL dump is created by transfering the R data.frame to SQLite, and the invoking sqlite to create a dump.
 
+```r
 library(RSQLite)
 ```
 
@@ -93,7 +109,7 @@ cat("SQLite database stored as ", tfile, "\n")
 ```
 
 ```
-## SQLite database stored as  /tmp/Rtmp0yKAmq/file21b6270477cf
+## SQLite database stored as  /tmp/RtmpInXUil/file22c434956ba7
 ```
 
 ```r
@@ -103,19 +119,31 @@ cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
 ```
-## SQLite database dump in  /tmp/Rtmp0yKAmq/file21b63ca9a3c0
+## SQLite database dump in  /tmp/RtmpInXUil/file22c45722050a
 ```
+
+Next step is to process the dump, so the SQL can be used as input to d2rq.
+The changes applied are:
+*  change TEXT to VARCHAR(1000)
+*  remove top 2 lines with PRAGMA
+*  in insert statements replace "adsl"  with adsl
+*  after "MMSETOT" REAL add a comma (",") and a new line with PRIMARY KEY (USUBJID)
+
+This could maybe be simplified using  RSQlite on dbSendQuery-methods, see (https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html).
+For d2rq documentation see (file:///opt/d2rq-0.8.1/doc/dump-rdf.html).
+
 
 ```r
 dumpAfterSedFn <- tempfile()
-
-sedCmd<- paste("sed", "-e 's/TEXT/VARCHAR(1000)/g; s/\"MMSETOT\" REAL/\"MMSETOT\" REAL, PRIMARY KEY (USUBJID)/; s/\"adsl\"/adsl/g; 1,2 d; $ d; ' ", dumpFn, ">", dumpAfterSedFn, sep=" ")
+sedCmd<- paste("sed",
+               "-e 's/TEXT/VARCHAR(1000)/g; s/\"MMSETOT\" REAL/\"MMSETOT\" REAL, PRIMARY KEY (USUBJID)/; s/\"adsl\"/adsl/g; 1,2 d; $ d; ' ",
+               dumpFn, ">", dumpAfterSedFn, sep=" ")
 system(sedCmd)
 cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
 ```
-## SQLite database dump modified stored as  /tmp/Rtmp0yKAmq/file21b6319d193b
+## SQLite database dump modified stored as  /tmp/RtmpInXUil/file22c447d86c34
 ```
 
 ```r
@@ -123,29 +151,45 @@ cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ## not run due to large output
 ## system(paste("diff", dumpFn, dumpAfterSedFn, sep=" "))
 
-## The change below are for now to be applied manually!
-##   change TEXT to VARCHAR(1000)
-##   remove top 2 lines with PRAGMA
-##   in insert statements replace "adsl"  with adsl
-##   after "MMSETOT" REAL add a comma (",") and a new line with
-##   PRIMARY KEY (USUBJID)
-##
-## see also RSQlite on dbSendQuery-methods - that can make more
-## https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html
-## d2rq documentationsee file:///opt/d2rq-0.8.1/doc/dump-rdf.html
-
-## -b option does not work with -l
 
 adslmapttlFn<- file.path(tempdir(), "adsl-map.ttl")
 adslttlFn<- file.path(tempdir(), "adsl.ttl")
 
 d2rqbaseURL<- "http://www.example.org/datasets/"
 
-system(paste("/opt/d2rq-0.8.1/generate-mapping  -o ", adslmapttlFn, " -l ", dumpAfterSedFn))
-system(paste("/opt/d2rq-0.8.1/dump-rdf -b ", d2rqbaseURL,  " -o ",
-             adslttlFn, " -l ", dumpAfterSedFn, " ", adslmapttlFn) )
+## -b option does not work with -l
+## /opt/d2rq-0.8.1/generate-mapping reports Unknown argument: -b
+system(paste("/opt/d2rq-0.8.1/generate-mapping",
+             " -l ", dumpAfterSedFn,
+             " -b ", d2rqbaseURL,
+             " -o ", adslmapttlFn
+             ))
+
+system(paste("/opt/d2rq-0.8.1/dump-rdf",
+             " -b ", d2rqbaseURL,
+             " -o ", adslttlFn,
+             " -l ", dumpAfterSedFn,
+             " ", adslmapttlFn
+             ))
  
 
+
+targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
+if (file.copy(adslmapttlFn, targetDir)) {
+cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
+}
+
+if (file.copy(adslttlFn, targetDir)) {
+cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
+}
+```
+
+```
+## File  /tmp/RtmpInXUil/adsl.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+```
+
+
+```r
 ### This could maybe also work ..
 ## m <- dbDriver("SQLite")
 ## tfile <- tempfile()
@@ -159,34 +203,14 @@ system(paste("/opt/d2rq-0.8.1/dump-rdf -b ", d2rqbaseURL,  " -o ",
 ## dbWriteTable(con, "adsl", adsl,append=TRUE)
 ## dbDisconnect(con)
 ## tfile
-
-## system(paste("sqlite3", tfile, ".dump > /tmp/xx.sql", sep=" "))
-## system(paste("/opt/d2rq-0.8.1/dump-rdf -b http://localhost:3030/ -o /tmp/adsl.ttl -l /tmp/xx.sql"))
-
-targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
-if (file.copy(adslmapttlFn, targetDir)) {
-cat( "File ", adslmapttlFn, " copied to ", targetDir, "\n")
-}
 ```
-
-```
-## File  /tmp/Rtmp0yKAmq/adsl-map.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
-```
-
-```r
-if (file.copy(adslttlFn, targetDir)) {
-cat( "File ", adslttlFn, " copied to ", targetDir, "\n")
-}
-```
-
-```
-## File  /tmp/Rtmp0yKAmq/adsl.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
-```
-
 
 
 ### Read in the file
 
+This section demostrates how to access the data for the ADSL dataset.
+
+First the data are loaded into a RDF model.
 
 ```r
 dataFilemap<- system.file("extdata/sample-rdf", "adsl-map.ttl", package="rrdfqbcrnd0")
@@ -194,7 +218,7 @@ dataFilemap
 ```
 
 ```
-## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/adsl-map.ttl"
+## [1] ""
 ```
 
 ```r
@@ -209,150 +233,110 @@ dataFile
 ```r
 store <- new.rdf()  # Initialize
 load.rdf(dataFilemap, format="TURTLE", appendTo= store)
+```
+
+```
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : java.io.FileNotFoundException:  (No such file or directory)
+```
+
+```r
 load.rdf(dataFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
 ```
 
 ```
-## [1] "Number of triples: 13160"
+## [1] "Number of triples: 40"
 ```
 
+Next step is to make a query showing the mappings
+
 ```r
-rq<-"
-prefix map: <#> 
-prefix db: <> 
-prefix vocab: <vocab/> 
+mapping.rq<-"
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
 prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
 prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> 
 prefix jdbc: <http://d2rq.org/terms/jdbc/> 
 select * where {
-?mapColumn a d2rq:PropertyBridge ;
-  d2rq:column ?d2rqcolumn ;
-  d2rq:datatype ?d2rqdatatype 
-.
-# ?mapColumn ?p ?o.
+   ?mapColumn a d2rq:PropertyBridge ;
+                d2rq:column ?d2rqcolumn .
+   optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }
 }
 "
 
-res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
-str(res)
+cat(mapping.rq,"\n")
 ```
 
 ```
-## 'data.frame':	20 obs. of  3 variables:
-##  $ mapColumn   : chr  "map:ADSL_TRT01AN" "map:ADSL_VISIT1DT" "map:ADSL_TRTSDT" "map:ADSL_TRT01PN" ...
-##  $ d2rqcolumn  : chr  "ADSL.TRT01AN" "ADSL.VISIT1DT" "ADSL.TRTSDT" "ADSL.TRT01PN" ...
-##  $ d2rqdatatype: chr  "xsd:double" "xsd:double" "xsd:double" "xsd:double" ...
-```
-
-```r
-res
-```
-
-```
-##            mapColumn    d2rqcolumn d2rqdatatype
-## 1   map:ADSL_TRT01AN  ADSL.TRT01AN   xsd:double
-## 2  map:ADSL_VISIT1DT ADSL.VISIT1DT   xsd:double
-## 3    map:ADSL_TRTSDT   ADSL.TRTSDT   xsd:double
-## 4   map:ADSL_TRT01PN  ADSL.TRT01PN   xsd:double
-## 5     map:ADSL_RACEN    ADSL.RACEN   xsd:double
-## 6  map:ADSL_DISONSDT ADSL.DISONSDT   xsd:double
-## 7  map:ADSL_WEIGHTBL ADSL.WEIGHTBL   xsd:double
-## 8   map:ADSL_AGEGR1N  ADSL.AGEGR1N   xsd:double
-## 9    map:ADSL_TRTDUR   ADSL.TRTDUR   xsd:double
-## 10  map:ADSL_EDUCLVL  ADSL.EDUCLVL   xsd:double
-## 11   map:ADSL_TRTEDT   ADSL.TRTEDT   xsd:double
-## 12      map:ADSL_AGE      ADSL.AGE   xsd:double
-## 13 map:ADSL_HEIGHTBL ADSL.HEIGHTBL   xsd:double
-## 14 map:ADSL_VISNUMEN ADSL.VISNUMEN   xsd:double
-## 15   map:ADSL_DURDIS   ADSL.DURDIS   xsd:double
-## 16    map:ADSL_AVGDD    ADSL.AVGDD   xsd:double
-## 17  map:ADSL_CUMDOSE  ADSL.CUMDOSE   xsd:double
-## 18    map:ADSL_BMIBL    ADSL.BMIBL   xsd:double
-## 19   map:ADSL_RFENDT   ADSL.RFENDT   xsd:double
-## 20  map:ADSL_MMSETOT  ADSL.MMSETOT   xsd:double
+## 
+## prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+## prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+## prefix xsd: <http://www.w3.org/2001/XMLSchema#> 
+## prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> 
+## prefix jdbc: <http://d2rq.org/terms/jdbc/> 
+## select * where {
+##    ?mapColumn a d2rq:PropertyBridge ;
+##                 d2rq:column ?d2rqcolumn .
+##    optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }
+## }
+## 
 ```
 
 ```r
-s<- paste0("<", d2rqbaseURL,"ADSL/01-718-1254>")
-rq<-paste0("select * where {", s, " ?p ?o . }" )
-print(rq)
+resmapping<- data.frame(sparql.rdf(store, mapping.rq),stringsAsFactors=FALSE)
+str(resmapping)
 ```
 
 ```
-## [1] "select * where {<http://www.example.org/datasets/ADSL/01-718-1254> ?p ?o . }"
-```
-
-```r
-res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
-str(res)
-```
-
-```
-## 'data.frame':	51 obs. of  2 variables:
-##  $ p: chr  "http://www.example.org/datasets/vocab/ADSL_EFFFL" "http://www.example.org/datasets/vocab/ADSL_DCREASCD" "http://www.example.org/datasets/vocab/ADSL_TRT01PN" "http://www.example.org/datasets/vocab/ADSL_COMP8FL" ...
-##  $ o: chr  "Y" "Completed" "54.0E0" "Y" ...
+## 'data.frame':	0 obs. of  0 variables
 ```
 
 ```r
-res$pclean<- gsub(paste0(d2rqbaseURL,"vocab/ADSL_"), "", res$p)
-knitr::kable(res[,c("p","o")])
+knitr::kable(resmapping)
+```
+
+```
+## Error in kable_markdown(x = structure(character(0), .Dim = c(0L, 0L), .Dimnames = list(: the table must have a header (column names)
 ```
 
 
+The code below gets the all values in one record
 
-|p                                                   |o                                             |
-|:---------------------------------------------------|:---------------------------------------------|
-|http://www.example.org/datasets/vocab/ADSL_EFFFL    |Y                                             |
-|http://www.example.org/datasets/vocab/ADSL_DCREASCD |Completed                                     |
-|http://www.example.org/datasets/vocab/ADSL_TRT01PN  |54.0E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_COMP8FL  |Y                                             |
-|http://www.example.org/datasets/vocab/ADSL_CUMDOSE  |9936.0E0                                      |
-|http://www.example.org/datasets/vocab/ADSL_TRTSDT   |19549.0E0                                     |
-|http://www.example.org/datasets/vocab/ADSL_SITEGR1  |718                                           |
-|http://www.example.org/datasets/vocab/ADSL_TRT01AN  |54.0E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_AVGDD    |54.0E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_DURDIS   |21.6E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_TRTDUR   |184.0E0                                       |
-|http://www.example.org/datasets/vocab/ADSL_HEIGHTBL |170.2E0                                       |
-|http://www.example.org/datasets/vocab/ADSL_COMP16FL |Y                                             |
-|http://www.example.org/datasets/vocab/ADSL_DCDECOD  |COMPLETED                                     |
-|http://www.example.org/datasets/vocab/ADSL_WEIGHTBL |82.1E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_BMIBLGR1 |25-<30                                        |
-|http://www.example.org/datasets/vocab/ADSL_AGE      |78.0E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_SUBJID   |1254                                          |
-|http://www.example.org/datasets/vocab/ADSL_TRT01A   |Xanomeline Low Dose                           |
-|http://www.example.org/datasets/vocab/ADSL_DURDSGR1 |>=12                                          |
-|http://www.example.org/datasets/vocab/ADSL_RFSTDTC  |2013-07-10                                    |
-|http://www.example.org/datasets/vocab/ADSL_SEX      |M                                             |
-|http://www.example.org/datasets/vocab/ADSL_DISCONFL |                                              |
-|http://www.example.org/datasets/vocab/ADSL_DSRAEFL  |                                              |
-|http://www.example.org/datasets/vocab/ADSL_COMP24FL |Y                                             |
-|http://www.example.org/datasets/vocab/ADSL_RFENDT   |19732.0E0                                     |
-|http://www.w3.org/2000/01/rdf-schema#label          |ADSL #01-718-1254                             |
-|http://www.example.org/datasets/vocab/ADSL_SAFFL    |Y                                             |
-|http://www.example.org/datasets/vocab/ADSL_AGEU     |YEARS                                         |
-|http://www.example.org/datasets/vocab/ADSL_ETHNIC   |HISPANIC OR LATINO                            |
-|http://www.example.org/datasets/vocab/ADSL_AGEGR1   |65-80                                         |
-|http://www.example.org/datasets/vocab/ADSL_DISONSDT |18882.0E0                                     |
-|http://www.example.org/datasets/vocab/ADSL_TRTEDT   |19732.0E0                                     |
-|http://www.example.org/datasets/vocab/ADSL_DTHFL    |                                              |
-|http://www.example.org/datasets/vocab/ADSL_MMSETOT  |16.0E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_VISNUMEN |12.0E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_USUBJID  |01-718-1254                                   |
-|http://www.example.org/datasets/vocab/ADSL_ITTFL    |Y                                             |
-|http://www.example.org/datasets/vocab/ADSL_BMIBL    |28.3E0                                        |
-|http://www.example.org/datasets/vocab/ADSL_RFENDTC  |2014-01-09                                    |
-|http://www.w3.org/1999/02/22-rdf-syntax-ns#type     |http://www.example.org/datasets/vocab/ADSL    |
-|http://www.example.org/datasets/vocab/ADSL_STUDYID  |CDISCPILOT01                                  |
-|http://www.example.org/datasets/vocab/ADSL_RACEN    |1.0E0                                         |
-|http://www.example.org/datasets/vocab/ADSL_VISIT1DT |19537.0E0                                     |
-|http://www.example.org/datasets/vocab/ADSL_AGEGR1N  |2.0E0                                         |
-|http://www.example.org/datasets/vocab/ADSL_TRT01P   |Xanomeline Low Dose                           |
-|http://www.example.org/datasets/vocab/ADSL_RACE     |WHITE                                         |
-|http://www.example.org/datasets/vocab/ADSL_ARM      |Xanomeline Low Dose                           |
-|http://www.example.org/datasets/vocab/ADSL_SITEID   |718                                           |
-|http://www.example.org/datasets/vocab/ADSL_EDUCLVL  |18.0E0                                        |
-|http://www.w3.org/1999/02/22-rdf-syntax-ns#type     |http://www.w3.org/2000/01/rdf-schema#Resource |
+```r
+s<- paste0("<", d2rqbaseURL,c("ADSL/01-718-1254"), ">")
+
+records.rq<-paste("select * ",
+           "where { ?s ?p ?o.",
+           " values(?s) {",
+           paste("(",s,")", collapse="\n"),
+           "}",
+           "}", sep="\n", collapse="\n" )
+cat(records.rq,"\n")
+```
+
+```
+## select * 
+## where { ?s ?p ?o.
+##  values(?s) {
+## ( <http://www.example.org/datasets/ADSL/01-718-1254> )
+## }
+## }
+```
+
+```r
+records.res<- data.frame(sparql.rdf(store, records.rq),stringsAsFactors=FALSE)
+str(records.res)
+```
+
+```
+## 'data.frame':	0 obs. of  0 variables
+```
+
+```r
+records.res$pclean<- gsub(paste0(d2rqbaseURL,"vocab/ADSL_"), "", records.res$p)
+knitr::kable(records.res[,c("s", "p","o")])
+```
+
+```
+## Error in `[.data.frame`(records.res, , c("s", "p", "o")): undefined columns selected
+```

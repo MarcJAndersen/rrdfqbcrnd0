@@ -265,7 +265,7 @@ ds:obs050  a                        qb:Observation ;
 code:factor-weightbl  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
         rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_weightbl> ;
+                <http://www.example.org/datasets/vocab/ADSL_WEIGHTBL> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "weightbl" ;
@@ -879,7 +879,7 @@ dccs:factor  a        qb:ComponentSpecification ;
 code:factor-age  a                    code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
         rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_age> ;
+                <http://www.example.org/datasets/vocab/ADSL_AGE> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "age" ;
@@ -1721,7 +1721,7 @@ ds:dataset-DEMO  a           qb:DataSet ;
         dct:title            "Demographics Analysis Results"^^xsd:string ;
         qb:structure         ds:dsd-DEMO ;
         pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn        "2015-09-21T17:43:32+02:00"^^xsd:dateTime ;
+        pav:createdOn        "2015-09-22T10:51:03+02:00"^^xsd:dateTime ;
         pav:createdWith      "R Version 3.2.2 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies" ;
         pav:version          "0.0.0" ;
         dcat:distribution    "DC-DEMO-R-V-0-5-2.ttl" ;
@@ -2115,7 +2115,7 @@ ds:obs041  a                        qb:Observation ;
 code:factor-quantity  a               code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
         rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_quantity> ;
+                <http://www.example.org/datasets/vocab/ADSL_QUANTITY> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "quantity" ;
@@ -2518,7 +2518,7 @@ code:factor-proportion
         a                             code:Factor , skos:Concept ;
         rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
         rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_proportion> ;
+                <http://www.example.org/datasets/vocab/ADSL_PROPORTION> ;
         rrdfqbcrnd0:R-selectionoperator
                 "==" ;
         rrdfqbcrnd0:R-selectionvalue  "proportion" ;

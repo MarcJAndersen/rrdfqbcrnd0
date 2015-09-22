@@ -1,7 +1,7 @@
 ---
 title: "Show the procedure codelist"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-07-27"
+date: "2015-09-22"
 vignette: >
   %\VignetteIndexEntry{Show the procedure codelist}
   %\VignetteEngine{knitr::rmarkdown}
@@ -127,7 +127,7 @@ cat(normalizePath(outcube),"\n")
 ```
 
 ```
-## /tmp/RtmpIihHkr/DC-EXAMPLE-R-V-0-0-0.ttl
+## /tmp/RtmpkDafMc/DC-EXAMPLE-R-V-0-0-0.ttl
 ```
 
 # Query the cube using SPARQL
@@ -150,7 +150,7 @@ summarize.rdf(cube)
 ```
 
 ```
-## [1] "Number of triples: 402"
+## [1] "Number of triples: 417"
 ```
 
 The next statements are needed for the current implementation of the cube, and may change in future versions.

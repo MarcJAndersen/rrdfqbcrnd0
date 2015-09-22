@@ -1,7 +1,7 @@
 ---
 title: "Create Integrity Contraints SPARQL Queries from RDF data cube definition"
 author: "mja@statgroup.dk"
-date: "2015-07-27"
+date: "2015-09-22"
 ---
 
 ## Setup 

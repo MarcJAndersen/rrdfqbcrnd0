@@ -1,7 +1,7 @@
 ---
 title: "Create AE table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-07-27"
+date: "2015-09-22"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create AE table as csv file}

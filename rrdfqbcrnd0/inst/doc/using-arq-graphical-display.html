@@ -199,10 +199,47 @@ rapper -i turtle -o dot fordot.ttl &gt; fordot.dot
 dot -x -Tpdf -ograph.pdf fordot.dot
 </code></pre>
 
-<pre><code>## Error: Could not find or load main class arq.arq
+<pre><code>## @prefix dccs:  &lt;http://www.example.org/dc/demo/dccs/&gt; .
+## @prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt; .
+## @prefix cts:   &lt;http://rdf.cdisc.org/ct/schema#&gt; .
+## @prefix code:  &lt;http://www.example.org/dc/code/&gt; .
+## @prefix pav:   &lt;http://purl.org/pav&gt; .
+## @prefix owl:   &lt;http://www.w3.org/2002/07/owl#&gt; .
+## @prefix xsd:   &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+## @prefix skos:  &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+## @prefix rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+## @prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt; .
+## @prefix ds:    &lt;http://www.example.org/dc/demo/ds/&gt; .
+## @prefix qb:    &lt;http://purl.org/linked-data/cube#&gt; .
+## @prefix mms:   &lt;http://rdf.cdisc.org/mms#&gt; .
+## @prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt; .
+## @prefix dct:   &lt;http://purl.org/dc/terms/&gt; .
+## @prefix rdf:   &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+## @prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt; .
+## @prefix dcat:  &lt;http://www.w3.org/ns/dcat#&gt; .
+## @prefix prov:  &lt;http://www.w3.org/ns/prov#&gt; .
+## 
+## ds:obs014  a                        qb:Observation ;
+##         rdfs:comment                &quot;Statistic for number of records/Statistics for factor with the dimensions XX&quot;@en ;
+##         rdfs:label                  &quot;14&quot; ;
+##         qb:dataSet                  ds:dataset-DEMO ;
+##         crnd-attribute:cellpartno   &quot;1&quot;^^xsd:string ;
+##         crnd-attribute:colno        &quot;2&quot;^^xsd:string ;
+##         crnd-attribute:denominator  &quot;&quot; ;
+##         crnd-attribute:measurefmt   &quot;%6.0f&quot;^^xsd:string ;
+##         crnd-attribute:rowno        &quot;3&quot;^^xsd:string ;
+##         crnd-attribute:unit         &quot;NA&quot;^^xsd:string ;
+##         crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+##         crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+##         crnd-dimension:factor       code:factor-quantity ;
+##         crnd-dimension:procedure    code:procedure-count ;
+##         crnd-dimension:race         code:race-_ALL_ ;
+##         crnd-dimension:sex          code:sex-M ;
+##         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+##         crnd-measure:measure        &quot;34&quot;^^xsd:int .
 ## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/fordot.ttl with parser turtle
 ## rapper: Serializing with serializer dot
-## rapper: Parsing returned 0 triples
+## rapper: Parsing returned 18 triples
 </code></pre>
 
 <p>The pdf file can then be viewed using a pdf viewer. </p>
