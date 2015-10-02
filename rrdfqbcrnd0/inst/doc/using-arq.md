@@ -1,25 +1,18 @@
 ---
 title: "Using ARQ to make SPARQL queries"
 author: "mja@statgroup.dk"
-date: "2015-09-22"
+date: "2015-07-23"
 output: rmarkdown::html_vignette
 ---
 
 # SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)
 
-The examples below uses `arq` from Apache Jena
-(http://jena.apache.org). To install arq - download and unpack the
-latest version of apache-jena from
-(http://jena.apache.org/download/index.cgi).
-Then you need some way
-of invoking `arq`; I use a not-so-clever-approach: `cd ~/bin; ln -s
-/opt/apache-jena-2.13.0/bin/arq`.
+The examples below uses `arq` from Apache Jena (http://jena.apache.org). To install arq - download and unpack the latest version of apache-jena from (http://jena.apache.org/download/index.cgi).
+Then you need some way of invoking `arq`; I use a not-so-good-approach: `cd ~/bin; ln -s /opt/apache-jena-2.13.0/bin/arq .".
 
-Given a SPARQL query and RDF data, `arq` returns the result of the
-query. So this is the command line way of making a SPARQL query.
+Given a SPARQL query and RDF data, `arq` returns the result of the query. So this is the command line way of making a SPARQL query.
 
-The use of arq is described many places, see for example
-(http://www.learningsparql.com/).
+The use of arq is described many places, see for example (http://www.learningsparql.com/).
 
 All `arq` commands below are to be run in the directory with the
 sample files, which is `inst/extdata/sample-rdf` directory or
@@ -292,50 +285,4 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations-R-selection.rq
 ## ------------------------------------------------------------------------------------
 ```
 
-## Get information on the underlying data in D2RQ format
 
-The following two SPARQL scripts are from taken from `create-ADSL-ttl.Rmd`.
-
-First get the mapping information.
-
-```bash
-cd ../extdata/sample-rdf
-arq --data adsl-map.ttl --query ADSL-mapping.rq
-```
-
-```
-## Failed to load data
-```
-
-Then dump the contents of a record in the database.
-
-```bash
-cd ../extdata/sample-rdf
-arq --data adsl.ttl --query ADSL-record.rq
-```
-
-```
-## -------------
-## | s | p | o |
-## =============
-## -------------
-```
-
-## Get underlying data for one cube observation
-
-
-```bash
-cd ../extdata/sample-rdf
-arq --data adsl.ttl --data DC-DEMO-sample.ttl --query DEMOobservations-R-data.rq
-```
-
-```
-## -------------------------------------------
-## | record | p | o | CountCrit | XCountCrit |
-## ===========================================
-## -------------------------------------------
-```
-
-
-# How to run this .Rmd file
-.. add text ..

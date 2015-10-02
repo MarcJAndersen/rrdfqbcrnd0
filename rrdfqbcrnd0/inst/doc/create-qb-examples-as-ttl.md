@@ -1,7 +1,7 @@
 ---
 title: "Create DEMO table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-09-22"
+date: "2015-06-28"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DEMO table from csv file}
@@ -60,7 +60,7 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 
 ```
 ## Start loading rdf.cdisc.org contents from /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165672
+## Done loading rdf.cdisc.org contents, number of triples: 165643
 ```
 
 ```r
@@ -68,7 +68,7 @@ cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
 ```
-## DM cube stored as  /tmp/RtmpgpgHEW/DC-DM-R-V-0-5-2.ttl
+## DM cube stored as  /tmp/RtmpqXyN4P/DC-DM-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -89,7 +89,7 @@ cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
 ```
-## AE cube stored as  /tmp/RtmpgpgHEW/DC-AE-R-V-0-5-2.ttl
+## AE cube stored as  /tmp/RtmpqXyN4P/DC-AE-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -126,7 +126,7 @@ cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
 ```
-## DEMO cube stored as  /tmp/RtmpgpgHEW/DC-DEMO-R-V-0-5-2.ttl
+## DEMO cube stored as  /tmp/RtmpqXyN4P/DC-DEMO-R-V-0-5-2.ttl
 ```
 
 ```r

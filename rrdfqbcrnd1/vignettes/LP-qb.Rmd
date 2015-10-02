@@ -36,6 +36,7 @@ The `Makefile` is
 
 To execute R-code but not put it in the extracted output, use: `{r eval=TRUE, purl=FALSE}`.
 
+The extraction is done using `knitr::purl()`.
 
 ```{r}
 ##' Dummy function used for defining all paramter with Roxygen2

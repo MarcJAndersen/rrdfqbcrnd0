@@ -165,19 +165,12 @@ hr {
 <body>
 <h1>SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)</h1>
 
-<p>The examples below uses <code>arq</code> from Apache Jena
-(<a href="http://jena.apache.org">http://jena.apache.org</a>). To install arq - download and unpack the
-latest version of apache-jena from
-(<a href="http://jena.apache.org/download/index.cgi">http://jena.apache.org/download/index.cgi</a>).
-Then you need some way
-of invoking <code>arq</code>; I use a not-so-clever-approach: <code>cd ~/bin; ln -s
-/opt/apache-jena-2.13.0/bin/arq</code>.</p>
+<p>The examples below uses <code>arq</code> from Apache Jena (<a href="http://jena.apache.org">http://jena.apache.org</a>). To install arq - download and unpack the latest version of apache-jena from (<a href="http://jena.apache.org/download/index.cgi">http://jena.apache.org/download/index.cgi</a>).
+Then you need some way of invoking <code>arq</code>; I use a not-so-good-approach: cd ~/bin; ln -s /opt/apache-jena-2.13.0/bin/arq .&ldquo;.</p>
 
-<p>Given a SPARQL query and RDF data, <code>arq</code> returns the result of the
-query. So this is the command line way of making a SPARQL query.</p>
+<p>Given a SPARQL query and RDF data, <code>arq</code> returns the result of the query. So this is the command line way of making a SPARQL query.</p>
 
-<p>The use of arq is described many places, see for example
-(<a href="http://www.learningsparql.com/">http://www.learningsparql.com/</a>).</p>
+<p>The use of arq is described many places, see for example (<a href="http://www.learningsparql.com/">http://www.learningsparql.com/</a>).</p>
 
 <p>All <code>arq</code> commands below are to be run in the directory with the
 sample files, which is <code>inst/extdata/sample-rdf</code> directory or
@@ -436,47 +429,6 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations-R-selection.rq
 ## | ds:obs056 | &quot;trt01a&quot;               | &quot;==&quot;               | &quot;Xanomeline Low Dose&quot;  |
 ## ------------------------------------------------------------------------------------
 </code></pre>
-
-<h2>Get information on the underlying data in D2RQ format</h2>
-
-<p>The following two SPARQL scripts are from taken from <code>create-ADSL-ttl.Rmd</code>.</p>
-
-<p>First get the mapping information.</p>
-
-<pre><code class="bash">cd ../extdata/sample-rdf
-arq --data adsl-map.ttl --query ADSL-mapping.rq
-</code></pre>
-
-<pre><code>## Failed to load data
-</code></pre>
-
-<p>Then dump the contents of a record in the database.</p>
-
-<pre><code class="bash">cd ../extdata/sample-rdf
-arq --data adsl.ttl --query ADSL-record.rq
-</code></pre>
-
-<pre><code>## -------------
-## | s | p | o |
-## =============
-## -------------
-</code></pre>
-
-<h2>Get underlying data for one cube observation</h2>
-
-<pre><code class="bash">cd ../extdata/sample-rdf
-arq --data adsl.ttl --data DC-DEMO-sample.ttl --query DEMOobservations-R-data.rq
-</code></pre>
-
-<pre><code>## -------------------------------------------
-## | record | p | o | CountCrit | XCountCrit |
-## ===========================================
-## -------------------------------------------
-</code></pre>
-
-<h1>How to run this .Rmd file</h1>
-
-<p>.. add text ..</p>
 
 </body>
 

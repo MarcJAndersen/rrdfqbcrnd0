@@ -1,7 +1,7 @@
 ---
 title: "Store CDISC RDF as RRDF data model"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-09-22"
+date: "2015-06-15"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
@@ -145,64 +145,33 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 ```
 
 ```
+## Warning in normalizePath(file.path(cdisc.files.dir, fn)): path[1]="/home/
+## ma/projects/phrmwg/rdf.cdisc.org/resources/w3.org/skos.rdf": No such file
+## or directory
+```
+
+```
 ## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/w3.org/skos.rdf ..
-## .. total number of triples: 1361
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcam.rdf ..
-## .. total number of triples: 1374
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcelements.rdf ..
-## .. total number of triples: 1481
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcterms.rdf ..
-## .. total number of triples: 1914
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/glossary-terminology.owl ..
-## .. total number of triples: 2917
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/cdash-terminology.owl ..
-## .. total number of triples: 3845
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/sdtm-terminology.owl ..
-## .. total number of triples: 53592
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/qs-terminology.owl ..
-## .. total number of triples: 79547
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/send-terminology.owl ..
-## .. total number of triples: 117998
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/adam-terminology.owl ..
-## .. total number of triples: 118181
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtm-1-2.ttl ..
-## .. total number of triples: 119657
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/all-standards.ttl ..
-## .. total number of triples: 119667
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/cdash-1-1.ttl ..
-## .. total number of triples: 127111
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtmig-3-1-3.ttl ..
-## .. total number of triples: 139397
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtmig-3-1-2.ttl ..
-## .. total number of triples: 150159
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/adamig-1-0.ttl ..
-## .. total number of triples: 154924
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sendig-3-0.ttl ..
-## .. total number of triples: 163094
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtm-1-3.ttl ..
-## .. total number of triples: 164872
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/adam-2-1.ttl ..
-## .. total number of triples: 164900
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/ct-schema.owl ..
-## .. total number of triples: 164992
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/meta-model-schema.owl ..
-## .. total number of triples: 165188
-## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..
-## .. total number of triples: 165381
-## Loading /home/ma/projects/phrmwg/rdf-data-cube/cube.ttl ..
-## .. total number of triples: 165673
-## Final rdf.cdisc.org rrdf store, number of triples: 165673
-## rrdf store saved to turle file: /tmp/RtmpgGqB9L/cdisc-rdf.ttl
-## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+```
+
+```
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : java.io.FileNotFoundException: /home/ma/projects/phrmwg/rdf.cdisc.org/resources/w3.org/skos.rdf (No such file or directory)
 ```
 
 ```r
 cdisc.save.zip.info<- file.info(cdisc.save.zip)
+```
+
+```
+## Error in file.info(cdisc.save.zip): object 'cdisc.save.zip' not found
+```
+
+```r
 message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size ", cdisc.save.zip.info$size, " bytes")
 ```
 
 ```
-## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-09-22 10:50:35 size 2315968 bytes
+## Error in message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, : object 'cdisc.save.zip' not found
 ```
 
 ### Loading using Load.cdisc.standards 
@@ -217,7 +186,7 @@ cdisc.rdf<- Load.cdisc.standards()
 
 ```
 ## Start loading rdf.cdisc.org contents from /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165672
+## Done loading rdf.cdisc.org contents, number of triples: 165643
 ```
 
 ```r
@@ -225,7 +194,7 @@ message(".. total number of triples: ", summarize.rdf.noprint(cdisc.rdf) )
 ```
 
 ```
-## .. total number of triples: 165672
+## .. total number of triples: 165643
 ```
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset

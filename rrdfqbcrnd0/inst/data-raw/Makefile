@@ -6,7 +6,8 @@ populate-sample-xpt.html  create-ADSL-ttl.html create-ADAE-ttl.html \
 create-dm-table-as-csv.html create-ae-table-as-csv.html \
 create-qb-examples-as-ttl.html \
 use-demo-ttl.html  using-arq.html using-arq-graphical-display.html \
-codelist-procedure.html using-python.html reporting-process.html
+codelist-procedure.html using-python.html \
+reporting-process.html package-overview.html
 
 # not possible directly from .Rmd PDFS=reporting-process.pdf
 
@@ -107,6 +108,15 @@ reporting-process.md: reporting-process.Rmd
 	${RKNIT2MD}
 
 reporting-process.pdf: reporting-process.Rmd
+	${RKNIT2PDF}
+
+package-overview.html: package-overview.Rmd
+	${RKNIT2HTML}
+
+package-overview.md: package-overview.Rmd
+	${RKNIT2MD}
+
+package-overview.pdf: package-overview.Rmd
 	${RKNIT2PDF}
 
 # %.pdf: %.Rnw

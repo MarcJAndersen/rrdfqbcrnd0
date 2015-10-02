@@ -1,7 +1,7 @@
 ---
 title: "Reporting process"
 author: "mja@statgroup.dk"
-date: "2015-09-22"
+date: "2015-10-02"
 output: 
   html_document
 vignette: >
@@ -293,8 +293,8 @@ Then display the graph.
 DiagrammeR( mermaid.commands )
 ```
 
-<!--html_preserve--><div id="htmlwidget-1961" style="width:504px;height:504px;" class="DiagrammeR"></div>
-<script type="application/json" data-for="htmlwidget-1961">{"x":{"diagram":"graph TB \nrepr:r01(SDTM Datasets) \nrepr:r02(Create Analysis Datasets) \nrepr:r03(ADaM Datasets) \nrepr:r04(Analysis Programs) \nrepr:r05(Tables, Listings, Graphs) \nrepr:r06(Dataset specs) \nrepr:r07(Codelist specs) \nrepr:r08(Report specs) \nrepr:r09(Prepare submission data & docs) \nrepr:r10(Selected code) \nrepr:r11(Submission.xpt) \nrepr:r12(Define.xml) \nrepr:r13(Data Guide) \nrepr:r09-->repr:r12 \nrepr:r07-->repr:r04 \nrepr:r02-->repr:r03 \nrepr:r04-->repr:r05 \nrepr:r09-->repr:r11 \nrepr:r08-->repr:r04 \nrepr:r09-->repr:r10 \nrepr:r08-->repr:r09 \nrepr:r06-->repr:r09 \nrepr:r07-->repr:r09 \nrepr:r01-->repr:r02 \nrepr:r03-->repr:r04 \nrepr:r06-->repr:r02 \nrepr:r09-->repr:r13 \n\n"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-7025" style="width:504px;height:504px;" class="DiagrammeR"></div>
+<script type="application/json" data-for="htmlwidget-7025">{"x":{"diagram":"graph TB \nrepr:r01(SDTM Datasets) \nrepr:r02(Create Analysis Datasets) \nrepr:r03(ADaM Datasets) \nrepr:r04(Analysis Programs) \nrepr:r05(Tables, Listings, Graphs) \nrepr:r06(Dataset specs) \nrepr:r07(Codelist specs) \nrepr:r08(Report specs) \nrepr:r09(Prepare submission data & docs) \nrepr:r10(Selected code) \nrepr:r11(Submission.xpt) \nrepr:r12(Define.xml) \nrepr:r13(Data Guide) \nrepr:r09-->repr:r12 \nrepr:r07-->repr:r04 \nrepr:r02-->repr:r03 \nrepr:r04-->repr:r05 \nrepr:r09-->repr:r11 \nrepr:r08-->repr:r04 \nrepr:r09-->repr:r10 \nrepr:r08-->repr:r09 \nrepr:r06-->repr:r09 \nrepr:r07-->repr:r09 \nrepr:r01-->repr:r02 \nrepr:r03-->repr:r04 \nrepr:r06-->repr:r02 \nrepr:r09-->repr:r13 \n\n"},"evals":[]}</script><!--/html_preserve-->
 
 # Grid for "Diagram of the SW Initiatives"
 

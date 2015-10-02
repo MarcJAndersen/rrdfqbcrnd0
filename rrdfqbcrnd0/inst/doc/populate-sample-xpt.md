@@ -1,7 +1,7 @@
 ---
 title: "Populate sample-xpt directory with example file in SAS transport xpt format"
 author: "mja@statgroup.dk"
-date: "2015-09-22"
+date: "2015-06-21"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Populate sample-xpt directory with example file in SAS transport xpt format}

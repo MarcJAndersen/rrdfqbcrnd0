@@ -213,24 +213,7 @@ TODO(mja): fix it.</p>
 <pre><code class="r">library(rrdfqbcrnd0)
 </code></pre>
 
-<pre><code>## Loading required package: rrdf
-## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: rrdflibs
-## Loading required package: xlsx
-## Loading required package: xlsxjars
-## Loading required package: RCurl
-## Loading required package: bitops
-## 
-## Attaching package: &#39;RCurl&#39;
-## 
-## The following object is masked from &#39;package:rJava&#39;:
-## 
-##     clone
-</code></pre>
-
-<pre><code>## Warning: replacing previous import by &#39;rJava::clone&#39; when loading
-## &#39;rrdfqbcrnd0&#39;
+<pre><code>## Error in library(rrdfqbcrnd0): there is no package called &#39;rrdfqbcrnd0&#39;
 </code></pre>
 
 <pre><code class="r">dataCubeSpec&lt;- system.file(&quot;extdata/CUBE-standards-rdf&quot;, &quot;cube.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
@@ -238,63 +221,71 @@ TODO(mja): fix it.</p>
 dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
 
 store &lt;- new.rdf()  # Initialize
-
-cat(&quot;Loading cube specfication from &quot;, dataCubeSpec, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Loading cube specfication from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CUBE-standards-rdf/cube.ttl
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;new.rdf&quot;
+</code></pre>
+
+<pre><code class="r">cat(&quot;Loading cube specfication from &quot;, dataCubeSpec, &quot;\n&quot;)
+</code></pre>
+
+<pre><code>## Loading cube specfication from
 </code></pre>
 
 <pre><code class="r">load.rdf(dataCubeSpec, format=&quot;TURTLE&quot;, appendTo= store)
-
-cat(&quot;Loading cube from &quot;, dataCubeFile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Loading cube from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/sample-rdf/DC-DEMO-sample.ttl
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;load.rdf&quot;
+</code></pre>
+
+<pre><code class="r">cat(&quot;Loading cube from &quot;, dataCubeFile, &quot;\n&quot;)
+</code></pre>
+
+<pre><code>## Loading cube from
 </code></pre>
 
 <pre><code class="r">load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= store)
-
-summarize.rdf(store)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 3217&quot;
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;load.rdf&quot;
+</code></pre>
+
+<pre><code class="r">summarize.rdf(store)
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;summarize.rdf&quot;
 </code></pre>
 
 <h2>This works do not change</h2>
 
 <pre><code class="r">dsdName&lt;- GetDsdNameFromCube( store )
-domainName&lt;- GetDomainNameFromCube( store )
-cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot; )
 </code></pre>
 
-<pre><code>## dsdName  dsd-DEMO , domainName  DEMO
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetDsdNameFromCube&quot;
+</code></pre>
+
+<pre><code class="r">domainName&lt;- GetDomainNameFromCube( store )
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetDomainNameFromCube&quot;
+</code></pre>
+
+<pre><code class="r">cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot; )
+</code></pre>
+
+<pre><code>## Error in cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot;): object &#39;dsdName&#39; not found
 </code></pre>
 
 <pre><code class="r">forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
-cat(forsparqlprefix,&quot;\n&quot;)
 </code></pre>
 
-<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
-## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
-## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
-## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
-## prefix pav: &lt;http://purl.org/pav&gt;
-## prefix dct: &lt;http://purl.org/dc/terms/&gt;
-## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
-## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
-## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
-## prefix code: &lt;http://www.example.org/dc/code/&gt;
-## prefix dccs: &lt;http://www.example.org/dc/demo/dccs/&gt;
-## prefix ds: &lt;http://www.example.org/dc/demo/ds/&gt;
-## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
-## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
-## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
-## 
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetForSparqlPrefix&quot;
+</code></pre>
+
+<pre><code class="r">cat(forsparqlprefix,&quot;\n&quot;)
+</code></pre>
+
+<pre><code>## Error in cat(forsparqlprefix, &quot;\n&quot;): object &#39;forsparqlprefix&#39; not found
 </code></pre>
 
 <pre><code class="r">rq&lt;-  paste( forsparqlprefix,
@@ -313,54 +304,22 @@ values (?s) {
 &#39;,
 &quot;\n&quot;                               
 )
-
-cube.observations&lt;- sparql.rdf(store, rq)
-knitr::kable(cube.observations)
 </code></pre>
 
-<table><thead>
-<tr>
-<th align="left">s</th>
-<th align="left">p</th>
-<th align="left">o</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:factor</td>
-<td align="left">code:factor-weightbl</td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:trt01a</td>
-<td align="left">code:trt01a-Xanomeline_High_Dose</td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:sex</td>
-<td align="left">code:sex-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:ethnic</td>
-<td align="left">code:ethnic-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:procedure</td>
-<td align="left">code:procedure-min</td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:race</td>
-<td align="left">code:race-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:agegr1</td>
-<td align="left">code:agegr1-<em>ALL</em></td>
-</tr>
-</tbody></table>
+<pre><code>## Error in paste(forsparqlprefix, &quot;\nselect *\nwhere { \n?s a qb:Observation ; \n?p ?o ;\n.\n[] qb:dimension ?p .\nvalues (?s) {\n(ds:obs114)\n}\n}\n# limit 30\n&quot;, : object &#39;forsparqlprefix&#39; not found
+</code></pre>
+
+<pre><code class="r">cube.observations&lt;- sparql.rdf(store, rq)
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;sparql.rdf&quot;
+</code></pre>
+
+<pre><code class="r">knitr::kable(cube.observations)
+</code></pre>
+
+<pre><code>## Error in is.data.frame(x): object &#39;cube.observations&#39; not found
+</code></pre>
 
 <h2>Getting triples with information of object if literal</h2>
 
@@ -379,12 +338,15 @@ values (?s) {
 &#39;,
 &quot;\n&quot;                               
 )
-
-
-save.rdf(construct.rdf( store, cons.rq) , file.path(tempdir(), &quot;rapperin.ttl&quot;), &quot;TURTLE&quot;)
 </code></pre>
 
-<pre><code>## [1] &quot;/tmp/RtmpGbutX1/rapperin.ttl&quot;
+<pre><code>## Error in paste(forsparqlprefix, &quot;\nconstruct { ?s ?p ?o }\nwhere { \n?s ?p ?o .\nBIND( datatype(?o) as ?datatype )\nBIND( isLiteral(?o) as ?isLiteral )\nBIND( lang(?o) as ?lang )\nvalues (?s) {\n(ds:obs114)\n}\n}\n&quot;, : object &#39;forsparqlprefix&#39; not found
+</code></pre>
+
+<pre><code class="r">save.rdf(construct.rdf( store, cons.rq) , file.path(tempdir(), &quot;rapperin.ttl&quot;), &quot;TURTLE&quot;)
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;save.rdf&quot;
 </code></pre>
 
 <p>To see dot code generated by rapper:</p>
@@ -414,142 +376,68 @@ values (?s) {
 &#39;,
 &quot;\n&quot;                               
 )
-
-
-res&lt;- sparql.rdf(store, rq)
-knitr::kable(cube.observations)
 </code></pre>
 
-<table><thead>
-<tr>
-<th align="left">s</th>
-<th align="left">p</th>
-<th align="left">o</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:factor</td>
-<td align="left">code:factor-weightbl</td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:trt01a</td>
-<td align="left">code:trt01a-Xanomeline_High_Dose</td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:sex</td>
-<td align="left">code:sex-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:ethnic</td>
-<td align="left">code:ethnic-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:procedure</td>
-<td align="left">code:procedure-min</td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:race</td>
-<td align="left">code:race-<em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">ds:obs114</td>
-<td align="left">crnd-dimension:agegr1</td>
-<td align="left">code:agegr1-<em>ALL</em></td>
-</tr>
-</tbody></table>
+<pre><code>## Error in paste(forsparqlprefix, &quot;\nselect *\nwhere { \n?s ?p ?o .\nBIND( datatype(?o) as ?datatype )\nBIND( isLiteral(?o) as ?isLiteral )\nBIND( lang(?o) as ?lang )\nvalues (?s) {\n(ds:obs114)\n}\n}\n&quot;, : object &#39;forsparqlprefix&#39; not found
+</code></pre>
+
+<pre><code class="r">res&lt;- sparql.rdf(store, rq)
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;sparql.rdf&quot;
+</code></pre>
+
+<pre><code class="r">knitr::kable(cube.observations)
+</code></pre>
+
+<pre><code>## Error in is.data.frame(x): object &#39;cube.observations&#39; not found
+</code></pre>
 
 <pre><code class="r">dimnames(res)
 </code></pre>
 
-<pre><code>## [[1]]
-## NULL
-## 
-## [[2]]
-## [1] &quot;s&quot;         &quot;p&quot;         &quot;o&quot;         &quot;datatype&quot;  &quot;isLiteral&quot; &quot;lang&quot;
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;res&#39; not found
 </code></pre>
 
 <pre><code class="r">allIRI&lt;- c( res[,1],res[,2])
-uallIRI&lt;- unique(allIRI)
-L&lt;- list()
+</code></pre>
+
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;res&#39; not found
+</code></pre>
+
+<pre><code class="r">uallIRI&lt;- unique(allIRI)
+</code></pre>
+
+<pre><code>## Error in unique(allIRI): object &#39;allIRI&#39; not found
+</code></pre>
+
+<pre><code class="r">L&lt;- list()
 for (i in 1:length(uallIRI) ) {
 L[[ uallIRI[i] ]] &lt;- paste( &quot;L&quot;, i, sep=&quot;&quot; )
 }
-
-paste( L[[ res[,1] ]], L[[ res[,2] ]], res[,3] )
 </code></pre>
 
-<pre><code>## Error in L[[res[, 1]]]: recursive indexing failed at level 2
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;uallIRI&#39; not found
+</code></pre>
+
+<pre><code class="r">paste( L[[ res[,1] ]], L[[ res[,2] ]], res[,3] )
+</code></pre>
+
+<pre><code>## Error in paste(L[[res[, 1]]], L[[res[, 2]]], res[, 3]): object &#39;res&#39; not found
 </code></pre>
 
 <h3>Check the statistics</h3>
 
 <pre><code class="r">stmtSQL&lt;- GetSQLFromCube(store) 
-cat(stmtSQL$summStatSQL) 
 </code></pre>
 
-<pre><code>## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;q3&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, q3(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, a.SEX, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SEX
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, b.RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;race&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.RACE=b.RACE) as measure from  adsl  as a , (select distinct RACE from adsl) as b group by  b.RACE, a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;std&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, std(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;q3&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, q3(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT b.ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;ethnic&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.ETHNIC=b.ETHNIC) as measure from  adsl  as a , (select distinct ETHNIC from adsl) as b group by  b.ETHNIC, a.TRT01A
-## UNION
-## SELECT a.ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, count(*) as measure from  adsl  as a   group by  a.ETHNIC, a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;min&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, min(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;n&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, n(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;median&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, median(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;agegr1&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.AGEGR1=b.AGEGR1) as measure from  adsl  as a , (select distinct AGEGR1 from adsl) as b group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;std&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, std(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, b.AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;agegr1&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.AGEGR1=b.AGEGR1) as measure from  adsl  as a , (select distinct AGEGR1 from adsl) as b group by  b.AGEGR1, a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;median&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, median(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, a.AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, count(*) as measure from  adsl  as a   group by  a.AGEGR1, a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;race&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.RACE=b.RACE) as measure from  adsl  as a , (select distinct RACE from adsl) as b group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;sex&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.SEX=b.SEX) as measure from  adsl  as a , (select distinct SEX from adsl) as b group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;q1&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, q1(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;max&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, max(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, a.RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;count&#39; as procedure, &#39;quantity&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, count(*) as measure from  adsl  as a   group by  a.RACE, a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;mean&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, avg(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, b.SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;sex&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.SEX=b.SEX) as measure from  adsl  as a , (select distinct SEX from adsl) as b group by  a.TRT01A, b.SEX
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;q1&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, q1(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;percent&#39; as procedure, &#39;proportion&#39; as factor, &#39;ethnic&#39; as denominator, &#39;NA&#39; as unit, 100*avg(a.ETHNIC=b.ETHNIC) as measure from  adsl  as a , (select distinct ETHNIC from adsl) as b group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;mean&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, avg(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;n&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, n(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;max&#39; as procedure, &#39;age&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, max(AGE) as measure from  adsl  as a   group by  a.TRT01A
-## UNION
-## SELECT &#39;_ALL_&#39; as ETHNIC, &#39;_ALL_&#39; as RACE, &#39;_ALL_&#39; as AGEGR1, a.TRT01A, &#39;_ALL_&#39; as SEX, &#39;min&#39; as procedure, &#39;weightbl&#39; as factor, &#39;&#39; as denominator, &#39;NA&#39; as unit, min(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetSQLFromCube&quot;
+</code></pre>
+
+<pre><code class="r">cat(stmtSQL$summStatSQL) 
+</code></pre>
+
+<pre><code>## Error in cat(stmtSQL$summStatSQL): object &#39;stmtSQL&#39; not found
 </code></pre>
 
 </body>
