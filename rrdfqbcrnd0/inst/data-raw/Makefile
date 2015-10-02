@@ -50,6 +50,8 @@ RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
 RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 
+RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
+
 
 all: ${TARGETS}
 
@@ -111,7 +113,7 @@ reporting-process.pdf: reporting-process.Rmd
 	${RKNIT2PDF}
 
 package-overview.html: package-overview.Rmd
-	${RKNIT2HTML}
+	${RMD2HTML}
 
 package-overview.md: package-overview.Rmd
 	${RKNIT2MD}
