@@ -15,6 +15,7 @@ reporting-process.html package-overview.html
 MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 
 ADSLTTL=../extdata/sample-rdf/adsl-map.ttl ../extdata/sample-rdf/adsl.ttl
+ADAETTL=../extdata/sample-rdf/adae-map.ttl ../extdata/sample-rdf/adae.ttl
 
 QBTTLS=../extdata/sample-rdf/DC-AE-sample.ttl ../extdata/sample-rdf/DC-DM-sample.ttl ../extdata/sample-rdf/DC-DEMO-sample.ttl
 
@@ -86,6 +87,9 @@ ${QBTTLS} create-qb-examples-as-ttl.html: create-qb-examples-as-ttl.Rmd ${CSVAE}
 	${RKNIT2HTML}
 
 ${ADSLTTL} create-ADSL-ttl.html: create-ADSL-ttl.Rmd ${ADSLXPT}
+	${RKNIT2HTML}
+
+${ADAETTL} create-ADAE-ttl.html: create-ADAE-ttl.Rmd ${ADAEXPT}
 	${RKNIT2HTML}
 
 use-demo-ttl.html: use-demo-ttl.Rmd ../extdata/sample-rdf/DC-DEMO-sample.ttl
