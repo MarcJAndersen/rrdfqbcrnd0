@@ -1,7 +1,7 @@
 ---
 title: "Store CDISC RDF as RRDF data model"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-06-15"
+date: "2015-10-28"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
@@ -13,6 +13,7 @@ vignette: >
 
 # Preliminaries
 
+The `setup.R` script assumes that the current working directory contains the scripts, and the path to the package root is `../..` relative to the present working directory.
 
 ```r
 knitr::read_chunk("setup.R")
@@ -72,9 +73,9 @@ wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/
 ## Finding the files
 
 Replace directory for find with the appropriate directory for your setup.
-Here the the 
-Also change below in R code.
+Also change below for the function `Get.filenames.for.cdisc.standards.R`.
 
+This is one way to find the file names:
 ```
 find ${CDISCRDF_HOME} -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
 ```
@@ -101,7 +102,8 @@ library(tools)
 
 To conserve space in the R package the files are located outside the package.
 
-The files are stored beneath the directory given by fileStemDirectory. The path relative to fileStemDirectory is stored in filesToLoad.
+The files are stored beneath the directory given by fileStemDirectory.
+The path relative to fileStemDirectory is stored in filesToLoad.
 
 
 ```r
@@ -145,33 +147,64 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 ```
 
 ```
-## Warning in normalizePath(file.path(cdisc.files.dir, fn)): path[1]="/home/
-## ma/projects/phrmwg/rdf.cdisc.org/resources/w3.org/skos.rdf": No such file
-## or directory
-```
-
-```
 ## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/w3.org/skos.rdf ..
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : java.io.FileNotFoundException: /home/ma/projects/phrmwg/rdf.cdisc.org/resources/w3.org/skos.rdf (No such file or directory)
+## .. total number of triples: 1361
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcam.rdf ..
+## .. total number of triples: 1374
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcelements.rdf ..
+## .. total number of triples: 1481
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcterms.rdf ..
+## .. total number of triples: 1914
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/glossary-terminology.owl ..
+## .. total number of triples: 2917
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/cdash-terminology.owl ..
+## .. total number of triples: 3845
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/sdtm-terminology.owl ..
+## .. total number of triples: 53592
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/qs-terminology.owl ..
+## .. total number of triples: 79547
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/send-terminology.owl ..
+## .. total number of triples: 117998
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/adam-terminology.owl ..
+## .. total number of triples: 118181
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtm-1-2.ttl ..
+## .. total number of triples: 119657
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/all-standards.ttl ..
+## .. total number of triples: 119667
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/cdash-1-1.ttl ..
+## .. total number of triples: 127111
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtmig-3-1-3.ttl ..
+## .. total number of triples: 139397
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtmig-3-1-2.ttl ..
+## .. total number of triples: 150159
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/adamig-1-0.ttl ..
+## .. total number of triples: 154924
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sendig-3-0.ttl ..
+## .. total number of triples: 163094
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtm-1-3.ttl ..
+## .. total number of triples: 164872
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/adam-2-1.ttl ..
+## .. total number of triples: 164900
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/ct-schema.owl ..
+## .. total number of triples: 164992
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/meta-model-schema.owl ..
+## .. total number of triples: 165188
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..
+## .. total number of triples: 165381
+## Loading /home/ma/projects/phrmwg/rdf-data-cube/cube.ttl ..
+## .. total number of triples: 165673
+## Final rdf.cdisc.org rrdf store, number of triples: 165673
+## rrdf store saved to turle file: /tmp/RtmpYoolIr/cdisc-rdf.ttl
+## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 ```
 
 ```r
 cdisc.save.zip.info<- file.info(cdisc.save.zip)
-```
-
-```
-## Error in file.info(cdisc.save.zip): object 'cdisc.save.zip' not found
-```
-
-```r
 message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size ", cdisc.save.zip.info$size, " bytes")
 ```
 
 ```
-## Error in message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, : object 'cdisc.save.zip' not found
+## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-10-28 21:34:38 size 2315968 bytes
 ```
 
 ### Loading using Load.cdisc.standards 
@@ -186,7 +219,7 @@ cdisc.rdf<- Load.cdisc.standards()
 
 ```
 ## Start loading rdf.cdisc.org contents from /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165643
+## Done loading rdf.cdisc.org contents, number of triples: 165672
 ```
 
 ```r
@@ -194,7 +227,7 @@ message(".. total number of triples: ", summarize.rdf.noprint(cdisc.rdf) )
 ```
 
 ```
-## .. total number of triples: 165643
+## .. total number of triples: 165672
 ```
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
@@ -250,7 +283,10 @@ WHERE { ?s ?p ?o }
 ```r
 SPARQLscriptfn<- file.path(tempdir(),"get-rdf.disc.org.rq")
 writeLines( SPARQLscript, con=SPARQLscriptfn )
+cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
+
+SPARQL script stored in   /tmp/RtmpYoolIr/get-rdf.disc.org.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.
@@ -263,22 +299,31 @@ summarize.rdf(results)
 ```
 
 The code below assumes a locate fuseki instance is running.
-As of 22-feb-2015 the code appears to stop at the first file skos.rdf, which in XML/RDF format.
-Maybe because the jena implementation of from expects a turtle file?
 
 ```r
-endpoint<- "http://localhost:3030/sparql"
+endpoint<- "http://localhost:3030/arm/query"
 results.fuseki <- construct.remote(endpoint, SPARQLscript )
 summarize.rdf(results.fuseki)
 ```
+This worked partially with fuseki 2.3 as of 28-oct-2015: 42199 triples was retrieved. The fuseki endpoint was started using the configuration file `../extdata/sample-rdf/fuseki-crnd-example-config.ttl` (see instruction in top of the file).
+
+Alternative a virtouso endpoint can be used:
+
+```r
+endpoint2<- "http://localhost:8890/sparql"
+results.virtouso <- construct.remote(endpoint2, SPARQLscript )
+summarize.rdf(results.virtouso)
+```
+This worked partially with virtuoso 7.2 as of 28-oct-2015: 164976 triples was retrieved. The fuseki endpoint was started using the configuration file `../extdata/sample-rdf/fuseki-crnd-example-config.ttl` (see instruction in top of the file). Note: the virtuoso endpoint must support remote retrival of data (see [http://localhost:8890/sparql?help=enable_sponge]) and the value of 
+`ResultSetMaxRows` in the SPARQL section of `virtuoso.ini` should be sufficiently high; for the rdf.cdisc.org mentioned here a value of 200000 may be needed.
 
 ### Using the script with jena arq
 The generated SPARQL query works with arq when using a local endpoint.
-The code below is expected to run in the directory given by tempdir().
+The code below is expected to run in the directory given by `tempdir()`.
 Replace _get-rdf.disc.org.rq_ with the path to the generated file (see above).
 
 ```
-export JENAROOT=/opt/apache-jena-2.12.1
+export JENAROOT=/opt/apache-jena-3.0.0
 export PATH=$PATH:$JENAROOT/bin
 arq --query=get-rdf.disc.org.rq > construct-rdf.disc.org.ttl
 ```
@@ -290,6 +335,6 @@ arqCDISCTtl<- file.path(tempdir(), "construct-rdf.disc.org.ttl")
 cdisc.rdf.arq<- load.rdf( arqCDISCTtl, format="TURTLE")
 summarize.rdf(cdisc.rdf.arq)
 ```
-
+This worked as expected as of 28-oct-2015.
 
 

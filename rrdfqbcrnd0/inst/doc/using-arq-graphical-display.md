@@ -1,7 +1,7 @@
 ---
 title: "Graphical display of SPARQL queries with arq, rapper and graphviz"
 author: "mja@statgroup.dk"
-date: "2015-09-22"
+date: "2015-10-28"
 output: rmarkdown::html_vignette
 ---
  
