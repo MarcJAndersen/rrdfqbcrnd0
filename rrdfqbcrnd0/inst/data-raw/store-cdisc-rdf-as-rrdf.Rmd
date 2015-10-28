@@ -13,6 +13,7 @@ vignette: >
 
 # Preliminaries
 
+The `setup.R` script assumes that the current working directory contains the scripts, and the path to the package root is `../..` relative to the present working directory.
 ```{r}
 knitr::read_chunk("setup.R")
 ```
@@ -45,9 +46,9 @@ wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/
 ## Finding the files
 
 Replace directory for find with the appropriate directory for your setup.
-Here the the 
-Also change below in R code.
+Also change below for the function `Get.filenames.for.cdisc.standards.R`.
 
+This is one way to find the file names:
 ```
 find ${CDISCRDF_HOME} -name "*.rdf" -o -name "*.owl" -o -name "*.ttl"
 ```
@@ -72,7 +73,8 @@ library(tools)
 
 To conserve space in the R package the files are located outside the package.
 
-The files are stored beneath the directory given by fileStemDirectory. The path relative to fileStemDirectory is stored in filesToLoad.
+The files are stored beneath the directory given by fileStemDirectory.
+The path relative to fileStemDirectory is stored in filesToLoad.
 
 ```{r, results='asis', eval=TRUE}
 fileStemDirectory<- "~/projects/phrmwg"
@@ -150,7 +152,8 @@ paste0( "FROM ", "<", rqfilesToLoad, ">", collapse="\n" )
 cat(SPARQLscript,"\n")
 SPARQLscriptfn<- file.path(tempdir(),"get-rdf.disc.org.rq")
 writeLines( SPARQLscript, con=SPARQLscriptfn )
- ```
+cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
+```
 
 ### Using the script with R
 The R-code below does not work with rrdf.
@@ -162,21 +165,29 @@ summarize.rdf(results)
 ```
 
 The code below assumes a locate fuseki instance is running.
-As of 22-feb-2015 the code appears to stop at the first file skos.rdf, which in XML/RDF format.
-Maybe because the jena implementation of from expects a turtle file?
 ```{r, results='asis', eval=FALSE}
-endpoint<- "http://localhost:3030/sparql"
+endpoint<- "http://localhost:3030/arm/query"
 results.fuseki <- construct.remote(endpoint, SPARQLscript )
 summarize.rdf(results.fuseki)
 ```
+This worked partially with fuseki 2.3 as of 28-oct-2015: 42199 triples was retrieved. The fuseki endpoint was started using the configuration file `../extdata/sample-rdf/fuseki-crnd-example-config.ttl` (see instruction in top of the file).
+
+Alternative a virtouso endpoint can be used:
+```{r, results='asis', eval=FALSE}
+endpoint2<- "http://localhost:8890/sparql"
+results.virtouso <- construct.remote(endpoint2, SPARQLscript )
+summarize.rdf(results.virtouso)
+```
+This worked partially with virtuoso 7.2 as of 28-oct-2015: 164976 triples was retrieved. The fuseki endpoint was started using the configuration file `../extdata/sample-rdf/fuseki-crnd-example-config.ttl` (see instruction in top of the file). Note: the virtuoso endpoint must support remote retrival of data (see [http://localhost:8890/sparql?help=enable_sponge]) and the value of 
+`ResultSetMaxRows` in the SPARQL section of `virtuoso.ini` should be sufficiently high; for the rdf.cdisc.org mentioned here a value of 200000 may be needed.
 
 ### Using the script with jena arq
 The generated SPARQL query works with arq when using a local endpoint.
-The code below is expected to run in the directory given by tempdir().
+The code below is expected to run in the directory given by `tempdir()`.
 Replace _get-rdf.disc.org.rq_ with the path to the generated file (see above).
 
 ```
-export JENAROOT=/opt/apache-jena-2.12.1
+export JENAROOT=/opt/apache-jena-3.0.0
 export PATH=$PATH:$JENAROOT/bin
 arq --query=get-rdf.disc.org.rq > construct-rdf.disc.org.ttl
 ```
@@ -187,6 +198,6 @@ arqCDISCTtl<- file.path(tempdir(), "construct-rdf.disc.org.ttl")
 cdisc.rdf.arq<- load.rdf( arqCDISCTtl, format="TURTLE")
 summarize.rdf(cdisc.rdf.arq)
 ```
-
+This worked as expected as of 28-oct-2015.
 
 
