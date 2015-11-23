@@ -373,7 +373,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq
 ## ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 </code></pre>
 
-<h2>Get definition for all descriptive statistics</h2>
+<h2>Get definition for all descriptive statistics - class <code>code:procedure</code></h2>
 
 <p>The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.</p>
 
@@ -395,6 +395,191 @@ arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq
 ## | code:procedure-median  | &quot;median&quot;  | &quot;function (x)  {     median(x, na.rm = TRUE) }&quot;                    |
 ## | code:procedure-q1      | &quot;q1&quot;      | &quot;function (x)  {     quantile(x, probs = c(0.25), na.rm = TRUE) }&quot; |
 ## -----------------------------------------------------------------------------------------------------------
+</code></pre>
+
+<h2>Get the codelist definition for all descriptive statistics - class <code>code:procedure</code></h2>
+
+<p>The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.</p>
+
+<pre><code class="bash">cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOprocedure-codelist.rq 
+</code></pre>
+
+<pre><code>## ---------------------------------------------------------------------------------------------------------------------------------
+## | s                      | p                               | o                                                                  |
+## =================================================================================================================================
+## | code:procedure-min     | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-min     | skos:prefLabel                  | &quot;min&quot;                                                              |
+## | code:procedure-min     | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-min     | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     min(x, na.rm = TRUE) }&quot;                       |
+## | code:procedure-min     | rrdfqbcrnd0:R-selectionvalue    | &quot;min&quot;                                                              |
+## | code:procedure-min     | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-min     | rdfs:comment                    | &quot;Descriptive statistics min&quot;@en                                    |
+## | code:procedure-min     | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-min     | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-std     | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-std     | skos:prefLabel                  | &quot;std&quot;                                                              |
+## | code:procedure-std     | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-std     | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     sd(x, na.rm = TRUE) }&quot;                        |
+## | code:procedure-std     | rrdfqbcrnd0:R-selectionvalue    | &quot;std&quot;                                                              |
+## | code:procedure-std     | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-std     | rdfs:comment                    | &quot;Descriptive statistics std&quot;@en                                    |
+## | code:procedure-std     | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-std     | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-q3      | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-q3      | skos:prefLabel                  | &quot;q3&quot;                                                               |
+## | code:procedure-q3      | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-q3      | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }&quot; |
+## | code:procedure-q3      | rrdfqbcrnd0:R-selectionvalue    | &quot;q3&quot;                                                               |
+## | code:procedure-q3      | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-q3      | rdfs:comment                    | &quot;Descriptive statistics q3&quot;@en                                     |
+## | code:procedure-q3      | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-q3      | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-median  | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-median  | skos:prefLabel                  | &quot;median&quot;                                                           |
+## | code:procedure-median  | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-median  | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     median(x, na.rm = TRUE) }&quot;                    |
+## | code:procedure-median  | rrdfqbcrnd0:R-selectionvalue    | &quot;median&quot;                                                           |
+## | code:procedure-median  | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-median  | rdfs:comment                    | &quot;Descriptive statistics median&quot;@en                                 |
+## | code:procedure-median  | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-median  | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-count   | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-count   | skos:prefLabel                  | &quot;count&quot;                                                            |
+## | code:procedure-count   | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-count   | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     length(x) }&quot;                                  |
+## | code:procedure-count   | rrdfqbcrnd0:R-selectionvalue    | &quot;count&quot;                                                            |
+## | code:procedure-count   | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-count   | rdfs:comment                    | &quot;Descriptive statistics count&quot;@en                                  |
+## | code:procedure-count   | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-count   | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-max     | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-max     | skos:prefLabel                  | &quot;max&quot;                                                              |
+## | code:procedure-max     | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-max     | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     max(x, na.rm = TRUE) }&quot;                       |
+## | code:procedure-max     | rrdfqbcrnd0:R-selectionvalue    | &quot;max&quot;                                                              |
+## | code:procedure-max     | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-max     | rdfs:comment                    | &quot;Descriptive statistics max&quot;@en                                    |
+## | code:procedure-max     | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-max     | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-mean    | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-mean    | skos:prefLabel                  | &quot;mean&quot;                                                             |
+## | code:procedure-mean    | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-mean    | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     mean(x, na.rm = TRUE) }&quot;                      |
+## | code:procedure-mean    | rrdfqbcrnd0:R-selectionvalue    | &quot;mean&quot;                                                             |
+## | code:procedure-mean    | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-mean    | rdfs:comment                    | &quot;Descriptive statistics mean&quot;@en                                   |
+## | code:procedure-mean    | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-mean    | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-q1      | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-q1      | skos:prefLabel                  | &quot;q1&quot;                                                               |
+## | code:procedure-q1      | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-q1      | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     quantile(x, probs = c(0.25), na.rm = TRUE) }&quot; |
+## | code:procedure-q1      | rrdfqbcrnd0:R-selectionvalue    | &quot;q1&quot;                                                               |
+## | code:procedure-q1      | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-q1      | rdfs:comment                    | &quot;Descriptive statistics q1&quot;@en                                     |
+## | code:procedure-q1      | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-q1      | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-n       | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-n       | skos:prefLabel                  | &quot;n&quot;                                                                |
+## | code:procedure-n       | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-n       | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     length(x[!is.na(x)]) }&quot;                       |
+## | code:procedure-n       | rrdfqbcrnd0:R-selectionvalue    | &quot;n&quot;                                                                |
+## | code:procedure-n       | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-n       | rdfs:comment                    | &quot;Descriptive statistics n&quot;@en                                      |
+## | code:procedure-n       | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-n       | rdf:type                        | code:Procedure                                                     |
+## | code:procedure-percent | skos:topConceptOf               | code:procedure                                                     |
+## | code:procedure-percent | skos:prefLabel                  | &quot;percent&quot;                                                          |
+## | code:procedure-percent | skos:inScheme                   | code:procedure                                                     |
+## | code:procedure-percent | rrdfqbcrnd0:RdescStatDefFun     | &quot;function (x)  {     -1 }&quot;                                         |
+## | code:procedure-percent | rrdfqbcrnd0:R-selectionvalue    | &quot;percent&quot;                                                          |
+## | code:procedure-percent | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                               |
+## | code:procedure-percent | rdfs:comment                    | &quot;Descriptive statistics percent&quot;@en                                |
+## | code:procedure-percent | rdf:type                        | skos:Concept                                                       |
+## | code:procedure-percent | rdf:type                        | code:Procedure                                                     |
+## ---------------------------------------------------------------------------------------------------------------------------------
+</code></pre>
+
+<h2>Get definition for all variables used for descriptive statistics - class <code>code:factor</code></h2>
+
+<p>The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.</p>
+
+<pre><code class="bash">cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOfactor.rq 
+</code></pre>
+
+<pre><code>## ---------------------------------------------------------------------------------------
+## | factor                 | prefLabel    | DataSetRefD2RQ            | Rselectionvalue |
+## =======================================================================================
+## | code:factor-_ALL_      | &quot;_ALL_&quot;      |                           |                 |
+## | code:factor-proportion | &quot;proportion&quot; |                           | &quot;proportion&quot;    |
+## | code:factor-weightbl   | &quot;weightbl&quot;   | rrdfqbcrnd0:ADSL_WEIGHTBL | &quot;weightbl&quot;      |
+## | code:factor-_NONMISS_  | &quot;_NONMISS_&quot;  |                           |                 |
+## | code:factor-quantity   | &quot;quantity&quot;   |                           | &quot;quantity&quot;      |
+## | code:factor-age        | &quot;age&quot;        | rrdfqbcrnd0:ADSL_AGE      | &quot;age&quot;           |
+## ---------------------------------------------------------------------------------------
+</code></pre>
+
+<h2>Get the codelist definition for all variables used for descriptive statistics - class <code>code:factor</code></h2>
+
+<p>The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.</p>
+
+<pre><code class="bash">cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOfactor-codelist.rq 
+</code></pre>
+
+<pre><code>## ---------------------------------------------------------------------------------------------------------------------------------------------------------------
+## | s                      | p                               | o                                                                                                |
+## ===============================================================================================================================================================
+## | code:factor-weightbl   | skos:topConceptOf               | code:factor                                                                                      |
+## | code:factor-weightbl   | skos:prefLabel                  | &quot;weightbl&quot;                                                                                       |
+## | code:factor-weightbl   | skos:inScheme                   | code:factor                                                                                      |
+## | code:factor-weightbl   | rrdfqbcrnd0:R-selectionvalue    | &quot;weightbl&quot;                                                                                       |
+## | code:factor-weightbl   | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                                                             |
+## | code:factor-weightbl   | rrdfqbcrnd0:DataSetRefD2RQ      | rrdfqbcrnd0:ADSL_WEIGHTBL                                                                        |
+## | code:factor-weightbl   | rdfs:comment                    | &quot;Coded values from data source. No reconciliation against another source&quot;@en                     |
+## | code:factor-weightbl   | rdf:type                        | skos:Concept                                                                                     |
+## | code:factor-weightbl   | rdf:type                        | code:Factor                                                                                      |
+## | code:factor-age        | skos:topConceptOf               | code:factor                                                                                      |
+## | code:factor-age        | skos:prefLabel                  | &quot;age&quot;                                                                                            |
+## | code:factor-age        | skos:inScheme                   | code:factor                                                                                      |
+## | code:factor-age        | rrdfqbcrnd0:R-selectionvalue    | &quot;age&quot;                                                                                            |
+## | code:factor-age        | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                                                             |
+## | code:factor-age        | rrdfqbcrnd0:DataSetRefD2RQ      | rrdfqbcrnd0:ADSL_AGE                                                                             |
+## | code:factor-age        | rdfs:comment                    | &quot;Coded values from data source. No reconciliation against another source&quot;@en                     |
+## | code:factor-age        | rdf:type                        | skos:Concept                                                                                     |
+## | code:factor-age        | rdf:type                        | code:Factor                                                                                      |
+## | code:factor-_ALL_      | skos:topConceptOf               | code:factor                                                                                      |
+## | code:factor-_ALL_      | skos:prefLabel                  | &quot;_ALL_&quot;                                                                                          |
+## | code:factor-_ALL_      | skos:inScheme                   | code:factor                                                                                      |
+## | code:factor-_ALL_      | rdfs:comment                    | &quot;NON-CDISC: Represents all codelist categories.&quot;@en                                              |
+## | code:factor-_ALL_      | rdf:type                        | skos:Concept                                                                                     |
+## | code:factor-_ALL_      | rdf:type                        | code:Factor                                                                                      |
+## | code:factor-quantity   | skos:topConceptOf               | code:factor                                                                                      |
+## | code:factor-quantity   | skos:prefLabel                  | &quot;quantity&quot;                                                                                       |
+## | code:factor-quantity   | skos:inScheme                   | code:factor                                                                                      |
+## | code:factor-quantity   | rrdfqbcrnd0:R-selectionvalue    | &quot;quantity&quot;                                                                                       |
+## | code:factor-quantity   | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                                                             |
+## | code:factor-quantity   | rdfs:comment                    | &quot;Coded values from data source. No reconciliation against another source&quot;@en                     |
+## | code:factor-quantity   | rdf:type                        | skos:Concept                                                                                     |
+## | code:factor-quantity   | rdf:type                        | code:Factor                                                                                      |
+## | code:factor-_NONMISS_  | skos:topConceptOf               | code:factor                                                                                      |
+## | code:factor-_NONMISS_  | skos:prefLabel                  | &quot;_NONMISS_&quot;                                                                                      |
+## | code:factor-_NONMISS_  | skos:inScheme                   | code:factor                                                                                      |
+## | code:factor-_NONMISS_  | rrdfqbcrnd0:R-selectionfunction | &quot;is.na&quot;                                                                                          |
+## | code:factor-_NONMISS_  | rdfs:comment                    | &quot;NON-CDISC: Represents the non-missing codelist categories. Does not include missing values.&quot;@en |
+## | code:factor-_NONMISS_  | rdf:type                        | skos:Concept                                                                                     |
+## | code:factor-_NONMISS_  | rdf:type                        | code:Factor                                                                                      |
+## | code:factor-proportion | skos:topConceptOf               | code:factor                                                                                      |
+## | code:factor-proportion | skos:prefLabel                  | &quot;proportion&quot;                                                                                     |
+## | code:factor-proportion | skos:inScheme                   | code:factor                                                                                      |
+## | code:factor-proportion | rrdfqbcrnd0:R-selectionvalue    | &quot;proportion&quot;                                                                                     |
+## | code:factor-proportion | rrdfqbcrnd0:R-selectionoperator | &quot;==&quot;                                                                                             |
+## | code:factor-proportion | rdfs:comment                    | &quot;Coded values from data source. No reconciliation against another source&quot;@en                     |
+## | code:factor-proportion | rdf:type                        | skos:Concept                                                                                     |
+## | code:factor-proportion | rdf:type                        | code:Factor                                                                                      |
+## ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 </code></pre>
 
 <h2>Get definition for descriptive statistics median</h2>
@@ -447,7 +632,58 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations-R-selection.rq
 arq --data adsl-map.ttl --query ADSL-mapping.rq
 </code></pre>
 
-<pre><code>## File not found: ADSL-mapping.rq
+<pre><code>## -----------------------------------------------------------------
+## | mapColumn                    | d2rqcolumn      | d2rqdatatype |
+## =================================================================
+## | &lt;adsl-map.ttl#ADSL_AGEU&gt;     | &quot;ADSL.AGEU&quot;     |              |
+## | &lt;adsl-map.ttl#ADSL_TRT01PN&gt;  | &quot;ADSL.TRT01PN&quot;  | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_SUBJID&gt;   | &quot;ADSL.SUBJID&quot;   |              |
+## | &lt;adsl-map.ttl#ADSL_AVGDD&gt;    | &quot;ADSL.AVGDD&quot;    | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_COMP24FL&gt; | &quot;ADSL.COMP24FL&quot; |              |
+## | &lt;adsl-map.ttl#ADSL_USUBJID&gt;  | &quot;ADSL.USUBJID&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_TRTSDT&gt;   | &quot;ADSL.TRTSDT&quot;   | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_TRTEDT&gt;   | &quot;ADSL.TRTEDT&quot;   | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_DSRAEFL&gt;  | &quot;ADSL.DSRAEFL&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_AGEGR1&gt;   | &quot;ADSL.AGEGR1&quot;   |              |
+## | &lt;adsl-map.ttl#ADSL_DCREASCD&gt; | &quot;ADSL.DCREASCD&quot; |              |
+## | &lt;adsl-map.ttl#ADSL_DTHFL&gt;    | &quot;ADSL.DTHFL&quot;    |              |
+## | &lt;adsl-map.ttl#ADSL_VISNUMEN&gt; | &quot;ADSL.VISNUMEN&quot; | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_DCDECOD&gt;  | &quot;ADSL.DCDECOD&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_STUDYID&gt;  | &quot;ADSL.STUDYID&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_RFENDTC&gt;  | &quot;ADSL.RFENDTC&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_SITEGR1&gt;  | &quot;ADSL.SITEGR1&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_COMP16FL&gt; | &quot;ADSL.COMP16FL&quot; |              |
+## | &lt;adsl-map.ttl#ADSL_CUMDOSE&gt;  | &quot;ADSL.CUMDOSE&quot;  | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_BMIBL&gt;    | &quot;ADSL.BMIBL&quot;    | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_ITTFL&gt;    | &quot;ADSL.ITTFL&quot;    |              |
+## | &lt;adsl-map.ttl#ADSL_HEIGHTBL&gt; | &quot;ADSL.HEIGHTBL&quot; | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_TRT01P&gt;   | &quot;ADSL.TRT01P&quot;   |              |
+## | &lt;adsl-map.ttl#ADSL_ARM&gt;      | &quot;ADSL.ARM&quot;      |              |
+## | &lt;adsl-map.ttl#ADSL_TRT01AN&gt;  | &quot;ADSL.TRT01AN&quot;  | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_MMSETOT&gt;  | &quot;ADSL.MMSETOT&quot;  | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_DURDSGR1&gt; | &quot;ADSL.DURDSGR1&quot; |              |
+## | &lt;adsl-map.ttl#ADSL_RFENDT&gt;   | &quot;ADSL.RFENDT&quot;   | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_SEX&gt;      | &quot;ADSL.SEX&quot;      |              |
+## | &lt;adsl-map.ttl#ADSL_RACE&gt;     | &quot;ADSL.RACE&quot;     |              |
+## | &lt;adsl-map.ttl#ADSL_AGE&gt;      | &quot;ADSL.AGE&quot;      | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_TRT01A&gt;   | &quot;ADSL.TRT01A&quot;   |              |
+## | &lt;adsl-map.ttl#ADSL_EFFFL&gt;    | &quot;ADSL.EFFFL&quot;    |              |
+## | &lt;adsl-map.ttl#ADSL_RFSTDTC&gt;  | &quot;ADSL.RFSTDTC&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_ETHNIC&gt;   | &quot;ADSL.ETHNIC&quot;   |              |
+## | &lt;adsl-map.ttl#ADSL_DISONSDT&gt; | &quot;ADSL.DISONSDT&quot; | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_WEIGHTBL&gt; | &quot;ADSL.WEIGHTBL&quot; | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_RACEN&gt;    | &quot;ADSL.RACEN&quot;    | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_VISIT1DT&gt; | &quot;ADSL.VISIT1DT&quot; | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_BMIBLGR1&gt; | &quot;ADSL.BMIBLGR1&quot; |              |
+## | &lt;adsl-map.ttl#ADSL_COMP8FL&gt;  | &quot;ADSL.COMP8FL&quot;  |              |
+## | &lt;adsl-map.ttl#ADSL_AGEGR1N&gt;  | &quot;ADSL.AGEGR1N&quot;  | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_SAFFL&gt;    | &quot;ADSL.SAFFL&quot;    |              |
+## | &lt;adsl-map.ttl#ADSL_TRTDUR&gt;   | &quot;ADSL.TRTDUR&quot;   | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_DISCONFL&gt; | &quot;ADSL.DISCONFL&quot; |              |
+## | &lt;adsl-map.ttl#ADSL_DURDIS&gt;   | &quot;ADSL.DURDIS&quot;   | xsd:double   |
+## | &lt;adsl-map.ttl#ADSL_SITEID&gt;   | &quot;ADSL.SITEID&quot;   |              |
+## | &lt;adsl-map.ttl#ADSL_EDUCLVL&gt;  | &quot;ADSL.EDUCLVL&quot;  | xsd:double   |
+## -----------------------------------------------------------------
 </code></pre>
 
 <p>Then dump the contents of a record in the database.</p>

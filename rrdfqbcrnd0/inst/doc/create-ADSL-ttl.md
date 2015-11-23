@@ -1,7 +1,7 @@
 ---
 title: "Create ADSL as TTL file"
 author: "mja@statgroup.dk"
-date: "2015-10-28"
+date: "2015-11-23"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create ADSL as TTL file}
@@ -109,7 +109,7 @@ cat("SQLite database stored as ", tfile, "\n")
 ```
 
 ```
-## SQLite database stored as  /tmp/RtmpXJyAfs/file131c71d4924d
+## SQLite database stored as  /tmp/RtmpEmWsxF/file1299799d4052
 ```
 
 ```r
@@ -119,7 +119,7 @@ cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
 ```
-## SQLite database dump in  /tmp/RtmpXJyAfs/file131c7b322b4d
+## SQLite database dump in  /tmp/RtmpEmWsxF/file129952d24085
 ```
 
 Next step is to process the dump, so the SQL can be used as input to d2rq.
@@ -143,7 +143,7 @@ cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
 ```
-## SQLite database dump modified stored as  /tmp/RtmpXJyAfs/file131cbf6d432
+## SQLite database dump modified stored as  /tmp/RtmpEmWsxF/file129950b9daf1
 ```
 
 ```r
@@ -180,7 +180,7 @@ cat( "File ", adslmapttlFn, " copied to directory ", targetDir, "\n")
 ```
 
 ```
-## File  /tmp/RtmpXJyAfs/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+## File  /tmp/RtmpEmWsxF/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 ```
 
 ```r
@@ -190,7 +190,7 @@ cat( "File ", adslttlFn, " copied to directory ", targetDir, "\n")
 ```
 
 ```
-## File  /tmp/RtmpXJyAfs/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+## File  /tmp/RtmpEmWsxF/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 ```
 
 

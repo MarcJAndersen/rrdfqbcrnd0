@@ -1,7 +1,7 @@
 ---
 title: "Create DM table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-06-21"
+date: "2015-09-22"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DM table as csv file}
@@ -114,53 +114,34 @@ library(rrdfqbcrnd0)
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0")
 checkCube <- new.rdf(ontology=FALSE)  # Initialize
 load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
+```
+
+```
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : java.io.FileNotFoundException:  (No such file or directory)
+```
+
+```r
 summarize.rdf(checkCube)
 ```
 
 ```
-## [1] "Number of triples: 1308"
+## [1] "Number of triples: 0"
 ```
 
 ```r
 stmtSQL<- GetSQLFromCube(checkCube) 
+```
 
+```
+## Error in tempstr[[1]]: subscript out of bounds
+```
+
+```r
 cat(stmtSQL$summStatSQL) 
 ```
 
 ```
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'min' as procedure, 'AGE' as factor, '_NULL_' as denominator, 'YEARS' as unit, min(AGE) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SEX, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'mean' as procedure, 'WEIGHTBL' as factor, '_NULL_' as denominator, 'KG' as unit, avg(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'median' as procedure, 'AGE' as factor, '_NULL_' as denominator, 'YEARS' as unit, median(AGE) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'max' as procedure, 'WEIGHTBL' as factor, '_NULL_' as denominator, 'KG' as unit, max(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'median' as procedure, 'WEIGHTBL' as factor, '_NULL_' as denominator, 'KG' as unit, median(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, a.RACE, '_ALL_' as SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.RACE, a.SAFFL
-## UNION
-## SELECT a.TRT01A, b.RACE, '_ALL_' as SEX, a.SAFFL, 'percent' as procedure, 'proportion' as factor, 'RACE' as denominator, '_NULL_' as unit, 100*avg(a.RACE=b.RACE) as measure from  adsl  as a , (select distinct RACE from adsl) as b group by  a.TRT01A, b.RACE, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'max' as procedure, 'AGE' as factor, '_NULL_' as denominator, 'YEARS' as unit, max(AGE) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'stdev' as procedure, 'AGE' as factor, '_NULL_' as denominator, 'YEARS' as unit, stdev(AGE) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, b.SEX, a.SAFFL, 'percent' as procedure, 'proportion' as factor, 'SEX' as denominator, '_NULL_' as unit, 100*avg(a.SEX=b.SEX) as measure from  adsl  as a , (select distinct SEX from adsl) as b group by  a.TRT01A, b.SEX, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'min' as procedure, 'WEIGHTBL' as factor, '_NULL_' as denominator, 'KG' as unit, min(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT '_ALL_' as TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.SEX, a.SAFFL
-## UNION
-## SELECT '_ALL_' as TRT01A, a.RACE, '_ALL_' as SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.RACE, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'mean' as procedure, 'AGE' as factor, '_NULL_' as denominator, 'YEARS' as unit, avg(AGE) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
-## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'stdev' as procedure, 'WEIGHTBL' as factor, '_NULL_' as denominator, 'KG' as unit, stdev(WEIGHTBL) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
+## Error in cat(stmtSQL$summStatSQL): object 'stmtSQL' not found
 ```
 
 ```r
@@ -171,8 +152,16 @@ adsl.summ.stat.res<- sqldf( stmtSQL$summStatSQL)
 ## Loading required package: tcltk
 ```
 
+```
+## Error in is.tclObj(x): object 'stmtSQL' not found
+```
+
 ```r
 names(adsl.summ.stat.res)<- tolower(gsub("(a|b)\\.","", names(adsl.summ.stat.res)))
+```
+
+```
+## Error in gsub("(a|b)\\.", "", names(adsl.summ.stat.res)): object 'adsl.summ.stat.res' not found
 ```
 
 ## Store the SQL statements to a file
@@ -180,9 +169,21 @@ names(adsl.summ.stat.res)<- tolower(gsub("(a|b)\\.","", names(adsl.summ.stat.res
 
 ```r
 res.text<- stmtSQL$summStatSQL
+```
 
+```
+## Error in eval(expr, envir, enclos): object 'stmtSQL' not found
+```
+
+```r
 cr.text<-   paste0("create table qbframe ", "(", paste(names(stmtSQL$qbframe), "TEXT", collapse=", "), ")",";")
+```
 
+```
+## Error in paste(names(stmtSQL$qbframe), "TEXT", collapse = ", "): object 'stmtSQL' not found
+```
+
+```r
 in.text<-   paste0(
   paste(
   paste0("insert into qbframe ", "(", paste0(names(stmtSQL$qbframe),collapse=","), ")\n" ),
@@ -190,19 +191,46 @@ in.text<-   paste0(
   paste0( "(", apply(stmtSQL$qbframe,1,function(x) {paste0('"',x,'"', collapse=",")}), ")",  collapse=",\n"),
   collapse="\n"
   ),";\n")
+```
 
+```
+## Error in paste0(names(stmtSQL$qbframe), collapse = ","): object 'stmtSQL' not found
+```
+
+```r
 se.text<- "select * from qbframe;"
 
 tempfile<- file.path(tempdir(),"temp-code.R")
 cat(paste('res.text<- "', res.text,'"\n',collapse="\n"), file=tempfile)
+```
+
+```
+## Error in paste("res.text<- \"", res.text, "\"\n", collapse = "\n"): object 'res.text' not found
+```
+
+```r
 cat(paste("cr.text<- '", cr.text,"'\n",collapse="\n"), file=tempfile,append=TRUE)
+```
+
+```
+## Error in paste("cr.text<- '", cr.text, "'\n", collapse = "\n"): object 'cr.text' not found
+```
+
+```r
 cat(paste("in.text<- '", in.text,"'\n",collapse="\n"), file=tempfile,append=TRUE)
+```
+
+```
+## Error in paste("in.text<- '", in.text, "'\n", collapse = "\n"): object 'in.text' not found
+```
+
+```r
 cat(paste("se.text<- '", se.text,"'\n",collapse="\n"), file=tempfile,append=TRUE)
 print(tempfile)
 ```
 
 ```
-## [1] "/tmp/RtmpohoFyn/temp-code.R"
+## [1] "/tmp/RtmpaDWN2s/temp-code.R"
 ```
 
 ## Define SQL statements directly
