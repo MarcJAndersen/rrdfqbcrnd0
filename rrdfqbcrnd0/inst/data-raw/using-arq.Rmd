@@ -61,6 +61,14 @@ cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq 
 ```
 
+## Get the codelists 
+
+The SPARQL script shows the codelist.
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOcodelist.rq 
+```
+
 ## Get the codelist definition for all descriptive statistics - class `code:procedure`
 
 The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.

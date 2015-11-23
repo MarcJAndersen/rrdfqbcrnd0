@@ -28,15 +28,32 @@ dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="
 store <- new.rdf()  # Initialize
 
 cat("Loading cube specfication from ", dataCubeSpec, "\n")
-load.rdf(dataCubeSpec, format="TURTLE", appendTo= store)
+tmp<- load.rdf(dataCubeSpec, format="TURTLE", appendTo= store)
 
 cat("Loading cube from ", dataCubeFile, "\n")
-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+tmp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 
 summarize.rdf(store)
 
 ```
 
+## Execute the DEMO* SPARQL queries
+
+```{r, eval=TRUE}
+
+rqFiles<- system.file("extdata/sample-rdf", list.files(system.file("extdata/sample-rdf",  package="rrdfqbcrnd0"), pattern="DEMO.+rq$"),  package="rrdfqbcrnd0")
+
+for (rqFile in rqFiles) {
+    cat("File ", rqFile, "\n")
+    rq<- paste0(readLines(rqFile),collapse="\n")
+    res<- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
+    print(nrow(res))
+    if (nrow(res)>0) {
+        print(knitr::kable(res))
+        }
+}
+
+```
 
 ## This works do not change
 
@@ -128,7 +145,7 @@ values (?s) {
 
 
 res<- sparql.rdf(store, rq)
-knitr::kable(cube.observations)
+knitr::kable(res)
 
 dimnames(res)
 
