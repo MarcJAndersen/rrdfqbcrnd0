@@ -19,10 +19,11 @@ prefix crnd-dimension: <http://www.example.org/dc/dimension#>
 prefix crnd-attribute: <http://www.example.org/dc/attribute#>  
 prefix crnd-measure: <http://www.example.org/dc/measure#>  
 
-select ?procedure ?prefLabel ?functiondef where { 
-code:procedure  a skos:ConceptScheme ;
-   skos:hasTopConcept  ?procedure .
-optional{ ?procedure skos:prefLabel ?prefLabel . }  
-optional{ ?procedure rrdfqbcrnd0:RdescStatDefFun ?functiondef . }  
- }    
+select * where { 
+code:factor  a                 skos:ConceptScheme ;
+     skos:hasTopConcept  ?factor .
+optional{ ?factor skos:prefLabel ?prefLabel . }  
+optional{ ?factor rrdfqbcrnd0:DataSetRefD2RQ ?DataSetRefD2RQ . }
+optional{ ?factor rrdfqbcrnd0:R-selectionvalue ?Rselectionvalue . }
+}    
 
