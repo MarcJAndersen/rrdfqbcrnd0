@@ -1,7 +1,7 @@
 ---
 title: "Usage of cube DEMO"
 author: "mja@statgroup.dk"
-date: "2015-06-28"
+date: "2015-10-28"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Usage of cube DEMO}

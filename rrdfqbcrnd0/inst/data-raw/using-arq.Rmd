@@ -53,12 +53,36 @@ cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq 
 ```
 
-## Get definition for all descriptive statistics
+## Get definition for all descriptive statistics - class `code:procedure`
 
 The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.
 ```{r, engine='bash'}
 cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq 
+```
+
+## Get the codelist definition for all descriptive statistics - class `code:procedure`
+
+The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOprocedure-codelist.rq 
+```
+
+## Get definition for all variables used for descriptive statistics - class `code:factor`
+
+The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOfactor.rq 
+```
+
+## Get the codelist definition for all variables used for descriptive statistics - class `code:factor`
+
+The SPARQL script shows how the R function definition for the descriptive statistics is stored in the cube.
+```{r, engine='bash'}
+cd ../extdata/sample-rdf
+arq --data DC-DEMO-sample.ttl --query DEMOfactor-codelist.rq 
 ```
 
 ## Get definition for descriptive statistics median

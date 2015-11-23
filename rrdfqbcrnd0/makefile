@@ -1,6 +1,6 @@
 PACKAGENAME=rrdfqbcrnd0
 
-all: createRD data-raw rbuildforce rcheck rbuild
+all: createRD data-raw rbuildforce rcheck rbuild vignettedoc
 
 cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
@@ -22,7 +22,7 @@ createRD:
 
 
 data-raw:
-	(cd inst/data-raw; make all)
+	(cd inst/data-raw; make all; make installDoc)
 
 # Only run this after the package is installed in the overall R library
 # The vignettes uses the packages, and this should be the most recent version

@@ -23,11 +23,16 @@ There are several ways to install the package, with the most straightforward pre
 
 ### Install as a package
 
-From (https://github.com/MarcJAndersen/rrdfqbcrnd0/tree/master/ReleasePackages) download the most recent version. As of May 26, 2015 the most recent version is (https://github.com/MarcJAndersen/rrdfqbcrnd0/blob/master/ReleasePackages/rrdfqbcrnd0_0.1.4.tar.gz)[rrdfqbcrnd0_0.1.4.tar.gz]. In R issue
+Download rrdfqbcrnd0 project from Git from (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
+
+Extract the most recent package (rrdfqbcrnd0_0.1.6.tar.gz) from rrdfqbcrnd0-master/ReleasePackages/ subfolder of the downloaded archive. 
+
+Put rrdfqbcrnd0_0.1.6.tar.gz in the current working directory of the R process.
+
+In R issue
 ```r
-install.packages("rrdfqbcrnd0_0.1.4.tar.gz")
+install.packages("rrdfqbcrnd0_0.1.6.tar.gz")
 ```
-This is assuming that the downloaded rrdfqbcrnd0_0.1.4.tar.gz is stored in the current working directory of the R process.
 
 ### Install in R from local directory using Rstudio
 
@@ -37,7 +42,7 @@ GitHub
 
 Extract the zip file to a directory of your choosing. 
 
-Go to the directory, change to rrdfqbcrnd0 subdirectory and open the rrdfqbcrnd0.Rproj file.
+Open the extracted directory. Change to rrdfqbcrnd0 subdirectory and open the rrdfqbcrnd0.Rproj file.
 
 ### Clone from GitHub and start using Rstudio
 

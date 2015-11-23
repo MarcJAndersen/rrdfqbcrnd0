@@ -203,6 +203,8 @@ hr {
 <body>
 <h1>Create turtle version of ADSL dataset</h1>
 
+<h2>Setup</h2>
+
 <pre><code class="r">knitr::read_chunk(&quot;setup.R&quot;)
 </code></pre>
 
@@ -231,20 +233,31 @@ hr {
 
 <p>This script creates a turtle version of the ADSL dataset.</p>
 
-<p>The script uses SQLite to export the ADSL dataset, and d2rq (<a href="http://d2rq.org/">http://d2rq.org/</a>) to create a turle version of the file.</p>
+<p>The script uses SQLite to export the ADSL dataset, and d2rq (<a href="http://d2rq.org/">http://d2rq.org/</a>) to create a turle version of the file.
+In the code below it is assumed that d2rq is installed in the directory <code>/opt/d2rq-0.8.1</code>.</p>
 
 <pre><code class="r">library(foreign)
 fnadsl&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adsl.xpt&quot;, package=&quot;rrdfqbcrnd0&quot;)
 adsl&lt;-read.xport(fnadsl)
+</code></pre>
 
-## Use other method for reading sas - see elsewhere
+<p>The present code uses <code>read.xport</code> to input the sas dataset.
+TODO: Date variables are note handled correctly. Other
+methods are available allowing access to more of the meta data in the
+datasets.</p>
 
-## http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf
-## install.packages(&quot;RSQLite&quot;)
+<p>Next step is to dump the data as a SQL dump, that will serve as input
+to D2RQ.  For dumping the data <code>sqlite</code> is used as it is the easies to
+setup. The R-package <code>RSQLite</code>
+(<a href="http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf">http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf</a>) provides
+access to <code>sqlite</code>.</p>
 
-## Create a SQL dump - here using RSQLite - could also create the dump programically
+<pre><code class="r">## install.packages(&quot;RSQLite&quot;)
+</code></pre>
 
-library(RSQLite)
+<p>The SQL dump is created by transfering the R data.frame to SQLite, and the invoking sqlite to create a dump.</p>
+
+<pre><code class="r">library(RSQLite)
 </code></pre>
 
 <pre><code>## Loading required package: DBI
@@ -271,7 +284,7 @@ dbWriteTable(con, &quot;adsl&quot;, adsl)
 <pre><code class="r">cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database stored as  /tmp/RtmpzZBsSN/file5aab2944362c
+<pre><code>## SQLite database stored as  /tmp/RtmpXJyAfs/file131c71d4924d
 </code></pre>
 
 <pre><code class="r">dumpFn&lt;- tempfile()
@@ -279,47 +292,77 @@ system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&qu
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump in  /tmp/RtmpzZBsSN/file5aab2297ea19
+<pre><code>## SQLite database dump in  /tmp/RtmpXJyAfs/file131c7b322b4d
 </code></pre>
 
-<pre><code class="r">dumpAfterSedFn &lt;- tempfile()
+<p>Next step is to process the dump, so the SQL can be used as input to d2rq.
+The changes applied are:</p>
 
-sedCmd&lt;- paste(&quot;sed&quot;, &quot;-e &#39;s/TEXT/VARCHAR(1000)/g; s/\&quot;MMSETOT\&quot; REAL/\&quot;MMSETOT\&quot; REAL, PRIMARY KEY (USUBJID)/; s/\&quot;adsl\&quot;/adsl/g; 1,2 d; $ d; &#39; &quot;, dumpFn, &quot;&gt;&quot;, dumpAfterSedFn, sep=&quot; &quot;)
+<ul>
+<li> change TEXT to VARCHAR(1000)</li>
+<li> remove top 2 lines with PRAGMA</li>
+<li> in insert statements replace &ldquo;adsl&rdquo;  with adsl</li>
+<li> after &ldquo;MMSETOT&rdquo; REAL add a comma (&ldquo;,&rdquo;) and a new line with PRIMARY KEY (USUBJID)</li>
+</ul>
+
+<p>This could maybe be simplified using  RSQlite on dbSendQuery-methods, see (<a href="https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html">https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html</a>).
+For d2rq documentation see (file:///opt/d2rq-0.8.1/doc/dump-rdf.html).</p>
+
+<pre><code class="r">dumpAfterSedFn &lt;- tempfile()
+sedCmd&lt;- paste(&quot;sed&quot;,
+               &quot;-e &#39;s/TEXT/VARCHAR(1000)/g; s/\&quot;MMSETOT\&quot; REAL/\&quot;MMSETOT\&quot; REAL, PRIMARY KEY (USUBJID)/; s/\&quot;adsl\&quot;/adsl/g; 1,2 d; $ d; &#39; &quot;,
+               dumpFn, &quot;&gt;&quot;, dumpAfterSedFn, sep=&quot; &quot;)
 system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump modified stored as  /tmp/RtmpzZBsSN/file5aab58e799f
+<pre><code>## SQLite database dump modified stored as  /tmp/RtmpXJyAfs/file131cbf6d432
 </code></pre>
 
 <pre><code class="r">## Check only expected changes were applied
 ## not run due to large output
 ## system(paste(&quot;diff&quot;, dumpFn, dumpAfterSedFn, sep=&quot; &quot;))
 
-## The change below are for now to be applied manually!
-##   change TEXT to VARCHAR(1000)
-##   remove top 2 lines with PRAGMA
-##   in insert statements replace &quot;adsl&quot;  with adsl
-##   after &quot;MMSETOT&quot; REAL add a comma (&quot;,&quot;) and a new line with
-##   PRIMARY KEY (USUBJID)
-##
-## see also RSQlite on dbSendQuery-methods - that can make more
-## https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html
-## d2rq documentationsee file:///opt/d2rq-0.8.1/doc/dump-rdf.html
-
-## -b option does not work with -l
 
 adslmapttlFn&lt;- file.path(tempdir(), &quot;adsl-map.ttl&quot;)
 adslttlFn&lt;- file.path(tempdir(), &quot;adsl.ttl&quot;)
 
 d2rqbaseURL&lt;- &quot;http://www.example.org/datasets/&quot;
 
-system(paste(&quot;/opt/d2rq-0.8.1/generate-mapping  -o &quot;, adslmapttlFn, &quot; -l &quot;, dumpAfterSedFn))
-system(paste(&quot;/opt/d2rq-0.8.1/dump-rdf -b &quot;, d2rqbaseURL,  &quot; -o &quot;,
-             adslttlFn, &quot; -l &quot;, dumpAfterSedFn, &quot; &quot;, adslmapttlFn) )
+## -b option does not work with -l
+## /opt/d2rq-0.8.1/generate-mapping reports Unknown argument: -b
+system(paste(&quot;/opt/d2rq-0.8.1/generate-mapping&quot;,
+             &quot; -l &quot;, dumpAfterSedFn,
+             &quot; -o &quot;, adslmapttlFn
+             ))
+
+system(paste(&quot;/opt/d2rq-0.8.1/dump-rdf&quot;,
+             &quot; -b &quot;, d2rqbaseURL,
+             &quot; -o &quot;, adslttlFn,
+             &quot; -l &quot;, dumpAfterSedFn,
+             &quot; &quot;, adslmapttlFn
+             ))
 
 
-### This could maybe also work ..
+
+targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbcrnd0&quot;)
+if (file.copy(adslmapttlFn, targetDir, overwrite = TRUE)) {
+cat( &quot;File &quot;, adslmapttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
+}
+</code></pre>
+
+<pre><code>## File  /tmp/RtmpXJyAfs/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+</code></pre>
+
+<pre><code class="r">if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
+cat( &quot;File &quot;, adslttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
+}
+</code></pre>
+
+<pre><code>## File  /tmp/RtmpXJyAfs/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
+</code></pre>
+
+<pre><code class="r">### This could maybe also work ..
 ## m &lt;- dbDriver(&quot;SQLite&quot;)
 ## tfile &lt;- tempfile()
 ## con &lt;- dbConnect(m, dbname = tfile)
@@ -332,28 +375,13 @@ system(paste(&quot;/opt/d2rq-0.8.1/dump-rdf -b &quot;, d2rqbaseURL,  &quot; -o &
 ## dbWriteTable(con, &quot;adsl&quot;, adsl,append=TRUE)
 ## dbDisconnect(con)
 ## tfile
-
-## system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt; /tmp/xx.sql&quot;, sep=&quot; &quot;))
-## system(paste(&quot;/opt/d2rq-0.8.1/dump-rdf -b http://localhost:3030/ -o /tmp/adsl.ttl -l /tmp/xx.sql&quot;))
-
-targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbcrnd0&quot;)
-if (file.copy(adslmapttlFn, targetDir)) {
-cat( &quot;File &quot;, adslmapttlFn, &quot; copied to &quot;, targetDir, &quot;\n&quot;)
-}
-</code></pre>
-
-<pre><code>## File  /tmp/RtmpzZBsSN/adsl-map.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
-</code></pre>
-
-<pre><code class="r">if (file.copy(adslttlFn, targetDir)) {
-cat( &quot;File &quot;, adslttlFn, &quot; copied to &quot;, targetDir, &quot;\n&quot;)
-}
-</code></pre>
-
-<pre><code>## File  /tmp/RtmpzZBsSN/adsl.ttl  copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf
 </code></pre>
 
 <h3>Read in the file</h3>
+
+<p>This section demostrates how to access the data for the ADSL dataset.</p>
+
+<p>First the data are loaded into a RDF model.</p>
 
 <pre><code class="r">dataFilemap&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adsl-map.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
 dataFilemap
@@ -378,288 +406,594 @@ summarize.rdf(store)
 <pre><code>## [1] &quot;Number of triples: 13160&quot;
 </code></pre>
 
-<pre><code class="r">rq&lt;-&quot;
-prefix map: &lt;#&gt; 
-prefix db: &lt;&gt; 
-prefix vocab: &lt;vocab/&gt; 
+<p>Next step is to make a query showing the mappings</p>
+
+<pre><code class="r">mapping.rq&lt;-&quot;
 prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
 prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
 prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; 
 prefix d2rq: &lt;http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#&gt; 
 prefix jdbc: &lt;http://d2rq.org/terms/jdbc/&gt; 
 select * where {
-?mapColumn a d2rq:PropertyBridge ;
-  d2rq:column ?d2rqcolumn ;
-  d2rq:datatype ?d2rqdatatype 
-.
-# ?mapColumn ?p ?o.
+   ?mapColumn a d2rq:PropertyBridge ;
+                d2rq:column ?d2rqcolumn .
+   optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }
 }
 &quot;
 
-res&lt;- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
-str(res)
+cat(mapping.rq,&quot;\n&quot;)
 </code></pre>
 
-<pre><code>## &#39;data.frame&#39;:    20 obs. of  3 variables:
-##  $ mapColumn   : chr  &quot;map:ADSL_TRT01AN&quot; &quot;map:ADSL_VISIT1DT&quot; &quot;map:ADSL_TRTSDT&quot; &quot;map:ADSL_TRT01PN&quot; ...
-##  $ d2rqcolumn  : chr  &quot;ADSL.TRT01AN&quot; &quot;ADSL.VISIT1DT&quot; &quot;ADSL.TRTSDT&quot; &quot;ADSL.TRT01PN&quot; ...
-##  $ d2rqdatatype: chr  &quot;xsd:double&quot; &quot;xsd:double&quot; &quot;xsd:double&quot; &quot;xsd:double&quot; ...
+<pre><code>## 
+## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
+## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
+## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; 
+## prefix d2rq: &lt;http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#&gt; 
+## prefix jdbc: &lt;http://d2rq.org/terms/jdbc/&gt; 
+## select * where {
+##    ?mapColumn a d2rq:PropertyBridge ;
+##                 d2rq:column ?d2rqcolumn .
+##    optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }
+## }
+## 
 </code></pre>
 
-<pre><code class="r">res
+<pre><code class="r">resmapping&lt;- data.frame(sparql.rdf(store, mapping.rq),stringsAsFactors=FALSE)
+str(resmapping)
 </code></pre>
 
-<pre><code>##            mapColumn    d2rqcolumn d2rqdatatype
-## 1   map:ADSL_TRT01AN  ADSL.TRT01AN   xsd:double
-## 2  map:ADSL_VISIT1DT ADSL.VISIT1DT   xsd:double
-## 3    map:ADSL_TRTSDT   ADSL.TRTSDT   xsd:double
-## 4   map:ADSL_TRT01PN  ADSL.TRT01PN   xsd:double
-## 5     map:ADSL_RACEN    ADSL.RACEN   xsd:double
-## 6  map:ADSL_DISONSDT ADSL.DISONSDT   xsd:double
-## 7  map:ADSL_WEIGHTBL ADSL.WEIGHTBL   xsd:double
-## 8   map:ADSL_AGEGR1N  ADSL.AGEGR1N   xsd:double
-## 9    map:ADSL_TRTDUR   ADSL.TRTDUR   xsd:double
-## 10  map:ADSL_EDUCLVL  ADSL.EDUCLVL   xsd:double
-## 11   map:ADSL_TRTEDT   ADSL.TRTEDT   xsd:double
-## 12      map:ADSL_AGE      ADSL.AGE   xsd:double
-## 13 map:ADSL_HEIGHTBL ADSL.HEIGHTBL   xsd:double
-## 14 map:ADSL_VISNUMEN ADSL.VISNUMEN   xsd:double
-## 15   map:ADSL_DURDIS   ADSL.DURDIS   xsd:double
-## 16    map:ADSL_AVGDD    ADSL.AVGDD   xsd:double
-## 17  map:ADSL_CUMDOSE  ADSL.CUMDOSE   xsd:double
-## 18    map:ADSL_BMIBL    ADSL.BMIBL   xsd:double
-## 19   map:ADSL_RFENDT   ADSL.RFENDT   xsd:double
-## 20  map:ADSL_MMSETOT  ADSL.MMSETOT   xsd:double
+<pre><code>## &#39;data.frame&#39;:    48 obs. of  3 variables:
+##  $ mapColumn   : chr  &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_AGEGR1&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_SUBJID&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_BMIBLGR1&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRT01AN&quot; ...
+##  $ d2rqcolumn  : chr  &quot;ADSL.AGEGR1&quot; &quot;ADSL.SUBJID&quot; &quot;ADSL.BMIBLGR1&quot; &quot;ADSL.TRT01AN&quot; ...
+##  $ d2rqdatatype: chr  NA NA NA &quot;xsd:double&quot; ...
 </code></pre>
 
-<pre><code class="r">s&lt;- paste0(&quot;&lt;&quot;, d2rqbaseURL,&quot;ADSL/01-718-1254&gt;&quot;)
-rq&lt;-paste0(&quot;select * where {&quot;, s, &quot; ?p ?o . }&quot; )
-print(rq)
-</code></pre>
-
-<pre><code>## [1] &quot;select * where {&lt;http://www.example.org/datasets/ADSL/01-718-1254&gt; ?p ?o . }&quot;
-</code></pre>
-
-<pre><code class="r">res&lt;- data.frame(sparql.rdf(store, rq),stringsAsFactors=FALSE)
-str(res)
-</code></pre>
-
-<pre><code>## &#39;data.frame&#39;:    51 obs. of  2 variables:
-##  $ p: chr  &quot;http://www.example.org/datasets/vocab/ADSL_EFFFL&quot; &quot;http://www.example.org/datasets/vocab/ADSL_DCREASCD&quot; &quot;http://www.example.org/datasets/vocab/ADSL_TRT01PN&quot; &quot;http://www.example.org/datasets/vocab/ADSL_COMP8FL&quot; ...
-##  $ o: chr  &quot;Y&quot; &quot;Completed&quot; &quot;54.0E0&quot; &quot;Y&quot; ...
-</code></pre>
-
-<pre><code class="r">res$pclean&lt;- gsub(paste0(d2rqbaseURL,&quot;vocab/ADSL_&quot;), &quot;&quot;, res$p)
-knitr::kable(res[,c(&quot;p&quot;,&quot;o&quot;)])
+<pre><code class="r">knitr::kable(resmapping)
 </code></pre>
 
 <table><thead>
 <tr>
+<th align="left">mapColumn</th>
+<th align="left">d2rqcolumn</th>
+<th align="left">d2rqdatatype</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_AGEGR1</td>
+<td align="left">ADSL.AGEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_SUBJID</td>
+<td align="left">ADSL.SUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_BMIBLGR1</td>
+<td align="left">ADSL.BMIBLGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRT01AN</td>
+<td align="left">ADSL.TRT01AN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_VISIT1DT</td>
+<td align="left">ADSL.VISIT1DT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_SAFFL</td>
+<td align="left">ADSL.SAFFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_COMP16FL</td>
+<td align="left">ADSL.COMP16FL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_USUBJID</td>
+<td align="left">ADSL.USUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRTSDT</td>
+<td align="left">ADSL.TRTSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_COMP24FL</td>
+<td align="left">ADSL.COMP24FL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRT01PN</td>
+<td align="left">ADSL.TRT01PN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_ARM</td>
+<td align="left">ADSL.ARM</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_AGEU</td>
+<td align="left">ADSL.AGEU</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_RACEN</td>
+<td align="left">ADSL.RACEN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRT01A</td>
+<td align="left">ADSL.TRT01A</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DTHFL</td>
+<td align="left">ADSL.DTHFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DISONSDT</td>
+<td align="left">ADSL.DISONSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_WEIGHTBL</td>
+<td align="left">ADSL.WEIGHTBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_AGEGR1N</td>
+<td align="left">ADSL.AGEGR1N</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRTDUR</td>
+<td align="left">ADSL.TRTDUR</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_EDUCLVL</td>
+<td align="left">ADSL.EDUCLVL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_RFENDTC</td>
+<td align="left">ADSL.RFENDTC</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_SITEID</td>
+<td align="left">ADSL.SITEID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_RACE</td>
+<td align="left">ADSL.RACE</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DCDECOD</td>
+<td align="left">ADSL.DCDECOD</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRTEDT</td>
+<td align="left">ADSL.TRTEDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_RFSTDTC</td>
+<td align="left">ADSL.RFSTDTC</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DSRAEFL</td>
+<td align="left">ADSL.DSRAEFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_AGE</td>
+<td align="left">ADSL.AGE</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DCREASCD</td>
+<td align="left">ADSL.DCREASCD</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_SEX</td>
+<td align="left">ADSL.SEX</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_EFFFL</td>
+<td align="left">ADSL.EFFFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_COMP8FL</td>
+<td align="left">ADSL.COMP8FL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_HEIGHTBL</td>
+<td align="left">ADSL.HEIGHTBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_VISNUMEN</td>
+<td align="left">ADSL.VISNUMEN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DISCONFL</td>
+<td align="left">ADSL.DISCONFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DURDIS</td>
+<td align="left">ADSL.DURDIS</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_STUDYID</td>
+<td align="left">ADSL.STUDYID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_SITEGR1</td>
+<td align="left">ADSL.SITEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_ETHNIC</td>
+<td align="left">ADSL.ETHNIC</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_AVGDD</td>
+<td align="left">ADSL.AVGDD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_CUMDOSE</td>
+<td align="left">ADSL.CUMDOSE</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_BMIBL</td>
+<td align="left">ADSL.BMIBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_RFENDT</td>
+<td align="left">ADSL.RFENDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_MMSETOT</td>
+<td align="left">ADSL.MMSETOT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_TRT01P</td>
+<td align="left">ADSL.TRT01P</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_ITTFL</td>
+<td align="left">ADSL.ITTFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/data-raw/#ADSL_DURDSGR1</td>
+<td align="left">ADSL.DURDSGR1</td>
+<td align="left">NA</td>
+</tr>
+</tbody></table>
+
+<p>The code below gets the all values in one record</p>
+
+<pre><code class="r">s&lt;- paste0(&quot;&lt;&quot;, d2rqbaseURL,c(&quot;ADSL/01-718-1254&quot;), &quot;&gt;&quot;)
+
+records.rq&lt;-paste(&quot;select * &quot;,
+           &quot;where { ?s ?p ?o.&quot;,
+           &quot; values(?s) {&quot;,
+           paste(&quot;(&quot;,s,&quot;)&quot;, collapse=&quot;\n&quot;),
+           &quot;}&quot;,
+           &quot;}&quot;, sep=&quot;\n&quot;, collapse=&quot;\n&quot; )
+cat(records.rq,&quot;\n&quot;)
+</code></pre>
+
+<pre><code>## select * 
+## where { ?s ?p ?o.
+##  values(?s) {
+## ( &lt;http://www.example.org/datasets/ADSL/01-718-1254&gt; )
+## }
+## }
+</code></pre>
+
+<pre><code class="r">records.res&lt;- data.frame(sparql.rdf(store, records.rq),stringsAsFactors=FALSE)
+str(records.res)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    51 obs. of  3 variables:
+##  $ s: chr  &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; ...
+##  $ p: chr  &quot;http://www.example.org/datasets/vocab/ADSL_EFFFL&quot; &quot;http://www.example.org/datasets/vocab/ADSL_DCREASCD&quot; &quot;http://www.example.org/datasets/vocab/ADSL_TRT01PN&quot; &quot;http://www.example.org/datasets/vocab/ADSL_COMP8FL&quot; ...
+##  $ o: chr  &quot;Y&quot; &quot;Completed&quot; &quot;54.0E0&quot; &quot;Y&quot; ...
+</code></pre>
+
+<pre><code class="r">records.res$pclean&lt;- gsub(paste0(d2rqbaseURL,&quot;vocab/ADSL_&quot;), &quot;&quot;, records.res$p)
+knitr::kable(records.res[,c(&quot;s&quot;, &quot;p&quot;,&quot;o&quot;)])
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">s</th>
 <th align="left">p</th>
 <th align="left">o</th>
 </tr>
 </thead><tbody>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_EFFFL">http://www.example.org/datasets/vocab/ADSL_EFFFL</a></td>
 <td align="left">Y</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DCREASCD">http://www.example.org/datasets/vocab/ADSL_DCREASCD</a></td>
 <td align="left">Completed</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01PN">http://www.example.org/datasets/vocab/ADSL_TRT01PN</a></td>
 <td align="left">54.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_COMP8FL">http://www.example.org/datasets/vocab/ADSL_COMP8FL</a></td>
 <td align="left">Y</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_CUMDOSE">http://www.example.org/datasets/vocab/ADSL_CUMDOSE</a></td>
 <td align="left">9936.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRTSDT">http://www.example.org/datasets/vocab/ADSL_TRTSDT</a></td>
 <td align="left">19549.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SITEGR1">http://www.example.org/datasets/vocab/ADSL_SITEGR1</a></td>
 <td align="left">718</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01AN">http://www.example.org/datasets/vocab/ADSL_TRT01AN</a></td>
 <td align="left">54.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AVGDD">http://www.example.org/datasets/vocab/ADSL_AVGDD</a></td>
 <td align="left">54.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DURDIS">http://www.example.org/datasets/vocab/ADSL_DURDIS</a></td>
 <td align="left">21.6E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRTDUR">http://www.example.org/datasets/vocab/ADSL_TRTDUR</a></td>
 <td align="left">184.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_HEIGHTBL">http://www.example.org/datasets/vocab/ADSL_HEIGHTBL</a></td>
 <td align="left">170.2E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_COMP16FL">http://www.example.org/datasets/vocab/ADSL_COMP16FL</a></td>
 <td align="left">Y</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DCDECOD">http://www.example.org/datasets/vocab/ADSL_DCDECOD</a></td>
 <td align="left">COMPLETED</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_WEIGHTBL">http://www.example.org/datasets/vocab/ADSL_WEIGHTBL</a></td>
 <td align="left">82.1E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_BMIBLGR1">http://www.example.org/datasets/vocab/ADSL_BMIBLGR1</a></td>
 <td align="left">25-&lt;30</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGE">http://www.example.org/datasets/vocab/ADSL_AGE</a></td>
 <td align="left">78.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SUBJID">http://www.example.org/datasets/vocab/ADSL_SUBJID</a></td>
 <td align="left">1254</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01A">http://www.example.org/datasets/vocab/ADSL_TRT01A</a></td>
 <td align="left">Xanomeline Low Dose</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DURDSGR1">http://www.example.org/datasets/vocab/ADSL_DURDSGR1</a></td>
 <td align="left">&gt;=12</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RFSTDTC">http://www.example.org/datasets/vocab/ADSL_RFSTDTC</a></td>
 <td align="left">2013-07-10</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SEX">http://www.example.org/datasets/vocab/ADSL_SEX</a></td>
 <td align="left">M</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DISCONFL">http://www.example.org/datasets/vocab/ADSL_DISCONFL</a></td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DSRAEFL">http://www.example.org/datasets/vocab/ADSL_DSRAEFL</a></td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_COMP24FL">http://www.example.org/datasets/vocab/ADSL_COMP24FL</a></td>
 <td align="left">Y</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RFENDT">http://www.example.org/datasets/vocab/ADSL_RFENDT</a></td>
 <td align="left">19732.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a></td>
 <td align="left">ADSL #01-718-1254</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SAFFL">http://www.example.org/datasets/vocab/ADSL_SAFFL</a></td>
 <td align="left">Y</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGEU">http://www.example.org/datasets/vocab/ADSL_AGEU</a></td>
 <td align="left">YEARS</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_ETHNIC">http://www.example.org/datasets/vocab/ADSL_ETHNIC</a></td>
 <td align="left">HISPANIC OR LATINO</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGEGR1">http://www.example.org/datasets/vocab/ADSL_AGEGR1</a></td>
 <td align="left">65-80</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DISONSDT">http://www.example.org/datasets/vocab/ADSL_DISONSDT</a></td>
 <td align="left">18882.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRTEDT">http://www.example.org/datasets/vocab/ADSL_TRTEDT</a></td>
 <td align="left">19732.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DTHFL">http://www.example.org/datasets/vocab/ADSL_DTHFL</a></td>
 <td align="left"></td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_MMSETOT">http://www.example.org/datasets/vocab/ADSL_MMSETOT</a></td>
 <td align="left">16.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_VISNUMEN">http://www.example.org/datasets/vocab/ADSL_VISNUMEN</a></td>
 <td align="left">12.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_USUBJID">http://www.example.org/datasets/vocab/ADSL_USUBJID</a></td>
 <td align="left">01-718-1254</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_ITTFL">http://www.example.org/datasets/vocab/ADSL_ITTFL</a></td>
 <td align="left">Y</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_BMIBL">http://www.example.org/datasets/vocab/ADSL_BMIBL</a></td>
 <td align="left">28.3E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RFENDTC">http://www.example.org/datasets/vocab/ADSL_RFENDTC</a></td>
 <td align="left">2014-01-09</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL">http://www.example.org/datasets/vocab/ADSL</a></td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_STUDYID">http://www.example.org/datasets/vocab/ADSL_STUDYID</a></td>
 <td align="left">CDISCPILOT01</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RACEN">http://www.example.org/datasets/vocab/ADSL_RACEN</a></td>
 <td align="left">1.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_VISIT1DT">http://www.example.org/datasets/vocab/ADSL_VISIT1DT</a></td>
 <td align="left">19537.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGEGR1N">http://www.example.org/datasets/vocab/ADSL_AGEGR1N</a></td>
 <td align="left">2.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01P">http://www.example.org/datasets/vocab/ADSL_TRT01P</a></td>
 <td align="left">Xanomeline Low Dose</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RACE">http://www.example.org/datasets/vocab/ADSL_RACE</a></td>
 <td align="left">WHITE</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_ARM">http://www.example.org/datasets/vocab/ADSL_ARM</a></td>
 <td align="left">Xanomeline Low Dose</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SITEID">http://www.example.org/datasets/vocab/ADSL_SITEID</a></td>
 <td align="left">718</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_EDUCLVL">http://www.example.org/datasets/vocab/ADSL_EDUCLVL</a></td>
 <td align="left">18.0E0</td>
 </tr>
 <tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
 <td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
 <td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#Resource">http://www.w3.org/2000/01/rdf-schema#Resource</a></td>
 </tr>

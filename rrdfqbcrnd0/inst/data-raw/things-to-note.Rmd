@@ -1,10 +1,10 @@
 ---
-title: "Create AE table as csv file"
+title: "Tings that does not fit any where else"
 author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Create AE table as csv file}
+  %\VignetteIndexEntry{Tings that does not fit any where else}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -12,6 +12,7 @@ vignette: >
 # Code snippets that may be of use.
 
 ```{r}
+library(devtools)
 knitr::read_chunk("setup.R")
 ```
 ```{r setup}
@@ -21,15 +22,36 @@ knitr::read_chunk("setup.R")
 
 When developing, the script is intented to run from the package root as
 ```{r, results='asis', eval=FALSE}
-knit("inst/data-raw/create-qb-CDISC-prefix.Rmd")
+knit("inst/data-raw/things-to-note.Rmd")
 ```
 
 knit runs the script in the data-raw directory, so it would be
 expected to use pkg=".." to store the qbIClist in the data directory
-However, it did not work - hence the setwd below-
+However, it did not work - hence the setwd below.
+
+```{r, results='asis', eval=FALSE}
+setwd("inst/data-raw/")
+knit("things-to-note.Rmd")
+```
+
 
 Data are stored in the data directory, following [R packages by Hadley Wickham](http://r-pkgs.had.co.nz/data.html) and [Writing R Extensions](http://cran.r-project.org/doc/manuals/R-exts.pdf).
 
+### Installating pandoc on windows
+
+pandoc is needed when using `rmarkdown::render("thing-to-note.Rmd")`-
+
+Install from (https://github.com/jgm/pandoc/releases)
+
+Verify installation from a command prompt by `pandoc --version`.
+
+## Installing highlight on windows
+
+Highlight is using for syntax highlighting, see below for examples.
+
+(http://www.andre-simon.de/doku/highlight/en/install.php)
+
+Install using from (http://www.andre-simon.de/zip/download.php)
 
 ## Check RRDF works
 
@@ -293,7 +315,9 @@ data=data, type=type)
 ```
 
 
-## At the end of each scipt
+## Text for note note on how to generate html version
+
+At the end of each scipt
 
 Add the following - note it should be possible to generate it automatically.
 
@@ -353,10 +377,16 @@ readLines(fn)
 ```{r sp1, asis=TRUE, engine='highlight', engine.opts='-l -S n3 --inline-css -O md'}
 ```
 
-The (http://www.andre-simon.de/doku/highlight/en/highlight.php)[highlight] package can take a input file and output it many formats with the code highlighted. Below is one-liner example showing highlighting of a short SPARQL query as html. The option --inline-css embeds the CSS in the html file. If the option is not present, the CSS is written to file highlight.css and reffered to in the generated html. The second line opens the file in the default browser.
-```
-echo -e "prefix a: <bb.bb>\\nselect * where {?s ?p ?o}" | highlight --inline-css -S n3 > highlight-simple-example.html
-xdg-open highlight-simple-example.html
+The
+(http://www.andre-simon.de/doku/highlight/en/highlight.php)[highlight]
+package can take a input file and output it many formats with the code
+highlighted. Below is one-liner example showing highlighting of a
+short SPARQL query as html. The option --inline-css embeds the CSS in
+the html file. If the option is not present, the CSS is written to
+file highlight.css and reffered to in the generated html. The second
+line opens the file in the default browser.  ``` echo -e "prefix a:
+<bb.bb>\\nselect * where {?s ?p ?o}" | highlight --inline-css -S n3 >
+highlight-simple-example.html xdg-open highlight-simple-example.html
 ```
 
 ```{r engine='bash'}
@@ -365,7 +395,13 @@ echo -e "prefix a: <bb.bb>\\nselect * where {?s ?p ?o}" | highlight --inline-css
 
 ## Generating markdown files from Rmd
 
-Rmd files contains a YAML header. The code below identifies the YAML header. A possible use is to make a copy of the file without the YAML header. Revisiting this, I found this is adressed in (https://github.com/yihui/knitr/issues/965)[Proposed function: knitr::custom_knit #965] and (http://stackoverflow.com/questions/23622307/strip-yaml-from-child-docs-in-knitr)[Strip YAML from child docs in knitr].
+Rmd files contains a YAML header. The code below identifies the YAML
+header. A possible use is to make a copy of the file without the YAML
+header. Revisiting this, I found this is adressed in
+(https://github.com/yihui/knitr/issues/965)[Proposed function:
+knitr::custom_knit #965] and
+(http://stackoverflow.com/questions/23622307/strip-yaml-from-child-docs-in-knitr)[Strip
+YAML from child docs in knitr].
 
 ```{r, eval=FALSE}
 library(yaml)

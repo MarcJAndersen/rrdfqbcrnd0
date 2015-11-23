@@ -1,7 +1,7 @@
 #
 # fuseki configuration file for loading rrdfqbcrdn0 turtle files
 # Start fuseki using
-# (CFGFILE=${PWD}/fuseki-crnd-example-config.ttl ;cd /opt/apache-jena-fuseki-2.0.0; ./fuseki-server --config=${CFGFILE} ) 
+# (CFGFILE=${PWD}/fuseki-crnd-example-config.ttl ;cd /opt/apache-jena-fuseki-2.3.0; ./fuseki-server --config=${CFGFILE} ) 
 
 @prefix :        <#> .
 @prefix fuseki:  <http://jena.apache.org/fuseki#> .
