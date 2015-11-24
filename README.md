@@ -21,17 +21,58 @@ visit the Wiki at [phusewiki.org]() or go straight to
 ## Install the rrdfqbcrnd0 package
 There are several ways to install the package, with the most straightforward presented first.
 
+
+## First - The RRDF package
+
+The [rrdf](https://github.com/egonw/rrdf) performs the interaction
+with a Apache Jena triple store.  The packages must be installed
+accoding to the instructions on the packages github page: 
+
+```r
+install.packages("rJava") # if not present already
+install.packages("devtools") # if not present already
+library(devtools)
+install_github("egonw/rrdf", subdir="rrdflibs")
+install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE)
+```
+
+To check if the installation was successfull use:
+```r
+library(rrdflibs)
+library(rrdf)
+packageVersion("rrdf")
+```
+
+## Installation approaches
+
 ### Install as a package
 
 Download rrdfqbcrnd0 project from Git from (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
 
 Extract the most recent package (rrdfqbcrnd0_0.1.6.tar.gz) from rrdfqbcrnd0-master/ReleasePackages/ subfolder of the downloaded archive. 
 
-Put rrdfqbcrnd0_0.1.6.tar.gz in the current working directory of the R process.
+Put rrdfqbcrnd0_0.1.6.tar.gz in the current working directory of the R process - or change the working directory to the folder with the package.
+Tip for Rstudio: use the file explore window to navigate to the directory, then use "Set Working Director" from the "More" menu.
 
 In R issue
 ```r
-install.packages("rrdfqbcrnd0_0.1.6.tar.gz")
+library(devtools)
+install_local("rrdfqbcrnd0_0.1.6.tar.gz")
+```
+
+Note: the package may not be able to install using "install.packages" in Rstudio due to "rrdf(>= 2.0.4)".
+
+#### Note - cleaning up local library
+
+To see the contents of the libraries with packages use
+```r
+library()
+```
+
+To do a cleanup of the personal library, usually `.libPaths()[1]`, use the following command
+
+```r
+remove.packages((library(lib=.libPaths()[1])$results)[,"Package"])
 ```
 
 ### Install in R from local directory using Rstudio
@@ -107,25 +148,6 @@ These scripts uses the following packages:
 install.packages( c( "foreign", "sqldf" ) )
 ```
 
-### The RRDF package
-
-The [rrdf](https://github.com/egonw/rrdf) performs the interaction
-with a Apache Jena triple store.  The packages must be installed
-accoding to the instructions on the packages github page. Well,
-almost, due changes in install_github, you need to use
-
-```r
-library(devtools)
-install_github("egonw/rrdf", subdir="rrdflibs")
-install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE)
-```
-
-To check if the installation was successfull use:
-```r
-library(rrdflibs)
-library(rrdf)
-packageVersion("rrdf")
-```
 
 ## Other issues 
 
