@@ -1,6 +1,6 @@
 PACKAGENAME=rrdfqbcrnd0
 
-all: createRD data-raw rbuildforce rcheck rbuild vignettedoc
+all: createRD data-raw rbuildforce rbuild vignettedoc
 
 cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
@@ -11,8 +11,9 @@ rbuildforce:
 # checking package
 # see http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-packages
 # see http://stackoverflow.com/questions/15324705/should-there-be-a-package-subfolder-in-a-github-package-repo?lq=1
+# removing --as-cran - ma 2015-11-25
 rcheck: 
-	cd ..; R CMD check --as-cran ${PACKAGENAME}*.tar.gz
+	cd ..; R CMD check  ${PACKAGENAME}*.tar.gz
 
 rbuild: 
 	cd ..; R CMD build  ${PACKAGENAME}

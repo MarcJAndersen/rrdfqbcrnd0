@@ -29,7 +29,7 @@ export CDISCRDF_HOME=~/projects/phrmwg
 
 ## Make local copy of the rdf.cdisc.org
 Here is how to make a local copy of the rdf.cdisc.org - with Bash Shell on Linux.
-In my setup the ~/projects/phrmwg directory contains a git pull of rdf.cdisc.org.
+In my setup the `~/projects/phrmwg` directory contains a git pull of [rdf.cdisc.org].
 
 ```{r get-rdf-cdisc-org-setup.sh, eval=FALSE, engine='bash'}
 echo only if directory does not exist 

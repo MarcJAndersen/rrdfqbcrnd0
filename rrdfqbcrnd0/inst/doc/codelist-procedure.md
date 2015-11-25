@@ -1,7 +1,7 @@
 ---
 title: "Show the procedure codelist"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-11-23"
+date: "2015-10-28"
 vignette: >
   %\VignetteIndexEntry{Show the procedure codelist}
   %\VignetteEngine{knitr::rmarkdown}
@@ -127,7 +127,7 @@ cat(normalizePath(outcube),"\n")
 ```
 
 ```
-## /tmp/RtmpGiz5FH/DC-EXAMPLE-R-V-0-0-0.ttl
+## /tmp/RtmpuVSUur/DC-EXAMPLE-R-V-0-0-0.ttl
 ```
 
 # Query the cube using SPARQL

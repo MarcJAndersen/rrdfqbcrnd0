@@ -1,7 +1,7 @@
 ---
 title: "Graphical display of SPARQL queries with arq, rapper and graphviz"
 author: "mja@statgroup.dk"
-date: "2015-11-23"
+date: "2015-11-25"
 output: rmarkdown::html_vignette
 ---
  
@@ -45,10 +45,10 @@ dot -x -Tpdf -ograph.pdf fordot.dot
 ```
 
 ```
-## @prefix dccs:  <http://www.example.org/dc/demo/dccs/> .
 ## @prefix crnd-measure: <http://www.example.org/dc/measure#> .
-## @prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
+## @prefix dccs:  <http://www.example.org/dc/demo/dccs/> .
 ## @prefix code:  <http://www.example.org/dc/code/> .
+## @prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
 ## @prefix pav:   <http://purl.org/pav> .
 ## @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 ## @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -69,12 +69,12 @@ dot -x -Tpdf -ograph.pdf fordot.dot
 ##         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
 ##         rdfs:label                  "14" ;
 ##         qb:dataSet                  ds:dataset-DEMO ;
-##         crnd-attribute:cellpartno   "1"^^xsd:string ;
-##         crnd-attribute:colno        "2"^^xsd:string ;
+##         crnd-attribute:cellpartno   "1" ;
+##         crnd-attribute:colno        "2" ;
 ##         crnd-attribute:denominator  "" ;
-##         crnd-attribute:measurefmt   "%6.0f"^^xsd:string ;
-##         crnd-attribute:rowno        "3"^^xsd:string ;
-##         crnd-attribute:unit         "NA"^^xsd:string ;
+##         crnd-attribute:measurefmt   "%6.0f" ;
+##         crnd-attribute:rowno        "3" ;
+##         crnd-attribute:unit         "NA" ;
 ##         crnd-dimension:agegr1       code:agegr1-_ALL_ ;
 ##         crnd-dimension:ethnic       code:ethnic-_ALL_ ;
 ##         crnd-dimension:factor       code:factor-quantity ;

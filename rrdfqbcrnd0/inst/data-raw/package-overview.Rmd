@@ -45,7 +45,8 @@ knitr::read_chunk("setup.R")
 # install.packages("mvbutils")
 library(DiagrammeR)
 library(mvbutils)
-library(rrdfqbcrnd0)
+library(rrdf) # apparantly needed 
+## library(rrdfqbcrnd0) # should not go here 
 
 pretty.print.rq<- function(rqstring) {
     ## print sparql query with line numbers - use full for finding errors

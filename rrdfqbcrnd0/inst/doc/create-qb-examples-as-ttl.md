@@ -1,7 +1,7 @@
 ---
 title: "Create DEMO table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-11-23"
+date: "2015-10-28"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DEMO table from csv file}
@@ -68,7 +68,7 @@ cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
 ```
-## DM cube stored as  /tmp/RtmpFdcs0e/DC-DM-R-V-0-5-2.ttl
+## DM cube stored as  /tmp/RtmpuBGp26/DC-DM-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -89,7 +89,7 @@ cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
 ```
-## AE cube stored as  /tmp/RtmpFdcs0e/DC-AE-R-V-0-5-2.ttl
+## AE cube stored as  /tmp/RtmpuBGp26/DC-AE-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -126,7 +126,7 @@ cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
 ```
-## DEMO cube stored as  /tmp/RtmpFdcs0e/DC-DEMO-R-V-0-5-2.ttl
+## DEMO cube stored as  /tmp/RtmpuBGp26/DC-DEMO-R-V-0-5-2.ttl
 ```
 
 ```r

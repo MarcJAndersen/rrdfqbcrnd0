@@ -2,6 +2,10 @@
 title: "Using ARQ to investigate RDF data cube"
 author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{Using ARQ to investigate RDF data cube}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 output: rmarkdown::html_vignette
 ---
 

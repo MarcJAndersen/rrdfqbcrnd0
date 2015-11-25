@@ -6,12 +6,12 @@ digraph {
 	"Rds:obs014" -> "LStatistic for number of records/Statistics for factor with the dimensions XX|Language: en" [ label="rdfs:comment" ];
 	"Rds:obs014" -> "L14" [ label="rdfs:label" ];
 	"Rds:obs014" -> "Rds:dataset-DEMO" [ label="qb:dataSet" ];
-	"Rds:obs014" -> "L1|Datatype: xsd:string" [ label="crnd-attribute:cellpartno" ];
-	"Rds:obs014" -> "L2|Datatype: xsd:string" [ label="crnd-attribute:colno" ];
+	"Rds:obs014" -> "L1" [ label="crnd-attribute:cellpartno" ];
+	"Rds:obs014" -> "L2" [ label="crnd-attribute:colno" ];
 	"Rds:obs014" -> "L" [ label="crnd-attribute:denominator" ];
-	"Rds:obs014" -> "L%6.0f|Datatype: xsd:string" [ label="crnd-attribute:measurefmt" ];
-	"Rds:obs014" -> "L3|Datatype: xsd:string" [ label="crnd-attribute:rowno" ];
-	"Rds:obs014" -> "LNA|Datatype: xsd:string" [ label="crnd-attribute:unit" ];
+	"Rds:obs014" -> "L%6.0f" [ label="crnd-attribute:measurefmt" ];
+	"Rds:obs014" -> "L3" [ label="crnd-attribute:rowno" ];
+	"Rds:obs014" -> "LNA" [ label="crnd-attribute:unit" ];
 	"Rds:obs014" -> "Rcode:agegr1-_ALL_" [ label="crnd-dimension:agegr1" ];
 	"Rds:obs014" -> "Rcode:ethnic-_ALL_" [ label="crnd-dimension:ethnic" ];
 	"Rds:obs014" -> "Rcode:factor-quantity" [ label="crnd-dimension:factor" ];
@@ -38,13 +38,13 @@ digraph {
 	// Literals
 	"LStatistic for number of records/Statistics for factor with the dimensions XX|Language: en" [ label="Statistic for number of records/Statistics for factor with the dimensions XX|Language: en", shape = record ];
 	"L14" [ label="14", shape = record ];
-	"L1|Datatype: xsd:string" [ label="1|Datatype: xsd:string", shape = record ];
-	"L2|Datatype: xsd:string" [ label="2|Datatype: xsd:string", shape = record ];
+	"L1" [ label="1", shape = record ];
+	"L2" [ label="2", shape = record ];
 	"L" [ label="", shape = record ];
-	"L%6.0f|Datatype: xsd:string" [ label="%6.0f|Datatype: xsd:string", shape = record ];
-	"L3|Datatype: xsd:string" [ label="3|Datatype: xsd:string", shape = record ];
-	"LNA|Datatype: xsd:string" [ label="NA|Datatype: xsd:string", shape = record ];
+	"L%6.0f" [ label="%6.0f", shape = record ];
+	"L3" [ label="3", shape = record ];
+	"LNA" [ label="NA", shape = record ];
 	"L34|Datatype: xsd:int" [ label="34|Datatype: xsd:int", shape = record ];
 
-	label="\n\nModel:\n(Unknown)\n\nNamespaces:\ndccs: http://www.example.org/dc/demo/dccs/\ncrnd-measure: http://www.example.org/dc/measure#\ncts: http://rdf.cdisc.org/ct/schema#\ncode: http://www.example.org/dc/code/\npav: http://purl.org/pav\nowl: http://www.w3.org/2002/07/owl#\nxsd: http://www.w3.org/2001/XMLSchema#\nskos: http://www.w3.org/2004/02/skos/core#\nrdfs: http://www.w3.org/2000/01/rdf-schema#\ncrnd-attribute: http://www.example.org/dc/attribute#\nds: http://www.example.org/dc/demo/ds/\nqb: http://purl.org/linked-data/cube#\nmms: http://rdf.cdisc.org/mms#\ncrnd-dimension: http://www.example.org/dc/dimension#\ndct: http://purl.org/dc/terms/\nrdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#\nrrdfqbcrnd0: http://www.example.org/rrdfqbcrnd0/\ndcat: http://www.w3.org/ns/dcat#\nprov: http://www.w3.org/ns/prov#\n";
+	label="\n\nModel:\n(Unknown)\n\nNamespaces:\ncrnd-measure: http://www.example.org/dc/measure#\ndccs: http://www.example.org/dc/demo/dccs/\ncode: http://www.example.org/dc/code/\ncts: http://rdf.cdisc.org/ct/schema#\npav: http://purl.org/pav\nowl: http://www.w3.org/2002/07/owl#\nxsd: http://www.w3.org/2001/XMLSchema#\nskos: http://www.w3.org/2004/02/skos/core#\nrdfs: http://www.w3.org/2000/01/rdf-schema#\ncrnd-attribute: http://www.example.org/dc/attribute#\nds: http://www.example.org/dc/demo/ds/\nqb: http://purl.org/linked-data/cube#\nmms: http://rdf.cdisc.org/mms#\ncrnd-dimension: http://www.example.org/dc/dimension#\ndct: http://purl.org/dc/terms/\nrdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#\nrrdfqbcrnd0: http://www.example.org/rrdfqbcrnd0/\ndcat: http://www.w3.org/ns/dcat#\nprov: http://www.w3.org/ns/prov#\n";
 }
