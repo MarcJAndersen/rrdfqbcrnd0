@@ -45,7 +45,7 @@ devtools::check()
 devtools::install()
 ## 
 ```
-
+de
 TIP: For starting directory for the R process in use the directory
 this file resides in. The other examples may depend on this, and
 enables devtools::load_all() to load the package.

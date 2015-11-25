@@ -43,24 +43,29 @@ library(rrdf)
 packageVersion("rrdf")
 ```
 
+## Second - The knitr package
+```r
+install.packages("knitr") # if not present already
+```
+
 ## Installation approaches
 
 ### Install as a package
 
 Download rrdfqbcrnd0 project from Git from (https://github.com/MarcJAndersen/rrdfqbcrnd0/archive/master.zip).
 
-Extract the most recent package (rrdfqbcrnd0_0.1.7.tar.gz) from rrdfqbcrnd0-master/ReleasePackages/ subfolder of the downloaded archive. 
+Extract the most recent package (rrdfqbcrnd0_0.1.6.tar.gz) from rrdfqbcrnd0-master/ReleasePackages/ subfolder of the downloaded archive. 
 
-Put rrdfqbcrnd0_0.1.7.tar.gz in the current working directory of the R process - or change the working directory to the folder with the package.
+Put rrdfqbcrnd0_0.1.6.tar.gz in the current working directory of the R process - or change the working directory to the folder with the package.
 Tip for Rstudio: use the file explore window to navigate to the directory, then use "Set Working Director" from the "More" menu.
 
 In R issue
 ```r
 library(devtools)
-install_local("rrdfqbcrnd0_0.1.7.tar.gz")
+install_local("rrdfqbcrnd0_0.1.6.tar.gz")
 ```
 
-Note: Prior to version 0.1.7 the package may not be able to install using "install.packages" in Rstudio due to "rrdf(>= 2.0.4)".
+Note: the package may not be able to install using "install.packages" in Rstudio due to "rrdf(>= 2.0.4)".
 
 #### Note - cleaning up local library
 
