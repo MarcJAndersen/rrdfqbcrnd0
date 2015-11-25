@@ -139,13 +139,15 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
   add.data.triple(store,
                   paste0(prefixlist$prefixCODE,dimName),
                   paste0(prefixlist$prefixRRDFQBCRND0, "codeType"),
-                  paste0(codeType)
+                  paste0(codeType),
+                  type="string"
                   )
   ## Should only be added if R data set is available
   add.data.triple(store,
                   paste0(prefixlist$prefixCODE,dimName),
                   paste0(prefixlist$prefixRRDFQBCRND0, "R-columnname"),
-                  paste0(dimName)
+                  paste0(dimName),
+                  type="string"
                   )
 
     ## Should only be added if data available in D2RQ format
@@ -166,7 +168,8 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
         add.data.triple(store,
                   datasetname.subject,
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
-                  toupper(underlDataSetName)
+                  toupper(underlDataSetName),
+                  type="string"
                   )
     }
 
@@ -174,7 +177,8 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     add.data.triple(store,
                     paste0(prefixlist$prefixCODE,dimName),
                     paste0(prefixlist$prefixMMS,"inValueDomain"),
-                    paste0(nciDomainValue)
+                    paste0(nciDomainValue),
+                  type="string"
                     )
   }
 
@@ -214,13 +218,16 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     add.data.triple(store,
                     codeSubj,
                     paste0(prefixlist$prefixSKOS,"prefLabel"),
-                    paste0(codeSource[i,"code"]))
+                    paste0(codeSource[i,"code"]),
+                  type="string"
+                    )
 
     if (codeSource[i,"code"]!="_ALL_" & codeSource[i,"code"]!="_NONMISS_") {
     add.data.triple(store,
                   codeSubj,
                   paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionoperator"),
-                  "=="
+                  "==",
+                  type="string"
                   )
 
     ## TODO(mja): consider adding type here ...
@@ -228,13 +235,15 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
     add.data.triple(store,
                   codeSubj,
                   paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
-                  paste0('\\"',codeSource[i,"code"], '\\"')
+                  paste0('\\"',codeSource[i,"code"], '\\"'),
+                  type="string"
                     )
   }  else {
     add.data.triple(store,
                   codeSubj,
                   paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
-                  paste0(codeSource[i,"code"])
+                  paste0(codeSource[i,"code"]),
+                  type="string"
                     )
     }
   }
@@ -258,7 +267,8 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
         add.data.triple(store,
                   datasetname.subject,
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
-                  toupper(underlDataSetName)
+                  toupper(underlDataSetName),
+                  type="string"
                   )
     }
 

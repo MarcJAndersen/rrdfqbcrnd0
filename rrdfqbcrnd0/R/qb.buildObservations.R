@@ -8,7 +8,7 @@
 ##' @param procedure2format A list specifying the format for the
 ##' descriptive statistics. If NULL then the default list is used
 ##' @return Always TRUE
-##' 
+##'
 qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix,
                                 dsdName, recode.list, procedure2format ) {
 
@@ -27,16 +27,16 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
             print( obsData[which(dupObs | dupObsRev ), ] )
             stop("Duplicated observations in obsData. Variables that should be unique: ", paste0(checkVars,collapse=", "))
         }
-    }                         
+    }
     if (is.null(procedure2format)) {
         procedure2format<- list("count"="int",
                                 "countdistinct"="int",
-                                'percent'='double', 
-                                'mean'='double', 
-                                'stdev'='double', 
-                                'min'='double', 
-                                'median'='double', 
-                                'max'='double'                         
+                                'percent'='double',
+                                'mean'='double',
+                                'stdev'='double',
+                                'min'='double',
+                                'median'='double',
+                                'max'='double'
                                 );
 
     }
@@ -76,7 +76,7 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
     obs.width<- floor(log10(nrow(obsData)))+1
     for (i in 1:nrow(obsData)){
         ## TODO(mja): consider this being the rownames
-        obsNum <- paste0("obs",formatC(i,flag="0",width=obs.width)) 
+        obsNum <- paste0("obs",formatC(i,flag="0",width=obs.width))
 
         add.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
@@ -87,13 +87,15 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         add.triple(store,
                    paste0(prefixlist$prefixDS, obsNum),
                    paste0(prefixlist$prefixQB, "dataSet"),
-                   paste0(prefixlist$prefixDS, dsdURIwoprefix))  #TODO : change to declared var
+                   paste0(prefixlist$prefixDS, dsdURIwoprefix)
+                   )  #TODO : change to declared var
 
         ## Label
         add.data.triple(store,
                         paste0(prefixlist$prefixDS, obsNum),
                         paste0(prefixlist$prefixRDFS, "label"),
-                        paste0(i))
+                        paste0(i),
+                        type="string")
 
         ## Comment
         add.data.triple(store,
@@ -105,7 +107,7 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         for (qbdim in skeletonSource[ skeletonSource$compType=="dimension", "compName" ]){
             ##   print(paste0("qbdim :   ", qbdim))
             ##   print(paste0("recode.list[[qbdim]]: ", names(recode.list[[qbdim]]), "=", recode.list[[qbdim]]))
-            
+
             vCoded <-  ph.recode( obsData[i,qbdim], recode.list[[qbdim]] )
             ## b. Create coded triple
             add.triple(store,

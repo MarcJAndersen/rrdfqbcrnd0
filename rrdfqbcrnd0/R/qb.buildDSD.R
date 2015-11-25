@@ -114,12 +114,14 @@ add.data.triple(store,
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "version"),
-                extra$PAVnodes$pavVersion)
+                extra$PAVnodes$pavVersion,
+                "string")
 
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "createdWith"),
-                extra$PAVnodes$createdWith)
+                extra$PAVnodes$createdWith,
+                "string")
 
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
@@ -130,13 +132,15 @@ add.data.triple(store,
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPROV, "wasDerivedFrom"),
-                extra$obsfilename
+                extra$obsfilename,
+                "string"
                 )  # The source .CSV data file
 
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
-                extra$obsDataSetName
+                extra$obsDataSetName,
+                "string"
                 )  # D2RQ DataSetName
     
 for (i in 1:nrow(skeletonSource)){
