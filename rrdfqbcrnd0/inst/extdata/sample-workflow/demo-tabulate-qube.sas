@@ -13,7 +13,8 @@
 
 
 options ls=150;
-filename source url "http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt" ;
+* filename source url "http://phuse-scripts.googlecode.com/svn/trunk/scriptathon2014/data/adsl.xpt" ;
+filename source "../sample-xpt/adsl.xpt";
 libname source xport ;
 
 options mprint;
@@ -99,10 +100,6 @@ proc format;
             
 run;
 
-%global trtn trt;
-%let trtn = trt01an;
-%let trt = trt01a;
-
 data work.adsl;
    set source.adsl;
 
@@ -121,6 +118,8 @@ ods output table=demo_tabulate;
 */
 
 proc tabulate data=adsl missing;
+   where ittfl = 'Y';
+   class ittfl;
     class sex;
     format sex $sexfmt.;
     class agegr1;
@@ -134,6 +133,7 @@ proc tabulate data=adsl missing;
     class trt01an;
     format trt01an trt01an.;
     table
+        ittfl,
         sex*(n pctn<sex>)
         agegr1*(n pctn<agegr1>)
         ethnic*(n pctn<ethnic>)
