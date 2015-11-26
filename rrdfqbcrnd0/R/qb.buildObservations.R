@@ -29,14 +29,14 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         }
     }
     if (is.null(procedure2format)) {
-        procedure2format<- list("count"="int",
-                                "countdistinct"="int",
-                                'percent'='double',
-                                'mean'='double',
-                                'stdev'='double',
-                                'min'='double',
-                                'median'='double',
-                                'max'='double'
+        procedure2format<- list("count"="float",
+                                "countdistinct"="float",
+                                'percent'='float',
+                                'mean'='float',
+                                'stdev'='float',
+                                'min'='float',
+                                'median'='float',
+                                'max'='float'
                                 );
 
     }
