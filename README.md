@@ -12,8 +12,8 @@ Marc Andersen
 # Contact
 
 For more information about the Analysis Results Model subgroup, please
-visit the Wiki at [phusewiki.org]() or go straight to
-[http://www.phusewiki.org/wiki/index.php?title=Analysis_Results_Model]()
+visit the Wiki at (http://www.phusewiki.org) or go straight to
+(http://www.phusewiki.org/wiki/index.php?title=Analysis_Results_Model)
 
 
 # Introduction
@@ -56,13 +56,13 @@ Download rrdfqbcrnd0 project from Git from (https://github.com/MarcJAndersen/rrd
 
 Extract the most recent package (rrdfqbcrnd0_0.1.6.tar.gz) from rrdfqbcrnd0-master/ReleasePackages/ subfolder of the downloaded archive. 
 
-Put rrdfqbcrnd0_0.1.6.tar.gz in the current working directory of the R process - or change the working directory to the folder with the package.
+Put rrdfqbcrnd0_0.1.7.tar.gz in the current working directory of the R process - or change the working directory to the folder with the package.
 Tip for Rstudio: use the file explore window to navigate to the directory, then use "Set Working Director" from the "More" menu.
 
 In R issue
 ```r
 library(devtools)
-install_local("rrdfqbcrnd0_0.1.6.tar.gz")
+install_local("rrdfqbcrnd0_0.1.7.tar.gz")
 ```
 
 Note: the package may not be able to install using "install.packages" in Rstudio due to "rrdf(>= 2.0.4)".
