@@ -17,24 +17,6 @@ First load the package.
 library(rrdfqbcrnd0)
 ```
 
-```
-## Loading required package: xlsx
-## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: xlsxjars
-## Loading required package: RCurl
-## Loading required package: bitops
-## 
-## Attaching package: 'RCurl'
-## 
-## The following object is masked from 'package:rJava':
-## 
-##     clone
-## 
-## Loading required package: rrdf
-## Loading required package: rrdflibs
-```
-
 # Generating RDF data cube from specification in a spreadsheet and export as turtle file
 
 The generation of RDF data cube can be specified in a spreadsheet.
@@ -107,34 +89,20 @@ the generated RDF data cube.
 
 ```r
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromWorkbook"
-```
-
-```r
 cat("DM cube stored as ", normalizePath(dm.cube.fn), "\n")
 ```
 
 ```
-## Error in path.expand(path): object 'dm.cube.fn' not found
+## DM cube stored as  /tmp/Rtmp7wLyPu/DC-DM-R-V-0-5-2.ttl
 ```
 
 ```r
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromWorkbook"
-```
-
-```r
 cat("AE cube stored as ", normalizePath(ae.cube.fn), "\n")
 ```
 
 ```
-## Error in path.expand(path): object 'ae.cube.fn' not found
+## AE cube stored as  /tmp/Rtmp7wLyPu/DC-AE-R-V-0-5-2.ttl
 ```
 
 # Create from demo data PhUSE scripting program
@@ -169,18 +137,11 @@ demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 
 
 demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromDataFrames"
-```
-
-```r
 cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
 ```
-## Error in path.expand(path): object 'demo.cube.fn' not found
+## DEMO cube stored as  /tmp/Rtmp7wLyPu/DC-DEMO-R-V-0-5-2.ttl
 ```
 
 ### Notes 
@@ -215,13 +176,6 @@ Now look at the generated cubes by loading the turtle files.
 
 ```r
 dataCubeFile<- demo.cube.fn
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'demo.cube.fn' not found
-```
-
-```r
 # dataCubeFile<- ae.cube.fn
 # dataCubeFile<- dm.cube.fn
 ```
@@ -230,19 +184,12 @@ The rest of the code only depends on the value of dataCubeFile.
 
 ```r
 checkCube <- new.rdf()  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : object 'dataCubeFile' not found
-```
-
-```r
+temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
 
 ```
-## [1] "Number of triples: 40"
+## [1] "Number of triples: 3094"
 ```
 
 ## Get the values in the cube
@@ -250,26 +197,8 @@ First set values for accessing the cube.
 
 ```r
 dsdName<- GetDsdNameFromCube( checkCube )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetDsdNameFromCube"
-```
-
-```r
 domainName<- GetDomainNameFromCube( checkCube )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetDomainNameFromCube"
-```
-
-```r
 forsparqlprefix<- GetForSparqlPrefix( domainName )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetForSparqlPrefix"
 ```
 
 The next statement shows the first 10 triples in the cube.
@@ -283,27 +212,20 @@ limit 10
 ',
 "\n"
 )
-```
-
-```
-## Error in paste(forsparqlprefix, "\nselect *\nwhere {?s ?p ?o .}\nlimit 10\n", : object 'forsparqlprefix' not found
-```
-
-```r
 observations1<- sparql.rdf(checkCube, observations1Rq  )
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'observations1Rq' not found
-```
-
-```r
 knitr::kable(head(observations1))
 ```
 
-```
-## Error in head(observations1): error in evaluating the argument 'x' in selecting a method for function 'head': Error: object 'observations1' not found
-```
+
+
+|s            |p                  |o            |
+|:------------|:------------------|:------------|
+|rdfs:domain  |rdfs:domain        |rdf:Property |
+|rdfs:domain  |rdfs:range         |rdfs:Class   |
+|rdfs:comment |rdfs:range         |rdfs:Literal |
+|rdf:first    |rdf:type           |rdf:Property |
+|rdf:first    |rdfs:domain        |rdf:List     |
+|rdf:first    |rdfs:subPropertyOf |rdf:first    |
 
 The next statement shows the first 10 triples in the cube, where the subject is a qb:Observation.
 
@@ -316,27 +238,24 @@ limit 10
 ',
 "\n"                               
 )
-```
-
-```
-## Error in paste(forsparqlprefix, "\nselect *\nwhere { ?s a qb:Observation ; ?p ?o .}\nlimit 10\n", : object 'forsparqlprefix' not found
-```
-
-```r
 observations2<- sparql.rdf(checkCube, observations2Rq)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'observations2Rq' not found
-```
-
-```r
 knitr::kable(head(observations2, 10))
 ```
 
-```
-## Error in head(observations2, 10): error in evaluating the argument 'x' in selecting a method for function 'head': Error: object 'observations2' not found
-```
+
+
+|s         |p                          |o                    |
+|:---------|:--------------------------|:--------------------|
+|ds:obs103 |crnd-attribute:unit        |NA                   |
+|ds:obs103 |crnd-attribute:cellpartno  |1                    |
+|ds:obs103 |rdf:type                   |qb:Observation       |
+|ds:obs103 |crnd-dimension:procedure   |code:procedure-q3    |
+|ds:obs103 |crnd-dimension:ethnic      |code:ethnic-_ALL_    |
+|ds:obs103 |crnd-attribute:rowno       |30                   |
+|ds:obs103 |crnd-dimension:factor      |code:factor-weightbl |
+|ds:obs103 |crnd-dimension:sex         |code:sex-_ALL_       |
+|ds:obs103 |rdfs:label                 |103                  |
+|ds:obs103 |crnd-attribute:denominator |                     |
 
 ## Get cube components
 
@@ -344,166 +263,206 @@ The cube components are shown in the next output.
 
 ```r
 componentsRq<- GetComponentSparqlQuery( forsparqlprefix, dsdName )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetComponentSparqlQuery"
-```
-
-```r
 components<- as.data.frame(sparql.rdf(checkCube, componentsRq), stringsAsFactors=FALSE)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'componentsRq' not found
-```
-
-```r
 components$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",components$p)
-```
-
-```
-## Error in gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", components$p): object 'components' not found
-```
-
-```r
 knitr::kable(components[,c("vn", "label")])
 ```
 
-```
-## Error in is.data.frame(x): object 'components' not found
-```
+
+
+|vn        |label                                       |
+|:---------|:-------------------------------------------|
+|agegr1    |Age group                                   |
+|ethnic    |Ethnic                                      |
+|factor    |Type of procedure (quantity, proportion...) |
+|procedure |Statistical Procedure                       |
+|race      |Race                                        |
+|sex       |Sex (Gender)                                |
+|trt01a    |Treatment Arm                               |
 
 The codelists are shown in the next output.
 
 ```r
 codelistsRq<- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetCodeListSparqlQuery"
-```
-
-```r
 codelists<- as.data.frame(sparql.rdf(checkCube, codelistsRq), stringsAsFactors=FALSE)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'codelistsRq' not found
-```
-
-```r
 codelists$vn<- gsub("crnd-dimension:|crnd-attribute:|crnd-measure:","",codelists$p)
-```
-
-```
-## Error in gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", codelists$p): object 'codelists' not found
-```
-
-```r
 codelists$clc<- gsub("code:","",codelists$cl)
-```
-
-```
-## Error in gsub("code:", "", codelists$cl): object 'codelists' not found
-```
-
-```r
 knitr::kable(codelists[,c("vn", "clc", "prefLabel")])
 ```
 
-```
-## Error in is.data.frame(x): object 'codelists' not found
-```
+
+
+|vn        |clc                                            |prefLabel                                 |
+|:---------|:----------------------------------------------|:-----------------------------------------|
+|agegr1    |agegr1-65-80                                   |65-80                                     |
+|agegr1    |agegr1-_65                                     |<65                                       |
+|agegr1    |agegr1-_80                                     |>80                                       |
+|agegr1    |agegr1-_ALL_                                   |_ALL_                                     |
+|agegr1    |agegr1-_ALL_                                   |_ALL_                                     |
+|agegr1    |agegr1-_NONMISS_                               |_NONMISS_                                 |
+|agegr1    |agegr1-_NONMISS_                               |_NONMISS_                                 |
+|ethnic    |ethnic-HISPANIC_OR_LATINO                      |HISPANIC OR LATINO                        |
+|ethnic    |ethnic-NOT_HISPANIC_OR_LATINO                  |NOT HISPANIC OR LATINO                    |
+|ethnic    |ethnic-_ALL_                                   |_ALL_                                     |
+|ethnic    |ethnic-_ALL_                                   |_ALL_                                     |
+|ethnic    |ethnic-_NONMISS_                               |_NONMISS_                                 |
+|ethnic    |ethnic-_NONMISS_                               |_NONMISS_                                 |
+|factor    |factor-_ALL_                                   |_ALL_                                     |
+|factor    |factor-_NONMISS_                               |_NONMISS_                                 |
+|factor    |factor-age                                     |age                                       |
+|factor    |factor-proportion                              |proportion                                |
+|factor    |factor-quantity                                |quantity                                  |
+|factor    |factor-weightbl                                |weightbl                                  |
+|procedure |procedure-count                                |count                                     |
+|procedure |procedure-max                                  |max                                       |
+|procedure |procedure-mean                                 |mean                                      |
+|procedure |procedure-median                               |median                                    |
+|procedure |procedure-min                                  |min                                       |
+|procedure |procedure-n                                    |n                                         |
+|procedure |procedure-percent                              |percent                                   |
+|procedure |procedure-q1                                   |q1                                        |
+|procedure |procedure-q3                                   |q3                                        |
+|procedure |procedure-std                                  |std                                       |
+|race      |race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          |AMERICAN INDIAN OR ALASKA NATIVE          |
+|race      |race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          |AMERICAN INDIAN OR ALASKA NATIVE          |
+|race      |race-ASIAN                                     |ASIAN                                     |
+|race      |race-ASIAN                                     |ASIAN                                     |
+|race      |race-BLACK_OR_AFRICAN_AMERICAN                 |BLACK OR AFRICAN AMERICAN                 |
+|race      |race-BLACK_OR_AFRICAN_AMERICAN                 |BLACK OR AFRICAN AMERICAN                 |
+|race      |race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER |NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER |
+|race      |race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER |NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER |
+|race      |race-WHITE                                     |WHITE                                     |
+|race      |race-WHITE                                     |WHITE                                     |
+|race      |race-_ALL_                                     |_ALL_                                     |
+|race      |race-_NONMISS_                                 |_NONMISS_                                 |
+|sex       |sex-F                                          |F                                         |
+|sex       |sex-F                                          |F                                         |
+|sex       |sex-M                                          |M                                         |
+|sex       |sex-M                                          |M                                         |
+|sex       |sex-U                                          |U                                         |
+|sex       |sex-U                                          |U                                         |
+|sex       |sex-UN                                         |UN                                        |
+|sex       |sex-UN                                         |UN                                        |
+|sex       |sex-_ALL_                                      |_ALL_                                     |
+|sex       |sex-_NONMISS_                                  |_NONMISS_                                 |
+|trt01a    |trt01a-Placebo                                 |Placebo                                   |
+|trt01a    |trt01a-Xanomeline_High_Dose                    |Xanomeline High Dose                      |
+|trt01a    |trt01a-Xanomeline_Low_Dose                     |Xanomeline Low Dose                       |
+|trt01a    |trt01a-_ALL_                                   |_ALL_                                     |
+|trt01a    |trt01a-_NONMISS_                               |_NONMISS_                                 |
 
 
 The dimensions are shown in the next output.
 
 ```r
 dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetDimensionsSparqlQuery"
-```
-
-```r
 dimensions<- sparql.rdf(checkCube, dimensionsRq)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'dimensionsRq' not found
-```
-
-```r
 knitr::kable(dimensions)
 ```
 
-```
-## Error in is.data.frame(x): object 'dimensions' not found
-```
+
+
+|p                        |
+|:------------------------|
+|crnd-dimension:ethnic    |
+|crnd-dimension:race      |
+|crnd-dimension:procedure |
+|crnd-dimension:agegr1    |
+|crnd-dimension:factor    |
+|crnd-dimension:trt01a    |
+|crnd-dimension:sex       |
 
 Then the attributes as shown in the next output.
 
 ```r
 attributesRq<- GetAttributesSparqlQuery( forsparqlprefix )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetAttributesSparqlQuery"
-```
-
-```r
 attributes<- sparql.rdf(checkCube, attributesRq)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'attributesRq' not found
-```
-
-```r
 knitr::kable(attributes)
 ```
 
-```
-## Error in as.data.frame.default(x): cannot coerce class ""function"" to a data.frame
-```
+
+
+|p                          |
+|:--------------------------|
+|crnd-attribute:cellpartno  |
+|crnd-attribute:measurefmt  |
+|crnd-attribute:colno       |
+|crnd-attribute:denominator |
+|crnd-attribute:unit        |
+|crnd-attribute:rowno       |
 
 ## Get observations
 And finally the SPARQL query for observations, showing only the first 10 observations.
 
 ```r
 observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetObservationsSparqlQuery"
-```
-
-```r
 cat(observationsRq)
 ```
 
 ```
-## Error in cat(observationsRq): object 'observationsRq' not found
+## prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+## prefix skos: <http://www.w3.org/2004/02/skos/core#>
+## prefix prov: <http://www.w3.org/ns/prov#>
+## prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+## prefix dcat: <http://www.w3.org/ns/dcat#>
+## prefix owl: <http://www.w3.org/2002/07/owl#>
+## prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+## prefix qb: <http://purl.org/linked-data/cube#>
+## prefix pav: <http://purl.org/pav>
+## prefix dct: <http://purl.org/dc/terms/>
+## prefix mms: <http://rdf.cdisc.org/mms#>
+## prefix cts: <http://rdf.cdisc.org/ct/schema#>
+## prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>
+## prefix code: <http://www.example.org/dc/code/>
+## prefix dccs: <http://www.example.org/dc/demo/dccs/>
+## prefix ds: <http://www.example.org/dc/demo/ds/>
+## prefix crnd-dimension: <http://www.example.org/dc/dimension#>
+## prefix crnd-attribute: <http://www.example.org/dc/attribute#>
+## prefix crnd-measure: <http://www.example.org/dc/measure#>
+##  select * where { ?s a qb:Observation  ; 
+##         qb:dataSet ds:dataset-DEMO  ; 
+##  crnd-dimension:ethnic ?ethnic;
+## crnd-dimension:race ?race;
+## crnd-dimension:procedure ?procedure;
+## crnd-dimension:agegr1 ?agegr1;
+## crnd-dimension:factor ?factor;
+## crnd-dimension:trt01a ?trt01a;
+## crnd-dimension:sex ?sex; crnd-attribute:cellpartno ?cellpartno;
+## crnd-attribute:measurefmt ?measurefmt;
+## crnd-attribute:colno ?colno;
+## crnd-attribute:denominator ?denominator;
+## crnd-attribute:unit ?unit;
+## crnd-attribute:rowno ?rowno; crnd-measure:measure      ?measure ;      
+##  optional{ ?ethnic skos:prefLabel ?ethnicvalue . }
+## optional{ ?race skos:prefLabel ?racevalue . }
+## optional{ ?procedure skos:prefLabel ?procedurevalue . }
+## optional{ ?agegr1 skos:prefLabel ?agegr1value . }
+## optional{ ?factor skos:prefLabel ?factorvalue . }
+## optional{ ?trt01a skos:prefLabel ?trt01avalue . }
+## optional{ ?sex skos:prefLabel ?sexvalue . } 
+##  }
 ```
 
 ```r
 observations<- as.data.frame(sparql.rdf(checkCube, observationsRq ), stringsAsFactors=FALSE)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'observationsRq' not found
-```
-
-```r
 knitr::kable(observations[ 1:10 ,
    c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions), "value"),sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", attributes), "measure")])
 ```
 
-```
-## Error in is.data.frame(x): object 'observations' not found
-```
+
+
+|ethnicvalue |racevalue |procedurevalue |agegr1value |factorvalue |trt01avalue         |sexvalue |cellpartno |measurefmt |colno |denominator |unit |rowno |measure |
+|:-----------|:---------|:--------------|:-----------|:-----------|:-------------------|:--------|:----------|:----------|:-----|:-----------|:----|:-----|:-------|
+|_ALL_       |_ALL_     |q3             |_ALL_       |weightbl    |Placebo             |_ALL_    |1          |%6.1f      |1     |            |NA   |30    |74.4    |
+|_ALL_       |_ALL_     |q3             |_ALL_       |weightbl    |Placebo             |_ALL_    |1          |%6.1f      |1     |            |NA   |30    |74.4    |
+|_ALL_       |_ALL_     |q3             |_ALL_       |weightbl    |Placebo             |_ALL_    |1          |%6.1f      |1     |            |NA   |30    |74.4    |
+|_ALL_       |_ALL_     |q3             |_ALL_       |weightbl    |Placebo             |_ALL_    |1          |%6.1f      |1     |            |NA   |30    |74.4    |
+|_ALL_       |_ALL_     |count          |_ALL_       |quantity    |Xanomeline Low Dose |M        |1          |%6.0f      |2     |            |NA   |3     |34      |
+|_ALL_       |_ALL_     |count          |_ALL_       |quantity    |Xanomeline Low Dose |M        |1          |%6.0f      |2     |            |NA   |3     |34      |
+|_ALL_       |_ALL_     |count          |_ALL_       |quantity    |Xanomeline Low Dose |M        |1          |%6.0f      |2     |            |NA   |3     |34      |
+|_ALL_       |_ALL_     |count          |_ALL_       |quantity    |Xanomeline Low Dose |M        |1          |%6.0f      |2     |            |NA   |3     |34      |
+|_ALL_       |_ALL_     |count          |_ALL_       |quantity    |Xanomeline Low Dose |M        |1          |%6.0f      |2     |            |NA   |3     |34      |
+|_ALL_       |_ALL_     |count          |_ALL_       |quantity    |Xanomeline Low Dose |M        |1          |%6.0f      |2     |            |NA   |3     |34      |
 
 ## Get observations with labels
 
@@ -511,29 +470,73 @@ The SPARQL query for observations with labels for variables, showing only the fi
 
 ```r
 observationsDescriptionRq<- GetObservationsWithDescriptionSparqlQuery( forsparqlprefix, domainName, dimensions, attributes )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetObservationsWithDescriptionSparqlQuery"
-```
-
-```r
 cat(observationsDescriptionRq)
 ```
 
 ```
-## Error in cat(observationsDescriptionRq): object 'observationsDescriptionRq' not found
+## prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+## prefix skos: <http://www.w3.org/2004/02/skos/core#>
+## prefix prov: <http://www.w3.org/ns/prov#>
+## prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+## prefix dcat: <http://www.w3.org/ns/dcat#>
+## prefix owl: <http://www.w3.org/2002/07/owl#>
+## prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+## prefix qb: <http://purl.org/linked-data/cube#>
+## prefix pav: <http://purl.org/pav>
+## prefix dct: <http://purl.org/dc/terms/>
+## prefix mms: <http://rdf.cdisc.org/mms#>
+## prefix cts: <http://rdf.cdisc.org/ct/schema#>
+## prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>
+## prefix code: <http://www.example.org/dc/code/>
+## prefix dccs: <http://www.example.org/dc/demo/dccs/>
+## prefix ds: <http://www.example.org/dc/demo/ds/>
+## prefix crnd-dimension: <http://www.example.org/dc/dimension#>
+## prefix crnd-attribute: <http://www.example.org/dc/attribute#>
+## prefix crnd-measure: <http://www.example.org/dc/measure#>
+##  select * where { 
+##  ?s a qb:Observation  ; 
+##  qb:dataSet ds:dataset-DEMO  ; 
+##  crnd-dimension:ethnic ?ethnic;
+## crnd-dimension:race ?race;
+## crnd-dimension:procedure ?procedure;
+## crnd-dimension:agegr1 ?agegr1;
+## crnd-dimension:factor ?factor;
+## crnd-dimension:trt01a ?trt01a;
+## crnd-dimension:sex ?sex; 
+##  crnd-attribute:cellpartno ?cellpartno;
+## crnd-attribute:measurefmt ?measurefmt;
+## crnd-attribute:colno ?colno;
+## crnd-attribute:denominator ?denominator;
+## crnd-attribute:unit ?unit;
+## crnd-attribute:rowno ?rowno; 
+##  crnd-measure:measure      ?measure .      
+##  optional{ ?ethnic skos:prefLabel ?ethnicvalue . }
+## optional{ ?race skos:prefLabel ?racevalue . }
+## optional{ ?procedure skos:prefLabel ?procedurevalue . }
+## optional{ ?agegr1 skos:prefLabel ?agegr1value . }
+## optional{ ?factor skos:prefLabel ?factorvalue . }
+## optional{ ?trt01a skos:prefLabel ?trt01avalue . }
+## optional{ ?sex skos:prefLabel ?sexvalue . } 
+##  optional{ crnd-dimension:ethnic rdfs:label ?ethniclabel . }
+## optional{ crnd-dimension:race rdfs:label ?racelabel . }
+## optional{ crnd-dimension:procedure rdfs:label ?procedurelabel . }
+## optional{ crnd-dimension:agegr1 rdfs:label ?agegr1label . }
+## optional{ crnd-dimension:factor rdfs:label ?factorlabel . }
+## optional{ crnd-dimension:trt01a rdfs:label ?trt01alabel . }
+## optional{ crnd-dimension:sex rdfs:label ?sexlabel . } 
+##  BIND( IRI(crnd-dimension:ethnic) as ?ethnicIRI)
+## BIND( IRI(crnd-dimension:race) as ?raceIRI)
+## BIND( IRI(crnd-dimension:procedure) as ?procedureIRI)
+## BIND( IRI(crnd-dimension:agegr1) as ?agegr1IRI)
+## BIND( IRI(crnd-dimension:factor) as ?factorIRI)
+## BIND( IRI(crnd-dimension:trt01a) as ?trt01aIRI)
+## BIND( IRI(crnd-dimension:sex) as ?sexIRI) 
+##  BIND( IRI( ?s ) AS ?measureIRI) 
+##  }
 ```
 
 ```r
 observationsDesc<- as.data.frame(sparql.rdf(checkCube, observationsDescriptionRq ), stringsAsFactors=FALSE)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'observationsDescriptionRq' not found
-```
-
-```r
 knitr::kable(observationsDesc[ 1:10 ,
      c(paste0(rep(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions),each=3),
        c("label", "value", "IRI")),
@@ -542,9 +545,20 @@ knitr::kable(observationsDesc[ 1:10 ,
        )
 ```
 
-```
-## Error in is.data.frame(x): object 'observationsDesc' not found
-```
+
+
+|ethniclabel |ethnicvalue |ethnicIRI             |racelabel |racevalue |raceIRI             |procedurelabel        |procedurevalue |procedureIRI             |agegr1label |agegr1value |agegr1IRI             |factorlabel                                 |factorvalue |factorIRI             |trt01alabel   |trt01avalue         |trt01aIRI             |sexlabel     |sexvalue |sexIRI             |cellpartno |measurefmt |colno |denominator |unit |rowno |measure |measureIRI |
+|:-----------|:-----------|:---------------------|:---------|:---------|:-------------------|:---------------------|:--------------|:------------------------|:-----------|:-----------|:---------------------|:-------------------------------------------|:-----------|:---------------------|:-------------|:-------------------|:---------------------|:------------|:--------|:------------------|:----------|:----------|:-----|:-----------|:----|:-----|:-------|:----------|
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |q3             |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |weightbl    |crnd-dimension:factor |Treatment Arm |Placebo             |crnd-dimension:trt01a |Sex (Gender) |_ALL_    |crnd-dimension:sex |1          |%6.1f      |1     |            |NA   |30    |74.4    |ds:obs103  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |q3             |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |weightbl    |crnd-dimension:factor |Treatment Arm |Placebo             |crnd-dimension:trt01a |Sex (Gender) |_ALL_    |crnd-dimension:sex |1          |%6.1f      |1     |            |NA   |30    |74.4    |ds:obs103  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |q3             |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |weightbl    |crnd-dimension:factor |Treatment Arm |Placebo             |crnd-dimension:trt01a |Sex (Gender) |_ALL_    |crnd-dimension:sex |1          |%6.1f      |1     |            |NA   |30    |74.4    |ds:obs103  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |q3             |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |weightbl    |crnd-dimension:factor |Treatment Arm |Placebo             |crnd-dimension:trt01a |Sex (Gender) |_ALL_    |crnd-dimension:sex |1          |%6.1f      |1     |            |NA   |30    |74.4    |ds:obs103  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |count          |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |quantity    |crnd-dimension:factor |Treatment Arm |Xanomeline Low Dose |crnd-dimension:trt01a |Sex (Gender) |M        |crnd-dimension:sex |1          |%6.0f      |2     |            |NA   |3     |34      |ds:obs014  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |count          |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |quantity    |crnd-dimension:factor |Treatment Arm |Xanomeline Low Dose |crnd-dimension:trt01a |Sex (Gender) |M        |crnd-dimension:sex |1          |%6.0f      |2     |            |NA   |3     |34      |ds:obs014  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |count          |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |quantity    |crnd-dimension:factor |Treatment Arm |Xanomeline Low Dose |crnd-dimension:trt01a |Sex (Gender) |M        |crnd-dimension:sex |1          |%6.0f      |2     |            |NA   |3     |34      |ds:obs014  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |count          |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |quantity    |crnd-dimension:factor |Treatment Arm |Xanomeline Low Dose |crnd-dimension:trt01a |Sex (Gender) |M        |crnd-dimension:sex |1          |%6.0f      |2     |            |NA   |3     |34      |ds:obs014  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |count          |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |quantity    |crnd-dimension:factor |Treatment Arm |Xanomeline Low Dose |crnd-dimension:trt01a |Sex (Gender) |M        |crnd-dimension:sex |1          |%6.0f      |2     |            |NA   |3     |34      |ds:obs014  |
+|Ethnic      |_ALL_       |crnd-dimension:ethnic |Race      |_ALL_     |crnd-dimension:race |Statistical Procedure |count          |crnd-dimension:procedure |Age group   |_ALL_       |crnd-dimension:agegr1 |Type of procedure (quantity, proportion...) |quantity    |crnd-dimension:factor |Treatment Arm |Xanomeline Low Dose |crnd-dimension:trt01a |Sex (Gender) |M        |crnd-dimension:sex |1          |%6.0f      |2     |            |NA   |3     |34      |ds:obs014  |
 
 ## Get formular expression
 
@@ -554,7 +568,7 @@ GetFormularFromCube( checkCube, forsparqlprefix )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetFormularFromCube"
+## expression(~trt01a*q3(weightbl)+trt01a*sex*count( )+race*trt01a*percent(race)+trt01a*std(age)+trt01a*q3(age)+ethnic*trt01a*percent(ethnic)+ethnic*trt01a*count( )+trt01a*min(age)+trt01a*n(weightbl)+trt01a*median(weightbl)+agegr1*trt01a*percent(agegr1)+trt01a*std(weightbl)+trt01a*median(age)+agegr1*trt01a*count( )+trt01a*sex*percent(sex)+trt01a*q1(weightbl)+trt01a*max(weightbl)+race*trt01a*count( )+trt01a*mean(weightbl)+trt01a*q1(age)+trt01a*mean(age)+trt01a*n(age)+trt01a*max(age)+trt01a*min(weightbl))
 ```
 
 ### Notes
@@ -577,27 +591,28 @@ First get the dimensions, measure and attribute
 
 ```r
 workbookDimAttrMeasRq<- GetDimAttrMeasInWorkbookFormatSparqlQuery( forsparqlprefix ) 
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetDimAttrMeasInWorkbookFormatSparqlQuery"
-```
-
-```r
 dimensionsattr<- sparql.rdf(checkCube, workbookDimAttrMeasRq )
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'workbookDimAttrMeasRq' not found
-```
-
-```r
 knitr::kable(dimensionsattr)
 ```
 
-```
-## Error in is.data.frame(x): object 'dimensionsattr' not found
-```
+
+
+|compType  |compName                   |codeType |nciDomainValue |
+|:---------|:--------------------------|:--------|:--------------|
+|dimension |crnd-dimension:ethnic      |NA       |NA             |
+|dimension |crnd-dimension:race        |NA       |C74457         |
+|dimension |crnd-dimension:procedure   |NA       |NA             |
+|dimension |crnd-dimension:agegr1      |NA       |NA             |
+|dimension |crnd-dimension:factor      |NA       |NA             |
+|dimension |crnd-dimension:trt01a      |NA       |NA             |
+|dimension |crnd-dimension:sex         |NA       |C66731         |
+|attribute |crnd-attribute:cellpartno  |NA       |NA             |
+|attribute |crnd-attribute:measurefmt  |NA       |NA             |
+|attribute |crnd-attribute:colno       |NA       |NA             |
+|attribute |crnd-attribute:denominator |NA       |NA             |
+|attribute |crnd-attribute:unit        |NA       |NA             |
+|attribute |crnd-attribute:rowno       |NA       |NA             |
+|measure   |crnd-measure:measure       |NA       |NA             |
 
 Secondly, get the metadata for the workbook. To get the metadata
 element "cubeVersion" a workaround is needed. The cubeversion is not
@@ -607,43 +622,23 @@ paste0("DC-", domainName,"-R-V-",cubeVersion,".ttl").
 
 ```r
 workbookMetadataRq<- GetMetaDataInWorkbookFormatSparqlQuery( forsparqlprefix )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetMetaDataInWorkbookFormatSparqlQuery"
-```
-
-```r
 metadata<- sparql.rdf(checkCube, workbookMetadataRq)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'workbookMetadataRq' not found
-```
-
-```r
 cubeVersion<- gsub("-",".", gsub("DC-.*-R-V-([^\\.]+).ttl", "\\1", metadata[ metadata[,2]=="distribution", "compLabel"], perl=TRUE))
-```
-
-```
-## Error in gsub("DC-.*-R-V-([^\\.]+).ttl", "\\1", metadata[metadata[, 2] == : object 'metadata' not found
-```
-
-```r
 metadataX<- rbind(metadata, cbind(compType="metadata", compName="cubeVersion", compLabel=cubeVersion))
-```
-
-```
-## Error in rbind(metadata, cbind(compType = "metadata", compName = "cubeVersion", : object 'metadata' not found
-```
-
-```r
 knitr::kable(metadataX)
 ```
 
-```
-## Error in is.data.frame(x): object 'metadataX' not found
-```
+
+
+|          |compType |compName     |compLabel                                        |
+|:---------|:--------|:------------|:------------------------------------------------|
+|          |metadata |title        |Demographics Analysis Results                    |
+|          |metadata |distribution |DC-DEMO-R-V-0-5-2.ttl                            |
+|          |metadata |comment      |Example demographics table from demo.sas program |
+|          |metadata |label        |Demographics results data set.                   |
+|          |metadata |description  |Data from demo.sas program                       |
+|          |metadata |obsFileName  |demo.AR.csv                                      |
+|compLabel |metadata |cubeVersion  |0.5.2                                            |
 
 For comparison, see the meta data from the excel workbook in the beginning of the document.
 
@@ -667,14 +662,18 @@ sessionInfo()
 ## [11] LC_MEASUREMENT=en_GB.UTF-8    LC_IDENTIFICATION=en_GB.UTF-8
 ## 
 ## attached base packages:
-## [1] methods   stats     graphics  grDevices utils     datasets  base     
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] rrdfqbcrnd0_0.1.7 rrdf_2.1.2        rrdflibs_1.4.0    RCurl_1.95-4.7   
-## [5] bitops_1.0-6      xlsx_0.5.7        xlsxjars_0.6.1    rJava_0.9-7      
+##  [1] foreign_0.8-63    rrdfqbcrnd0_0.1.8 rrdf_2.1.2       
+##  [4] rrdflibs_1.4.0    RCurl_1.95-4.7    bitops_1.0-6     
+##  [7] xlsx_0.5.7        xlsxjars_0.6.1    rJava_0.9-7      
+## [10] devtools_1.9.1    knitr_1.11       
 ## 
 ## loaded via a namespace (and not attached):
-## [1] magrittr_1.5  formatR_1.2.1 tools_3.2.2   stringi_1.0-1 highr_0.5.1  
-## [6] knitr_1.11    stringr_1.0.0 evaluate_0.8
+##  [1] Rcpp_0.12.2     magrittr_1.5    roxygen2_4.1.1  stringr_1.0.0  
+##  [5] highr_0.5.1     tools_3.2.2     htmltools_0.2.6 yaml_2.1.13    
+##  [9] digest_0.6.8    formatR_1.2.1   memoise_0.2.1   evaluate_0.8   
+## [13] rmarkdown_0.7   stringi_1.0-1   compiler_3.2.2  markdown_0.7.7
 ```
 

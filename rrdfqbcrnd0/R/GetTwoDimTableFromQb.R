@@ -139,8 +139,9 @@ GetTwoDimTableFromQb<- function( store, forsparqlprefix, domainName, rowdim, col
     }
     for (icolno in icolnoseq) {
         for (irowno in irownoseq) {
+# TODO: quick hack - check why mja 08-dec-2015            
             presTable[irowno,paste0("col", icolno)]<-
-                observationsDescXX[observationsDescXX$irowno==irowno & observationsDescXX$icolno==icolno, "measure"]
+                (observationsDescXX[observationsDescXX$irowno==irowno & observationsDescXX$icolno==icolno, "measure"])[1]
         }
     }
 

@@ -67,7 +67,7 @@ The DEMO data exists as a turtle file in the sample-rdf directory.
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 store <- new.rdf()  # Initialize
 cat("Loading ", dataCubeFile, "\n")
-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
 ```
 

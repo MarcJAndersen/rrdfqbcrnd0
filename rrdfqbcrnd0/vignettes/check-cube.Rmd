@@ -31,7 +31,7 @@ dataSet[ii] <- lapply(dataSet[ii], as.character)
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrnd0")
 store <- new.rdf()  # Initialize
 cat("Reading turtle definition from ", dataCubeFile, "\n")
-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
 
 dsdName<- GetDsdNameFromCube( store )

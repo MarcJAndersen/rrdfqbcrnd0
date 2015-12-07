@@ -80,7 +80,7 @@ The code demonstrates the use of the rrdf library.
 
 ```{r}
 cube <- new.rdf()  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
+temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= cube) # work around to not get it printed
 summarize.rdf(cube)
 ```
 

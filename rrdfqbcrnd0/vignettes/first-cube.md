@@ -22,24 +22,6 @@ The next command is not needed if the package have been loaded throug devtools::
 library(rrdfqbcrnd0)
 ```
 
-```
-## Loading required package: xlsx
-## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: xlsxjars
-## Loading required package: RCurl
-## Loading required package: bitops
-## 
-## Attaching package: 'RCurl'
-## 
-## The following object is masked from 'package:rJava':
-## 
-##     clone
-## 
-## Loading required package: rrdf
-## Loading required package: rrdflibs
-```
-
 # Create RDF data cube
 The RDF data cube will be created from two data.frames containing data and metadata.
 
@@ -99,10 +81,6 @@ The RDF data cube for the data above is created using
 ```r
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromDataFrames"
-```
 This shows a simple use of the BuildCubeFromDataFrames function. 
 The warning message from log4j can be ignored.
 
@@ -113,7 +91,7 @@ cat(normalizePath(outcube),"\n")
 ```
 
 ```
-## Error in path.expand(path): object 'outcube' not found
+## /tmp/Rtmp7wLyPu/DC-EXAMPLE-R-V-0-0-0.ttl
 ```
 
 # Query the cube using SPARQL
@@ -126,29 +104,18 @@ Now take a look at the generated cubes by loading the turle file.
 dataCubeFile<- outcube
 ```
 
-```
-## Error in eval(expr, envir, enclos): object 'outcube' not found
-```
-
 The rest of the code only depends on the value of dataCubeFile.
 The code demonstrates the use of the rrdf library.
 
 
 ```r
 cube <- new.rdf()  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : object 'dataCubeFile' not found
-```
-
-```r
+temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= cube) # work around to not get it printed
 summarize.rdf(cube)
 ```
 
 ```
-## [1] "Number of triples: 40"
+## [1] "Number of triples: 220"
 ```
 
 The next statements are needed for the current implementation of the cube, and may change in future versions.
@@ -156,42 +123,40 @@ The next statements are needed for the current implementation of the cube, and m
 ```r
 ## TODO: reconsider the use of domain specific prefixes
 dsdName<- GetDsdNameFromCube( cube )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetDsdNameFromCube"
-```
-
-```r
 domainName<- GetDomainNameFromCube( cube )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetDomainNameFromCube"
-```
-
-```r
 cat("dsdName ", dsdName, ", domainName ", domainName, "\n" )
 ```
 
 ```
-## Error in cat("dsdName ", dsdName, ", domainName ", domainName, "\n"): object 'dsdName' not found
+## dsdName  dsd-EXAMPLE , domainName  EXAMPLE
 ```
 
 ```r
 forsparqlprefix<- GetForSparqlPrefix( domainName )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetForSparqlPrefix"
-```
-
-```r
 cat(forsparqlprefix,"\n")
 ```
 
 ```
-## Error in cat(forsparqlprefix, "\n"): object 'forsparqlprefix' not found
+## prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+## prefix skos: <http://www.w3.org/2004/02/skos/core#>
+## prefix prov: <http://www.w3.org/ns/prov#>
+## prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+## prefix dcat: <http://www.w3.org/ns/dcat#>
+## prefix owl: <http://www.w3.org/2002/07/owl#>
+## prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+## prefix qb: <http://purl.org/linked-data/cube#>
+## prefix pav: <http://purl.org/pav>
+## prefix dct: <http://purl.org/dc/terms/>
+## prefix mms: <http://rdf.cdisc.org/mms#>
+## prefix cts: <http://rdf.cdisc.org/ct/schema#>
+## prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>
+## prefix code: <http://www.example.org/dc/code/>
+## prefix dccs: <http://www.example.org/dc/example/dccs/>
+## prefix ds: <http://www.example.org/dc/example/ds/>
+## prefix crnd-dimension: <http://www.example.org/dc/dimension#>
+## prefix crnd-attribute: <http://www.example.org/dc/attribute#>
+## prefix crnd-measure: <http://www.example.org/dc/measure#>
+## 
 ```
 
 The variable forsparqlprefix contains the prefix statements applicable
@@ -205,17 +170,18 @@ most often not be of interest, as the RDF cube contain general
 definition and not the specific cube triples.
 
 
-```
-## Error in paste(forsparqlprefix, "\nselect *\nwhere {?s ?p ?o .}\nlimit 10\n", : object 'forsparqlprefix' not found
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'cube.observations1.rq' not found
-```
-
-```
-## Error in head(cube.observations1, 10): error in evaluating the argument 'x' in selecting a method for function 'head': Error: object 'cube.observations1' not found
-```
+|s             |p                  |o             |
+|:-------------|:------------------|:-------------|
+|rdf:rest      |rdf:type           |rdf:Property  |
+|rdf:rest      |rdfs:domain        |rdf:List      |
+|rdf:rest      |rdfs:range         |rdf:List      |
+|rdf:rest      |rdfs:subPropertyOf |rdf:rest      |
+|rdf:List      |rdf:type           |rdfs:Class    |
+|rdf:List      |rdfs:subClassOf    |rdfs:Resource |
+|code:Category |rdfs:subClassOf    |rdfs:Resource |
+|rdf:predicate |rdf:type           |rdf:Property  |
+|rdf:predicate |rdfs:domain        |rdf:Statement |
+|rdf:predicate |rdfs:subPropertyOf |rdf:predicate |
 
 The next statement gets the first 30 triples in the cube where 
 the subject is a qb:Observation, and shows the first 15 triples.
@@ -229,51 +195,97 @@ limit 30
 ',
 "\n"                               
 )
-```
 
-```
-## Error in paste(forsparqlprefix, "\nselect *\nwhere { ?s a qb:Observation ; ?p ?o .}\nlimit 30\n", : object 'forsparqlprefix' not found
-```
-
-```r
 cube.observations2<- sparql.rdf(cube, cube.observations2.rq)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'cube.observations2.rq' not found
-```
-
-```r
 knitr::kable(head(cube.observations2, 15))
 ```
 
-```
-## Error in head(cube.observations2, 15): error in evaluating the argument 'x' in selecting a method for function 'head': Error: object 'cube.observations2' not found
-```
+
+
+|s       |p                        |o                                                                            |
+|:-------|:------------------------|:----------------------------------------------------------------------------|
+|ds:obs1 |crnd-measure:measure     |123                                                                          |
+|ds:obs1 |crnd-dimension:procedure |code:procedure-count                                                         |
+|ds:obs1 |crnd-dimension:factor    |code:factor-quantity                                                         |
+|ds:obs1 |crnd-dimension:category  |code:category-AA-group                                                       |
+|ds:obs1 |qb:dataSet               |ds:dataset-EXAMPLE                                                           |
+|ds:obs1 |rdfs:label               |1                                                                            |
+|ds:obs1 |rdfs:comment             |Statistic for number of records/Statistics for factor with the dimensions XX |
+|ds:obs1 |rdf:type                 |qb:Observation                                                               |
+|ds:obs2 |crnd-measure:measure     |456                                                                          |
+|ds:obs2 |crnd-dimension:procedure |code:procedure-count                                                         |
+|ds:obs2 |crnd-dimension:factor    |code:factor-quantity                                                         |
+|ds:obs2 |crnd-dimension:category  |code:category-BB-group                                                       |
+|ds:obs2 |qb:dataSet               |ds:dataset-EXAMPLE                                                           |
+|ds:obs2 |rdfs:label               |2                                                                            |
+|ds:obs2 |rdfs:comment             |Statistic for number of records/Statistics for factor with the dimensions XX |
 
 The SPARQL query for codelists are shown in the next output.
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetCodeListSparqlQuery"
-```
-
-```
-## Error in cat(codelists.rq): object 'codelists.rq' not found
+## prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+## prefix skos: <http://www.w3.org/2004/02/skos/core#>
+## prefix prov: <http://www.w3.org/ns/prov#>
+## prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+## prefix dcat: <http://www.w3.org/ns/dcat#>
+## prefix owl: <http://www.w3.org/2002/07/owl#>
+## prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+## prefix qb: <http://purl.org/linked-data/cube#>
+## prefix pav: <http://purl.org/pav>
+## prefix dct: <http://purl.org/dc/terms/>
+## prefix mms: <http://rdf.cdisc.org/mms#>
+## prefix cts: <http://rdf.cdisc.org/ct/schema#>
+## prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>
+## prefix code: <http://www.example.org/dc/code/>
+## prefix dccs: <http://www.example.org/dc/example/dccs/>
+## prefix ds: <http://www.example.org/dc/example/ds/>
+## prefix crnd-dimension: <http://www.example.org/dc/dimension#>
+## prefix crnd-attribute: <http://www.example.org/dc/attribute#>
+## prefix crnd-measure: <http://www.example.org/dc/measure#>
+##  
+## select distinct ?p ?vn ?cl ?prefLabel 
+## where {
+## ?DataStructureDefinition a qb:DataStructureDefinition ;
+##    qb:component ?component .
+## ?component a qb:ComponentSpecification .
+## ?component qb:dimension ?p .
+## ?p qb:codeList ?c .
+## ?c skos:hasTopConcept ?cl .
+## ?cl skos:prefLabel ?prefLabel .
+## OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn } 
+## values ( ?DataStructureDefinition ) {
+##  (ds:dsd-EXAMPLE) 
+## }
+## }
+## order by ?p ?cl ?prefLabel
 ```
 
 Executing the SPARQL query gives the code list as a data frame.
 
 ```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'codelists.rq' not found
+##          vn                clc prefLabel
+## 1  category  category-AA-group  AA-group
+## 2  category  category-BB-group  BB-group
+## 3  category     category-_ALL_     _ALL_
+## 4  category category-_NONMISS_ _NONMISS_
+## 5    factor       factor-_ALL_     _ALL_
+## 6    factor   factor-_NONMISS_ _NONMISS_
+## 7    factor    factor-quantity  quantity
+## 8 procedure    procedure-count     count
 ```
 
-```
-## Error in gsub("code:", "", cube.codelists$cl): object 'cube.codelists' not found
-```
 
-```
-## Error in print(cube.codelists[, c("vn", "clc", "prefLabel")]): object 'cube.codelists' not found
-```
+
+|vn        |clc                |prefLabel |
+|:---------|:------------------|:---------|
+|category  |category-AA-group  |AA-group  |
+|category  |category-BB-group  |BB-group  |
+|category  |category-_ALL_     |_ALL_     |
+|category  |category-_NONMISS_ |_NONMISS_ |
+|factor    |factor-_ALL_       |_ALL_     |
+|factor    |factor-_NONMISS_   |_NONMISS_ |
+|factor    |factor-quantity    |quantity  |
+|procedure |procedure-count    |count     |
 
 The dimensions are shown in the next output.
 
@@ -285,37 +297,20 @@ select * where
 ',
 "\n"
 )
-```
-
-```
-## Error in paste(forsparqlprefix, "\nselect * where\n{ [] qb:dimension ?p .  }\n", : object 'forsparqlprefix' not found
-```
-
-```r
 cube.dimensions<- as.data.frame(sparql.rdf(cube, cube.dimensions.rq), stringsAsFactors=FALSE)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'cube.dimensions.rq' not found
-```
-
-```r
 knitr::kable(cube.dimensions)
 ```
 
-```
-## Error in is.data.frame(x): object 'cube.dimensions' not found
-```
+
+
+|p                        |
+|:------------------------|
+|crnd-dimension:factor    |
+|crnd-dimension:procedure |
+|crnd-dimension:category  |
 
 And finally the SPARQL query for observations.
 
-```
-## Error in paste(forsparqlprefix, "select * where { {[] qb:dimension ?p . } union {  ?p a qb:AttributeProperty . } }"): object 'forsparqlprefix' not found
-```
-
-```
-## Error in paste(forsparqlprefix, "select * where {", "     ?s a qb:Observation  ;", : object 'forsparqlprefix' not found
-```
 
 This is the query for getting the observations
 
@@ -324,26 +319,52 @@ cat(cube.observations.rq)
 ```
 
 ```
-## Error in cat(cube.observations.rq): object 'cube.observations.rq' not found
+## prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+## prefix skos: <http://www.w3.org/2004/02/skos/core#>
+## prefix prov: <http://www.w3.org/ns/prov#>
+## prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+## prefix dcat: <http://www.w3.org/ns/dcat#>
+## prefix owl: <http://www.w3.org/2002/07/owl#>
+## prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+## prefix qb: <http://purl.org/linked-data/cube#>
+## prefix pav: <http://purl.org/pav>
+## prefix dct: <http://purl.org/dc/terms/>
+## prefix mms: <http://rdf.cdisc.org/mms#>
+## prefix cts: <http://rdf.cdisc.org/ct/schema#>
+## prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>
+## prefix code: <http://www.example.org/dc/code/>
+## prefix dccs: <http://www.example.org/dc/example/dccs/>
+## prefix ds: <http://www.example.org/dc/example/ds/>
+## prefix crnd-dimension: <http://www.example.org/dc/dimension#>
+## prefix crnd-attribute: <http://www.example.org/dc/attribute#>
+## prefix crnd-measure: <http://www.example.org/dc/measure#>
+## 
+## select * where {
+##      ?s a qb:Observation  ;
+##      qb:dataSet ds:dataset-EXAMPLE  ;
+##      crnd-dimension:factor ?factor;
+##      crnd-dimension:procedure ?procedure;
+##      crnd-dimension:category ?category;
+##      crnd-measure:measure      ?measure ;
+##      optional{ ?factor skos:prefLabel ?factorvalue . }
+##      optional{ ?procedure skos:prefLabel ?procedurevalue . }
+##      optional{ ?category skos:prefLabel ?categoryvalue . }
+## }
 ```
 
 And finally the observations, which is expected be the same as the starting data set.
 
 ```r
 cube.observations<- as.data.frame(sparql.rdf(cube, cube.observations.rq ), stringsAsFactors=FALSE)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : object 'cube.observations.rq' not found
-```
-
-```r
 knitr::kable(cube.observations[,c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", cube.dimensionsattr), "value"),"measure")])
 ```
 
-```
-## Error in is.data.frame(x): object 'cube.observations' not found
-```
+
+
+|factorvalue |procedurevalue |categoryvalue |measure |
+|:-----------|:--------------|:-------------|:-------|
+|quantity    |count          |AA-group      |123     |
+|quantity    |count          |BB-group      |456     |
 
 # Evaluating RDF data cube integrity constraints 
 
@@ -368,16 +389,77 @@ icres<- RunQbIC( cubeData, forsparqlprefix )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "RunQbIC"
+## Executing IC-1.  Unique DataSet
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-2. Unique DSD
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-3. DSD includes measure
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-4. Dimensions have range
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-5. Concept dimensions have code lists
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-6. Only attributes may be optional
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-7. Slice Keys must be declared
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-8. Slice Keys consistent with DSD
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-9. Unique slice structure
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-10. Slice dimensions complete
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-11. All dimensions required
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-12. No duplicate observations
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-13. Required attributes
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-14. All measures present
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-15. Measure dimension consistent
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-16. Single measure on measure dimension observation
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-17. All measures present in measures dimension cube 
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-18. Consistent data set links
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-19a. Codes from code list
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-19b. Codes from code list
+##  -- 0 rows returned (0 is pass, >0 fail)
+## IC-20 and IC-21 are currently not implemented
 ```
 
 ```r
 knitr::kable(icres)
 ```
 
-```
-## Error in is.data.frame(x): object 'icres' not found
-```
+
+
+|ictitle                                                | icfail|
+|:------------------------------------------------------|------:|
+|IC-1.  Unique DataSet                                  |      0|
+|IC-2. Unique DSD                                       |      0|
+|IC-3. DSD includes measure                             |      0|
+|IC-4. Dimensions have range                            |      0|
+|IC-5. Concept dimensions have code lists               |      0|
+|IC-6. Only attributes may be optional                  |      0|
+|IC-7. Slice Keys must be declared                      |      0|
+|IC-8. Slice Keys consistent with DSD                   |      0|
+|IC-9. Unique slice structure                           |      0|
+|IC-10. Slice dimensions complete                       |      0|
+|IC-11. All dimensions required                         |      0|
+|IC-12. No duplicate observations                       |      0|
+|IC-13. Required attributes                             |      0|
+|IC-14. All measures present                            |      0|
+|IC-15. Measure dimension consistent                    |      0|
+|IC-16. Single measure on measure dimension observation |      0|
+|IC-17. All measures present in measures dimension cube |      0|
+|IC-18. Consistent data set links                       |      0|
+|IC-19a. Codes from code list                           |      0|
+|IC-19b. Codes from code list                           |      0|
 
 Here we remove one of the dimensions from the cube in observationo
 ds:obs1. Note: for the remove.triple function the components must be
@@ -394,16 +476,77 @@ icres<- RunQbIC( cubeData, forsparqlprefix )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "RunQbIC"
+## Executing IC-1.  Unique DataSet
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-2. Unique DSD
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-3. DSD includes measure
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-4. Dimensions have range
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-5. Concept dimensions have code lists
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-6. Only attributes may be optional
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-7. Slice Keys must be declared
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-8. Slice Keys consistent with DSD
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-9. Unique slice structure
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-10. Slice dimensions complete
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-11. All dimensions required
+##  -- 1 rows returned (0 is pass, >0 fail)
+## Executing IC-12. No duplicate observations
+##  -- 2 rows returned (0 is pass, >0 fail)
+## Executing IC-13. Required attributes
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-14. All measures present
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-15. Measure dimension consistent
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-16. Single measure on measure dimension observation
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-17. All measures present in measures dimension cube 
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-18. Consistent data set links
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-19a. Codes from code list
+##  -- 0 rows returned (0 is pass, >0 fail)
+## Executing IC-19b. Codes from code list
+##  -- 0 rows returned (0 is pass, >0 fail)
+## IC-20 and IC-21 are currently not implemented
 ```
 
 ```r
 knitr::kable(icres)
 ```
 
-```
-## Error in is.data.frame(x): object 'icres' not found
-```
+
+
+|ictitle                                                | icfail|
+|:------------------------------------------------------|------:|
+|IC-1.  Unique DataSet                                  |      0|
+|IC-2. Unique DSD                                       |      0|
+|IC-3. DSD includes measure                             |      0|
+|IC-4. Dimensions have range                            |      0|
+|IC-5. Concept dimensions have code lists               |      0|
+|IC-6. Only attributes may be optional                  |      0|
+|IC-7. Slice Keys must be declared                      |      0|
+|IC-8. Slice Keys consistent with DSD                   |      0|
+|IC-9. Unique slice structure                           |      0|
+|IC-10. Slice dimensions complete                       |      0|
+|IC-11. All dimensions required                         |      1|
+|IC-12. No duplicate observations                       |      2|
+|IC-13. Required attributes                             |      0|
+|IC-14. All measures present                            |      0|
+|IC-15. Measure dimension consistent                    |      0|
+|IC-16. Single measure on measure dimension observation |      0|
+|IC-17. All measures present in measures dimension cube |      0|
+|IC-18. Consistent data set links                       |      0|
+|IC-19a. Codes from code list                           |      0|
+|IC-19b. Codes from code list                           |      0|
 
 IC-12 also fails; examining the SPARQL query shows why.
 

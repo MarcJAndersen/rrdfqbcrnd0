@@ -127,7 +127,7 @@ dataCubeFile<- demo.cube.fn
 The rest of the code only depends on the value of dataCubeFile.
 ```{r, echo=TRUE}
 checkCube <- new.rdf()  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
+temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
 

@@ -57,7 +57,7 @@ files from the extdata/sample-cfg directory.
 MakeTable<- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
     store <- new.rdf()  # Initialize
     cat("Loading ", dataCubeFile, "\n")
-    load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+    temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
     summarize.rdf(store)
     dsdName<- GetDsdNameFromCube( store )
     domainName<- GetDomainNameFromCube( store )
@@ -112,7 +112,7 @@ cat("HTML stored as: ", normalizePath(resHtmlFile), "\n")
 ```{r, eval=TRUE}
 store <- new.rdf()  # Initialize
 cat("Loading ", dataCubeFile, "\n")
-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
 
 dsdName<- GetDsdNameFromCube( store )
@@ -126,7 +126,7 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 store <- new.rdf()  # Initialize
 cat("Loading ", dataCubeFile, "\n")
-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
+temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 dsdName<- GetDsdNameFromCube( store )
 domainName<- GetDomainNameFromCube( store )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
