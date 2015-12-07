@@ -7,17 +7,11 @@
 ##' @return Character string with PREFIX statements delimited by CR
 GetForSparqlPrefix<- function( domainName=NULL, common.prefixes=NULL, custom.prefixes=NULL  ) {
 
-if (is.null(common.prefixes)) { 
-  common.prefixes <- GetCommonPrefixDf()
-}
-
-if (is.null(custom.prefixes)) {
-  if (is.null(domainName)) {
-    custom.prefixes<- NULL
-  } else {
-    custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
-  }
-}
-
-Get.rq.prefix.df(rbind(common.prefixes, custom.prefixes))
+    Get.rq.prefix.df(
+        GetForSparqlPrefix.as.df(
+            domainName=domainName,
+            common.prefixes=common.prefixes,
+            custom.prefixes=custom.prefixes
+            )
+        )
 }

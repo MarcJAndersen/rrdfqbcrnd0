@@ -44,19 +44,7 @@ BuildCubeFromDataFrames<- function(cubeMetadata, obsData, common.prefixes=NULL, 
     ## Subset to the dimensions, attributes, and measure used to construct the skeleton
     skeletonSource <-cubeMetadata[grep("dimension|attribute|measure", cubeMetadata$compType),]
 
-    ## If common.prefixes is not set, then use built-in defaults
-    if (is.null(common.prefixes)) {
-        common.prefixes <-data.frame(
-            prefix=names( Get.default.crnd.prefixes() ),
-            namespace=as.character( Get.default.crnd.prefixes() )
-        )
-    }  
-
-    ## Domain-specific prefixes for prop/, dccs/ and dataset/
-    ## Domain-independent for code/
-    ## TODO: ensure that is meaningfill to use tolower(domainName)
-    custom.prefixes <-Get.qb.crnd.prefixes(tolower(domainName))
-    prefixes<- rbind(common.prefixes, custom.prefixes)                                                
+    prefixes<- GetForSparqlPrefix.as.df(domainName=domainName)
 
     store <- new.rdf()  ## Initialize
 

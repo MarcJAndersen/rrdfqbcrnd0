@@ -17,6 +17,7 @@ This vignette shows
 ```{r}
 knitr::read_chunk("setup.R")
 ```
+
 ```{r setup}
 ```
 
@@ -80,7 +81,7 @@ The code demonstrates the use of the rrdf library.
 
 ```{r}
 cube <- new.rdf()  # Initialize
-load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
+temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
 summarize.rdf(cube)
 ```
 
@@ -90,6 +91,8 @@ The next statements are needed for the current implementation of the cube, and m
 dsdName<- GetDsdNameFromCube( cube )
 domainName<- GetDomainNameFromCube( cube )
 cat("dsdName ", dsdName, ", domainName ", domainName, "\n" )
+
+prefixlist<- Get.prefixlist.from.df(GetForSparqlPrefix.as.df(domainName=domainName))
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 cat(forsparqlprefix,"\n")
 ```
@@ -100,7 +103,25 @@ shorter, and more readable. The present version of the package defines
 namespaces dccs: and ds: where the domainname is included.
 TODO: Consider other approach for including the domainname, or use other concept.
 
-## Codelist
+## Add `rdfs:seeAlso` for descriptive statistics
+
+```{r}
+        add.triple(cube,
+                   paste0(prefixlist$prefixCODE, "procedure-median"),
+                   paste0(prefixlist$prefixRDFS,"seeAlso" ),
+                   "purl.obolibrary.org/obo/OBI_0200119")
+        add.triple(cube,
+                   paste0(prefixlist$prefixCODE, "procedure-stddev"),
+                   paste0(prefixlist$prefixRDFS,"seeAlso" ),
+                   "purl.obolibrary.org/obo/STATO_0000037")
+        add.triple(cube,
+                   paste0(prefixlist$prefixCODE, "procedure-mean"),
+                   paste0(prefixlist$prefixRDFS,"seeAlso" ),
+                   "purl.obolibrary.org/obo/IAO_0000125")
+```
+
+
+## Getting all codelists as data.frame
 
 The SPARQL query for codelists are shown in the next output.
 ```{r, echo=FALSE}
@@ -120,7 +141,7 @@ knitr::kable(print(cube.codelists[,c("vn", "clc", "prefLabel")]))
 
 ```
 
-## Procedure codelist
+## Getting the procedure codelist as data.frame
 
 ```{r, echo=FALSE}
 procedure.codelists.rq<- paste( forsparqlprefix,
@@ -144,6 +165,8 @@ knitr::kable(print(cube.procedure.codelists))
 
 ```
 
+## Get the procedure codelist as turtle with Stato References
+
 ```{r, echo=FALSE}
 construct.codelists.rq<- paste( forsparqlprefix,
 '
@@ -152,12 +175,10 @@ where {
 { ?s ?p ?o . ?s a code:Procedure. }
 union
 { ?s ?p ?o . values(?s) {(code:Procedure)} }
- }    
+ } 
 ',
 "\n"
 )
-
-
 
 cat(construct.codelists.rq)
 ```
@@ -167,11 +188,9 @@ procedure.codelist.store<- construct.rdf(cube, construct.codelists.rq)
 targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrnd0")
 procedure.codelist.fn <- file.path(targetDir,"procedure-code-list.ttl" ) # Full path to file
 outcodelist<- save.rdf(procedure.codelist.store, procedure.codelist.fn, format="TURTLE")
-
 ```
 
 The RDF data cube is serialized in turtle format and stored as a text file in
 ```{r}
 cat(normalizePath(outcodelist),"\n")
-
 ```

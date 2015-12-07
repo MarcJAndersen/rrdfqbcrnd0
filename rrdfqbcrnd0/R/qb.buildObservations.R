@@ -29,16 +29,21 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         }
     }
     if (is.null(procedure2format)) {
-        procedure2format<- list("count"="float",
-                                "countdistinct"="float",
-                                'percent'='float',
-                                'mean'='float',
-                                'stdev'='float',
-                                'min'='float',
-                                'median'='float',
-                                'max'='float'
-                                );
-
+        procedure2format<- list(
+            "mean"="double",
+            "stddev"="double",
+            "stdev"="double",
+            "std"="double",
+            "median"="double",
+            "min"="double",
+            "max"="double",
+            "n"="double",
+            "q1"="double",
+            "q3"="double",
+            "count"="double",
+            "countdistinct"="double",
+            "percent"="double"
+            )
     }
 
     if (is.null(recode.list)) {
@@ -120,6 +125,7 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         ## Set the format of the Measure based on the Procedure value
         procedure <- paste0(obsData[i,"procedure"])
         xsdFormat<- procedure2format[[ procedure ]]
+        if (is.null(xsdFormat)) { stop("Unexpected null value: ", procedure)}
 
         add.data.triple(store,
                         paste0(prefixlist$prefixDS, obsNum),
