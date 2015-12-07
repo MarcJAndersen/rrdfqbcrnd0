@@ -1,7 +1,7 @@
 ---
 title: "SPARQL query using Shiny to build interface"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-09-22"
+date: "2015-12-08"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{SPARQL query using Shiny to build interface}
@@ -31,11 +31,6 @@ Here should be more text.
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
-```
-
-```
-## Warning: replacing previous import by 'rJava::clone' when loading
-## 'rrdfqbcrnd0'
 ```
 
 When creating vignettes the code hangs. Hence the code is disabled.

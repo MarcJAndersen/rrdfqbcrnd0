@@ -1,7 +1,7 @@
 ---
 title: "Create DEMO table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-10-28"
+date: "2015-12-08"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DEMO table from csv file}
@@ -24,11 +24,9 @@ devtools::load_all(pkg="../..")
 
 ```
 ## Loading rrdfqbcrnd0
-## Loading required package: rrdf
+## Loading required package: xlsx
 ## Loading required package: rJava
 ## Loading required package: methods
-## Loading required package: rrdflibs
-## Loading required package: xlsx
 ## Loading required package: xlsxjars
 ## Loading required package: RCurl
 ## Loading required package: bitops
@@ -38,10 +36,9 @@ devtools::load_all(pkg="../..")
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
-```
-
-```
-## Warning: character(0)
+## 
+## Loading required package: rrdf
+## Loading required package: rrdflibs
 ```
 All files are store to the directory
 
@@ -68,7 +65,7 @@ cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
 ```
-## DM cube stored as  /tmp/RtmpuBGp26/DC-DM-R-V-0-5-2.ttl
+## DM cube stored as  /tmp/RtmpaCA7tK/DC-DM-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -89,7 +86,7 @@ cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
 ```
-## AE cube stored as  /tmp/RtmpuBGp26/DC-AE-R-V-0-5-2.ttl
+## AE cube stored as  /tmp/RtmpaCA7tK/DC-AE-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -126,7 +123,7 @@ cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
 ```
-## DEMO cube stored as  /tmp/RtmpuBGp26/DC-DEMO-R-V-0-5-2.ttl
+## DEMO cube stored as  /tmp/RtmpaCA7tK/DC-DEMO-R-V-0-5-2.ttl
 ```
 
 ```r

@@ -1,7 +1,7 @@
 Package: rrdfqbcrnd0
 Title: R-RDF Data Cube for Clinical Research & Development -
     Development
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") ),
     person("Tim", "Williams", email="tim.williams@ucb.com", role=c("aut", "cre") )
@@ -24,6 +24,7 @@ Suggests:
     shiny,
     XML
 VignetteBuilder: knitr
+BuildVignettes: no
 Packaged: 2015-01-11 10:37:02 UTC; ma
 Author: Marc Andersen [aut, cre],
     Tim Williams [aut, cre]

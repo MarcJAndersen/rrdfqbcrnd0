@@ -1,7 +1,7 @@
 ---
 title: "Store CDISC RDF as RRDF data model"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-11-25"
+date: "2015-12-08"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
@@ -37,10 +37,9 @@ devtools::load_all(pkg="../..")
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
-```
-
-```
-## Warning: character(0)
+## 
+## Loading required package: rrdf
+## Loading required package: rrdflibs
 ```
 
 ## Directory for storing rdf.cdisc.org and RDF data cube specification
@@ -93,13 +92,6 @@ Note: this is not a straightforward way to do it.
 
 ```r
 library(rrdf)
-```
-
-```
-## Loading required package: rrdflibs
-```
-
-```r
 library(tools)
 ```
 
@@ -199,7 +191,7 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 ## Loading /home/ma/projects/phrmwg/rdf-data-cube/cube.ttl ..
 ## .. total number of triples: 165673
 ## Final rdf.cdisc.org rrdf store, number of triples: 165673
-## rrdf store saved to turle file: /tmp/Rtmp7Pt9Yy/cdisc-rdf.ttl
+## rrdf store saved to turle file: /tmp/Rtmp66Z3ce/cdisc-rdf.ttl
 ## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 ```
 
@@ -209,7 +201,7 @@ message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size 
 ```
 
 ```
-## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-11-25 05:44:53 size 2315967 bytes
+## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-12-08 00:05:48 size 2315968 bytes
 ```
 
 ### Loading using Load.cdisc.standards 
@@ -291,7 +283,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/Rtmp7Pt9Yy/get-rdf.disc.org.rq 
+SPARQL script stored in   /tmp/Rtmp66Z3ce/get-rdf.disc.org.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.

@@ -1,7 +1,7 @@
 ---
 title: "Create Integrity Contraints SPARQL Queries from RDF data cube definition"
 author: "mja@statgroup.dk"
-date: "2015-06-15"
+date: "2015-12-08"
 ---
 
 ## Setup 
@@ -16,11 +16,9 @@ devtools::load_all(pkg="../..")
 
 ```
 ## Loading rrdfqbcrnd0
-## Loading required package: rrdf
+## Loading required package: xlsx
 ## Loading required package: rJava
 ## Loading required package: methods
-## Loading required package: rrdflibs
-## Loading required package: xlsx
 ## Loading required package: xlsxjars
 ## Loading required package: RCurl
 ## Loading required package: bitops
@@ -30,10 +28,9 @@ devtools::load_all(pkg="../..")
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
-```
-
-```
-## Warning: character(0)
+## 
+## Loading required package: rrdf
+## Loading required package: rrdflibs
 ```
 
 # R-code

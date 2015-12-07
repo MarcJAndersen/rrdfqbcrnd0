@@ -19,6 +19,7 @@ vignette: >
 
 First load the package.
 ```{r, eval=TRUE}
+library(knitr)
 library(rrdfqbcrnd0)
 ```
 
@@ -86,8 +87,9 @@ dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
 mdwrite( dimensionsRq, "DEMOdimensions" )
 ```
 
-```{r DEMOdimensions, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
-```
+This does not work as of 07-dec-2015.
+    {r DEMOdimensions, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
+    
 
 Executing the SPARQL query gives:
 
@@ -105,8 +107,9 @@ attributesRq<- GetAttributesSparqlQuery( forsparqlprefix )
 mdwrite( attributesRq, "DEMOattributes" )
 ```
 
-```{r DEMOattributes, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
-```
+This does not work as of 07-dec-2015.
+    {r DEMOattributes, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
+    
 
 Executing the SPARQL query gives:
 
@@ -126,8 +129,9 @@ observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimens
 mdwrite( observationsRq, "DEMOobservations" )
 ```
 
-```{r DEMOobservations, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
-```
+This does not work as of 07-dec-2015.
+    {r DEMOobservations, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
+    
 
 The first 2 rows of result of the query is:
 

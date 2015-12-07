@@ -35,4 +35,4 @@ ds:obs014  a                        qb:Observation ;
         crnd-dimension:race         code:race-_ALL_ ;
         crnd-dimension:sex          code:sex-M ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-        crnd-measure:measure        "34"^^xsd:int .
+        crnd-measure:measure        "34"^^xsd:double .

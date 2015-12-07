@@ -1,7 +1,7 @@
 ---
 title: "Graphical display of SPARQL queries with arq, rapper and graphviz"
 author: "mja@statgroup.dk"
-date: "2015-11-25"
+date: "2015-12-08"
 output: rmarkdown::html_vignette
 ---
  
@@ -82,7 +82,7 @@ dot -x -Tpdf -ograph.pdf fordot.dot
 ##         crnd-dimension:race         code:race-_ALL_ ;
 ##         crnd-dimension:sex          code:sex-M ;
 ##         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
-##         crnd-measure:measure        "34"^^xsd:int .
+##         crnd-measure:measure        "34"^^xsd:double .
 ## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/fordot.ttl with parser turtle
 ## rapper: Serializing with serializer dot
 ## rapper: Parsing returned 18 triples

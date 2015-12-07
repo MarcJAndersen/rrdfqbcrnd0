@@ -1,7 +1,7 @@
 ---
 title: "Create prefixes for use with CDISC standards in RDF"
 author: "mja@statgroup.dk"
-date: "2015-06-15"
+date: "2015-12-08"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create prefixes for use with CDISC standards in RDF}
@@ -23,11 +23,9 @@ devtools::load_all(pkg="../..")
 
 ```
 ## Loading rrdfqbcrnd0
-## Loading required package: rrdf
+## Loading required package: xlsx
 ## Loading required package: rJava
 ## Loading required package: methods
-## Loading required package: rrdflibs
-## Loading required package: xlsx
 ## Loading required package: xlsxjars
 ## Loading required package: RCurl
 ## Loading required package: bitops
@@ -37,10 +35,9 @@ devtools::load_all(pkg="../..")
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
-```
-
-```
-## Warning: character(0)
+## 
+## Loading required package: rrdf
+## Loading required package: rrdflibs
 ```
 
 # Prefixes for the package

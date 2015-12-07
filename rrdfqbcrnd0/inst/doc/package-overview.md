@@ -1,7 +1,7 @@
 ---
 title: "Package overview"
 author: "mja@statgroup.dk"
-date: "2015-11-25"
+date: "2015-12-08"
 output: 
   html_document
 vignette: >
@@ -58,10 +58,9 @@ devtools::load_all(pkg="../..")
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
-```
-
-```
-## Warning: character(0)
+## 
+## Loading required package: rrdf
+## Loading required package: rrdflibs
 ```
 
 ```r
@@ -95,13 +94,6 @@ library(mvbutils)
 
 ```r
 library(rrdf) # apparantly needed 
-```
-
-```
-## Loading required package: rrdflibs
-```
-
-```r
 ## library(rrdfqbcrnd0) # should not go here 
 
 pretty.print.rq<- function(rqstring) {
@@ -191,6 +183,7 @@ knitr::kable(RP.labels)
 |prog:qb.def.prefixlist                         |qb.def.prefixlist                         |
 |prog:GetSQLFromCube                            |GetSQLFromCube                            |
 |prog:GetTwoDimTableFromQb                      |GetTwoDimTableFromQb                      |
+|prog:GetForSparqlPrefix.as.df                  |GetForSparqlPrefix.as.df                  |
 |prog:Load.cdisc.standards                      |Load.cdisc.standards                      |
 |prog:Get.env.cdiscstandards                    |Get.env.cdiscstandards                    |
 |prog:GetForSparqlPrefix                        |GetForSparqlPrefix                        |
@@ -218,7 +211,9 @@ knitr::kable(RP.labels)
 |prog:GetCommonPrefixDf                         |GetCommonPrefixDf                         |
 |prog:GetValueFromMetadata                      |GetValueFromMetadata                      |
 |prog:RunQbIC                                   |RunQbIC                                   |
+|prog:Get.prefixlist.from.df                    |Get.prefixlist.from.df                    |
 |prog:buildCodelist                             |buildCodelist                             |
+|prog:qb.add.prefixlist.to.store                |qb.add.prefixlist.to.store                |
 |prog:MakeHTMLfromQb                            |MakeHTMLfromQb                            |
 |prog:GetDsdNameFromCube                        |GetDsdNameFromCube                        |
 |prog:ph.recode                                 |ph.recode                                 |
@@ -264,11 +259,10 @@ knitr::kable(RP.calls)
 |:--------------------------------------|:----------------------------------------------|
 |prog:BuildCubeFromDataFrames           |prog:qb.buildDSD                               |
 |prog:GetFormularFromCube               |prog:GetDomainNameFromCube                     |
-|prog:GetForSparqlPrefix                |prog:Get.qb.crnd.prefixes                      |
 |prog:BuildCubeFromDataFrames           |prog:qb.buildObservations                      |
-|prog:BuildCubeFromDataFrames           |prog:Get.default.crnd.prefixes                 |
 |prog:GetCommonPrefixDf                 |prog:Get.default.crnd.prefixes                 |
 |prog:GetSQLFromCube                    |prog:GetForSparqlPrefix                        |
+|prog:BuildCubeFromDataFrames           |prog:GetForSparqlPrefix.as.df                  |
 |prog:GetDsdNameFromCube                |prog:GetForSparqlPrefix                        |
 |prog:GetForSparqlPrefix                |prog:Get.rq.prefix.df                          |
 |prog:GetSQLFromCube                    |prog:GetDomainNameFromCube                     |
@@ -284,10 +278,11 @@ knitr::kable(RP.calls)
 |prog:GetTwoDimTableFromQb              |prog:GetDimsubsetDescSparqlQuery               |
 |prog:BuildCubeFromDataFrames           |prog:GetValueFromMetadata                      |
 |prog:DeriveStatsForCube                |prog:GetAttributesSparqlQuery                  |
+|prog:qb.def.prefixlist                 |prog:qb.add.prefixlist.to.store                |
 |prog:GetSQLFromCube                    |prog:GetDsdNameFromCube                        |
 |prog:qb.buildSkeleton                  |prog:capitalize                                |
 |prog:GetSQLFromCube                    |prog:GetAttributesSparqlQuery                  |
-|prog:BuildCubeFromDataFrames           |prog:Get.qb.crnd.prefixes                      |
+|prog:GetForSparqlPrefix.as.df          |prog:Get.qb.crnd.prefixes                      |
 |prog:buildCodelist                     |prog:Get.env.cdiscstandards                    |
 |prog:DeriveStatsForCube                |prog:GetDescrStatProcedure                     |
 |prog:GetFormularFromCube               |prog:GetObservationsSparqlQuery                |
@@ -299,10 +294,11 @@ knitr::kable(RP.calls)
 |prog:GetTwoDimTableFromQb              |prog:GetDimensionsSparqlQuery                  |
 |prog:buildCodelist                     |prog:capitalize                                |
 |prog:GetSQLFromCube                    |prog:GetDimensionsSparqlQuery                  |
+|prog:qb.def.prefixlist                 |prog:Get.prefixlist.from.df                    |
 |prog:Create.cdisc.standards.from.local |prog:summarize.rdf.noprint                     |
-|prog:GetForSparqlPrefix                |prog:GetCommonPrefixDf                         |
 |prog:buildCodelist                     |prog:GetDescrStatProcedure                     |
 |prog:GetFormularFromCube               |prog:GetDsdNameFromCube                        |
+|prog:GetForSparqlPrefix                |prog:GetForSparqlPrefix.as.df                  |
 |prog:GetDomainNameFromCube             |prog:GetForSparqlPrefix                        |
 |prog:GetTwoDimTableFromQb              |prog:GetDimsubsetWithObsSparqlQuery            |
 |prog:GetTwoDimTableFromQb              |prog:GetObservationsWithDescriptionSparqlQuery |
@@ -314,6 +310,7 @@ knitr::kable(RP.calls)
 |prog:qb.buildObservations              |prog:GetCodeListSparqlQuery                    |
 |prog:DeriveStatsForCube                |prog:GetCodeListSparqlQuery                    |
 |prog:GetFormularFromCube               |prog:GetAttributesSparqlQuery                  |
+|prog:GetForSparqlPrefix.as.df          |prog:GetCommonPrefixDf                         |
 |prog:BuildCubeFromDataFrames           |prog:qb.buildSkeleton                          |
 |prog:Load.cdisc.standards              |prog:summarize.rdf.noprint                     |
 
@@ -339,6 +336,7 @@ cat(mermaid.commands,"\n")
 ## qbdefprefixlist(qb.def.prefixlist);  
 ## GetSQLFromCube(GetSQLFromCube);  
 ## GetTwoDimTableFromQb(GetTwoDimTableFromQb);  
+## GetForSparqlPrefixasdf(GetForSparqlPrefix.as.df);  
 ## Loadcdiscstandards(Load.cdisc.standards);  
 ## Getenvcdiscstandards(Get.env.cdiscstandards);  
 ## GetForSparqlPrefix(GetForSparqlPrefix);  
@@ -366,7 +364,9 @@ cat(mermaid.commands,"\n")
 ## GetCommonPrefixDf(GetCommonPrefixDf);  
 ## GetValueFromMetadata(GetValueFromMetadata);  
 ## RunQbIC(RunQbIC);  
+## Getprefixlistfromdf(Get.prefixlist.from.df);  
 ## buildCodelist(buildCodelist);  
+## qbaddprefixlisttostore(qb.add.prefixlist.to.store);  
 ## MakeHTMLfromQb(MakeHTMLfromQb);  
 ## GetDsdNameFromCube(GetDsdNameFromCube);  
 ## phrecode(ph.recode);  
@@ -380,11 +380,10 @@ cat(mermaid.commands,"\n")
 ## GetFormularFromCube(GetFormularFromCube);  
 ## BuildCubeFromDataFrames-->qbbuildDSD;  
 ## GetFormularFromCube-->GetDomainNameFromCube;  
-## GetForSparqlPrefix-->Getqbcrndprefixes;  
 ## BuildCubeFromDataFrames-->qbbuildObservations;  
-## BuildCubeFromDataFrames-->Getdefaultcrndprefixes;  
 ## GetCommonPrefixDf-->Getdefaultcrndprefixes;  
 ## GetSQLFromCube-->GetForSparqlPrefix;  
+## BuildCubeFromDataFrames-->GetForSparqlPrefixasdf;  
 ## GetDsdNameFromCube-->GetForSparqlPrefix;  
 ## GetForSparqlPrefix-->Getrqprefixdf;  
 ## GetSQLFromCube-->GetDomainNameFromCube;  
@@ -400,10 +399,11 @@ cat(mermaid.commands,"\n")
 ## GetTwoDimTableFromQb-->GetDimsubsetDescSparqlQuery;  
 ## BuildCubeFromDataFrames-->GetValueFromMetadata;  
 ## DeriveStatsForCube-->GetAttributesSparqlQuery;  
+## qbdefprefixlist-->qbaddprefixlisttostore;  
 ## GetSQLFromCube-->GetDsdNameFromCube;  
 ## qbbuildSkeleton-->capitalize;  
 ## GetSQLFromCube-->GetAttributesSparqlQuery;  
-## BuildCubeFromDataFrames-->Getqbcrndprefixes;  
+## GetForSparqlPrefixasdf-->Getqbcrndprefixes;  
 ## buildCodelist-->Getenvcdiscstandards;  
 ## DeriveStatsForCube-->GetDescrStatProcedure;  
 ## GetFormularFromCube-->GetObservationsSparqlQuery;  
@@ -415,10 +415,11 @@ cat(mermaid.commands,"\n")
 ## GetTwoDimTableFromQb-->GetDimensionsSparqlQuery;  
 ## buildCodelist-->capitalize;  
 ## GetSQLFromCube-->GetDimensionsSparqlQuery;  
+## qbdefprefixlist-->Getprefixlistfromdf;  
 ## Createcdiscstandardsfromlocal-->summarizerdfnoprint;  
-## GetForSparqlPrefix-->GetCommonPrefixDf;  
 ## buildCodelist-->GetDescrStatProcedure;  
 ## GetFormularFromCube-->GetDsdNameFromCube;  
+## GetForSparqlPrefix-->GetForSparqlPrefixasdf;  
 ## GetDomainNameFromCube-->GetForSparqlPrefix;  
 ## GetTwoDimTableFromQb-->GetDimsubsetWithObsSparqlQuery;  
 ## GetTwoDimTableFromQb-->GetObservationsWithDescriptionSparqlQuery;  
@@ -430,6 +431,7 @@ cat(mermaid.commands,"\n")
 ## qbbuildObservations-->GetCodeListSparqlQuery;  
 ## DeriveStatsForCube-->GetCodeListSparqlQuery;  
 ## GetFormularFromCube-->GetAttributesSparqlQuery;  
+## GetForSparqlPrefixasdf-->GetCommonPrefixDf;  
 ## BuildCubeFromDataFrames-->qbbuildSkeleton;  
 ## Loadcdiscstandards-->summarizerdfnoprint;  
 ## 
@@ -447,8 +449,8 @@ Then display the graph.
 DiagrammeR( mermaid.commands )
 ```
 
-<!--html_preserve--><div id="htmlwidget-1367" style="width:504px;height:504px;" class="DiagrammeR"></div>
-<script type="application/json" data-for="htmlwidget-1367">{"x":{"diagram":"graph TB;  \nGetCDISCCodeListSparqlQuery(GetCDISCCodeListSparqlQuery);  \nCreatecdiscstandardsfromlocal(Create.cdisc.standards.from.local);  \nGetDimsubsetDescSparqlQuery(GetDimsubsetDescSparqlQuery);  \nGetAttributesSparqlQuery(GetAttributesSparqlQuery);  \nqbdefprefixlist(qb.def.prefixlist);  \nGetSQLFromCube(GetSQLFromCube);  \nGetTwoDimTableFromQb(GetTwoDimTableFromQb);  \nLoadcdiscstandards(Load.cdisc.standards);  \nGetenvcdiscstandards(Get.env.cdiscstandards);  \nGetForSparqlPrefix(GetForSparqlPrefix);  \nGetDimAttrSparqlQuery(GetDimAttrSparqlQuery);  \nGetDescrStatProcedure(GetDescrStatProcedure);  \nsummarizerdfnoprint(summarize.rdf.noprint);  \nGetdefaultcrndprefixes(Get.default.crnd.prefixes);  \nGetEmptyMetadata(GetEmptyMetadata);  \nDeriveStatsForCube(DeriveStatsForCube);  \nqbbuildObservations(qb.buildObservations);  \nBuildCubeFromDataFrames(BuildCubeFromDataFrames);  \ncapitalize(capitalize);  \nGetDsdNameSparqlQuery(GetDsdNameSparqlQuery);  \nqbbuildDSD(qb.buildDSD);  \nGetDimensionsSparqlQuery(GetDimensionsSparqlQuery);  \nBuildCubeFromWorkbook(BuildCubeFromWorkbook);  \nGetDomainNameFromCube(GetDomainNameFromCube);  \nGetDimsubsetWithObsSparqlQuery(GetDimsubsetWithObsSparqlQuery);  \nqbbuildSkeleton(qb.buildSkeleton);  \nencodetouri(encodetouri);  \nGetRownoColnoCellpartnoSparqlQuery(GetRownoColnoCellpartnoSparqlQuery);  \nGetrqprefixlistdf(Get.rq.prefixlist.df);  \nGetObservationsWithDescriptionSparqlQuery(GetObservationsWithDescriptionSparqlQuery);  \nGetObservationsSparqlQuery(GetObservationsSparqlQuery);  \nGetCommonPrefixDf(GetCommonPrefixDf);  \nGetValueFromMetadata(GetValueFromMetadata);  \nRunQbIC(RunQbIC);  \nbuildCodelist(buildCodelist);  \nMakeHTMLfromQb(MakeHTMLfromQb);  \nGetDsdNameFromCube(GetDsdNameFromCube);  \nphrecode(ph.recode);  \nGetDimAttrMeasInWorkbookFormatSparqlQuery(GetDimAttrMeasInWorkbookFormatSparqlQuery);  \nGetComponentSparqlQuery(GetComponentSparqlQuery);  \nGetMetaDataInWorkbookFormatSparqlQuery(GetMetaDataInWorkbookFormatSparqlQuery);  \nGetqbcrndprefixes(Get.qb.crnd.prefixes);  \nGetCodeListSparqlQuery(GetCodeListSparqlQuery);  \nGetrqprefixdf(Get.rq.prefix.df);  \nGetfilenamesforcdiscstandards(Get.filenames.for.cdisc.standards);  \nGetFormularFromCube(GetFormularFromCube);  \nBuildCubeFromDataFrames-->qbbuildDSD;  \nGetFormularFromCube-->GetDomainNameFromCube;  \nGetForSparqlPrefix-->Getqbcrndprefixes;  \nBuildCubeFromDataFrames-->qbbuildObservations;  \nBuildCubeFromDataFrames-->Getdefaultcrndprefixes;  \nGetCommonPrefixDf-->Getdefaultcrndprefixes;  \nGetSQLFromCube-->GetForSparqlPrefix;  \nGetDsdNameFromCube-->GetForSparqlPrefix;  \nGetForSparqlPrefix-->Getrqprefixdf;  \nGetSQLFromCube-->GetDomainNameFromCube;  \nGetenvcdiscstandards-->Loadcdiscstandards;  \nqbbuildObservations-->Getrqprefixlistdf;  \nGetFormularFromCube-->GetForSparqlPrefix;  \nDeriveStatsForCube-->GetObservationsSparqlQuery;  \nBuildCubeFromWorkbook-->BuildCubeFromDataFrames;  \nGetDsdNameFromCube-->GetDsdNameSparqlQuery;  \nGetDomainNameFromCube-->GetDsdNameFromCube;  \nqbbuildDSD-->buildCodelist;  \nbuildCodelist-->encodetouri;  \nGetTwoDimTableFromQb-->GetDimsubsetDescSparqlQuery;  \nBuildCubeFromDataFrames-->GetValueFromMetadata;  \nDeriveStatsForCube-->GetAttributesSparqlQuery;  \nGetSQLFromCube-->GetDsdNameFromCube;  \nqbbuildSkeleton-->capitalize;  \nGetSQLFromCube-->GetAttributesSparqlQuery;  \nBuildCubeFromDataFrames-->Getqbcrndprefixes;  \nbuildCodelist-->Getenvcdiscstandards;  \nDeriveStatsForCube-->GetDescrStatProcedure;  \nGetFormularFromCube-->GetObservationsSparqlQuery;  \nqbbuildObservations-->phrecode;  \nGetFormularFromCube-->GetDimensionsSparqlQuery;  \nGetTwoDimTableFromQb-->GetAttributesSparqlQuery;  \nGetSQLFromCube-->GetObservationsSparqlQuery;  \nCreatecdiscstandardsfromlocal-->Getfilenamesforcdiscstandards;  \nGetTwoDimTableFromQb-->GetDimensionsSparqlQuery;  \nbuildCodelist-->capitalize;  \nGetSQLFromCube-->GetDimensionsSparqlQuery;  \nCreatecdiscstandardsfromlocal-->summarizerdfnoprint;  \nGetForSparqlPrefix-->GetCommonPrefixDf;  \nbuildCodelist-->GetDescrStatProcedure;  \nGetFormularFromCube-->GetDsdNameFromCube;  \nGetDomainNameFromCube-->GetForSparqlPrefix;  \nGetTwoDimTableFromQb-->GetDimsubsetWithObsSparqlQuery;  \nGetTwoDimTableFromQb-->GetObservationsWithDescriptionSparqlQuery;  \nGetDsdNameSparqlQuery-->GetForSparqlPrefix;  \nDeriveStatsForCube-->GetDimensionsSparqlQuery;  \nBuildCubeFromDataFrames-->qbdefprefixlist;  \nMakeHTMLfromQb-->GetTwoDimTableFromQb;  \nbuildCodelist-->GetCDISCCodeListSparqlQuery;  \nqbbuildObservations-->GetCodeListSparqlQuery;  \nDeriveStatsForCube-->GetCodeListSparqlQuery;  \nGetFormularFromCube-->GetAttributesSparqlQuery;  \nBuildCubeFromDataFrames-->qbbuildSkeleton;  \nLoadcdiscstandards-->summarizerdfnoprint;  \n\n"},"evals":[]}</script><!--/html_preserve-->
+<!--html_preserve--><div id="htmlwidget-807" style="width:504px;height:504px;" class="DiagrammeR"></div>
+<script type="application/json" data-for="htmlwidget-807">{"x":{"diagram":"graph TB;  \nGetCDISCCodeListSparqlQuery(GetCDISCCodeListSparqlQuery);  \nCreatecdiscstandardsfromlocal(Create.cdisc.standards.from.local);  \nGetDimsubsetDescSparqlQuery(GetDimsubsetDescSparqlQuery);  \nGetAttributesSparqlQuery(GetAttributesSparqlQuery);  \nqbdefprefixlist(qb.def.prefixlist);  \nGetSQLFromCube(GetSQLFromCube);  \nGetTwoDimTableFromQb(GetTwoDimTableFromQb);  \nGetForSparqlPrefixasdf(GetForSparqlPrefix.as.df);  \nLoadcdiscstandards(Load.cdisc.standards);  \nGetenvcdiscstandards(Get.env.cdiscstandards);  \nGetForSparqlPrefix(GetForSparqlPrefix);  \nGetDimAttrSparqlQuery(GetDimAttrSparqlQuery);  \nGetDescrStatProcedure(GetDescrStatProcedure);  \nsummarizerdfnoprint(summarize.rdf.noprint);  \nGetdefaultcrndprefixes(Get.default.crnd.prefixes);  \nGetEmptyMetadata(GetEmptyMetadata);  \nDeriveStatsForCube(DeriveStatsForCube);  \nqbbuildObservations(qb.buildObservations);  \nBuildCubeFromDataFrames(BuildCubeFromDataFrames);  \ncapitalize(capitalize);  \nGetDsdNameSparqlQuery(GetDsdNameSparqlQuery);  \nqbbuildDSD(qb.buildDSD);  \nGetDimensionsSparqlQuery(GetDimensionsSparqlQuery);  \nBuildCubeFromWorkbook(BuildCubeFromWorkbook);  \nGetDomainNameFromCube(GetDomainNameFromCube);  \nGetDimsubsetWithObsSparqlQuery(GetDimsubsetWithObsSparqlQuery);  \nqbbuildSkeleton(qb.buildSkeleton);  \nencodetouri(encodetouri);  \nGetRownoColnoCellpartnoSparqlQuery(GetRownoColnoCellpartnoSparqlQuery);  \nGetrqprefixlistdf(Get.rq.prefixlist.df);  \nGetObservationsWithDescriptionSparqlQuery(GetObservationsWithDescriptionSparqlQuery);  \nGetObservationsSparqlQuery(GetObservationsSparqlQuery);  \nGetCommonPrefixDf(GetCommonPrefixDf);  \nGetValueFromMetadata(GetValueFromMetadata);  \nRunQbIC(RunQbIC);  \nGetprefixlistfromdf(Get.prefixlist.from.df);  \nbuildCodelist(buildCodelist);  \nqbaddprefixlisttostore(qb.add.prefixlist.to.store);  \nMakeHTMLfromQb(MakeHTMLfromQb);  \nGetDsdNameFromCube(GetDsdNameFromCube);  \nphrecode(ph.recode);  \nGetDimAttrMeasInWorkbookFormatSparqlQuery(GetDimAttrMeasInWorkbookFormatSparqlQuery);  \nGetComponentSparqlQuery(GetComponentSparqlQuery);  \nGetMetaDataInWorkbookFormatSparqlQuery(GetMetaDataInWorkbookFormatSparqlQuery);  \nGetqbcrndprefixes(Get.qb.crnd.prefixes);  \nGetCodeListSparqlQuery(GetCodeListSparqlQuery);  \nGetrqprefixdf(Get.rq.prefix.df);  \nGetfilenamesforcdiscstandards(Get.filenames.for.cdisc.standards);  \nGetFormularFromCube(GetFormularFromCube);  \nBuildCubeFromDataFrames-->qbbuildDSD;  \nGetFormularFromCube-->GetDomainNameFromCube;  \nBuildCubeFromDataFrames-->qbbuildObservations;  \nGetCommonPrefixDf-->Getdefaultcrndprefixes;  \nGetSQLFromCube-->GetForSparqlPrefix;  \nBuildCubeFromDataFrames-->GetForSparqlPrefixasdf;  \nGetDsdNameFromCube-->GetForSparqlPrefix;  \nGetForSparqlPrefix-->Getrqprefixdf;  \nGetSQLFromCube-->GetDomainNameFromCube;  \nGetenvcdiscstandards-->Loadcdiscstandards;  \nqbbuildObservations-->Getrqprefixlistdf;  \nGetFormularFromCube-->GetForSparqlPrefix;  \nDeriveStatsForCube-->GetObservationsSparqlQuery;  \nBuildCubeFromWorkbook-->BuildCubeFromDataFrames;  \nGetDsdNameFromCube-->GetDsdNameSparqlQuery;  \nGetDomainNameFromCube-->GetDsdNameFromCube;  \nqbbuildDSD-->buildCodelist;  \nbuildCodelist-->encodetouri;  \nGetTwoDimTableFromQb-->GetDimsubsetDescSparqlQuery;  \nBuildCubeFromDataFrames-->GetValueFromMetadata;  \nDeriveStatsForCube-->GetAttributesSparqlQuery;  \nqbdefprefixlist-->qbaddprefixlisttostore;  \nGetSQLFromCube-->GetDsdNameFromCube;  \nqbbuildSkeleton-->capitalize;  \nGetSQLFromCube-->GetAttributesSparqlQuery;  \nGetForSparqlPrefixasdf-->Getqbcrndprefixes;  \nbuildCodelist-->Getenvcdiscstandards;  \nDeriveStatsForCube-->GetDescrStatProcedure;  \nGetFormularFromCube-->GetObservationsSparqlQuery;  \nqbbuildObservations-->phrecode;  \nGetFormularFromCube-->GetDimensionsSparqlQuery;  \nGetTwoDimTableFromQb-->GetAttributesSparqlQuery;  \nGetSQLFromCube-->GetObservationsSparqlQuery;  \nCreatecdiscstandardsfromlocal-->Getfilenamesforcdiscstandards;  \nGetTwoDimTableFromQb-->GetDimensionsSparqlQuery;  \nbuildCodelist-->capitalize;  \nGetSQLFromCube-->GetDimensionsSparqlQuery;  \nqbdefprefixlist-->Getprefixlistfromdf;  \nCreatecdiscstandardsfromlocal-->summarizerdfnoprint;  \nbuildCodelist-->GetDescrStatProcedure;  \nGetFormularFromCube-->GetDsdNameFromCube;  \nGetForSparqlPrefix-->GetForSparqlPrefixasdf;  \nGetDomainNameFromCube-->GetForSparqlPrefix;  \nGetTwoDimTableFromQb-->GetDimsubsetWithObsSparqlQuery;  \nGetTwoDimTableFromQb-->GetObservationsWithDescriptionSparqlQuery;  \nGetDsdNameSparqlQuery-->GetForSparqlPrefix;  \nDeriveStatsForCube-->GetDimensionsSparqlQuery;  \nBuildCubeFromDataFrames-->qbdefprefixlist;  \nMakeHTMLfromQb-->GetTwoDimTableFromQb;  \nbuildCodelist-->GetCDISCCodeListSparqlQuery;  \nqbbuildObservations-->GetCodeListSparqlQuery;  \nDeriveStatsForCube-->GetCodeListSparqlQuery;  \nGetFormularFromCube-->GetAttributesSparqlQuery;  \nGetForSparqlPrefixasdf-->GetCommonPrefixDf;  \nBuildCubeFromDataFrames-->qbbuildSkeleton;  \nLoadcdiscstandards-->summarizerdfnoprint;  \n\n"},"evals":[]}</script><!--/html_preserve-->
 
 
 # How to make the HTML file

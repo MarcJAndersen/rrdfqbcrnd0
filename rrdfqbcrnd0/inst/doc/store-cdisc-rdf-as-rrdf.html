@@ -224,9 +224,9 @@ hr {
 ## The following object is masked from &#39;package:rJava&#39;:
 ## 
 ##     clone
-</code></pre>
-
-<pre><code>## Warning: character(0)
+## 
+## Loading required package: rrdf
+## Loading required package: rrdflibs
 </code></pre>
 
 <h2>Directory for storing rdf.cdisc.org and RDF data cube specification</h2>
@@ -274,12 +274,7 @@ the rrdfqbcrdn0 package is intended to match the output from find.</p>
 <h2>Setup</h2>
 
 <pre><code class="r">library(rrdf)
-</code></pre>
-
-<pre><code>## Loading required package: rrdflibs
-</code></pre>
-
-<pre><code class="r">library(tools)
+library(tools)
 </code></pre>
 
 <h2>Create local version using RRDF from local directory conting rdf.cdisc.org</h2>
@@ -373,7 +368,7 @@ filesToLoad&lt;- c(
 ## Loading /home/ma/projects/phrmwg/rdf-data-cube/cube.ttl ..
 ## .. total number of triples: 165673
 ## Final rdf.cdisc.org rrdf store, number of triples: 165673
-## rrdf store saved to turle file: /tmp/Rtmp7Pt9Yy/cdisc-rdf.ttl
+## rrdf store saved to turle file: /tmp/Rtmp66Z3ce/cdisc-rdf.ttl
 ## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 </code></pre>
 
@@ -381,7 +376,7 @@ filesToLoad&lt;- c(
 message(&quot;File &quot;, cdisc.save.zip, &quot; created &quot;, cdisc.save.zip.info$ctime, &quot; size &quot;, cdisc.save.zip.info$size, &quot; bytes&quot;)
 </code></pre>
 
-<pre><code>## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-11-25 05:44:53 size 2315967 bytes
+<pre><code>## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-12-08 00:05:48 size 2315968 bytes
 </code></pre>
 
 <h3>Loading using Load.cdisc.standards</h3>
@@ -455,7 +450,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)
 </code></pre>
 
-<p>SPARQL script stored in   /tmp/Rtmp7Pt9Yy/get-rdf.disc.org.rq </p>
+<p>SPARQL script stored in   /tmp/Rtmp66Z3ce/get-rdf.disc.org.rq </p>
 
 <h3>Using the script with R</h3>
 

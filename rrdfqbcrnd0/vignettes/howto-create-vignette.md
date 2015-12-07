@@ -1,7 +1,7 @@
 ---
 title: How to create vignette"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-09-22"
+date: "2015-12-08"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{How to create vignette}
