@@ -1,6 +1,6 @@
 PACKAGENAME=rrdfcdisc
 
-all: createRD data-raw rbuildforce rbuild vignettedoc
+all: createRD data-raw rbuildforce rbuild 
 
 cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
@@ -27,7 +27,9 @@ data-raw:
 
 # Only run this after the package is installed in the overall R library
 # The vignettes uses the packages, and this should be the most recent version
+# Not the vignette documents are in the package
 # The vignettes document should be extracted from the package
+
 vignettedoc:
 	(cd vignettes; make all)
 

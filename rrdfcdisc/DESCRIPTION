@@ -1,4 +1,4 @@
-Package: rrdfqbcrnd0
+Package: rrdfcdisc
 Title: R-RDF CDISC standards (rrdf.cdisc.org)
     Development
 Version: 0.1.8
@@ -6,7 +6,7 @@ Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") ),
     person("Tim", "Williams", email="tim.williams@ucb.com", role=c("aut", "cre") )
     )
-Description: Creates and operates on RDF Data cube
+Description: Creates RDF version of CDISC standards from rrdf.cdisc.org
 Depends:
     R (>= 3.0.2),
     RCurl,
@@ -23,7 +23,7 @@ Suggests:
     shiny,
     XML
 VignetteBuilder: knitr
-BuildVignettes: no
+BuildVignettes: yes
 Packaged: 2015-01-11 10:37:02 UTC; ma
 Author: Marc Andersen [aut, cre],
     Tim Williams [aut, cre]

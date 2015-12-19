@@ -3,6 +3,7 @@
 ##' @param forsparqlprefix SPARQL prefix
 ##' @param nciDomainValue NCI domain value
 ##' @return SPARQL query
+##' @export
 GetCDISCCodeListSparqlQuery<- function( forsparqlprefix, nciDomainValue ) {
 codelists.rq<-   paste(forsparqlprefix,
 'select ?nciDomain ?cdiscDefinition ?code ?cdiscSynonyms ?nciCode ?nciPreferredTerm

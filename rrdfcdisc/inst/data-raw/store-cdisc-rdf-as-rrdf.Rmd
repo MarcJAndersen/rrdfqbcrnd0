@@ -116,16 +116,6 @@ cdisc.save.zip.info<- file.info(cdisc.save.zip)
 message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size ", cdisc.save.zip.info$size, " bytes")
 ```
 
-### Loading using Load.cdisc.standards 
-
-The code below shows the call for loading the zipped rdf file and store in triple store.
-This is currently handled in the .onLoad function for the package. The rrdf model is then stored in the package environment.
-
-```{r, results='asis', eval=TRUE}
-cdisc.rdf<- Load.cdisc.standards()
-message(".. total number of triples: ", summarize.rdf.noprint(cdisc.rdf) )
-```
-
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
 
 The following is experimental and not needed for the present

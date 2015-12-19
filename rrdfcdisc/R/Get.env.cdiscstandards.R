@@ -2,6 +2,7 @@
 ##'
 ##' 
 ##' @return rdf.cdisc.org rrdf model
+##' @export
 
 Get.env.cdiscstandards<- function() {
 if (is.null(env[["cdiscstandards"]]) ) {

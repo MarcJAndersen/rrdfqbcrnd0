@@ -1,5 +1,4 @@
 ##' Create local file with CDISC standards using local copy of standards
-##'
 ##' 
 ##' @return RRDF model containing CDISC standards stored locally in zip file
 ##' @param cdisc.files.dir Path to directory with CDISC RDF files
@@ -9,6 +8,7 @@
 ##' @param CDISCfilelist A list ofe paths for the rdf.cdisc.org standards files.
 ##' Default the results of Get.filenames.for.cdisc.standards()
 ##' 
+##' @export
 Create.cdisc.standards.from.local<- function(
   cdisc.files.dir= "~/projects/phrmwg/rdf.cdisc.org",
   cdisc.save.zip=file.path(system.file("extdata/CDISC-standards-rdf", package="rrdfqbcrnd0"), "cdisc-rdf.zip" ),
