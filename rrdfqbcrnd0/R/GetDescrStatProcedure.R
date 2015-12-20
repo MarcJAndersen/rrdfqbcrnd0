@@ -1,3 +1,9 @@
+##' Get list of Descriptive statistics
+##'
+##' @return List providing function for each descriptive statistics
+##' @export
+
+
 GetDescrStatProcedure<- function( ) {
 
 list(

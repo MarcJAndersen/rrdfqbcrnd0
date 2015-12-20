@@ -3,6 +3,7 @@
 ##' @param prefixes A data.frame with column prefix and namespace
 ##' @return The list with member names prefixUPPERCASEPREFIX and namespace as value
 ##' TODO(mja): this should be changed - at least the naming, or use another data structure 
+##' @export
 Get.prefixlist.from.df<- function(prefixes) {
 pl<- list();
 

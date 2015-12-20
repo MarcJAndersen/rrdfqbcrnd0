@@ -2,6 +2,7 @@
 ##'
 ##' 
 ##' @return empty data.frame with column corresponding to the metadata data.frame
+##' @export
 
 GetEmptyMetadata<-  function() {
 df<- data.frame(

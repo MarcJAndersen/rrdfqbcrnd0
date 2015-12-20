@@ -1,7 +1,7 @@
 
 
 
-HTMLS= store-cdisc-rdf-as-rrdf.html
+HTMLS= store-cdisc-rdf-as-rrdf.html create-qb-CDISC-prefix.html
 
 # not possible directly from .Rmd PDFS=reporting-process.pdf
 
@@ -20,6 +20,8 @@ RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
 
+RDAQBCDISCPREFIXES=../../data/qbCDISCprefixes.rda
+
 
 all: ${TARGETS}
 
@@ -34,4 +36,8 @@ installDoc:
 ${CDISCRDFZIP} store-cdisc-rdf-as-rrdf.html: store-cdisc-rdf-as-rrdf.Rmd
 	${RKNIT2HTML}
 
+
+${RDAQBCDISCPREFIXES} create-qb-CDISC-prefix.html: create-qb-CDISC-prefix.Rmd
+	echo Creating $@
+	${RKNIT2HTML}
 

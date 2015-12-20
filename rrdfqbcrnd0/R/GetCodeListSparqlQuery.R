@@ -4,6 +4,7 @@
 ##' @param dsdName Dataset Descriptor Name
 ##' @return SPARQL query
 ##' @family SPARQL queries
+##' @export
 GetCodeListSparqlQuery<- function( forsparqlprefix, dsdName ) {
 codelists.rq<-   paste(forsparqlprefix,
 '

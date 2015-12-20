@@ -8,6 +8,7 @@
 ##' codetype="SDTM" to give the URL for the remote endpoint. If NULL
 ##' then the local rdf.cdisc.store from the environment is used.
 ##' @return The filename for the generated turtle file
+##' @export
 
 BuildCubeFromDataFrames<- function(cubeMetadata, obsData, common.prefixes=NULL, endpoint=NULL) {
     

@@ -2,6 +2,7 @@
 ##'
 ##' @inheritParams GetDomainNameFromCube
 ##' @return expression with the formulars representing the RDF data cube
+##' @export
 
 GetFormularFromCube<- function( store, forsparqlprefixcommon  ) {
 

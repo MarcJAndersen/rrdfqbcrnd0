@@ -3,6 +3,7 @@
 ##' @param forsparqlprefix PREFIX statements for SPARQL query
 ##' @return SPARQL query
 ##' @family SPARQL queries
+##' @export
 GetRownoColnoCellpartnoSparqlQuery<- function( forsparqlprefix ) {
 rownocolnocellpartno.rq<-   paste(forsparqlprefix,
 '

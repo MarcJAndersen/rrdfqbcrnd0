@@ -7,13 +7,14 @@
 ##' @inheritParams qb.buildDSD
 ##' @return always TRUE
 ##' @author Tim Williams, Marc Andersen
+##' @export
 qb.buildSkeleton<- function(store, prefixlist,obsData, skeletonSource) {
-# Loop through to create Property and Component specs
+## Loop through to create Property and Component specs
 
 for (i in 1:nrow(skeletonSource)){
    component <- tolower(skeletonSource[i,"compType"])
    ##DEBUG message ("Component:", component)
-  #------------------  Dimensions ---------------------------------------------
+  ##------------------  Dimensions ---------------------------------------------
   if (component == "dimension"){
     ## Class name is the compName with an uppercase first letter.
     compNameClass <- capitalize(toString(skeletonSource[i,"compName"]))
@@ -60,7 +61,7 @@ for (i in 1:nrow(skeletonSource)){
                "http://www.w3.org/2000/01/rdf-schema#label",
                paste0(skeletonSource[i,"compLabel"]))
   }
-  #------------------  Measure ------------------------------------------------
+  ##------------------  Measure ------------------------------------------------
   else if (component =="measure"){
 
     add.triple(store,

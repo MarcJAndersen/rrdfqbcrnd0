@@ -9,6 +9,7 @@
 ##' descriptive statistics. If NULL then the default list is used
 ##' @return Always TRUE
 ##'
+##' @export
 qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsdURIwoprefix,
                                 dsdName, recode.list, procedure2format ) {
 

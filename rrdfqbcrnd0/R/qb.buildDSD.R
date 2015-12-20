@@ -10,6 +10,7 @@
 ##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title, PAVnodes, obsDataSetName
 ##' @param remote.endpoint Remote endpoint, if NULL use local version of CDISC RDF standards
 ##' @return Always TRUE
+##' @export
 qb.buildDSD<- function(store,
   prefixlist,
   obsData,

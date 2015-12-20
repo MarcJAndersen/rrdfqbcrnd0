@@ -2,6 +2,7 @@
 ##' TODO: change the way domainname is used - should only use the dsdName
 ##' @inheritParams GetDomainNameFromCube
 ##' @return the dsdName for the cube
+##' @export
 GetDsdNameFromCube<- function( store, forsparqlprefixcommon=GetForSparqlPrefix() ) {
 
 tempstr<- as.character(sparql.rdf(store, GetDsdNameSparqlQuery( forsparqlprefixcommon )))

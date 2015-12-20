@@ -4,6 +4,7 @@
 ##' @param forsparqlprefixcommon Common prefixes for the data cube
 ##' @param store RRDF store
 ##' @return the domainName for the cube
+##' @export
 GetDomainNameFromCube<- function( store, forsparqlprefixcommon=GetForSparqlPrefix()  ) {
 
 dsdName<- GetDsdNameFromCube( store, forsparqlprefixcommon ) 

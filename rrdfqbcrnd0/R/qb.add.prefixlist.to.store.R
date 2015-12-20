@@ -5,6 +5,7 @@
 ##' @param prefixes A data.frame with column prefix and namespace
 ##' @return The list with member names prefixUPPERCASEPREFIX and namespace as value
 ##' TODO(mja): this should be changed - at least the naming, or use another data structure 
+##' @export
 qb.add.prefixlist.to.store<- function(store=NULL, prefixes) {
 
 for (i in 1:nrow(prefixes))

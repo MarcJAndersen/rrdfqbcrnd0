@@ -6,6 +6,7 @@
 ##' @param compName select on the value of compName
 ##' @param defaultValue if not NULL then a character string providing the default value in 
 ##' @return the value of the meta data or the the provided default value if keys are not found
+##' @export
 GetValueFromMetadata<- function(metaData,compType=NULL,compName=NULL,defaultValue=NULL) {
 
   if (is.null(compType)) {

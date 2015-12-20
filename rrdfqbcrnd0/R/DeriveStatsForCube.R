@@ -14,6 +14,7 @@
 ##' FALSE then measure is overwritten with the results
 ##' @param myprefixes Prefixes used for storing the results - TODO(mja): combined with forsparqlprefix
 ##' @return list with status TRUE if the operation was sucessfull
+##' @export
 
 DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=TRUE, validation.measure=NULL, myprefixes ) {
 

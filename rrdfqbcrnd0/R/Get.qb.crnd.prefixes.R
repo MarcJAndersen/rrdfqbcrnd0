@@ -9,6 +9,7 @@
 ##' @param domain.prefixes Prefix specific for the domain
 ##' @param general.prefixes General prefixes not specific for the domain
 ##' @return Data frame with column prefix and namespace
+##' @export
 Get.qb.crnd.prefixes<- function(
   domainName,
   namespaceStem="http://www.example.org/dc/",

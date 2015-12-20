@@ -2,6 +2,7 @@
 ##'
 ##' @inheritParams GetObservationsSparqlQuery
 ##' @return SPARQL query
+##' @export
 GetMetaDataInWorkbookFormatSparqlQuery<- function( forsparqlprefix ) {
 cube.observations.rq<-  paste( forsparqlprefix,
 '

@@ -10,6 +10,7 @@
 ##' @param showProcedure If TRUE show in each row the projection procedurevalue
 ##' @return path to file with HTML
 ##' @inheritParams GetObservationsSparqlQuery
+##' @export
 
 MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
                           dimensions, rowdim, coldim, idrow, idcol,

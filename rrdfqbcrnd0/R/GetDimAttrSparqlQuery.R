@@ -4,6 +4,7 @@
 ##' @inheritParams GetObservationsSparqlQuery
 ##' @return SPARQL query
 ##' @family SPARQL queries
+##' @export
 GetDimAttrSparqlQuery<- function( forsparqlprefix ) {
 dimAttr.rq<-   paste(forsparqlprefix,
 '

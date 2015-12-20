@@ -7,6 +7,7 @@
 ##' codetype="SDTM" to give the URL for the remote endpoint. If NULL
 ##' then the local rdf.cdisc.store from the environment is used.
 ##' @return The filename for the generated turtle file
+##' @export
 BuildCubeFromWorkbook<- function(RDFCubeWorkbook,domainName,endpoint=NULL) {
   
 # Prefixe sources: 1. Workbook sheet CubePrefixes 2. custom built on domain name

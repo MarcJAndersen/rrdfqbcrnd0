@@ -13,6 +13,7 @@
 ##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
+##' @export
 buildCodelist <- function(
   store,
   prefixlist,

@@ -1,5 +1,6 @@
 ##' Get the common PREFIXES for a SPARQL query
 ##' @return data.frame with columns prefix and namespace
+##' @export
 
 GetCommonPrefixDf<- function() {
 common.prefixes <- data.frame(

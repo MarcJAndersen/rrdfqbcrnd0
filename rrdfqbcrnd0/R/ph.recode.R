@@ -2,6 +2,7 @@
 ##' @param s A value interpreted as character
 ##' @param l A named list using the value as name as part of a URI
 ##' @return s capitalized
+##' @export
 ph.recode<- function( s, l ) {
   if (s %in% names(l)) {
     return(l[[as.character(s)]])  # as.character !!!

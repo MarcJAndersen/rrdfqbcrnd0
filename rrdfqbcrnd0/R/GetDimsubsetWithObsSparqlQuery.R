@@ -4,6 +4,7 @@
 ##' @param dimensionsorattrs vector of dimensions or attributes
 ##' @return SPARQL query
 ##' @family SPARQL queries
+##' @export
 GetDimsubsetWithObsSparqlQuery<- function( forsparqlprefix, domainName, dimensionsorattrs ) {
 cube.observations.rq<-  paste( forsparqlprefix,
     "select * where {",

@@ -2,6 +2,7 @@
 ##' @param s input string
 ##' @param strict if all character should be capitalized
 ##' @return s capitalized
+##' @export
 
 capitalize <- function(s, strict = FALSE) {
 # suggested R online help /library/base/html/chartr.html

@@ -15,6 +15,7 @@
 ##' This could also be done using a SPARQL query. Most likely this would be a more
 ##' clear approach.
 
+##' @export
 
 ## TODO: Consider
 ## rownamefunc function for deriving rownames

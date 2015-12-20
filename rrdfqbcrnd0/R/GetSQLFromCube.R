@@ -5,6 +5,7 @@
 ##' @param dsdName The name of the data frame with data (results)
 ##' @param srcDsName The name of the data frame with underlying data (source)
 ##' @return SQL expression with the formulars representing the RDF data cube
+##' @export
 
 GetSQLFromCube<- function( store, dsdName=NULL, srcDsName="adsl"  ) {
 

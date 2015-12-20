@@ -2,6 +2,7 @@
 ##'
 ##' @inheritParams GetObservationsSparqlQuery
 ##' @return SPARQL query
+##' @export
 GetDimAttrMeasInWorkbookFormatSparqlQuery<- function( forsparqlprefix ) {
 cube.observations.rq<-  paste( forsparqlprefix,
 '

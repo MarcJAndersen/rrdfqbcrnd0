@@ -6,6 +6,7 @@
 ##' 
 ##' @param prefix.df prefixes as data.frame with column prefix and namespace
 ##' @return String containing prefix statements for SPARQL query
+##' @export
 Get.rq.prefix.df<- function( prefix.df ) {
 
 forsparqlprefix<- paste0(paste(

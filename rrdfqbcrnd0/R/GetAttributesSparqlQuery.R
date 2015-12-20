@@ -4,6 +4,7 @@
 ##' @inheritParams GetObservationsSparqlQuery
 ##' @return SPARQL query
 ##' @family SPARQL queries
+##' @export
 GetAttributesSparqlQuery<- function( forsparqlprefix ) {
 attributes.rq<-   paste(forsparqlprefix,
 '

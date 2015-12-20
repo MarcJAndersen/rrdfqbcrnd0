@@ -462,6 +462,9 @@ knitr::kable(cubeMetadata)
 <pre><code class="r">outcube&lt;- BuildCubeFromDataFrames(cubeMetadata, obsData )
 </code></pre>
 
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Line 10, column 28: Unresolved prefixed name: qb:DataStructureDefinition
+</code></pre>
+
 <p>This shows a simple use of the BuildCubeFromDataFrames function. 
 The warning message from log4j can be ignored.</p>
 
@@ -470,7 +473,7 @@ The warning message from log4j can be ignored.</p>
 <pre><code class="r">cat(normalizePath(outcube),&quot;\n&quot;)
 </code></pre>
 
-<pre><code>## /tmp/Rtmp650gri/DC-EXAMPLE-R-V-0-0-0.ttl
+<pre><code>## Error in path.expand(path): object &#39;outcube&#39; not found
 </code></pre>
 
 <h1>Query the cube using SPARQL</h1>
@@ -480,53 +483,62 @@ The warning message from log4j can be ignored.</p>
 <pre><code class="r">dataCubeFile&lt;- outcube
 </code></pre>
 
+<pre><code>## Error in eval(expr, envir, enclos): object &#39;outcube&#39; not found
+</code></pre>
+
 <p>The rest of the code only depends on the value of dataCubeFile.
 The code demonstrates the use of the rrdf library.</p>
 
 <pre><code class="r">cube &lt;- new.rdf()  # Initialize
 temp&lt;-load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= cube)
-summarize.rdf(cube)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 422&quot;
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/hp/hpl/jena/rdf/model/Model;&quot;, : object &#39;dataCubeFile&#39; not found
+</code></pre>
+
+<pre><code class="r">summarize.rdf(cube)
+</code></pre>
+
+<pre><code>## [1] &quot;Number of triples: 40&quot;
 </code></pre>
 
 <p>The next statements are needed for the current implementation of the cube, and may change in future versions.</p>
 
 <pre><code class="r">## TODO: reconsider the use of domain specific prefixes
 dsdName&lt;- GetDsdNameFromCube( cube )
-domainName&lt;- GetDomainNameFromCube( cube )
-cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot; )
 </code></pre>
 
-<pre><code>## dsdName  dsd-EXAMPLE , domainName  EXAMPLE
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Line 5, column 8: Unresolved prefixed name: qb:DataStructureDefinition
+</code></pre>
+
+<pre><code class="r">domainName&lt;- GetDomainNameFromCube( cube )
+</code></pre>
+
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Line 5, column 8: Unresolved prefixed name: qb:DataStructureDefinition
+</code></pre>
+
+<pre><code class="r">cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot; )
+</code></pre>
+
+<pre><code>## Error in cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot;): object &#39;dsdName&#39; not found
 </code></pre>
 
 <pre><code class="r">prefixlist&lt;- Get.prefixlist.from.df(GetForSparqlPrefix.as.df(domainName=domainName))
-forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
-cat(forsparqlprefix,&quot;\n&quot;)
 </code></pre>
 
-<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
-## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
-## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
-## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
-## prefix pav: &lt;http://purl.org/pav&gt;
-## prefix dct: &lt;http://purl.org/dc/terms/&gt;
-## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
-## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
-## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
-## prefix code: &lt;http://www.example.org/dc/code/&gt;
-## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;
-## prefix ds: &lt;http://www.example.org/dc/example/ds/&gt;
-## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
-## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
-## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
-## 
+<pre><code>## Error in GetForSparqlPrefix.as.df(domainName = domainName): object &#39;domainName&#39; not found
+</code></pre>
+
+<pre><code class="r">forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
+</code></pre>
+
+<pre><code>## Error in GetForSparqlPrefix.as.df(domainName = domainName, common.prefixes = common.prefixes, : object &#39;domainName&#39; not found
+</code></pre>
+
+<pre><code class="r">cat(forsparqlprefix,&quot;\n&quot;)
+</code></pre>
+
+<pre><code>## Error in cat(forsparqlprefix, &quot;\n&quot;): object &#39;forsparqlprefix&#39; not found
 </code></pre>
 
 <p>The variable forsparqlprefix contains the prefix statements applicable
@@ -541,1190 +553,78 @@ TODO: Consider other approach for including the domainname, or use other concept
                    paste0(prefixlist$prefixCODE, &quot;procedure-median&quot;),
                    paste0(prefixlist$prefixRDFS,&quot;seeAlso&quot; ),
                    &quot;purl.obolibrary.org/obo/OBI_0200119&quot;)
-        add.triple(cube,
+</code></pre>
+
+<pre><code>## Error in paste0(prefixlist$prefixCODE, &quot;procedure-median&quot;): object &#39;prefixlist&#39; not found
+</code></pre>
+
+<pre><code class="r">        add.triple(cube,
                    paste0(prefixlist$prefixCODE, &quot;procedure-stddev&quot;),
                    paste0(prefixlist$prefixRDFS,&quot;seeAlso&quot; ),
                    &quot;purl.obolibrary.org/obo/STATO_0000037&quot;)
-        add.triple(cube,
+</code></pre>
+
+<pre><code>## Error in paste0(prefixlist$prefixCODE, &quot;procedure-stddev&quot;): object &#39;prefixlist&#39; not found
+</code></pre>
+
+<pre><code class="r">        add.triple(cube,
                    paste0(prefixlist$prefixCODE, &quot;procedure-mean&quot;),
                    paste0(prefixlist$prefixRDFS,&quot;seeAlso&quot; ),
                    &quot;purl.obolibrary.org/obo/IAO_0000125&quot;)
+</code></pre>
+
+<pre><code>## Error in paste0(prefixlist$prefixCODE, &quot;procedure-mean&quot;): object &#39;prefixlist&#39; not found
 </code></pre>
 
 <h2>Getting all codelists as data.frame</h2>
 
 <p>The SPARQL query for codelists are shown in the next output.</p>
 
-<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
-## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
-## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
-## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
-## prefix pav: &lt;http://purl.org/pav&gt;
-## prefix dct: &lt;http://purl.org/dc/terms/&gt;
-## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
-## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
-## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
-## prefix code: &lt;http://www.example.org/dc/code/&gt;
-## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;
-## prefix ds: &lt;http://www.example.org/dc/example/ds/&gt;
-## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
-## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
-## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
-##  
-## select distinct ?p ?vn ?cl ?prefLabel 
-## where {
-## ?DataStructureDefinition a qb:DataStructureDefinition ;
-##    qb:component ?component .
-## ?component a qb:ComponentSpecification .
-## ?component qb:dimension ?p .
-## ?p qb:codeList ?c .
-## ?c skos:hasTopConcept ?cl .
-## ?cl skos:prefLabel ?prefLabel .
-## OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn } 
-## values ( ?DataStructureDefinition ) {
-##  (ds:dsd-EXAMPLE) 
-## }
-## }
-## order by ?p ?cl ?prefLabel
+<pre><code>## Error in paste(forsparqlprefix, &quot;\nselect distinct ?p ?vn ?cl ?prefLabel \nwhere {\n?DataStructureDefinition a qb:DataStructureDefinition ;\n   qb:component ?component .\n?component a qb:ComponentSpecification .\n?component qb:dimension ?p .\n?p qb:codeList ?c .\n?c skos:hasTopConcept ?cl .\n?cl skos:prefLabel ?prefLabel .\nOPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn } \nvalues ( ?DataStructureDefinition ) {\n&quot;, : object &#39;forsparqlprefix&#39; not found
+</code></pre>
+
+<pre><code>## Error in cat(codelists.rq): object &#39;codelists.rq&#39; not found
 </code></pre>
 
 <p>Executing the SPARQL query gives the code list as a data frame.</p>
 
-<pre><code>##           vn                     clc     prefLabel
-## 1   category       category-AA-group      AA-group
-## 2   category          category-_ALL_         _ALL_
-## 3   category      category-_NONMISS_     _NONMISS_
-## 4     factor             factor-VARA          VARA
-## 5     factor            factor-_ALL_         _ALL_
-## 6     factor        factor-_NONMISS_     _NONMISS_
-## 7  procedure         procedure-count         count
-## 8  procedure procedure-countdistinct countdistinct
-## 9  procedure           procedure-max           max
-## 10 procedure          procedure-mean          mean
-## 11 procedure        procedure-median        median
-## 12 procedure           procedure-min           min
-## 13 procedure             procedure-n             n
-## 14 procedure       procedure-percent       percent
-## 15 procedure            procedure-q1            q1
-## 16 procedure            procedure-q3            q3
-## 17 procedure           procedure-std           std
-## 18 procedure        procedure-stddev        stddev
-## 19 procedure         procedure-stdev         stdev
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : object &#39;codelists.rq&#39; not found
 </code></pre>
 
-<table><thead>
-<tr>
-<th align="left">vn</th>
-<th align="left">clc</th>
-<th align="left">prefLabel</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">category</td>
-<td align="left">category-AA-group</td>
-<td align="left">AA-group</td>
-</tr>
-<tr>
-<td align="left">category</td>
-<td align="left">category-<em>ALL</em></td>
-<td align="left"><em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">category</td>
-<td align="left">category-<em>NONMISS</em></td>
-<td align="left"><em>NONMISS</em></td>
-</tr>
-<tr>
-<td align="left">factor</td>
-<td align="left">factor-VARA</td>
-<td align="left">VARA</td>
-</tr>
-<tr>
-<td align="left">factor</td>
-<td align="left">factor-<em>ALL</em></td>
-<td align="left"><em>ALL</em></td>
-</tr>
-<tr>
-<td align="left">factor</td>
-<td align="left">factor-<em>NONMISS</em></td>
-<td align="left"><em>NONMISS</em></td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-count</td>
-<td align="left">count</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-countdistinct</td>
-<td align="left">countdistinct</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-max</td>
-<td align="left">max</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-mean</td>
-<td align="left">mean</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-median</td>
-<td align="left">median</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-min</td>
-<td align="left">min</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-n</td>
-<td align="left">n</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-percent</td>
-<td align="left">percent</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-q1</td>
-<td align="left">q1</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-q3</td>
-<td align="left">q3</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-std</td>
-<td align="left">std</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-stddev</td>
-<td align="left">stddev</td>
-</tr>
-<tr>
-<td align="left">procedure</td>
-<td align="left">procedure-stdev</td>
-<td align="left">stdev</td>
-</tr>
-</tbody></table>
+<pre><code>## Error in gsub(&quot;code:&quot;, &quot;&quot;, cube.codelists$cl): object &#39;cube.codelists&#39; not found
+</code></pre>
+
+<pre><code>## Error in print(cube.codelists[, c(&quot;vn&quot;, &quot;clc&quot;, &quot;prefLabel&quot;)]): object &#39;cube.codelists&#39; not found
+</code></pre>
 
 <h2>Getting the procedure codelist as data.frame</h2>
 
-<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
-## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
-## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
-## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
-## prefix pav: &lt;http://purl.org/pav&gt;
-## prefix dct: &lt;http://purl.org/dc/terms/&gt;
-## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
-## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
-## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
-## prefix code: &lt;http://www.example.org/dc/code/&gt;
-## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;
-## prefix ds: &lt;http://www.example.org/dc/example/ds/&gt;
-## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
-## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
-## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
-##  
-## select ?s ?p ?o
-## where { 
-## ?s ?p ?o .
-## ?s a code:Procedure
-##  }    
-## 
+<pre><code>## Error in paste(forsparqlprefix, &quot;\nselect ?s ?p ?o\nwhere { \n?s ?p ?o .\n?s a code:Procedure\n }    \n&quot;, : object &#39;forsparqlprefix&#39; not found
+</code></pre>
+
+<pre><code>## Error in cat(procedure.codelists.rq): object &#39;procedure.codelists.rq&#39; not found
 </code></pre>
 
 <p>Executing the SPARQL query gives the code list as a data frame.</p>
 
-<pre><code>##                                s                               p
-## 1            code:procedure-mean                    rdfs:comment
-## 2            code:procedure-mean                  skos:prefLabel
-## 3            code:procedure-mean     rrdfqbcrnd0:RdescStatDefFun
-## 4            code:procedure-mean                        rdf:type
-## 5            code:procedure-mean rrdfqbcrnd0:R-selectionoperator
-## 6            code:procedure-mean                        rdf:type
-## 7            code:procedure-mean    rrdfqbcrnd0:R-selectionvalue
-## 8            code:procedure-mean                   skos:inScheme
-## 9            code:procedure-mean                    rdfs:seeAlso
-## 10           code:procedure-mean               skos:topConceptOf
-## 11              code:procedure-n               skos:topConceptOf
-## 12              code:procedure-n                  skos:prefLabel
-## 13              code:procedure-n                   skos:inScheme
-## 14              code:procedure-n     rrdfqbcrnd0:RdescStatDefFun
-## 15              code:procedure-n    rrdfqbcrnd0:R-selectionvalue
-## 16              code:procedure-n rrdfqbcrnd0:R-selectionoperator
-## 17              code:procedure-n                    rdfs:comment
-## 18              code:procedure-n                        rdf:type
-## 19              code:procedure-n                        rdf:type
-## 20             code:procedure-q3               skos:topConceptOf
-## 21             code:procedure-q3                  skos:prefLabel
-## 22             code:procedure-q3                   skos:inScheme
-## 23             code:procedure-q3     rrdfqbcrnd0:RdescStatDefFun
-## 24             code:procedure-q3    rrdfqbcrnd0:R-selectionvalue
-## 25             code:procedure-q3 rrdfqbcrnd0:R-selectionoperator
-## 26             code:procedure-q3                    rdfs:comment
-## 27             code:procedure-q3                        rdf:type
-## 28             code:procedure-q3                        rdf:type
-## 29  code:procedure-countdistinct               skos:topConceptOf
-## 30  code:procedure-countdistinct                  skos:prefLabel
-## 31  code:procedure-countdistinct                   skos:inScheme
-## 32  code:procedure-countdistinct     rrdfqbcrnd0:RdescStatDefFun
-## 33  code:procedure-countdistinct    rrdfqbcrnd0:R-selectionvalue
-## 34  code:procedure-countdistinct rrdfqbcrnd0:R-selectionoperator
-## 35  code:procedure-countdistinct                    rdfs:comment
-## 36  code:procedure-countdistinct                        rdf:type
-## 37  code:procedure-countdistinct                        rdf:type
-## 38          code:procedure-count               skos:topConceptOf
-## 39          code:procedure-count                  skos:prefLabel
-## 40          code:procedure-count                   skos:inScheme
-## 41          code:procedure-count     rrdfqbcrnd0:RdescStatDefFun
-## 42          code:procedure-count    rrdfqbcrnd0:R-selectionvalue
-## 43          code:procedure-count rrdfqbcrnd0:R-selectionoperator
-## 44          code:procedure-count                    rdfs:comment
-## 45          code:procedure-count                        rdf:type
-## 46          code:procedure-count                        rdf:type
-## 47         code:procedure-median                    rdfs:comment
-## 48         code:procedure-median     rrdfqbcrnd0:RdescStatDefFun
-## 49         code:procedure-median rrdfqbcrnd0:R-selectionoperator
-## 50         code:procedure-median                        rdf:type
-## 51         code:procedure-median                        rdf:type
-## 52         code:procedure-median               skos:topConceptOf
-## 53         code:procedure-median                    rdfs:seeAlso
-## 54         code:procedure-median    rrdfqbcrnd0:R-selectionvalue
-## 55         code:procedure-median                   skos:inScheme
-## 56         code:procedure-median                  skos:prefLabel
-## 57          code:procedure-stdev               skos:topConceptOf
-## 58          code:procedure-stdev                  skos:prefLabel
-## 59          code:procedure-stdev                   skos:inScheme
-## 60          code:procedure-stdev     rrdfqbcrnd0:RdescStatDefFun
-## 61          code:procedure-stdev    rrdfqbcrnd0:R-selectionvalue
-## 62          code:procedure-stdev rrdfqbcrnd0:R-selectionoperator
-## 63          code:procedure-stdev                    rdfs:comment
-## 64          code:procedure-stdev                        rdf:type
-## 65          code:procedure-stdev                        rdf:type
-## 66            code:procedure-std               skos:topConceptOf
-## 67            code:procedure-std                  skos:prefLabel
-## 68            code:procedure-std                   skos:inScheme
-## 69            code:procedure-std     rrdfqbcrnd0:RdescStatDefFun
-## 70            code:procedure-std    rrdfqbcrnd0:R-selectionvalue
-## 71            code:procedure-std rrdfqbcrnd0:R-selectionoperator
-## 72            code:procedure-std                    rdfs:comment
-## 73            code:procedure-std                        rdf:type
-## 74            code:procedure-std                        rdf:type
-## 75             code:procedure-q1               skos:topConceptOf
-## 76             code:procedure-q1                  skos:prefLabel
-## 77             code:procedure-q1                   skos:inScheme
-## 78             code:procedure-q1     rrdfqbcrnd0:RdescStatDefFun
-## 79             code:procedure-q1    rrdfqbcrnd0:R-selectionvalue
-## 80             code:procedure-q1 rrdfqbcrnd0:R-selectionoperator
-## 81             code:procedure-q1                    rdfs:comment
-## 82             code:procedure-q1                        rdf:type
-## 83             code:procedure-q1                        rdf:type
-## 84        code:procedure-percent               skos:topConceptOf
-## 85        code:procedure-percent                  skos:prefLabel
-## 86        code:procedure-percent                   skos:inScheme
-## 87        code:procedure-percent     rrdfqbcrnd0:RdescStatDefFun
-## 88        code:procedure-percent    rrdfqbcrnd0:R-selectionvalue
-## 89        code:procedure-percent rrdfqbcrnd0:R-selectionoperator
-## 90        code:procedure-percent                    rdfs:comment
-## 91        code:procedure-percent                        rdf:type
-## 92        code:procedure-percent                        rdf:type
-## 93            code:procedure-max               skos:topConceptOf
-## 94            code:procedure-max                  skos:prefLabel
-## 95            code:procedure-max                   skos:inScheme
-## 96            code:procedure-max     rrdfqbcrnd0:RdescStatDefFun
-## 97            code:procedure-max    rrdfqbcrnd0:R-selectionvalue
-## 98            code:procedure-max rrdfqbcrnd0:R-selectionoperator
-## 99            code:procedure-max                    rdfs:comment
-## 100           code:procedure-max                        rdf:type
-## 101           code:procedure-max                        rdf:type
-## 102        code:procedure-stddev                        rdf:type
-## 103        code:procedure-stddev rrdfqbcrnd0:R-selectionoperator
-## 104        code:procedure-stddev                        rdf:type
-## 105        code:procedure-stddev                   skos:inScheme
-## 106        code:procedure-stddev     rrdfqbcrnd0:RdescStatDefFun
-## 107        code:procedure-stddev               skos:topConceptOf
-## 108        code:procedure-stddev    rrdfqbcrnd0:R-selectionvalue
-## 109        code:procedure-stddev                  skos:prefLabel
-## 110        code:procedure-stddev                    rdfs:seeAlso
-## 111        code:procedure-stddev                    rdfs:comment
-## 112           code:procedure-min               skos:topConceptOf
-## 113           code:procedure-min                  skos:prefLabel
-## 114           code:procedure-min                   skos:inScheme
-## 115           code:procedure-min     rrdfqbcrnd0:RdescStatDefFun
-## 116           code:procedure-min    rrdfqbcrnd0:R-selectionvalue
-## 117           code:procedure-min rrdfqbcrnd0:R-selectionoperator
-## 118           code:procedure-min                    rdfs:comment
-## 119           code:procedure-min                        rdf:type
-## 120           code:procedure-min                        rdf:type
-## 121            code:procedure-q3                        rdf:type
-## 122        code:procedure-stddev                        rdf:type
-## 123         code:procedure-stdev                        rdf:type
-## 124          code:procedure-mean                        rdf:type
-## 125            code:procedure-q1                        rdf:type
-## 126           code:procedure-std                        rdf:type
-## 127         code:procedure-count                        rdf:type
-## 128        code:procedure-median                        rdf:type
-## 129       code:procedure-percent                        rdf:type
-## 130 code:procedure-countdistinct                        rdf:type
-## 131           code:procedure-min                        rdf:type
-## 132           code:procedure-max                        rdf:type
-## 133             code:procedure-n                        rdf:type
-##                                                                    o
-## 1                                        Descriptive statistics mean
-## 2                                                               mean
-## 3                        function (x)  {     mean(x, na.rm = TRUE) }
-## 4                                                       skos:Concept
-## 5                                                                 ==
-## 6                                                     code:Procedure
-## 7                                                               mean
-## 8                                                     code:procedure
-## 9                                purl.obolibrary.org/obo/IAO_0000125
-## 10                                                    code:procedure
-## 11                                                    code:procedure
-## 12                                                                 n
-## 13                                                    code:procedure
-## 14                        function (x)  {     length(x[!is.na(x)]) }
-## 15                                                                 n
-## 16                                                                ==
-## 17                                          Descriptive statistics n
-## 18                                                      skos:Concept
-## 19                                                    code:Procedure
-## 20                                                    code:procedure
-## 21                                                                q3
-## 22                                                    code:procedure
-## 23  function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }
-## 24                                                                q3
-## 25                                                                ==
-## 26                                         Descriptive statistics q3
-## 27                                                      skos:Concept
-## 28                                                    code:Procedure
-## 29                                                    code:procedure
-## 30                                                     countdistinct
-## 31                                                    code:procedure
-## 32                           function (x)  {     length(unique(x)) }
-## 33                                                     countdistinct
-## 34                                                                ==
-## 35                              Descriptive statistics countdistinct
-## 36                                                      skos:Concept
-## 37                                                    code:Procedure
-## 38                                                    code:procedure
-## 39                                                             count
-## 40                                                    code:procedure
-## 41                                   function (x)  {     length(x) }
-## 42                                                             count
-## 43                                                                ==
-## 44                                      Descriptive statistics count
-## 45                                                      skos:Concept
-## 46                                                    code:Procedure
-## 47                                     Descriptive statistics median
-## 48                     function (x)  {     median(x, na.rm = TRUE) }
-## 49                                                                ==
-## 50                                                      skos:Concept
-## 51                                                    code:Procedure
-## 52                                                    code:procedure
-## 53                               purl.obolibrary.org/obo/OBI_0200119
-## 54                                                            median
-## 55                                                    code:procedure
-## 56                                                            median
-## 57                                                    code:procedure
-## 58                                                             stdev
-## 59                                                    code:procedure
-## 60                         function (x)  {     sd(x, na.rm = TRUE) }
-## 61                                                             stdev
-## 62                                                                ==
-## 63                                      Descriptive statistics stdev
-## 64                                                      skos:Concept
-## 65                                                    code:Procedure
-## 66                                                    code:procedure
-## 67                                                               std
-## 68                                                    code:procedure
-## 69                         function (x)  {     sd(x, na.rm = TRUE) }
-## 70                                                               std
-## 71                                                                ==
-## 72                                        Descriptive statistics std
-## 73                                                      skos:Concept
-## 74                                                    code:Procedure
-## 75                                                    code:procedure
-## 76                                                                q1
-## 77                                                    code:procedure
-## 78  function (x)  {     quantile(x, probs = c(0.25), na.rm = TRUE) }
-## 79                                                                q1
-## 80                                                                ==
-## 81                                         Descriptive statistics q1
-## 82                                                      skos:Concept
-## 83                                                    code:Procedure
-## 84                                                    code:procedure
-## 85                                                           percent
-## 86                                                    code:procedure
-## 87                                          function (x)  {     -1 }
-## 88                                                           percent
-## 89                                                                ==
-## 90                                    Descriptive statistics percent
-## 91                                                      skos:Concept
-## 92                                                    code:Procedure
-## 93                                                    code:procedure
-## 94                                                               max
-## 95                                                    code:procedure
-## 96                        function (x)  {     max(x, na.rm = TRUE) }
-## 97                                                               max
-## 98                                                                ==
-## 99                                        Descriptive statistics max
-## 100                                                     skos:Concept
-## 101                                                   code:Procedure
-## 102                                                   code:Procedure
-## 103                                                               ==
-## 104                                                     skos:Concept
-## 105                                                   code:procedure
-## 106                        function (x)  {     sd(x, na.rm = TRUE) }
-## 107                                                   code:procedure
-## 108                                                           stddev
-## 109                                                           stddev
-## 110                            purl.obolibrary.org/obo/STATO_0000037
-## 111                                    Descriptive statistics stddev
-## 112                                                   code:procedure
-## 113                                                              min
-## 114                                                   code:procedure
-## 115                       function (x)  {     min(x, na.rm = TRUE) }
-## 116                                                              min
-## 117                                                               ==
-## 118                                       Descriptive statistics min
-## 119                                                     skos:Concept
-## 120                                                   code:Procedure
-## 121                                                    rdfs:Resource
-## 122                                                    rdfs:Resource
-## 123                                                    rdfs:Resource
-## 124                                                    rdfs:Resource
-## 125                                                    rdfs:Resource
-## 126                                                    rdfs:Resource
-## 127                                                    rdfs:Resource
-## 128                                                    rdfs:Resource
-## 129                                                    rdfs:Resource
-## 130                                                    rdfs:Resource
-## 131                                                    rdfs:Resource
-## 132                                                    rdfs:Resource
-## 133                                                    rdfs:Resource
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : object &#39;procedure.codelists.rq&#39; not found
 </code></pre>
 
-<table><thead>
-<tr>
-<th align="left">s</th>
-<th align="left">p</th>
-<th align="left">o</th>
-</tr>
-</thead><tbody>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics mean</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">mean</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     mean(x, na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">mean</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rdfs:seeAlso</td>
-<td align="left">purl.obolibrary.org/obo/IAO_0000125</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">n</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     length(x[!is.na(x)]) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">n</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics n</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">q3</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">q3</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics q3</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">countdistinct</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     length(unique(x)) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">countdistinct</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics countdistinct</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">count</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     length(x) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">count</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics count</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics median</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     median(x, na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rdfs:seeAlso</td>
-<td align="left">purl.obolibrary.org/obo/OBI_0200119</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">median</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">median</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">stdev</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     sd(x, na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">stdev</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics stdev</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">std</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     sd(x, na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">std</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics std</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">q1</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     quantile(x, probs = c(0.25), na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">q1</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics q1</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">percent</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     -1 }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">percent</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics percent</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">max</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     max(x, na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">max</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics max</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     sd(x, na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">stddev</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">stddev</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rdfs:seeAlso</td>
-<td align="left">purl.obolibrary.org/obo/STATO_0000037</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics stddev</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">skos:topConceptOf</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">skos:prefLabel</td>
-<td align="left">min</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">skos:inScheme</td>
-<td align="left">code:procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">rrdfqbcrnd0:RdescStatDefFun</td>
-<td align="left">function (x)  {     min(x, na.rm = TRUE) }</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">rrdfqbcrnd0:R-selectionvalue</td>
-<td align="left">min</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">rrdfqbcrnd0:R-selectionoperator</td>
-<td align="left">==</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">rdfs:comment</td>
-<td align="left">Descriptive statistics min</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">rdf:type</td>
-<td align="left">skos:Concept</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">rdf:type</td>
-<td align="left">code:Procedure</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q3</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stddev</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-stdev</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-mean</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-q1</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-std</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-count</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-median</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-percent</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-countdistinct</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-min</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-max</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-<tr>
-<td align="left">code:procedure-n</td>
-<td align="left">rdf:type</td>
-<td align="left">rdfs:Resource</td>
-</tr>
-</tbody></table>
+<pre><code>## Error in print(cube.procedure.codelists): object &#39;cube.procedure.codelists&#39; not found
+</code></pre>
 
 <h2>Get the procedure codelist as turtle with Stato References</h2>
 
-<pre><code>## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
-## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
-## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
-## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
-## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
-## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
-## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
-## prefix pav: &lt;http://purl.org/pav&gt;
-## prefix dct: &lt;http://purl.org/dc/terms/&gt;
-## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
-## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
-## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
-## prefix code: &lt;http://www.example.org/dc/code/&gt;
-## prefix dccs: &lt;http://www.example.org/dc/example/dccs/&gt;
-## prefix ds: &lt;http://www.example.org/dc/example/ds/&gt;
-## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
-## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
-## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
-##  
-## construct { ?s ?p ?o } 
-## where { 
-## { ?s ?p ?o . ?s a code:Procedure. }
-## union
-## { ?s ?p ?o . values(?s) {(code:Procedure)} }
-##  } 
-## 
+<pre><code>## Error in paste(forsparqlprefix, &quot;\nconstruct { ?s ?p ?o } \nwhere { \n{ ?s ?p ?o . ?s a code:Procedure. }\nunion\n{ ?s ?p ?o . values(?s) {(code:Procedure)} }\n } \n&quot;, : object &#39;forsparqlprefix&#39; not found
+</code></pre>
+
+<pre><code>## Error in cat(construct.codelists.rq): object &#39;construct.codelists.rq&#39; not found
+</code></pre>
+
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/hp/hpl/jena/rdf/model/Model;&quot;, : object &#39;construct.codelists.rq&#39; not found
+</code></pre>
+
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;V&quot;, &quot;saveRdf&quot;, store, : object &#39;procedure.codelist.store&#39; not found
 </code></pre>
 
 <p>The RDF data cube is serialized in turtle format and stored as a text file in</p>
@@ -1732,7 +632,7 @@ TODO: Consider other approach for including the domainname, or use other concept
 <pre><code class="r">cat(normalizePath(outcodelist),&quot;\n&quot;)
 </code></pre>
 
-<pre><code>## /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/procedure-code-list.ttl
+<pre><code>## Error in path.expand(path): object &#39;outcodelist&#39; not found
 </code></pre>
 
 </body>

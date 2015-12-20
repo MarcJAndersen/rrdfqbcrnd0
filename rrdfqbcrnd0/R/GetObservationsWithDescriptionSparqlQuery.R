@@ -5,6 +5,7 @@
 ##' @param attributes attributes 
 ##' @return SPARQL query
 ##' 
+##' @export
 GetObservationsWithDescriptionSparqlQuery<- function( forsparqlprefix, domainName, dimensions, attributes ) {
   cube.observations.rq<-  paste(
     forsparqlprefix,
