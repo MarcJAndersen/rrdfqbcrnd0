@@ -1,0 +1,50 @@
+---
+title: "Use R RDF version of CDISC standards"
+author: "PhuseSubTeamAnalysisResults@example.org"
+date: "`r Sys.Date()`"
+vignette: >
+  %\VignetteIndexEntry{Create simple RDF data qube}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+## Introduction
+This vignette shows how to 
+- load the CDISC standards from the packages
+- make a SPARQL query for extracting a codelist
+- make a SPARQL query for extracting the definition for the SDTM DM dataset
+
+## Setup
+
+```{r, results='asis', eval=TRUE}
+require("rrdfcdisc")
+```
+
+### Loading using Load.cdisc.standards 
+
+The code below shows the call for loading the zipped rdf file and store in a triple store.
+This is currently handled in the .onLoad function for the package. The rrdf model is then stored in the package environment.
+
+```{r, results='asis', eval=TRUE}
+cdisc.rdf<- Load.cdisc.standards()
+message(".. total number of triples: ", summarize.rdf.noprint(cdisc.rdf) )
+```
+
+### Extract codelist
+
+Note: consider using `qbCDISCprefixes` .
+
+```{r, results='asis', eval=TRUE}
+CDISCsparqlprefix<-'
+prefix : <http://rdf.cdisc.org/sdtm-terminology#>
+prefix cts:   <http://rdf.cdisc.org/ct/schema#>
+prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
+prefix mms:   <http://rdf.cdisc.org/mms#>
+'
+
+nciDomainValue<- "C66731"
+query <- GetCDISCCodeListSparqlQuery( CDISCsparqlprefix, nciDomainValue )
+codeSource <- as.data.frame(sparql.rdf(cdisc.rdf, query))
+
+knitr::kable(codeSource)
+```
