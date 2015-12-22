@@ -125,7 +125,9 @@ adsl<-read.xport(fnadsl)
 ## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-xpt/adsl.xpt
 ```
 
-The following codes is not evaluated.
+The following code is not evaluated, as the dates are not processed as expected.
+
+TODO(mja): get numeric variables with date format converted to a R date object.
 
 
 ```r

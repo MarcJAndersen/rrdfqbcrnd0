@@ -58,14 +58,14 @@ tmp.install.packages("../../../rrdfqbcrnd0_0.1.19.tar.gz")
 All files are store to the directory
 
 ```r
-targetDir<- system.file("extdata/sample-rdf", package="rrdfcrndexqb")
+targetDir<- system.file("extdata/sample-rdf", package="rrdfcrndex")
 ```
 
 ## RDF data cubes specified in workbook
 
 
 ```r
-RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfcrndexqb")
+RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfcrndex")
 
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 ```
@@ -125,20 +125,9 @@ if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
 
 
 ```r
-demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfcrndexqb")
+demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfcrndex")
 demoObsData <- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
-```
 
-```
-## Warning in file(file, "rt"): file("") only supports open = "w+" and open =
-## "w+b": using the former
-```
-
-```
-## Error in read.table(file = file, header = header, sep = sep, quote = quote, : no lines available in input
-```
-
-```r
 ##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
 ##TODO inst/data-raw/create-qb-examples-as-ttl.Rmd
 if (!( "measurefmt" %in% names(demoObsData))) {
@@ -146,27 +135,10 @@ demoObsData$measurefmt<- "%6.1f"
 demoObsData$measurefmt[ demoObsData$procedure %in% c("n", "nmiss", "count") ]<- "%6.0f"
 ## sprintf( demoObsData$measurefmt, demoObsData$measure)
 }
-```
 
-```
-## Error in match(x, table, nomatch = 0L): object 'demoObsData' not found
-```
-
-```r
-demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", package="rrdfcrndexqb")
+demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", package="rrdfcrndex")
 demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
-```
 
-```
-## Warning in file(file, "rt"): file("") only supports open = "w+" and open =
-## "w+b": using the former
-```
-
-```
-## Error in read.table(file = file, header = header, sep = sep, quote = quote, : no lines available in input
-```
-
-```r
 demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 ```
 

@@ -245,12 +245,9 @@ The script is currently written to be executed manually.</p>
 
 <pre><code class="r">fnadae&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adae.xpt&quot;, package=&quot;rrdfcrndex&quot;)
 adae&lt;- read.xport(fnadae)
-</code></pre>
 
-<pre><code>## Error in lookup.xport(file): unable to open file: &#39;No such file or directory&#39;
-</code></pre>
 
-<pre><code class="r">## by treatment
+## by treatment
 aesummay.trta.e&lt;- sqldf(&quot;
 select distinct TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
@@ -261,364 +258,160 @@ from adae group by TRTA
 <pre><code>## Loading required package: tcltk
 </code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
 <pre><code class="r">aesoc.trta.e&lt;- sqldf(&quot;
 select distinct TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
 from adae group by TRTA, SAFFL, AESOC
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesocpt.trta.e&lt;- sqldf(&quot;
+aesocpt.trta.e&lt;- sqldf(&quot;
 select distinct TRTA, SAFFL, AESOC, AEDECOD,
        &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
 from adae group by TRTA, SAFFL, AESOC, AEDECOD
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesummay.trta.n&lt;- sqldf(&quot;
+aesummay.trta.n&lt;- sqldf(&quot;
 select distinct TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
 from adae group by TRTA
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesoc.trta.n&lt;- sqldf(&quot;
+aesoc.trta.n&lt;- sqldf(&quot;
 select distinct TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
 from adae group by TRTA, SAFFL, AESOC
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesocpt.trta.n&lt;- sqldf(&quot;
+aesocpt.trta.n&lt;- sqldf(&quot;
 select distinct TRTA, SAFFL, AESOC, AEDECOD,
        &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
 from adae group by TRTA, SAFFL, AESOC, AEDECOD
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">## over treatment
+## over treatment
 aesummay.e&lt;- sqldf(&quot;
 select distinct &#39;_ALL_&#39; as TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
 from adae 
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesoc.e&lt;- sqldf(&quot;
+aesoc.e&lt;- sqldf(&quot;
 select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
 from adae group by SAFFL, AESOC
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesocpt.e&lt;- sqldf(&quot;
+aesocpt.e&lt;- sqldf(&quot;
 select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, AEDECOD,
        &#39;count&#39; as procedure, &#39;quantity&#39; as factor, count(*) as measure
 from adae group by SAFFL, AESOC, AEDECOD
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesummay.n&lt;- sqldf(&quot;
+aesummay.n&lt;- sqldf(&quot;
 select distinct &#39;_ALL_&#39; as TRTA, SAFFL, &#39;_ALL_&#39; as AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
 from adae 
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesoc.n&lt;- sqldf(&quot;
+aesoc.n&lt;- sqldf(&quot;
 select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, &#39;_ALL_&#39; as AEDECOD,
        &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
 from adae group by SAFFL, AESOC
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aesocpt.n&lt;- sqldf(&quot;
+aesocpt.n&lt;- sqldf(&quot;
 select distinct &#39;_ALL_&#39; as TRTA, SAFFL, AESOC, AEDECOD,
        &#39;countdistinct&#39; as procedure, &#39;USUBJID&#39; as factor, count(distinct USUBJID) as measure
 from adae group by SAFFL, AESOC, AEDECOD
 &quot;, stringsAsFactors=FALSE )
-</code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">aetable.trta&lt;- rbind(
+aetable.trta&lt;- rbind(
   aesummay.trta.e, aesummay.trta.n, aesoc.trta.e, aesoc.trta.n, aesocpt.trta.e, aesocpt.trta.n
   )
-</code></pre>
 
-<pre><code>## Error in rbind(aesummay.trta.e, aesummay.trta.n, aesoc.trta.e, aesoc.trta.n, : object &#39;aesummay.trta.e&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable.all&lt;- rbind(
+aetable.all&lt;- rbind(
   aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n
   )
-</code></pre>
 
-<pre><code>## Error in rbind(aesummay.e, aesummay.n, aesoc.e, aesoc.n, aesocpt.e, aesocpt.n): object &#39;aesummay.e&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable.rows&lt;- rbind(
+aetable.rows&lt;- rbind(
   aesummay.e, aesoc.e, aesocpt.e
   )
-</code></pre>
 
-<pre><code>## Error in rbind(aesummay.e, aesoc.e, aesocpt.e): object &#39;aesummay.e&#39; not found
-</code></pre>
+rowstosort&lt;- aetable.rows[,c(&quot;AESOC&quot;, &quot;AEDECOD&quot; )]
+rows&lt;- do.call(order, rowstosort)
+rowno.df&lt;- rowstosort[rows,] 
+rowno.df$rowno&lt;- seq(nrow(rowstosort))
 
-<pre><code class="r">rowstosort&lt;- aetable.rows[,c(&quot;AESOC&quot;, &quot;AEDECOD&quot; )]
-</code></pre>
+colstosort&lt;- unique(aetable.trta[,c(&quot;TRTA&quot; )])
+cols&lt;- order( colstosort)
+colno.df&lt;- data.frame(TRTA=colstosort[cols] )
+colno.df$colno&lt;- seq(length(colstosort))
+colno.df&lt;- rbind(colno.df, data.frame( TRTA=&quot;_ALL_&quot;, colno=4))
 
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;aetable.rows&#39; not found
-</code></pre>
+aetable.1&lt;- rbind( aetable.trta, aetable.all )
+aetable.2&lt;- merge( aetable.1, rowno.df, by=c(&quot;AESOC&quot;, &quot;AEDECOD&quot; ) )
+aetable.3 &lt;- merge( aetable.2, colno.df, by=c(&quot;TRTA&quot; ) )
 
-<pre><code class="r">rows&lt;- do.call(order, rowstosort)
-</code></pre>
-
-<pre><code>## Error in do.call(order, rowstosort): object &#39;rowstosort&#39; not found
-</code></pre>
-
-<pre><code class="r">rowno.df&lt;- rowstosort[rows,] 
-</code></pre>
-
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;rowstosort&#39; not found
-</code></pre>
-
-<pre><code class="r">rowno.df$rowno&lt;- seq(nrow(rowstosort))
-</code></pre>
-
-<pre><code>## Error in nrow(rowstosort): object &#39;rowstosort&#39; not found
-</code></pre>
-
-<pre><code class="r">colstosort&lt;- unique(aetable.trta[,c(&quot;TRTA&quot; )])
-</code></pre>
-
-<pre><code>## Error in unique(aetable.trta[, c(&quot;TRTA&quot;)]): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;unique&#39;: Error: object &#39;aetable.trta&#39; not found
-</code></pre>
-
-<pre><code class="r">cols&lt;- order( colstosort)
-</code></pre>
-
-<pre><code>## Error in order(colstosort): object &#39;colstosort&#39; not found
-</code></pre>
-
-<pre><code class="r">colno.df&lt;- data.frame(TRTA=colstosort[cols] )
-</code></pre>
-
-<pre><code>## Error in data.frame(TRTA = colstosort[cols]): object &#39;colstosort&#39; not found
-</code></pre>
-
-<pre><code class="r">colno.df$colno&lt;- seq(length(colstosort))
-</code></pre>
-
-<pre><code>## Error in seq(length(colstosort)): object &#39;colstosort&#39; not found
-</code></pre>
-
-<pre><code class="r">colno.df&lt;- rbind(colno.df, data.frame( TRTA=&quot;_ALL_&quot;, colno=4))
-</code></pre>
-
-<pre><code>## Error in rbind(colno.df, data.frame(TRTA = &quot;_ALL_&quot;, colno = 4)): object &#39;colno.df&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable.1&lt;- rbind( aetable.trta, aetable.all )
-</code></pre>
-
-<pre><code>## Error in rbind(aetable.trta, aetable.all): object &#39;aetable.trta&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable.2&lt;- merge( aetable.1, rowno.df, by=c(&quot;AESOC&quot;, &quot;AEDECOD&quot; ) )
-</code></pre>
-
-<pre><code>## Error in merge(aetable.1, rowno.df, by = c(&quot;AESOC&quot;, &quot;AEDECOD&quot;)): object &#39;aetable.1&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable.3 &lt;- merge( aetable.2, colno.df, by=c(&quot;TRTA&quot; ) )
-</code></pre>
-
-<pre><code>## Error in merge(aetable.2, colno.df, by = c(&quot;TRTA&quot;)): object &#39;aetable.2&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable.4&lt;-aetable.3[,c(&quot;TRTA&quot;, &quot;AESOC&quot;, &quot;AEDECOD&quot;, &quot;procedure&quot;)]
-</code></pre>
-
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;aetable.3&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable&lt;- aetable.3[do.call(order, aetable.4),]
-</code></pre>
-
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;aetable.3&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable$cellpartno&lt;- ifelse(aetable$procedure==&quot;count&quot;, 1, 2)
-</code></pre>
-
-<pre><code>## Error in ifelse(aetable$procedure == &quot;count&quot;, 1, 2): object &#39;aetable&#39; not found
-</code></pre>
-
-<pre><code class="r">kable(aetable)
+aetable.4&lt;-aetable.3[,c(&quot;TRTA&quot;, &quot;AESOC&quot;, &quot;AEDECOD&quot;, &quot;procedure&quot;)]
+aetable&lt;- aetable.3[do.call(order, aetable.4),]
+aetable$cellpartno&lt;- ifelse(aetable$procedure==&quot;count&quot;, 1, 2)
+kable(aetable)
 </code></pre>
 
 <pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;kable&quot;
 </code></pre>
 
 <pre><code class="r">check&lt;- aetable[,c(&quot;rowno&quot;, &quot;colno&quot;, &quot;cellpartno&quot; )]
-</code></pre>
-
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;aetable&#39; not found
-</code></pre>
-
-<pre><code class="r">dupObs&lt;-duplicated(check)
-</code></pre>
-
-<pre><code>## Error in duplicated(check): error in evaluating the argument &#39;x&#39; in selecting a method for function &#39;duplicated&#39;: Error: object &#39;check&#39; not found
-</code></pre>
-
-<pre><code class="r">if (any(dupObs)) {
+dupObs&lt;-duplicated(check)
+if (any(dupObs)) {
 ## idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
   dupObsRev&lt;-  duplicated(check, fromLast=TRUE)
   kable( aetable[which(dupObs | dupObsRev ), ] )
     stop(&quot;Unexpected an observation is not uniquely identified by row, column and cellpart number&quot;)
   }
-</code></pre>
 
-<pre><code>## Error in eval(expr, envir, enclos): object &#39;dupObs&#39; not found
-</code></pre>
+aetable$unit&lt;- &quot;_NULL_&quot;
+aetable$denominator&lt;- &quot;_NULL_&quot;
+names(aetable)&lt;- tolower(names(aetable))
 
-<pre><code class="r">aetable$unit&lt;- &quot;_NULL_&quot;
-</code></pre>
-
-<pre><code>## Error in aetable$unit &lt;- &quot;_NULL_&quot;: object &#39;aetable&#39; not found
-</code></pre>
-
-<pre><code class="r">aetable$denominator&lt;- &quot;_NULL_&quot;
-</code></pre>
-
-<pre><code>## Error in aetable$denominator &lt;- &quot;_NULL_&quot;: object &#39;aetable&#39; not found
-</code></pre>
-
-<pre><code class="r">names(aetable)&lt;- tolower(names(aetable))
-</code></pre>
-
-<pre><code>## Error in tolower(names(aetable)): object &#39;aetable&#39; not found
-</code></pre>
-
-<pre><code class="r">targetDir&lt;- system.file(&quot;extdata/sample-cfg&quot;, package=&quot;rrdfcrndex&quot;)
+targetDir&lt;- system.file(&quot;extdata/sample-cfg&quot;, package=&quot;rrdfcrndex&quot;)
 aetableFile&lt;- file.path(targetDir, &quot;ae.AR.csv&quot;)
 write.csv(aetable, file=aetableFile,row.names=FALSE)
-</code></pre>
-
-<pre><code>## Error in is.data.frame(x): object &#39;aetable&#39; not found
-</code></pre>
-
-<pre><code class="r">cat(&quot;Written to &quot;, aetableFile, &quot;\n&quot;)
+cat(&quot;Written to &quot;, aetableFile, &quot;\n&quot;)
 </code></pre>
 
 <pre><code>## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.AR.csv
 </code></pre>
 
 <pre><code class="r">recode.aesoc.list&lt;- sqldf(&quot;select distinct AESOC from adae&quot;, stringsAsFactors=FALSE)
+names(recode.aesoc.list)&lt;- tolower(names(recode.aesoc.list))
+recode.aesoc.list&lt;- rbind(recode.aesoc.list, data.frame(aesoc=&quot;_ALL_&quot;))
+for (i in 1:nrow(recode.aesoc.list)) { recode.aesoc.list[i,&quot;recodeto&quot;]&lt;- encodetouri(as.character(recode.aesoc.list[i,1])) }
 </code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">names(recode.aesoc.list)&lt;- tolower(names(recode.aesoc.list))
-</code></pre>
-
-<pre><code>## Error in tolower(names(recode.aesoc.list)): object &#39;recode.aesoc.list&#39; not found
-</code></pre>
-
-<pre><code class="r">recode.aesoc.list&lt;- rbind(recode.aesoc.list, data.frame(aesoc=&quot;_ALL_&quot;))
-</code></pre>
-
-<pre><code>## Error in rbind(recode.aesoc.list, data.frame(aesoc = &quot;_ALL_&quot;)): object &#39;recode.aesoc.list&#39; not found
-</code></pre>
-
-<pre><code class="r">for (i in 1:nrow(recode.aesoc.list)) { recode.aesoc.list[i,&quot;recodeto&quot;]&lt;- encodetouri(as.character(recode.aesoc.list[i,1])) }
-</code></pre>
-
-<pre><code>## Error in nrow(recode.aesoc.list): object &#39;recode.aesoc.list&#39; not found
+<pre><code>## Error: could not find function &quot;encodetouri&quot;
 </code></pre>
 
 <pre><code class="r">aesocFile&lt;- file.path(targetDir, &quot;ae.aesoc.AR.csv&quot; )
 write.csv(recode.aesoc.list, file=aesocFile, row.names=FALSE)
-</code></pre>
-
-<pre><code>## Error in is.data.frame(x): object &#39;recode.aesoc.list&#39; not found
-</code></pre>
-
-<pre><code class="r">cat(&quot;Written to &quot;, aesocFile, &quot;\n&quot;)
+cat(&quot;Written to &quot;, aesocFile, &quot;\n&quot;)
 </code></pre>
 
 <pre><code>## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.aesoc.AR.csv
 </code></pre>
 
 <pre><code class="r">recode.aedecod.list&lt;- sqldf(&quot;select distinct AEDECOD from adae&quot;, stringsAsFactors=FALSE )
+names(recode.aedecod.list)&lt;- tolower(names(recode.aedecod.list))
+recode.aedecod.list&lt;- rbind(recode.aedecod.list, data.frame(aedecod=&quot;_ALL_&quot;))
+for (i in 1:nrow(recode.aedecod.list)) { recode.aedecod.list[i,&quot;recodeto&quot;]&lt;- encodetouri(as.character(recode.aedecod.list[i,1])) }
 </code></pre>
 
-<pre><code>## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adae
-</code></pre>
-
-<pre><code class="r">names(recode.aedecod.list)&lt;- tolower(names(recode.aedecod.list))
-</code></pre>
-
-<pre><code>## Error in tolower(names(recode.aedecod.list)): object &#39;recode.aedecod.list&#39; not found
-</code></pre>
-
-<pre><code class="r">recode.aedecod.list&lt;- rbind(recode.aedecod.list, data.frame(aedecod=&quot;_ALL_&quot;))
-</code></pre>
-
-<pre><code>## Error in rbind(recode.aedecod.list, data.frame(aedecod = &quot;_ALL_&quot;)): object &#39;recode.aedecod.list&#39; not found
-</code></pre>
-
-<pre><code class="r">for (i in 1:nrow(recode.aedecod.list)) { recode.aedecod.list[i,&quot;recodeto&quot;]&lt;- encodetouri(as.character(recode.aedecod.list[i,1])) }
-</code></pre>
-
-<pre><code>## Error in nrow(recode.aedecod.list): object &#39;recode.aedecod.list&#39; not found
+<pre><code>## Error: could not find function &quot;encodetouri&quot;
 </code></pre>
 
 <pre><code class="r">aedecodFile&lt;- file.path(targetDir, &quot;ae.aedecod.AR.csv&quot;)
 write.csv(recode.aedecod.list, file=aedecodFile, row.names=FALSE)
-</code></pre>
-
-<pre><code>## Error in is.data.frame(x): object &#39;recode.aedecod.list&#39; not found
-</code></pre>
-
-<pre><code class="r">cat(&quot;Written to &quot;, aedecodFile, &quot;\n&quot;)
+cat(&quot;Written to &quot;, aedecodFile, &quot;\n&quot;)
 </code></pre>
 
 <pre><code>## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.aedecod.AR.csv

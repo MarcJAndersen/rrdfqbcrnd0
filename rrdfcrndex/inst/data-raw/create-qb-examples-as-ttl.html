@@ -244,12 +244,12 @@ tmp.install.packages(&quot;../../../rrdfqbcrnd0_0.1.19.tar.gz&quot;)
 
 <p>All files are store to the directory</p>
 
-<pre><code class="r">targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfcrndexqb&quot;)
+<pre><code class="r">targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfcrndex&quot;)
 </code></pre>
 
 <h2>RDF data cubes specified in workbook</h2>
 
-<pre><code class="r">RDFCubeWorkbook&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;RDFCubeWorkbook.xlsx&quot;, package=&quot;rrdfcrndexqb&quot;)
+<pre><code class="r">RDFCubeWorkbook&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;RDFCubeWorkbook.xlsx&quot;, package=&quot;rrdfcrndex&quot;)
 
 dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
 </code></pre>
@@ -296,41 +296,21 @@ if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
 
 <h2>RDF data cube in csv files</h2>
 
-<pre><code class="r">demoObsDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;demo.AR.csv&quot;, package=&quot;rrdfcrndexqb&quot;)
+<pre><code class="r">demoObsDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;demo.AR.csv&quot;, package=&quot;rrdfcrndex&quot;)
 demoObsData &lt;- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
-</code></pre>
 
-<pre><code>## Warning in file(file, &quot;rt&quot;): file(&quot;&quot;) only supports open = &quot;w+&quot; and open =
-## &quot;w+b&quot;: using the former
-</code></pre>
-
-<pre><code>## Error in read.table(file = file, header = header, sep = sep, quote = quote, : no lines available in input
-</code></pre>
-
-<pre><code class="r">##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
+##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
 ##TODO inst/data-raw/create-qb-examples-as-ttl.Rmd
 if (!( &quot;measurefmt&quot; %in% names(demoObsData))) {
 demoObsData$measurefmt&lt;- &quot;%6.1f&quot;
 demoObsData$measurefmt[ demoObsData$procedure %in% c(&quot;n&quot;, &quot;nmiss&quot;, &quot;count&quot;) ]&lt;- &quot;%6.0f&quot;
 ## sprintf( demoObsData$measurefmt, demoObsData$measure)
 }
-</code></pre>
 
-<pre><code>## Error in match(x, table, nomatch = 0L): object &#39;demoObsData&#39; not found
-</code></pre>
-
-<pre><code class="r">demoMetaDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;DEMO-Components.csv&quot;, package=&quot;rrdfcrndexqb&quot;)
+demoMetaDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;DEMO-Components.csv&quot;, package=&quot;rrdfcrndex&quot;)
 demoMetaData &lt;- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
-</code></pre>
 
-<pre><code>## Warning in file(file, &quot;rt&quot;): file(&quot;&quot;) only supports open = &quot;w+&quot; and open =
-## &quot;w+b&quot;: using the former
-</code></pre>
-
-<pre><code>## Error in read.table(file = file, header = header, sep = sep, quote = quote, : no lines available in input
-</code></pre>
-
-<pre><code class="r">demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )
+demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 </code></pre>
 
 <pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;BuildCubeFromDataFrames&quot;
