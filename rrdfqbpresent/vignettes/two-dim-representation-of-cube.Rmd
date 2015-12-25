@@ -78,8 +78,8 @@ MakeTable<- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
 ## Create AE html example
 
 ```{r, echo=TRUE}
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfqbcrnd0")
-htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "DC-AE-sample.html")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfcrndex")
+htmlfile<- file.path(system.file("extdata/sample-html", package="rrdfqbpresent"), "DC-AE-sample.html")
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:aesoc", "crnd-dimension:aedecod" )
 coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trta", "crnd-dimension:factor", "crnd-dimension:procedure" )
 # idrow is a function of rowdim; writing it directly is easier for now
@@ -92,7 +92,7 @@ cat("HTML stored as: ", normalizePath(resHtmlFile), "\n")
 ## Create DEMO html example
 
 ```{r, echo=TRUE}
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrndex")
 htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "DC-DEMO-sample.html")
 
 coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a", "crnd-dimension:factor", "crnd-dimension:procedure" )
