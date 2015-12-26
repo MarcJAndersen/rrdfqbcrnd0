@@ -1,7 +1,7 @@
 ##' SPARQL query for attributes in RDF data cube
 ##'
 ##' 
-##' @inheritParams GetObservationsSparqlQuery
+##' @param forsparqlprefix string with prefix defintions
 ##' @return SPARQL query
 ##' @family SPARQL queries
 ##' @export

@@ -1,0 +1,86 @@
+---
+title: "Get RDF data cube example file from RDF data cube specifications"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+---
+
+## Setup 
+```{r}
+devtools::load_all(pkg="../..")
+```
+
+# R-code
+
+```{r}
+library(RCurl)
+library(devtools)
+qbURL<-"https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/example/example.ttl"
+if (! url.exists(qbURL) ) {
+  stop(paste0("Can not access URL ",qbURL))
+}
+examplettl <- getURL(qbURL)
+savefile <- file.path(system.file("extdata/sample-rdf", package="rrdfqb"), "example.ttl" )
+writeLines( examplettl, savefile)
+cat("written to ", normalizePath(savefile) )
+```
+
+# Show one observations from the store
+
+```{r}
+exfile <- file.path(system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb") )
+store <- new.rdf(ontology=FALSE)
+load.rdf( exfile, format="TURTLE", store)
+
+SPARQLscript<- '
+select * where {
+ <http://example.org/ns#o62> ?p ?o .
+}    
+'
+
+results <- sparql.rdf(store, SPARQLscript )
+knitr::kable(results)
+
+SPARQLscript<- '
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+prefix skos: <http://www.w3.org/2004/02/skos/core#>  
+prefix prov: <http://www.w3.org/ns/prov#>  
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
+prefix dcat: <http://www.w3.org/ns/dcat#>  
+prefix owl: <http://www.w3.org/2002/07/owl#>  
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>  
+prefix qb: <http://purl.org/linked-data/cube#>  
+prefix pav: <http://purl.org/pav>  
+prefix dct: <http://purl.org/dc/terms/>  
+ select * where {
+?s a qb:Observation  ;
+?p ?o .
+values (?s) {
+( <http://example.org/ns#o62> )
+}
+ }    
+'
+results <- sparql.rdf(store, SPARQLscript )
+
+
+```
+
+# Effect of using the ontology inference
+
+See (https://jena.apache.org/documentation/ontology/#ontology-inference-overview).
+
+```{r}
+exfile <- file.path(system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb") )
+store.ontology <- load.rdf( exfile, format="TURTLE")
+
+results.ontology <- sparql.rdf(store.ontology, SPARQLscript )
+knitr::kable(results.ontology)
+```
+
+The result shows inferred triples, added with respect to the query above.
+
+# To do
+
+TODO(mja): extend rrdf to handle SPARQL update
+(https://jena.apache.org/documentation/query/update.html), so that the
+RDF data cube normalization alogrihtms can be applied
+(http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm).

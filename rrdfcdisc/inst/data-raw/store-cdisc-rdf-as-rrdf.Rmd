@@ -36,9 +36,6 @@ cd ${CDISCRDF_HOME}
 
 git clone https://github.com/phuse-org/rdf.cdisc.org.git
 
-mkdir rdf-data-cube
-cd rdf-data-cube
-wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab/cube.ttl
 ```
 
 ## Finding the files
@@ -99,8 +96,7 @@ filesToLoad<- c(
 "rdf.cdisc.org/std/adam-2-1.ttl", 
 "rdf.cdisc.org/schemas/ct-schema.owl", 
 "rdf.cdisc.org/schemas/meta-model-schema.owl", 
-"rdf.cdisc.org/schemas/cdisc-schema.owl",
-"rdf-data-cube/cube.ttl"
+"rdf.cdisc.org/schemas/cdisc-schema.owl
   )
 ```
 

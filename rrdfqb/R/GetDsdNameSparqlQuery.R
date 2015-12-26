@@ -1,6 +1,7 @@
 ##' SPARQL query for DataStructureDefinition in RDF data cube
 ##'
-##' @inheritParams GetDomainNameFromCube
+##' @param forsparqlprefixcommon string with prefix defintions
+##' @param dsdName Dataset Descriptor Name
 ##' @return SPARQL query
 ##' @family SPARQL queries
 ##' @export

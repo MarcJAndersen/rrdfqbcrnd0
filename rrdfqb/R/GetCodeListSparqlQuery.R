@@ -1,6 +1,6 @@
 ##' SPARQL query for codelists in RDF data cube
 ##'
-##' @inheritParams GetObservationsSparqlQuery
+##' @param forsparqlprefix string with prefix defintions
 ##' @param dsdName Dataset Descriptor Name
 ##' @return SPARQL query
 ##' @family SPARQL queries

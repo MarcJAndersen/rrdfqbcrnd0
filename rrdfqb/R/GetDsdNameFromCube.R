@@ -1,6 +1,7 @@
 ##' Get dsdname for the RDF data cube
 ##' TODO: change the way domainname is used - should only use the dsdName
-##' @inheritParams GetDomainNameFromCube
+##' @param forsparqlprefixcommon string with prefix defintions
+##' @param dsdName Dataset Descriptor Name
 ##' @return the dsdName for the cube
 ##' @export
 GetDsdNameFromCube<- function( store, forsparqlprefixcommon=GetForSparqlPrefix() ) {
