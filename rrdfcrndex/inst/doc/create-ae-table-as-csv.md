@@ -1,7 +1,7 @@
 ---
 title: "Create AE table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2015-12-26"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create AE table as csv file}
@@ -202,7 +202,7 @@ cat("Written to ", aetableFile, "\n")
 ```
 
 ```
-## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.AR.csv
+## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.AR.csv
 ```
 
 ```r
@@ -223,7 +223,7 @@ cat("Written to ", aesocFile, "\n")
 ```
 
 ```
-## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.aesoc.AR.csv
+## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.aesoc.AR.csv
 ```
 
 ```r
@@ -244,5 +244,5 @@ cat("Written to ", aedecodFile, "\n")
 ```
 
 ```
-## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.aedecod.AR.csv
+## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-cfg/ae.aedecod.AR.csv
 ```

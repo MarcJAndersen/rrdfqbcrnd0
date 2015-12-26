@@ -96,7 +96,7 @@ filesToLoad<- c(
 "rdf.cdisc.org/std/adam-2-1.ttl", 
 "rdf.cdisc.org/schemas/ct-schema.owl", 
 "rdf.cdisc.org/schemas/meta-model-schema.owl", 
-"rdf.cdisc.org/schemas/cdisc-schema.owl
+"rdf.cdisc.org/schemas/cdisc-schema.owl"
   )
 ```
 

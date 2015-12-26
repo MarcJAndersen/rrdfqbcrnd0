@@ -1,7 +1,7 @@
 ---
 title: "Create prefixes for use with CDISC standards in RDF"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2015-12-26"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create prefixes for use with CDISC standards in RDF}
@@ -48,7 +48,7 @@ qbCDISCprefixes<-  list(
  "mms"= "http://rdf.cdisc.org/mms#" ,
  "cts"= "http://rdf.cdisc.org/ct/schema#",
  "rrdfqbcrnd0"="http://www.example.org/rrdfqbcrnd0/"
-)  ;
+) 
 ```
 
 

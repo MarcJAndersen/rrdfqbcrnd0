@@ -1,7 +1,7 @@
 ---
 title: "Store CDISC RDF as RRDF data model"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-12-22"
+date: "2015-12-26"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
@@ -57,9 +57,6 @@ cd ${CDISCRDF_HOME}
 
 git clone https://github.com/phuse-org/rdf.cdisc.org.git
 
-mkdir rdf-data-cube
-cd rdf-data-cube
-wget http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab/cube.ttl
 ```
 
 ## Finding the files
@@ -123,8 +120,7 @@ filesToLoad<- c(
 "rdf.cdisc.org/std/adam-2-1.ttl", 
 "rdf.cdisc.org/schemas/ct-schema.owl", 
 "rdf.cdisc.org/schemas/meta-model-schema.owl", 
-"rdf.cdisc.org/schemas/cdisc-schema.owl",
-"rdf-data-cube/cube.ttl"
+"rdf.cdisc.org/schemas/cdisc-schema.owl"
   )
 ```
 
@@ -183,10 +179,8 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 ## .. total number of triples: 165213
 ## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..
 ## .. total number of triples: 165406
-## Loading /home/ma/projects/phrmwg/rdf-data-cube/cube.ttl ..
-## .. total number of triples: 165701
-## Final rdf.cdisc.org rrdf store, number of triples: 165701
-## rrdf store saved to turle file: /tmp/RtmpFe71WI/cdisc-rdf.ttl
+## Final rdf.cdisc.org rrdf store, number of triples: 165406
+## rrdf store saved to turle file: /tmp/RtmpqF32j7/cdisc-rdf.ttl
 ## Writing to zip file /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 ```
 
@@ -196,7 +190,7 @@ message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size 
 ```
 
 ```
-## File /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-12-22 23:34:57 size 2315967 bytes
+## File /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-12-26 23:37:52 size 2310300 bytes
 ```
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
@@ -246,7 +240,6 @@ FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/adam-2-1.ttl>
 FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/ct-schema.owl>
 FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/meta-model-schema.owl>
 FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl>
-FROM <http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab/cube.ttl>
 WHERE { ?s ?p ?o } 
 
 ```r
@@ -255,7 +248,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/RtmpFe71WI/get-rdf.disc.org.rq 
+SPARQL script stored in   /tmp/RtmpqF32j7/get-rdf.disc.org.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.

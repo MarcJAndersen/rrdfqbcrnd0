@@ -1,7 +1,7 @@
 ---
 title: "Create DEMO table as csv file"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2015-12-26"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DEMO table from csv file}

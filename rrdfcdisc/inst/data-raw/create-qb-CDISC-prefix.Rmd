@@ -39,7 +39,7 @@ qbCDISCprefixes<-  list(
  "mms"= "http://rdf.cdisc.org/mms#" ,
  "cts"= "http://rdf.cdisc.org/ct/schema#",
  "rrdfqbcrnd0"="http://www.example.org/rrdfqbcrnd0/"
-)  ;
+) 
 
 
 ```

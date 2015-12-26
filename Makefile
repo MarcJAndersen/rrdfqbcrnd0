@@ -1,4 +1,4 @@
-all: mk-rrdfcdisc mk-rrdfqbcrnd0 mk-rrdfcrndex mk-rrdfqbic 
+all: mk-rrdfcdisc  mk-rrdfqb  mk-rrdfqbcrnd0 mk-rrdfcrndex mk-rrdfqbic 
 
 mk-rrdfcdisc:
 	cd rrdfcdisc; make
@@ -11,6 +11,9 @@ mk-rrdfcrndex:
 
 mk-rrdfqbic:
 	cd rrdfqbic; make
+
+mk-rrdfqb:
+	cd rrdfqb; make
 
 mk-rrdfcrndcheck:
 	cd rrdfcrndcheck; make
