@@ -1,1 +1,3 @@
-inst/doc
+inst/data-raw/*.html
+inst/data-raw/*.md
+

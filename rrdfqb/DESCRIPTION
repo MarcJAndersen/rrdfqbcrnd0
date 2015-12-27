@@ -6,25 +6,27 @@ Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") ),
     person("Tim", "Williams", email="tim.williams@ucb.com", role=c("aut", "cre") )
     )
-Depends:
+Depends: 
     R (>= 3.0.2),
     xlsx,
     RCurl,
     rJava,
     rrdf(>= 2.0.4)
-Imports:
+Imports: 
     tools
 License: MIT + file LICENSE
 LazyData: true
-Suggests:
+Suggests: 
     knitr,
     testthat,
     foreign,
     shiny,
-    XML
+    XML,
+    rmarkdown
 VignetteBuilder: knitr
 BuildVignettes: no
 Author: Marc Andersen [aut, cre],
     Tim Williams [aut, cre]
 Maintainer: Marc Andersen <mja@statgroup.dk>,
     Tim Williams <tim.williams@ucb.com>
+RoxygenNote: 5.0.1

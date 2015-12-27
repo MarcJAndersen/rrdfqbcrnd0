@@ -1,7 +1,7 @@
 ---
 title: "Show the procedure codelist"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-12-26"
+date: "2015-12-20"
 vignette: >
   %\VignetteIndexEntry{Show the procedure codelist}
   %\VignetteEngine{knitr::rmarkdown}
@@ -117,7 +117,7 @@ outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromDataFrames"
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : com.hp.hpl.jena.query.QueryParseException: Line 10, column 28: Unresolved prefixed name: qb:DataStructureDefinition
 ```
 This shows a simple use of the BuildCubeFromDataFrames function. 
 The warning message from log4j can be ignored.
@@ -174,7 +174,7 @@ dsdName<- GetDsdNameFromCube( cube )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetDsdNameFromCube"
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : com.hp.hpl.jena.query.QueryParseException: Line 5, column 8: Unresolved prefixed name: qb:DataStructureDefinition
 ```
 
 ```r
@@ -182,7 +182,7 @@ domainName<- GetDomainNameFromCube( cube )
 ```
 
 ```
-## Error in GetDomainNameFromCube(cube): could not find function "GetDsdNameFromCube"
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : com.hp.hpl.jena.query.QueryParseException: Line 5, column 8: Unresolved prefixed name: qb:DataStructureDefinition
 ```
 
 ```r
@@ -198,7 +198,7 @@ prefixlist<- Get.prefixlist.from.df(GetForSparqlPrefix.as.df(domainName=domainNa
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "Get.prefixlist.from.df"
+## Error in GetForSparqlPrefix.as.df(domainName = domainName): object 'domainName' not found
 ```
 
 ```r
@@ -206,7 +206,7 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
 ```
-## Error in GetForSparqlPrefix(domainName): could not find function "Get.rq.prefix.df"
+## Error in GetForSparqlPrefix.as.df(domainName = domainName, common.prefixes = common.prefixes, : object 'domainName' not found
 ```
 
 ```r
@@ -265,7 +265,7 @@ TODO: Consider other approach for including the domainname, or use other concept
 The SPARQL query for codelists are shown in the next output.
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetCodeListSparqlQuery"
+## Error in paste(forsparqlprefix, "\nselect distinct ?p ?vn ?cl ?prefLabel \nwhere {\n?DataStructureDefinition a qb:DataStructureDefinition ;\n   qb:component ?component .\n?component a qb:ComponentSpecification .\n?component qb:dimension ?p .\n?p qb:codeList ?c .\n?c skos:hasTopConcept ?cl .\n?cl skos:prefLabel ?prefLabel .\nOPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn } \nvalues ( ?DataStructureDefinition ) {\n", : object 'forsparqlprefix' not found
 ```
 
 ```

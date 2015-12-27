@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Setup</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h2>Setup</h2>
+
+<pre><code class="r">devtools::load_all(pkg=&quot;../..&quot;)
+</code></pre>
+
+<pre><code>## Loading rrdfqb
+## Loading required package: xlsx
+## Loading required package: rJava
+## Loading required package: methods
+## Loading required package: xlsxjars
+## Loading required package: RCurl
+## Loading required package: bitops
+## 
+## Attaching package: &#39;RCurl&#39;
+## 
+## The following object is masked from &#39;package:rJava&#39;:
+## 
+##     clone
+## 
+## Loading required package: rrdf
+## Loading required package: rrdflibs
+</code></pre>
+
+<h1>R-code</h1>
+
+<pre><code class="r">library(RCurl)
+library(devtools)
+qbURL&lt;-&quot;https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/example/example.ttl&quot;
+if (! url.exists(qbURL) ) {
+  stop(paste0(&quot;Can not access URL &quot;,qbURL))
+}
+examplettl &lt;- getURL(qbURL)
+savefile &lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;example.ttl&quot; )
+writeLines( examplettl, savefile)
+cat(&quot;written to &quot;, normalizePath(savefile) )
+</code></pre>
+
+<pre><code>## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example.ttl
+</code></pre>
+
+<h1>Show one observations from the store</h1>
+
+<pre><code class="r">exfile &lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, &quot;example.ttl&quot;, package=&quot;rrdfqb&quot;) )
+store &lt;- new.rdf(ontology=FALSE)
+load.rdf( exfile, format=&quot;TURTLE&quot;, store)
+</code></pre>
+
+<pre><code>## [1] &quot;Java-Object{&lt;ModelCom   {eg:organization @rdfs:label \&quot;Example org\&quot;@en; eg:organization @rdf:type foaf:Agent; eg:organization @rdf:type org:Organization; eg:o31 @eg:lifeExpectancy \&quot;77.1\&quot;^^http://www.w3.org/2001/XMLSchema#decimal; eg:o31 @eg:refArea ex-geo:newport_00pr; eg:o31 @qb:dataSet eg:dataset-le3; eg:o31 @rdf:type qb:Observation; 256caf10fb5fb960688d18c53fbcb8de @qb:order \&quot;1\&quot;^^http://www.w3.org/2001/XMLSchema#integer; 256caf10fb5fb960688d18c53fbcb8de @qb:dimension eg:refArea; eg:o44 @eg:lifeExpectancy \&quot;79.4\&quot;^^http://www.w3.org/2001/XMLSchema#decimal; eg:o44 @eg:refArea ex-geo:merthyr_tdfil_00ph; eg:o44 @qb:dataSet eg:dataset-le3; eg:o44 @rdf:type qb:Observation; d961e60be1970cc7ddca42992e970eee @qb:componentAttachment qb:DataSet; d961e60be1970cc7ddca42992e970eee @qb:componentRequired \&quot;true\&quot;^^http://www.w3.org/2001/XMLSchema#boolean; d961e60be1970cc7ddca42992e970eee @qb:attribute sdmx-attribute:unitMeasure; eg:slice3 @qb:observation eg:o34...} |  [http://example.org/ns#organization, http://www.w3.org/2000/01/rdf-schema#label, \&quot;Example org\&quot;@en] [http://example.org/ns#organization, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://xmlns.com/foaf/0.1/Agent] [http://example.org/ns#organization, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/ns/org#Organization] [http://example.org/ns#o31, http://example.org/ns#lifeExpectancy, \&quot;77.1\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o31, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o31, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o31, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [256caf10fb5fb960688d18c53fbcb8de, http://purl.org/linked-data/cube#order, \&quot;1\&quot;^^http://www.w3.org/2001/XMLSchema#integer] [256caf10fb5fb960688d18c53fbcb8de, http://purl.org/linked-data/cube#dimension, http://example.org/ns#refArea] [http://example.org/ns#o44, http://example.org/ns#lifeExpectancy, \&quot;79.4\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o44, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o44, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o44, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [d961e60be1970cc7ddca42992e970eee, http://purl.org/linked-data/cube#componentAttachment, http://purl.org/linked-data/cube#DataSet] [d961e60be1970cc7ddca42992e970eee, http://purl.org/linked-data/cube#componentRequired, \&quot;true\&quot;^^http://www.w3.org/2001/XMLSchema#boolean] [d961e60be1970cc7ddca42992e970eee, http://purl.org/linked-data/cube#attribute, http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o34] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o33] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o32] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o31] [http://example.org/ns#slice3, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-M] [http://example.org/ns#slice3, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2005-01-01T00:00:00/P3Y] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice3, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#o51, http://example.org/ns#lifeExpectancy, \&quot;77.0\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o51, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o51, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o51, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o23, http://example.org/ns#lifeExpectancy, \&quot;81.3\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o23, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o23, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o23, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o64, http://example.org/ns#lifeExpectancy, \&quot;79.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o64, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o64, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o64, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#sliceByRegion, http://purl.org/linked-data/cube#componentProperty, http://purl.org/linked-data/sdmx/2009/dimension#sex] [http://example.org/ns#sliceByRegion, http://purl.org/linked-data/cube#componentProperty, http://example.org/ns#refPeriod] [http://example.org/ns#sliceByRegion, http://www.w3.org/2000/01/rdf-schema#comment, \&quot;Slice by grouping regions together, fixing sex and time values\&quot;@en] [http://example.org/ns#sliceByRegion, http://www.w3.org/2000/01/rdf-schema#label, \&quot;slice by region\&quot;@en] [http://example.org/ns#sliceByRegion, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#SliceKey] [http://example.org/ns#o43, http://example.org/ns#lifeExpectancy, \&quot;81.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o43, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o43, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o43, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#refPeriod, http://purl.org/linked-data/cube#concept, http://purl.org/linked-data/sdmx/2009/concept#refPeriod] [http://example.org/ns#refPeriod, http://www.w3.org/2000/01/rdf-schema#range, http://reference.data.gov.uk/def/intervals/Interval] [http://example.org/ns#refPeriod, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://purl.org/linked-data/sdmx/2009/dimension#refPeriod] [http://example.org/ns#refPeriod, http://www.w3.org/2000/01/rdf-schema#label, \&quot;reference period\&quot;@en] [http://example.org/ns#refPeriod, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DimensionProperty] [http://example.org/ns#refPeriod, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o24] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o23] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o22] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o21] [http://example.org/ns#slice2, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-F] [http://example.org/ns#slice2, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2004-01-01T00:00:00/P3Y] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice2, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#refArea, http://purl.org/linked-data/cube#concept, http://purl.org/linked-data/sdmx/2009/concept#refArea] [http://example.org/ns#refArea, http://www.w3.org/2000/01/rdf-schema#range, http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority] [http://example.org/ns#refArea, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://purl.org/linked-data/sdmx/2009/dimension#refArea] [http://example.org/ns#refArea, http://www.w3.org/2000/01/rdf-schema#label, \&quot;reference area\&quot;@en] [http://example.org/ns#refArea, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DimensionProperty] [http://example.org/ns#refArea, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://example.org/ns#o22, http://example.org/ns#lifeExpectancy, \&quot;83.3\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o22, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o22, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o22, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o63, http://example.org/ns#lifeExpectancy, \&quot;81.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o63, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o63, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o63, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o42, http://example.org/ns#lifeExpectancy, \&quot;83.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o42, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o42, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o42, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o14, http://example.org/ns#lifeExpectancy, \&quot;75.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o14, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o14, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o14, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#sliceKey, http://example.org/ns#sliceByRegion] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, d961e60be1970cc7ddca42992e970eee] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 6df363eeaf4638d05e3d665d736eb72d] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 6188285dc5873de240df8afa9b261f0d] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 3f040c3f8b5c76aadb162800dbda96ac] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 256caf10fb5fb960688d18c53fbcb8de] [http://example.org/ns#dsd-le3, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DataStructureDefinition] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o14] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o13] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o12] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o11] [http://example.org/ns#slice1, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-M] [http://example.org/ns#slice1, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2004-01-01T00:00:00/P3Y] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice1, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#o21, http://example.org/ns#lifeExpectancy, \&quot;80.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o21, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o21, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o21, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o62, http://example.org/ns#lifeExpectancy, \&quot;83.4\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o62, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o62, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o62, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o34, http://example.org/ns#lifeExpectancy, \&quot;75.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o34, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o34, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o34, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [3f040c3f8b5c76aadb162800dbda96ac, http://purl.org/linked-data/cube#componentAttachment, http://purl.org/linked-data/cube#Slice] [3f040c3f8b5c76aadb162800dbda96ac, http://purl.org/linked-data/cube#order, \&quot;2\&quot;^^http://www.w3.org/2001/XMLSchema#integer] [3f040c3f8b5c76aadb162800dbda96ac, http://purl.org/linked-data/cube#dimension, http://example.org/ns#refPeriod] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/issued, \&quot;2010-08-11\&quot;^^http://www.w3.org/2001/XMLSchema#date] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice1] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/description, \&quot;Life expectancy within Welsh Unitary authorities - extracted from Stats Wales\&quot;@en] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/subject, http://example.org/geo#wales] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice6] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice4] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure, http://dbpedia.org/resource/Year] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#structure, http://example.org/ns#dsd-le3] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice5] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice2] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/subject, http://purl.org/linked-data/sdmx/2009/subject#1.4] [http://example.org/ns#dataset-le3, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DataSet] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/title, \&quot;Life expectancy\&quot;@en] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/subject, http://purl.org/linked-data/sdmx/2009/subject#3.2] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice3] [http://example.org/ns#dataset-le3, http://www.w3.org/2000/01/rdf-schema#comment, \&quot;Life expectancy within Welsh Unitary authorities - extracted from Stats Wales\&quot;@en] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/publisher, http://example.org/ns#organization] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o64] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o63] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o62] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o61] [http://example.org/ns#slice6, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-F] [http://example.org/ns#slice6, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2006-01-01T00:00:00/P3Y] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice6, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#lifeExpectancy, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#lifeExpectancy, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://purl.org/linked-data/sdmx/2009/measure#obsValue] [http://example.org/ns#lifeExpectancy, http://www.w3.org/2000/01/rdf-schema#label, \&quot;life expectancy\&quot;@en] [http://example.org/ns#lifeExpectancy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#MeasureProperty] [http://example.org/ns#lifeExpectancy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://example.org/ns#o41, http://example.org/ns#lifeExpectancy, \&quot;80.9\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o41, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o41, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o41, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o13, http://example.org/ns#lifeExpectancy, \&quot;76.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o13, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o13, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o13, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o54, http://example.org/ns#lifeExpectancy, \&quot;74.9\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o54, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o54, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o54, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [6df363eeaf4638d05e3d665d736eb72d, http://purl.org/linked-data/cube#measure, http://example.org/ns#lifeExpectancy] [http://example.org/ns#o61, http://example.org/ns#lifeExpectancy, \&quot;81.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o61, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o61, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o61, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o33, http://example.org/ns#lifeExpectancy, \&quot;76.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o33, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o33, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o33, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o54] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o53] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o52] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o51] [http://example.org/ns#slice5, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-M] [http://example.org/ns#slice5, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2006-01-01T00:00:00/P3Y] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice5, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [6188285dc5873de240df8afa9b261f0d, http://purl.org/linked-data/cube#componentAttachment, http://purl.org/linked-data/cube#Slice] [6188285dc5873de240df8afa9b261f0d, http://purl.org/linked-data/cube#order, \&quot;3\&quot;^^http://www.w3.org/2001/XMLSchema#integer] [6188285dc5873de240df8afa9b261f0d, http://purl.org/linked-data/cube#dimension, http://purl.org/linked-data/sdmx/2009/dimension#sex] [http://example.org/ns#o12, http://example.org/ns#lifeExpectancy, \&quot;78.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o12, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o12, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o12, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o53, http://example.org/ns#lifeExpectancy, \&quot;76.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o53, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o53, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o53, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o32, http://example.org/ns#lifeExpectancy, \&quot;78.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o32, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o32, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o32, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o44] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o43] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o42] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o41] [http://example.org/ns#slice4, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-F] [http://example.org/ns#slice4, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2005-01-01T00:00:00/P3Y] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice4, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#o11, http://example.org/ns#lifeExpectancy, \&quot;76.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o11, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o11, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o11, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o52, http://example.org/ns#lifeExpectancy, \&quot;78.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o52, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o52, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o52, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o24, http://example.org/ns#lifeExpectancy, \&quot;79.1\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o24, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o24, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o24, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation]&gt;}&quot;
+</code></pre>
+
+<pre><code class="r">SPARQLscript&lt;- &#39;
+select * where {
+ &lt;http://example.org/ns#o62&gt; ?p ?o .
+}    
+&#39;
+
+results &lt;- sparql.rdf(store, SPARQLscript )
+knitr::kable(results)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">p</th>
+<th align="left">o</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"><a href="http://example.org/ns#lifeExpectancy">http://example.org/ns#lifeExpectancy</a></td>
+<td align="left">83.4</td>
+</tr>
+<tr>
+<td align="left"><a href="http://example.org/ns#refArea">http://example.org/ns#refArea</a></td>
+<td align="left"><a href="http://example.org/geo#cardiff_00pt">http://example.org/geo#cardiff_00pt</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://purl.org/linked-data/cube#dataSet">http://purl.org/linked-data/cube#dataSet</a></td>
+<td align="left"><a href="http://example.org/ns#dataset-le3">http://example.org/ns#dataset-le3</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
+<td align="left"><a href="http://purl.org/linked-data/cube#Observation">http://purl.org/linked-data/cube#Observation</a></td>
+</tr>
+</tbody></table>
+
+<pre><code class="r">SPARQLscript&lt;- &#39;
+prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;  
+prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;  
+prefix prov: &lt;http://www.w3.org/ns/prov#&gt;  
+prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;  
+prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;  
+prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;  
+prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;  
+prefix qb: &lt;http://purl.org/linked-data/cube#&gt;  
+prefix pav: &lt;http://purl.org/pav&gt;  
+prefix dct: &lt;http://purl.org/dc/terms/&gt;  
+ select * where {
+?s a qb:Observation  ;
+?p ?o .
+values (?s) {
+( &lt;http://example.org/ns#o62&gt; )
+}
+ }    
+&#39;
+results &lt;- sparql.rdf(store, SPARQLscript )
+</code></pre>
+
+<h1>Effect of using the ontology inference</h1>
+
+<p>See (<a href="https://jena.apache.org/documentation/ontology/#ontology-inference-overview">https://jena.apache.org/documentation/ontology/#ontology-inference-overview</a>).</p>
+
+<pre><code class="r">exfile &lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, &quot;example.ttl&quot;, package=&quot;rrdfqb&quot;) )
+store.ontology &lt;- load.rdf( exfile, format=&quot;TURTLE&quot;)
+
+results.ontology &lt;- sparql.rdf(store.ontology, SPARQLscript )
+knitr::kable(results.ontology)
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"><a href="http://example.org/ns#o62">http://example.org/ns#o62</a></td>
+<td align="left"><a href="http://example.org/ns#lifeExpectancy">http://example.org/ns#lifeExpectancy</a></td>
+<td align="left">83.4</td>
+</tr>
+<tr>
+<td align="left"><a href="http://example.org/ns#o62">http://example.org/ns#o62</a></td>
+<td align="left"><a href="http://example.org/ns#refArea">http://example.org/ns#refArea</a></td>
+<td align="left"><a href="http://example.org/geo#cardiff_00pt">http://example.org/geo#cardiff_00pt</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://example.org/ns#o62">http://example.org/ns#o62</a></td>
+<td align="left">qb:dataSet</td>
+<td align="left"><a href="http://example.org/ns#dataset-le3">http://example.org/ns#dataset-le3</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://example.org/ns#o62">http://example.org/ns#o62</a></td>
+<td align="left">rdf:type</td>
+<td align="left">qb:Observation</td>
+</tr>
+<tr>
+<td align="left"><a href="http://example.org/ns#o62">http://example.org/ns#o62</a></td>
+<td align="left"><a href="http://purl.org/linked-data/sdmx/2009/dimension#refArea">http://purl.org/linked-data/sdmx/2009/dimension#refArea</a></td>
+<td align="left"><a href="http://example.org/geo#cardiff_00pt">http://example.org/geo#cardiff_00pt</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://example.org/ns#o62">http://example.org/ns#o62</a></td>
+<td align="left"><a href="http://purl.org/linked-data/sdmx/2009/measure#obsValue">http://purl.org/linked-data/sdmx/2009/measure#obsValue</a></td>
+<td align="left">83.4</td>
+</tr>
+</tbody></table>
+
+<p>The result shows inferred triples, added with respect to the query above.</p>
+
+<h1>To do</h1>
+
+<p>TODO(mja): extend rrdf to handle SPARQL update
+(<a href="https://jena.apache.org/documentation/query/update.html">https://jena.apache.org/documentation/query/update.html</a>), so that the
+RDF data cube normalization alogrihtms can be applied
+(<a href="http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm">http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm</a>).</p>
+
+</body>
+
+</html>

@@ -6,11 +6,13 @@ rrdfqbcrnd0/.Rproj.user/
 .RData
 # inst/doc
 rrdfqbcrnd0/build/
-rrdfqbcrnd0/man/
 *.Rmd~
 *.R~
 .#*
 *~
+^*.tar.gz$
+^*/inst/data-raw/*.md$
+^*/inst/data-raw/*.html$
 rrdfqbcrnd0/inst/extdata/sample-workflow/demo-export-csv.log
 rrdfqbcrnd0/inst/extdata/sample-workflow/demo-export-csv.lst
 rrdfqbcrnd0/inst/extdata/sample-workflow/demo.log

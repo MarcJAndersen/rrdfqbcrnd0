@@ -1,0 +1,225 @@
+---
+title: "RDF data cube SPARQL queries"
+author: "mja@statgroup.dk"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: 
+  %\VignetteIndexEntry{RDF data cube SPARQL queries}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Setup
+```{r, results='asis', eval=TRUE}
+devtools::load_all(pkg="..")
+
+#library(rrdf)
+
+```
+
+# Load example cube and define SPARQL prefixes
+
+```{r, results='asis', eval=TRUE}
+
+qbfile <- file.path(system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb") )
+qbfile <- file.path(system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqb") )
+cube <- new.rdf(ontology=FALSE)
+invisible(load.rdf( qbfile, format="TURTLE", cube))
+
+SPARQLprefix<- '
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+prefix skos: <http://www.w3.org/2004/02/skos/core#>  
+prefix prov: <http://www.w3.org/ns/prov#>  
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
+prefix dcat: <http://www.w3.org/ns/dcat#>  
+prefix owl: <http://www.w3.org/2002/07/owl#>  
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>  
+prefix qb: <http://purl.org/linked-data/cube#>  
+prefix pav: <http://purl.org/pav>  
+prefix dct: <http://purl.org/dc/terms/>  
+'
+```
+
+# Get data set
+
+```{r, results='asis', eval=TRUE}
+
+SPARQLquery<- '
+select ?dataset
+where {
+?dataset a qb:DataSet .
+} 
+'
+
+SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
+result <- sparql.rdf(cube, SPARQLscript )
+knitr::kable(result)
+
+```
+
+# Get the data structure definition in the store
+
+```{r, results='asis', eval=TRUE}
+
+SPARQLquery<- '
+select ?dataset ?dsd
+where {
+?dataset a qb:DataSet ;
+  qb:structure ?dsd .
+ ?dsd a qb:DataStructureDefinition  .
+} 
+'
+
+SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
+result <- sparql.rdf(cube, SPARQLscript )
+knitr::kable(result)
+
+```
+
+# Get the componentes in the data structure definition in the store
+
+```{r, results='asis', eval=TRUE}
+
+SPARQLquery<- '
+select ?dataset ?dsd ?component ?componentPropery ?componentReference 
+where {
+?dataset a qb:DataSet ;
+  qb:structure ?dsd .
+?dsd a qb:DataStructureDefinition;
+qb:component ?component .
+?component ?componentPropery ?componentReference .
+} 
+'
+
+SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
+result <- sparql.rdf(cube, SPARQLscript )
+knitr::kable(result)
+
+```
+
+# Get the dimension, measures and attributes
+
+```{r, results='asis', eval=TRUE}
+SPARQLquery<- '
+select ?dataset ?component ?isblankcomponent ?componentProperty ?componentReference ?ordercp ?order ?label
+where {
+?dataset a qb:DataSet ;
+  qb:structure ?dsd .
+?dsd a qb:DataStructureDefinition;
+qb:component ?component .
+?component ?componentProperty ?componentReference .
+optional{ ?component qb:order ?temporder . }
+BIND( ISBLANK(?component) as ?isblankcomponent )
+optional{ ?componentReference rdfs:label ?templabel . }
+BIND(
+if( ?componentProperty = qb:dimension, 1001, 
+   if( ?componentProperty = qb:measure, 2001,
+      if( ?componentProperty = qb:attribute, 3001, 9001 )
+        )
+  )
+ as ?ordercp )
+BIND( COALESCE( ?temporder, 0 )  as ?order )
+BIND( COALESCE( ?templabel, "" )  as ?label )
+values ( ?componentProperty ) {
+(qb:attribute)
+(qb:dimension)
+(qb:measure)
+}
+}
+order by ?dataset ?ordercp ?order ?componentReference
+'
+SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
+result <- data.frame(sparql.rdf(cube, SPARQLscript ),stringsAsFactors=FALSE)
+knitr::kable(result)
+```
+
+Add CONSTRUCT query that defines the cube from the SPARQL results above.
+
+# Make SPARQL query for getting observations for example.ttl
+
+This will not work as the cube is not normalized.
+
+
+```{r, results='asis', eval=FALSE}
+genfor<- result[result$dataset==result$dataset[1],]
+genfor$colnames<- sapply(strsplit(genfor$componentReference, "#"), "[", 2)
+
+SPARQLquery<- paste( "select * where {",
+      "?obs a qb:Observation;",
+      "# qb:dataSet  ?dataset ; ",
+      paste("",
+          "<", genfor$componentReference, ">", " ", "?", genfor$colnames, " ;", sep="", collapse="\n"
+      ),
+      ".", 
+      paste( "#values (?dataset) { (",
+            "<", result$dataset[1], ">",
+            ") }", sep="", collapse="\n"
+            ),
+      "}", sep="\n", collapse="\n"
+      )
+
+SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
+cat(SPARQLscript)
+oresult <- data.frame(sparql.rdf(cube, SPARQLscript ),stringsAsFactors=FALSE)
+knitr::kable(oresult)
+
+
+
+```
+
+# Make SPARQL query for getting observations for example.ttl
+
+This will not work as the cube is not normalized.
+
+
+```{r, results='asis', eval=FALSE}
+genfor<- result[result$dataset==result$dataset[1],]
+genfor$colnames<- sapply(strsplit(genfor$componentReference, "#"), "[", 2)
+
+SPARQLquery<- paste( "select * where {",
+      "?obs a qb:Observation;",
+      "# qb:dataSet  ?dataset ; ",
+      paste("",
+          "<", genfor$componentReference, ">", " ", "?", genfor$colnames, " ;", sep="", collapse="\n"
+      ),
+      ".", 
+      paste( "#values (?dataset) { (",
+            "<", result$dataset[1], ">",
+            ") }", sep="", collapse="\n"
+            ),
+      "}", sep="\n", collapse="\n"
+      )
+
+SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
+cat(SPARQLscript)
+oresult <- data.frame(sparql.rdf(cube, SPARQLscript ),stringsAsFactors=FALSE)
+knitr::kable(oresult)
+
+qq<-'
+prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
+prefix skos: <http://www.w3.org/2004/02/skos/core#>  
+prefix prov: <http://www.w3.org/ns/prov#>  
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
+prefix dcat: <http://www.w3.org/ns/dcat#>  
+prefix owl: <http://www.w3.org/2002/07/owl#>  
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>  
+prefix qb: <http://purl.org/linked-data/cube#>  
+prefix pav: <http://purl.org/pav>  
+prefix dct: <http://purl.org/dc/terms/>  
+ select * where {
+?obs a qb:Observation;
+ qb:dataSet  ?dataset ; 
+ <http://example.org/ns#refArea> ?refArea ;
+ <http://example.org/ns#refPeriod> ?refPeriod ;
+ <http://purl.org/linked-data/sdmx/2009/dimension#sex> ?sex ;
+ <http://example.org/ns#lifeExpectancy> ?lifeExpectancy ;
+# <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> ?unitMeasure ;
+.
+#values (?dataset) { (<http://example.org/ns#dataset-le3>) }
+}
+'
+oresult <- data.frame(sparql.rdf(cube, qq ),stringsAsFactors=FALSE)
+knitr::kable(oresult)
+
+
+```

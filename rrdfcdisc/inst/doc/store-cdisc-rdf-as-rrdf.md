@@ -1,7 +1,7 @@
 ---
 title: "Store CDISC RDF as RRDF data model"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2015-12-26"
+date: "2015-12-27"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Store CDISC RDF as RRDF data model}
@@ -180,7 +180,7 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 ## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..
 ## .. total number of triples: 165406
 ## Final rdf.cdisc.org rrdf store, number of triples: 165406
-## rrdf store saved to turle file: /tmp/RtmpqF32j7/cdisc-rdf.ttl
+## rrdf store saved to turle file: /tmp/RtmpyqoU9b/cdisc-rdf.ttl
 ## Writing to zip file /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 ```
 
@@ -190,7 +190,7 @@ message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size 
 ```
 
 ```
-## File /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-12-26 23:37:52 size 2310300 bytes
+## File /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2015-12-27 21:34:23 size 2310299 bytes
 ```
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
@@ -248,7 +248,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/RtmpqF32j7/get-rdf.disc.org.rq 
+SPARQL script stored in   /tmp/RtmpyqoU9b/get-rdf.disc.org.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.
