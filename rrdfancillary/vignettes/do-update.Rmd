@@ -1,0 +1,54 @@
+---
+title: How to create vignette"
+author: "PhuseSubTeamAnalysisResults@example.org"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to create vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+
+### How to run from command prompt when developing
+
+Start in the package root directory
+
+Devtools should reply reply Loading rrdfqbcrnd0.
+
+The knit command should generate .md file in the present work directory - the package root directory
+
+
+```{r, eval=FALSE}
+library(devtools)
+devtools::document()
+devtools::load_all("..")
+devtools::install()
+
+library(knitr)
+knit("vignettes/do-update.Rmd")
+
+library(rrdfancillary)
+
+```
+
+```{r, eval=TRUE}
+store <- new.rdf()
+add.data.triple(store,
+                subject="http://example.org/Subject",
+                predicate="http://example.org/Predicate",
+                data="Value")
+cat(asString.rdf(store))
+
+SPARQLinsert<- '
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+INSERT DATA
+{ 
+  <http://example/book1> dc:title "A new book" ;
+                         dc:creator "A.N.Other" .
+}
+'
+
+update.rdf( store, SPARQLinsert )
+
+```
