@@ -1,7 +1,10 @@
-all: mk-rrdfcdisc  mk-rrdfqb  mk-rrdfqbcrnd0 mk-rrdfcrndex mk-rrdfqbic 
+all: mk-rrdfcdisc mk-rrdfancillary mk-rrdfqb  mk-rrdfqbcrnd0 mk-rrdfcrndex mk-rrdfqbic 
 
 mk-rrdfcdisc:
 	cd rrdfcdisc; make
+
+mk-rrdfancillary:
+	cd rrdfancillary; make
 
 mk-rrdfqbcrnd0:
 	cd rrdfqbcrnd0; make
