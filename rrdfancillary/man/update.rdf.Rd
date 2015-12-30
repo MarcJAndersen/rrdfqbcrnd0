@@ -2,9 +2,9 @@
 % Please edit documentation in R/update.rdf.R
 \name{update.rdf}
 \alias{update.rdf}
-\title{SPARQL updaate}
+\title{SPARQL update}
 \usage{
-\method{update}{rdf}(model, sparqlUpdateStmts)
+update.rdf(model, sparqlUpdateStmts)
 }
 \arguments{
 \item{model}{RRDF store}
@@ -12,9 +12,9 @@
 \item{sparqlUpdateStmts}{SPARQL update statements string}
 }
 \value{
-the updated model
+TRUE
 }
 \description{
-SPARQL updaate
+SPARQL update
 }
 

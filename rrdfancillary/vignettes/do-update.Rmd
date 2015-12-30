@@ -51,4 +51,6 @@ INSERT DATA
 
 update.rdf( store, SPARQLinsert )
 
+cat(asString.rdf(store))
+
 ```
