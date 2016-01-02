@@ -1,12 +1,31 @@
-(cd ~/bin; ln -s /opt/apache-jena-3.0.0/bin/update .)
+Using Fusiki to do the update
+
+    FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.1/
+    (${FUSEKI_HOME}fuseki-server --mem --update /ex2) &
+
+ToDo: add storing PID in file (`echo $$ > fuseki.pid; `), and redirecting output from fuseki.
+
+will re-use configuration files - so be sure of the contents of the run directory.
+
+To load, normalize phase 1, normalize phase 2, and finally dump the graph
+    ${FUSEKI_HOME}bin/s-put http://localhost:3030/ex2/data default ../sample-rdf/example.ttl
+    ${FUSEKI_HOME}bin/s-update --server=http://localhost:3030/ex2/update --update=../cube-vocabulary-rdf/normalize-algorithm-phase-1.ru 
+    ${FUSEKI_HOME}bin/s-update --server=http://localhost:3030/ex2/update --update=../cube-vocabulary-rdf/normalize-algorithm-phase-2.ru 
+    ${FUSEKI_HOME}bin/s-get http://localhost:3030/ex2/get default  > ../sample-rdf/example-normalize.ttl
+
+
+================================================================
+
+# does work with jena 2.13
+/opt/apache-jena-2.13.0/arq --desc=jena-assambler.ttl  "select * where {?s ?p ?o} limit 10"
 /opt/apache-jena-2.13.0/bin/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-1.ru --dump
-arq --desc=jena-assambler.ttl  "select * where {?s ?p ?o} limit 10"
-update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-1.ru --verbose --debug
+/opt/apache-jena-2.13.0/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-2.ru --verbose --debug
 
 
+
+# does not work with jena 3.0.0
 /opt/apache-jena-3.0.0/bin/tdbloader --loc=DB example.ttl 
 arq --desc=tdb-assembler.ttl  "select * where {?s ?p ?o} limit 10"
-update --desc=tdb-assembler.ttl --update=.ru --verbose --debug
 
 
 
@@ -21,42 +40,8 @@ Creates setup
 [2015-12-28 23:58:57] Config     INFO  Shiro file: file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/run/shiro.ini
 [2015-12-28 23:58:58] Server     INFO  Started 2015/12/28 23:58:58 CET on port 3030
 
-IN run/configuration/ex.ttl
-add configuration for ex endpoint
-Note - all files in run/configuration/ are read - so do not leave backup files in the directory.
-
-Start again:
-
-(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/fuseki-server )
-
-To run update query
-
-
-(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex/update --update=normalize-algorithm-phase-1.ru )
-(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex/update --update=normalize-algorithm-phase-2.ru )
-
-To dump the graph
-(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-get http://localhost:3030/ex/get default )
-
-Another approach
-
-(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/fuseki-server --mem --update /ex2)
-
-will re-use configuration files - so be sure of the contents of the run directory.
-
-To dump the graph
-/opt/apache-jena-fuseki-2.3.0/bin/s-put http://localhost:3030/ex2/data default example.ttl
-/opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex2/update --update=normalize-algorithm-phase-1.ru 
-/opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex2/update --update=normalize-algorithm-phase-2.ru 
-/opt/apache-jena-fuseki-2.3.0/bin/s-get http://localhost:3030/ex2/get default  > example-normalize.ttl
-
-
-================================================================
-
-Sample file for run/configuration/ex.ttl
-
-# Licensed under the terms of http://www.apache.org/licenses/LICENSE-2.0
-
+In directory run/configuration add configuration for ex endpoint using the filename run/configuration/ex.ttl as:
+=================================================
 @prefix :        <#> .
 @prefix fuseki:  <http://jena.apache.org/fuseki#> .
 @prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
@@ -86,4 +71,24 @@ Sample file for run/configuration/ex.ttl
     ##ja:context [ ja:cxtName "arq:queryTimeout" ;  ja:cxtValue "3000" ] ;
     ##tdb:unionDefaultGraph true ;
     .
+=================================================
+
+
+Note - all files in run/configuration/ are read - so do not leave backup files in the directory.
+
+Start again:
+
+(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/fuseki-server )
+
+To run update query
+
+
+(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex/update --update=normalize-algorithm-phase-1.ru )
+(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex/update --update=normalize-algorithm-phase-2.ru )
+
+To dump the graph
+(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-get http://localhost:3030/ex/get default )
+
+
+================================================================
 
