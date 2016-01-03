@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Setup</title>
+<title>Create Integrity Contraints SPARQL Queries from RDF data cube definition</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,6 +201,12 @@ hr {
 </head>
 
 <body>
+<h1>Create Integrity Contraints SPARQL Queries from RDF data cube definition</h1>
+
+<p>This script retrieves the RDF data cube vocabulary from (<a href="http://www.w3.org/TR/2014/REC-vocab-data-cube-20140116/">http://www.w3.org/TR/2014/REC-vocab-data-cube-20140116/</a>).</p>
+
+<p>The Integrity Constraints are stored as file in the package</p>
+
 <h2>Setup</h2>
 
 <pre><code class="r">devtools::load_all(pkg=&quot;../..&quot;)
@@ -240,23 +246,24 @@ if (! url.exists(qbURL) ) {
 }
 
 
-# Acknowledgement: I got the approach from
-# http://stackoverflow.com/questions/1395528/scraping-html-tables-into-r-data-frames-using-the-xml-package?lq=1
+## Acknowledgement: I got the approach from
+## http://stackoverflow.com/questions/1395528/scraping-html-tables-into-r-data-frames-using-the-xml-package?lq=1
 
 webpage &lt;- getURL(qbURL)
-# The following two lines is suggested in the stackoverflow post
-# Apparantly not needed here
+## The following two lines is suggested in the stackoverflow post
+## Apparantly not needed here
 ## Process escape characters
 ## webpage &lt;- readLines(tc &lt;- textConnection(webpage)); close(tc)
 
-# Parse the html tree, ignoring errors on the page
+## Parse the html tree, ignoring errors on the page
 pagetree &lt;- htmlTreeParse(webpage, error=function(...){}, useInternalNodes = TRUE)
 
-# appears that integrity checks starte with h3 and then a table with class bordered-table
-# so that&#39;s what we look for
+## appears that integrity checks starts with h3 and then a table with class bordered-table
+## so that&#39;s what we look for
 both&lt;- getNodeSet(pagetree,&quot;//*/h3[@id]|//*/table[@class=&#39;bordered-table&#39;]/tbody/tr/td/pre&quot;)
 
-       irq20&lt;- &quot;
+
+irq20&lt;- &quot;
 SELECT ?p WHERE {
     ?hierarchy a qb:HierarchicalCodeList ;
                  qb:parentChildProperty ?p .
@@ -288,10 +295,10 @@ for (i in 1:(length(both)-1)) {
   if (grepl(&#39;ic-[1-9]([0-9])*&#39;, icname ) ) {
    ictitle&lt;- unlist(xmlValue(xmlChildren(both[[i]])$text ))
    rq&lt;- xmlValue(xmlChildren(both[[i+1]])$text)
-#   print(paste0( &quot;Node &quot;, i, &quot;, IC name &quot;, icname, &quot; - &quot;, ictitle ))
+      ##   print(paste0( &quot;Node &quot;, i, &quot;, IC name &quot;, icname, &quot; - &quot;, ictitle ))
    if (icname %in% &quot;ic-19&quot;) {
-     ## XXX change list to vection - use unlist ??
-###     print(i)
+       ## XXX change list to vection - use unlist ??
+       ##     print(i)
       rq&lt;- paste0(unlist(strsplit(xmlValue(xmlChildren(both[[i+1]])$text),&quot;\n&quot;))[1:8], collapse=&quot;\n&quot;)
       qbIClist[[&quot;ic-19a&quot;]]&lt;- storeIC(gsub(&quot;IC-19&quot;, &quot;IC-19a&quot;, ictitle), &quot;&quot;, rq)
       rq&lt;- paste0(unlist(strsplit(xmlValue(xmlChildren(both[[i+1]])$text),&quot;\n&quot;))[10:17], collapse=&quot;\n&quot;)
@@ -703,11 +710,13 @@ for (i in 1:(length(both)-1)) {
 ## 
 </code></pre>
 
-<p>TODO(mja): show the SPARQL code in a highlight environment</p>
+<p>TODO(mja): show the SPARQL code in a highlight environment.</p>
 
-<p>This stores the qbIClist in the data directory</p>
+<p>This stores the qbIClist in the data directory.</p>
 
-<p>TODO(mja): Consider making qbIClist an internal data set</p>
+<p>TODO(mja): Consider making qbIClist an internal data set.</p>
+
+<p>TODO(mja): Extract nomalization scripts and store also.</p>
 
 <pre><code class="r">devtools::use_data(qbIClist,overwrite=TRUE)
 </code></pre>

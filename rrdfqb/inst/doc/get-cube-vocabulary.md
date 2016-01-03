@@ -1,8 +1,12 @@
 ---
-title: "Get RDF data cube vocabulary as turtle file from qb: http://purl.org/linked-data/cube#"
+title: "Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#)"
 author: "mja@statgroup.dk"
-date: "2015-12-26"
+date: "2016-01-03"
 ---
+
+# Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#).
+
+This script retrieves the RDF data cube vocabulary and stores it as a .ttl in the packages.
 
 ## Setup 
 
@@ -29,20 +33,17 @@ devtools::load_all(pkg="../..")
 ## Loading required package: rrdflibs
 ```
 
-# R-code
+# Get and store RDF data vocabulary
 
 
 ```r
 library(RCurl)
 library(devtools)
-
 qbURL<-"http://purl.org/linked-data/cube#"
 if (! url.exists(qbURL) ) {
   stop(paste0("Can not access URL ",qbURL))
 }
-
 cube.vocabulary.ttl <- getURL(qbURL)
-
 savefile <- file.path(system.file("extdata/cube-vocabulary-rdf", package="rrdfqb"), "cube.ttl" )
 writeLines( cube.vocabulary.ttl, savefile)
 cat("written to ", normalizePath(savefile) )
@@ -52,7 +53,7 @@ cat("written to ", normalizePath(savefile) )
 ## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
 ```
 
-### Creating SPARQL script for getting CDISC standard using FROM dataset
+## SPARQL for getting the cube vocabulary using FROM in the SPARQL query 
 
 The following is experimental and not needed for the present
 package. See below for explanation.
@@ -60,15 +61,12 @@ package. See below for explanation.
 
 ```r
 rdf.data.cube.URLstem<- qbURL
-
-
 SPARQLscript<- paste(
   "CONSTRUCT { ?s ?p ?o }",
 paste0( "FROM ", "<", rdf.data.cube.URLstem, ">", collapse="\n" )
   ,
   "WHERE { ?s ?p ?o }", sep="\n", collapse="\n"
 )
-
 cat(SPARQLscript,"\n")
 ```
 
@@ -82,7 +80,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/Rtmpfqpfmi/get-cube.rq 
+SPARQL script stored in   /tmp/RtmpPQ4uvV/get-cube.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.
@@ -94,7 +92,9 @@ results <- construct.rdf(store, SPARQLscript )
 summarize.rdf(results)
 ```
 
-The code below assumes a locate fuseki instance is running.
+However, it works using a local Fuseki instance. 
+The code below assumes a local Fuseki instance is running at `http://localhost:3030/arm/query`.
+Change to follow your setup.
 
 ```r
 endpoint<- "http://localhost:3030/arm/query"

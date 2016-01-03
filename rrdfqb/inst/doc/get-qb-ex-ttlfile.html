@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Setup</title>
+<title>Get RDF data cube example file from RDF data cube specifications</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,6 +201,11 @@ hr {
 </head>
 
 <body>
+<h1>Get RDF data cube example file from RDF data cube specifications</h1>
+
+<p>This script downloads the example from the RDF data cube vocabulary and stores it in the package.
+The example is normalized.</p>
+
 <h2>Setup</h2>
 
 <pre><code class="r">devtools::load_all(pkg=&quot;../..&quot;)
@@ -358,7 +363,8 @@ knitr::kable(results.ontology)
 <h1>Load, normalize phase 1, normalize phase 2, and finally dump the graph</h1>
 
 <p>RDF data cube normalization algorihtms can be applied
-(<a href="http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm">http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm</a>).</p>
+(<a href="http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm">http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm</a>).
+Note: the <code>rrdfancillary</code> package must be installed in R to get this to work.</p>
 
 <pre><code class="r">library(rrdfancillary)
 
@@ -476,48 +482,53 @@ cat(UpdateNormPhase2,&quot;\n&quot;)
 <pre><code>## [1] TRUE
 </code></pre>
 
-<pre><code class="r">normalizedfile&lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;example-norm-internal.ttl&quot;  )
+<pre><code class="r">normalizedfile&lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;example-normalized.ttl&quot;  )
 save.rdf( store, normalizedfile, format=&quot;TURTLE&quot;)
 </code></pre>
 
-<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-norm-internal.ttl&quot;
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-normalized.ttl&quot;
 </code></pre>
 
 <h1>Update example cube using Fuseki</h1>
 
-<p>Using Fusiki to do the update</p>
+<p>Using Fusiki to do the update.</p>
 
 <pre><code>FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.1/
 (${FUSEKI_HOME}fuseki-server --mem --update /ex2) &amp;
 </code></pre>
 
-<p>ToDo: add storing PID in file (<code>echo $$ &gt; fuseki.pid;</code>), and redirecting output from fuseki.</p>
+<p>The <code>--men</code> creates in memory-store,  <code>--update</code> enables updating operation and <code>/ex2</code> is the name of the dataset.</p>
 
-<p>will re-use configuration files - so be sure of the contents of the run directory.</p>
+<p>ToDo(MJA): add storing PID in file (<code>echo $$ &gt; fuseki.pid;</code>), and redirecting output from fuseki.</p>
+
+<p>Fuseki will re-use configuration files - so be sure of the contents of the run directory.</p>
 
 <p>To load, normalize phase 1, normalize phase 2, and finally dump the graph
     ${FUSEKI_HOME}bin/s-put http://localhost:3030/ex2/data default ../sample-rdf/example.ttl
     ${FUSEKI_HOME}bin/s-update &ndash;server=http://localhost:3030/ex2/update &ndash;update=../cube-vocabulary-rdf/normalize-algorithm-phase-1.ru 
     ${FUSEKI_HOME}bin/s-update &ndash;server=http://localhost:3030/ex2/update &ndash;update=../cube-vocabulary-rdf/normalize-algorithm-phase-2.ru 
-    ${FUSEKI_HOME}bin/s-get http://localhost:3030/ex2/get default  &gt; ../sample-rdf/example-normalize.ttl</p>
+    ${FUSEKI_HOME}bin/s-get http://localhost:3030/ex2/get default  &gt; ../sample-rdf/example-normalize-with-fuseki.ttl</p>
 
-<h2>Using jena 2.13 - somewhat successfull</h2>
+<h2>Using jena 2.13</h2>
+
+<p>This was successfull in december 2015. The approach relies on a not recent version of jena, so it is not investigated further.</p>
 
 <pre><code>/opt/apache-jena-2.13.0/arq --desc=jena-assambler.ttl  &quot;select * where {?s ?p ?o} limit 10&quot;
 /opt/apache-jena-2.13.0/bin/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-1.ru --dump
 /opt/apache-jena-2.13.0/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-2.ru --verbose --debug
 </code></pre>
 
-<h2>Using jena 3.0.0 - dit not work</h2>
+<h2>Using jena 3.0.0</h2>
 
-<h1>does not work with jena 3.0.0</h1>
+<p>This does not work with jena 3.0.0 in december 2015.</p>
 
-<p>/opt/apache-jena-3.0.0/bin/tdbloader &ndash;loc=DB example.ttl 
-arq &ndash;desc=tdb-assembler.ttl  &ldquo;select * where {?s ?p ?o} limit 10&rdquo;</p>
+<pre><code>/opt/apache-jena-3.0.0/bin/tdbloader --loc=DB example.ttl 
+arq --desc=tdb-assembler.ttl  &quot;select * where {?s ?p ?o} limit 10&quot;
+</code></pre>
 
-<h2>Fuseki, adding configuration file</h2>
+<h2>Fuseki with customized  configuration file</h2>
 
-<p>Creates setup</p>
+<p>Start fuseki to create the configuration files.</p>
 
 <pre><code>(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/fuseki-server )
 </code></pre>

@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Setup</title>
+<title>Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube#">http://purl.org/linked-data/cube#</a>).</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,6 +201,10 @@ hr {
 </head>
 
 <body>
+<h1>Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube#">http://purl.org/linked-data/cube#</a>).</h1>
+
+<p>This script retrieves the RDF data cube vocabulary and stores it as a .ttl in the packages.</p>
+
 <h2>Setup</h2>
 
 <pre><code class="r">devtools::load_all(pkg=&quot;../..&quot;)
@@ -224,18 +228,15 @@ hr {
 ## Loading required package: rrdflibs
 </code></pre>
 
-<h1>R-code</h1>
+<h1>Get and store RDF data vocabulary</h1>
 
 <pre><code class="r">library(RCurl)
 library(devtools)
-
 qbURL&lt;-&quot;http://purl.org/linked-data/cube#&quot;
 if (! url.exists(qbURL) ) {
   stop(paste0(&quot;Can not access URL &quot;,qbURL))
 }
-
 cube.vocabulary.ttl &lt;- getURL(qbURL)
-
 savefile &lt;- file.path(system.file(&quot;extdata/cube-vocabulary-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;cube.ttl&quot; )
 writeLines( cube.vocabulary.ttl, savefile)
 cat(&quot;written to &quot;, normalizePath(savefile) )
@@ -244,21 +245,18 @@ cat(&quot;written to &quot;, normalizePath(savefile) )
 <pre><code>## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
 </code></pre>
 
-<h3>Creating SPARQL script for getting CDISC standard using FROM dataset</h3>
+<h2>SPARQL for getting the cube vocabulary using FROM in the SPARQL query</h2>
 
 <p>The following is experimental and not needed for the present
 package. See below for explanation.</p>
 
 <pre><code class="r">rdf.data.cube.URLstem&lt;- qbURL
-
-
 SPARQLscript&lt;- paste(
   &quot;CONSTRUCT { ?s ?p ?o }&quot;,
 paste0( &quot;FROM &quot;, &quot;&lt;&quot;, rdf.data.cube.URLstem, &quot;&gt;&quot;, collapse=&quot;\n&quot; )
   ,
   &quot;WHERE { ?s ?p ?o }&quot;, sep=&quot;\n&quot;, collapse=&quot;\n&quot;
 )
-
 cat(SPARQLscript,&quot;\n&quot;)
 </code></pre>
 
@@ -271,7 +269,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)
 </code></pre>
 
-<p>SPARQL script stored in   /tmp/Rtmpfqpfmi/get-cube.rq </p>
+<p>SPARQL script stored in   /tmp/RtmpPQ4uvV/get-cube.rq </p>
 
 <h3>Using the script with R</h3>
 
@@ -282,7 +280,9 @@ results &lt;- construct.rdf(store, SPARQLscript )
 summarize.rdf(results)
 </code></pre>
 
-<p>The code below assumes a locate fuseki instance is running.</p>
+<p>However, it works using a local Fuseki instance. 
+The code below assumes a local Fuseki instance is running at <code>http://localhost:3030/arm/query</code>.
+Change to follow your setup.</p>
 
 <pre><code class="r">endpoint&lt;- &quot;http://localhost:3030/arm/query&quot;
 results.fuseki &lt;- construct.remote(endpoint, SPARQLscript )

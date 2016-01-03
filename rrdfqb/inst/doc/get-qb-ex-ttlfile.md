@@ -4,6 +4,11 @@ author: "mja@statgroup.dk"
 date: "2016-01-03"
 ---
 
+# Get RDF data cube example file from RDF data cube specifications
+
+This script downloads the example from the RDF data cube vocabulary and stores it in the package.
+The example is normalized.
+
 ## Setup 
 
 ```r
@@ -129,6 +134,7 @@ The result shows inferred triples, added with respect to the query above.
 
 RDF data cube normalization algorihtms can be applied
 (http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm).
+Note: the `rrdfancillary` package must be installed in R to get this to work.
 
 
 ```r
@@ -256,54 +262,52 @@ update.rdf( store, UpdateNormPhase2 )
 ```
 
 ```r
-normalizedfile<- file.path(system.file("extdata/sample-rdf", package="rrdfqb"), "example-norm-internal.ttl"  )
+normalizedfile<- file.path(system.file("extdata/sample-rdf", package="rrdfqb"), "example-normalized.ttl"  )
 save.rdf( store, normalizedfile, format="TURTLE")
 ```
 
 ```
-## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-norm-internal.ttl"
+## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-normalized.ttl"
 ```
 
 
 # Update example cube using Fuseki
-
-Using Fusiki to do the update
+Using Fusiki to do the update.
 
     FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.1/
     (${FUSEKI_HOME}fuseki-server --mem --update /ex2) &
+The `--men` creates in memory-store,  `--update` enables updating operation and `/ex2` is the name of the dataset.
 
-ToDo: add storing PID in file (`echo $$ > fuseki.pid; `), and redirecting output from fuseki.
+ToDo(MJA): add storing PID in file (`echo $$ > fuseki.pid; `), and redirecting output from fuseki.
 
-will re-use configuration files - so be sure of the contents of the run directory.
+Fuseki will re-use configuration files - so be sure of the contents of the run directory.
 
 To load, normalize phase 1, normalize phase 2, and finally dump the graph
     ${FUSEKI_HOME}bin/s-put http://localhost:3030/ex2/data default ../sample-rdf/example.ttl
     ${FUSEKI_HOME}bin/s-update --server=http://localhost:3030/ex2/update --update=../cube-vocabulary-rdf/normalize-algorithm-phase-1.ru 
     ${FUSEKI_HOME}bin/s-update --server=http://localhost:3030/ex2/update --update=../cube-vocabulary-rdf/normalize-algorithm-phase-2.ru 
-    ${FUSEKI_HOME}bin/s-get http://localhost:3030/ex2/get default  > ../sample-rdf/example-normalize.ttl
+    ${FUSEKI_HOME}bin/s-get http://localhost:3030/ex2/get default  > ../sample-rdf/example-normalize-with-fuseki.ttl
 
-
-## Using jena 2.13 - somewhat successfull 
+## Using jena 2.13
+This was successfull in december 2015. The approach relies on a not recent version of jena, so it is not investigated further.
 
     /opt/apache-jena-2.13.0/arq --desc=jena-assambler.ttl  "select * where {?s ?p ?o} limit 10"
     /opt/apache-jena-2.13.0/bin/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-1.ru --dump
 	/opt/apache-jena-2.13.0/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-2.ru --verbose --debug
 
+## Using jena 3.0.0
+This does not work with jena 3.0.0 in december 2015.
 
-## Using jena 3.0.0 - dit not work 
-
-# does not work with jena 3.0.0
-/opt/apache-jena-3.0.0/bin/tdbloader --loc=DB example.ttl 
-arq --desc=tdb-assembler.ttl  "select * where {?s ?p ?o} limit 10"
+	/opt/apache-jena-3.0.0/bin/tdbloader --loc=DB example.ttl 
+	arq --desc=tdb-assembler.ttl  "select * where {?s ?p ?o} limit 10"
 
 
-## Fuseki, adding configuration file
-Creates setup
+## Fuseki with customized  configuration file
+Start fuseki to create the configuration files.
 
 	(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/fuseki-server )
 
 In directory run/configuration add configuration for ex endpoint using the filename run/configuration/ex.ttl as:
-
 
 	@prefix :        <#> .
 	@prefix fuseki:  <http://jena.apache.org/fuseki#> .

@@ -4,6 +4,13 @@ author: "mja@statgroup.dk"
 date: "2016-01-03"
 ---
 
+# Create Integrity Contraints SPARQL Queries from RDF data cube definition
+
+This script retrieves the RDF data cube vocabulary from (http://www.w3.org/TR/2014/REC-vocab-data-cube-20140116/).
+
+The Integrity Constraints are stored as file in the package
+
+
 ## Setup 
 
 ```r
@@ -29,7 +36,6 @@ devtools::load_all(pkg="../..")
 ## Loading required package: rrdflibs
 ```
 
-
 # R-code
 
 IC-19 is two queries, so it is split into IC-19a and IC-19b: For IC-20
@@ -48,23 +54,24 @@ if (! url.exists(qbURL) ) {
 }
 
 
-# Acknowledgement: I got the approach from
-# http://stackoverflow.com/questions/1395528/scraping-html-tables-into-r-data-frames-using-the-xml-package?lq=1
+## Acknowledgement: I got the approach from
+## http://stackoverflow.com/questions/1395528/scraping-html-tables-into-r-data-frames-using-the-xml-package?lq=1
 
 webpage <- getURL(qbURL)
-# The following two lines is suggested in the stackoverflow post
-# Apparantly not needed here
+## The following two lines is suggested in the stackoverflow post
+## Apparantly not needed here
 ## Process escape characters
 ## webpage <- readLines(tc <- textConnection(webpage)); close(tc)
 
-# Parse the html tree, ignoring errors on the page
+## Parse the html tree, ignoring errors on the page
 pagetree <- htmlTreeParse(webpage, error=function(...){}, useInternalNodes = TRUE)
 
-# appears that integrity checks starte with h3 and then a table with class bordered-table
-# so that's what we look for
+## appears that integrity checks starts with h3 and then a table with class bordered-table
+## so that's what we look for
 both<- getNodeSet(pagetree,"//*/h3[@id]|//*/table[@class='bordered-table']/tbody/tr/td/pre")
 
-       irq20<- "
+
+irq20<- "
 SELECT ?p WHERE {
     ?hierarchy a qb:HierarchicalCodeList ;
                  qb:parentChildProperty ?p .
@@ -96,10 +103,10 @@ for (i in 1:(length(both)-1)) {
   if (grepl('ic-[1-9]([0-9])*', icname ) ) {
    ictitle<- unlist(xmlValue(xmlChildren(both[[i]])$text ))
    rq<- xmlValue(xmlChildren(both[[i+1]])$text)
-#   print(paste0( "Node ", i, ", IC name ", icname, " - ", ictitle ))
+      ##   print(paste0( "Node ", i, ", IC name ", icname, " - ", ictitle ))
    if (icname %in% "ic-19") {
-     ## XXX change list to vection - use unlist ??
-###     print(i)
+       ## XXX change list to vection - use unlist ??
+       ##     print(i)
       rq<- paste0(unlist(strsplit(xmlValue(xmlChildren(both[[i+1]])$text),"\n"))[1:8], collapse="\n")
       qbIClist[["ic-19a"]]<- storeIC(gsub("IC-19", "IC-19a", ictitle), "", rq)
       rq<- paste0(unlist(strsplit(xmlValue(xmlChildren(both[[i+1]])$text),"\n"))[10:17], collapse="\n")
@@ -114,7 +121,6 @@ for (i in 1:(length(both)-1)) {
   }
   }
 ```
-
 
 
 Here are the integrity constraints:
@@ -514,11 +520,13 @@ for (icname in names(qbIClist)) {
 ## }
 ## 
 ```
-TODO(mja): show the SPARQL code in a highlight environment
+TODO(mja): show the SPARQL code in a highlight environment.
 
-This stores the qbIClist in the data directory
+This stores the qbIClist in the data directory.
 
-TODO(mja): Consider making qbIClist an internal data set
+TODO(mja): Consider making qbIClist an internal data set.
+
+TODO(mja): Extract nomalization scripts and store also.
 
 
 ```r
