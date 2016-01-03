@@ -1,7 +1,7 @@
 ---
 title: "Create prefixes for use with CDISC standards in RDF"
 author: "mja@statgroup.dk"
-date: "2015-12-27"
+date: "2015-12-26"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create prefixes for use with CDISC standards in RDF}
