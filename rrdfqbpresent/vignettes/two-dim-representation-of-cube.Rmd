@@ -13,7 +13,9 @@ vignette: >
 
 First load the package.
 ```{r, eval=TRUE}
+library(rrdfqb)
 library(rrdfqbcrnd0)
+library(rrdfqbpresent)
 library(rrdfqbcrndex)
 ```
 
@@ -76,7 +78,7 @@ MakeTable<- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
 ## Create AE html example
 
 ```{r, echo=TRUE}
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfcrndex")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfqbcrndex")
 htmlfile<- file.path(system.file("extdata/sample-html", package="rrdfqbpresent"), "DC-AE-sample.html")
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:aesoc", "crnd-dimension:aedecod" )
 coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trta", "crnd-dimension:factor", "crnd-dimension:procedure" )

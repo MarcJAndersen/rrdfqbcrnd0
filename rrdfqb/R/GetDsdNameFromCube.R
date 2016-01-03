@@ -3,7 +3,7 @@
 ##' @param forsparqlprefixcommon string with prefix defintions
 ##' @param dsdName Dataset Descriptor Name
 ##' @return the dsdName for the cube
-##' @export
+##' @export GetDsdNameFromCube
 GetDsdNameFromCube<- function( store, forsparqlprefixcommon=GetForSparqlPrefix() ) {
 
 tempstr<- as.character(sparql.rdf(store, GetDsdNameSparqlQuery( forsparqlprefixcommon )))
