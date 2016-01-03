@@ -1,12 +1,8 @@
 
 
-all:
-	echo Nothing yet
+all: check-ic.html check-ic.md 
 
 clean: 
-
-%.pdf: %.Rnw
-	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"
 
 # not clever rule - also creates HTML version
 # disabled 2015-09-22 MJA - does not work

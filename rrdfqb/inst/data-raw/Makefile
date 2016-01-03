@@ -1,5 +1,5 @@
 
-HTMLS= get-cube-vocabulary.html get-qb-ex-ttlfile.html
+HTMLS= get-cube-vocabulary.html get-qb-ex-ttlfile.html create-qb-IC-dataset.html
 
 # List of files with .md extension
 MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
@@ -31,4 +31,6 @@ get-cube-vocabulary.html: get-cube-vocabulary.Rmd
 get-qb-ex-ttlfile.html: get-qb-ex-ttlfile.Rmd
 	${RKNIT2HTML}
 
+${RDAQBICLIST} create-qb-IC-dataset.html: create-qb-IC-dataset.Rmd
+	${RKNIT2HTML}
 

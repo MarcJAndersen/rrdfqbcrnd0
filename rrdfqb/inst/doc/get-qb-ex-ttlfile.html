@@ -238,7 +238,7 @@ writeLines( examplettl, savefile)
 cat(&quot;written to &quot;, normalizePath(savefile) )
 </code></pre>
 
-<pre><code>## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example.ttl
+<pre><code>## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example.ttl
 </code></pre>
 
 <h1>Show one observations from the store</h1>
@@ -246,12 +246,8 @@ cat(&quot;written to &quot;, normalizePath(savefile) )
 <pre><code class="r">exfile &lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, &quot;example.ttl&quot;, package=&quot;rrdfqb&quot;) )
 store &lt;- new.rdf(ontology=FALSE)
 load.rdf( exfile, format=&quot;TURTLE&quot;, store)
-</code></pre>
 
-<pre><code>## [1] &quot;Java-Object{&lt;ModelCom   {eg:organization @rdfs:label \&quot;Example org\&quot;@en; eg:organization @rdf:type foaf:Agent; eg:organization @rdf:type org:Organization; eg:o31 @eg:lifeExpectancy \&quot;77.1\&quot;^^http://www.w3.org/2001/XMLSchema#decimal; eg:o31 @eg:refArea ex-geo:newport_00pr; eg:o31 @qb:dataSet eg:dataset-le3; eg:o31 @rdf:type qb:Observation; 256caf10fb5fb960688d18c53fbcb8de @qb:order \&quot;1\&quot;^^http://www.w3.org/2001/XMLSchema#integer; 256caf10fb5fb960688d18c53fbcb8de @qb:dimension eg:refArea; eg:o44 @eg:lifeExpectancy \&quot;79.4\&quot;^^http://www.w3.org/2001/XMLSchema#decimal; eg:o44 @eg:refArea ex-geo:merthyr_tdfil_00ph; eg:o44 @qb:dataSet eg:dataset-le3; eg:o44 @rdf:type qb:Observation; d961e60be1970cc7ddca42992e970eee @qb:componentAttachment qb:DataSet; d961e60be1970cc7ddca42992e970eee @qb:componentRequired \&quot;true\&quot;^^http://www.w3.org/2001/XMLSchema#boolean; d961e60be1970cc7ddca42992e970eee @qb:attribute sdmx-attribute:unitMeasure; eg:slice3 @qb:observation eg:o34...} |  [http://example.org/ns#organization, http://www.w3.org/2000/01/rdf-schema#label, \&quot;Example org\&quot;@en] [http://example.org/ns#organization, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://xmlns.com/foaf/0.1/Agent] [http://example.org/ns#organization, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/ns/org#Organization] [http://example.org/ns#o31, http://example.org/ns#lifeExpectancy, \&quot;77.1\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o31, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o31, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o31, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [256caf10fb5fb960688d18c53fbcb8de, http://purl.org/linked-data/cube#order, \&quot;1\&quot;^^http://www.w3.org/2001/XMLSchema#integer] [256caf10fb5fb960688d18c53fbcb8de, http://purl.org/linked-data/cube#dimension, http://example.org/ns#refArea] [http://example.org/ns#o44, http://example.org/ns#lifeExpectancy, \&quot;79.4\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o44, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o44, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o44, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [d961e60be1970cc7ddca42992e970eee, http://purl.org/linked-data/cube#componentAttachment, http://purl.org/linked-data/cube#DataSet] [d961e60be1970cc7ddca42992e970eee, http://purl.org/linked-data/cube#componentRequired, \&quot;true\&quot;^^http://www.w3.org/2001/XMLSchema#boolean] [d961e60be1970cc7ddca42992e970eee, http://purl.org/linked-data/cube#attribute, http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o34] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o33] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o32] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#observation, http://example.org/ns#o31] [http://example.org/ns#slice3, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-M] [http://example.org/ns#slice3, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2005-01-01T00:00:00/P3Y] [http://example.org/ns#slice3, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice3, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#o51, http://example.org/ns#lifeExpectancy, \&quot;77.0\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o51, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o51, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o51, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o23, http://example.org/ns#lifeExpectancy, \&quot;81.3\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o23, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o23, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o23, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o64, http://example.org/ns#lifeExpectancy, \&quot;79.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o64, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o64, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o64, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#sliceByRegion, http://purl.org/linked-data/cube#componentProperty, http://purl.org/linked-data/sdmx/2009/dimension#sex] [http://example.org/ns#sliceByRegion, http://purl.org/linked-data/cube#componentProperty, http://example.org/ns#refPeriod] [http://example.org/ns#sliceByRegion, http://www.w3.org/2000/01/rdf-schema#comment, \&quot;Slice by grouping regions together, fixing sex and time values\&quot;@en] [http://example.org/ns#sliceByRegion, http://www.w3.org/2000/01/rdf-schema#label, \&quot;slice by region\&quot;@en] [http://example.org/ns#sliceByRegion, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#SliceKey] [http://example.org/ns#o43, http://example.org/ns#lifeExpectancy, \&quot;81.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o43, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o43, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o43, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#refPeriod, http://purl.org/linked-data/cube#concept, http://purl.org/linked-data/sdmx/2009/concept#refPeriod] [http://example.org/ns#refPeriod, http://www.w3.org/2000/01/rdf-schema#range, http://reference.data.gov.uk/def/intervals/Interval] [http://example.org/ns#refPeriod, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://purl.org/linked-data/sdmx/2009/dimension#refPeriod] [http://example.org/ns#refPeriod, http://www.w3.org/2000/01/rdf-schema#label, \&quot;reference period\&quot;@en] [http://example.org/ns#refPeriod, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DimensionProperty] [http://example.org/ns#refPeriod, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o24] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o23] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o22] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#observation, http://example.org/ns#o21] [http://example.org/ns#slice2, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-F] [http://example.org/ns#slice2, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2004-01-01T00:00:00/P3Y] [http://example.org/ns#slice2, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice2, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#refArea, http://purl.org/linked-data/cube#concept, http://purl.org/linked-data/sdmx/2009/concept#refArea] [http://example.org/ns#refArea, http://www.w3.org/2000/01/rdf-schema#range, http://data.ordnancesurvey.co.uk/ontology/admingeo/UnitaryAuthority] [http://example.org/ns#refArea, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://purl.org/linked-data/sdmx/2009/dimension#refArea] [http://example.org/ns#refArea, http://www.w3.org/2000/01/rdf-schema#label, \&quot;reference area\&quot;@en] [http://example.org/ns#refArea, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DimensionProperty] [http://example.org/ns#refArea, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://example.org/ns#o22, http://example.org/ns#lifeExpectancy, \&quot;83.3\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o22, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o22, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o22, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o63, http://example.org/ns#lifeExpectancy, \&quot;81.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o63, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o63, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o63, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o42, http://example.org/ns#lifeExpectancy, \&quot;83.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o42, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o42, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o42, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o14, http://example.org/ns#lifeExpectancy, \&quot;75.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o14, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o14, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o14, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#sliceKey, http://example.org/ns#sliceByRegion] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, d961e60be1970cc7ddca42992e970eee] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 6df363eeaf4638d05e3d665d736eb72d] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 6188285dc5873de240df8afa9b261f0d] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 3f040c3f8b5c76aadb162800dbda96ac] [http://example.org/ns#dsd-le3, http://purl.org/linked-data/cube#component, 256caf10fb5fb960688d18c53fbcb8de] [http://example.org/ns#dsd-le3, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DataStructureDefinition] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o14] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o13] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o12] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#observation, http://example.org/ns#o11] [http://example.org/ns#slice1, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-M] [http://example.org/ns#slice1, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2004-01-01T00:00:00/P3Y] [http://example.org/ns#slice1, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice1, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#o21, http://example.org/ns#lifeExpectancy, \&quot;80.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o21, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o21, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o21, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o62, http://example.org/ns#lifeExpectancy, \&quot;83.4\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o62, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o62, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o62, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o34, http://example.org/ns#lifeExpectancy, \&quot;75.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o34, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o34, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o34, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [3f040c3f8b5c76aadb162800dbda96ac, http://purl.org/linked-data/cube#componentAttachment, http://purl.org/linked-data/cube#Slice] [3f040c3f8b5c76aadb162800dbda96ac, http://purl.org/linked-data/cube#order, \&quot;2\&quot;^^http://www.w3.org/2001/XMLSchema#integer] [3f040c3f8b5c76aadb162800dbda96ac, http://purl.org/linked-data/cube#dimension, http://example.org/ns#refPeriod] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/issued, \&quot;2010-08-11\&quot;^^http://www.w3.org/2001/XMLSchema#date] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice1] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/description, \&quot;Life expectancy within Welsh Unitary authorities - extracted from Stats Wales\&quot;@en] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/subject, http://example.org/geo#wales] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice6] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice4] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure, http://dbpedia.org/resource/Year] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#structure, http://example.org/ns#dsd-le3] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice5] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice2] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/subject, http://purl.org/linked-data/sdmx/2009/subject#1.4] [http://example.org/ns#dataset-le3, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#DataSet] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/title, \&quot;Life expectancy\&quot;@en] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/subject, http://purl.org/linked-data/sdmx/2009/subject#3.2] [http://example.org/ns#dataset-le3, http://purl.org/linked-data/cube#slice, http://example.org/ns#slice3] [http://example.org/ns#dataset-le3, http://www.w3.org/2000/01/rdf-schema#comment, \&quot;Life expectancy within Welsh Unitary authorities - extracted from Stats Wales\&quot;@en] [http://example.org/ns#dataset-le3, http://purl.org/dc/terms/publisher, http://example.org/ns#organization] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o64] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o63] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o62] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#observation, http://example.org/ns#o61] [http://example.org/ns#slice6, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-F] [http://example.org/ns#slice6, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2006-01-01T00:00:00/P3Y] [http://example.org/ns#slice6, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice6, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#lifeExpectancy, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#lifeExpectancy, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://purl.org/linked-data/sdmx/2009/measure#obsValue] [http://example.org/ns#lifeExpectancy, http://www.w3.org/2000/01/rdf-schema#label, \&quot;life expectancy\&quot;@en] [http://example.org/ns#lifeExpectancy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#MeasureProperty] [http://example.org/ns#lifeExpectancy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://example.org/ns#o41, http://example.org/ns#lifeExpectancy, \&quot;80.9\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o41, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o41, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o41, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o13, http://example.org/ns#lifeExpectancy, \&quot;76.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o13, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o13, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o13, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o54, http://example.org/ns#lifeExpectancy, \&quot;74.9\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o54, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o54, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o54, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [6df363eeaf4638d05e3d665d736eb72d, http://purl.org/linked-data/cube#measure, http://example.org/ns#lifeExpectancy] [http://example.org/ns#o61, http://example.org/ns#lifeExpectancy, \&quot;81.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o61, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o61, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o61, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o33, http://example.org/ns#lifeExpectancy, \&quot;76.5\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o33, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o33, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o33, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o54] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o53] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o52] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#observation, http://example.org/ns#o51] [http://example.org/ns#slice5, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-M] [http://example.org/ns#slice5, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2006-01-01T00:00:00/P3Y] [http://example.org/ns#slice5, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice5, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [6188285dc5873de240df8afa9b261f0d, http://purl.org/linked-data/cube#componentAttachment, http://purl.org/linked-data/cube#Slice] [6188285dc5873de240df8afa9b261f0d, http://purl.org/linked-data/cube#order, \&quot;3\&quot;^^http://www.w3.org/2001/XMLSchema#integer] [6188285dc5873de240df8afa9b261f0d, http://purl.org/linked-data/cube#dimension, http://purl.org/linked-data/sdmx/2009/dimension#sex] [http://example.org/ns#o12, http://example.org/ns#lifeExpectancy, \&quot;78.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o12, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o12, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o12, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o53, http://example.org/ns#lifeExpectancy, \&quot;76.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o53, http://example.org/ns#refArea, http://example.org/geo#monmouthshire_00pp] [http://example.org/ns#o53, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o53, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o32, http://example.org/ns#lifeExpectancy, \&quot;78.6\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o32, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o32, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o32, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o44] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o43] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o42] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#observation, http://example.org/ns#o41] [http://example.org/ns#slice4, http://purl.org/linked-data/sdmx/2009/dimension#sex, http://purl.org/linked-data/sdmx/2009/code#sex-F] [http://example.org/ns#slice4, http://example.org/ns#refPeriod, http://reference.data.gov.uk/id/gregorian-interval/2005-01-01T00:00:00/P3Y] [http://example.org/ns#slice4, http://purl.org/linked-data/cube#sliceStructure, http://example.org/ns#sliceByRegion] [http://example.org/ns#slice4, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Slice] [http://example.org/ns#o11, http://example.org/ns#lifeExpectancy, \&quot;76.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o11, http://example.org/ns#refArea, http://example.org/geo#newport_00pr] [http://example.org/ns#o11, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o11, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o52, http://example.org/ns#lifeExpectancy, \&quot;78.7\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o52, http://example.org/ns#refArea, http://example.org/geo#cardiff_00pt] [http://example.org/ns#o52, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o52, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation] [http://example.org/ns#o24, http://example.org/ns#lifeExpectancy, \&quot;79.1\&quot;^^http://www.w3.org/2001/XMLSchema#decimal] [http://example.org/ns#o24, http://example.org/ns#refArea, http://example.org/geo#merthyr_tdfil_00ph] [http://example.org/ns#o24, http://purl.org/linked-data/cube#dataSet, http://example.org/ns#dataset-le3] [http://example.org/ns#o24, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://purl.org/linked-data/cube#Observation]&gt;}&quot;
-</code></pre>
-
-<pre><code class="r">SPARQLscript&lt;- &#39;
+SPARQLscript&lt;- &#39;
 select * where {
  &lt;http://example.org/ns#o62&gt; ?p ?o .
 }    
@@ -359,12 +355,215 @@ knitr::kable(results.ontology)
 
 <p>The result shows inferred triples, added with respect to the query above.</p>
 
-<h1>To do</h1>
+<h1>Load, normalize phase 1, normalize phase 2, and finally dump the graph</h1>
 
-<p>TODO(mja): extend rrdf to handle SPARQL update
-(<a href="https://jena.apache.org/documentation/query/update.html">https://jena.apache.org/documentation/query/update.html</a>), so that the
-RDF data cube normalization alogrihtms can be applied
+<p>RDF data cube normalization algorihtms can be applied
 (<a href="http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm">http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm</a>).</p>
+
+<pre><code class="r">library(rrdfancillary)
+
+exfile &lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, &quot;example.ttl&quot;, package=&quot;rrdfqb&quot;) )
+store &lt;- new.rdf(ontology=FALSE)
+load.rdf( exfile, format=&quot;TURTLE&quot;, store)
+
+normalize.phase.1.file&lt;- file.path(system.file(&quot;extdata/cube-vocabulary-rdf&quot;, &quot;normalize-algorithm-phase-1.ru&quot;, package=&quot;rrdfqb&quot;) )
+UpdateNormPhase1 &lt;- paste(readLines(normalize.phase.1.file), collapse=&quot;\n&quot;)
+cat(UpdateNormPhase1,&quot;\n&quot;)
+</code></pre>
+
+<pre><code>## # Phase 1: Type and property closure
+## # http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm
+## 
+## PREFIX rdf:            &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+## PREFIX qb:             &lt;http://purl.org/linked-data/cube#&gt;
+## 
+## INSERT {
+##     ?o rdf:type qb:Observation .
+## } WHERE {
+##     [] qb:observation ?o .
+## };
+## 
+## INSERT {
+##     ?o  rdf:type qb:Observation .
+##     ?ds rdf:type qb:DataSet .
+## } WHERE {
+##     ?o qb:dataSet ?ds .
+## };
+## 
+## INSERT {
+##     ?s rdf:type qb:Slice .
+## } WHERE {
+##     [] qb:slice ?s.
+## };
+## 
+## INSERT {
+##     ?cs qb:componentProperty ?p .
+##     ?p  rdf:type qb:DimensionProperty .
+## } WHERE {
+##     ?cs qb:dimension ?p .
+## };
+## 
+## INSERT {
+##     ?cs qb:componentProperty ?p .
+##     ?p  rdf:type qb:MeasureProperty .
+## } WHERE {
+##     ?cs qb:measure ?p .
+## };
+## 
+## INSERT {
+##     ?cs qb:componentProperty ?p .
+##     ?p  rdf:type qb:AttributeProperty .
+## } WHERE {
+##     ?cs qb:attribute ?p .
+## }
+</code></pre>
+
+<pre><code class="r">update.rdf( store, UpdateNormPhase1 )
+</code></pre>
+
+<pre><code>## [1] TRUE
+</code></pre>
+
+<pre><code class="r">normalize.phase.2.file&lt;- file.path(system.file(&quot;extdata/cube-vocabulary-rdf&quot;, &quot;normalize-algorithm-phase-2.ru&quot;, package=&quot;rrdfqb&quot;) )
+UpdateNormPhase2 &lt;- paste(readLines(normalize.phase.2.file), collapse=&quot;\n&quot;)
+cat(UpdateNormPhase2,&quot;\n&quot;)
+</code></pre>
+
+<pre><code>## # Phase 2: Push down attachment levels
+## # http://www.w3.org/TR/vocab-data-cube/#normalize-algorithm
+## 
+## PREFIX qb:             &lt;http://purl.org/linked-data/cube#&gt;
+## 
+## # Dataset attachments
+## INSERT {
+##     ?obs  ?comp ?value
+## } WHERE {
+##     ?spec    qb:componentProperty ?comp ;
+##              qb:componentAttachment qb:DataSet .
+##     ?dataset qb:structure [qb:component ?spec];
+##              ?comp ?value .
+##     ?obs     qb:dataSet ?dataset.
+## };
+## 
+## # Slice attachments
+## INSERT {
+##     ?obs  ?comp ?value
+## } WHERE {
+##     ?spec    qb:componentProperty ?comp;
+##              qb:componentAttachment qb:Slice .
+##     ?dataset qb:structure [qb:component ?spec];
+##              qb:slice ?slice .
+##     ?slice ?comp ?value;
+##            qb:observation ?obs .
+## };
+## 
+## # Dimension values on slices
+## INSERT {
+##     ?obs  ?comp ?value
+## } WHERE {
+##     ?spec    qb:componentProperty ?comp .
+##     ?comp a  qb:DimensionProperty .
+##     ?dataset qb:structure [qb:component ?spec];
+##              qb:slice ?slice .
+##     ?slice ?comp ?value;
+##            qb:observation ?obs .
+## }
+</code></pre>
+
+<pre><code class="r">update.rdf( store, UpdateNormPhase2 )
+</code></pre>
+
+<pre><code>## [1] TRUE
+</code></pre>
+
+<pre><code class="r">normalizedfile&lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;example-norm-internal.ttl&quot;  )
+save.rdf( store, normalizedfile, format=&quot;TURTLE&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-norm-internal.ttl&quot;
+</code></pre>
+
+<h1>Update example cube using Fuseki</h1>
+
+<p>Using Fusiki to do the update</p>
+
+<pre><code>FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.1/
+(${FUSEKI_HOME}fuseki-server --mem --update /ex2) &amp;
+</code></pre>
+
+<p>ToDo: add storing PID in file (<code>echo $$ &gt; fuseki.pid;</code>), and redirecting output from fuseki.</p>
+
+<p>will re-use configuration files - so be sure of the contents of the run directory.</p>
+
+<p>To load, normalize phase 1, normalize phase 2, and finally dump the graph
+    ${FUSEKI_HOME}bin/s-put http://localhost:3030/ex2/data default ../sample-rdf/example.ttl
+    ${FUSEKI_HOME}bin/s-update &ndash;server=http://localhost:3030/ex2/update &ndash;update=../cube-vocabulary-rdf/normalize-algorithm-phase-1.ru 
+    ${FUSEKI_HOME}bin/s-update &ndash;server=http://localhost:3030/ex2/update &ndash;update=../cube-vocabulary-rdf/normalize-algorithm-phase-2.ru 
+    ${FUSEKI_HOME}bin/s-get http://localhost:3030/ex2/get default  &gt; ../sample-rdf/example-normalize.ttl</p>
+
+<h2>Using jena 2.13 - somewhat successfull</h2>
+
+<pre><code>/opt/apache-jena-2.13.0/arq --desc=jena-assambler.ttl  &quot;select * where {?s ?p ?o} limit 10&quot;
+/opt/apache-jena-2.13.0/bin/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-1.ru --dump
+/opt/apache-jena-2.13.0/update --desc=jena-assambler.ttl --update=normalize-algorithm-phase-2.ru --verbose --debug
+</code></pre>
+
+<h2>Using jena 3.0.0 - dit not work</h2>
+
+<h1>does not work with jena 3.0.0</h1>
+
+<p>/opt/apache-jena-3.0.0/bin/tdbloader &ndash;loc=DB example.ttl 
+arq &ndash;desc=tdb-assembler.ttl  &ldquo;select * where {?s ?p ?o} limit 10&rdquo;</p>
+
+<h2>Fuseki, adding configuration file</h2>
+
+<p>Creates setup</p>
+
+<pre><code>(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/fuseki-server )
+</code></pre>
+
+<p>In directory run/configuration add configuration for ex endpoint using the filename run/configuration/ex.ttl as:</p>
+
+<pre><code>@prefix :        &lt;#&gt; .
+@prefix fuseki:  &lt;http://jena.apache.org/fuseki#&gt; .
+@prefix rdf:     &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfs:    &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix tdb:     &lt;http://jena.hpl.hp.com/2008/tdb#&gt; .
+@prefix ja:      &lt;http://jena.hpl.hp.com/2005/11/Assembler#&gt; .
+## ---------------------------------------------------------------
+## Updatable TDB dataset with all services enabled.
+&lt;#service_tdb_all&gt; rdf:type fuseki:Service ;
+rdfs:label                      &quot;TDB ex&quot; ;
+fuseki:name                     &quot;ex&quot; ;
+fuseki:serviceQuery             &quot;query&quot; ;
+fuseki:serviceQuery             &quot;sparql&quot; ;
+fuseki:serviceUpdate            &quot;update&quot; ;
+fuseki:serviceUpload            &quot;upload&quot; ;
+fuseki:serviceReadWriteGraphStore      &quot;data&quot; ;
+# A separate read-only graph store endpoint:
+fuseki:serviceReadGraphStore       &quot;get&quot; ;
+fuseki:dataset           &lt;#tdb_dataset_readwrite&gt; ;
+.
+&lt;#tdb_dataset_readwrite&gt; rdf:type      tdb:DatasetTDB ;
+tdb:location &quot;run/databases/ex&quot; ;
+##ja:context [ ja:cxtName &quot;arq:queryTimeout&quot; ;  ja:cxtValue &quot;3000&quot; ] ;
+##tdb:unionDefaultGraph true ;
+.
+</code></pre>
+
+<p>Note - all files in run/configuration/ are read - so do not leave backup files in the directory.</p>
+
+<p>Start again:
+    (FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/fuseki-server )</p>
+
+<p>To run update query</p>
+
+<pre><code>(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex/update --update=normalize-algorithm-phase-1.ru )
+(FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-update --server=http://localhost:3030/ex/update --update=normalize-algorithm-phase-2.ru )
+</code></pre>
+
+<p>To dump the graph
+    (FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.0 /opt/apache-jena-fuseki-2.3.0/bin/s-get http://localhost:3030/ex/get default )</p>
 
 </body>
 

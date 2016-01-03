@@ -1,7 +1,7 @@
 ---
 title: "Get RDF data cube vocabulary as turtle file from qb: http://purl.org/linked-data/cube#"
 author: "mja@statgroup.dk"
-date: "2015-12-27"
+date: "2015-12-26"
 ---
 
 ## Setup 
@@ -49,7 +49,7 @@ cat("written to ", normalizePath(savefile) )
 ```
 
 ```
-## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
+## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
 ```
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
@@ -82,7 +82,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/RtmpWXdutq/get-cube.rq 
+SPARQL script stored in   /tmp/Rtmpfqpfmi/get-cube.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.
