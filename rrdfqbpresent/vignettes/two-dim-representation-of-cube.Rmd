@@ -14,6 +14,7 @@ vignette: >
 First load the package.
 ```{r, eval=TRUE}
 library(rrdfqbcrnd0)
+library(rrdfqbcrndex)
 ```
 
 
@@ -43,14 +44,11 @@ The HTML includes green-turtle
 In my setup I store the project under packages, and can symlink to the
 files from the extdata/sample-cfg directory.
 
-
     cd extdata/sample-cfg
     ln -s ~/packages/green-turtle/build/RDFa.min.1.4.0.js 
     ln -s ~/packages/green-turtle/build/RDFaProcessor.min.1.4.0.js 
     ln -s ~/packages/jquery-2.1.3.min/jquery-2.1.3.min.js .
     ln -s ~/packages/jquery-ui-1.11.3.custom .
-
-
 
 
 ```{r, echo=TRUE}

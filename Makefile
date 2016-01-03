@@ -1,4 +1,5 @@
-all: mk-rrdfcdisc mk-rrdfancillary mk-rrdfqb  mk-rrdfqbcrnd0 mk-rrdfcrndex 
+all: mk-rrdfancillary  mk-rrdfcdisc mk-rrdfqb  mk-rrdfqbcrnd0 \
+     mk-rrdfqbcrndcheck mk-rrdfqbpresent mk-rrdfqbcrndex 
 
 mk-rrdfcdisc:
 	cd rrdfcdisc; make
@@ -9,11 +10,14 @@ mk-rrdfancillary:
 mk-rrdfqbcrnd0:
 	cd rrdfqbcrnd0; make
 
-mk-rrdfcrndex:
-	cd rrdfcrndex; make
+mk-rrdfqbcrndex:
+	cd rrdfqbcrndex; make
 
 mk-rrdfqb:
 	cd rrdfqb; make
 
-mk-rrdfcrndcheck:
-	cd rrdfcrndcheck; make
+mk-rrdfqbpresent:
+	cd rrdfqbpresent; make
+
+mk-rrdfqbcrndcheck:
+	cd rrdfqbcrndcheck; make
