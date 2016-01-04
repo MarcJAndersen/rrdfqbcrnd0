@@ -2,7 +2,7 @@
 ##' 
 ##' 
 ##' @return Character vector with filenames for cdisc.rdf.org standards
-##' @export
+##' @export Get.filenames.for.cdisc.standards
 Get.filenames.for.cdisc.standards<- function(
   ) {
 

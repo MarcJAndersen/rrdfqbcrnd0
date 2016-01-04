@@ -13,10 +13,11 @@ vignette: >
 
 First load the package.
 ```{r, eval=TRUE}
+library(rrdf)
 library(rrdfqb)
 library(rrdfqbcrnd0)
-library(rrdfqbpresent)
 library(rrdfqbcrndex)
+library(rrdfqbpresent)
 ```
 
 
@@ -93,7 +94,7 @@ cat("HTML stored as: ", normalizePath(resHtmlFile), "\n")
 
 ```{r, echo=TRUE}
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrndex")
-htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "DC-DEMO-sample.html")
+htmlfile<- file.path(system.file("extdata/sample-html", package="rrdfqbcrnd0"), "DC-DEMO-sample.html")
 
 coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a", "crnd-dimension:factor", "crnd-dimension:procedure" )
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:agegr1", "crnd-dimension:race", "crnd-dimension:ethnic", "crnd-dimension:sex" )

@@ -6,7 +6,7 @@
 ##' 
 ##' @param prefixlist List of prefixes made by qb.def.prefixlist
 ##' @return String containing prefix statements for SPARQL query
-##' @export
+##' @export Get.rq.prefixlist.df
 Get.rq.prefixlist.df<- function( prefixlist ) {
 
 forsparqlprefix<- paste0(paste(

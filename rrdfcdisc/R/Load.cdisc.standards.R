@@ -14,7 +14,7 @@
 ##' @examples
 ##' cubestore<- Load.cdisc.standards()
 ##'  
-##' @export
+##' @export Load.cdisc.standards
 Load.cdisc.standards<- function(
   cdisc.load.zip= file.path(
     system.file( "extdata/CDISC-standards-rdf", package="rrdfqbcrnd0" ), "cdisc-rdf.zip"

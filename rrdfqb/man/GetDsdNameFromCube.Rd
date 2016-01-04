@@ -8,9 +8,9 @@ TODO: change the way domainname is used - should only use the dsdName}
 GetDsdNameFromCube(store, forsparqlprefixcommon = GetForSparqlPrefix())
 }
 \arguments{
-\item{forsparqlprefixcommon}{string with prefix defintions}
+\item{store}{the RDF store containing the datacube}
 
-\item{dsdName}{Dataset Descriptor Name}
+\item{forsparqlprefixcommon}{string with prefix defintions}
 }
 \value{
 the dsdName for the cube

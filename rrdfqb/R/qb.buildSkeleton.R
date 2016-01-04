@@ -7,7 +7,7 @@
 ##' @inheritParams qb.buildDSD
 ##' @return always TRUE
 ##' @author Tim Williams, Marc Andersen
-##' @export
+##' @export qb.buildSkeleton
 qb.buildSkeleton<- function(store, prefixlist,obsData, skeletonSource) {
 ## Loop through to create Property and Component specs
 

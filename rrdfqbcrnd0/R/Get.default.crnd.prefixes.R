@@ -1,8 +1,11 @@
 ##' Get list of default prefixes
 ##'
 ##' @return List with default prefixes
-##' @export
+##' @export Get.default.crnd.prefixes
 Get.default.crnd.prefixes<- function( ) {
-  env[["qbCDISCprefixes"]]
+    
+    ## TODO(mja)  env[["qbCDISCprefixes"]]
+    ## TODO(mja) move to more appropriate location
+    rrdfcdisc:::env[["qbCDISCprefixes"]]
 }
   

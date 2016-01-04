@@ -5,7 +5,7 @@
 ##' @param common.prefixes Common prefixes, using default if NULL
 ##' @param custom.prefixes Custom prefixes, using default if NULL
 ##' @return Character string with PREFIX statements delimited by CR
-##' @export
+##' @export GetForSparqlPrefix.as.df
 
 GetForSparqlPrefix.as.df<- function( domainName=NULL, common.prefixes=NULL, custom.prefixes=NULL  ) {
 
