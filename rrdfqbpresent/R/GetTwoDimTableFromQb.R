@@ -15,7 +15,7 @@
 ##' This could also be done using a SPARQL query. Most likely this would be a more
 ##' clear approach.
 
-##' @export
+##' @export GetTwoDimTableFromQb
 
 ## TODO: Consider
 ## rownamefunc function for deriving rownames
