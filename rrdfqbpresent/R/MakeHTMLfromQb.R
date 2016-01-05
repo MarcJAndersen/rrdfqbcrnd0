@@ -24,9 +24,10 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
     ## knitr::kable(qbtest[order(strtoi(qbtest$rowno)),])
 
     oDx<-attr(qbtest,"observationsDesc")
+    ## knitr::kable(oDx)
     oDxx<- oDx[! is.na(oDx$s),]
     oD<- oDxx[order(strtoi(oDxx$rowno)),]
-    print(colnames(oD))
+    ## print(colnames(oD))
     ## TODO(mja): ensure measurefmt is always defined - this is a quick fix
     if (!("measurefmt" %in% names(oD))) {
         oD$measurefmt<- " "
@@ -36,13 +37,13 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
     cellpartnoindex<- unique(oD$cellpartno)
 
     Showit<- function() {
-        presrowvarindex
-        colvarindex
-        cellpartnoindex
-        oD[,c("s","rowno","colno","cellpartno")]
+        print(presrowvarindex)
+        print(colvarindex)
+        print(cellpartnoindex)
+        print(oD[,c("s","rowno","colno","cellpartno")])
     }
 
-    ## Showit()
+    Showit()
 
     # Determine variable names in Od dataframe
     presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value", rowdim)
@@ -57,15 +58,14 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
     ## as the observations are stored as RDFa
 
     if (is.null(htmlfile)) {
-        htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbcrnd0"), "test.html")
+        htmlfile<- file.path(system.file("extdata/sample-cfg", package="rrdfqbpresent"), "test.html")
                                         # htmlfile<- file.path(tempdir(),"test.html")
     }
 
-    append<- TRUE
     cat("<!DOCTYPE HTML>\n", file=htmlfile, append=FALSE)
     cat('
 <html>
-  <head>
+<head>
 <meta charset="UTF-8">
 <title>DEMO table as html</title>
 ',
@@ -147,7 +147,8 @@ function obsclick(obssubject)
 dsdName,
 '</h1>
 '
-, file=htmlfile, append=TRUE)
+, file=htmlfile, append=TRUE
+)
 
     cat('<div id="container">', file=htmlfile, append=TRUE)
 
@@ -164,7 +165,7 @@ dsdName,
         for (rr in presrowvarindex) {
             thisNoOfNonALL<-0
             for (rowidname in idrow) {
-##                cat("Row ", rr, ", or ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n")
+                cat("Row ", rr, ", observation (or) ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n")
                 if ( is.na(oD[or,rowidname]) || oD[or,rowidname]=="_ALL_" ) {
                     if (!is.element(rowidname,hasallidrow) ) {
                         hasallidrow<- c(hasallidrow, rowidname)
@@ -247,68 +248,71 @@ dsdName,
 
     ## data rows
     or<- 1
+cat("Start data rows\n")    
     for (rr in presrowvarindex) {
+        cat("Data rows: Row ", rr, ", observation (or) ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n")
         cat("<tr>", file=htmlfile, append=TRUE)
                                         # print(rr)
 
         ## START make the row identification
         if (oD$rowno[or]==rr) {
             for (rowidname in idrow) {
-##                cat("<td>", oD[or,rowidname],  "</td>", file=htmlfile, append=TRUE)
                 ## this is not a long term approach
-                cat("<td><a href=\"",oD[or,gsub("(^.*)value$","\\1",rowidname)],"\">", oD[or,rowidname], "</a></th>", file=htmlfile, append=TRUE)
+                cat("<td>",
+                    "<a href=\"",oD[or,gsub("(^.*)value$","\\1",rowidname)],"\">",
+                    oD[or,rowidname],
+                    "</a>",
+                    "</td>", file=htmlfile, append=TRUE)
             }
         }
         ## END make the row identification
         
         ## START identify all column related information to be projected into column
         if (showProcedure) {
-        xor<- or
-        xrowid<- rep("", length(cellpartnoindex))
-        yrowid<- rep("", length(cellpartnoindex))
-
-        for (cc in colvarindex) {
-              cpindex<-0
-              for (cp in cellpartnoindex) {
-                  cpindex<- cpindex+1
-                if (oD$rowno[xor]==rr & oD$colno[xor]==cc & oD$cellpartno[xor]==cp ) {
-                    if (!is.na(oD$factorvalue[xor]) && yrowid[cpindex]=="") {
-                        yrowid[cpindex]<-paste0("<a href=\"",oD$factor[xor],"\">",  oD$factorvalue[xor], "</a>",collapse="")
+            xor<- or
+            xrowid<- rep("", length(cellpartnoindex))
+            yrowid<- rep("", length(cellpartnoindex))
+            
+            for (cc in colvarindex) {
+                cpindex<-0
+                for (cp in cellpartnoindex) {
+                    cpindex<- cpindex+1
+                    if (oD$rowno[xor]==rr & oD$colno[xor]==cc & oD$cellpartno[xor]==cp ) {
+                        if (!is.na(oD$factorvalue[xor]) && yrowid[cpindex]=="") {
+                            yrowid[cpindex]<-paste0("<a href=\"",oD$factor[xor],"\">",
+                                                    oD$factorvalue[xor], "</a>",collapse="")
+                        }
+                        if (!is.na(oD$procedurevalue[xor]) && xrowid[cpindex]=="") {
+                            xrowid[cpindex]<-paste0("<a href=\"",oD$procedure[xor],"\">",
+                                                    oD$procedurevalue[xor], "</a>",collapse="")
+                        }
+                        xor<- xor+1
                     }
-                    if (!is.na(oD$procedurevalue[xor]) && xrowid[cpindex]=="") {
-                        xrowid[cpindex]<-paste0("<a href=\"",oD$procedure[xor],"\">",  oD$procedurevalue[xor], "</a>",collapse="")
-                    }
-                    xor<- xor+1
                 }
             }
-        }
-        cat("<td>", paste(yrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
-        cat("<td>", paste(xrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
+            cat("<td>", paste(yrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
+            cat("<td>", paste(xrowid,collapse=", ",sep=""),  "</td>", file=htmlfile, append=TRUE)
         }
         
         ## END identify all column related information to be projected into column
         ## 
         for (cc in colvarindex) {
-                                        # print(cc)
-                                        #    cat("<td>", file=htmlfile, append=TRUE)
             cpindex<-0
             for (cp in cellpartnoindex) {
-                                        # print(cp)
                 cpindex<- cpindex+1
                 cat("<td>", file=htmlfile, append=TRUE)
                 ## if (cpindex>1) {
                 ## ## separator between cells should be taken from data
                 ##       cat(" ", file=htmlfile, append=TRUE)
                 ## }
+cat("colvarindex: ", oD$rowno[or],"==", rr, " ", oD$colno[or], "==", cc, " ", oD$cellpartno[or], "==", cp, "\n" )
                 if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
                     ## The observation
                     ## next line is for simple fly-over
                     if (useRDFa) {
-
                         cat(paste0("<a title=\"", oD$measureIRI[or], "\"",
                                    " onclick=obsclick(\"", oD$measureIRI[or], "\")",
                                    ">\n" ), file=htmlfile, append=TRUE)
-
                         cat(paste0('<span ', 'id="', gsub("ds:","",oD$s[or]), '"',
                                    'resource="', oD$s[or],'"',
                                    ' typeof="qb:Observation" ',
@@ -319,7 +323,6 @@ dsdName,
                     } else {
                         cat(paste0("<a href=\"", oD$measureIRI[or], "\"",
                                    ">\n" ), file=htmlfile, append=TRUE)
-
                     }
                     
                     ## TODO(mja) how to store dataSet information
@@ -330,6 +333,7 @@ dsdName,
                     ## cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">\n' ), file=htmlfile, append=TRUE)
                     ## }
 
+                    cat("Observation: ", oD$measure[or],"\n" )                    
                     ## formatting to applied to measure
                     if (oD$measurefmt[or] != " ") {
                         cat(sprintf(oD$measurefmt[or],as.numeric(oD$measure[or])), file=htmlfile, append=TRUE)
@@ -337,15 +341,11 @@ dsdName,
                     else {
                         cat(paste0(oD$measure[or]), file=htmlfile, append=TRUE)
                     }
-
-                    
                     ## for (prop in dimensions) {
                     ## cat( '</span>\n', file=htmlfile, append=TRUE)
                     ## }
-
                     ## dataSet information
                     ## cat( '</span>\n', file=htmlfile, append=TRUE)
-
                     if (useRDFa) {
                         cat( '</span>\n', file=htmlfile, append=TRUE)
                     }
@@ -357,7 +357,10 @@ dsdName,
                                         #    cat("</td>\n", file=htmlfile, append=TRUE)
         }
         cat("</tr>", "\n", file=htmlfile, append=TRUE)
+cat("End of for, or ", or, "\n" )
     }
+
+
     cat("</table>\n", file=htmlfile, append=TRUE)
     cat("</div>\n", file=htmlfile, append=TRUE)
 

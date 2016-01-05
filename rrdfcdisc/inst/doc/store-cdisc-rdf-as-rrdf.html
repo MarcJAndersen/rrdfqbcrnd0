@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube#">http://purl.org/linked-data/cube#</a>).</title>
+<title>Preliminaries</title>
 
 <script type="text/javascript">
 window.onload = function() {
@@ -201,93 +201,275 @@ hr {
 </head>
 
 <body>
-<h1>Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube#">http://purl.org/linked-data/cube#</a>).</h1>
+<h1>Preliminaries</h1>
 
-<p>This script retrieves the RDF data cube vocabulary and stores it as a .ttl in the packages.</p>
-
-<h2>Setup</h2>
+<p>The path to the package root is <code>../..</code> relative to the present working directory.</p>
 
 <pre><code class="r">devtools::load_all(pkg=&quot;../..&quot;)
 </code></pre>
 
-<pre><code>## Loading rrdfqb
-## Loading required package: xlsx
-## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: xlsxjars
+<pre><code>## Loading rrdfcdisc
 ## Loading required package: RCurl
+## Loading required package: methods
 ## Loading required package: bitops
+## Loading required package: rrdf
+## Loading required package: rJava
 ## 
-## Attaching package: &#39;RCurl&#39;
+## Attaching package: &#39;rJava&#39;
 ## 
-## The following object is masked from &#39;package:rJava&#39;:
+## The following object is masked from &#39;package:RCurl&#39;:
 ## 
 ##     clone
 ## 
-## Loading required package: rrdf
 ## Loading required package: rrdflibs
+## Loading required package: devtools
 </code></pre>
 
-<h1>Get and store RDF data vocabulary</h1>
+<h2>Directory for storing rdf.cdisc.org and RDF data cube specification</h2>
 
-<pre><code class="r">library(RCurl)
-library(devtools)
-qbURL&lt;-&quot;http://purl.org/linked-data/cube#&quot;
-if (! url.exists(qbURL) ) {
-  stop(paste0(&quot;Can not access URL &quot;,qbURL))
-}
-cube.vocabulary.ttl &lt;- getURL(qbURL)
-savefile &lt;- file.path(system.file(&quot;extdata/cube-vocabulary-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;cube.ttl&quot; )
-writeLines( cube.vocabulary.ttl, savefile)
-cat(&quot;written to &quot;, normalizePath(savefile) )
+<pre><code class="bash">echo change below to suit your setup
+export CDISCRDF_HOME=~/projects/phrmwg
 </code></pre>
 
-<pre><code>## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
+<h2>Make local copy of the rdf.cdisc.org</h2>
+
+<p>Here is how to make a local copy of the rdf.cdisc.org - with Bash Shell on Linux.
+In my setup the <code>~/projects/phrmwg</code> directory contains a git pull of [rdf.cdisc.org].</p>
+
+<pre><code class="bash">echo only if directory does not exist 
+mkdir -p ${CDISCRDF_HOME}  
+cd ${CDISCRDF_HOME}
+
+git clone https://github.com/phuse-org/rdf.cdisc.org.git
+
 </code></pre>
 
-<h2>SPARQL for getting the cube vocabulary using FROM in the SPARQL query</h2>
+<h2>Finding the files</h2>
+
+<p>Replace directory for find with the appropriate directory for your setup.
+Also change below for the function <code>Get.filenames.for.cdisc.standards.R</code>.</p>
+
+<p>This is one way to find the file names:</p>
+
+<pre><code>find ${CDISCRDF_HOME} -name &quot;*.rdf&quot; -o -name &quot;*.owl&quot; -o -name &quot;*.ttl&quot;
+</code></pre>
+
+<p>The result of the function call Get.filenames.for.cdisc.standards() in
+the rrdfqbcrdn0 package is intended to match the output from find.</p>
+
+<pre><code class="r">Get.filenames.for.cdisc.standards()
+</code></pre>
+
+<p>Note: this is not a straightforward way to do it.</p>
+
+<h1>R-code</h1>
+
+<h2>Setup</h2>
+
+<pre><code class="r">library(rrdf)
+library(tools)
+</code></pre>
+
+<h2>Create local version using RRDF from local directory conting rdf.cdisc.org</h2>
+
+<p>To conserve space in the R package the files are located outside the package.</p>
+
+<p>The files are stored beneath the directory given by fileStemDirectory.
+The path relative to fileStemDirectory is stored in filesToLoad.</p>
+
+<pre><code class="r">fileStemDirectory&lt;- &quot;~/projects/phrmwg&quot;
+
+filesToLoad&lt;- c(
+&quot;rdf.cdisc.org/resources/w3.org/skos.rdf&quot;, 
+&quot;rdf.cdisc.org/resources/dublincore.org/dcam.rdf&quot;, 
+&quot;rdf.cdisc.org/resources/dublincore.org/dcelements.rdf&quot;, 
+&quot;rdf.cdisc.org/resources/dublincore.org/dcterms.rdf&quot;, 
+&quot;rdf.cdisc.org/terminology-2013-06-28/glossary-terminology.owl&quot;, 
+&quot;rdf.cdisc.org/terminology-2013-06-28/cdash-terminology.owl&quot;, 
+&quot;rdf.cdisc.org/terminology-2013-06-28/sdtm-terminology.owl&quot;, 
+&quot;rdf.cdisc.org/terminology-2013-06-28/qs-terminology.owl&quot;, 
+&quot;rdf.cdisc.org/terminology-2013-06-28/send-terminology.owl&quot;, 
+&quot;rdf.cdisc.org/terminology-2013-06-28/adam-terminology.owl&quot;, 
+&quot;rdf.cdisc.org/std/sdtm-1-2.ttl&quot;,
+&quot;rdf.cdisc.org/std/all-standards.ttl&quot;,
+&quot;rdf.cdisc.org/std/cdash-1-1.ttl&quot;,
+&quot;rdf.cdisc.org/std/sdtmig-3-1-3.ttl&quot;,
+&quot;rdf.cdisc.org/std/sdtmig-3-1-2.ttl&quot;,
+&quot;rdf.cdisc.org/std/adamig-1-0.ttl&quot;,
+&quot;rdf.cdisc.org/std/sendig-3-0.ttl&quot;,
+&quot;rdf.cdisc.org/std/sdtm-1-3.ttl&quot;,
+&quot;rdf.cdisc.org/std/adam-2-1.ttl&quot;, 
+&quot;rdf.cdisc.org/schemas/ct-schema.owl&quot;, 
+&quot;rdf.cdisc.org/schemas/meta-model-schema.owl&quot;, 
+&quot;rdf.cdisc.org/schemas/cdisc-schema.owl&quot;
+  )
+</code></pre>
+
+<p>Then the files are input and the size of the resulting file is reported.</p>
+
+<pre><code class="r">cdisc.save.zip&lt;- Create.cdisc.standards.from.local(
+  cdisc.files.dir= fileStemDirectory,
+  CDISCfilelist= filesToLoad
+  )
+</code></pre>
+
+<pre><code>## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/w3.org/skos.rdf ..
+## .. total number of triples: 1376
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcam.rdf ..
+## .. total number of triples: 1389
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcelements.rdf ..
+## .. total number of triples: 1497
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/resources/dublincore.org/dcterms.rdf ..
+## .. total number of triples: 1931
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/glossary-terminology.owl ..
+## .. total number of triples: 2934
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/cdash-terminology.owl ..
+## .. total number of triples: 3862
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/sdtm-terminology.owl ..
+## .. total number of triples: 53609
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/qs-terminology.owl ..
+## .. total number of triples: 79564
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/send-terminology.owl ..
+## .. total number of triples: 118015
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/terminology-2013-06-28/adam-terminology.owl ..
+## .. total number of triples: 118198
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtm-1-2.ttl ..
+## .. total number of triples: 119674
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/all-standards.ttl ..
+## .. total number of triples: 119684
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/cdash-1-1.ttl ..
+## .. total number of triples: 127128
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtmig-3-1-3.ttl ..
+## .. total number of triples: 139414
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtmig-3-1-2.ttl ..
+## .. total number of triples: 150176
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/adamig-1-0.ttl ..
+## .. total number of triples: 154941
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sendig-3-0.ttl ..
+## .. total number of triples: 163111
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/sdtm-1-3.ttl ..
+## .. total number of triples: 164889
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/std/adam-2-1.ttl ..
+## .. total number of triples: 164917
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/ct-schema.owl ..
+## .. total number of triples: 165017
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/meta-model-schema.owl ..
+## .. total number of triples: 165213
+## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..
+## .. total number of triples: 165406
+## Final rdf.cdisc.org rrdf store, number of triples: 165406
+## rrdf store saved to turle file: /tmp/RtmpkpDaBE/cdisc-rdf.ttl
+## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+</code></pre>
+
+<pre><code class="r">cdisc.save.zip.info&lt;- file.info(cdisc.save.zip)
+message(&quot;File &quot;, cdisc.save.zip, &quot; created &quot;, cdisc.save.zip.info$ctime, &quot; size &quot;, cdisc.save.zip.info$size, &quot; bytes&quot;)
+</code></pre>
+
+<pre><code>## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-01-05 21:37:50 size 2310300 bytes
+</code></pre>
+
+<h3>Creating SPARQL script for getting CDISC standard using FROM dataset</h3>
 
 <p>The following is experimental and not needed for the present
 package. See below for explanation.</p>
 
-<pre><code class="r">rdf.data.cube.URLstem&lt;- qbURL
+<pre><code class="r">rdf.cdisc.org.URLstem&lt;- &quot;https://github.com/phuse-org/rdf.cdisc.org/raw/master&quot;
+rdf.data.cube.URLstem&lt;- &quot;http://publishing-statistical-data.googlecode.com/svn/trunk/specs/src/main/vocab&quot;
+rqfilesToLoad&lt;- filesToLoad
+rqfilesToLoad&lt;- gsub(&quot;rdf.cdisc.org&quot;, rdf.cdisc.org.URLstem, rqfilesToLoad )
+rqfilesToLoad&lt;- gsub(&quot;rdf-data-cube&quot;, rdf.data.cube.URLstem, rqfilesToLoad )
+
+
 SPARQLscript&lt;- paste(
   &quot;CONSTRUCT { ?s ?p ?o }&quot;,
-paste0( &quot;FROM &quot;, &quot;&lt;&quot;, rdf.data.cube.URLstem, &quot;&gt;&quot;, collapse=&quot;\n&quot; )
+paste0( &quot;FROM &quot;, &quot;&lt;&quot;, rqfilesToLoad, &quot;&gt;&quot;, collapse=&quot;\n&quot; )
   ,
   &quot;WHERE { ?s ?p ?o }&quot;, sep=&quot;\n&quot;, collapse=&quot;\n&quot;
 )
+
 cat(SPARQLscript,&quot;\n&quot;)
 </code></pre>
 
 <p>CONSTRUCT { ?s ?p ?o }
-FROM <a href="http://purl.org/linked-data/cube#">http://purl.org/linked-data/cube#</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/w3.org/skos.rdf">https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/w3.org/skos.rdf</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcam.rdf">https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcam.rdf</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcelements.rdf">https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcelements.rdf</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcterms.rdf">https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcterms.rdf</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/glossary-terminology.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/glossary-terminology.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/cdash-terminology.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/cdash-terminology.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/sdtm-terminology.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/sdtm-terminology.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/qs-terminology.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/qs-terminology.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/send-terminology.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/send-terminology.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/adam-terminology.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/adam-terminology.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtm-1-2.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtm-1-2.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/all-standards.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/all-standards.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/cdash-1-1.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/cdash-1-1.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtmig-3-1-3.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtmig-3-1-3.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtmig-3-1-2.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtmig-3-1-2.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/adamig-1-0.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/adamig-1-0.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sendig-3-0.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sendig-3-0.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtm-1-3.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtm-1-3.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/adam-2-1.ttl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/adam-2-1.ttl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/ct-schema.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/ct-schema.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/meta-model-schema.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/meta-model-schema.owl</a>
+FROM <a href="https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl">https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl</a>
 WHERE { ?s ?p ?o } </p>
 
-<pre><code class="r">SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-cube.rq&quot;)
+<pre><code class="r">SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-rdf.disc.org.rq&quot;)
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)
 </code></pre>
 
-<p>SPARQL script stored in   /tmp/Rtmp3PU6C1/get-cube.rq </p>
+<p>SPARQL script stored in   /tmp/RtmpkpDaBE/get-rdf.disc.org.rq </p>
 
 <h3>Using the script with R</h3>
 
 <p>The R-code below does not work with rrdf.</p>
 
-<pre><code class="r">store &lt;- new.rdf()
-results &lt;- construct.rdf(store, SPARQLscript )
+<pre><code class="r">cdisc.rdf.store &lt;- new.rdf()
+results &lt;- construct.rdf(cdisc.rdf.store, SPARQLscript )
 summarize.rdf(results)
 </code></pre>
 
-<p>However, it works using a local Fuseki instance. 
-The code below assumes a local Fuseki instance is running at <code>http://localhost:3030/arm/query</code>.
-Change to follow your setup.</p>
+<p>The code below assumes a locate fuseki instance is running.</p>
 
 <pre><code class="r">endpoint&lt;- &quot;http://localhost:3030/arm/query&quot;
 results.fuseki &lt;- construct.remote(endpoint, SPARQLscript )
 summarize.rdf(results.fuseki)
 </code></pre>
+
+<p>This worked partially with fuseki 2.3 as of 28-oct-2015: 42199 triples was retrieved. The fuseki endpoint was started using the configuration file <code>../extdata/sample-rdf/fuseki-crnd-example-config.ttl</code> (see instruction in top of the file).</p>
+
+<p>Alternative a virtouso endpoint can be used:</p>
+
+<pre><code class="r">endpoint2&lt;- &quot;http://localhost:8890/sparql&quot;
+results.virtouso &lt;- construct.remote(endpoint2, SPARQLscript )
+summarize.rdf(results.virtouso)
+</code></pre>
+
+<p>This worked partially with virtuoso 7.2 as of 28-oct-2015: 164976 triples was retrieved. The fuseki endpoint was started using the configuration file <code>../extdata/sample-rdf/fuseki-crnd-example-config.ttl</code> (see instruction in top of the file). Note: the virtuoso endpoint must support remote retrival of data (see [http://localhost:8890/sparql?help=enable_sponge]) and the value of 
+<code>ResultSetMaxRows</code> in the SPARQL section of <code>virtuoso.ini</code> should be sufficiently high; for the rdf.cdisc.org mentioned here a value of 200000 may be needed.</p>
+
+<h3>Using the script with jena arq</h3>
+
+<p>The generated SPARQL query works with arq when using a local endpoint.
+The code below is expected to run in the directory given by <code>tempdir()</code>.
+Replace <em>get-rdf.disc.org.rq</em> with the path to the generated file (see above).</p>
+
+<pre><code>export JENAROOT=/opt/apache-jena-3.0.0
+export PATH=$PATH:$JENAROOT/bin
+arq --query=get-rdf.disc.org.rq &gt; construct-rdf.disc.org.ttl
+</code></pre>
+
+<p>The next statements loads the turtle files generated by the arq invocation above.</p>
+
+<pre><code class="r">arqCDISCTtl&lt;- file.path(tempdir(), &quot;construct-rdf.disc.org.ttl&quot;)
+cdisc.rdf.arq&lt;- load.rdf( arqCDISCTtl, format=&quot;TURTLE&quot;)
+summarize.rdf(cdisc.rdf.arq)
+</code></pre>
+
+<p>This worked as expected as of 28-oct-2015.</p>
 
 </body>
 
