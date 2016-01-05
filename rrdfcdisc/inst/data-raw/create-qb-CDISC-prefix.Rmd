@@ -13,9 +13,8 @@ vignette: >
 
 ## Setup 
 ```{r}
-knitr::read_chunk("setup.R")
-```
-```{r setup}
+library(devtools)
+devtools::load_all(pkg="../..")
 ```
 
 # Prefixes for the package

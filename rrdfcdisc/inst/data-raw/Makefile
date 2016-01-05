@@ -9,10 +9,11 @@ HTMLS= store-cdisc-rdf-as-rrdf.html create-qb-CDISC-prefix.html
 MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 
 CDISCRDFZIP=../extdata/CDISC-standards-rdf/cdisc-rdf.zip
+RDAQBCDISCPREFIXES=../../data/qbCDISCprefixes.rda
 
 FORDOC= ${HTMLS} ${MDS} 
 
-TARGETS=${CDISCRDFZIP}  ${FORDOC}
+TARGETS=${CDISCRDFZIP} ${RDAQBCDISCPREFIXES} ${FORDOC}
 
 RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
@@ -20,13 +21,13 @@ RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
 
-RDAQBCDISCPREFIXES=../../data/qbCDISCprefixes.rda
 
 
 all: ${TARGETS}
 
 clean: 
 	rm -f ${TARGETS}
+	(cd ../doc; rm -f ${FORDOC})
 
 installDoc:
 #	mkdir -p ../doc/figure

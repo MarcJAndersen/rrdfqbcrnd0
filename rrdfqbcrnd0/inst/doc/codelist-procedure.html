@@ -462,7 +462,7 @@ knitr::kable(cubeMetadata)
 <pre><code class="r">outcube&lt;- BuildCubeFromDataFrames(cubeMetadata, obsData )
 </code></pre>
 
-<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Line 10, column 28: Unresolved prefixed name: qb:DataStructureDefinition
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;BuildCubeFromDataFrames&quot;
 </code></pre>
 
 <p>This shows a simple use of the BuildCubeFromDataFrames function. 
@@ -508,13 +508,13 @@ temp&lt;-load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= cube)
 dsdName&lt;- GetDsdNameFromCube( cube )
 </code></pre>
 
-<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Line 5, column 8: Unresolved prefixed name: qb:DataStructureDefinition
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetDsdNameFromCube&quot;
 </code></pre>
 
 <pre><code class="r">domainName&lt;- GetDomainNameFromCube( cube )
 </code></pre>
 
-<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Line 5, column 8: Unresolved prefixed name: qb:DataStructureDefinition
+<pre><code>## Error in GetDomainNameFromCube(cube): could not find function &quot;GetDsdNameFromCube&quot;
 </code></pre>
 
 <pre><code class="r">cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot; )
@@ -526,13 +526,13 @@ dsdName&lt;- GetDsdNameFromCube( cube )
 <pre><code class="r">prefixlist&lt;- Get.prefixlist.from.df(GetForSparqlPrefix.as.df(domainName=domainName))
 </code></pre>
 
-<pre><code>## Error in GetForSparqlPrefix.as.df(domainName = domainName): object &#39;domainName&#39; not found
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;Get.prefixlist.from.df&quot;
 </code></pre>
 
 <pre><code class="r">forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
 </code></pre>
 
-<pre><code>## Error in GetForSparqlPrefix.as.df(domainName = domainName, common.prefixes = common.prefixes, : object &#39;domainName&#39; not found
+<pre><code>## Error in GetForSparqlPrefix(domainName): could not find function &quot;Get.rq.prefix.df&quot;
 </code></pre>
 
 <pre><code class="r">cat(forsparqlprefix,&quot;\n&quot;)
@@ -580,7 +580,7 @@ TODO: Consider other approach for including the domainname, or use other concept
 
 <p>The SPARQL query for codelists are shown in the next output.</p>
 
-<pre><code>## Error in paste(forsparqlprefix, &quot;\nselect distinct ?p ?vn ?cl ?prefLabel \nwhere {\n?DataStructureDefinition a qb:DataStructureDefinition ;\n   qb:component ?component .\n?component a qb:ComponentSpecification .\n?component qb:dimension ?p .\n?p qb:codeList ?c .\n?c skos:hasTopConcept ?cl .\n?cl skos:prefLabel ?prefLabel .\nOPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn } \nvalues ( ?DataStructureDefinition ) {\n&quot;, : object &#39;forsparqlprefix&#39; not found
+<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetCodeListSparqlQuery&quot;
 </code></pre>
 
 <pre><code>## Error in cat(codelists.rq): object &#39;codelists.rq&#39; not found

@@ -88,8 +88,8 @@ install_local("rrdfancillary_0.2.0.tar.gz")
 install_local("rrdfcdisc_0.2.0.tar.gz")    
 install_local("rrdfqb_0.2.0.tar.gz")       
 install_local("rrdfqbcrnd0_0.2.0.tar.gz")  
-install_local("rrdfqbcrndcheck_0.2.0.tar.gz")
 install_local("rrdfqbcrndex_0.2.0.tar.gz")
+install_local("rrdfqbcrndcheck_0.2.0.tar.gz")
 install_local("rrdfqbpresent_0.2.0.tar.gz")
 ```
 

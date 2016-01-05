@@ -11,7 +11,7 @@
 ##' @export Create.cdisc.standards.from.local
 Create.cdisc.standards.from.local<- function(
   cdisc.files.dir= "~/projects/phrmwg/rdf.cdisc.org",
-  cdisc.save.zip=file.path(system.file("extdata/CDISC-standards-rdf", package="rrdfqbcrnd0"), "cdisc-rdf.zip" ),
+  cdisc.save.zip=file.path(system.file("extdata/CDISC-standards-rdf", package="rrdfcdisc"), "cdisc-rdf.zip" ),
   cdisc.save.ttl= file.path(tempdir(),"cdisc-rdf.ttl"),
   remove.cdisc.save.ttl= TRUE,
   CDISCfilelist= Get.filenames.for.cdisc.standards()

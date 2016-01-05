@@ -50,7 +50,7 @@ cat("written to ", normalizePath(savefile) )
 ```
 
 ```
-## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
+## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
 ```
 
 ## SPARQL for getting the cube vocabulary using FROM in the SPARQL query 
@@ -80,7 +80,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/Rtmp3PU6C1/get-cube.rq 
+SPARQL script stored in   /tmp/RtmpPQ4uvV/get-cube.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.
