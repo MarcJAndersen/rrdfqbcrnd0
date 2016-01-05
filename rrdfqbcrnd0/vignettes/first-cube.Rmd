@@ -217,7 +217,7 @@ vocabulary. Therefore the RDF model must contain the RDF data cube
 vocabulary.
 
 ```{r} 
-cubeVocabularyFn<- system.file("extdata/CUBE-standards-rdf","cube.ttl", package="rrdfqbcrnd0")
+cubeVocabularyFn<- system.file("extdata/cube-vocabulary-rdf","cube.ttl", package="rrdfqb")
 cubeVocabulary<- load.rdf(cubeVocabularyFn,format="TURTLE")
 cubeData<- combine.rdf( cubeVocabulary, cube)
 ```

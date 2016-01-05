@@ -21,14 +21,14 @@ This script creates the result and codelist for a simple DEMO table.
 ```{r, eval=TRUE}
 library(rrdfqbcrnd0)
 
-dataCubeSpec<- system.file("extdata/CUBE-standards-rdf", "cube.ttl", package="rrdfqbcrnd0")
+cubeVocabularyFn<- system.file("extdata/cube-vocabulary-rdf","cube.ttl", package="rrdfqb")
 
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 
 store <- new.rdf()  # Initialize
 
-cat("Loading cube specfication from ", dataCubeSpec, "\n")
-tmp<- load.rdf(dataCubeSpec, format="TURTLE", appendTo= store)
+cat("Loading cube specfication from ", cubeVocabularyFn, "\n")
+tmp<- load.rdf(cubeVocabularyFn, format="TURTLE", appendTo= store)
 
 cat("Loading cube from ", dataCubeFile, "\n")
 tmp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)

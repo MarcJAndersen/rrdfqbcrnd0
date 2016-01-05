@@ -230,21 +230,25 @@ TODO(mja): fix it.</p>
 ## Loading required package: rrdflibs
 </code></pre>
 
-<pre><code class="r">dataCubeSpec&lt;- system.file(&quot;extdata/CUBE-standards-rdf&quot;, &quot;cube.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
+<pre><code class="r">cubeVocabularyFn&lt;- system.file(&quot;extdata/cube-vocabulary-rdf&quot;,&quot;cube.ttl&quot;, package=&quot;rrdfqb&quot;)
 
 dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DEMO-sample.ttl&quot;, package=&quot;rrdfqbcrnd0&quot;)
 
 store &lt;- new.rdf()  # Initialize
 
-cat(&quot;Loading cube specfication from &quot;, dataCubeSpec, &quot;\n&quot;)
+cat(&quot;Loading cube specfication from &quot;, cubeVocabularyFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Loading cube specfication from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CUBE-standards-rdf/cube.ttl
+<pre><code>## Loading cube specfication from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqb/extdata/cube-vocabulary-rdf/cube.ttl
 </code></pre>
 
-<pre><code class="r">tmp&lt;- load.rdf(dataCubeSpec, format=&quot;TURTLE&quot;, appendTo= store)
+<pre><code class="r">tmp&lt;- load.rdf(cubeVocabularyFn, format=&quot;TURTLE&quot;, appendTo= store)
+</code></pre>
 
-cat(&quot;Loading cube from &quot;, dataCubeFile, &quot;\n&quot;)
+<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/hp/hpl/jena/rdf/model/Model;&quot;, : org.apache.jena.riot.RiotException: [line: 4, col: 9 ] Triples not terminated by DOT
+</code></pre>
+
+<pre><code class="r">cat(&quot;Loading cube from &quot;, dataCubeFile, &quot;\n&quot;)
 </code></pre>
 
 <pre><code>## Loading cube from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/sample-rdf/DC-DEMO-sample.ttl
@@ -255,7 +259,7 @@ cat(&quot;Loading cube from &quot;, dataCubeFile, &quot;\n&quot;)
 summarize.rdf(store)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 3381&quot;
+<pre><code>## [1] &quot;Number of triples: 3095&quot;
 </code></pre>
 
 <h2>Execute the DEMO* SPARQL queries</h2>
@@ -273,7 +277,11 @@ for (rqFile in rqFiles) {
 }
 </code></pre>
 
-<pre><code>## File  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/sample-rdf/DEMOattributes.rq
+<pre><code>## File
+</code></pre>
+
+<pre><code>## Warning in file(con, &quot;r&quot;): file(&quot;&quot;) only supports open = &quot;w+&quot; and open = &quot;w
+## +b&quot;: using the former
 </code></pre>
 
 <pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Encountered &quot;&lt;EOF&gt;&quot; at line 1, column 0.
@@ -298,7 +306,7 @@ for (rqFile in rqFiles) {
 <pre><code class="r">domainName&lt;- GetDomainNameFromCube( store )
 </code></pre>
 
-<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetDomainNameFromCube&quot;
+<pre><code>## Error in GetDomainNameFromCube(store): could not find function &quot;GetDsdNameFromCube&quot;
 </code></pre>
 
 <pre><code class="r">cat(&quot;dsdName &quot;, dsdName, &quot;, domainName &quot;, domainName, &quot;\n&quot; )
@@ -310,7 +318,7 @@ for (rqFile in rqFiles) {
 <pre><code class="r">forsparqlprefix&lt;- GetForSparqlPrefix( domainName )
 </code></pre>
 
-<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;GetForSparqlPrefix&quot;
+<pre><code>## Error in GetForSparqlPrefix(domainName): could not find function &quot;Get.rq.prefix.df&quot;
 </code></pre>
 
 <pre><code class="r">cat(forsparqlprefix,&quot;\n&quot;)

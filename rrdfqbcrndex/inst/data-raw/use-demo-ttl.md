@@ -1,7 +1,7 @@
 ---
 title: "Usage of cube DEMO"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2016-01-06"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Usage of cube DEMO}
@@ -42,22 +42,28 @@ library(rrdfqbcrnd0)
 ```
 
 ```r
-dataCubeSpec<- system.file("extdata/CUBE-standards-rdf", "cube.ttl", package="rrdfqbcrnd0")
+cubeVocabularyFn<- system.file("extdata/cube-vocabulary-rdf","cube.ttl", package="rrdfqb")
 
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
 
 store <- new.rdf()  # Initialize
 
-cat("Loading cube specfication from ", dataCubeSpec, "\n")
+cat("Loading cube specfication from ", cubeVocabularyFn, "\n")
 ```
 
 ```
-## Loading cube specfication from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CUBE-standards-rdf/cube.ttl
+## Loading cube specfication from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqb/extdata/cube-vocabulary-rdf/cube.ttl
 ```
 
 ```r
-tmp<- load.rdf(dataCubeSpec, format="TURTLE", appendTo= store)
+tmp<- load.rdf(cubeVocabularyFn, format="TURTLE", appendTo= store)
+```
 
+```
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : org.apache.jena.riot.RiotException: [line: 4, col: 9 ] Triples not terminated by DOT
+```
+
+```r
 cat("Loading cube from ", dataCubeFile, "\n")
 ```
 
@@ -72,7 +78,7 @@ summarize.rdf(store)
 ```
 
 ```
-## [1] "Number of triples: 3381"
+## [1] "Number of triples: 3095"
 ```
 
 ## Execute the DEMO* SPARQL queries
@@ -93,7 +99,12 @@ for (rqFile in rqFiles) {
 ```
 
 ```
-## File  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/sample-rdf/DEMOattributes.rq
+## File
+```
+
+```
+## Warning in file(con, "r"): file("") only supports open = "w+" and open = "w
+## +b": using the former
 ```
 
 ```
@@ -124,7 +135,7 @@ domainName<- GetDomainNameFromCube( store )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetDomainNameFromCube"
+## Error in GetDomainNameFromCube(store): could not find function "GetDsdNameFromCube"
 ```
 
 ```r
@@ -140,7 +151,7 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetForSparqlPrefix"
+## Error in GetForSparqlPrefix(domainName): could not find function "Get.rq.prefix.df"
 ```
 
 ```r
