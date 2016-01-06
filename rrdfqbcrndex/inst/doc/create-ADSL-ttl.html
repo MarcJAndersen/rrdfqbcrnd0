@@ -236,9 +236,6 @@ fnadsl&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adsl.xpt&quot;, pa
 adsl&lt;-read.xport(fnadsl)
 </code></pre>
 
-<pre><code>## Error in lookup.xport(file): file not in SAS transfer format
-</code></pre>
-
 <p>The present code uses <code>read.xport</code> to input the sas dataset.
 TODO: Date variables are note handled correctly. Other
 methods are available allowing access to more of the meta data in the
@@ -270,7 +267,7 @@ con &lt;- dbConnect(m, dbname = tfile)
 dbWriteTable(con, &quot;adsl&quot;, adsl)
 </code></pre>
 
-<pre><code>## Error in dbWriteTable(con, &quot;adsl&quot;, adsl): error in evaluating the argument &#39;value&#39; in selecting a method for function &#39;dbWriteTable&#39;: Error: object &#39;adsl&#39; not found
+<pre><code>## [1] TRUE
 </code></pre>
 
 <pre><code class="r">dbDisconnect(con)
@@ -282,7 +279,7 @@ dbWriteTable(con, &quot;adsl&quot;, adsl)
 <pre><code class="r">cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database stored as  /tmp/RtmpfwI6ac/file2f8665048f0f
+<pre><code>## SQLite database stored as  /tmp/Rtmpw0HtTz/file3f3257b661ca
 </code></pre>
 
 <pre><code class="r">dumpFn&lt;- tempfile()
@@ -290,7 +287,7 @@ system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&qu
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump in  /tmp/RtmpfwI6ac/file2f8635426d2b
+<pre><code>## SQLite database dump in  /tmp/Rtmpw0HtTz/file3f323a1cc40e
 </code></pre>
 
 <p>Next step is to process the dump, so the SQL can be used as input to d2rq.
@@ -314,7 +311,7 @@ system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## SQLite database dump modified stored as  /tmp/RtmpfwI6ac/file2f86139bd35b
+<pre><code>## SQLite database dump modified stored as  /tmp/Rtmpw0HtTz/file3f32792d9a8a
 </code></pre>
 
 <pre><code class="r">## Check only expected changes were applied
@@ -349,7 +346,7 @@ cat( &quot;File &quot;, adslmapttlFn, &quot; copied to directory &quot;, targetD
 }
 </code></pre>
 
-<pre><code>## File  /tmp/RtmpfwI6ac/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+<pre><code>## File  /tmp/Rtmpw0HtTz/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 </code></pre>
 
 <pre><code class="r">if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
@@ -357,7 +354,7 @@ cat( &quot;File &quot;, adslttlFn, &quot; copied to directory &quot;, targetDir,
 }
 </code></pre>
 
-<pre><code>## File  /tmp/RtmpfwI6ac/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+<pre><code>## File  /tmp/Rtmpw0HtTz/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 </code></pre>
 
 <pre><code class="r">### This could maybe also work ..
@@ -396,22 +393,12 @@ dataFile
 </code></pre>
 
 <pre><code class="r">store &lt;- new.rdf()  # Initialize
-load.rdf(dataFilemap, format=&quot;TURTLE&quot;, appendTo= store)
+invisible(load.rdf(dataFilemap, format=&quot;TURTLE&quot;, appendTo= store))
+invisible(load.rdf(dataFile, format=&quot;TURTLE&quot;, appendTo= store))
+summarize.rdf(store)
 </code></pre>
 
-<pre><code>## [1] &quot;Java-Object{&lt;ModelCom   {rdf:rest @rdf:type rdf:Property; rdf:rest @rdfs:domain rdf:List; rdf:rest @rdfs:range rdf:List; rdf:rest @rdfs:subPropertyOf rdf:rest; rdf:List @rdf:type rdfs:Class; rdf:List @rdfs:subClassOf rdfs:Resource; rdf:predicate @rdf:type rdf:Property; rdf:predicate @rdfs:domain rdf:Statement; rdf:predicate @rdfs:subPropertyOf rdf:predicate; rdf:Property @rdf:type rdfs:Class; rdf:Property @rdfs:subClassOf rdfs:Resource; rdfs:label @rdfs:range rdfs:Literal; rdf:Statement @rdf:type rdfs:Class; rdf:Statement @rdfs:subClassOf rdfs:Resource; rdfs:Class @rdf:type rdfs:Class; rdfs:Class @rdfs:subClassOf rdfs:Resource; rdf:type @rdfs:range rdfs:Class...} |  [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#rest] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#label, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Literal] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Resource, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#subject] [http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Datatype] [http://www.w3.org/2000/01/rdf-schema#comment, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Literal] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#object] [http://www.w3.org/1999/02/22-rdf-syntax-ns#nil, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#first] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#startupSQLScript, file:///tmp/RtmpfwI6ac/file2f86139bd35b] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#jdbcDSN, \&quot;jdbc:hsqldb:mem:temp\&quot;] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#jdbcDriver, \&quot;org.hsqldb.jdbc.JDBCDriver\&quot;] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#Database] [http://www.w3.org/2000/01/rdf-schema#Resource, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Datatype] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Literal] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/2000/01/rdf-schema#Container, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#isDefinedBy] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#seeAlso] [http://www.w3.org/2000/01/rdf-schema#seeAlso, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#seeAlso] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Container, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#seeAlso, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#comment, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#label, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#Database, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#nil, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#seeAlso, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#comment, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#label, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Resource, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Container, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#Database, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource]&gt;}&quot;
-</code></pre>
-
-<pre><code class="r">load.rdf(dataFile, format=&quot;TURTLE&quot;, appendTo= store)
-</code></pre>
-
-<pre><code>## [1] &quot;Java-Object{&lt;ModelCom   {rdf:rest @rdf:type rdf:Property; rdf:rest @rdfs:domain rdf:List; rdf:rest @rdfs:range rdf:List; rdf:rest @rdfs:subPropertyOf rdf:rest; rdf:List @rdf:type rdfs:Class; rdf:List @rdfs:subClassOf rdfs:Resource; rdf:predicate @rdf:type rdf:Property; rdf:predicate @rdfs:domain rdf:Statement; rdf:predicate @rdfs:subPropertyOf rdf:predicate; rdf:Property @rdf:type rdfs:Class; rdf:Property @rdfs:subClassOf rdfs:Resource; rdfs:label @rdfs:range rdfs:Literal; rdf:subject @rdf:type rdf:Property; rdf:subject @rdfs:domain rdf:Statement; rdf:subject @rdfs:subPropertyOf rdf:subject; rdfs:Resource @rdf:type rdfs:Class; rdf:type @rdfs:range rdfs:Class...} |  [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#rest] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#label, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Literal] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#subject] [http://www.w3.org/2000/01/rdf-schema#Resource, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Datatype] [http://www.w3.org/2000/01/rdf-schema#comment, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Literal] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#object] [http://www.w3.org/1999/02/22-rdf-syntax-ns#nil, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#first] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/2000/01/rdf-schema#Class] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#startupSQLScript, file:///tmp/RtmpfwI6ac/file2f86139bd35b] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#jdbcDSN, \&quot;jdbc:hsqldb:mem:temp\&quot;] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#jdbcDriver, \&quot;org.hsqldb.jdbc.JDBCDriver\&quot;] [file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#database, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#Database] [http://www.w3.org/2000/01/rdf-schema#Resource, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Datatype] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#List] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Literal] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement] [http://www.w3.org/2000/01/rdf-schema#Container, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Container] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#isDefinedBy] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#seeAlso] [http://www.w3.org/2000/01/rdf-schema#seeAlso, http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/2000/01/rdf-schema#seeAlso] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Container, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#seeAlso, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#comment, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.w3.org/2000/01/rdf-schema#label, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#Property] [http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#Database, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#XMLLiteral, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Class] [http://www.w3.org/1999/02/22-rdf-syntax-ns#nil, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#first, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#object, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#subject, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#rest, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#isDefinedBy, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#seeAlso, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#subClassOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#domain, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#subPropertyOf, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#range, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#comment, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#label, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Property, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#List, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Resource, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Class, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Statement, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Literal, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Container, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#Datatype, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/1999/02/22-rdf-syntax-ns#Alt, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.w3.org/2000/01/rdf-schema#ContainerMembershipProperty, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource] [http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#Database, http://www.w3.org/1999/02/22-rdf-syntax-ns#type, http://www.w3.org/2000/01/rdf-schema#Resource]&gt;}&quot;
-</code></pre>
-
-<pre><code class="r">summarize.rdf(store)
-</code></pre>
-
-<pre><code>## [1] &quot;Number of triples: 44&quot;
+<pre><code>## [1] &quot;Number of triples: 13160&quot;
 </code></pre>
 
 <p>Next step is to make a query showing the mappings</p>
@@ -450,14 +437,263 @@ cat(mapping.rq,&quot;\n&quot;)
 str(resmapping)
 </code></pre>
 
-<pre><code>## &#39;data.frame&#39;:    0 obs. of  0 variables
+<pre><code>## &#39;data.frame&#39;:    48 obs. of  3 variables:
+##  $ mapColumn   : chr  &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID&quot; ...
+##  $ d2rqcolumn  : chr  &quot;ADSL.USUBJID&quot; &quot;ADSL.TRT01A&quot; &quot;ADSL.TRT01P&quot; &quot;ADSL.STUDYID&quot; ...
+##  $ d2rqdatatype: chr  NA NA NA NA ...
 </code></pre>
 
 <pre><code class="r">knitr::kable(resmapping)
 </code></pre>
 
-<pre><code>## Error in kable_markdown(x = structure(character(0), .Dim = c(0L, 0L), .Dimnames = list(: the table must have a header (column names)
-</code></pre>
+<table><thead>
+<tr>
+<th align="left">mapColumn</th>
+<th align="left">d2rqcolumn</th>
+<th align="left">d2rqdatatype</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID</td>
+<td align="left">ADSL.USUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A</td>
+<td align="left">ADSL.TRT01A</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P</td>
+<td align="left">ADSL.TRT01P</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID</td>
+<td align="left">ADSL.STUDYID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISCONFL</td>
+<td align="left">ADSL.DISCONFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEU</td>
+<td align="left">ADSL.AGEU</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ITTFL</td>
+<td align="left">ADSL.ITTFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD</td>
+<td align="left">ADSL.DCDECOD</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBL</td>
+<td align="left">ADSL.BMIBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDIS</td>
+<td align="left">ADSL.DURDIS</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SUBJID</td>
+<td align="left">ADSL.SUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ETHNIC</td>
+<td align="left">ADSL.ETHNIC</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EFFFL</td>
+<td align="left">ADSL.EFFFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEGR1</td>
+<td align="left">ADSL.SITEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP8FL</td>
+<td align="left">ADSL.COMP8FL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTSDT</td>
+<td align="left">ADSL.TRTSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SEX</td>
+<td align="left">ADSL.SEX</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_WEIGHTBL</td>
+<td align="left">ADSL.WEIGHTBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGE</td>
+<td align="left">ADSL.AGE</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_CUMDOSE</td>
+<td align="left">ADSL.CUMDOSE</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP16FL</td>
+<td align="left">ADSL.COMP16FL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1</td>
+<td align="left">ADSL.AGEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBLGR1</td>
+<td align="left">ADSL.BMIBLGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP24FL</td>
+<td align="left">ADSL.COMP24FL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01PN</td>
+<td align="left">ADSL.TRT01PN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDT</td>
+<td align="left">ADSL.RFENDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDSGR1</td>
+<td align="left">ADSL.DURDSGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFSTDTC</td>
+<td align="left">ADSL.RFSTDTC</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD</td>
+<td align="left">ADSL.AVGDD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTDUR</td>
+<td align="left">ADSL.TRTDUR</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL</td>
+<td align="left">ADSL.HEIGHTBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1N</td>
+<td align="left">ADSL.AGEGR1N</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACEN</td>
+<td align="left">ADSL.RACEN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDTC</td>
+<td align="left">ADSL.RFENDTC</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISONSDT</td>
+<td align="left">ADSL.DISONSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEID</td>
+<td align="left">ADSL.SITEID</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EDUCLVL</td>
+<td align="left">ADSL.EDUCLVL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DSRAEFL</td>
+<td align="left">ADSL.DSRAEFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ARM</td>
+<td align="left">ADSL.ARM</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SAFFL</td>
+<td align="left">ADSL.SAFFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACE</td>
+<td align="left">ADSL.RACE</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01AN</td>
+<td align="left">ADSL.TRT01AN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_MMSETOT</td>
+<td align="left">ADSL.MMSETOT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISNUMEN</td>
+<td align="left">ADSL.VISNUMEN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISIT1DT</td>
+<td align="left">ADSL.VISIT1DT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DTHFL</td>
+<td align="left">ADSL.DTHFL</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCREASCD</td>
+<td align="left">ADSL.DCREASCD</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTEDT</td>
+<td align="left">ADSL.TRTEDT</td>
+<td align="left">xsd:double</td>
+</tr>
+</tbody></table>
 
 <p>The code below gets the all values in one record</p>
 
@@ -484,15 +720,279 @@ cat(records.rq,&quot;\n&quot;)
 str(records.res)
 </code></pre>
 
-<pre><code>## &#39;data.frame&#39;:    0 obs. of  0 variables
+<pre><code>## &#39;data.frame&#39;:    51 obs. of  3 variables:
+##  $ s: chr  &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; &quot;http://www.example.org/datasets/ADSL/01-718-1254&quot; ...
+##  $ p: chr  &quot;http://www.example.org/datasets/vocab/ADSL_EFFFL&quot; &quot;http://www.example.org/datasets/vocab/ADSL_DCREASCD&quot; &quot;http://www.example.org/datasets/vocab/ADSL_TRT01PN&quot; &quot;http://www.example.org/datasets/vocab/ADSL_COMP8FL&quot; ...
+##  $ o: chr  &quot;Y&quot; &quot;Completed&quot; &quot;54.0E0&quot; &quot;Y&quot; ...
 </code></pre>
 
 <pre><code class="r">records.res$pclean&lt;- gsub(paste0(d2rqbaseURL,&quot;vocab/ADSL_&quot;), &quot;&quot;, records.res$p)
 knitr::kable(records.res[,c(&quot;s&quot;, &quot;p&quot;,&quot;o&quot;)])
 </code></pre>
 
-<pre><code>## Error in `[.data.frame`(records.res, , c(&quot;s&quot;, &quot;p&quot;, &quot;o&quot;)): undefined columns selected
-</code></pre>
+<table><thead>
+<tr>
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_EFFFL">http://www.example.org/datasets/vocab/ADSL_EFFFL</a></td>
+<td align="left">Y</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DCREASCD">http://www.example.org/datasets/vocab/ADSL_DCREASCD</a></td>
+<td align="left">Completed</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01PN">http://www.example.org/datasets/vocab/ADSL_TRT01PN</a></td>
+<td align="left">54.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_COMP8FL">http://www.example.org/datasets/vocab/ADSL_COMP8FL</a></td>
+<td align="left">Y</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_CUMDOSE">http://www.example.org/datasets/vocab/ADSL_CUMDOSE</a></td>
+<td align="left">9936.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRTSDT">http://www.example.org/datasets/vocab/ADSL_TRTSDT</a></td>
+<td align="left">19549.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SITEGR1">http://www.example.org/datasets/vocab/ADSL_SITEGR1</a></td>
+<td align="left">718</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01AN">http://www.example.org/datasets/vocab/ADSL_TRT01AN</a></td>
+<td align="left">54.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AVGDD">http://www.example.org/datasets/vocab/ADSL_AVGDD</a></td>
+<td align="left">54.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DURDIS">http://www.example.org/datasets/vocab/ADSL_DURDIS</a></td>
+<td align="left">21.6E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRTDUR">http://www.example.org/datasets/vocab/ADSL_TRTDUR</a></td>
+<td align="left">184.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_HEIGHTBL">http://www.example.org/datasets/vocab/ADSL_HEIGHTBL</a></td>
+<td align="left">170.2E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_COMP16FL">http://www.example.org/datasets/vocab/ADSL_COMP16FL</a></td>
+<td align="left">Y</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DCDECOD">http://www.example.org/datasets/vocab/ADSL_DCDECOD</a></td>
+<td align="left">COMPLETED</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_WEIGHTBL">http://www.example.org/datasets/vocab/ADSL_WEIGHTBL</a></td>
+<td align="left">82.1E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_BMIBLGR1">http://www.example.org/datasets/vocab/ADSL_BMIBLGR1</a></td>
+<td align="left">25-&lt;30</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGE">http://www.example.org/datasets/vocab/ADSL_AGE</a></td>
+<td align="left">78.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SUBJID">http://www.example.org/datasets/vocab/ADSL_SUBJID</a></td>
+<td align="left">1254</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01A">http://www.example.org/datasets/vocab/ADSL_TRT01A</a></td>
+<td align="left">Xanomeline Low Dose</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DURDSGR1">http://www.example.org/datasets/vocab/ADSL_DURDSGR1</a></td>
+<td align="left">&gt;=12</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RFSTDTC">http://www.example.org/datasets/vocab/ADSL_RFSTDTC</a></td>
+<td align="left">2013-07-10</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SEX">http://www.example.org/datasets/vocab/ADSL_SEX</a></td>
+<td align="left">M</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DISCONFL">http://www.example.org/datasets/vocab/ADSL_DISCONFL</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DSRAEFL">http://www.example.org/datasets/vocab/ADSL_DSRAEFL</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_COMP24FL">http://www.example.org/datasets/vocab/ADSL_COMP24FL</a></td>
+<td align="left">Y</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RFENDT">http://www.example.org/datasets/vocab/ADSL_RFENDT</a></td>
+<td align="left">19732.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a></td>
+<td align="left">ADSL #01-718-1254</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SAFFL">http://www.example.org/datasets/vocab/ADSL_SAFFL</a></td>
+<td align="left">Y</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGEU">http://www.example.org/datasets/vocab/ADSL_AGEU</a></td>
+<td align="left">YEARS</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_ETHNIC">http://www.example.org/datasets/vocab/ADSL_ETHNIC</a></td>
+<td align="left">HISPANIC OR LATINO</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGEGR1">http://www.example.org/datasets/vocab/ADSL_AGEGR1</a></td>
+<td align="left">65-80</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DISONSDT">http://www.example.org/datasets/vocab/ADSL_DISONSDT</a></td>
+<td align="left">18882.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRTEDT">http://www.example.org/datasets/vocab/ADSL_TRTEDT</a></td>
+<td align="left">19732.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_DTHFL">http://www.example.org/datasets/vocab/ADSL_DTHFL</a></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_MMSETOT">http://www.example.org/datasets/vocab/ADSL_MMSETOT</a></td>
+<td align="left">16.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_VISNUMEN">http://www.example.org/datasets/vocab/ADSL_VISNUMEN</a></td>
+<td align="left">12.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_USUBJID">http://www.example.org/datasets/vocab/ADSL_USUBJID</a></td>
+<td align="left">01-718-1254</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_ITTFL">http://www.example.org/datasets/vocab/ADSL_ITTFL</a></td>
+<td align="left">Y</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_BMIBL">http://www.example.org/datasets/vocab/ADSL_BMIBL</a></td>
+<td align="left">28.3E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RFENDTC">http://www.example.org/datasets/vocab/ADSL_RFENDTC</a></td>
+<td align="left">2014-01-09</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL">http://www.example.org/datasets/vocab/ADSL</a></td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_STUDYID">http://www.example.org/datasets/vocab/ADSL_STUDYID</a></td>
+<td align="left">CDISCPILOT01</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RACEN">http://www.example.org/datasets/vocab/ADSL_RACEN</a></td>
+<td align="left">1.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_VISIT1DT">http://www.example.org/datasets/vocab/ADSL_VISIT1DT</a></td>
+<td align="left">19537.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_AGEGR1N">http://www.example.org/datasets/vocab/ADSL_AGEGR1N</a></td>
+<td align="left">2.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_TRT01P">http://www.example.org/datasets/vocab/ADSL_TRT01P</a></td>
+<td align="left">Xanomeline Low Dose</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_RACE">http://www.example.org/datasets/vocab/ADSL_RACE</a></td>
+<td align="left">WHITE</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_ARM">http://www.example.org/datasets/vocab/ADSL_ARM</a></td>
+<td align="left">Xanomeline Low Dose</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_SITEID">http://www.example.org/datasets/vocab/ADSL_SITEID</a></td>
+<td align="left">718</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADSL_EDUCLVL">http://www.example.org/datasets/vocab/ADSL_EDUCLVL</a></td>
+<td align="left">18.0E0</td>
+</tr>
+<tr>
+<td align="left"><a href="http://www.example.org/datasets/ADSL/01-718-1254">http://www.example.org/datasets/ADSL/01-718-1254</a></td>
+<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
+<td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#Resource">http://www.w3.org/2000/01/rdf-schema#Resource</a></td>
+</tr>
+</tbody></table>
 
 </body>
 

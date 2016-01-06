@@ -15,11 +15,10 @@ This script creates the result and codelist for a simple DEMO table.
 
 
 ```r
-devtools::load_all(pkg="../..")
+library(rrdfqb)
 ```
 
 ```
-## Loading rrdfqbcrndex
 ## Loading required package: xlsx
 ## Loading required package: rJava
 ## Loading required package: methods
@@ -38,33 +37,31 @@ devtools::load_all(pkg="../..")
 ```
 
 ```r
-## http://stackoverflow.com/questions/14896941/install-an-r-package-temporarily-only-for-the-current-session
-tmp.install.packages <- function(pack, dependencies=TRUE, ...) {
-  path <- tempdir()
-  ## Add 'path' to .libPaths, and be sure that it is not
-  ## at the first position, otherwise any other package during
-  ## this session would be installed into 'path'
-  firstpath <- .libPaths()[1]
-  .libPaths(c(firstpath, path))
-  install.packages(pack, dependencies=dependencies, lib=path, ...)
-}
-tmp.install.packages("../../../rrdfqbcrnd0_0.1.19.tar.gz")
+library(rrdfqbcrnd0)
+devtools::load_all(pkg="../..")
 ```
 
 ```
-## inferring 'repos = NULL' from 'pkgs'
+## Loading rrdfqbcrndex
+```
+
+```r
+library(rrdfqbcrndcheck)
 ```
 
 ```
-## Warning in install.packages(pack, dependencies = dependencies, lib =
-## path, : installation of package '../../../rrdfqbcrnd0_0.1.19.tar.gz' had
-## non-zero exit status
+## Error: package 'rrdfqbcrndex' required by 'rrdfqbcrndcheck' could not be found
 ```
 
-All files are store to the directory
+All files are stored in the directory
 
 ```r
 targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrndex")
+(targetDir)
+```
+
+```
+## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf"
 ```
 
 ## RDF data cubes specified in workbook
@@ -72,12 +69,19 @@ targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrndex")
 
 ```r
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrndex")
+(RDFCubeWorkbook)
+```
 
+```
+## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/RDFCubeWorkbook.xlsx"
+```
+
+```r
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromWorkbook"
+## Error in BuildCubeFromWorkbook(RDFCubeWorkbook, "DM"): Expected file /dm.AR.csv does not exist
 ```
 
 ```r
@@ -105,7 +109,7 @@ ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromWorkbook"
+## Error in BuildCubeFromWorkbook(RDFCubeWorkbook, "AE"): Expected file /ae.AR.csv does not exist
 ```
 
 ```r
@@ -149,7 +153,7 @@ demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromDataFrames"
+## Error in BuildCubeFromDataFrames(demoMetaData, demoObsData): could not find function "qb.def.prefixlist"
 ```
 
 ```r

@@ -3,4 +3,3 @@
 export(DeriveStatsForCube)
 export(GetFormularFromCube)
 export(GetSQLFromCube)
-export(qb.def.prefixlist)

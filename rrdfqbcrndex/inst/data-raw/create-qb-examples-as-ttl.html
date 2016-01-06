@@ -205,11 +205,10 @@ hr {
 
 <p>This script creates the result and codelist for a simple DEMO table.</p>
 
-<pre><code class="r">devtools::load_all(pkg=&quot;../..&quot;)
+<pre><code class="r">library(rrdfqb)
 </code></pre>
 
-<pre><code>## Loading rrdfqbcrndex
-## Loading required package: xlsx
+<pre><code>## Loading required package: xlsx
 ## Loading required package: rJava
 ## Loading required package: methods
 ## Loading required package: xlsxjars
@@ -226,40 +225,41 @@ hr {
 ## Loading required package: rrdflibs
 </code></pre>
 
-<pre><code class="r">## http://stackoverflow.com/questions/14896941/install-an-r-package-temporarily-only-for-the-current-session
-tmp.install.packages &lt;- function(pack, dependencies=TRUE, ...) {
-  path &lt;- tempdir()
-  ## Add &#39;path&#39; to .libPaths, and be sure that it is not
-  ## at the first position, otherwise any other package during
-  ## this session would be installed into &#39;path&#39;
-  firstpath &lt;- .libPaths()[1]
-  .libPaths(c(firstpath, path))
-  install.packages(pack, dependencies=dependencies, lib=path, ...)
-}
-tmp.install.packages(&quot;../../../rrdfqbcrnd0_0.1.19.tar.gz&quot;)
+<pre><code class="r">library(rrdfqbcrnd0)
+devtools::load_all(pkg=&quot;../..&quot;)
 </code></pre>
 
-<pre><code>## inferring &#39;repos = NULL&#39; from &#39;pkgs&#39;
+<pre><code>## Loading rrdfqbcrndex
 </code></pre>
 
-<pre><code>## Warning in install.packages(pack, dependencies = dependencies, lib =
-## path, : installation of package &#39;../../../rrdfqbcrnd0_0.1.19.tar.gz&#39; had
-## non-zero exit status
+<pre><code class="r">library(rrdfqbcrndcheck)
 </code></pre>
 
-<p>All files are store to the directory</p>
+<pre><code>## Error: package &#39;rrdfqbcrndex&#39; required by &#39;rrdfqbcrndcheck&#39; could not be found
+</code></pre>
+
+<p>All files are stored in the directory</p>
 
 <pre><code class="r">targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbcrndex&quot;)
+(targetDir)
+</code></pre>
+
+<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf&quot;
 </code></pre>
 
 <h2>RDF data cubes specified in workbook</h2>
 
 <pre><code class="r">RDFCubeWorkbook&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;RDFCubeWorkbook.xlsx&quot;, package=&quot;rrdfqbcrndex&quot;)
-
-dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
+(RDFCubeWorkbook)
 </code></pre>
 
-<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;BuildCubeFromWorkbook&quot;
+<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/RDFCubeWorkbook.xlsx&quot;
+</code></pre>
+
+<pre><code class="r">dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
+</code></pre>
+
+<pre><code>## Error in BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot;): Expected file /dm.AR.csv does not exist
 </code></pre>
 
 <pre><code class="r">cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)
@@ -281,7 +281,7 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 <pre><code class="r">ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )
 </code></pre>
 
-<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;BuildCubeFromWorkbook&quot;
+<pre><code>## Error in BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot;): Expected file /ae.AR.csv does not exist
 </code></pre>
 
 <pre><code class="r">cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)
@@ -318,7 +318,7 @@ demoMetaData &lt;- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 </code></pre>
 
-<pre><code>## Error in eval(expr, envir, enclos): could not find function &quot;BuildCubeFromDataFrames&quot;
+<pre><code>## Error in BuildCubeFromDataFrames(demoMetaData, demoObsData): could not find function &quot;qb.def.prefixlist&quot;
 </code></pre>
 
 <pre><code class="r">cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)

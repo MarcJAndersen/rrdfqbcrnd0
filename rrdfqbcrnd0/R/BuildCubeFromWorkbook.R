@@ -29,7 +29,7 @@ obsFileDir<- as.character(metadataSource[ metadataSource$compName=="obsFileNameD
 } else  {obsFileDir<-""}
 
 if (nchar(obsFileDir)==0 | obsFileDir=="!example" ) {
-obsFileDir<- system.file("extdata/sample-cfg", package="rrdfqbcrnd0")
+obsFileDir<- dirname(RDFCubeWorkbook)
 }
 
 obsFile<- as.character(metadataSource[ metadataSource$compName=="obsFileName", "compLabel" ])

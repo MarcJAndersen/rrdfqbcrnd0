@@ -180,7 +180,7 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 ## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..
 ## .. total number of triples: 165406
 ## Final rdf.cdisc.org rrdf store, number of triples: 165406
-## rrdf store saved to turle file: /tmp/RtmpHT95TK/cdisc-rdf.ttl
+## rrdf store saved to turle file: /tmp/RtmpwOOMXv/cdisc-rdf.ttl
 ## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 ```
 
@@ -190,7 +190,7 @@ message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size 
 ```
 
 ```
-## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-01-06 20:32:27 size 2310300 bytes
+## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-01-06 22:21:10 size 2310300 bytes
 ```
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
@@ -248,7 +248,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/RtmpHT95TK/get-rdf.disc.org.rq 
+SPARQL script stored in   /tmp/RtmpwOOMXv/get-rdf.disc.org.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.

@@ -78,45 +78,11 @@ if (!file.exists(fnadsl)) {
   stop("File does not exist - ",fnadsl)
 }
 adsl<- read.xport(fnadsl)
-```
-
-```
-## Error in lookup.xport(file): file not in SAS transfer format
-```
-
-```r
 adsl$TRT01A<- as.character(adsl$TRT01A)
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'adsl' not found
-```
-
-```r
 adsl$RACE<- as.character(adsl$RACE)
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'adsl' not found
-```
-
-```r
 adsl$SAFFL<- as.character(adsl$SAFFL)
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'adsl' not found
-```
-
-```r
 adsl$SEX<- as.character(adsl$SEX)
-```
 
-```
-## Error in eval(expr, envir, enclos): object 'adsl' not found
-```
-
-```r
 ## SASxport package maps characters and dates etc into more R like data type
 ## install.packages("SASxport")
 ## library(SASxport)
@@ -257,7 +223,7 @@ print(tempfile)
 ```
 
 ```
-## [1] "/tmp/RtmpgyAsKz/temp-code.R"
+## [1] "/tmp/RtmpuxS9iY/temp-code.R"
 ```
 
 ## Define SQL statements directly
@@ -393,22 +359,9 @@ select * from qbframe;
 
 ```r
 adsl.summ.stat.res<- sqldf( res.text )
-```
-
-```
-## Error in sqliteSendQuery(con, statement, bind.data): error in statement: no such table: adsl
-```
-
-```r
 # adsl.summ.stat$unit<- "_NULL_"
 names(adsl.summ.stat.res)<- tolower(gsub("(a|b)\\.","", names(adsl.summ.stat.res)))
-```
 
-```
-## Error in gsub("(a|b)\\.", "", names(adsl.summ.stat.res)): object 'adsl.summ.stat.res' not found
-```
-
-```r
 rm(qbframe)
 ```
 
@@ -458,27 +411,150 @@ sqldf()
 
 ```r
 adsl.summ.stat<- merge(qbframe,adsl.summ.stat.res,by=names(qbframe),all=TRUE)
-```
-
-```
-## Error in as.data.frame(y): object 'adsl.summ.stat.res' not found
-```
-
-```r
 # adsl.summ.stat<- merge(stmtSQL$qbframe,adsl.summ.stat.res,all=TRUE)
 adsl.summ.stat$measure[ is.na(adsl.summ.stat$measure) & adsl.summ.stat$procedure=="count" ]<- 0
-```
-
-```
-## Error in adsl.summ.stat$measure[is.na(adsl.summ.stat$measure) & adsl.summ.stat$procedure == : object 'adsl.summ.stat' not found
-```
-
-```r
 adsl.summ.stat
 ```
 
 ```
-## Error in eval(expr, envir, enclos): object 'adsl.summ.stat' not found
+##                  trt01a                             race     factor
+## 1                 _ALL_                            _ALL_   quantity
+## 2                 _ALL_                            _ALL_   quantity
+## 3                 _ALL_ AMERICAN INDIAN OR ALASKA NATIVE   quantity
+## 4                 _ALL_        BLACK OR AFRICAN AMERICAN   quantity
+## 5                 _ALL_                            WHITE   quantity
+## 6               Placebo                            _ALL_        AGE
+## 7               Placebo                            _ALL_        AGE
+## 8               Placebo                            _ALL_        AGE
+## 9               Placebo                            _ALL_        AGE
+## 10              Placebo                            _ALL_        AGE
+## 11              Placebo                            _ALL_ proportion
+## 12              Placebo                            _ALL_ proportion
+## 13              Placebo                            _ALL_   quantity
+## 14              Placebo                            _ALL_   quantity
+## 15              Placebo                            _ALL_   quantity
+## 16              Placebo                            _ALL_   WEIGHTBL
+## 17              Placebo                            _ALL_   WEIGHTBL
+## 18              Placebo                            _ALL_   WEIGHTBL
+## 19              Placebo                            _ALL_   WEIGHTBL
+## 20              Placebo                            _ALL_   WEIGHTBL
+## 21              Placebo AMERICAN INDIAN OR ALASKA NATIVE proportion
+## 22              Placebo AMERICAN INDIAN OR ALASKA NATIVE   quantity
+## 23              Placebo        BLACK OR AFRICAN AMERICAN proportion
+## 24              Placebo        BLACK OR AFRICAN AMERICAN   quantity
+## 25              Placebo                            WHITE proportion
+## 26              Placebo                            WHITE   quantity
+## 27 Xanomeline High Dose                            _ALL_        AGE
+## 28 Xanomeline High Dose                            _ALL_        AGE
+## 29 Xanomeline High Dose                            _ALL_        AGE
+## 30 Xanomeline High Dose                            _ALL_        AGE
+## 31 Xanomeline High Dose                            _ALL_        AGE
+## 32 Xanomeline High Dose                            _ALL_ proportion
+## 33 Xanomeline High Dose                            _ALL_ proportion
+## 34 Xanomeline High Dose                            _ALL_   quantity
+## 35 Xanomeline High Dose                            _ALL_   quantity
+## 36 Xanomeline High Dose                            _ALL_   quantity
+## 37 Xanomeline High Dose                            _ALL_   WEIGHTBL
+## 38 Xanomeline High Dose                            _ALL_   WEIGHTBL
+## 39 Xanomeline High Dose                            _ALL_   WEIGHTBL
+## 40 Xanomeline High Dose                            _ALL_   WEIGHTBL
+## 41 Xanomeline High Dose                            _ALL_   WEIGHTBL
+## 42 Xanomeline High Dose AMERICAN INDIAN OR ALASKA NATIVE proportion
+## 43 Xanomeline High Dose AMERICAN INDIAN OR ALASKA NATIVE   quantity
+## 44 Xanomeline High Dose        BLACK OR AFRICAN AMERICAN proportion
+## 45 Xanomeline High Dose        BLACK OR AFRICAN AMERICAN   quantity
+## 46 Xanomeline High Dose                            WHITE proportion
+## 47 Xanomeline High Dose                            WHITE   quantity
+## 48  Xanomeline Low Dose                            _ALL_        AGE
+## 49  Xanomeline Low Dose                            _ALL_        AGE
+## 50  Xanomeline Low Dose                            _ALL_        AGE
+## 51  Xanomeline Low Dose                            _ALL_        AGE
+## 52  Xanomeline Low Dose                            _ALL_        AGE
+## 53  Xanomeline Low Dose                            _ALL_ proportion
+## 54  Xanomeline Low Dose                            _ALL_ proportion
+## 55  Xanomeline Low Dose                            _ALL_   quantity
+## 56  Xanomeline Low Dose                            _ALL_   quantity
+## 57  Xanomeline Low Dose                            _ALL_   quantity
+## 58  Xanomeline Low Dose                            _ALL_   WEIGHTBL
+## 59  Xanomeline Low Dose                            _ALL_   WEIGHTBL
+## 60  Xanomeline Low Dose                            _ALL_   WEIGHTBL
+## 61  Xanomeline Low Dose                            _ALL_   WEIGHTBL
+## 62  Xanomeline Low Dose                            _ALL_   WEIGHTBL
+## 63  Xanomeline Low Dose AMERICAN INDIAN OR ALASKA NATIVE proportion
+## 64  Xanomeline Low Dose AMERICAN INDIAN OR ALASKA NATIVE   quantity
+## 65  Xanomeline Low Dose        BLACK OR AFRICAN AMERICAN proportion
+## 66  Xanomeline Low Dose        BLACK OR AFRICAN AMERICAN   quantity
+## 67  Xanomeline Low Dose                            WHITE proportion
+## 68  Xanomeline Low Dose                            WHITE   quantity
+##    procedure   sex saffl   unit denominator    measure
+## 1      count     F     Y _NULL_       _ALL_ 143.000000
+## 2      count     M     Y _NULL_       _ALL_ 111.000000
+## 3      count _ALL_     Y _NULL_       _ALL_   1.000000
+## 4      count _ALL_     Y _NULL_       _ALL_  23.000000
+## 5      count _ALL_     Y _NULL_       _ALL_ 230.000000
+## 6        max _ALL_     Y  YEARS      _NULL_  89.000000
+## 7       mean _ALL_     Y  YEARS      _NULL_  75.209302
+## 8     median _ALL_     Y  YEARS      _NULL_  76.000000
+## 9        min _ALL_     Y  YEARS      _NULL_  52.000000
+## 10     stdev _ALL_     Y  YEARS      _NULL_   8.590167
+## 11   percent     F     Y _NULL_         SEX  61.627907
+## 12   percent     M     Y _NULL_         SEX  38.372093
+## 13     count _ALL_     Y _NULL_       _ALL_  86.000000
+## 14     count     F     Y _NULL_       _ALL_  53.000000
+## 15     count     M     Y _NULL_       _ALL_  33.000000
+## 16       max _ALL_     Y     KG      _NULL_  86.200000
+## 17      mean _ALL_     Y     KG      _NULL_  62.759302
+## 18    median _ALL_     Y     KG      _NULL_  60.550000
+## 19       min _ALL_     Y     KG      _NULL_  34.000000
+## 20     stdev _ALL_     Y     KG      _NULL_  12.771544
+## 21   percent _ALL_     Y _NULL_        RACE   0.000000
+## 22     count _ALL_     Y _NULL_       _ALL_   0.000000
+## 23   percent _ALL_     Y _NULL_        RACE   9.302326
+## 24     count _ALL_     Y _NULL_       _ALL_   8.000000
+## 25   percent _ALL_     Y _NULL_        RACE  90.697674
+## 26     count _ALL_     Y _NULL_       _ALL_  78.000000
+## 27       max _ALL_     Y  YEARS      _NULL_  88.000000
+## 28      mean _ALL_     Y  YEARS      _NULL_  74.380952
+## 29    median _ALL_     Y  YEARS      _NULL_  76.000000
+## 30       min _ALL_     Y  YEARS      _NULL_  56.000000
+## 31     stdev _ALL_     Y  YEARS      _NULL_   7.886094
+## 32   percent     F     Y _NULL_         SEX  47.619048
+## 33   percent     M     Y _NULL_         SEX  52.380952
+## 34     count _ALL_     Y _NULL_       _ALL_  84.000000
+## 35     count     F     Y _NULL_       _ALL_  40.000000
+## 36     count     M     Y _NULL_       _ALL_  44.000000
+## 37       max _ALL_     Y     KG      _NULL_ 108.000000
+## 38      mean _ALL_     Y     KG      _NULL_  70.004762
+## 39    median _ALL_     Y     KG      _NULL_  69.200000
+## 40       min _ALL_     Y     KG      _NULL_  41.700000
+## 41     stdev _ALL_     Y     KG      _NULL_  14.653433
+## 42   percent _ALL_     Y _NULL_        RACE   1.190476
+## 43     count _ALL_     Y _NULL_       _ALL_   1.000000
+## 44   percent _ALL_     Y _NULL_        RACE  10.714286
+## 45     count _ALL_     Y _NULL_       _ALL_   9.000000
+## 46   percent _ALL_     Y _NULL_        RACE  88.095238
+## 47     count _ALL_     Y _NULL_       _ALL_  74.000000
+## 48       max _ALL_     Y  YEARS      _NULL_  88.000000
+## 49      mean _ALL_     Y  YEARS      _NULL_  75.666667
+## 50    median _ALL_     Y  YEARS      _NULL_  77.500000
+## 51       min _ALL_     Y  YEARS      _NULL_  51.000000
+## 52     stdev _ALL_     Y  YEARS      _NULL_   8.286051
+## 53   percent     F     Y _NULL_         SEX  59.523810
+## 54   percent     M     Y _NULL_         SEX  40.476190
+## 55     count _ALL_     Y _NULL_       _ALL_  84.000000
+## 56     count     F     Y _NULL_       _ALL_  50.000000
+## 57     count     M     Y _NULL_       _ALL_  34.000000
+## 58       max _ALL_     Y     KG      _NULL_ 106.100000
+## 59      mean _ALL_     Y     KG      _NULL_  67.279518
+## 60    median _ALL_     Y     KG      _NULL_  64.900000
+## 61       min _ALL_     Y     KG      _NULL_  45.400000
+## 62     stdev _ALL_     Y     KG      _NULL_  14.123599
+## 63   percent _ALL_     Y _NULL_        RACE   0.000000
+## 64     count _ALL_     Y _NULL_       _ALL_   0.000000
+## 65   percent _ALL_     Y _NULL_        RACE   7.142857
+## 66     count _ALL_     Y _NULL_       _ALL_   6.000000
+## 67   percent _ALL_     Y _NULL_        RACE  92.857143
+## 68     count _ALL_     Y _NULL_       _ALL_  78.000000
 ```
 
 ```r
@@ -486,13 +562,6 @@ dmtableFile<- file.path( system.file("extdata/sample-cfg", package="rrdfqbcrndex
 ## dmtableFile<- file.path(tempdir(),"temp-dm.AR.csv")
 
 write.csv(adsl.summ.stat, file=dmtableFile, row.names=FALSE)
-```
-
-```
-## Error in is.data.frame(x): object 'adsl.summ.stat' not found
-```
-
-```r
 cat("Written to ", dmtableFile, "\n")
 ```
 

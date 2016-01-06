@@ -14,30 +14,23 @@ vignette: >
 This script creates the result and codelist for a simple DEMO table.
 
 ```{r}
+library(rrdfqb)
+library(rrdfqbcrnd0)
+library(rrdfcdisc)
 devtools::load_all(pkg="../..")
-## http://stackoverflow.com/questions/14896941/install-an-r-package-temporarily-only-for-the-current-session
-tmp.install.packages <- function(pack, dependencies=TRUE, ...) {
-  path <- tempdir()
-  ## Add 'path' to .libPaths, and be sure that it is not
-  ## at the first position, otherwise any other package during
-  ## this session would be installed into 'path'
-  firstpath <- .libPaths()[1]
-  .libPaths(c(firstpath, path))
-  install.packages(pack, dependencies=dependencies, lib=path, ...)
-}
-tmp.install.packages("../../../rrdfqbcrnd0_0.1.19.tar.gz")
 ```
 
-All files are store to the directory
+All files are stored in the directory
 ```{r}
 targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrndex")
+(targetDir)
 ```
 
 ## RDF data cubes specified in workbook
 
 ```{r}
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrndex")
-
+(RDFCubeWorkbook)
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 cat("DM cube stored as ", dm.cube.fn, "\n")
 targetFile<- file.path(targetDir,"DC-DM-sample.ttl")
