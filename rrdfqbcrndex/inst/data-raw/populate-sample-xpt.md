@@ -1,7 +1,7 @@
 ---
 title: "Populate sample-xpt directory with example file in SAS transport xpt format"
 author: "mja@statgroup.dk"
-date: "2016-01-03"
+date: "2016-01-06"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Populate sample-xpt directory with example file in SAS transport xpt format}
@@ -48,7 +48,7 @@ devtools::load_all(pkg="../..")
 
 
 ```r
-repositoryURL<- "https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data"
+repositoryURL<- "https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc"
 
 fnadae<- file.path( system.file("extdata/sample-xpt", package="rrdfqbcrndex"), "adae.xpt" )
 message("Downloading to ", fnadae )
@@ -64,7 +64,7 @@ message("Downloading from ", downloadURL )
 ```
 
 ```
-## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data/adae.xpt
+## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adae.xpt
 ```
 
 ```r
@@ -84,7 +84,7 @@ message("Downloading from ", downloadURL )
 ```
 
 ```
-## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data/adsl.xpt
+## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adsl.xpt
 ```
 
 ```r
@@ -122,10 +122,7 @@ adsl<-read.xport(fnadsl)
 ```
 ## Loading required package: foreign
 ## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
-```
-
-```
-## Error in lookup.xport(file): file not in SAS transfer format
+## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
 ```
 
 The following code is not evaluated, as the dates are not processed as expected.

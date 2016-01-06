@@ -57,13 +57,7 @@ cat("Loading cube specfication from ", cubeVocabularyFn, "\n")
 
 ```r
 tmp<- load.rdf(cubeVocabularyFn, format="TURTLE", appendTo= store)
-```
 
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : org.apache.jena.riot.RiotException: [line: 4, col: 9 ] Triples not terminated by DOT
-```
-
-```r
 cat("Loading cube from ", dataCubeFile, "\n")
 ```
 
@@ -78,7 +72,7 @@ summarize.rdf(store)
 ```
 
 ```
-## [1] "Number of triples: 3095"
+## [1] "Number of triples: 3381"
 ```
 
 ## Execute the DEMO* SPARQL queries
@@ -99,12 +93,7 @@ for (rqFile in rqFiles) {
 ```
 
 ```
-## File
-```
-
-```
-## Warning in file(con, "r"): file("") only supports open = "w+" and open = "w
-## +b": using the former
+## File  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/sample-rdf/DEMOattributes.rq
 ```
 
 ```

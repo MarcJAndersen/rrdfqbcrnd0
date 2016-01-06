@@ -1,7 +1,7 @@
 ---
 title: "Create DM table as csv file"
 author: "mja@statgroup.dk"
-date: "2016-01-03"
+date: "2016-01-06"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DM table as csv file}
@@ -257,7 +257,7 @@ print(tempfile)
 ```
 
 ```
-## [1] "/tmp/Rtmp2wyX0G/temp-code.R"
+## [1] "/tmp/RtmpgyAsKz/temp-code.R"
 ```
 
 ## Define SQL statements directly

@@ -18,7 +18,7 @@ devtools::load_all(pkg="../..")
 ```{r}
 library(RCurl)
 library(devtools)
-qbURL<-"http://purl.org/linked-data/cube#"
+qbURL<-"https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl"
 if (! url.exists(qbURL) ) {
   stop(paste0("Can not access URL ",qbURL))
 }

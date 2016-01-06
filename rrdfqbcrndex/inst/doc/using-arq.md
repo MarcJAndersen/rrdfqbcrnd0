@@ -1,7 +1,7 @@
 ---
 title: "Using ARQ to make SPARQL queries"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2016-01-06"
 output: rmarkdown::html_vignette
 ---
 
@@ -39,8 +39,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOdimensions.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOdimensions.rq
+## Failed to load data
 ```
 
 ## Get attributes
@@ -52,8 +51,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOattributes.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOattributes.rq
+## Failed to load data
 ```
 
 ## Get observations
@@ -67,8 +65,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOobservations.rq
+## Failed to load data
 ```
 
 ## Get definition for all descriptive statistics - class `code:procedure`
@@ -81,8 +78,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOprocedure.rq
+## Failed to load data
 ```
 
 ## Get the codelists 
@@ -95,8 +91,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOcodelist.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOcodelist.rq
+## Failed to load data
 ```
 
 ## Get the codelist definition for all descriptive statistics - class `code:procedure`
@@ -109,8 +104,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOprocedure-codelist.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOprocedure-codelist.rq
+## Failed to load data
 ```
 
 ## Get definition for all variables used for descriptive statistics - class `code:factor`
@@ -123,8 +117,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOfactor.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOfactor.rq
+## Failed to load data
 ```
 
 ## Get the codelist definition for all variables used for descriptive statistics - class `code:factor`
@@ -137,8 +130,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOfactor-codelist.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOfactor-codelist.rq
+## Failed to load data
 ```
 
 ## Get definition for descriptive statistics median
@@ -151,8 +143,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOprocedure-median.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOprocedure-median.rq
+## Failed to load data
 ```
 
 ## Get information for selection of data
@@ -165,8 +156,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations-R-selection.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOobservations-R-selection.rq
+## Failed to load data
 ```
 
 ## Get information on the underlying data in D2RQ format
@@ -181,8 +171,10 @@ arq --data adsl-map.ttl --query ADSL-mapping.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: ADSL-mapping.rq
+## -----------------------------------------
+## | mapColumn | d2rqcolumn | d2rqdatatype |
+## =========================================
+## -----------------------------------------
 ```
 
 Then dump the contents of a record in the database.
@@ -193,8 +185,10 @@ arq --data adsl.ttl --query ADSL-record.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: ADSL-record.rq
+## -------------
+## | s | p | o |
+## =============
+## -------------
 ```
 
 ## Get underlying data for one cube observation
@@ -206,8 +200,7 @@ arq --data adsl.ttl --data DC-DEMO-sample.ttl --query DEMOobservations-R-data.rq
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOobservations-R-data.rq
+## Failed to load data
 ```
 
 

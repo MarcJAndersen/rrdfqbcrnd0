@@ -1,10 +1,10 @@
 ---
-title: How to create vignette"
-author: "PhuseSubTeamAnalysisResults@example.org"
+title: "SPARQL update example"
+author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{How to create vignette}
+  %\VignetteIndexEntry{SPARQL update example}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
@@ -14,7 +14,7 @@ vignette: >
 
 Start in the package root directory
 
-Devtools should reply reply Loading rrdfqbcrnd0.
+Devtools should reply reply `Loading rrdfancillary`.
 
 The knit command should generate .md file in the present work directory - the package root directory
 
@@ -24,15 +24,14 @@ library(devtools)
 devtools::document()
 devtools::load_all("..")
 devtools::install()
-
 library(knitr)
 knit("vignettes/do-update.Rmd")
-
 library(rrdfancillary)
-
 ```
 
 ```{r, eval=TRUE}
+library(rrdf)
+library(rrdfancillary)
 store <- new.rdf()
 add.data.triple(store,
                 subject="http://example.org/Subject",

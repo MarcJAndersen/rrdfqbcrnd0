@@ -146,8 +146,8 @@ dataFile<- system.file("extdata/sample-rdf", "adae.ttl", package="rrdfqbcrndex")
 dataFile
 
 store <- new.rdf()  # Initialize
-load.rdf(dataFilemap, format="TURTLE", appendTo= store)
-load.rdf(dataFile, format="TURTLE", appendTo= store)
+invisible(load.rdf(dataFilemap, format="TURTLE", appendTo= store))
+invisible(load.rdf(dataFile, format="TURTLE", appendTo= store))
 summarize.rdf(store)
 ```
 

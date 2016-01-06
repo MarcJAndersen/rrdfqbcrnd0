@@ -3,7 +3,10 @@ HTMLS= populate-sample-xpt.html  create-ADSL-ttl.html create-ADAE-ttl.html \
 create-ae-table-as-csv.html  create-dm-table-as-csv.html \
 create-qb-examples-as-ttl.html \
 use-demo-ttl.html  \
-using-arq.html using-arq-graphical-display.html using-arq-qb.html using-python.html
+using-arq.html using-arq-graphical-display.html using-arq-qb.html using-python.html \
+reporting-process.html
+
+# does not work package-overview.html
 
 # not possible directly from .Rmd PDFS=reporting-process.pdf
 
@@ -27,7 +30,7 @@ QBTTLS=../extdata/sample-rdf/DC-AE-sample.ttl ../extdata/sample-rdf/DC-DM-sample
 
 FORDOC= ${HTMLS} ${MDS} ${PDFS}
 
-TARGETS=${TTLS} ${XPTS} ${FORDOC}
+TARGETS=${XPTS} ${TTLS}  ${FORDOC}
 
 
 RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
@@ -79,6 +82,25 @@ using-arq-qb.html: using-arq-qb.Rmd
 
 using-python.html: using-python.Rmd
 	${RKNIT2HTML}
+
+reporting-process.html: reporting-process.Rmd
+	${RKNIT2HTML}
+
+reporting-process.md: reporting-process.Rmd
+	${RKNIT2MD}
+
+reporting-process.pdf: reporting-process.Rmd
+	${RKNIT2PDF}
+
+package-overview.html: package-overview.Rmd
+	${RMD2HTML}
+
+package-overview.md: package-overview.Rmd
+	${RKNIT2MD}
+
+package-overview.pdf: package-overview.Rmd
+	${RKNIT2PDF}
+
 
 # %.pdf: %.Rnw
 # 	${RKNIT2PDF}

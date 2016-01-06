@@ -1,8 +1,10 @@
 
+TARGETS=first-cube.md howto-create-vignette.md SPARQL-query.md SPARQL-scripts-for-qb.md
 
-all: first-cube.md howto-create-vignette.md SPARQL-query.md SPARQL-scripts-for-qb.md
+all: ${TARGETS}
 
-clean: 
+clean:
+	rm -f ${TARGETS}
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"

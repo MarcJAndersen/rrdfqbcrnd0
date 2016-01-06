@@ -1,7 +1,7 @@
 ---
 title: "Using ARQ to investigate RDF data cube"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2016-01-06"
 vignette: >
   %\VignetteIndexEntry{Using ARQ to investigate RDF data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -50,7 +50,7 @@ dot -x -Tpdf -ograph.pdf fordot.dot
 ```
 ## bash: line 0: cd: ../extdata/CUBE-standards-rdf: No such file or directory
 ## File not found: qb-construct-ComponentProperty.rq
-## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/data-raw/fordot.ttl with parser turtle
+## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/fordot.ttl with parser turtle
 ## rapper: Serializing with serializer dot
 ## rapper: Parsing returned 0 triples
 ```

@@ -1,8 +1,9 @@
 
+TARGETS=CDISC-make-list.html CDISC-make-list.md CDISC-make-list.pdf
+all: ${TARGETS}
 
-all: CDISC-make-list.html CDISC-make-list.md CDISC-make-list.pdf
-
-clean: 
+clean:
+	rm -f ${TARGETS}
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"

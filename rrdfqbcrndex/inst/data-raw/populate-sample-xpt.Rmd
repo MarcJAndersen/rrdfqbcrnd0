@@ -24,7 +24,8 @@ devtools::load_all(pkg="../..")
 
 ```{r}
 
-repositoryURL<- "https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data"
+
+repositoryURL<- "https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc"
 
 fnadae<- file.path( system.file("extdata/sample-xpt", package="rrdfqbcrndex"), "adae.xpt" )
 message("Downloading to ", fnadae )

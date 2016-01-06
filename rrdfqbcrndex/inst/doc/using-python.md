@@ -1,7 +1,7 @@
 ---
 title: "Using Python to make SPARQL queries"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2016-01-06"
 output: rmarkdown::html_vignette
 ---
 
@@ -36,7 +36,7 @@ for row in qres:
 ##     data=data, format=format)
 ##   File "/usr/lib/python2.7/site-packages/rdflib/parser.py", line 168, in create_input_source
 ##     file = open(filename, "rb")
-## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
+## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
 ```
 
 ## Get attributes
@@ -61,7 +61,7 @@ for row in qres:
 ##     data=data, format=format)
 ##   File "/usr/lib/python2.7/site-packages/rdflib/parser.py", line 168, in create_input_source
 ##     file = open(filename, "rb")
-## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
+## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
 ```
 
 ## Get observations
@@ -90,7 +90,7 @@ for row in qres:
 ##     data=data, format=format)
 ##   File "/usr/lib/python2.7/site-packages/rdflib/parser.py", line 168, in create_input_source
 ##     file = open(filename, "rb")
-## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
+## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
 ```
 
 ## Get definition for all descriptive statistics
@@ -117,7 +117,7 @@ for row in qres:
 ##     data=data, format=format)
 ##   File "/usr/lib/python2.7/site-packages/rdflib/parser.py", line 168, in create_input_source
 ##     file = open(filename, "rb")
-## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
+## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
 ```
 
 ## Get definition for descriptive statistics median
@@ -144,7 +144,7 @@ for row in qres:
 ##     data=data, format=format)
 ##   File "/usr/lib/python2.7/site-packages/rdflib/parser.py", line 168, in create_input_source
 ##     file = open(filename, "rb")
-## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
+## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
 ```
 
 ## Get information for selection of data
@@ -171,7 +171,7 @@ for row in qres:
 ##     data=data, format=format)
 ##   File "/usr/lib/python2.7/site-packages/rdflib/parser.py", line 168, in create_input_source
 ##     file = open(filename, "rb")
-## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
+## IOError: [Errno 2] No such file or directory: u'/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl'
 ```
 
 

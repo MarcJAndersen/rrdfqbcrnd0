@@ -232,7 +232,7 @@ hr {
 
 <pre><code class="r">library(RCurl)
 library(devtools)
-qbURL&lt;-&quot;http://purl.org/linked-data/cube#&quot;
+qbURL&lt;-&quot;https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl&quot;
 if (! url.exists(qbURL) ) {
   stop(paste0(&quot;Can not access URL &quot;,qbURL))
 }
@@ -261,7 +261,7 @@ cat(SPARQLscript,&quot;\n&quot;)
 </code></pre>
 
 <p>CONSTRUCT { ?s ?p ?o }
-FROM <a href="http://purl.org/linked-data/cube#">http://purl.org/linked-data/cube#</a>
+FROM <a href="https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl">https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl</a>
 WHERE { ?s ?p ?o } </p>
 
 <pre><code class="r">SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-cube.rq&quot;)
@@ -269,7 +269,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)
 </code></pre>
 
-<p>SPARQL script stored in   /tmp/Rtmp3PU6C1/get-cube.rq </p>
+<p>SPARQL script stored in   /tmp/Rtmpvb7gLS/get-cube.rq </p>
 
 <h3>Using the script with R</h3>
 

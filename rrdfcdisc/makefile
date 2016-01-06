@@ -21,6 +21,9 @@ rbuild:
 createRD:
 	$(R_HOME)/bin/Rscript -e "library(devtools); devtools::document()"
 
+clean:
+	(cd inst/data-raw; make clean)
+	(cd vignettes; make clean)
 
 data-raw:
 	(cd inst/data-raw; make all; make installDoc)

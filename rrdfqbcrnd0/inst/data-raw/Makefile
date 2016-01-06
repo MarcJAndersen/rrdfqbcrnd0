@@ -1,8 +1,6 @@
 
 HTMLS= codelist-procedure.html
 
-# reporting-process.html package-overview.html
-
 # not possible directly from .Rmd PDFS=reporting-process.pdf
 
 # List of files with .md extension
@@ -24,6 +22,7 @@ all: ${TARGETS}
 
 clean: 
 	rm -f ${TARGETS}
+	(cd ../doc; rm -f ${TARGETS})
 
 installDoc:
 	mkdir -p ../doc/figure
@@ -32,24 +31,6 @@ installDoc:
 
 codelist-procedure.html: codelist-procedure.Rmd 
 	${RKNIT2HTML}
-
-reporting-process.html: reporting-process.Rmd
-	${RKNIT2HTML}
-
-reporting-process.md: reporting-process.Rmd
-	${RKNIT2MD}
-
-reporting-process.pdf: reporting-process.Rmd
-	${RKNIT2PDF}
-
-package-overview.html: package-overview.Rmd
-	${RMD2HTML}
-
-package-overview.md: package-overview.Rmd
-	${RKNIT2MD}
-
-package-overview.pdf: package-overview.Rmd
-	${RKNIT2PDF}
 
 # %.pdf: %.Rnw
 # 	${RKNIT2PDF}

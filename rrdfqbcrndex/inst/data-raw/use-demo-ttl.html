@@ -243,12 +243,8 @@ cat(&quot;Loading cube specfication from &quot;, cubeVocabularyFn, &quot;\n&quot
 </code></pre>
 
 <pre><code class="r">tmp&lt;- load.rdf(cubeVocabularyFn, format=&quot;TURTLE&quot;, appendTo= store)
-</code></pre>
 
-<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/hp/hpl/jena/rdf/model/Model;&quot;, : org.apache.jena.riot.RiotException: [line: 4, col: 9 ] Triples not terminated by DOT
-</code></pre>
-
-<pre><code class="r">cat(&quot;Loading cube from &quot;, dataCubeFile, &quot;\n&quot;)
+cat(&quot;Loading cube from &quot;, dataCubeFile, &quot;\n&quot;)
 </code></pre>
 
 <pre><code>## Loading cube from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/sample-rdf/DC-DEMO-sample.ttl
@@ -259,7 +255,7 @@ cat(&quot;Loading cube specfication from &quot;, cubeVocabularyFn, &quot;\n&quot
 summarize.rdf(store)
 </code></pre>
 
-<pre><code>## [1] &quot;Number of triples: 3095&quot;
+<pre><code>## [1] &quot;Number of triples: 3381&quot;
 </code></pre>
 
 <h2>Execute the DEMO* SPARQL queries</h2>
@@ -277,11 +273,7 @@ for (rqFile in rqFiles) {
 }
 </code></pre>
 
-<pre><code>## File
-</code></pre>
-
-<pre><code>## Warning in file(con, &quot;r&quot;): file(&quot;&quot;) only supports open = &quot;w+&quot; and open = &quot;w
-## +b&quot;: using the former
+<pre><code>## File  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/sample-rdf/DEMOattributes.rq
 </code></pre>
 
 <pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : com.hp.hpl.jena.query.QueryParseException: Encountered &quot;&lt;EOF&gt;&quot; at line 1, column 0.

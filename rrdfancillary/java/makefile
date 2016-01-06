@@ -1,2 +1,3 @@
 all:
-	groovy buildall.groovy
+	groovy build.groovy
+

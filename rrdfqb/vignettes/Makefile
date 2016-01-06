@@ -1,8 +1,9 @@
 
+TARGETS=check-ic.html check-ic.md 
+all:  ${TARGETS}
 
-all: check-ic.html check-ic.md 
-
-clean: 
+clean:
+	rm -f ${TARGETS}
 
 # not clever rule - also creates HTML version
 # disabled 2015-09-22 MJA - does not work

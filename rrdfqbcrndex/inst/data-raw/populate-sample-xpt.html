@@ -232,7 +232,7 @@ devtools::load_all(pkg=&quot;../..&quot;)
 ##     clone
 </code></pre>
 
-<pre><code class="r">repositoryURL&lt;- &quot;https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data&quot;
+<pre><code class="r">repositoryURL&lt;- &quot;https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc&quot;
 
 fnadae&lt;- file.path( system.file(&quot;extdata/sample-xpt&quot;, package=&quot;rrdfqbcrndex&quot;), &quot;adae.xpt&quot; )
 message(&quot;Downloading to &quot;, fnadae )
@@ -245,7 +245,7 @@ message(&quot;Downloading to &quot;, fnadae )
 message(&quot;Downloading from &quot;, downloadURL )
 </code></pre>
 
-<pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data/adae.xpt
+<pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adae.xpt
 </code></pre>
 
 <pre><code class="r">download.file( downloadURL, fnadae, method=&quot;curl&quot;)
@@ -261,7 +261,7 @@ message(&quot;Downloading to &quot;, fnadsl )
 message(&quot;Downloading from &quot;, downloadURL )
 </code></pre>
 
-<pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/scriptathon2014/data/adsl.xpt
+<pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adsl.xpt
 </code></pre>
 
 <pre><code class="r">download.file( downloadURL, fnadsl, method=&quot;curl&quot;)
@@ -295,9 +295,7 @@ adsl&lt;-read.xport(fnadsl)
 
 <pre><code>## Loading required package: foreign
 ## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
-</code></pre>
-
-<pre><code>## Error in lookup.xport(file): file not in SAS transfer format
+## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
 </code></pre>
 
 <p>The following code is not evaluated, as the dates are not processed as expected.</p>

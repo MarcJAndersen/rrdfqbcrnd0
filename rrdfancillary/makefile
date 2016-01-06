@@ -25,13 +25,23 @@ createRD:
 data-raw:
 	echo Nothing
 
-java:
+JAVATARGETS=./java/bin/com/github/marcjandersen/rrdfancillary/RJenaHelper2.class ./inst/java/rrdfancillary.jar
+VIGNETTETARGETS=./vignettes/do-update.html ./vignettes/do-update.md
+TARGETS=${JAVATARGETS} ${VIGNETTETARGETS}
+clean: 
+	rm -f ${TARGETS}
+
+java: ${JAVATARGETS}
+
+${JAVATARGETS}:
 	(cd java; make all)
 
 # Only run this after the package is installed in the overall R library
 # The vignettes uses the packages, and this should be the most recent version
 # The vignettes document should be extracted from the package
-vignettedoc:
+vignettedoc: ${VIGNETTETARGETS}
+
+${VIGNETTETARGETS}: 
 	(cd vignettes; make all)
 
 

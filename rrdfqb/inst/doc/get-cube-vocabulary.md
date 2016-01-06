@@ -1,7 +1,7 @@
 ---
 title: "Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#)"
 author: "mja@statgroup.dk"
-date: "2016-01-03"
+date: "2016-01-06"
 ---
 
 # Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#).
@@ -39,7 +39,7 @@ devtools::load_all(pkg="../..")
 ```r
 library(RCurl)
 library(devtools)
-qbURL<-"http://purl.org/linked-data/cube#"
+qbURL<-"https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl"
 if (! url.exists(qbURL) ) {
   stop(paste0("Can not access URL ",qbURL))
 }
@@ -71,7 +71,7 @@ cat(SPARQLscript,"\n")
 ```
 
 CONSTRUCT { ?s ?p ?o }
-FROM <http://purl.org/linked-data/cube#>
+FROM <https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl>
 WHERE { ?s ?p ?o } 
 
 ```r
@@ -80,7 +80,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/Rtmp3PU6C1/get-cube.rq 
+SPARQL script stored in   /tmp/Rtmpvb7gLS/get-cube.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.

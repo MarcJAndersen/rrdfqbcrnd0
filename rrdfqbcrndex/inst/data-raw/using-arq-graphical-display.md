@@ -1,7 +1,7 @@
 ---
 title: "Graphical display of SPARQL queries with arq, rapper and graphviz"
 author: "mja@statgroup.dk"
-date: "2015-12-22"
+date: "2016-01-06"
 output: rmarkdown::html_vignette
 ---
  
@@ -45,9 +45,8 @@ dot -x -Tpdf -ograph.pdf fordot.dot
 ```
 
 ```
-## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: OneQBobservation.rq
-## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcrndex/inst/data-raw/fordot.ttl with parser turtle
+## Failed to load data
+## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/fordot.ttl with parser turtle
 ## rapper: Serializing with serializer dot
 ## rapper: Parsing returned 0 triples
 ```

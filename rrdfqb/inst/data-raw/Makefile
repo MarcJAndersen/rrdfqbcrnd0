@@ -6,7 +6,16 @@ MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 
 FORDOC= ${HTMLS} ${MDS}
 
-TARGETS= ${FORDOC}
+# ToDo(MJA): ${SPARQLUPDATE} is made manually - should be extracted from cube specs 
+SPARQLUPDATE=inst/extdata/cube-vocabulary-rdf/normalize-algorithm-phase-1.ru \
+inst/extdata/cube-vocabulary-rdf/normalize-algorithm-phase-2.ru
+# ToDo(MJA): ${QBEXFAILIC14TTL} is made manually - should be generated
+QBEXFAILIC14TTL=inst/extdata/sample-rdf/example-fails-IC14.ttl
+
+RDAQBICLIST=./data/qbIClist.rda
+QBVOCABULARY=inst/extdata/cube-vocabulary-rdf/cube.ttl
+QBEXAMPLETTL=inst/extdata/sample-rdf/example.ttl inst/extdata/sample-rdf/example-normalized.ttl
+TARGETS= ${FORDOC} ${QBEXAMPLETTL} ${QBVOCABULARY} 
 
 RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
@@ -25,10 +34,10 @@ installDoc:
 	cp ${FORDOC} ../doc
 #	cp figure/* ../doc/figure
 
-get-cube-vocabulary.html: get-cube-vocabulary.Rmd
+${QBVOCABULARY} get-cube-vocabulary.html: get-cube-vocabulary.Rmd
 	${RKNIT2HTML}
 
-get-qb-ex-ttlfile.html: get-qb-ex-ttlfile.Rmd
+${QBEXAMPLETTL} get-qb-ex-ttlfile.html: get-qb-ex-ttlfile.Rmd
 	${RKNIT2HTML}
 
 ${RDAQBICLIST} create-qb-IC-dataset.html: create-qb-IC-dataset.Rmd

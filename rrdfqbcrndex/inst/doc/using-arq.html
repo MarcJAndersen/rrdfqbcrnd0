@@ -195,8 +195,7 @@ So, ignore the repeated cd ..</p>
 arq --data DC-DEMO-sample.ttl --query DEMOdimensions.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOdimensions.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get attributes</h2>
@@ -205,8 +204,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOdimensions.rq
 arq --data DC-DEMO-sample.ttl --query DEMOattributes.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOattributes.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get observations</h2>
@@ -218,8 +216,7 @@ Note: in the HTML version the output below can be scrolled using the left and ri
 arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOobservations.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get definition for all descriptive statistics - class <code>code:procedure</code></h2>
@@ -230,8 +227,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations.rq
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOprocedure.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get the codelists</h2>
@@ -242,8 +238,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq
 arq --data DC-DEMO-sample.ttl --query DEMOcodelist.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOcodelist.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get the codelist definition for all descriptive statistics - class <code>code:procedure</code></h2>
@@ -254,8 +249,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOcodelist.rq
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure-codelist.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOprocedure-codelist.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get definition for all variables used for descriptive statistics - class <code>code:factor</code></h2>
@@ -266,8 +260,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOprocedure-codelist.rq
 arq --data DC-DEMO-sample.ttl --query DEMOfactor.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOfactor.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get the codelist definition for all variables used for descriptive statistics - class <code>code:factor</code></h2>
@@ -278,8 +271,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOfactor.rq
 arq --data DC-DEMO-sample.ttl --query DEMOfactor-codelist.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOfactor-codelist.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get definition for descriptive statistics median</h2>
@@ -290,8 +282,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOfactor-codelist.rq
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure-median.rq 
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOprocedure-median.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get information for selection of data</h2>
@@ -302,8 +293,7 @@ arq --data DC-DEMO-sample.ttl --query DEMOprocedure-median.rq
 arq --data DC-DEMO-sample.ttl --query DEMOobservations-R-selection.rq
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOobservations-R-selection.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h2>Get information on the underlying data in D2RQ format</h2>
@@ -316,8 +306,10 @@ arq --data DC-DEMO-sample.ttl --query DEMOobservations-R-selection.rq
 arq --data adsl-map.ttl --query ADSL-mapping.rq
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: ADSL-mapping.rq
+<pre><code>## -----------------------------------------
+## | mapColumn | d2rqcolumn | d2rqdatatype |
+## =========================================
+## -----------------------------------------
 </code></pre>
 
 <p>Then dump the contents of a record in the database.</p>
@@ -326,8 +318,10 @@ arq --data adsl-map.ttl --query ADSL-mapping.rq
 arq --data adsl.ttl --query ADSL-record.rq
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: ADSL-record.rq
+<pre><code>## -------------
+## | s | p | o |
+## =============
+## -------------
 </code></pre>
 
 <h2>Get underlying data for one cube observation</h2>
@@ -336,8 +330,7 @@ arq --data adsl.ttl --query ADSL-record.rq
 arq --data adsl.ttl --data DC-DEMO-sample.ttl --query DEMOobservations-R-data.rq
 </code></pre>
 
-<pre><code>## bash: line 0: cd: ../extdata/sample-rdf: No such file or directory
-## File not found: DEMOobservations-R-data.rq
+<pre><code>## Failed to load data
 </code></pre>
 
 <h1>How to run this .Rmd file</h1>
