@@ -38,19 +38,25 @@ library(rrdfqb)
 
 ```r
 library(rrdfqbcrnd0)
+library(rrdfcdisc)
+```
+
+```
+## Loading required package: devtools
+## 
+## Attaching package: 'rrdfcdisc'
+## 
+## The following object is masked from 'package:rrdfqbcrnd0':
+## 
+##     summarize.rdf.noprint
+```
+
+```r
 devtools::load_all(pkg="../..")
 ```
 
 ```
 ## Loading rrdfqbcrndex
-```
-
-```r
-library(rrdfqbcrndcheck)
-```
-
-```
-## Error: package 'rrdfqbcrndex' required by 'rrdfqbcrndcheck' could not be found
 ```
 
 All files are stored in the directory
@@ -81,7 +87,12 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 ```
 
 ```
-## Error in BuildCubeFromWorkbook(RDFCubeWorkbook, "DM"): Expected file /dm.AR.csv does not exist
+## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+## Done loading rdf.cdisc.org contents, number of triples: 165672
+```
+
+```
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : method sparql with signature (Ljava/lang/String;)Lcom/github/egonw/rrdf/StringMatrix; not found
 ```
 
 ```r
@@ -106,18 +117,11 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 
 ```r
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
-```
-
-```
-## Error in BuildCubeFromWorkbook(RDFCubeWorkbook, "AE"): Expected file /ae.AR.csv does not exist
-```
-
-```r
 cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
 ```
-## Error in cat("AE cube stored as ", ae.cube.fn, "\n"): object 'ae.cube.fn' not found
+## AE cube stored as  /tmp/RtmpPTCWOg/DC-AE-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -128,7 +132,7 @@ if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
 ```
 
 ```
-## Error in file.copy(ae.cube.fn, targetFile, overwrite = TRUE): object 'ae.cube.fn' not found
+## AE cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-AE-sample.ttl
 ```
 
 ## RDF data cube in csv files
@@ -153,7 +157,7 @@ demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 ```
 
 ```
-## Error in BuildCubeFromDataFrames(demoMetaData, demoObsData): could not find function "qb.def.prefixlist"
+## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : method sparql with signature (Ljava/lang/String;)Lcom/github/egonw/rrdf/StringMatrix; not found
 ```
 
 ```r

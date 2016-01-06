@@ -11,8 +11,6 @@ qb.buildSkeleton(store, prefixlist, obsData, skeletonSource)
 
 \item{prefixlist}{prefix list}
 
-\item{obsData}{data.frame with observations}
-
 \item{skeletonSource}{data.frame with skeleton source}
 }
 \value{

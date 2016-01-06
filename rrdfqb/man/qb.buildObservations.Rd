@@ -12,8 +12,6 @@ qb.buildObservations(store, prefixlist, obsData, skeletonSource, dsdURIwoprefix,
 
 \item{prefixlist}{prefix list}
 
-\item{obsData}{data.frame with observations}
-
 \item{skeletonSource}{data.frame with skeleton source}
 
 \item{dsdURIwoprefix}{DSD URI}
