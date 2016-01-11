@@ -145,7 +145,13 @@ add.data.triple(store,
                 )  # D2RQ DataSetName
     
 for (i in 1:nrow(skeletonSource)){
-  if (skeletonSource[i,"compType"]=="dimension") {
+    if (skeletonSource[i,"compType"]=="dimension") {
+        cat("codeType: ",skeletonSource[i,"codeType"], "\n" )
+                        cat("nciDomainValue: ",skeletonSource[i,"nciDomainValue"], "\n")
+                        cat("dimName: ",skeletonSource[i,"compName"], "\n")
+                        cat("underlDataSetName: ",extra$obsDataSetName, "\n")
+                        cat("remote.endpoint: ",remote.endpoint, "\n")         
+
   buildCodelist(store,
                 prefixlist,
                 obsData,

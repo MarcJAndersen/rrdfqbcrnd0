@@ -1,7 +1,7 @@
 ---
 title: "Create DEMO table as csv file"
 author: "mja@statgroup.dk"
-date: "2016-01-06"
+date: "2016-01-11"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Create DEMO table from csv file}
@@ -87,12 +87,50 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 ```
 
 ```
-## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165672
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  trt01a 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  trt01a 
+## codeType:  SDTM 
+## nciDomainValue:  C66731 
+## dimName:  sex 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  sex
 ```
 
 ```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : method sparql with signature (Ljava/lang/String;)Lcom/github/egonw/rrdf/StringMatrix; not found
+## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+## Done loading rdf.cdisc.org contents, number of triples: 165700
+```
+
+```
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  saffl 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  saffl 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  procedure 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  procedure 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  factor 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  factor 
+## codeType:  SDTM 
+## nciDomainValue:  C74457 
+## dimName:  race 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  race
 ```
 
 ```r
@@ -100,7 +138,7 @@ cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
 ```
-## Error in cat("DM cube stored as ", dm.cube.fn, "\n"): object 'dm.cube.fn' not found
+## DM cube stored as  /tmp/RtmpzGAfne/DC-DM-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -112,16 +150,58 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 ```
 
 ```
-## Error in file.copy(dm.cube.fn, targetFile, overwrite = TRUE): object 'dm.cube.fn' not found
+## DM cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DM-sample.ttl
 ```
 
 ```r
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
+```
+
+```
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  trta 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  trta 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  saffl 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  saffl 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  aesoc 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  aesoc 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  aedecod 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  aedecod 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  procedure 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  procedure 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  factor 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  factor
+```
+
+```r
 cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
 ```
-## AE cube stored as  /tmp/RtmpPTCWOg/DC-AE-R-V-0-5-2.ttl
+## AE cube stored as  /tmp/RtmpzGAfne/DC-AE-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -157,7 +237,48 @@ demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 ```
 
 ```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/github/egonw/rrdf/StringMatrix;", : method sparql with signature (Ljava/lang/String;)Lcom/github/egonw/rrdf/StringMatrix; not found
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  trt01a 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  trt01a 
+## codeType:  SDTM 
+## nciDomainValue:  C66731 
+## dimName:  sex 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  sex 
+## codeType:  SDTM 
+## nciDomainValue:  C74457 
+## dimName:  race 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  race 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  ethnic 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  ethnic 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  agegr1 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  agegr1 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  procedure 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  procedure 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  factor 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  factor
 ```
 
 ```r
@@ -165,7 +286,7 @@ cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
 ```
-## Error in path.expand(path): object 'demo.cube.fn' not found
+## DEMO cube stored as  /tmp/RtmpzGAfne/DC-DEMO-R-V-0-5-2.ttl
 ```
 
 ```r
@@ -177,6 +298,6 @@ if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
 ```
 
 ```
-## Error in file.copy(demo.cube.fn, targetFile, overwrite = TRUE): object 'demo.cube.fn' not found
+## DEMO cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
 ```
 

@@ -265,17 +265,54 @@ library(rrdfcdisc)
 <pre><code class="r">dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )
 </code></pre>
 
-<pre><code>## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165672
+<pre><code>## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  trt01a 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  trt01a 
+## codeType:  SDTM 
+## nciDomainValue:  C66731 
+## dimName:  sex 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  sex
 </code></pre>
 
-<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : method sparql with signature (Ljava/lang/String;)Lcom/github/egonw/rrdf/StringMatrix; not found
+<pre><code>## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
+## Done loading rdf.cdisc.org contents, number of triples: 165700
+</code></pre>
+
+<pre><code>## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  saffl 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  saffl 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  procedure 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  procedure 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  factor 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  factor 
+## codeType:  SDTM 
+## nciDomainValue:  C74457 
+## dimName:  race 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  race
 </code></pre>
 
 <pre><code class="r">cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Error in cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;): object &#39;dm.cube.fn&#39; not found
+<pre><code>## DM cube stored as  /tmp/RtmpzGAfne/DC-DM-R-V-0-5-2.ttl
 </code></pre>
 
 <pre><code class="r">targetFile&lt;- file.path(targetDir,&quot;DC-DM-sample.ttl&quot;)
@@ -285,14 +322,54 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 }
 </code></pre>
 
-<pre><code>## Error in file.copy(dm.cube.fn, targetFile, overwrite = TRUE): object &#39;dm.cube.fn&#39; not found
+<pre><code>## DM cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DM-sample.ttl
 </code></pre>
 
 <pre><code class="r">ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )
-cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## AE cube stored as  /tmp/RtmpPTCWOg/DC-AE-R-V-0-5-2.ttl
+<pre><code>## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  trta 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  trta 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  saffl 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  saffl 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  aesoc 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  aesoc 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  aedecod 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  aedecod 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  procedure 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  procedure 
+## codeType:  DATA 
+## nciDomainValue:  NA 
+## dimName:  factor 
+## underlDataSetName:  ADAE 
+## remote.endpoint:  
+## dimName  factor
+</code></pre>
+
+<pre><code class="r">cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)
+</code></pre>
+
+<pre><code>## AE cube stored as  /tmp/RtmpzGAfne/DC-AE-R-V-0-5-2.ttl
 </code></pre>
 
 <pre><code class="r">targetFile&lt;- file.path(targetDir,&quot;DC-AE-sample.ttl&quot;)
@@ -323,13 +400,54 @@ demoMetaData &lt;- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 </code></pre>
 
-<pre><code>## Error in .jcall(&quot;com/github/egonw/rrdf/RJenaHelper&quot;, &quot;Lcom/github/egonw/rrdf/StringMatrix;&quot;, : method sparql with signature (Ljava/lang/String;)Lcom/github/egonw/rrdf/StringMatrix; not found
+<pre><code>## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  trt01a 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  trt01a 
+## codeType:  SDTM 
+## nciDomainValue:  C66731 
+## dimName:  sex 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  sex 
+## codeType:  SDTM 
+## nciDomainValue:  C74457 
+## dimName:  race 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  race 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  ethnic 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  ethnic 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  agegr1 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  agegr1 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  procedure 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  procedure 
+## codeType:  DATA 
+## nciDomainValue:   
+## dimName:  factor 
+## underlDataSetName:  ADSL 
+## remote.endpoint:  
+## dimName  factor
 </code></pre>
 
 <pre><code class="r">cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)
 </code></pre>
 
-<pre><code>## Error in path.expand(path): object &#39;demo.cube.fn&#39; not found
+<pre><code>## DEMO cube stored as  /tmp/RtmpzGAfne/DC-DEMO-R-V-0-5-2.ttl
 </code></pre>
 
 <pre><code class="r">targetFile&lt;- file.path(targetDir,&quot;DC-DEMO-sample.ttl&quot;)
@@ -339,7 +457,7 @@ if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
  }
 </code></pre>
 
-<pre><code>## Error in file.copy(demo.cube.fn, targetFile, overwrite = TRUE): object &#39;demo.cube.fn&#39; not found
+<pre><code>## DEMO cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
 </code></pre>
 
 </body>

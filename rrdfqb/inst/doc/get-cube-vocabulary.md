@@ -1,7 +1,7 @@
 ---
 title: "Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#)"
 author: "mja@statgroup.dk"
-date: "2016-01-06"
+date: "2016-01-11"
 ---
 
 # Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#).
@@ -80,7 +80,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in   /tmp/RtmpLjaa25/get-cube.rq 
+SPARQL script stored in   /tmp/RtmpTIYhyg/get-cube.rq 
 
 ### Using the script with R
 The R-code below does not work with rrdf.
