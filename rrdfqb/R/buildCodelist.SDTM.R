@@ -45,7 +45,7 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
         ## local environment is used
         ## TODO make the
         ## loading of cdiscstandards more clever
-        codeSource <- as.data.frame(sparql.rdf(env$cdiscstandards, query))
+        codeSource <- as.data.frame(sparql.rdf(rrdfcdisc:::env$cdiscstandards, query))
         ## message("Result of sparql using local store")
         ## print(codeSource)
         ## print(str(codeSource))
