@@ -2,7 +2,8 @@
 
 all: two-dim-representation-of-cube.md two-dim-representation-of-cube.html
 
-clean: 
+clean:
+	rm -f two-dim-representation-of-cube.html
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"

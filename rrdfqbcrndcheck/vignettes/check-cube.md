@@ -1,7 +1,7 @@
 ---
 title: "Derive results in RDF data cube and compare with results in data cube"
 author: "mja@statgroup.dk"
-date: "2016-01-03"
+date: "2016-01-12"
 vignette: >
   %\VignetteIndexEntry{Derive results in RDF data cube and compare with results in data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -34,64 +34,34 @@ library(rrdf)
 ```
 
 ```r
-tmp.install.packages <- function(pack, dependencies=TRUE, ...) {
-  path <- tempdir()
-  ## Add 'path' to .libPaths, and be sure that it is not
-  ## at the first position, otherwise any other package during
-  ## this session would be installed into 'path'
-  firstpath <- .libPaths()[1]
-  .libPaths(c(firstpath, path))
-  install.packages(pack, dependencies=dependencies, lib=path, ...)
-}
-tmp.install.packages("../../rrdfqbcrnd0_0.1.19.tar.gz")
+library(rrdfqbcrnd0)
 ```
 
 ```
-## inferring 'repos = NULL' from 'pkgs'
+## Loading required package: RCurl
+## Loading required package: bitops
+## 
+## Attaching package: 'RCurl'
+## 
+## The following object is masked from 'package:rJava':
+## 
+##     clone
 ```
 
 ```r
-tmp.install.packages("../../rrdfcrndex_0.1.19.tar.gz")
-```
+library(rrdfqbcrndex)
 
-```
-## inferring 'repos = NULL' from 'pkgs'
-```
 
-```
-## Warning in install.packages(pack, dependencies = dependencies, lib = path, : installation of package '../../rrdfcrndex_0.1.19.tar.gz' had non-zero exit status
-```
-
-```r
-obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfcrndex")
+obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
 ## TODO do not want factors in the data.frame
 ## http://stackoverflow.com/questions/2851015/convert-data-frame-columns-from-factors-to-characters
 ## better to use library(SASxport) - see inst/data-raw/create-dm-table-as-csv.Rmd
 dataSet<-read.xport(obsFile)
-```
-
-```
-## Error in lookup.xport(file): unable to open file: 'No such file or directory'
-```
-
-```r
 ii <- sapply(dataSet, is.factor)
-```
-
-```
-## Error in lapply(X = X, FUN = FUN, ...): object 'dataSet' not found
-```
-
-```r
 dataSet[ii] <- lapply(dataSet[ii], as.character)
-```
 
-```
-## Error in lapply(dataSet[ii], as.character): object 'dataSet' not found
-```
 
-```r
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfcrndex")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrndex")
 store <- new.rdf()  # Initialize
 cat("Reading turtle definition from ", dataCubeFile, "\n")
 ```
@@ -129,7 +99,7 @@ domainName<- GetDomainNameFromCube( store )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetDomainNameFromCube"
+## Error in GetDomainNameFromCube(store): could not find function "GetDsdNameFromCube"
 ```
 
 ```r
@@ -137,7 +107,7 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "GetForSparqlPrefix"
+## Error in GetForSparqlPrefix(domainName): could not find function "Get.rq.prefix.df"
 ```
 
 ```r
@@ -145,7 +115,7 @@ custom.prefixes <-Get.qb.crnd.prefixes(domainName)
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "Get.qb.crnd.prefixes"
+## Error in tolower(domainName): object 'domainName' not found
 ```
 
 ```r
@@ -153,13 +123,7 @@ common.prefixes <-data.frame(
   prefix=names( Get.default.crnd.prefixes() ),
   namespace=as.character( Get.default.crnd.prefixes() )
   )
-```
 
-```
-## Error in data.frame(prefix = names(Get.default.crnd.prefixes()), namespace = as.character(Get.default.crnd.prefixes())): could not find function "Get.default.crnd.prefixes"
-```
-
-```r
  ## Prefix for storing the results of check each measure in the data cube
 
   validation.mesure.prefix<- data.frame(
@@ -177,7 +141,7 @@ common.prefixes <-data.frame(
 ```
 
 ```
-## Error in rbind(common.prefixes, custom.prefixes, validation.mesure.prefix): object 'common.prefixes' not found
+## Error in rbind(common.prefixes, custom.prefixes, validation.mesure.prefix): object 'custom.prefixes' not found
 ```
 
 ```r
@@ -197,7 +161,7 @@ common.prefixes <-data.frame(
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "qb.def.prefixlist"
+## Error in qb.def.prefixlist(store, prefixes): could not find function "qb.add.prefixlist.to.store"
 ```
 
 ```r

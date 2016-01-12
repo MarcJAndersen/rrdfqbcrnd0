@@ -30,3 +30,23 @@ mk-rrdfqbpresent:
 
 mk-rrdfqbcrndcheck:
 	cd rrdfqbcrndcheck; make
+
+
+rbuild:
+	cd rrdfcdisc; make rbuild
+	cd rrdfancillary; make rbuild
+	cd rrdfqbcrnd0; make rbuild
+	cd rrdfqbcrndex; make rbuild
+	cd rrdfqb; make rbuild
+	cd rrdfqbpresent; make rbuild
+	cd rrdfqbcrndcheck; make rbuild
+
+
+clean:
+	cd rrdfcdisc; make clean
+	cd rrdfancillary; make clean
+	cd rrdfqbcrnd0; make clean
+	cd rrdfqbcrndex; make clean
+	cd rrdfqb; make clean
+	cd rrdfqbpresent; make clean
+	cd rrdfqbcrndcheck; make clean

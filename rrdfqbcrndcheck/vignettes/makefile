@@ -1,8 +1,9 @@
 
 
-all: check-cube.md
+all: check-cube.md check-cube.html
 
-clean: 
+clean:
+	rm -f check-cube.html
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"

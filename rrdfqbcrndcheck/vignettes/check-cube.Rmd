@@ -17,21 +17,13 @@ options(width=200) # long lines
 library(xlsx)
 library(foreign)
 library(rrdf)
-
-tmp.install.packages <- function(pack, dependencies=TRUE, ...) {
-  path <- tempdir()
-  ## Add 'path' to .libPaths, and be sure that it is not
-  ## at the first position, otherwise any other package during
-  ## this session would be installed into 'path'
-  firstpath <- .libPaths()[1]
-  .libPaths(c(firstpath, path))
-  install.packages(pack, dependencies=dependencies, lib=path, ...)
-}
-tmp.install.packages("../../rrdfqbcrnd0_0.1.19.tar.gz")
-tmp.install.packages("../../rrdfcrndex_0.1.19.tar.gz")
+library(rrdfqb)
+library(rrdfqbcrnd0)
+library(rrdfqbcrndex)
+library(rrdfqbcrndcheck)
 
 
-obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfcrndex")
+obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
 ## TODO do not want factors in the data.frame
 ## http://stackoverflow.com/questions/2851015/convert-data-frame-columns-from-factors-to-characters
 ## better to use library(SASxport) - see inst/data-raw/create-dm-table-as-csv.Rmd
@@ -40,7 +32,7 @@ ii <- sapply(dataSet, is.factor)
 dataSet[ii] <- lapply(dataSet[ii], as.character)
 
 
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfcrndex")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrndex")
 store <- new.rdf()  # Initialize
 cat("Reading turtle definition from ", dataCubeFile, "\n")
 temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)

@@ -1,7 +1,7 @@
 ---
 title: "Show the procedure codelist"
 author: "PhuseSubTeamAnalysisResults@example.org"
-date: "2016-01-06"
+date: "2016-01-12"
 vignette: >
   %\VignetteIndexEntry{Show the procedure codelist}
   %\VignetteEngine{knitr::rmarkdown}
@@ -117,7 +117,7 @@ outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "BuildCubeFromDataFrames"
+## Error in GetForSparqlPrefix.as.df(domainName = domainName): could not find function "GetCommonPrefixDf"
 ```
 This shows a simple use of the BuildCubeFromDataFrames function. 
 The warning message from log4j can be ignored.

@@ -21,9 +21,12 @@ rbuild:
 createRD:
 	$(R_HOME)/bin/Rscript -e "library(devtools); devtools::document()"
 
+clean:
+	(cd vignettes; make clean)
+
 
 data-raw:
-	(cd inst/data-raw; make all; make installDoc)
+	# (cd inst/data-raw; make all; make installDoc)
 
 # Only run this after the package is installed in the overall R library
 # The vignettes uses the packages, and this should be the most recent version
