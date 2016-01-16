@@ -21,6 +21,7 @@ devtools::load_all(pkg="../..")
 ```{r}
 require(foreign)
 require(sqldf)
+library(rrdfqbcrnd0) # ToDo(MJA): only needed for encodeuri below 
 
 fnadae<- system.file("extdata/sample-xpt", "adae.xpt", package="rrdfqbcrndex")
 adae<- read.xport(fnadae)
@@ -130,14 +131,14 @@ aetable.3 <- merge( aetable.2, colno.df, by=c("TRTA" ) )
 aetable.4<-aetable.3[,c("TRTA", "AESOC", "AEDECOD", "procedure")]
 aetable<- aetable.3[do.call(order, aetable.4),]
 aetable$cellpartno<- ifelse(aetable$procedure=="count", 1, 2)
-kable(aetable)
+knitr::kable(aetable)
 
 check<- aetable[,c("rowno", "colno", "cellpartno" )]
 dupObs<-duplicated(check)
 if (any(dupObs)) {
 ## idea from http://stackoverflow.com/questions/12495345/find-indices-of-duplicated-rows
   dupObsRev<-  duplicated(check, fromLast=TRUE)
-  kable( aetable[which(dupObs | dupObsRev ), ] )
+  knitr::kable( aetable[which(dupObs | dupObsRev ), ] )
     stop("Unexpected an observation is not uniquely identified by row, column and cellpart number")
   }
 

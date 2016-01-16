@@ -18,12 +18,18 @@ TODO(mja): fix it.
 
 This script creates the result and codelist for a simple DEMO table.
 
+```{r}
+devtools::load_all(pkg="../..")
+```
+
 ```{r, eval=TRUE}
+
 library(rrdfqbcrnd0)
+library(rrdfqb)
 
 cubeVocabularyFn<- system.file("extdata/cube-vocabulary-rdf","cube.ttl", package="rrdfqb")
 
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrndex")
 
 store <- new.rdf()  # Initialize
 
@@ -41,7 +47,7 @@ summarize.rdf(store)
 
 ```{r, eval=TRUE}
 
-rqFiles<- system.file("extdata/sample-rdf", list.files(system.file("extdata/sample-rdf",  package="rrdfqbcrnd0"), pattern="DEMO.+rq$"),  package="rrdfqbcrnd0")
+rqFiles<- system.file("extdata/sample-rdf", list.files(system.file("extdata/sample-rdf",  package="rrdfqbcrndex"), pattern="DEMO.+rq$"),  package="rrdfqbcrndex")
 
 for (rqFile in rqFiles) {
     cat("File ", rqFile, "\n")
@@ -124,8 +130,9 @@ rapper -i turtle -o dot /tmp/Rtmpcccgdg/rapperin.ttl | dot -x -Tpdf -ograph.pdf
 
 See also (http://www.bioconductor.org/packages/release/bioc/vignettes/Rgraphviz/inst/doc/Rgraphviz.pdf) for Rgraphviz package - may be used to display graphs.
 
+ToDo(MJA): move this to another package - is more an example of R code for making Rgraphvis statement
 
-```{r, eval=TRUE}
+```{r, eval=FALSE}
 
 rq<-  paste( forsparqlprefix,
 '
@@ -156,13 +163,17 @@ for (i in 1:length(uallIRI) ) {
 L[[ uallIRI[i] ]] <- paste( "L", i, sep="" )
 }
 
-paste( L[[ res[,1] ]], L[[ res[,2] ]], res[,3] )
+
+rowcols<- cbind( as.matrix(apply(res[,1:2],c(1,2),function(x) as.character(L[[x]] ))),as.matrix(res[,3]))
+cat(paste(rowcols, sep=", "),"\n")
 
 ```
 
 ### Check the statistics
 
-```{r, eval=TRUE}
+ToDo(MJA): move this to another package - maybe the check package
+
+```{r, eval=FALSE}
 
 stmtSQL<- GetSQLFromCube(store) 
 cat(stmtSQL$summStatSQL) 

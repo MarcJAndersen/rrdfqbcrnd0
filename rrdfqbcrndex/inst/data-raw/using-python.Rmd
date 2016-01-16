@@ -50,7 +50,9 @@ g = Graph()
 g.parse("../extdata/sample-rdf/DC-DEMO-sample.ttl", format="turtle")
 with open ("../extdata/sample-rdf/DEMOobservations.rq", "r") as myfile:
     observationsQuery=myfile.read()
+
 qres = g.query(observationsQuery)
+
 for row in qres:
    for t in row:
      print("%s" %t)

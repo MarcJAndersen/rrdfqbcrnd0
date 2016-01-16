@@ -34,10 +34,9 @@ mja@statgroup.dk 05-aug-2015.
 ## Setup
 
 ```{r}
-knitr::read_chunk("setup.R")
+devtools::load_all(pkg="../..")
 ```
-```{r setup}
-```
+
 ```{r, eval=TRUE}
 
 library("DiagrammeR")

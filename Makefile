@@ -10,6 +10,15 @@ install-from-dir:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrndcheck_0.2.0.tar.gz")'
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbpresent_0.2.0.tar.gz")'
 
+install-from-ReleasePackages:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfancillary_0.2.0.tar.gz")'
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfcdisc_0.2.0.tar.gz")'
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqb_0.2.0.tar.gz")'       
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbcrnd0_0.2.0.tar.gz")'  
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbcrndex_0.2.0.tar.gz")'
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbcrndcheck_0.2.0.tar.gz")'
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbpresent_0.2.0.tar.gz")'
+
 mk-rrdfcdisc:
 	cd rrdfcdisc; make
 

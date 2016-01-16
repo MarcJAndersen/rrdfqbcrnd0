@@ -16,6 +16,9 @@ MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
 ADSLTTL=../extdata/sample-rdf/adsl-map.ttl ../extdata/sample-rdf/adsl.ttl
 ADAETTL=../extdata/sample-rdf/adae-map.ttl ../extdata/sample-rdf/adae.ttl
 
+QBTTLS=../extdata/sample-rdf/DC-AE-sample.ttl ../extdata/sample-rdf/DC-DM-sample.ttl ../extdata/sample-rdf/DC-DEMO-sample.ttl
+
+
 TTLS=${ADSLTTL} ${ADAETTL} ${QBTTLS}
 
 ADAEXPT=../extdata/sample-xpt/adae.xpt
@@ -25,7 +28,6 @@ XPTS= ${ADAEXPT} ${ADDMXPT}
 
 CSVS= ${CSVAE} ${CSVDM} 
 
-QBTTLS=../extdata/sample-rdf/DC-AE-sample.ttl ../extdata/sample-rdf/DC-DM-sample.ttl ../extdata/sample-rdf/DC-DEMO-sample.ttl
 
 
 FORDOC= ${HTMLS} ${MDS} ${PDFS}
@@ -33,7 +35,7 @@ FORDOC= ${HTMLS} ${MDS} ${PDFS}
 TARGETS=${XPTS} ${TTLS}  ${FORDOC}
 
 
-RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
+RKNIT2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
 RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 
@@ -44,6 +46,10 @@ all: ${TARGETS}
 
 clean: 
 	rm -f ${TARGETS}
+
+ds-ttl: ${ADSLTTL} ${ADAETTL}
+
+qb-ttl: ${QBTTLS}
 
 installDoc:
 	mkdir -p ../doc/figure

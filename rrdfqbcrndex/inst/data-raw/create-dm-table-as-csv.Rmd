@@ -28,8 +28,6 @@ devtools::load_all(pkg="../..")
 
 ```{r}
 
-library(rrdfqbcrndex)
-
 library(foreign)
 library(sqldf)
 
@@ -65,9 +63,11 @@ records where the combination of values lead to 0 observations. This
 is handled below, in a not so clever way. A better approach would be
 to include the concept of a skeleton in the SQL statements.
 
-```{r}
+ToDo(MJA): move this to rrdfqbcrndcheck or move to another package, like rrdfqcbcrnd0
 
-library(rrdfqbcrndex)
+```{r,eval=FALSE}
+
+library(rrdfqbcrndcheck)
 
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrndex")
 checkCube <- new.rdf(ontology=FALSE)  # Initialize
@@ -85,7 +85,7 @@ names(adsl.summ.stat.res)<- tolower(gsub("(a|b)\\.","", names(adsl.summ.stat.res
 
 ## Store the SQL statements to a file
 
-```{r}
+```{r, eval=FALSE}
 
 res.text<- stmtSQL$summStatSQL
 
