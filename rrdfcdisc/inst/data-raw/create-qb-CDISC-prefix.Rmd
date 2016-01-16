@@ -2,11 +2,16 @@
 title: "Create prefixes for use with CDISC standards in RDF"
 author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Create prefixes for use with CDISC standards in RDF}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\usepackage[utf8]{inputenc}
+output:
+  html_document:
+    toc: true
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  md_document:
+    variant: markdown_github
+
 ---
 
 # Create prefixes for use with CDISC standards in RDF

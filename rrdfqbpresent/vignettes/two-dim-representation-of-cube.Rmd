@@ -2,11 +2,15 @@
 title: "Two dimensional representation of RDF data cube"
 author: "PhuseSubTeamAnalysisResults@example.org"
 date: "`r Sys.Date()`"
-vignette: >
-  %\VignetteIndexEntry{Two dimensional representation of RDF data cube}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[utf8]{inputenc}
-  %\SweaveUTF8
+output:
+  html_document:
+    toc: true
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  md_document:
+    variant: markdown_github
 ---
 
 # Setup

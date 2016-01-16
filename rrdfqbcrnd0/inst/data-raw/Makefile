@@ -15,7 +15,7 @@ RKNIT2HTML=$(R_HOME)/bin/Rscript -e "knitr::knit2html('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
 RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 
-RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
+RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 
 
 all: ${TARGETS}
@@ -29,8 +29,8 @@ installDoc:
 	cp ${FORDOC} ../doc
 	cp figure/* ../doc/figure
 
-codelist-procedure.html: codelist-procedure.Rmd 
-	${RKNIT2HTML}
+codelist-procedure.html codelist-procedure.pdf codelist-procedure.md: codelist-procedure.Rmd 
+	${RMD2HTML}
 
 # %.pdf: %.Rnw
 # 	${RKNIT2PDF}

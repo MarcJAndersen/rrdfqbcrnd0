@@ -1,147 +1,84 @@
----
-title: "Create DEMO table as csv file"
-author: "mja@statgroup.dk"
-date: "2016-01-11"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Create DEMO table from csv file}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\usepackage[utf8]{inputenc}
----
-
-# Create turtle version of example files
+Create turtle version of example files
+======================================
 
 This script creates the result and codelist for a simple DEMO table.
 
-
-```r
+``` r
 library(rrdfqb)
-```
-
-```
-## Loading required package: xlsx
-## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: xlsxjars
-## Loading required package: RCurl
-## Loading required package: bitops
-## 
-## Attaching package: 'RCurl'
-## 
-## The following object is masked from 'package:rJava':
-## 
-##     clone
-## 
-## Loading required package: rrdf
-## Loading required package: rrdflibs
-```
-
-```r
 library(rrdfqbcrnd0)
 library(rrdfcdisc)
-```
-
-```
-## Loading required package: devtools
-## 
-## Attaching package: 'rrdfcdisc'
-## 
-## The following object is masked from 'package:rrdfqbcrnd0':
-## 
-##     summarize.rdf.noprint
-```
-
-```r
 devtools::load_all(pkg="../..")
 ```
 
-```
-## Loading rrdfqbcrndex
-```
+    ## Loading rrdfqbcrndex
 
 All files are stored in the directory
 
-```r
+``` r
 targetDir<- system.file("extdata/sample-rdf", package="rrdfqbcrndex")
 (targetDir)
 ```
 
-```
-## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf"
-```
+    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf"
 
-## RDF data cubes specified in workbook
+RDF data cubes specified in workbook
+------------------------------------
 
-
-```r
+``` r
 RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrndex")
 (RDFCubeWorkbook)
 ```
 
-```
-## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/RDFCubeWorkbook.xlsx"
-```
+    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/RDFCubeWorkbook.xlsx"
 
-```r
+``` r
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 ```
 
-```
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  trt01a 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  trt01a 
-## codeType:  SDTM 
-## nciDomainValue:  C66731 
-## dimName:  sex 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  sex
-```
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  trt01a 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  trt01a 
+    ## codeType:  SDTM 
+    ## nciDomainValue:  C66731 
+    ## dimName:  sex 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  sex 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  saffl 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  saffl 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  procedure 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  procedure 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  factor 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  factor 
+    ## codeType:  SDTM 
+    ## nciDomainValue:  C74457 
+    ## dimName:  race 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  race
 
-```
-## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip
-## Done loading rdf.cdisc.org contents, number of triples: 165700
-```
-
-```
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  saffl 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  saffl 
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  procedure 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  procedure 
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  factor 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  factor 
-## codeType:  SDTM 
-## nciDomainValue:  C74457 
-## dimName:  race 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  race
-```
-
-```r
+``` r
 cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
-```
-## DM cube stored as  /tmp/RtmpzGAfne/DC-DM-R-V-0-5-2.ttl
-```
+    ## DM cube stored as  /tmp/RtmpMMsKau/DC-DM-R-V-0-5-2.ttl
 
-```r
+``` r
 targetFile<- file.path(targetDir,"DC-DM-sample.ttl")
 
 if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
@@ -149,76 +86,68 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 }
 ```
 
-```
-## DM cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DM-sample.ttl
-```
+    ## DM cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DM-sample.ttl
 
-```r
+``` r
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 ```
 
-```
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  trta 
-## underlDataSetName:  ADAE 
-## remote.endpoint:  
-## dimName  trta 
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  saffl 
-## underlDataSetName:  ADAE 
-## remote.endpoint:  
-## dimName  saffl 
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  aesoc 
-## underlDataSetName:  ADAE 
-## remote.endpoint:  
-## dimName  aesoc 
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  aedecod 
-## underlDataSetName:  ADAE 
-## remote.endpoint:  
-## dimName  aedecod 
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  procedure 
-## underlDataSetName:  ADAE 
-## remote.endpoint:  
-## dimName  procedure 
-## codeType:  DATA 
-## nciDomainValue:  NA 
-## dimName:  factor 
-## underlDataSetName:  ADAE 
-## remote.endpoint:  
-## dimName  factor
-```
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  trta 
+    ## underlDataSetName:  ADAE 
+    ## remote.endpoint:  
+    ## dimName  trta 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  saffl 
+    ## underlDataSetName:  ADAE 
+    ## remote.endpoint:  
+    ## dimName  saffl 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  aesoc 
+    ## underlDataSetName:  ADAE 
+    ## remote.endpoint:  
+    ## dimName  aesoc 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  aedecod 
+    ## underlDataSetName:  ADAE 
+    ## remote.endpoint:  
+    ## dimName  aedecod 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  procedure 
+    ## underlDataSetName:  ADAE 
+    ## remote.endpoint:  
+    ## dimName  procedure 
+    ## codeType:  DATA 
+    ## nciDomainValue:  NA 
+    ## dimName:  factor 
+    ## underlDataSetName:  ADAE 
+    ## remote.endpoint:  
+    ## dimName  factor
 
-```r
+``` r
 cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
-```
-## AE cube stored as  /tmp/RtmpzGAfne/DC-AE-R-V-0-5-2.ttl
-```
+    ## AE cube stored as  /tmp/RtmpMMsKau/DC-AE-R-V-0-5-2.ttl
 
-```r
+``` r
 targetFile<- file.path(targetDir,"DC-AE-sample.ttl")
 if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
   cat("AE cube copied to ", normalizePath(targetFile), "\n")
 }
 ```
 
-```
-## AE cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-AE-sample.ttl
-```
+    ## AE cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-AE-sample.ttl
 
-## RDF data cube in csv files
+RDF data cube in csv files
+--------------------------
 
-
-```r
+``` r
 demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfqbcrndex")
 demoObsData <- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
 
@@ -236,60 +165,56 @@ demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 ```
 
-```
-## codeType:  DATA 
-## nciDomainValue:   
-## dimName:  trt01a 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  trt01a 
-## codeType:  SDTM 
-## nciDomainValue:  C66731 
-## dimName:  sex 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  sex 
-## codeType:  SDTM 
-## nciDomainValue:  C74457 
-## dimName:  race 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  race 
-## codeType:  DATA 
-## nciDomainValue:   
-## dimName:  ethnic 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  ethnic 
-## codeType:  DATA 
-## nciDomainValue:   
-## dimName:  agegr1 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  agegr1 
-## codeType:  DATA 
-## nciDomainValue:   
-## dimName:  procedure 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  procedure 
-## codeType:  DATA 
-## nciDomainValue:   
-## dimName:  factor 
-## underlDataSetName:  ADSL 
-## remote.endpoint:  
-## dimName  factor
-```
+    ## codeType:  DATA 
+    ## nciDomainValue:   
+    ## dimName:  trt01a 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  trt01a 
+    ## codeType:  SDTM 
+    ## nciDomainValue:  C66731 
+    ## dimName:  sex 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  sex 
+    ## codeType:  SDTM 
+    ## nciDomainValue:  C74457 
+    ## dimName:  race 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  race 
+    ## codeType:  DATA 
+    ## nciDomainValue:   
+    ## dimName:  ethnic 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  ethnic 
+    ## codeType:  DATA 
+    ## nciDomainValue:   
+    ## dimName:  agegr1 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  agegr1 
+    ## codeType:  DATA 
+    ## nciDomainValue:   
+    ## dimName:  procedure 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  procedure 
+    ## codeType:  DATA 
+    ## nciDomainValue:   
+    ## dimName:  factor 
+    ## underlDataSetName:  ADSL 
+    ## remote.endpoint:  
+    ## dimName  factor
 
-```r
+``` r
 cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
-```
-## DEMO cube stored as  /tmp/RtmpzGAfne/DC-DEMO-R-V-0-5-2.ttl
-```
+    ## DEMO cube stored as  /tmp/RtmpMMsKau/DC-DEMO-R-V-0-5-2.ttl
 
-```r
+``` r
 targetFile<- file.path(targetDir,"DC-DEMO-sample.ttl")
 
 if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
@@ -297,7 +222,4 @@ if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
  }
 ```
 
-```
-## DEMO cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
-```
-
+    ## DEMO cube copied to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl

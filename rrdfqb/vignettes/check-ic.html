@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-01-12" />
+<meta name="date" content="2016-01-16" />
 
 <title>Execute SPARQL integrity constraints on a data cube</title>
 
@@ -64,25 +64,24 @@ img {
 <div id="header">
 <h1 class="title">Execute SPARQL integrity constraints on a data cube</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-01-12</em></h4>
+<h4 class="date"><em>2016-01-16</em></h4>
 </div>
 
 
 <div id="checking-two-existing-cube" class="section level2">
 <h2>Checking two existing cube</h2>
 <pre class="r"><code>library(rrdf)</code></pre>
-<pre><code>## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: rrdflibs</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>library(rrdfqb)</code></pre>
-<pre><code>## Loading required package: xlsx
-## Loading required package: xlsxjars
-## Loading required package: RCurl
-## Loading required package: bitops
-## 
-## Attaching package: 'RCurl'
-## 
-## The following object is masked from 'package:rJava':
+<pre><code>## Loading required package: xlsx</code></pre>
+<pre><code>## Loading required package: xlsxjars</code></pre>
+<pre><code>## Loading required package: RCurl</code></pre>
+<pre><code>## Loading required package: bitops</code></pre>
+<pre><code>## 
+## Attaching package: 'RCurl'</code></pre>
+<pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
 <pre class="r"><code>library(rrdfqbcrnd0)
@@ -97,47 +96,47 @@ cubeData1&lt;- combine.rdf( cube1, cubevoc)
 forsparqlprefix&lt;- GetForSparqlPrefix()
 
 icres1&lt;- RunQbIC( cubeData1, forsparqlprefix )</code></pre>
-<pre><code>## Executing IC-1.  Unique DataSet
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-2. Unique DSD
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-3. DSD includes measure
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-4. Dimensions have range
-##  -- 1 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-5. Concept dimensions have code lists
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-6. Only attributes may be optional
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-7. Slice Keys must be declared
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-8. Slice Keys consistent with DSD
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-9. Unique slice structure
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-10. Slice dimensions complete
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-11. All dimensions required
-##  -- 48 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-12. No duplicate observations
-##  -- 120 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-13. Required attributes
-##  -- 24 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-14. All measures present
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-15. Measure dimension consistent
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-16. Single measure on measure dimension observation
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-17. All measures present in measures dimension cube 
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-18. Consistent data set links
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-19a. Codes from code list
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## Executing IC-19b. Codes from code list
-##  -- 0 rows returned (0 is pass, &gt;0 fail)
-## IC-20 and IC-21 are currently not implemented</code></pre>
+<pre><code>## Executing IC-1.  Unique DataSet</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-2. Unique DSD</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-3. DSD includes measure</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-4. Dimensions have range</code></pre>
+<pre><code>##  -- 1 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-5. Concept dimensions have code lists</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-6. Only attributes may be optional</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-7. Slice Keys must be declared</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-8. Slice Keys consistent with DSD</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-9. Unique slice structure</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-10. Slice dimensions complete</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-11. All dimensions required</code></pre>
+<pre><code>##  -- 48 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-12. No duplicate observations</code></pre>
+<pre><code>##  -- 120 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-13. Required attributes</code></pre>
+<pre><code>##  -- 24 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-14. All measures present</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-15. Measure dimension consistent</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-16. Single measure on measure dimension observation</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-17. All measures present in measures dimension cube</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-18. Consistent data set links</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-19a. Codes from code list</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## Executing IC-19b. Codes from code list</code></pre>
+<pre><code>##  -- 0 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## IC-20 and IC-21 are currently not implemented</code></pre>
 <pre class="r"><code>knitr::kable(icres1)</code></pre>
 <table>
 <thead>
@@ -239,9 +238,9 @@ cubevoc&lt;- load.rdf( cube.vocabulary.ttl, format=&quot;TURTLE&quot; )
 cubeData2&lt;- combine.rdf( cube2, cubevoc)
 
 icres2&lt;- RunQbIC( cubeData2, forsparqlprefix, doForIC=c(&quot;ic-14&quot;) )</code></pre>
-<pre><code>## Executing IC-14. All measures present
-##  -- 23 rows returned (0 is pass, &gt;0 fail)
-## IC-20 and IC-21 are currently not implemented</code></pre>
+<pre><code>## Executing IC-14. All measures present</code></pre>
+<pre><code>##  -- 23 rows returned (0 is pass, &gt;0 fail)</code></pre>
+<pre><code>## IC-20 and IC-21 are currently not implemented</code></pre>
 <pre class="r"><code>knitr::kable(icres2)</code></pre>
 <table>
 <thead>

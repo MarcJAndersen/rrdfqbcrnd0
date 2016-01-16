@@ -1,5 +1,5 @@
 all: mk-rrdfancillary  mk-rrdfcdisc mk-rrdfqb  mk-rrdfqbcrnd0 \
-     mk-rrdfqbcrndcheck mk-rrdfqbpresent mk-rrdfqbcrndex 
+      mk-rrdfqbcrndex mk-rrdfqbcrndcheck mk-rrdfqbpresent
 
 install-from-dir:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfancillary_0.2.0.tar.gz")'

@@ -1,98 +1,53 @@
----
-title: "Populate sample-xpt directory with example file in SAS transport xpt format"
-author: "mja@statgroup.dk"
-date: "2016-01-06"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Populate sample-xpt directory with example file in SAS transport xpt format}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\usepackage[utf8]{inputenc}
----
+Populate sample-xpt with example file in SAS transport xpt format
+=================================================================
 
-# Populate sample-xpt with example file in SAS transport xpt format
+This script downloads example files from phuse script repository (<https://github.com/phuse-org/phuse-scripts>) and stores the files in the corresponding example directory.
 
-This script downloads example files from phuse script repository
-(https://github.com/phuse-org/phuse-scripts) and stores the files in
-the corresponding example directory.
-
-
-```r
+``` r
 library(rrdf)
-```
-
-```
-## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: rrdflibs
-```
-
-```r
 library(tools)
 devtools::load_all(pkg="../..")
 ```
 
-```
-## Loading rrdfqbcrndex
-## Loading required package: xlsx
-## Loading required package: xlsxjars
-## Loading required package: RCurl
-## Loading required package: bitops
-## 
-## Attaching package: 'RCurl'
-## 
-## The following object is masked from 'package:rJava':
-## 
-##     clone
-```
+    ## Loading rrdfqbcrndex
 
-
-
-```r
+``` r
 repositoryURL<- "https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc"
 
 fnadae<- file.path( system.file("extdata/sample-xpt", package="rrdfqbcrndex"), "adae.xpt" )
 message("Downloading to ", fnadae )
 ```
 
-```
-## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
-```
+    ## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
 
-```r
+``` r
 downloadURL<-paste0(repositoryURL, "/", "adae.xpt")
 message("Downloading from ", downloadURL )
 ```
 
-```
-## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adae.xpt
-```
+    ## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adae.xpt
 
-```r
+``` r
 download.file( downloadURL, fnadae, method="curl")
 
 fnadsl<- file.path( system.file("extdata/sample-xpt", package="rrdfqbcrndex"), "adsl.xpt" )
 message("Downloading to ", fnadsl )
 ```
 
-```
-## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
-```
+    ## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
 
-```r
+``` r
 downloadURL<-paste0(repositoryURL, "/", "adsl.xpt")
 message("Downloading from ", downloadURL )
 ```
 
-```
-## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adsl.xpt
-```
+    ## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adsl.xpt
 
-```r
+``` r
 download.file( downloadURL, fnadsl, method="curl")
 ```
 
-
-```r
+``` r
 if (require(foreign)) {
 fnadae<- system.file("extdata/sample-xpt", "adae.xpt", package="rrdfqbcrndex")
 message("Reading SAS transport file ", fnadae )
@@ -119,18 +74,15 @@ adsl<-read.xport(fnadsl)
 }
 ```
 
-```
-## Loading required package: foreign
-## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
-## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
-```
+    ## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
+
+    ## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
 
 The following code is not evaluated, as the dates are not processed as expected.
 
 TODO(mja): get numeric variables with date format converted to a R date object.
 
-
-```r
+``` r
 if (require(SASxport)) {
 
 fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
@@ -157,4 +109,3 @@ str(adae)
 
 }
 ```
-

@@ -8,10 +8,9 @@ reporting-process.html
 
 # does not work package-overview.html
 
-# not possible directly from .Rmd PDFS=reporting-process.pdf
-
 # List of files with .md extension
 MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
+PDFS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.pdf/g" )
 
 ADSLTTL=../extdata/sample-rdf/adsl-map.ttl ../extdata/sample-rdf/adsl.ttl
 ADAETTL=../extdata/sample-rdf/adae-map.ttl ../extdata/sample-rdf/adae.ttl
@@ -29,17 +28,15 @@ XPTS= ${ADAEXPT} ${ADDMXPT}
 CSVS= ${CSVAE} ${CSVDM} 
 
 
-
 FORDOC= ${HTMLS} ${MDS} ${PDFS}
 
 TARGETS=${XPTS} ${TTLS}  ${FORDOC}
-
 
 RKNIT2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
 RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
 RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 
-RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
+RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 
 
 all: ${TARGETS}
@@ -56,63 +53,51 @@ installDoc:
 	cp ${FORDOC} ../doc
 	cp figure/* ../doc/figure
 
-${ADAEXPT} ${ADSLXPT} populate-sample-xpt.html: populate-sample-xpt.Rmd
-	${RKNIT2HTML}
-
-${ADSLTTL} create-ADSL-ttl.html: create-ADSL-ttl.Rmd ${ADSLXPT}
-	${RKNIT2HTML}
-
-${ADAETTL} create-ADAE-ttl.html: create-ADAE-ttl.Rmd ${ADAEXPT}
-	${RKNIT2HTML}
-
-${CSVAE} create-ae-table-as-csv.html: create-ae-table-as-csv.Rmd ${ADAEXPT} 
-	${RKNIT2HTML}
-
-${CSVDM} create-dm-table-as-csv.html: create-dm-table-as-csv.Rmd
-	${RKNIT2HTML}
-
-${QBTTLS} create-qb-examples-as-ttl.html: create-qb-examples-as-ttl.Rmd ${CSVAE} ${CSVDM} ${CSVDEMO}
-	${RKNIT2HTML}
-
-use-demo-ttl.html: use-demo-ttl.Rmd 
-	${RKNIT2HTML}
-
-using-arq.html: using-arq.Rmd 
-	${RKNIT2HTML}
-
-using-arq-graphical-display.html: using-arq-graphical-display.Rmd
-	${RKNIT2HTML}
-
-using-arq-qb.html: using-arq-qb.Rmd
-	${RKNIT2HTML}
-
-using-python.html: using-python.Rmd
-	${RKNIT2HTML}
-
-reporting-process.html: reporting-process.Rmd
-	${RKNIT2HTML}
-
-reporting-process.md: reporting-process.Rmd
-	${RKNIT2MD}
-
-reporting-process.pdf: reporting-process.Rmd
-	${RKNIT2PDF}
-
-package-overview.html: package-overview.Rmd
+${ADAEXPT} ${ADSLXPT} populate-sample-xpt.html populate-sample-xpt.pdf populate-sample-xpt.md: populate-sample-xpt.Rmd
 	${RMD2HTML}
 
-package-overview.md: package-overview.Rmd
-	${RKNIT2MD}
+${ADSLTTL} create-ADSL-ttl.html create-ADSL-ttl.pdf create-ADSL-ttl.md: create-ADSL-ttl.Rmd ${ADSLXPT}
+	${RMD2HTML}
 
-package-overview.pdf: package-overview.Rmd
-	${RKNIT2PDF}
+${ADAETTL} create-ADAE-ttl.html create-ADAE-ttl.pdf create-ADAE-ttl.md: create-ADAE-ttl.Rmd ${ADAEXPT}
+	${RMD2HTML}
+
+${CSVAE} create-ae-table-as-csv.html create-ae-table-as-csv.pdf create-ae-table-as-csv.md: create-ae-table-as-csv.Rmd ${ADAEXPT} 
+	${RMD2HTML}
+
+${CSVDM} create-dm-table-as-csv.html create-dm-table-as-csv.pdf create-dm-table-as-csv.md: create-dm-table-as-csv.Rmd
+	${RMD2HTML}
+
+${QBTTLS} create-qb-examples-as-ttl.html create-qb-examples-as-ttl.pdf create-qb-examples-as-ttl.md: create-qb-examples-as-ttl.Rmd ${CSVAE} ${CSVDM} ${CSVDEMO}
+	${RMD2HTML}
+
+use-demo-ttl.html use-demo-ttl.pdf use-demo-ttl.md: use-demo-ttl.Rmd 
+	${RMD2HTML}
+
+using-arq.html using-arq.pdf using-arq.md: using-arq.Rmd 
+	${RMD2HTML}
+
+using-arq-graphical-display.html using-arq-graphical-display.pdf using-arq-graphical-display.md: using-arq-graphical-display.Rmd
+	${RMD2HTML}
+
+using-arq-qb.html using-arq-qb.pdf using-arq-qb.md: using-arq-qb.Rmd
+	${RMD2HTML}
+
+using-python.html using-python.pdf using-python.md: using-python.Rmd
+	${RMD2HTML}
+
+reporting-process.html reporting-process.pdf reporting-process.md: reporting-process.Rmd
+	${RMD2HTML}
+
+package-overview.html package-overview.pdf package-overview.md: package-overview.Rmd
+	${RMD2HTML}
 
 
 # %.pdf: %.Rnw
 # 	${RKNIT2PDF}
 #
 # %.html: %.Rmd
-#	${RKNIT2HTML}
+#	${RMD2HTML}
 
 # # not clever rule - also creates HTML version
 # %.pdf: %.Rmd

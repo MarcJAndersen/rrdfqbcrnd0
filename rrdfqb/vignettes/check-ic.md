@@ -1,7 +1,7 @@
 ---
 title: "Execute SPARQL integrity constraints on a data cube"
 author: "mja@statgroup.dk"
-date: "2016-01-12"
+date: "2016-01-16"
 vignette: >
   %\VignetteIndexEntry{Execute SPARQL integrity constraints on a data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -18,7 +18,13 @@ library(rrdf)
 
 ```
 ## Loading required package: rJava
+```
+
+```
 ## Loading required package: methods
+```
+
+```
 ## Loading required package: rrdflibs
 ```
 
@@ -28,12 +34,26 @@ library(rrdfqb)
 
 ```
 ## Loading required package: xlsx
+```
+
+```
 ## Loading required package: xlsxjars
+```
+
+```
 ## Loading required package: RCurl
+```
+
+```
 ## Loading required package: bitops
+```
+
+```
 ## 
 ## Attaching package: 'RCurl'
-## 
+```
+
+```
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
@@ -56,45 +76,165 @@ icres1<- RunQbIC( cubeData1, forsparqlprefix )
 
 ```
 ## Executing IC-1.  Unique DataSet
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-2. Unique DSD
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-3. DSD includes measure
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-4. Dimensions have range
+```
+
+```
 ##  -- 1 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-5. Concept dimensions have code lists
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-6. Only attributes may be optional
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-7. Slice Keys must be declared
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-8. Slice Keys consistent with DSD
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-9. Unique slice structure
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-10. Slice dimensions complete
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-11. All dimensions required
+```
+
+```
 ##  -- 48 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-12. No duplicate observations
+```
+
+```
 ##  -- 120 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-13. Required attributes
+```
+
+```
 ##  -- 24 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-14. All measures present
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-15. Measure dimension consistent
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-16. Single measure on measure dimension observation
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
-## Executing IC-17. All measures present in measures dimension cube 
+```
+
+```
+## Executing IC-17. All measures present in measures dimension cube
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-18. Consistent data set links
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-19a. Codes from code list
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## Executing IC-19b. Codes from code list
+```
+
+```
 ##  -- 0 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## IC-20 and IC-21 are currently not implemented
 ```
 
@@ -144,7 +284,13 @@ icres2<- RunQbIC( cubeData2, forsparqlprefix, doForIC=c("ic-14") )
 
 ```
 ## Executing IC-14. All measures present
+```
+
+```
 ##  -- 23 rows returned (0 is pass, >0 fail)
+```
+
+```
 ## IC-20 and IC-21 are currently not implemented
 ```
 

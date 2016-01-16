@@ -1,7 +1,7 @@
 ---
 title: "Derive results in RDF data cube and compare with results in data cube"
 author: "mja@statgroup.dk"
-date: "2016-01-12"
+date: "2016-01-16"
 vignette: >
   %\VignetteIndexEntry{Derive results in RDF data cube and compare with results in data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,7 +20,13 @@ library(xlsx)
 
 ```
 ## Loading required package: rJava
+```
+
+```
 ## Loading required package: methods
+```
+
+```
 ## Loading required package: xlsxjars
 ```
 
@@ -34,22 +40,32 @@ library(rrdf)
 ```
 
 ```r
-library(rrdfqbcrnd0)
+library(rrdfqb)
 ```
 
 ```
 ## Loading required package: RCurl
+```
+
+```
 ## Loading required package: bitops
+```
+
+```
 ## 
 ## Attaching package: 'RCurl'
-## 
+```
+
+```
 ## The following object is masked from 'package:rJava':
 ## 
 ##     clone
 ```
 
 ```r
+library(rrdfqbcrnd0)
 library(rrdfqbcrndex)
+library(rrdfqbcrndcheck)
 
 
 obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
@@ -67,58 +83,24 @@ cat("Reading turtle definition from ", dataCubeFile, "\n")
 ```
 
 ```
-## Reading turtle definition from
+## Reading turtle definition from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrndex/extdata/sample-rdf/DC-DM-sample.ttl
 ```
 
 ```r
 temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
-```
-
-```
-## Error in .jcall("com/github/egonw/rrdf/RJenaHelper", "Lcom/hp/hpl/jena/rdf/model/Model;", : java.io.FileNotFoundException:  (No such file or directory)
-```
-
-```r
 summarize.rdf(store)
 ```
 
 ```
-## [1] "Number of triples: 40"
+## [1] "Number of triples: 1460"
 ```
 
 ```r
 dsdName<- GetDsdNameFromCube( store )
-```
-
-```
-## Error in eval(expr, envir, enclos): could not find function "GetDsdNameFromCube"
-```
-
-```r
 domainName<- GetDomainNameFromCube( store )
-```
-
-```
-## Error in GetDomainNameFromCube(store): could not find function "GetDsdNameFromCube"
-```
-
-```r
 forsparqlprefix<- GetForSparqlPrefix( domainName )
-```
-
-```
-## Error in GetForSparqlPrefix(domainName): could not find function "Get.rq.prefix.df"
-```
-
-```r
 custom.prefixes <-Get.qb.crnd.prefixes(domainName)
-```
 
-```
-## Error in tolower(domainName): object 'domainName' not found
-```
-
-```r
 common.prefixes <-data.frame(
   prefix=names( Get.default.crnd.prefixes() ),
   namespace=as.character( Get.default.crnd.prefixes() )
@@ -130,46 +112,23 @@ common.prefixes <-data.frame(
     prefix=c("validmeas"),
     namespace=c(paste0("http://www.example.org/dc/",tolower(domainName),"/validmeas/"))
     )
-```
 
-```
-## Error in tolower(domainName): object 'domainName' not found
-```
-
-```r
   prefixes<- rbind(common.prefixes, custom.prefixes, validation.mesure.prefix)
-```
 
-```
-## Error in rbind(common.prefixes, custom.prefixes, validation.mesure.prefix): object 'custom.prefixes' not found
-```
-
-```r
   forsparqlprefix<- paste("prefix", paste(prefixes$prefix,":",sep=""), paste("<",prefixes$namespace,">",sep=""),sep=" ",collapse="\n")
-```
 
-```
-## Error in paste(prefixes$prefix, ":", sep = ""): object 'prefixes' not found
-```
-
-```r
   ## The qbfile also contains prefixes, which are part of the model
   ## So not adding the prefixes to the model, but using them for adding further
   ## information to the model when deriving statistics
 
   myprefixes<- qb.def.prefixlist(store, prefixes )
-```
 
-```
-## Error in qb.def.prefixlist(store, prefixes): could not find function "qb.add.prefixlist.to.store"
-```
-
-```r
 res<- DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=FALSE, myprefixes=myprefixes ) 
 ```
 
 ```
-## Error in eval(expr, envir, enclos): could not find function "DeriveStatsForCube"
+## Number of differences  1 
+## [1] "If the result is <0 x 0> matrix then all value matches"
 ```
 
 ```r
@@ -177,7 +136,7 @@ print(res)
 ```
 
 ```
-## Error in print(res): object 'res' not found
+## <0 x 0 matrix>
 ```
 
 TODO(mja): naming of parameters to function _DeriveStatsForCube_ to be updated.
