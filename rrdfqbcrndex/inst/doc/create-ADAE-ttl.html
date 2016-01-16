@@ -1,363 +1,154 @@
 <!DOCTYPE html>
-<html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-<title>Create turtle version of ADAE dataset</title>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
 
-<script type="text/javascript">
-window.onload = function() {
-  var imgs = document.getElementsByTagName('img'), i, img;
-  for (i = 0; i < imgs.length; i++) {
-    img = imgs[i];
-    // center an image if it is the only element of its parent
-    if (img.parentElement.childElementCount === 1)
-      img.parentElement.style.textAlign = 'center';
+<meta name="author" content="mja@statgroup.dk" />
+
+<meta name="date" content="2016-01-16" />
+
+<title>Create ADAE as TTL file</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
   }
-};
-</script>
-
-<!-- Styles for R syntax highlighter -->
-<style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: #990073
-   }
-
-   pre .number {
-     color: #099;
-   }
-
-   pre .comment {
-     color: #998;
-     font-style: italic
-   }
-
-   pre .keyword {
-     color: #900;
-     font-weight: bold
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: #d14;
-   }
-</style>
-
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
-</script>
-
-
-
-<style type="text/css">
-body, td {
-   font-family: sans-serif;
-   background-color: white;
-   font-size: 13px;
-}
-
-body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 20px;
-}
-
-tt, code, pre {
-   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
-}
-
-h1 {
-   font-size:2.2em;
-}
-
-h2 {
-   font-size:1.8em;
-}
-
-h3 {
-   font-size:1.4em;
-}
-
-h4 {
-   font-size:1.0em;
-}
-
-h5 {
-   font-size:0.9em;
-}
-
-h6 {
-   font-size:0.8em;
-}
-
-a:visited {
-   color: rgb(50%, 0%, 50%);
-}
-
-pre, img {
-  max-width: 100%;
-}
-pre {
-  overflow-x: auto;
-}
-pre code {
-   display: block; padding: 0.5em;
-}
-
-code {
-  font-size: 92%;
-  border: 1px solid #ccc;
-}
-
-code[class] {
-  background-color: #F8F8F8;
-}
-
-table, td, th {
-  border: none;
-}
-
-blockquote {
-   color:#666666;
-   margin:0;
-   padding-left: 1em;
-   border-left: 0.5em #EEE solid;
-}
-
-hr {
-   height: 0px;
-   border-bottom: none;
-   border-top-width: thin;
-   border-top-style: dotted;
-   border-top-color: #999999;
-}
-
-@media print {
-   * {
-      background: transparent !important;
-      color: black !important;
-      filter:none !important;
-      -ms-filter: none !important;
-   }
-
-   body {
-      font-size:12pt;
-      max-width:100%;
-   }
-
-   a, a:visited {
-      text-decoration: underline;
-   }
-
-   hr {
-      visibility: hidden;
-      page-break-before: always;
-   }
-
-   pre, blockquote {
-      padding-right: 1em;
-      page-break-inside: avoid;
-   }
-
-   tr, img {
-      page-break-inside: avoid;
-   }
-
-   img {
-      max-width: 100% !important;
-   }
-
-   @page :left {
-      margin: 15mm 20mm 15mm 10mm;
-   }
-
-   @page :right {
-      margin: 15mm 10mm 15mm 20mm;
-   }
-
-   p, h2, h3 {
-      orphans: 3; widows: 3;
-   }
-
-   h2, h3 {
-      page-break-after: avoid;
-   }
-}
 </style>
 
 
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%7D%0Apre%20%7B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
+
+
+
+<div id="header">
+<h1 class="title">Create ADAE as TTL file</h1>
+<h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
+<h4 class="date"><em>2016-01-16</em></h4>
+</div>
+
+
+<div id="create-turtle-version-of-adae-dataset" class="section level1">
 <h1>Create turtle version of ADAE dataset</h1>
-
+<div id="setup" class="section level2">
 <h2>Setup</h2>
-
-<pre><code class="r">devtools::load_all(pkg=&quot;../..&quot;)
-</code></pre>
-
-<pre><code>## Loading rrdfqbcrndex
-## Loading required package: xlsx
-## Loading required package: rJava
-## Loading required package: methods
-## Loading required package: xlsxjars
-## Loading required package: RCurl
-## Loading required package: bitops
+<pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">load_all</span>(<span class="dt">pkg=</span><span class="st">&quot;../..&quot;</span>)</code></pre>
+<pre><code>## Loading rrdfqbcrndex</code></pre>
+<pre><code>## Loading required package: xlsx</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: xlsxjars</code></pre>
+<pre><code>## Loading required package: RCurl</code></pre>
+<pre><code>## Loading required package: bitops</code></pre>
+<pre><code>## 
+## Attaching package: 'RCurl'</code></pre>
+<pre><code>## The following object is masked from 'package:rJava':
 ## 
-## Attaching package: &#39;RCurl&#39;
-## 
-## The following object is masked from &#39;package:rJava&#39;:
-## 
-##     clone
-## 
-## Loading required package: rrdf
-## Loading required package: rrdflibs
-</code></pre>
-
+##     clone</code></pre>
+<pre><code>## Loading required package: rrdf</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <p>This script creates a turtle version of the ADAE dataset.</p>
-
-<p>The script uses SQLite to export the ADAE dataset, and d2rq (<a href="http://d2rq.org/">http://d2rq.org/</a>) to create a turle version of the file.
-In the code below it is assumed that d2rq is installed in the directory <code>/opt/d2rq-0.8.1</code>.</p>
-
-<pre><code class="r">library(foreign)
-fnadae&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adae.xpt&quot;, package=&quot;rrdfqbcrndex&quot;)
-adae&lt;-read.xport(fnadae)
-</code></pre>
-
-<p>The present code uses <code>read.xport</code> to input the sas dataset.
-TODO: Date variables are note handled correctly. Other
-methods are available allowing access to more of the meta data in the
-datasets.</p>
-
-<p>Next step is to dump the data as a SQL dump, that will serve as input
-to D2RQ.  For dumping the data <code>sqlite</code> is used as it is the easies to
-setup. The R-package <code>RSQLite</code>
-(<a href="http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf">http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf</a>) provides
-access to <code>sqlite</code>.</p>
-
-<pre><code class="r">## install.packages(&quot;RSQLite&quot;)
-</code></pre>
-
+<p>The script uses SQLite to export the ADAE dataset, and d2rq (<a href="http://d2rq.org/" class="uri">http://d2rq.org/</a>) to create a turle version of the file. In the code below it is assumed that d2rq is installed in the directory <code>/opt/d2rq-0.8.1</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(foreign)
+fnadae&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-xpt&quot;</span>, <span class="st">&quot;adae.xpt&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrndex&quot;</span>)
+adae&lt;-<span class="kw">read.xport</span>(fnadae)</code></pre>
+<p>The present code uses <code>read.xport</code> to input the sas dataset. TODO: Date variables are note handled correctly. Other methods are available allowing access to more of the meta data in the datasets.</p>
+<p>Next step is to dump the data as a SQL dump, that will serve as input to D2RQ. For dumping the data <code>sqlite</code> is used as it is the easies to setup. The R-package <code>RSQLite</code> (<a href="http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf" class="uri">http://cran.r-project.org/web/packages/RSQLite/RSQLite.pdf</a>) provides access to <code>sqlite</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">## install.packages(&quot;RSQLite&quot;)</code></pre>
 <p>The SQL dump is created by transfering the R data.frame to SQLite, and the invoking sqlite to create a dump.</p>
-
-<pre><code class="r">library(RSQLite)
-</code></pre>
-
-<pre><code>## Loading required package: DBI
-</code></pre>
-
-<pre><code class="r">## create a SQLite instance and create one connection.
-m &lt;- dbDriver(&quot;SQLite&quot;)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(RSQLite)</code></pre>
+<pre><code>## Loading required package: DBI</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">## create a SQLite instance and create one connection.
+m &lt;-<span class="st"> </span><span class="kw">dbDriver</span>(<span class="st">&quot;SQLite&quot;</span>)
 ## initialize a new database to a tempfile and copy some data.frame
 ## from the base package into it
-tfile &lt;- tempfile()
-con &lt;- dbConnect(m, dbname = tfile)
-dbWriteTable(con, &quot;adae&quot;, adae)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<pre><code class="r">dbDisconnect(con)
-</code></pre>
-
-<pre><code>## [1] TRUE
-</code></pre>
-
-<pre><code class="r">cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## SQLite database stored as  /tmp/RtmpaM2K6w/file3f83698cfd08
-</code></pre>
-
-<pre><code class="r">dumpFn&lt;- tempfile()
-system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&quot; &quot;))
-cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## SQLite database dump in  /tmp/RtmpaM2K6w/file3f835d1704cf
-</code></pre>
-
-<p>Next step is to process the dump, so the SQL can be used as input to d2rq.
-The changes applied are:</p>
-
-<ul>
-<li> change TEXT to VARCHAR(1000)</li>
-<li> remove top 2 lines with PRAGMA</li>
-<li> in insert statements replace &ldquo;adae&rdquo;  with adae</li>
-<li> after &ldquo;AOCC01FL&rdquo; TEXT add a comma (&ldquo;,&rdquo;) and a new line with PRIMARY KEY (USUBJID,AESEQ)</li>
-</ul>
-
-<p>This could maybe be simplified using  RSQlite on dbSendQuery-methods, see (<a href="https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html">https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html</a>).
-For d2rq documentation see (file:///opt/d2rq-0.8.1/doc/dump-rdf.html).</p>
-
-<pre><code class="r">dumpAfterSedFn &lt;- tempfile()
-sedCmd&lt;- paste(&quot;sed&quot;,
-               &quot;-e &#39;s/TEXT/VARCHAR(1000)/g; s/\&quot;AOCC01FL\&quot; VARCHAR(1000)/\&quot;AOCC01FL\&quot; VARCHAR(1000), PRIMARY KEY (USUBJID,AESEQ)/; s/\&quot;adae\&quot;/adae/g; 1,2 d; $ d; &#39; &quot;,
-               dumpFn, &quot;&gt;&quot;, dumpAfterSedFn, sep=&quot; &quot;)
-system(sedCmd)
-cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)
-</code></pre>
-
-<pre><code>## SQLite database dump modified stored as  /tmp/RtmpaM2K6w/file3f8316016c4
-</code></pre>
-
-<pre><code class="r">## Check only expected changes were applied
+tfile &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
+con &lt;-<span class="st"> </span><span class="kw">dbConnect</span>(m, <span class="dt">dbname =</span> tfile)
+<span class="kw">dbWriteTable</span>(con, <span class="st">&quot;adae&quot;</span>, adae)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dbDisconnect</span>(con)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(<span class="st">&quot;SQLite database stored as &quot;</span>, tfile, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<pre><code>## SQLite database stored as  /tmp/Rtmp19LCEZ/file31702e186644</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dumpFn&lt;-<span class="st"> </span><span class="kw">tempfile</span>()
+<span class="kw">system</span>(<span class="kw">paste</span>(<span class="st">&quot;sqlite3&quot;</span>, tfile, <span class="st">&quot;.dump &gt;&quot;</span>, dumpFn, <span class="dt">sep=</span><span class="st">&quot; &quot;</span>))
+<span class="kw">cat</span>(<span class="st">&quot;SQLite database dump in &quot;</span>, dumpFn, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<pre><code>## SQLite database dump in  /tmp/Rtmp19LCEZ/file3170592c0a3c</code></pre>
+<p>Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: * change TEXT to VARCHAR(1000) * remove top 2 lines with PRAGMA * in insert statements replace “adae” with adae * after “AOCC01FL” TEXT add a comma (“,”) and a new line with PRIMARY KEY (USUBJID,AESEQ)</p>
+<p>This could maybe be simplified using RSQlite on dbSendQuery-methods, see (<a href="https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html" class="uri">https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html</a>). For d2rq documentation see (<a href="file:///opt/d2rq-0.8.1/doc/dump-rdf.html" class="uri">file:///opt/d2rq-0.8.1/doc/dump-rdf.html</a>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">dumpAfterSedFn &lt;-<span class="st"> </span><span class="kw">tempfile</span>()
+sedCmd&lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;sed&quot;</span>,
+               <span class="st">&quot;-e 's/TEXT/VARCHAR(1000)/g; s/</span><span class="ch">\&quot;</span><span class="st">AOCC01FL</span><span class="ch">\&quot;</span><span class="st"> VARCHAR(1000)/</span><span class="ch">\&quot;</span><span class="st">AOCC01FL</span><span class="ch">\&quot;</span><span class="st"> VARCHAR(1000), PRIMARY KEY (USUBJID,AESEQ)/; s/</span><span class="ch">\&quot;</span><span class="st">adae</span><span class="ch">\&quot;</span><span class="st">/adae/g; 1,2 d; $ d; ' &quot;</span>,
+               dumpFn, <span class="st">&quot;&gt;&quot;</span>, dumpAfterSedFn, <span class="dt">sep=</span><span class="st">&quot; &quot;</span>)
+<span class="kw">system</span>(sedCmd)
+<span class="kw">cat</span>(<span class="st">&quot;SQLite database dump modified stored as &quot;</span>, dumpAfterSedFn, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
+<pre><code>## SQLite database dump modified stored as  /tmp/Rtmp19LCEZ/file31705ae23198</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">## Check only expected changes were applied
 ## not run due to large output
 ## system(paste(&quot;diff&quot;, dumpFn, dumpAfterSedFn, sep=&quot; &quot;))
 
 
-adaemapttlFn&lt;- file.path(tempdir(), &quot;adae-map.ttl&quot;)
-adaettlFn&lt;- file.path(tempdir(), &quot;adae.ttl&quot;)
+adaemapttlFn&lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;adae-map.ttl&quot;</span>)
+adaettlFn&lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="kw">tempdir</span>(), <span class="st">&quot;adae.ttl&quot;</span>)
 
-d2rqbaseURL&lt;- &quot;http://www.example.org/datasets/&quot;
+d2rqbaseURL&lt;-<span class="st"> &quot;http://www.example.org/datasets/&quot;</span>
 
 ## -b option does not work with -l
 ## /opt/d2rq-0.8.1/generate-mapping reports Unknown argument: -b
-system(paste(&quot;/opt/d2rq-0.8.1/generate-mapping&quot;,
-             &quot; -l &quot;, dumpAfterSedFn,
-             &quot; -o &quot;, adaemapttlFn
+<span class="kw">system</span>(<span class="kw">paste</span>(<span class="st">&quot;/opt/d2rq-0.8.1/generate-mapping&quot;</span>,
+             <span class="st">&quot; -l &quot;</span>, dumpAfterSedFn,
+             <span class="st">&quot; -o &quot;</span>, adaemapttlFn
              ))
 
-system(paste(&quot;/opt/d2rq-0.8.1/dump-rdf&quot;,
-             &quot; -b &quot;, d2rqbaseURL,
-             &quot; -o &quot;, adaettlFn,
-             &quot; -l &quot;, dumpAfterSedFn,
-             &quot; &quot;, adaemapttlFn
+<span class="kw">system</span>(<span class="kw">paste</span>(<span class="st">&quot;/opt/d2rq-0.8.1/dump-rdf&quot;</span>,
+             <span class="st">&quot; -b &quot;</span>, d2rqbaseURL,
+             <span class="st">&quot; -o &quot;</span>, adaettlFn,
+             <span class="st">&quot; -l &quot;</span>, dumpAfterSedFn,
+             <span class="st">&quot; &quot;</span>, adaemapttlFn
              ))
+ 
 
 
-
-targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbcrndex&quot;)
-if (file.copy(adaemapttlFn, targetDir, overwrite = TRUE)) {
-cat( &quot;File &quot;, adaemapttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
-}
-</code></pre>
-
-<pre><code>## File  /tmp/RtmpaM2K6w/adae-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
-</code></pre>
-
-<pre><code class="r">if (file.copy(adaettlFn, targetDir, overwrite = TRUE)) {
-cat( &quot;File &quot;, adaettlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
-}
-</code></pre>
-
-<pre><code>## File  /tmp/RtmpaM2K6w/adae.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
-</code></pre>
-
-<pre><code class="r">### This could maybe also work ..
+targetDir&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrndex&quot;</span>)
+if (<span class="kw">file.copy</span>(adaemapttlFn, targetDir, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)) {
+<span class="kw">cat</span>( <span class="st">&quot;File &quot;</span>, adaemapttlFn, <span class="st">&quot; copied to directory &quot;</span>, targetDir, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+<pre><code>## File  /tmp/Rtmp19LCEZ/adae-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">if (<span class="kw">file.copy</span>(adaettlFn, targetDir, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)) {
+<span class="kw">cat</span>( <span class="st">&quot;File &quot;</span>, adaettlFn, <span class="st">&quot; copied to directory &quot;</span>, targetDir, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
+}</code></pre>
+<pre><code>## File  /tmp/Rtmp19LCEZ/adae.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">### This could maybe also work ..
 ## m &lt;- dbDriver(&quot;SQLite&quot;)
 ## tfile &lt;- tempfile()
 ## con &lt;- dbConnect(m, dbname = tfile)
@@ -369,56 +160,37 @@ cat( &quot;File &quot;, adaettlFn, &quot; copied to directory &quot;, targetDir,
 
 ## dbWriteTable(con, &quot;adae&quot;, adae,append=TRUE)
 ## dbDisconnect(con)
-## tfile
-</code></pre>
-
+## tfile</code></pre>
+<div id="read-in-the-file" class="section level3">
 <h3>Read in the file</h3>
-
 <p>This section demostrates how to access the data for the ADAE dataset.</p>
-
 <p>First the data are loaded into a RDF model.</p>
-
-<pre><code class="r">dataFilemap&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adae-map.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
-dataFilemap
-</code></pre>
-
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae-map.ttl&quot;
-</code></pre>
-
-<pre><code class="r">dataFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adae.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
-dataFile
-</code></pre>
-
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae.ttl&quot;
-</code></pre>
-
-<pre><code class="r">store &lt;- new.rdf()  # Initialize
-invisible(load.rdf(dataFilemap, format=&quot;TURTLE&quot;, appendTo= store))
-invisible(load.rdf(dataFile, format=&quot;TURTLE&quot;, appendTo= store))
-summarize.rdf(store)
-</code></pre>
-
-<pre><code>## [1] &quot;Number of triples: 61002&quot;
-</code></pre>
-
+<pre class="sourceCode r"><code class="sourceCode r">dataFilemap&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;adae-map.ttl&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrndex&quot;</span>)
+dataFilemap</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae-map.ttl&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dataFile&lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;extdata/sample-rdf&quot;</span>, <span class="st">&quot;adae.ttl&quot;</span>, <span class="dt">package=</span><span class="st">&quot;rrdfqbcrndex&quot;</span>)
+dataFile</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae.ttl&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">store &lt;-<span class="st"> </span><span class="kw">new.rdf</span>()  <span class="co"># Initialize</span>
+<span class="kw">invisible</span>(<span class="kw">load.rdf</span>(dataFilemap, <span class="dt">format=</span><span class="st">&quot;TURTLE&quot;</span>, <span class="dt">appendTo=</span> store))
+<span class="kw">invisible</span>(<span class="kw">load.rdf</span>(dataFile, <span class="dt">format=</span><span class="st">&quot;TURTLE&quot;</span>, <span class="dt">appendTo=</span> store))
+<span class="kw">summarize.rdf</span>(store)</code></pre>
+<pre><code>## [1] &quot;Number of triples: 61002&quot;</code></pre>
 <p>Next step is to make a query showing the mappings</p>
+<pre class="sourceCode r"><code class="sourceCode r">mapping.rq&lt;-<span class="st">&quot;</span>
+<span class="st">prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; </span>
+<span class="st">prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; </span>
+<span class="st">prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; </span>
+<span class="st">prefix d2rq: &lt;http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#&gt; </span>
+<span class="st">prefix jdbc: &lt;http://d2rq.org/terms/jdbc/&gt; </span>
+<span class="st">select * where {</span>
+<span class="st">   ?mapColumn a d2rq:PropertyBridge ;</span>
+<span class="st">                d2rq:column ?d2rqcolumn .</span>
+<span class="st">   optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }</span>
+<span class="st">}</span>
+<span class="st">&quot;</span>
 
-<pre><code class="r">mapping.rq&lt;-&quot;
-prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
-prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
-prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt; 
-prefix d2rq: &lt;http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#&gt; 
-prefix jdbc: &lt;http://d2rq.org/terms/jdbc/&gt; 
-select * where {
-   ?mapColumn a d2rq:PropertyBridge ;
-                d2rq:column ?d2rqcolumn .
-   optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }
-}
-&quot;
-
-cat(mapping.rq,&quot;\n&quot;)
-</code></pre>
-
+<span class="kw">cat</span>(mapping.rq,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
 <pre><code>## 
 ## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
 ## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; 
@@ -430,600 +202,600 @@ cat(mapping.rq,&quot;\n&quot;)
 ##                 d2rq:column ?d2rqcolumn .
 ##    optional{ ?mapColumn d2rq:datatype ?d2rqdatatype  }
 ## }
-## 
-</code></pre>
-
-<pre><code class="r">resmapping&lt;- data.frame(sparql.rdf(store, mapping.rq),stringsAsFactors=FALSE)
-str(resmapping)
-</code></pre>
-
-<pre><code>## &#39;data.frame&#39;:    55 obs. of  3 variables:
-##  $ mapColumn   : chr  &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN&quot; ...
-##  $ d2rqcolumn  : chr  &quot;ADAE.AGEGR1&quot; &quot;ADAE.TRTA&quot; &quot;ADAE.AESOC&quot; &quot;ADAE.AESCAN&quot; ...
-##  $ d2rqdatatype: chr  NA NA NA NA ...
-</code></pre>
-
-<pre><code class="r">knitr::kable(resmapping)
-</code></pre>
-
-<table><thead>
-<tr>
+## </code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">resmapping&lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">sparql.rdf</span>(store, mapping.rq),<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+<span class="kw">str</span>(resmapping)</code></pre>
+<pre><code>## 'data.frame':    55 obs. of  3 variables:
+##  $ mapColumn   : chr  &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU&quot; ...
+##  $ d2rqcolumn  : chr  &quot;ADAE.AOCCPFL&quot; &quot;ADAE.AESCAN&quot; &quot;ADAE.AENDT&quot; &quot;ADAE.ADURU&quot; ...
+##  $ d2rqdatatype: chr  NA NA &quot;xsd:double&quot; NA ...</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">knitr::<span class="kw">kable</span>(resmapping)</code></pre>
+<table>
+<thead>
+<tr class="header">
 <th align="left">mapColumn</th>
 <th align="left">d2rqcolumn</th>
 <th align="left">d2rqdatatype</th>
 </tr>
-</thead><tbody>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1</td>
-<td align="left">ADAE.AGEGR1</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA</td>
-<td align="left">ADAE.TRTA</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC</td>
-<td align="left">ADAE.AESOC</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN</td>
-<td align="left">ADAE.AESCAN</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL</td>
-<td align="left">ADAE.AOCC04FL</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM</td>
-<td align="left">ADAE.CQ01NAM</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT</td>
-<td align="left">ADAE.TRTSDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS</td>
-<td align="left">ADAE.AEBODSYS</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN</td>
-<td align="left">ADAE.RACEN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL</td>
-<td align="left">ADAE.AEREL</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N</td>
-<td align="left">ADAE.AGEGR1N</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT</td>
-<td align="left">ADAE.AEOUT</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL</td>
-<td align="left">ADAE.AOCC02FL</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU</td>
-<td align="left">ADAE.ADURU</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY</td>
-<td align="left">ADAE.ASTDY</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB</td>
-<td align="left">ADAE.AESDISAB</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE</td>
-<td align="left">ADAE.RACE</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX</td>
-<td align="left">ADAE.SEX</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD</td>
-<td align="left">ADAE.AEDECOD</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP</td>
-<td align="left">ADAE.AESHOSP</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY</td>
-<td align="left">ADAE.AENDY</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN</td>
-<td align="left">ADAE.TRTAN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID</td>
-<td align="left">ADAE.STUDYID</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL</td>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL</a></td>
 <td align="left">ADAE.AOCCPFL</td>
 <td align="left">NA</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL</td>
-<td align="left">ADAE.AOCCFL</td>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN</a></td>
+<td align="left">ADAE.AESCAN</td>
 <td align="left">NA</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD</td>
-<td align="left">ADAE.AESOD</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT</td>
-<td align="left">ADAE.AELLT</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT</td>
-<td align="left">ADAE.AEHLGT</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT</td>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT</a></td>
 <td align="left">ADAE.AENDT</td>
 <td align="left">xsd:double</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF</td>
-<td align="left">ADAE.ASTDTF</td>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU</a></td>
+<td align="left">ADAE.ADURU</td>
 <td align="left">NA</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD</td>
-<td align="left">ADAE.AEPTCD</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE</td>
-<td align="left">ADAE.AESLIFE</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN</td>
-<td align="left">ADAE.ADURN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ</td>
-<td align="left">ADAE.AESEQ</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD</td>
-<td align="left">ADAE.AESOCCD</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL</td>
-<td align="left">ADAE.TRTEMFL</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV</td>
-<td align="left">ADAE.AESEV</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID</td>
-<td align="left">ADAE.USUBJID</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN</td>
-<td align="left">ADAE.AEACN</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL</td>
-<td align="left">ADAE.AOCC03FL</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM</td>
-<td align="left">ADAE.AETERM</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT</td>
-<td align="left">ADAE.AEHLT</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT</td>
-<td align="left">ADAE.TRTEDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID</td>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID</a></td>
 <td align="left">ADAE.SITEID</td>
 <td align="left">NA</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD</td>
-<td align="left">ADAE.AEHLGTCD</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG</td>
-<td align="left">ADAE.AESCONG</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH</td>
-<td align="left">ADAE.AESDTH</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER</td>
-<td align="left">ADAE.AESER</td>
-<td align="left">NA</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT</td>
-<td align="left">ADAE.ASTDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL</td>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL</a></td>
 <td align="left">ADAE.AOCCSFL</td>
 <td align="left">NA</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL</td>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN</a></td>
+<td align="left">ADAE.RACEN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC</a></td>
+<td align="left">ADAE.AESOC</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL</a></td>
 <td align="left">ADAE.AOCC01FL</td>
 <td align="left">NA</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL</td>
-<td align="left">ADAE.SAFFL</td>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG</a></td>
+<td align="left">ADAE.AESCONG</td>
 <td align="left">NA</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD</td>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN</a></td>
+<td align="left">ADAE.AEACN</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD</a></td>
 <td align="left">ADAE.AEHLTCD</td>
 <td align="left">xsd:double</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE</td>
-<td align="left">ADAE.AGE</td>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ</a></td>
+<td align="left">ADAE.AESEQ</td>
 <td align="left">xsd:double</td>
 </tr>
-<tr>
-<td align="left">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD</td>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA</a></td>
+<td align="left">ADAE.TRTA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD</a></td>
 <td align="left">ADAE.AELLTCD</td>
 <td align="left">xsd:double</td>
 </tr>
-</tbody></table>
-
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL</a></td>
+<td align="left">ADAE.AOCC03FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL</a></td>
+<td align="left">ADAE.TRTEMFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD</a></td>
+<td align="left">ADAE.AEPTCD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY</a></td>
+<td align="left">ADAE.AENDY</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD</a></td>
+<td align="left">ADAE.AESOCCD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1</a></td>
+<td align="left">ADAE.AGEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE</a></td>
+<td align="left">ADAE.AESLIFE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE</a></td>
+<td align="left">ADAE.RACE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT</a></td>
+<td align="left">ADAE.AELLT</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH</a></td>
+<td align="left">ADAE.AESDTH</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX</a></td>
+<td align="left">ADAE.SEX</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID</a></td>
+<td align="left">ADAE.USUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL</a></td>
+<td align="left">ADAE.AOCC02FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL</a></td>
+<td align="left">ADAE.AOCCFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT</a></td>
+<td align="left">ADAE.TRTSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM</a></td>
+<td align="left">ADAE.CQ01NAM</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT</a></td>
+<td align="left">ADAE.AEHLGT</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV</a></td>
+<td align="left">ADAE.AESEV</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT</a></td>
+<td align="left">ADAE.AEOUT</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB</a></td>
+<td align="left">ADAE.AESDISAB</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD</a></td>
+<td align="left">ADAE.AESOD</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD</a></td>
+<td align="left">ADAE.AEDECOD</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N</a></td>
+<td align="left">ADAE.AGEGR1N</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL</a></td>
+<td align="left">ADAE.AEREL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER</a></td>
+<td align="left">ADAE.AESER</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM</a></td>
+<td align="left">ADAE.AETERM</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF</a></td>
+<td align="left">ADAE.ASTDTF</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS</a></td>
+<td align="left">ADAE.AEBODSYS</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE</a></td>
+<td align="left">ADAE.AGE</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY</a></td>
+<td align="left">ADAE.ASTDY</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL</a></td>
+<td align="left">ADAE.SAFFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD</a></td>
+<td align="left">ADAE.AEHLGTCD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID</a></td>
+<td align="left">ADAE.STUDYID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL</a></td>
+<td align="left">ADAE.AOCC04FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN</a></td>
+<td align="left">ADAE.TRTAN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN</a></td>
+<td align="left">ADAE.ADURN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP</a></td>
+<td align="left">ADAE.AESHOSP</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT</a></td>
+<td align="left">ADAE.TRTEDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT</a></td>
+<td align="left">ADAE.ASTDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT</a></td>
+<td align="left">ADAE.AEHLT</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
 <p>The code below gets the all values in one record</p>
+<pre class="sourceCode r"><code class="sourceCode r">s&lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;&lt;&quot;</span>, d2rqbaseURL,<span class="kw">c</span>(<span class="st">&quot;ADAE/01-701-1023/2.0E0&quot;</span>), <span class="st">&quot;&gt;&quot;</span>)
 
-<pre><code class="r">s&lt;- paste0(&quot;&lt;&quot;, d2rqbaseURL,c(&quot;ADAE/01-701-1023/2.0E0&quot;), &quot;&gt;&quot;)
-
-records.rq&lt;-paste(&quot;select * &quot;,
-           &quot;where { ?s ?p ?o.&quot;,
-           &quot; values(?s) {&quot;,
-           paste(&quot;(&quot;,s,&quot;)&quot;, collapse=&quot;\n&quot;),
-           &quot;}&quot;,
-           &quot;}&quot;, sep=&quot;\n&quot;, collapse=&quot;\n&quot; )
-cat(records.rq,&quot;\n&quot;)
-</code></pre>
-
+records.rq&lt;-<span class="kw">paste</span>(<span class="st">&quot;select * &quot;</span>,
+           <span class="st">&quot;where { ?s ?p ?o.&quot;</span>,
+           <span class="st">&quot; values(?s) {&quot;</span>,
+           <span class="kw">paste</span>(<span class="st">&quot;(&quot;</span>,s,<span class="st">&quot;)&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>),
+           <span class="st">&quot;}&quot;</span>,
+           <span class="st">&quot;}&quot;</span>, <span class="dt">sep=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">collapse=</span><span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span> )
+<span class="kw">cat</span>(records.rq,<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)</code></pre>
 <pre><code>## select * 
 ## where { ?s ?p ?o.
 ##  values(?s) {
 ## ( &lt;http://www.example.org/datasets/ADAE/01-701-1023/2.0E0&gt; )
 ## }
-## }
-</code></pre>
-
-<pre><code class="r">records.res&lt;- data.frame(sparql.rdf(store, records.rq),stringsAsFactors=FALSE)
-str(records.res)
-</code></pre>
-
-<pre><code>## &#39;data.frame&#39;:    50 obs. of  3 variables:
+## }</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">records.res&lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">sparql.rdf</span>(store, records.rq),<span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)
+<span class="kw">str</span>(records.res)</code></pre>
+<pre><code>## 'data.frame':    50 obs. of  3 variables:
 ##  $ s: chr  &quot;http://www.example.org/datasets/ADAE/01-701-1023/2.0E0&quot; &quot;http://www.example.org/datasets/ADAE/01-701-1023/2.0E0&quot; &quot;http://www.example.org/datasets/ADAE/01-701-1023/2.0E0&quot; &quot;http://www.example.org/datasets/ADAE/01-701-1023/2.0E0&quot; ...
 ##  $ p: chr  &quot;http://www.example.org/datasets/vocab/ADAE_AEHLT&quot; &quot;http://www.example.org/datasets/vocab/ADAE_TRTEMFL&quot; &quot;http://www.example.org/datasets/vocab/ADAE_TRTA&quot; &quot;http://www.example.org/datasets/vocab/ADAE_AESCONG&quot; ...
-##  $ o: chr  &quot;HLT_0284&quot; &quot;Y&quot; &quot;Placebo&quot; &quot;N&quot; ...
-</code></pre>
-
-<pre><code class="r">records.res$pclean&lt;- gsub(paste0(d2rqbaseURL,&quot;vocab/ADAE_&quot;), &quot;&quot;, records.res$p)
-knitr::kable(records.res[,c(&quot;s&quot;, &quot;p&quot;,&quot;o&quot;)])
-</code></pre>
-
-<table><thead>
-<tr>
+##  $ o: chr  &quot;HLT_0284&quot; &quot;Y&quot; &quot;Placebo&quot; &quot;N&quot; ...</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">records.res$pclean&lt;-<span class="st"> </span><span class="kw">gsub</span>(<span class="kw">paste0</span>(d2rqbaseURL,<span class="st">&quot;vocab/ADAE_&quot;</span>), <span class="st">&quot;&quot;</span>, records.res$p)
+knitr::<span class="kw">kable</span>(records.res[,<span class="kw">c</span>(<span class="st">&quot;s&quot;</span>, <span class="st">&quot;p&quot;</span>,<span class="st">&quot;o&quot;</span>)])</code></pre>
+<table>
+<thead>
+<tr class="header">
 <th align="left">s</th>
 <th align="left">p</th>
 <th align="left">o</th>
 </tr>
-</thead><tbody>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEHLT">http://www.example.org/datasets/vocab/ADAE_AEHLT</a></td>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEHLT" class="uri">http://www.example.org/datasets/vocab/ADAE_AEHLT</a></td>
 <td align="left">HLT_0284</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTEMFL">http://www.example.org/datasets/vocab/ADAE_TRTEMFL</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTEMFL" class="uri">http://www.example.org/datasets/vocab/ADAE_TRTEMFL</a></td>
 <td align="left">Y</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTA">http://www.example.org/datasets/vocab/ADAE_TRTA</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTA" class="uri">http://www.example.org/datasets/vocab/ADAE_TRTA</a></td>
 <td align="left">Placebo</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESCONG">http://www.example.org/datasets/vocab/ADAE_AESCONG</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESCONG" class="uri">http://www.example.org/datasets/vocab/ADAE_AESCONG</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ADURU">http://www.example.org/datasets/vocab/ADAE_ADURU</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ADURU" class="uri">http://www.example.org/datasets/vocab/ADAE_ADURU</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCCSFL">http://www.example.org/datasets/vocab/ADAE_AOCCSFL</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCCSFL" class="uri">http://www.example.org/datasets/vocab/ADAE_AOCCSFL</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_SEX">http://www.example.org/datasets/vocab/ADAE_SEX</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_SEX" class="uri">http://www.example.org/datasets/vocab/ADAE_SEX</a></td>
 <td align="left">M</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESOC">http://www.example.org/datasets/vocab/ADAE_AESOC</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESOC" class="uri">http://www.example.org/datasets/vocab/ADAE_AESOC</a></td>
 <td align="left">SKIN AND SUBCUTANEOUS TISSUE DISORDERS</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESER">http://www.example.org/datasets/vocab/ADAE_AESER</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESER" class="uri">http://www.example.org/datasets/vocab/ADAE_AESER</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTEDT">http://www.example.org/datasets/vocab/ADAE_TRTEDT</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTEDT" class="uri">http://www.example.org/datasets/vocab/ADAE_TRTEDT</a></td>
 <td align="left">19237.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEBODSYS">http://www.example.org/datasets/vocab/ADAE_AEBODSYS</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEBODSYS" class="uri">http://www.example.org/datasets/vocab/ADAE_AEBODSYS</a></td>
 <td align="left">SKIN AND SUBCUTANEOUS TISSUE DISORDERS</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_SAFFL">http://www.example.org/datasets/vocab/ADAE_SAFFL</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_SAFFL" class="uri">http://www.example.org/datasets/vocab/ADAE_SAFFL</a></td>
 <td align="left">Y</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESDTH">http://www.example.org/datasets/vocab/ADAE_AESDTH</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESDTH" class="uri">http://www.example.org/datasets/vocab/ADAE_AESDTH</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AGE">http://www.example.org/datasets/vocab/ADAE_AGE</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AGE" class="uri">http://www.example.org/datasets/vocab/ADAE_AGE</a></td>
 <td align="left">64.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC01FL">http://www.example.org/datasets/vocab/ADAE_AOCC01FL</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC01FL" class="uri">http://www.example.org/datasets/vocab/ADAE_AOCC01FL</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE">http://www.example.org/datasets/vocab/ADAE</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" class="uri">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE" class="uri">http://www.example.org/datasets/vocab/ADAE</a></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ASTDY">http://www.example.org/datasets/vocab/ADAE_ASTDY</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ASTDY" class="uri">http://www.example.org/datasets/vocab/ADAE_ASTDY</a></td>
 <td align="left">3.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_STUDYID">http://www.example.org/datasets/vocab/ADAE_STUDYID</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_STUDYID" class="uri">http://www.example.org/datasets/vocab/ADAE_STUDYID</a></td>
 <td align="left">CDISCPILOT01</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ASTDT">http://www.example.org/datasets/vocab/ADAE_ASTDT</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ASTDT" class="uri">http://www.example.org/datasets/vocab/ADAE_ASTDT</a></td>
 <td align="left">19212.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEREL">http://www.example.org/datasets/vocab/ADAE_AEREL</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEREL" class="uri">http://www.example.org/datasets/vocab/ADAE_AEREL</a></td>
 <td align="left">PROBABLE</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEHLGT">http://www.example.org/datasets/vocab/ADAE_AEHLGT</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEHLGT" class="uri">http://www.example.org/datasets/vocab/ADAE_AEHLGT</a></td>
 <td align="left">HLGT_0192</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_SITEID">http://www.example.org/datasets/vocab/ADAE_SITEID</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_SITEID" class="uri">http://www.example.org/datasets/vocab/ADAE_SITEID</a></td>
 <td align="left">701</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTSDT">http://www.example.org/datasets/vocab/ADAE_TRTSDT</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTSDT" class="uri">http://www.example.org/datasets/vocab/ADAE_TRTSDT</a></td>
 <td align="left">19210.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ASTDTF">http://www.example.org/datasets/vocab/ADAE_ASTDTF</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_ASTDTF" class="uri">http://www.example.org/datasets/vocab/ADAE_ASTDTF</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESCAN">http://www.example.org/datasets/vocab/ADAE_AESCAN</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESCAN" class="uri">http://www.example.org/datasets/vocab/ADAE_AESCAN</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AGEGR1N">http://www.example.org/datasets/vocab/ADAE_AGEGR1N</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AGEGR1N" class="uri">http://www.example.org/datasets/vocab/ADAE_AGEGR1N</a></td>
 <td align="left">1.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC02FL">http://www.example.org/datasets/vocab/ADAE_AOCC02FL</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC02FL" class="uri">http://www.example.org/datasets/vocab/ADAE_AOCC02FL</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AELLT">http://www.example.org/datasets/vocab/ADAE_AELLT</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AELLT" class="uri">http://www.example.org/datasets/vocab/ADAE_AELLT</a></td>
 <td align="left">LOCALIZED ERYTHEMA</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESEV">http://www.example.org/datasets/vocab/ADAE_AESEV</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESEV" class="uri">http://www.example.org/datasets/vocab/ADAE_AESEV</a></td>
 <td align="left">MODERATE</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTAN">http://www.example.org/datasets/vocab/ADAE_TRTAN</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_TRTAN" class="uri">http://www.example.org/datasets/vocab/ADAE_TRTAN</a></td>
 <td align="left">0.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESOD">http://www.example.org/datasets/vocab/ADAE_AESOD</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESOD" class="uri">http://www.example.org/datasets/vocab/ADAE_AESOD</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_USUBJID">http://www.example.org/datasets/vocab/ADAE_USUBJID</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_USUBJID" class="uri">http://www.example.org/datasets/vocab/ADAE_USUBJID</a></td>
 <td align="left">01-701-1023</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEACN">http://www.example.org/datasets/vocab/ADAE_AEACN</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEACN" class="uri">http://www.example.org/datasets/vocab/ADAE_AEACN</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEOUT">http://www.example.org/datasets/vocab/ADAE_AEOUT</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEOUT" class="uri">http://www.example.org/datasets/vocab/ADAE_AEOUT</a></td>
 <td align="left">NOT RECOVERED/NOT RESOLVED</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEDECOD">http://www.example.org/datasets/vocab/ADAE_AEDECOD</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AEDECOD" class="uri">http://www.example.org/datasets/vocab/ADAE_AEDECOD</a></td>
 <td align="left">ERYTHEMA</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_CQ01NAM">http://www.example.org/datasets/vocab/ADAE_CQ01NAM</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_CQ01NAM" class="uri">http://www.example.org/datasets/vocab/ADAE_CQ01NAM</a></td>
 <td align="left">DERMATOLOGIC EVENTS</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESEQ">http://www.example.org/datasets/vocab/ADAE_AESEQ</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESEQ" class="uri">http://www.example.org/datasets/vocab/ADAE_AESEQ</a></td>
 <td align="left">2.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESHOSP">http://www.example.org/datasets/vocab/ADAE_AESHOSP</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESHOSP" class="uri">http://www.example.org/datasets/vocab/ADAE_AESHOSP</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESLIFE">http://www.example.org/datasets/vocab/ADAE_AESLIFE</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESLIFE" class="uri">http://www.example.org/datasets/vocab/ADAE_AESLIFE</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCCPFL">http://www.example.org/datasets/vocab/ADAE_AOCCPFL</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCCPFL" class="uri">http://www.example.org/datasets/vocab/ADAE_AOCCPFL</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESDISAB">http://www.example.org/datasets/vocab/ADAE_AESDISAB</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AESDISAB" class="uri">http://www.example.org/datasets/vocab/ADAE_AESDISAB</a></td>
 <td align="left">N</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC03FL">http://www.example.org/datasets/vocab/ADAE_AOCC03FL</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC03FL" class="uri">http://www.example.org/datasets/vocab/ADAE_AOCC03FL</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCCFL">http://www.example.org/datasets/vocab/ADAE_AOCCFL</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCCFL" class="uri">http://www.example.org/datasets/vocab/ADAE_AOCCFL</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC04FL">http://www.example.org/datasets/vocab/ADAE_AOCC04FL</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AOCC04FL" class="uri">http://www.example.org/datasets/vocab/ADAE_AOCC04FL</a></td>
 <td align="left"></td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AETERM">http://www.example.org/datasets/vocab/ADAE_AETERM</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AETERM" class="uri">http://www.example.org/datasets/vocab/ADAE_AETERM</a></td>
 <td align="left">ERYTHEMA</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_RACE">http://www.example.org/datasets/vocab/ADAE_RACE</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_RACE" class="uri">http://www.example.org/datasets/vocab/ADAE_RACE</a></td>
 <td align="left">WHITE</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#label" class="uri">http://www.w3.org/2000/01/rdf-schema#label</a></td>
 <td align="left">ADAE #01-701-1023/2.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AGEGR1">http://www.example.org/datasets/vocab/ADAE_AGEGR1</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_AGEGR1" class="uri">http://www.example.org/datasets/vocab/ADAE_AGEGR1</a></td>
 <td align="left">&lt;65</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_RACEN">http://www.example.org/datasets/vocab/ADAE_RACEN</a></td>
+<tr class="odd">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.example.org/datasets/vocab/ADAE_RACEN" class="uri">http://www.example.org/datasets/vocab/ADAE_RACEN</a></td>
 <td align="left">1.0E0</td>
 </tr>
-<tr>
-<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
-<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
-<td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#Resource">http://www.w3.org/2000/01/rdf-schema#Resource</a></td>
+<tr class="even">
+<td align="left"><a href="http://www.example.org/datasets/ADAE/01-701-1023/2.0E0" class="uri">http://www.example.org/datasets/ADAE/01-701-1023/2.0E0</a></td>
+<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#type" class="uri">http://www.w3.org/1999/02/22-rdf-syntax-ns#type</a></td>
+<td align="left"><a href="http://www.w3.org/2000/01/rdf-schema#Resource" class="uri">http://www.w3.org/2000/01/rdf-schema#Resource</a></td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 
 </body>
-
 </html>

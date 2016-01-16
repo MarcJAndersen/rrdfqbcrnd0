@@ -232,7 +232,7 @@ hr {
 
 <pre><code class="r">library(RCurl)
 library(devtools)
-qbURL&lt;-&quot;https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl&quot;
+qbURL&lt;-&quot;http://purl.org/linked-data/cube#&quot;
 if (! url.exists(qbURL) ) {
   stop(paste0(&quot;Can not access URL &quot;,qbURL))
 }
@@ -242,7 +242,7 @@ writeLines( cube.vocabulary.ttl, savefile)
 cat(&quot;written to &quot;, normalizePath(savefile) )
 </code></pre>
 
-<pre><code>## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
+<pre><code>## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
 </code></pre>
 
 <h2>SPARQL for getting the cube vocabulary using FROM in the SPARQL query</h2>
@@ -261,7 +261,7 @@ cat(SPARQLscript,&quot;\n&quot;)
 </code></pre>
 
 <p>CONSTRUCT { ?s ?p ?o }
-FROM <a href="https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl">https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl</a>
+FROM <a href="http://purl.org/linked-data/cube#">http://purl.org/linked-data/cube#</a>
 WHERE { ?s ?p ?o } </p>
 
 <pre><code class="r">SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-cube.rq&quot;)
@@ -269,7 +269,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)
 </code></pre>
 
-<p>SPARQL script stored in   /tmp/RtmpXDXYsD/get-cube.rq </p>
+<p>SPARQL script stored in   /tmp/RtmpPQ4uvV/get-cube.rq </p>
 
 <h3>Using the script with R</h3>
 
