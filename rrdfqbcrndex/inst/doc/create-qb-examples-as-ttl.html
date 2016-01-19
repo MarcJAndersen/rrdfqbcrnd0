@@ -152,7 +152,7 @@ library(rrdfcdisc)</code></pre>
 ## remote.endpoint:  
 ## dimName  race</code></pre>
 <pre class="r"><code>cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## DM cube stored as  /tmp/RtmpMMsKau/DC-DM-R-V-0-5-2.ttl</code></pre>
+<pre><code>## DM cube stored as  /tmp/RtmpL9CMC0/DC-DM-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DM-sample.ttl&quot;)
 
 if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
@@ -197,7 +197,7 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 ## remote.endpoint:  
 ## dimName  factor</code></pre>
 <pre class="r"><code>cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## AE cube stored as  /tmp/RtmpMMsKau/DC-AE-R-V-0-5-2.ttl</code></pre>
+<pre><code>## AE cube stored as  /tmp/RtmpL9CMC0/DC-AE-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-AE-sample.ttl&quot;)
 if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
   cat(&quot;AE cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
@@ -264,7 +264,7 @@ demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )</code></pr
 ## remote.endpoint:  
 ## dimName  factor</code></pre>
 <pre class="r"><code>cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)</code></pre>
-<pre><code>## DEMO cube stored as  /tmp/RtmpMMsKau/DC-DEMO-R-V-0-5-2.ttl</code></pre>
+<pre><code>## DEMO cube stored as  /tmp/RtmpL9CMC0/DC-DEMO-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DEMO-sample.ttl&quot;)
 
 if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {

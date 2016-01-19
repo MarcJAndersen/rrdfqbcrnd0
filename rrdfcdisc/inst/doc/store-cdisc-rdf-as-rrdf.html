@@ -214,11 +214,11 @@ filesToLoad&lt;- c(
 <pre><code>## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..</code></pre>
 <pre><code>## .. total number of triples: 165406</code></pre>
 <pre><code>## Final rdf.cdisc.org rrdf store, number of triples: 165406</code></pre>
-<pre><code>## rrdf store saved to turle file: /tmp/Rtmpek6hha/cdisc-rdf.ttl</code></pre>
+<pre><code>## rrdf store saved to turle file: /tmp/RtmpEzOaJj/cdisc-rdf.ttl</code></pre>
 <pre><code>## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip</code></pre>
 <pre class="r"><code>cdisc.save.zip.info&lt;- file.info(cdisc.save.zip)
 message(&quot;File &quot;, cdisc.save.zip, &quot; created &quot;, cdisc.save.zip.info$ctime, &quot; size &quot;, cdisc.save.zip.info$size, &quot; bytes&quot;)</code></pre>
-<pre><code>## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-01-16 18:32:01 size 2310304 bytes</code></pre>
+<pre><code>## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-01-16 18:50:16 size 2310300 bytes</code></pre>
 <div id="creating-sparql-script-for-getting-cdisc-standard-using-from-dataset" class="section level3">
 <h3>Creating SPARQL script for getting CDISC standard using FROM dataset</h3>
 <p>The following is experimental and not needed for the present package. See below for explanation.</p>
@@ -241,7 +241,7 @@ cat(SPARQLscript,&quot;\n&quot;)</code></pre>
 <pre class="r"><code>SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-rdf.disc.org.rq&quot;)
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)</code></pre>
-<p>SPARQL script stored in /tmp/Rtmpek6hha/get-rdf.disc.org.rq</p>
+<p>SPARQL script stored in /tmp/RtmpEzOaJj/get-rdf.disc.org.rq</p>
 </div>
 <div id="using-the-script-with-r" class="section level3">
 <h3>Using the script with R</h3>

@@ -118,11 +118,11 @@ dbWriteTable(con, &quot;adsl&quot;, adsl)</code></pre>
 <pre class="r"><code>dbDisconnect(con)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database stored as  /tmp/Rtmpul1iT5/file488f58ae42d8</code></pre>
+<pre><code>## SQLite database stored as  /tmp/RtmpIAN6WS/file5a5362ce932a</code></pre>
 <pre class="r"><code>dumpFn&lt;- tempfile()
 system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&quot; &quot;))
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump in  /tmp/Rtmpul1iT5/file488f32de9c22</code></pre>
+<pre><code>## SQLite database dump in  /tmp/RtmpIAN6WS/file5a53425fa2d5</code></pre>
 <p>Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: * change TEXT to VARCHAR(1000) * remove top 2 lines with PRAGMA * in insert statements replace “adsl” with adsl * after “MMSETOT” REAL add a comma (“,”) and a new line with PRIMARY KEY (USUBJID)</p>
 <p>This could maybe be simplified using RSQlite on dbSendQuery-methods, see (<a href="https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html" class="uri">https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html</a>). For d2rq documentation see (<a href="file:///opt/d2rq-0.8.1/doc/dump-rdf.html" class="uri">file:///opt/d2rq-0.8.1/doc/dump-rdf.html</a>).</p>
 <pre class="r"><code>dumpAfterSedFn &lt;- tempfile()
@@ -131,7 +131,7 @@ sedCmd&lt;- paste(&quot;sed&quot;,
                dumpFn, &quot;&gt;&quot;, dumpAfterSedFn, sep=&quot; &quot;)
 system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump modified stored as  /tmp/Rtmpul1iT5/file488f5bbf87c</code></pre>
+<pre><code>## SQLite database dump modified stored as  /tmp/RtmpIAN6WS/file5a53467c7c81</code></pre>
 <pre class="r"><code>## Check only expected changes were applied
 ## not run due to large output
 ## system(paste(&quot;diff&quot;, dumpFn, dumpAfterSedFn, sep=&quot; &quot;))
@@ -162,11 +162,11 @@ targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbc
 if (file.copy(adslmapttlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adslmapttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/Rtmpul1iT5/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/RtmpIAN6WS/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adslttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/Rtmpul1iT5/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/RtmpIAN6WS/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>### This could maybe also work ..
 ## m &lt;- dbDriver(&quot;SQLite&quot;)
 ## tfile &lt;- tempfile()

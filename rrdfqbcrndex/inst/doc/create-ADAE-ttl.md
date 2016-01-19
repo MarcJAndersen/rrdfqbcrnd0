@@ -53,7 +53,7 @@ dbDisconnect(con)
 cat("SQLite database stored as ", tfile, "\n")
 ```
 
-    ## SQLite database stored as  /tmp/RtmpGYhUwZ/file49852541910
+    ## SQLite database stored as  /tmp/RtmphHbjDQ/file5b1e5d7e1e21
 
 ``` r
 dumpFn<- tempfile()
@@ -61,7 +61,7 @@ system(paste("sqlite3", tfile, ".dump >", dumpFn, sep=" "))
 cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
-    ## SQLite database dump in  /tmp/RtmpGYhUwZ/file49855e53bb28
+    ## SQLite database dump in  /tmp/RtmphHbjDQ/file5b1e2897cf6c
 
 Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: \* change TEXT to VARCHAR(1000) \* remove top 2 lines with PRAGMA \* in insert statements replace "adae" with adae \* after "AOCC01FL" TEXT add a comma (",") and a new line with PRIMARY KEY (USUBJID,AESEQ)
 
@@ -76,7 +76,7 @@ system(sedCmd)
 cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
-    ## SQLite database dump modified stored as  /tmp/RtmpGYhUwZ/file4985166ab5a6
+    ## SQLite database dump modified stored as  /tmp/RtmphHbjDQ/file5b1e479ab6c5
 
 ``` r
 ## Check only expected changes were applied
@@ -111,7 +111,7 @@ cat( "File ", adaemapttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/RtmpGYhUwZ/adae-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/RtmphHbjDQ/adae-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 if (file.copy(adaettlFn, targetDir, overwrite = TRUE)) {
@@ -119,7 +119,7 @@ cat( "File ", adaettlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/RtmpGYhUwZ/adae.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/RtmphHbjDQ/adae.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 ### This could maybe also work ..
