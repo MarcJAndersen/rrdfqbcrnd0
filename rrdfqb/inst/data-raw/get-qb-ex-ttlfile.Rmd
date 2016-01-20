@@ -20,14 +20,14 @@ The example is normalized.
 
 ## Setup 
 ```{r}
+library(RCurl)
+library(devtools)
 devtools::load_all(pkg="../..")
 ```
 
 # R-code
 
 ```{r}
-library(RCurl)
-library(devtools)
 qbURL<-"https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/example/example.ttl"
 if (! url.exists(qbURL) ) {
   stop(paste0("Can not access URL ",qbURL))
@@ -35,7 +35,7 @@ if (! url.exists(qbURL) ) {
 examplettl <- getURL(qbURL)
 savefile <- file.path(system.file("extdata/sample-rdf", package="rrdfqb"), "example.ttl" )
 writeLines( examplettl, savefile)
-cat("written to ", normalizePath(savefile) )
+cat("written to ", normalizePath(savefile), "\n" )
 ```
 
 # Show one observations from the store
@@ -43,7 +43,7 @@ cat("written to ", normalizePath(savefile) )
 ```{r}
 exfile <- file.path(system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb") )
 store <- new.rdf(ontology=FALSE)
-load.rdf( exfile, format="TURTLE", store)
+invisible(load.rdf( exfile, format="TURTLE", store))
 
 SPARQLscript<- '
 select * where {
@@ -103,7 +103,7 @@ library(rrdfancillary)
 
 exfile <- file.path(system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb") )
 store <- new.rdf(ontology=FALSE)
-load.rdf( exfile, format="TURTLE", store)
+invisible(load.rdf( exfile, format="TURTLE", store))
 
 normalize.phase.1.file<- file.path(system.file("extdata/cube-vocabulary-rdf", "normalize-algorithm-phase-1.ru", package="rrdfqb") )
 UpdateNormPhase1 <- paste(readLines(normalize.phase.1.file), collapse="\n")
@@ -125,6 +125,9 @@ save.rdf( store, normalizedfile, format="TURTLE")
 
 
 # Update example cube using Fuseki
+
+The following is for information, and not part of the package.
+
 Using Fusiki to do the update.
 
     FUSEKI_HOME=/opt/apache-jena-fuseki-2.3.1/

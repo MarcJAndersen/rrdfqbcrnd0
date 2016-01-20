@@ -197,3 +197,9 @@ The RDF data cube is serialized in turtle format and stored as a text file in
 ```{r}
 cat(normalizePath(outcodelist),"\n")
 ```
+
+The triples are:
+```{r}
+cat(readLines(procedure.codelist.fn),"\n")
+```
+
