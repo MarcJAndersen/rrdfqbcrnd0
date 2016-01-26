@@ -40,6 +40,22 @@ mk-rrdfqbpresent:
 mk-rrdfqbcrndcheck:
 	cd rrdfqbcrndcheck; make
 
+doc-which-packages:
+	@echo "|Package            |Description|"
+	@echo "|-------------------|------------|"
+	@(find -name "DESCRIPTION" -exec grep "Title:" {} /dev/null \; | gawk '{ a=gensub(/^(.+)\/.+:.+: *(.+)/, "|\\1|\\2|", "g",$$0 ); print a }')
+	@echo " "
+
+doc-which-md-files:
+	@echo "|Package            |File        |Description|"
+	@echo "|-------------------|------------|-----------|"
+	@find -path "*/inst/doc/*" -name "*.md" -and -not -name "README.md"| gawk '{ getline line < $$0; a=gensub( /^(.+)\/inst\/doc\/(.+).md/, "|\\1|[\\2](\\1/inst/doc/\\2.html)|", "g",$$0 ); print a, line, "|";  }'
+
+# make doc-which-md-files  > overview-md.md
+# pandoc --from markdown_github --to html --standalone README.md > README.html
+# firefox README.html 
+# make doc-which-md-files | pandoc --from markdown_github --to html --standalone > mdrendered.html
+
 
 rbuild:
 	cd rrdfcdisc; make rbuild

@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-01-16" />
+<meta name="date" content="2016-01-23" />
 
 <title>Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#)</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube" class="uri">http://purl.org/linked-data/cube</a>#)</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-01-16</em></h4>
+<h4 class="date"><em>2016-01-23</em></h4>
 </div>
 
 <div id="TOC">
@@ -130,7 +130,7 @@ cat(SPARQLscript,&quot;\n&quot;)</code></pre>
 <pre class="r"><code>SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-cube.rq&quot;)
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)</code></pre>
-<p>SPARQL script stored in /tmp/RtmpnVgqmg/get-cube.rq</p>
+<p>SPARQL script stored in /tmp/RtmpEo368I/get-cube.rq</p>
 <div id="using-the-script-with-r" class="section level3">
 <h3>Using the script with R</h3>
 <p>The R-code below does not work with rrdf.</p>

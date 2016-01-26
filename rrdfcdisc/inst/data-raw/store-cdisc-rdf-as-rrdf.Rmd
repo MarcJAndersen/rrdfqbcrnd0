@@ -14,9 +14,9 @@ output:
 
 ---
 
+# Store CDISC RDF as RRDF data model
 
-
-# Preliminaries
+##  Preliminaries
 
 The path to the package root is `../..` relative to the present working directory.
 ```{r}
@@ -139,6 +139,7 @@ paste0( "FROM ", "<", rqfilesToLoad, ">", collapse="\n" )
 )
 
 cat(SPARQLscript,"\n")
+# change to be part of package
 SPARQLscriptfn<- file.path(tempdir(),"get-rdf.disc.org.rq")
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
