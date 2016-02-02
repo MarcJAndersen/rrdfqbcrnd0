@@ -20,12 +20,13 @@ prefix crnd-attribute: <http://www.example.org/dc/attribute#>
 prefix crnd-measure: <http://www.example.org/dc/measure#>  
 
 ## Still need to transpose the data - this will be mapping specific
-select ?record ?p ?o ?CountCrit ?XCountCrit where {
+select ?record ?p ?o # ?CountCrit ?XCountCrit
+where {
   ?record ?p ?o .
     {  
       # This gives the records in the data set
       select ?record ?CountCrit (count(*) as ?XCountCrit) where {
-	?record ?colProperty ?Rselectionvalue  .
+	?record ?D2RQPropertyBridge ?Rselectionvalue  .
 	## The (count(*) as ?XCountCrit) does work with ARQ but not virtuoso.
 	## Insert
 	## 	    values (?XCountCrit) {(2)}
@@ -34,16 +35,19 @@ select ?record ?p ?o ?CountCrit ?XCountCrit where {
 	## Solution for virtuoso: split the query in steps and insert the values as text
 	{  
 	  # repeating the same query twice - should not be necessary 
-	  select ?obs ?colProperty ?Rselectionvalue
+	  select ?obs ?D2RQPropertyBridge ?Rselectionvalue
+	  # ?Rselectionoperator ?DataSetRefD2RQ  ?rrdfqbcrnd0codeType ?rrdfqbcrnd0Rcolumnname 
 	  where {
 	    ?obs ?propdim ?dimvalue .
 	    ?propdim a qb:DimensionProperty .
 	    ?propdim qb:codeList ?codelist .
 	    ?dimvalue rrdfqbcrnd0:R-selectionoperator ?Rselectionoperator . 
-	    optional { ?dimvalue rrdfqbcrnd0:R-selectionvalue  ?Rselectionvalue . } 
+	    optional { ?dimvalue rrdfqbcrnd0:R-selectionvalue  ?Rselectionvalue . }
+	    ?codelist rrdfqbcrnd0:DataSetRefD2RQ ?DataSetRefD2RQ .
+	    ?DataSetRefD2RQ rrdfqbcrnd0:D2RQ-PropertyBridge ?D2RQPropertyBridge .
 	    ?codelist rrdfqbcrnd0:codeType ?rrdfqbcrnd0codeType .
 	    ?codelist rrdfqbcrnd0:R-columnname ?rrdfqbcrnd0Rcolumnname .
-	    ?codelist rrdfqbcrnd0:D2RQ-PropertyBridge ?colProperty .
+	    
 	    # works for one observations - assumes correct also for more observations
 	    values (?obs) {(ds:obs007)}
 	    filter (?rrdfqbcrnd0Rcolumnname != "procedure" && ?rrdfqbcrnd0Rcolumnname != "factor"
@@ -52,22 +56,24 @@ select ?record ?p ?o ?CountCrit ?XCountCrit where {
 	}
 	{  
 	  select (count(?obs) as ?CountCrit )
+	  # ?Rselectionoperator ?DataSetRefD2RQ  ?rrdfqbcrnd0codeType ?rrdfqbcrnd0Rcolumnname 
 	  where {
 	    ?obs ?propdim ?dimvalue .
 	    ?propdim a qb:DimensionProperty .
 	    ?propdim qb:codeList ?codelist .
 	    ?dimvalue rrdfqbcrnd0:R-selectionoperator ?Rselectionoperator . 
-	    optional { ?dimvalue rrdfqbcrnd0:R-selectionvalue  ?Rselectionvalue . } 
+	    optional { ?dimvalue rrdfqbcrnd0:R-selectionvalue  ?Rselectionvalue . }
+	    ?codelist rrdfqbcrnd0:DataSetRefD2RQ ?DataSetRefD2RQ .
+	    ?DataSetRefD2RQ rrdfqbcrnd0:D2RQ-PropertyBridge ?D2RQPropertyBridge .
 	    ?codelist rrdfqbcrnd0:codeType ?rrdfqbcrnd0codeType .
 	    ?codelist rrdfqbcrnd0:R-columnname ?rrdfqbcrnd0Rcolumnname .
-	    ?codelist rrdfqbcrnd0:D2RQ-PropertyBridge ?colProperty .
+	    
 	    # works for one observations - assumes correct also for more observations
 	    values (?obs) {(ds:obs007)}
 	    filter (?rrdfqbcrnd0Rcolumnname != "procedure" && ?rrdfqbcrnd0Rcolumnname != "factor"
 		    && ?Rselectionoperator = "==" )
 	  }
 	}
-	
       }
       group by ?record ?CountCrit ?XCountCrit
       having (?CountCrit = ?XCountCrit)
