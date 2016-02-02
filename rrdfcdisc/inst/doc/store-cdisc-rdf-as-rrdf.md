@@ -1,5 +1,8 @@
+Store CDISC RDF as RRDF data model
+==================================
+
 Preliminaries
-=============
+-------------
 
 The path to the package root is `../..` relative to the present working directory.
 
@@ -193,7 +196,7 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 
     ## Final rdf.cdisc.org rrdf store, number of triples: 165381
 
-    ## rrdf store saved to turle file: /tmp/RtmpEzOaJj/cdisc-rdf.ttl
+    ## rrdf store saved to turle file: /tmp/RtmpUjvHAN/cdisc-rdf.ttl
 
     ## Writing to zip file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip
 
@@ -202,7 +205,7 @@ cdisc.save.zip.info<- file.info(cdisc.save.zip)
 message("File ", cdisc.save.zip, " created ", cdisc.save.zip.info$ctime, " size ", cdisc.save.zip.info$size, " bytes")
 ```
 
-    ## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-01-16 18:50:28 size 2310300 bytes
+    ## File /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-02-02 18:31:15 size 2310300 bytes
 
 ### Creating SPARQL script for getting CDISC standard using FROM dataset
 
@@ -229,12 +232,13 @@ cat(SPARQLscript,"\n")
 CONSTRUCT { ?s ?p ?o } FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/w3.org/skos.rdf> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcam.rdf> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcelements.rdf> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/resources/dublincore.org/dcterms.rdf> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/glossary-terminology.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/cdash-terminology.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/sdtm-terminology.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/qs-terminology.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/send-terminology.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/terminology-2013-06-28/adam-terminology.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtm-1-2.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/all-standards.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/cdash-1-1.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtmig-3-1-3.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtmig-3-1-2.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/adamig-1-0.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sendig-3-0.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/sdtm-1-3.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/std/adam-2-1.ttl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/ct-schema.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/meta-model-schema.owl> FROM <https://github.com/phuse-org/rdf.cdisc.org/raw/master/schemas/cdisc-schema.owl> WHERE { ?s ?p ?o }
 
 ``` r
+# change to be part of package
 SPARQLscriptfn<- file.path(tempdir(),"get-rdf.disc.org.rq")
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in /tmp/RtmpEzOaJj/get-rdf.disc.org.rq
+SPARQL script stored in /tmp/RtmpUjvHAN/get-rdf.disc.org.rq
 
 ### Using the script with R
 
