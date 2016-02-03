@@ -67,7 +67,7 @@ would appreciate learning more on that approach.
 
 
 ```{r, eval=TRUE}
-modelTTLFile<- system.file("extdata/sample-rdf", "clinical-data-process-model.ttl", package="rrdfqbcrnd0")
+modelTTLFile<- system.file("extdata/sample-rdf", "clinical-data-process-model.ttl", package="rrdfqbcrndex")
 model<- load.rdf(modelTTLFile,"TURTLE")
 # identify the prefixes in the turtle file
 # The prefixes are part of the RRDF model, but I do not know how to extract it from the model.

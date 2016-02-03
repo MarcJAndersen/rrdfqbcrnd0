@@ -119,7 +119,7 @@ The RDF data cube is serialized in turtle format and stored as a text file in
 cat(normalizePath(outcube),"\n")
 ```
 
-    ## /tmp/RtmpOqFS8T/DC-EXAMPLE-R-V-0-0-0.ttl
+    ## /tmp/Rtmpbt4JlJ/DC-EXAMPLE-R-V-0-0-0.ttl
 
 Query the cube using SPARQL
 ===========================
