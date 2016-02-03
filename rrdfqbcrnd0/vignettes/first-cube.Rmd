@@ -18,6 +18,8 @@ This vignette shows how to
 
 The next command is not needed if the package have been loaded throug devtools::load_all().
 ```{r}
+library(rrdfcdisc)
+library(rrdfqb)
 library(rrdfqbcrnd0)
 ```
 

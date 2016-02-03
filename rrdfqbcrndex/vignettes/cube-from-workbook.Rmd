@@ -13,7 +13,10 @@ vignette: >
 
 First load the package.
 ```{r, eval=TRUE}
+library(rrdfcdisc)
+library(rrdfqb)
 library(rrdfqbcrnd0)
+library(rrdfqbcrndex)
 ```
 
 # Generating RDF data cube from specification in a spreadsheet and export as turtle file
@@ -22,7 +25,7 @@ The generation of RDF data cube can be specified in a spreadsheet.
 The outputs below shows the meta data for generation of the DM RDF data cube.
 
 ```{r, eval=TRUE}
-RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrnd0")
+RDFCubeWorkbook<- system.file("extdata/sample-cfg", "RDFCubeWorkbook.xlsx", package="rrdfqbcrndex")
 ```
 
 The next statement shows the metadata.
@@ -70,7 +73,7 @@ extra step with the workbook, as the input files may be updated by
 running the SAS program.
 
 ```{r, eval=TRUE}
-demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfqbcrnd0")
+demoObsDataCsvFn<- system.file("extdata/sample-cfg", "demo.AR.csv", package="rrdfqbcrndex")
 demoObsData <- read.csv(demoObsDataCsvFn,stringsAsFactors=FALSE)
 
 ##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
@@ -81,7 +84,7 @@ demoObsData$measurefmt[ demoObsData$procedure %in% c("n", "nmiss", "count") ]<- 
 ## sprintf( demoObsData$measurefmt, demoObsData$measure)
 }
 
-demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", package="rrdfqbcrnd0")
+demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", package="rrdfqbcrndex")
 demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 
 
@@ -233,6 +236,7 @@ knitr::kable(observationsDesc[ 1:10 ,
 ```{r, echo=TRUE}
 GetFormularFromCube( checkCube, forsparqlprefix )
 ```
+ToDo(mja): fix this
 
 ### Notes
 
