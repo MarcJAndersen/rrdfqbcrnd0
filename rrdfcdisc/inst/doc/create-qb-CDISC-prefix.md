@@ -5,6 +5,7 @@ Setup
 -----
 
 ``` r
+library(rrdfancillary)
 library(devtools)
 devtools::load_all(pkg="../..")
 ```
@@ -30,9 +31,12 @@ qbCDISCprefixes<-  list(
  "dct"= "http://purl.org/dc/terms/" ,
  "mms"= "http://rdf.cdisc.org/mms#" ,
  "cts"= "http://rdf.cdisc.org/ct/schema#",
+ "sdtm"="http://rdf.cdisc.org/sdtm-terminology#",
  "rrdfqbcrnd0"="http://www.example.org/rrdfqbcrnd0/"
 ) 
 ```
+
+ToDo(mja): The rrdfqbcrnd0 prefix should be moved to package rrdfqbcrnd0
 
 ``` r
 devtools::use_data(qbCDISCprefixes,overwrite=TRUE)

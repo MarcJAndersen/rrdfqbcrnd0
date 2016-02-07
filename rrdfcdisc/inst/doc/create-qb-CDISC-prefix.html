@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-07" />
 
 <title>Create prefixes for use with CDISC standards in RDF</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create prefixes for use with CDISC standards in RDF</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-07</em></h4>
 </div>
 
 <div id="TOC">
@@ -80,20 +80,21 @@ img {
 <h1>Create prefixes for use with CDISC standards in RDF</h1>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
+<pre class="r"><code>library(rrdfancillary)</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: rrdf</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>library(devtools)
 devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## Loading rrdfcdisc</code></pre>
 <pre><code>## Loading required package: RCurl</code></pre>
-<pre><code>## Loading required package: methods</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
-<pre><code>## Loading required package: rrdf</code></pre>
-<pre><code>## Loading required package: rJava</code></pre>
 <pre><code>## 
-## Attaching package: 'rJava'</code></pre>
-<pre><code>## The following object is masked from 'package:RCurl':
+## Attaching package: 'RCurl'</code></pre>
+<pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
-<pre><code>## Loading required package: rrdflibs</code></pre>
 </div>
 </div>
 <div id="prefixes-for-the-package" class="section level1">
@@ -112,8 +113,10 @@ devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
  &quot;dct&quot;= &quot;http://purl.org/dc/terms/&quot; ,
  &quot;mms&quot;= &quot;http://rdf.cdisc.org/mms#&quot; ,
  &quot;cts&quot;= &quot;http://rdf.cdisc.org/ct/schema#&quot;,
+ &quot;sdtm&quot;=&quot;http://rdf.cdisc.org/sdtm-terminology#&quot;,
  &quot;rrdfqbcrnd0&quot;=&quot;http://www.example.org/rrdfqbcrnd0/&quot;
 ) </code></pre>
+<p>ToDo(mja): The rrdfqbcrnd0 prefix should be moved to package rrdfqbcrnd0</p>
 <pre class="r"><code>devtools::use_data(qbCDISCprefixes,overwrite=TRUE)</code></pre>
 <pre><code>## Saving qbCDISCprefixes to data/qbCDISCprefixes.rda</code></pre>
 </div>

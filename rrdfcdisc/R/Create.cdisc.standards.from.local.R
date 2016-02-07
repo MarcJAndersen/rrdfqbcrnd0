@@ -20,7 +20,7 @@ Create.cdisc.standards.from.local<- function(
 
 format.from.ext<- list("ttl"="TURTLE", "rdf"="RDF/XML", "owl"="RDF/XML", "n3"="N3")
 
-cdisc.rdf <- new.rdf()
+cdisc.rdf <- new.rdf(ontology=FALSE)
 
 
 for (fn in CDISCfilelist) {
@@ -38,10 +38,10 @@ full.cdisc.save.ttl<- cdisc.save.ttl
 cdisc.out <- save.rdf(cdisc.rdf, filename=full.cdisc.save.ttl, format="TURTLE")
 
 if (! file.exists(full.cdisc.save.ttl)) {
-    stop("Problem: expected Turtle file not created - ", full.cdisc.save.ttl )
+    stop("Problem: expected Turtle file not created - ", normalizePath(full.cdisc.save.ttl) )
   }
 else {
-message("rrdf store saved to turle file: ", full.cdisc.save.ttl)
+message("rrdf store saved to turle file: ", normalizePath(full.cdisc.save.ttl) )
 }
 
 full.cdisc.save.zip<- path.expand(cdisc.save.zip)
@@ -49,10 +49,10 @@ if (file.exists(full.cdisc.save.zip)) {
   file.remove(full.cdisc.save.zip)
   }
 
-message("Writing to zip file ", full.cdisc.save.zip)
+message("Writing to zip file ", normalizePath(full.cdisc.save.zip) )
 zip( full.cdisc.save.zip, files=c(full.cdisc.save.ttl), extras="-j" )
   if (! file.exists(full.cdisc.save.zip)) {
-    stop("Problem: Expected zip file not found - ", full.cdisc.save.zip )
+    stop("Problem: Expected zip file not found - ", normalizePath(full.cdisc.save.zip) )
   }
 
   if (remove.cdisc.save.ttl) {

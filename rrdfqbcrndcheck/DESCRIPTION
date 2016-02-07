@@ -1,6 +1,6 @@
 Package: rrdfqbcrndcheck
 Title: Check of numbers in R-RDF Data Cube for Clinical Research & Development
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") )
     )
@@ -8,12 +8,12 @@ Description: Check numbers in RDF Data cube following Clinical Research & Develo
 Depends:
     R (>= 3.0.2),
     xlsx,
+    foreign,
     RCurl,
     rJava,
     rrdf(>= 2.0.4),
     rrdfqbcrnd0,
     rrdfqbcrndex,
-    foreign
 Imports:
     tools
 License: MIT + file LICENSE

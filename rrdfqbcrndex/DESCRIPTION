@@ -1,6 +1,6 @@
 Package: rrdfqbcrndex
 Title: R-RDF Examples for RDF data cube for Clinical Research and Development
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") ),
     person("Tim", "Williams", email="tim.williams@ucb.com", role=c("aut", "cre") )
@@ -11,7 +11,12 @@ Depends:
     xlsx,
     RCurl,
     rJava,
-    rrdf(>= 2.0.4)
+    rrdf(>= 2.0.4),
+    rrdfancillary,
+    rrdfcdisc,
+    rrdfqb,
+    rrdfqbcrnd0,
+    rrdfqbcrndex
 Imports:
     tools
 License: MIT + file LICENSE

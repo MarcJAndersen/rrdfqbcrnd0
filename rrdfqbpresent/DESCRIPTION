@@ -1,6 +1,6 @@
 Package: rrdfqbpresent
 Title: Present RDF data cube as two dimensional table
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") )
     )
@@ -9,7 +9,12 @@ Depends:
     xlsx,
     RCurl,
     rJava,
-    rrdf(>= 2.0.4)
+    rrdf(>= 2.0.4),
+    rrdfancillary,
+    rrdfcdisc,
+    rrdfqb,
+    rrdfqbcrnd0,
+    rrdfqbcrndex
 Imports: 
     tools
 License: MIT + file LICENSE
