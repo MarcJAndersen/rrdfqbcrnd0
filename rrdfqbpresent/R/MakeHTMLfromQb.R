@@ -8,6 +8,7 @@
 ##' @param useRDFa if TRUE include RDFa markup (default)
 ##' @param compactDimColumns if TRUE compact dimension columns and add pretty header (default)
 ##' @param showProcedure If TRUE show in each row the projection procedurevalue
+##' @param debug If TRUE give debug information
 ##' @return path to file with HTML
 ##' @inheritParams GetObservationsSparqlQuery
 ##' @export
@@ -15,7 +16,7 @@
 MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
                           dimensions, rowdim, coldim, idrow, idcol,
                           htmlfile=NULL, useRDFa=TRUE, compactDimColumns=TRUE,
-                          showProcedure=TRUE ) {
+                          showProcedure=TRUE, debug=FALSE ) {
 
 # ToDo(mja): the result from GetTwoDimTableFromQb is wrong
     qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
@@ -44,7 +45,7 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
         print(oD[,c("s","rowno","colno","cellpartno")])
     }
 
-    Showit()
+if (debug) {     Showit() }
 
     # Determine variable names in Od dataframe
     presrowvarvalue<- gsub("(crnd-dimension:|crnd-attribute:|crnd-measure:)(.*)","\\2value", rowdim)
@@ -166,7 +167,7 @@ dsdName,
         for (rr in presrowvarindex) {
             thisNoOfNonALL<-0
             for (rowidname in idrow) {
-                cat("Row ", rr, ", observation (or) ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n")
+if (debug) {                 cat("Row ", rr, ", observation (or) ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n") }
                 if ( is.na(oD[or,rowidname]) || oD[or,rowidname]=="_ALL_" ) {
                     if (!is.element(rowidname,hasallidrow) ) {
                         hasallidrow<- c(hasallidrow, rowidname)
@@ -250,9 +251,9 @@ dsdName,
     ## data rows
     or<- 1
     
-    cat("Start data rows\n")    
+if (debug) {    cat("Start data rows\n")     }
     for (rr in presrowvarindex) {
-        cat("Data rows: Row ", rr, ", observation (or) ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n")
+        if (debug) { cat("Data rows: Row ", rr, ", observation (or) ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n") }
         cat("<tr>", file=htmlfile, append=TRUE)
                                         # print(rr)
 
@@ -307,11 +308,13 @@ dsdName,
                 ## ## separator between cells should be taken from data
                 ##       cat(" ", file=htmlfile, append=TRUE)
                 ## }
-                cat("colvarindex:",
+                if (debug) {
+                    cat("colvarindex:",
                     " rowno ", oD$rowno[or],"==", rr,
                     " colno ", oD$colno[or], "==", cc,
                     " cellparno ", oD$cellpartno[or], "==", cp,
                     "\n" )
+                }
                 if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
                     ## The observation
                     ## next line is for simple fly-over
@@ -339,7 +342,7 @@ dsdName,
                     ## cat( paste0('<span property="', prop, '"', ' resource="', oD[or, gsub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", prop)], '">\n' ), file=htmlfile, append=TRUE)
                     ## }
 
-                    cat("Observation: ", oD$measure[or],"\n" )                    
+if (debug) {                     cat("Observation: ", oD$measure[or],"\n" )                    }
                     ## formatting to applied to measure
                     if (oD$measurefmt[or] != " ") {
                         cat(sprintf(oD$measurefmt[or],as.numeric(oD$measure[or])), file=htmlfile, append=TRUE)
@@ -363,7 +366,7 @@ dsdName,
                                         #    cat("</td>\n", file=htmlfile, append=TRUE)
         }
         cat("</tr>", "\n", file=htmlfile, append=TRUE)
-cat("End of for, or ", or, "\n" )
+if (debug) { cat("End of for, or ", or, "\n" ) }
     }
 
 

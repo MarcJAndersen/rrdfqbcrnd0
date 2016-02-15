@@ -47,7 +47,7 @@ dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
 cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
-    ## DM cube stored as  /tmp/RtmpfOIWLj/DC-DM-R-V-0-5-2.ttl
+    ## DM cube stored as  /tmp/Rtmpzq3Spj/DC-DM-R-V-0-5-2.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"DC-DM-sample.ttl")
@@ -74,7 +74,7 @@ ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
 cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
-    ## AE cube stored as  /tmp/RtmpfOIWLj/DC-AE-R-V-0-5-2.ttl
+    ## AE cube stored as  /tmp/Rtmpzq3Spj/DC-AE-R-V-0-5-2.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"DC-AE-sample.ttl")
@@ -118,7 +118,7 @@ demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
 cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
-    ## DEMO cube stored as  /tmp/RtmpfOIWLj/DC-DEMO-R-V-0-5-2.ttl
+    ## DEMO cube stored as  /tmp/Rtmpzq3Spj/DC-DEMO-R-V-0-5-2.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"DC-DEMO-sample.ttl")

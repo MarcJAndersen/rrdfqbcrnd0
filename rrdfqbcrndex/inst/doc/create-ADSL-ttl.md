@@ -54,7 +54,7 @@ dbDisconnect(con)
 cat("SQLite database stored as ", tfile, "\n")
 ```
 
-    ## SQLite database stored as  /tmp/Rtmp2kZok1/file3fd619291448
+    ## SQLite database stored as  /tmp/Rtmpf4BeGA/file143415c9f1b8
 
 ``` r
 dumpFn<- tempfile()
@@ -62,7 +62,7 @@ system(paste("sqlite3", tfile, ".dump >", dumpFn, sep=" "))
 cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
-    ## SQLite database dump in  /tmp/Rtmp2kZok1/file3fd670f7a320
+    ## SQLite database dump in  /tmp/Rtmpf4BeGA/file143412ec9dfa
 
 Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: \* change TEXT to VARCHAR(1000) \* remove top 2 lines with PRAGMA \* in insert statements replace "adsl" with adsl \* after "MMSETOT" REAL add a comma (",") and a new line with PRIMARY KEY (USUBJID)
 
@@ -77,7 +77,7 @@ system(sedCmd)
 cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
-    ## SQLite database dump modified stored as  /tmp/Rtmp2kZok1/file3fd65caaa31b
+    ## SQLite database dump modified stored as  /tmp/Rtmpf4BeGA/file143499aae55
 
 ``` r
 ## Check only expected changes were applied
@@ -112,7 +112,7 @@ cat( "File ", adslmapttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/Rtmp2kZok1/adsl-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/Rtmpf4BeGA/adsl-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
@@ -120,7 +120,7 @@ cat( "File ", adslttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/Rtmp2kZok1/adsl.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/Rtmpf4BeGA/adsl.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 ### This could maybe also work ..

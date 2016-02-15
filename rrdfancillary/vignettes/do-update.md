@@ -1,7 +1,7 @@
 ---
 title: "SPARQL update example"
 author: "mja@statgroup.dk"
-date: "2016-02-15"
+date: "2016-02-16"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{SPARQL update example}

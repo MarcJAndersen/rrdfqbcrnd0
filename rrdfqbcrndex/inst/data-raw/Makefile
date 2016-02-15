@@ -39,10 +39,14 @@ RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 
 
-all: ${TARGETS}
+all: ${TARGETS} cleantemp
 
 clean: 
 	rm -f ${TARGETS}
+
+cleantemp:
+	rm -f ../extdata/sample-rdf/fordot.ttl ../extdata/sample-rdf/fordot.dot
+	rm -f ../extdata/sample-rdf/graph.png  ../extdata/sample-rdf/graph.pdf
 
 ds-ttl: ${ADSLTTL} ${ADAETTL}
 
@@ -79,6 +83,7 @@ using-arq.html using-arq.pdf using-arq.md: using-arq.Rmd
 
 using-arq-graphical-display.html using-arq-graphical-display.pdf using-arq-graphical-display.md: using-arq-graphical-display.Rmd
 	${RMD2HTML}
+	rm -r -f using-arq-graphical-display_cache using-arq-graphical-display_files fordot.ttl fordot.dot
 
 using-arq-qb.html using-arq-qb.pdf using-arq-qb.md: using-arq-qb.Rmd
 	${RMD2HTML}

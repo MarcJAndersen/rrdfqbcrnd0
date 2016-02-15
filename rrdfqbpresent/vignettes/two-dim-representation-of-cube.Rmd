@@ -73,7 +73,8 @@ MakeTable<- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
 
     outhtmlfile<- MakeHTMLfromQb( store, forsparqlprefix, dsdName, domainName,
                                  dimensions, rowdim, coldim, idrow, idcol,
-                                 htmlfile, useRDFa=TRUE, compactDimColumns=FALSE)
+                                 htmlfile, useRDFa=TRUE, compactDimColumns=FALSE,
+                                 debug=FALSE)
 
     outhtmlfile
 }

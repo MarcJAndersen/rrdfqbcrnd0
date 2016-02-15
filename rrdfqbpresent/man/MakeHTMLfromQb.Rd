@@ -6,7 +6,7 @@
 \usage{
 MakeHTMLfromQb(store, forsparqlprefix, dsdName, domainName, dimensions, rowdim,
   coldim, idrow, idcol, htmlfile = NULL, useRDFa = TRUE,
-  compactDimColumns = TRUE, showProcedure = TRUE)
+  compactDimColumns = TRUE, showProcedure = TRUE, debug = FALSE)
 }
 \arguments{
 \item{store}{RDF data store containing cube}
@@ -26,6 +26,8 @@ MakeHTMLfromQb(store, forsparqlprefix, dsdName, domainName, dimensions, rowdim,
 \item{compactDimColumns}{if TRUE compact dimension columns and add pretty header (default)}
 
 \item{showProcedure}{If TRUE show in each row the projection procedurevalue}
+
+\item{debug}{If TRUE give debug information}
 }
 \value{
 path to file with HTML

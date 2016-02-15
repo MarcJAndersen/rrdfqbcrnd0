@@ -1,7 +1,7 @@
 @prefix dccs:  <http://www.example.org/dc/ae/dccs/> .
 @prefix crnd-measure: <http://www.example.org/dc/measure#> .
-@prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
 @prefix code:  <http://www.example.org/dc/code/> .
+@prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
 @prefix pav:   <http://purl.org/pav> .
 @prefix owl:   <http://www.w3.org/2002/07/owl#> .
 @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
@@ -17,6 +17,7 @@
 @prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/> .
 @prefix dcat:  <http://www.w3.org/ns/dcat#> .
 @prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix sdtm:  <http://rdf.cdisc.org/sdtm-terminology#> .
 
 ds:obs1339  a                       qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1143,9 +1144,9 @@ ds:obs0865  a                       qb:Observation ;
 code:trta-_NONMISS_  a     code:Trta , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:trta ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:trta .
 
 ds:obs0612  a                       qb:Observation ;
@@ -1577,9 +1578,9 @@ code:aedecod-_NONMISS_
         a                  code:Aedecod , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:aedecod ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:aedecod .
 
 ds:obs0705  a                       qb:Observation ;
@@ -7336,7 +7337,7 @@ ds:obs0717  a                       qb:Observation ;
 code:aedecod-_ALL_  a      code:Aedecod , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:aedecod ;
-        skos:prefLabel     "_ALL_" , "_ALL_"^^xsd:string ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:aedecod .
 
 ds:obs0080  a                       qb:Observation ;
@@ -8503,7 +8504,7 @@ ds:obs0599  a                       qb:Observation ;
 code:saffl-_ALL_  a        code:Saffl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:saffl ;
-        skos:prefLabel     "_ALL_" ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:saffl .
 
 ds:obs0346  a                       qb:Observation ;
@@ -13234,7 +13235,7 @@ ds:dataset-AE  a                      qb:DataSet ;
         dct:title                     "Adverse Event Analysis Results"^^xsd:string ;
         qb:structure                  ds:dsd-AE ;
         pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-02-15T22:19:45+01:00"^^xsd:dateTime ;
+        pav:createdOn                 "2016-02-16T00:20:57+01:00"^^xsd:dateTime ;
         pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
         pav:version                   "0.0.0"^^xsd:string ;
         rrdfqbcrnd0:D2RQ-DataSetName  "ADAE"^^xsd:string ;
@@ -13434,7 +13435,7 @@ ds:obs0172  a                       qb:Observation ;
 code:aesoc-_ALL_  a        code:Aesoc , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:aesoc ;
-        skos:prefLabel     "_ALL_" , "_ALL_"^^xsd:string ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:aesoc .
 
 ds:obs0897  a                       qb:Observation ;
@@ -13705,7 +13706,7 @@ ds:obs0417  a                       qb:Observation ;
 code:factor-_ALL_  a       code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:factor ;
-        skos:prefLabel     "_ALL_" ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:factor .
 
 ds:obs0711  a                       qb:Observation ;
@@ -13930,9 +13931,9 @@ code:factor-_NONMISS_
         a                  code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:factor ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:factor .
 
 ds:obs0278  a                       qb:Observation ;
@@ -15808,9 +15809,9 @@ ds:obs0766  a                       qb:Observation ;
 code:aesoc-_NONMISS_  a    code:Aesoc , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:aesoc ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:aesoc .
 
 ds:obs0513  a                       qb:Observation ;
@@ -19141,7 +19142,7 @@ ds:obs0710  a                       qb:Observation ;
 code:trta-_ALL_  a         code:Trta , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:trta ;
-        skos:prefLabel     "_ALL_" , "_ALL_"^^xsd:string ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:trta .
 
 ds:obs1066  a                       qb:Observation ;
@@ -25434,9 +25435,9 @@ ds:obs0410  a                       qb:Observation ;
 code:saffl-_NONMISS_  a    code:Saffl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:saffl ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:saffl .
 
 ds:obs1060  a                       qb:Observation ;

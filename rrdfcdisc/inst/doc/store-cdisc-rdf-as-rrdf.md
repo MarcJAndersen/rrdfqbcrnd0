@@ -197,7 +197,7 @@ cdisc.save.zip<- Create.cdisc.standards.from.local(
 
     ## Final rdf.cdisc.org rrdf store, number of triples: 164711
 
-    ## rrdf store saved to turle file: /tmp/RtmpmE44OX/cdisc-rdf.ttl
+    ## rrdf store saved to turle file: /tmp/RtmpYEbmTy/cdisc-rdf.ttl
 
     ## Warning in normalizePath(full.cdisc.save.zip): path[1]="/home/ma/projects/
     ## rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip": No
@@ -210,7 +210,7 @@ cdisc.save.zip.info<- file.info(cdisc.save.zip)
 message("File ", normalizePath(cdisc.save.zip), " created ", cdisc.save.zip.info$ctime, " size ", cdisc.save.zip.info$size, " bytes")
 ```
 
-    ## File /home/ma/projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-02-15 22:16:37 size 2310300 bytes
+    ## File /home/ma/projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-02-16 00:17:52 size 2310300 bytes
 
 ### Creating SPARQL construct script for getting CDISC standard using FROM dataset
 
@@ -243,7 +243,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in /tmp/RtmpmE44OX/get-rdf.disc.org.rq
+SPARQL script stored in /tmp/RtmpYEbmTy/get-rdf.disc.org.rq
 
 ``` r
 targetDir<- system.file("extdata/CDISC-standards-rdf", package="rrdfcdisc")

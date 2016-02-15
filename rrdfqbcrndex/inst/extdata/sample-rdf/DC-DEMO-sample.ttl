@@ -125,9 +125,9 @@ ds:obs021  a                        qb:Observation ;
 code:race-_NONMISS_  a     code:Race , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:race ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:race .
 
 code:Agegr1  a           rdfs:Class , owl:Class ;
@@ -573,11 +573,9 @@ ds:obs003  a                        qb:Observation ;
 
 code:agegr1-_NONMISS_
         a                  code:Agegr1 , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:agegr1 ;
-        skos:prefLabel     "_NONMISS_" , "_NONMISS_"^^xsd:string ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:agegr1 .
 
 crnd-dimension:trt01a
@@ -653,7 +651,7 @@ code:sex-M  a                         code:Sex , skos:Concept ;
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "M"^^xsd:string ;
         skos:inScheme                 code:sex ;
-        skos:prefLabel                "M"^^xsd:string , "M" ;
+        skos:prefLabel                "M"^^xsd:string ;
         skos:topConceptOf             code:sex .
 
 ds:obs095  a                        qb:Observation ;
@@ -766,7 +764,7 @@ code:race-WHITE  a                    skos:Concept , code:Race ;
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "WHITE"^^xsd:string ;
         skos:inScheme                 code:race ;
-        skos:prefLabel                "WHITE"^^xsd:string , "WHITE" ;
+        skos:prefLabel                "WHITE"^^xsd:string ;
         skos:topConceptOf             code:race .
 
 crnd-attribute:denominator
@@ -833,7 +831,7 @@ code:sex-U  a                         skos:Concept , code:Sex ;
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "U"^^xsd:string ;
         skos:inScheme                 code:sex ;
-        skos:prefLabel                "U"^^xsd:string , "U" ;
+        skos:prefLabel                "U"^^xsd:string ;
         skos:topConceptOf             code:sex .
 
 ds:obs082  a                        qb:Observation ;
@@ -949,7 +947,7 @@ code:procedure-q3  a                  code:Procedure , skos:Concept ;
 code:ethnic-_ALL_  a       code:Ethnic , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:ethnic ;
-        skos:prefLabel     "_ALL_" , "_ALL_"^^xsd:string ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:ethnic .
 
 ds:obs119  a                        qb:Observation ;
@@ -1298,7 +1296,7 @@ code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"^^xsd:string ;
         skos:inScheme                 code:race ;
-        skos:prefLabel                "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"^^xsd:string , "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ;
+        skos:prefLabel                "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"^^xsd:string ;
         skos:topConceptOf             code:race .
 
 ds:obs043  a                        qb:Observation ;
@@ -1397,9 +1395,9 @@ code:trt01a-_NONMISS_
         a                  code:Trt01a , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:trt01a ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:trt01a .
 
 dccs:agegr1  a        qb:ComponentSpecification ;
@@ -1415,7 +1413,7 @@ code:Factor  a           rdfs:Class , owl:Class ;
 code:sex-_ALL_  a          code:Sex , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:sex ;
-        skos:prefLabel     "_ALL_" ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:sex .
 
 ds:obs122  a                        qb:Observation ;
@@ -1488,7 +1486,7 @@ code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "AMERICAN INDIAN OR ALASKA NATIVE"^^xsd:string ;
         skos:inScheme                 code:race ;
-        skos:prefLabel                "AMERICAN INDIAN OR ALASKA NATIVE"^^xsd:string , "AMERICAN INDIAN OR ALASKA NATIVE" ;
+        skos:prefLabel                "AMERICAN INDIAN OR ALASKA NATIVE"^^xsd:string ;
         skos:topConceptOf             code:race .
 
 code:race-ASIAN  a                    skos:Concept , code:Race ;
@@ -1500,7 +1498,7 @@ code:race-ASIAN  a                    skos:Concept , code:Race ;
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "ASIAN"^^xsd:string ;
         skos:inScheme                 code:race ;
-        skos:prefLabel                "ASIAN"^^xsd:string , "ASIAN" ;
+        skos:prefLabel                "ASIAN"^^xsd:string ;
         skos:topConceptOf             code:race .
 
 ds:obs072  a                        qb:Observation ;
@@ -1586,7 +1584,7 @@ ds:obs009  a                        qb:Observation ;
 code:trt01a-_ALL_  a       code:Trt01a , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:trt01a ;
-        skos:prefLabel     "_ALL_" ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:trt01a .
 
 dccs:race  a          qb:ComponentSpecification ;
@@ -1727,7 +1725,7 @@ ds:dataset-DEMO  a                    qb:DataSet ;
         dct:title                     "Demographics Analysis Results"^^xsd:string ;
         qb:structure                  ds:dsd-DEMO ;
         pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-02-15T22:19:49+01:00"^^xsd:dateTime ;
+        pav:createdOn                 "2016-02-16T00:21:01+01:00"^^xsd:dateTime ;
         pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
         pav:version                   "0.0.0"^^xsd:string ;
         rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
@@ -1772,13 +1770,13 @@ code:sex-F  a                         code:Sex , skos:Concept ;
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "F"^^xsd:string ;
         skos:inScheme                 code:sex ;
-        skos:prefLabel                "F"^^xsd:string , "F" ;
+        skos:prefLabel                "F"^^xsd:string ;
         skos:topConceptOf             code:sex .
 
 code:agegr1-_ALL_  a       code:Agegr1 , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en , "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:agegr1 ;
-        skos:prefLabel     "_ALL_" , "_ALL_"^^xsd:string ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:agegr1 .
 
 ds:obs088  a                        qb:Observation ;
@@ -1883,7 +1881,7 @@ ds:obs004  a                        qb:Observation ;
 code:factor-_ALL_  a       code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:factor ;
-        skos:prefLabel     "_ALL_" ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:factor .
 
 ds:obs125  a                        qb:Observation ;
@@ -2185,9 +2183,9 @@ code:factor-_NONMISS_
         a                  code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:factor ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:factor .
 
 ds:obs091  a                        qb:Observation ;
@@ -2285,8 +2283,10 @@ ds:obs007  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "53"^^xsd:double .
 
-code:agegr1-_80  a                    code:Agegr1 , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+code:agegr1-_80  a                    skos:Concept , code:Agegr1 ;
+        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en , "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
+        rrdfqbcrnd0:R-selectionfunction
+                "is.na"^^xsd:string ;
         rrdfqbcrnd0:R-selectionoperator
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  ">80"^^xsd:string ;
@@ -2432,11 +2432,9 @@ ds:obs015  a                        qb:Observation ;
 
 code:ethnic-_NONMISS_
         a                  code:Ethnic , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
         skos:inScheme      code:ethnic ;
-        skos:prefLabel     "_NONMISS_" , "_NONMISS_"^^xsd:string ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:ethnic .
 
 dccs:rowno  a         qb:ComponentSpecification ;
@@ -2702,7 +2700,7 @@ code:race-BLACK_OR_AFRICAN_AMERICAN
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "BLACK OR AFRICAN AMERICAN"^^xsd:string ;
         skos:inScheme                 code:race ;
-        skos:prefLabel                "BLACK OR AFRICAN AMERICAN"^^xsd:string , "BLACK OR AFRICAN AMERICAN" ;
+        skos:prefLabel                "BLACK OR AFRICAN AMERICAN"^^xsd:string ;
         skos:topConceptOf             code:race .
 
 crnd-dimension:ethnic
@@ -2796,7 +2794,7 @@ code:sex-UN  a                        code:Sex , skos:Concept ;
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "UN"^^xsd:string ;
         skos:inScheme                 code:sex ;
-        skos:prefLabel                "UN"^^xsd:string , "UN" ;
+        skos:prefLabel                "UN"^^xsd:string ;
         skos:topConceptOf             code:sex .
 
 ds:obs081  a                        qb:Observation ;
@@ -3043,8 +3041,10 @@ crnd-attribute:cellpartno
         rdfs:label  "Position within cell given by row and column number for two dimensional represenation" .
 
 code:ethnic-HISPANIC_OR_LATINO
-        a                             code:Ethnic , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
+        a                             skos:Concept , code:Ethnic ;
+        rdfs:comment                  "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en , "Coded values from data source. No reconciliation against another source"@en ;
+        rrdfqbcrnd0:R-selectionfunction
+                "is.na"^^xsd:string ;
         rrdfqbcrnd0:R-selectionoperator
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "HISPANIC OR LATINO"^^xsd:string ;
@@ -3131,9 +3131,9 @@ ds:obs076  a                        qb:Observation ;
 code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
         rrdfqbcrnd0:R-selectionfunction
-                "is.na" ;
+                "is.na"^^xsd:string ;
         skos:inScheme      code:sex ;
-        skos:prefLabel     "_NONMISS_" ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:sex .
 
 rrdfqbcrnd0:ADSL_ETHNIC
@@ -3204,7 +3204,7 @@ ds:obs013  a                        qb:Observation ;
 code:race-_ALL_  a         code:Race , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:race ;
-        skos:prefLabel     "_ALL_" ;
+        skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:race .
 
 dccs:measure  a     qb:ComponentSpecification ;
