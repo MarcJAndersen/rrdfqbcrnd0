@@ -272,7 +272,9 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
         add.data.triple(store,
                         codeSubj,
                         paste0(prefixlist$prefixSKOS,"prefLabel"),
-                        paste0(codeSource[i,"code"]))
+                        paste0(codeSource[i,"code"]),
+                        type="string"
+                        )
         add.data.triple(store,
                         codeSubj,
                         paste0(prefixlist$prefixCTS,"cdiscDefinition"),
@@ -336,7 +338,9 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
         add.data.triple(store,
                         codeSubj,
                         paste0(prefixlist$prefixSKOS,"prefLabel"),
-                        "_NONMISS_")
+                        "_NONMISS_",
+                        type="string"
+                        )
         add.triple(store,
                    codeSubj,
                    paste0(prefixlist$prefixSKOS,"inScheme"),
@@ -381,7 +385,8 @@ prefix mms:   <http://rdf.cdisc.org/mms#>
         add.data.triple(store,
                         paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                         paste0(prefixlist$prefixSKOS,"prefLabel"),
-                        "_ALL_")
+                        "_ALL_",
+                        type="string")
         add.triple(store,
                    paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                    paste0(prefixlist$prefixSKOS,"inScheme"),

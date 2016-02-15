@@ -197,8 +197,11 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
 
   
 #############################################################################
-  ## Code values
+    ## Code values
+    hasALL<- FALSE
+    hasNONMISS<- FALSE
   for (i in 1:nrow(codeSource)) {
+
     subjcode<- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
     codeSubj<- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
 
@@ -222,36 +225,38 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
                     codeSubj,
                     paste0(prefixlist$prefixSKOS,"prefLabel"),
                     paste0(codeSource[i,"code"]),
-                  type="string"
+                    type="string"
                     )
-
+      if (! hasALL     ) { hasALL<- codeSource[i,"code"]=="_ALL_" }
+      if (! hasNONMISS ) { hasNONMISS<- codeSource[i,"code"]=="_NONMISS_" }
+      
     if (codeSource[i,"code"]!="_ALL_" & codeSource[i,"code"]!="_NONMISS_") {
-    add.data.triple(store,
-                  codeSubj,
-                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionoperator"),
-                  "==",
-                  type="string"
-                  )
-
+        add.data.triple(store,
+                        codeSubj,
+                        paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionoperator"),
+                        "==",
+                        type="string"
+                        )
+        
     ## TODO(mja): consider adding type here ...
-    if (mode(codeSource[i,"code"])=="character") {
-    add.data.triple(store,
-                  codeSubj,
-                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
-                  paste0('\\"',codeSource[i,"code"], '\\"'),
-                  type="string"
-                    )
-  }  else {
-    add.data.triple(store,
-                  codeSubj,
-                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
-                  paste0(codeSource[i,"code"]),
-                  type="string"
-                    )
+        if (mode(codeSource[i,"code"])=="character") {
+            add.data.triple(store,
+                            codeSubj,
+                            paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
+                            paste0('\\"',codeSource[i,"code"], '\\"'),
+                            type="string"
+                            )
+        }  else {
+            add.data.triple(store,
+                            codeSubj,
+                            paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
+                            paste0(codeSource[i,"code"]),
+                            type="string"
+                            )
+        }
     }
-  }
-
-
+      
+      
     ## Should only be added if data available in D2RQ format
     ## ToDo(mja): the stem for the URI for the property is hard coded - this should be changed to use a prefix
     ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
@@ -300,10 +305,11 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
                       codeSubj,
                       paste0(prefixlist$prefixMMS,"nciDomain"),
                       paste(nciDomain))
-      add.data.triple(store,
-                      codeSubj,
-                      paste0(prefixlist$prefixSKOS,"prefLabel"),
-                      paste0(codeSource[i,"code"]))
+      ## add.data.triple(store,
+      ##                 codeSubj,
+      ##                 paste0(prefixlist$prefixSKOS,"prefLabel"),
+      ##                 paste0(codeSource[i,"code"],"-A123"),
+      ##                 type="string")
       add.data.triple(store,
                       codeSubj,
                       paste0(prefixlist$prefixCTS,"cdiscDefinition"),
@@ -313,7 +319,6 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
                       codeSubj,
                       paste0(prefixlist$prefixCTS,"cdiscSubmissionValue"),
                       paste0(codeSource[i,"code"]))
-
     }
   }
 
@@ -321,7 +326,7 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
   ##   Cross reference:  _NONMISS_ creation for TopConcept.
   ## TODO: Create function that creates _NONMISS_ based on either presence in data
   ##       or function parameter.
-  ##      It is merely concidental that the Terminology values in the current
+  ##      It is merely coincidental that the Terminology values in the current
   ##       example both have _NONMISS_ .  This logic MUST change.
 
   
@@ -346,7 +351,8 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
       }
     }
   } else {
-      
+
+      if (! hasNONMISS ) {
       add.triple(store,
                  paste0(prefixlist$prefixCODE,dimName),
                  paste0(prefixlist$prefixSKOS, "hasTopConcept"),
@@ -368,21 +374,24 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
       add.data.triple(store,
                       codeSubj,
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
-                      "_NONMISS_")
+                      "_NONMISS_",
+                      type="string"
+                      )
       add.triple(store,
                  codeSubj,
                  paste0(prefixlist$prefixSKOS,"inScheme"),
                  paste0(prefixlist$prefixCODE, dimName))
+      }
       add.data.triple(store,
                       codeSubj,
                       paste0(prefixlist$prefixRDFS, "comment"),
                       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values.",
                       lang="en")
-
       add.data.triple(store,
                   codeSubj,
                   paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionfunction"),
-                  "is.na"
+                  "is.na",
+                  type="string"
                   )
 
       
@@ -391,8 +400,11 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
       ##   Cross reference:  _ALL_ creation for TopConcept.
       ## TODO: Create function that creates _ALL_ based on either presence in data
       ##       or function parameter.
-      ##       It is merely concidental that the Terminology values in the current
+      ##       It is merely coincidental that the Terminology values in the current
       ##       example both have _ALL_ .  This logic MUST change.
+
+
+      if (!hasALL) {
       add.triple(store,
                  paste0(prefixlist$prefixCODE,dimName),
                  paste0(prefixlist$prefixSKOS, "hasTopConcept"),
@@ -413,11 +425,14 @@ prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
       add.data.triple(store,
                       paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
-                      "_ALL_")
+                      "_ALL_",
+                      type="string"
+                      )
       add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                  paste0(prefixlist$prefixSKOS,"inScheme"),
                  paste0(prefixlist$prefixCODE, dimName))
+      }
       add.data.triple(store,
                       paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                       paste0(prefixlist$prefixRDFS, "comment"),

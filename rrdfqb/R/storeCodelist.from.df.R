@@ -178,7 +178,7 @@ storeCodelist.from.df <- function(
                     codeSubj,
                     paste0(prefixlist$prefixSKOS,"prefLabel"),
                     paste0(codeSource[i,"code"]),
-                  type="string"
+                    type="string"
                     )
 
     if (codeSource[i,"code"]!="_ALL_" & codeSource[i,"code"]!="_NONMISS_") {
@@ -259,7 +259,8 @@ storeCodelist.from.df <- function(
       add.data.triple(store,
                       codeSubj,
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
-                      paste0(codeSource[i,"code"]))
+                      paste0(codeSource[i,"code"]),
+                      type="string")
       add.data.triple(store,
                       codeSubj,
                       paste0(prefixlist$prefixCTS,"cdiscDefinition"),
@@ -324,7 +325,9 @@ storeCodelist.from.df <- function(
       add.data.triple(store,
                       codeSubj,
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
-                      "_NONMISS_")
+                      "_NONMISS_",
+                      type="string"
+                      )
       add.triple(store,
                  codeSubj,
                  paste0(prefixlist$prefixSKOS,"inScheme"),
@@ -369,7 +372,9 @@ storeCodelist.from.df <- function(
       add.data.triple(store,
                       paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                       paste0(prefixlist$prefixSKOS,"prefLabel"),
-                      "_ALL_")
+                      "_ALL_",
+                      type="string"
+                      )
       add.triple(store,
                  paste0(prefixlist$prefixCODE, dimName,"-_ALL_"),
                  paste0(prefixlist$prefixSKOS,"inScheme"),
