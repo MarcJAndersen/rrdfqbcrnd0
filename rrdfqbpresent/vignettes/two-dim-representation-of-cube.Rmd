@@ -84,6 +84,7 @@ MakeTable<- function( dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol ) {
 
 ```{r, echo=TRUE}
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-AE-sample.ttl", package="rrdfqbcrndex")
+# ToDo(mja): write to a temporary file  or move this to extdata
 htmlfile<- file.path(system.file("extdata/sample-html", package="rrdfqbpresent"), "DC-AE-sample.html")
 rowdim<- c("crnd-attribute:rowno", "crnd-dimension:aesoc", "crnd-dimension:aedecod" )
 coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trta",
@@ -99,6 +100,7 @@ cat("HTML stored as: ", normalizePath(resHtmlFile), "\n")
 
 ```{r, echo=TRUE}
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrndex")
+# ToDo(mja): write to a temporary file  or move this to extdata
 htmlfile<- file.path(system.file("extdata/sample-html", package="rrdfqbpresent"), "DC-DEMO-sample.html")
 coldim<- c("crnd-attribute:colno", "crnd-attribute:cellpartno", "crnd-dimension:trt01a",
            "crnd-dimension:factor", "crnd-dimension:procedure" )

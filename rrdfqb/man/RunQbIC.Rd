@@ -12,6 +12,8 @@ RunQbIC(model, forsparqlprefix, doForIC = NULL)
 \arguments{
 \item{model}{a RRDF model containing one or more date cubes}
 
+\item{forsparqlprefix}{string with the prefix to be used}
+
 \item{doForIC}{character vector of specific integrity checks to run}
 }
 \value{

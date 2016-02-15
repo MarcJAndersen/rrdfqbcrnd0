@@ -9,6 +9,7 @@ Create DM sample table as CSV file and other files
 This script creates the result and codelist for a simple DM table.
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -26,7 +27,7 @@ fnadsl<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
 print(fnadsl)
 ```
 
-    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt"
+    ## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt"
 
 ``` r
 if (!file.exists(fnadsl)) {
@@ -416,4 +417,4 @@ write.csv(adsl.summ.stat, file=dmtableFile, row.names=FALSE)
 cat("Written to ", dmtableFile, "\n")
 ```
 
-    ## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/dm.AR.csv
+    ## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/dm.AR.csv

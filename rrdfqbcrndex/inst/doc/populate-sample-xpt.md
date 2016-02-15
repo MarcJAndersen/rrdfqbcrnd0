@@ -18,7 +18,7 @@ fnadae<- file.path( system.file("extdata/sample-xpt", package="rrdfqbcrndex"), "
 message("Downloading to ", fnadae )
 ```
 
-    ## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
+    ## Downloading to /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
 
 ``` r
 downloadURL<-paste0(repositoryURL, "/", "adae.xpt")
@@ -34,7 +34,7 @@ fnadsl<- file.path( system.file("extdata/sample-xpt", package="rrdfqbcrndex"), "
 message("Downloading to ", fnadsl )
 ```
 
-    ## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
+    ## Downloading to /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
 
 ``` r
 downloadURL<-paste0(repositoryURL, "/", "adsl.xpt")
@@ -74,9 +74,9 @@ adsl<-read.xport(fnadsl)
 }
 ```
 
-    ## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
+    ## Reading SAS transport file /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt
 
-    ## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
+    ## Reading SAS transport file /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt
 
 The following code is not evaluated, as the dates are not processed as expected.
 

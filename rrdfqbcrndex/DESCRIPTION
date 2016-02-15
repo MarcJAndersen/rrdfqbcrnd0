@@ -15,8 +15,7 @@ Depends:
     rrdfancillary,
     rrdfcdisc,
     rrdfqb,
-    rrdfqbcrnd0,
-    rrdfqbcrndex
+    rrdfqbcrnd0
 Imports:
     tools
 License: MIT + file LICENSE

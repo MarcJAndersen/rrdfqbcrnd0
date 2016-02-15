@@ -19,7 +19,7 @@ rbuild:
 	cd ..; R CMD build  ${PACKAGENAME}
 
 createRD:
-	$(R_HOME)/bin/Rscript -e "library(devtools); devtools::document()"
+	$(R_HOME)/bin/Rscript -e "library(devtools); library(rrdfancillary); devtools::document()"
 
 clean:
 	(cd vignettes; make clean)

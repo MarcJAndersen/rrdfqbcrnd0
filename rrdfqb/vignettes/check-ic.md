@@ -1,7 +1,7 @@
 ---
 title: "Execute SPARQL integrity constraints on a data cube"
 author: "mja@statgroup.dk"
-date: "2016-02-03"
+date: "2016-02-15"
 vignette: >
   %\VignetteIndexEntry{Execute SPARQL integrity constraints on a data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -59,9 +59,34 @@ library(rrdfqb)
 ##     clone
 ```
 
+```
+## Loading required package: rrdfancillary
+```
+
 ```r
 library(rrdfqbcrnd0)
+```
 
+```
+## Loading required package: rrdfcdisc
+```
+
+```
+## Loading required package: devtools
+```
+
+```
+## 
+## Attaching package: 'rrdfqbcrnd0'
+```
+
+```
+## The following object is masked from 'package:rrdfcdisc':
+## 
+##     summarize.rdf.noprint
+```
+
+```r
 cube.vocabulary.ttl <- file.path(system.file("extdata/cube-vocabulary-rdf", "cube.ttl", package="rrdfqb") )
 cubevoc<- load.rdf( cube.vocabulary.ttl, format="TURTLE" )
 

@@ -9,6 +9,7 @@ Setup
 ``` r
 library(RCurl)
 library(devtools)
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -28,7 +29,7 @@ writeLines( examplettl, savefile)
 cat("written to ", normalizePath(savefile), "\n" )
 ```
 
-    ## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example.ttl
+    ## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example.ttl
 
 Show one observations from the store
 ====================================
@@ -228,7 +229,7 @@ normalizedfile<- file.path(system.file("extdata/sample-rdf", package="rrdfqb"), 
 save.rdf( store, normalizedfile, format="TURTLE")
 ```
 
-    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-normalized.ttl"
+    ## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-normalized.ttl"
 
 Update example cube using Fuseki
 ================================

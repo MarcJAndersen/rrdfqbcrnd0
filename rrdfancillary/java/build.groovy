@@ -10,7 +10,7 @@ ant.javac(
       include name: "*.jar"
     }
 //    fileset dir: "../../rrdflibs/inst/java", {
-    fileset dir: "../../../../../packages/rrdf/rrdflibs/inst/java", {
+    fileset dir: "../../../../packages/rrdf/rrdflibs/inst/java", {
       include name: "*.jar"
     }
   }

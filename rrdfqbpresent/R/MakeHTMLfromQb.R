@@ -16,7 +16,8 @@ MakeHTMLfromQb<- function( store, forsparqlprefix, dsdName, domainName,
                           dimensions, rowdim, coldim, idrow, idcol,
                           htmlfile=NULL, useRDFa=TRUE, compactDimColumns=TRUE,
                           showProcedure=TRUE ) {
-    
+
+# ToDo(mja): the result from GetTwoDimTableFromQb is wrong
     qbtest<- GetTwoDimTableFromQb( store, forsparqlprefix, domainName, rowdim, coldim )
 
     ## names(attributes(qbtest))
@@ -248,7 +249,8 @@ dsdName,
 
     ## data rows
     or<- 1
-cat("Start data rows\n")    
+    
+    cat("Start data rows\n")    
     for (rr in presrowvarindex) {
         cat("Data rows: Row ", rr, ", observation (or) ", or, ", rowidname", rowidname, ", contents: ", oD[or,rowidname],  "\n")
         cat("<tr>", file=htmlfile, append=TRUE)
@@ -305,7 +307,11 @@ cat("Start data rows\n")
                 ## ## separator between cells should be taken from data
                 ##       cat(" ", file=htmlfile, append=TRUE)
                 ## }
-cat("colvarindex: ", oD$rowno[or],"==", rr, " ", oD$colno[or], "==", cc, " ", oD$cellpartno[or], "==", cp, "\n" )
+                cat("colvarindex:",
+                    " rowno ", oD$rowno[or],"==", rr,
+                    " colno ", oD$colno[or], "==", cc,
+                    " cellparno ", oD$cellpartno[or], "==", cp,
+                    "\n" )
                 if (oD$rowno[or]==rr & oD$colno[or]==cc & oD$cellpartno[or]==cp ) {
                     ## The observation
                     ## next line is for simple fly-over

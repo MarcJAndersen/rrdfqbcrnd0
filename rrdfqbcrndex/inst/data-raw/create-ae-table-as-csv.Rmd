@@ -19,6 +19,7 @@ This script creates the result and codelist for a simple AE table.
 The script is currently written to be executed manually.
 
 ```{r}
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 

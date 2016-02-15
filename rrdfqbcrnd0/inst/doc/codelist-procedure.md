@@ -7,6 +7,7 @@ Setup
 =====
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -92,23 +93,8 @@ The RDF data cube for the data above is created using
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
 
-    ## codeType:  DATA 
-    ## nciDomainValue:    
-    ## dimName:  category 
-    ## underlDataSetName:  NOTGIVEN 
-    ## remote.endpoint:  
     ## dimName  category 
-    ## codeType:  DATA 
-    ## nciDomainValue:    
-    ## dimName:  procedure 
-    ## underlDataSetName:  NOTGIVEN 
-    ## remote.endpoint:  
     ## dimName  procedure 
-    ## codeType:  DATA 
-    ## nciDomainValue:    
-    ## dimName:  factor 
-    ## underlDataSetName:  NOTGIVEN 
-    ## remote.endpoint:  
     ## dimName  factor
 
 This shows a simple use of the BuildCubeFromDataFrames function. The warning message from log4j can be ignored.
@@ -119,7 +105,7 @@ The RDF data cube is serialized in turtle format and stored as a text file in
 cat(normalizePath(outcube),"\n")
 ```
 
-    ## /tmp/Rtmpbt4JlJ/DC-EXAMPLE-R-V-0-0-0.ttl
+    ## /tmp/RtmpanvY4c/DC-EXAMPLE-R-V-0-0-0.ttl
 
 Query the cube using SPARQL
 ===========================
@@ -762,7 +748,7 @@ The RDF data cube is serialized in turtle format and stored as a text file in
 cat(normalizePath(outcodelist),"\n")
 ```
 
-    ## /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/procedure-code-list.ttl
+    ## /home/ma/projects/rrdfqbcrnd0/rrdfqbcrnd0/inst/extdata/sample-rdf/procedure-code-list.ttl
 
 The triples are:
 

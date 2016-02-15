@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-15" />
 
 <title>Reporting process</title>
 
@@ -72,7 +72,7 @@ img {
 <div id="header">
 <h1 class="title">Reporting process</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-15</em></h4>
 </div>
 
 <div id="TOC">
@@ -104,11 +104,14 @@ img {
 <p><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a> 16-jan-2015.</p>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
+<pre class="r"><code>library(rrdfancillary)</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: rrdf</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## Loading rrdfqbcrndex</code></pre>
 <pre><code>## Loading required package: xlsx</code></pre>
-<pre><code>## Loading required package: rJava</code></pre>
-<pre><code>## Loading required package: methods</code></pre>
 <pre><code>## Loading required package: xlsxjars</code></pre>
 <pre><code>## Loading required package: RCurl</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
@@ -117,8 +120,15 @@ img {
 <pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
-<pre><code>## Loading required package: rrdf</code></pre>
-<pre><code>## Loading required package: rrdflibs</code></pre>
+<pre><code>## Loading required package: rrdfcdisc</code></pre>
+<pre><code>## Loading required package: devtools</code></pre>
+<pre><code>## Loading required package: rrdfqb</code></pre>
+<pre><code>## Loading required package: rrdfqbcrnd0</code></pre>
+<pre><code>## 
+## Attaching package: 'rrdfqbcrnd0'</code></pre>
+<pre><code>## The following object is masked from 'package:rrdfcdisc':
+## 
+##     summarize.rdf.noprint</code></pre>
 <pre class="r"><code>library(&quot;DiagrammeR&quot;)
 library(rrdf)
 
@@ -397,8 +407,8 @@ cat(mermaid.commands,&quot;\n&quot;)</code></pre>
 ## </code></pre>
 <p>Then display the graph.</p>
 <pre class="r"><code>DiagrammeR( mermaid.commands )</code></pre>
-<p><div id="htmlwidget-208" style="width:672px;height:480px;" class="DiagrammeR"></div>
-<script type="application/json" data-for="htmlwidget-208">{"x":{"diagram":"graph TB \nrepr:r01(SDTM Datasets) \nrepr:r02(Create Analysis Datasets) \nrepr:r03(ADaM Datasets) \nrepr:r04(Analysis Programs) \nrepr:r05(Tables, Listings, Graphs) \nrepr:r06(Dataset specs) \nrepr:r07(Codelist specs) \nrepr:r08(Report specs) \nrepr:r09(Prepare submission data & docs) \nrepr:r10(Selected code) \nrepr:r11(Submission.xpt) \nrepr:r12(Define.xml) \nrepr:r13(Data Guide) \nrepr:r09-->repr:r12 \nrepr:r07-->repr:r04 \nrepr:r02-->repr:r03 \nrepr:r04-->repr:r05 \nrepr:r09-->repr:r11 \nrepr:r08-->repr:r04 \nrepr:r09-->repr:r10 \nrepr:r08-->repr:r09 \nrepr:r06-->repr:r09 \nrepr:r07-->repr:r09 \nrepr:r01-->repr:r02 \nrepr:r03-->repr:r04 \nrepr:r06-->repr:r02 \nrepr:r09-->repr:r13 \n\n"},"evals":[]}</script></p>
+<p><div id="htmlwidget-3349" style="width:672px;height:480px;" class="DiagrammeR"></div>
+<script type="application/json" data-for="htmlwidget-3349">{"x":{"diagram":"graph TB \nrepr:r01(SDTM Datasets) \nrepr:r02(Create Analysis Datasets) \nrepr:r03(ADaM Datasets) \nrepr:r04(Analysis Programs) \nrepr:r05(Tables, Listings, Graphs) \nrepr:r06(Dataset specs) \nrepr:r07(Codelist specs) \nrepr:r08(Report specs) \nrepr:r09(Prepare submission data & docs) \nrepr:r10(Selected code) \nrepr:r11(Submission.xpt) \nrepr:r12(Define.xml) \nrepr:r13(Data Guide) \nrepr:r09-->repr:r12 \nrepr:r07-->repr:r04 \nrepr:r02-->repr:r03 \nrepr:r04-->repr:r05 \nrepr:r09-->repr:r11 \nrepr:r08-->repr:r04 \nrepr:r09-->repr:r10 \nrepr:r08-->repr:r09 \nrepr:r06-->repr:r09 \nrepr:r07-->repr:r09 \nrepr:r01-->repr:r02 \nrepr:r03-->repr:r04 \nrepr:r06-->repr:r02 \nrepr:r09-->repr:r13 \n\n"},"evals":[]}</script></p>
 </div>
 </div>
 <div id="grid-for-diagram-of-the-sw-initiatives" class="section level1">

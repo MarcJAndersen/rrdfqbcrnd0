@@ -7,6 +7,7 @@ Setup
 -----
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -28,7 +29,7 @@ writeLines( cube.vocabulary.ttl, savefile)
 cat("written to ", normalizePath(savefile) )
 ```
 
-    ## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
+    ## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl
 
 SPARQL for getting the cube vocabulary using FROM in the SPARQL query
 ---------------------------------------------------------------------
@@ -54,7 +55,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in /tmp/RtmpbdSId8/get-cube.rq
+SPARQL script stored in /tmp/Rtmpt5bPcJ/get-cube.rq
 
 ### Using the script with R
 

@@ -3,7 +3,6 @@
 ##' The skeletonSource is expected to contain compType corresponding to the compoents in
 ##' an RDF data cube: dimension, measure and attribute.
 ##' Consider: shorten code by introducing variables for properties etc. MJA 16-11-2014
-##' @inheritParams BuildCubeFromDataFrames
 ##' @inheritParams qb.buildDSD
 ##' @return always TRUE
 ##' @author Tim Williams, Marc Andersen

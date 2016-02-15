@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-15" />
 
 <title>Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#)</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube" class="uri">http://purl.org/linked-data/cube</a>#)</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-15</em></h4>
 </div>
 
 <div id="TOC">
@@ -85,11 +85,14 @@ img {
 <p>This script retrieves the RDF data cube vocabulary and stores it as a .ttl in the packages.</p>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
+<pre class="r"><code>library(rrdfancillary)</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: rrdf</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## Loading rrdfqb</code></pre>
 <pre><code>## Loading required package: xlsx</code></pre>
-<pre><code>## Loading required package: rJava</code></pre>
-<pre><code>## Loading required package: methods</code></pre>
 <pre><code>## Loading required package: xlsxjars</code></pre>
 <pre><code>## Loading required package: RCurl</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
@@ -98,8 +101,6 @@ img {
 <pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
-<pre><code>## Loading required package: rrdf</code></pre>
-<pre><code>## Loading required package: rrdflibs</code></pre>
 </div>
 </div>
 <div id="get-and-store-rdf-data-vocabulary" class="section level1">
@@ -114,7 +115,7 @@ cube.vocabulary.ttl &lt;- getURL(qbURL)
 savefile &lt;- file.path(system.file(&quot;extdata/cube-vocabulary-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;cube.ttl&quot; )
 writeLines( cube.vocabulary.ttl, savefile)
 cat(&quot;written to &quot;, normalizePath(savefile) )</code></pre>
-<pre><code>## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl</code></pre>
+<pre><code>## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl</code></pre>
 <div id="sparql-for-getting-the-cube-vocabulary-using-from-in-the-sparql-query" class="section level2">
 <h2>SPARQL for getting the cube vocabulary using FROM in the SPARQL query</h2>
 <p>The following is experimental and not needed for the present package. See below for explanation.</p>
@@ -130,7 +131,7 @@ cat(SPARQLscript,&quot;\n&quot;)</code></pre>
 <pre class="r"><code>SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-cube.rq&quot;)
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)</code></pre>
-<p>SPARQL script stored in /tmp/RtmpbdSId8/get-cube.rq</p>
+<p>SPARQL script stored in /tmp/Rtmpt5bPcJ/get-cube.rq</p>
 <div id="using-the-script-with-r" class="section level3">
 <h3>Using the script with R</h3>
 <p>The R-code below does not work with rrdf.</p>

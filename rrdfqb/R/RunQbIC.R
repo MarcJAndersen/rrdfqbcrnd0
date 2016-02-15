@@ -5,7 +5,7 @@
 ##' 
 ##' @param model a RRDF model containing one or more date cubes
 ##' @param doForIC character vector of specific integrity checks to run
-##' @inheritParams GetObservationsSparqlQuery
+##' @param forsparqlprefix string with the prefix to be used
 ##' @return data.frame with columns ICtitle, ICfailobs
 ##' @export
 RunQbIC<- function(model, forsparqlprefix, doForIC=NULL ) {

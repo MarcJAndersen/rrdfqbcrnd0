@@ -24,7 +24,7 @@ dot -x -Tpng -ograph.png fordot.dot
 rm -f fordot.dot
 ```
 
-    ## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/fordot.ttl with parser turtle
+    ## rapper: Parsing URI file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/fordot.ttl with parser turtle
     ## rapper: Serializing with serializer dot
     ## rapper: Parsing returned 29 triples
 

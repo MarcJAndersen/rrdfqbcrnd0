@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-15" />
 
 <title>Create DM table as csv file</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create DM table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-15</em></h4>
 </div>
 
 <div id="TOC">
@@ -89,11 +89,14 @@ img {
 <div id="create-dm-sample-table-as-csv-file-and-other-files" class="section level1">
 <h1>Create DM sample table as CSV file and other files</h1>
 <p>This script creates the result and codelist for a simple DM table.</p>
+<pre class="r"><code>library(rrdfancillary)</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: rrdf</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## Loading rrdfqbcrndex</code></pre>
 <pre><code>## Loading required package: xlsx</code></pre>
-<pre><code>## Loading required package: rJava</code></pre>
-<pre><code>## Loading required package: methods</code></pre>
 <pre><code>## Loading required package: xlsxjars</code></pre>
 <pre><code>## Loading required package: RCurl</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
@@ -102,8 +105,15 @@ img {
 <pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
-<pre><code>## Loading required package: rrdf</code></pre>
-<pre><code>## Loading required package: rrdflibs</code></pre>
+<pre><code>## Loading required package: rrdfcdisc</code></pre>
+<pre><code>## Loading required package: devtools</code></pre>
+<pre><code>## Loading required package: rrdfqb</code></pre>
+<pre><code>## Loading required package: rrdfqbcrnd0</code></pre>
+<pre><code>## 
+## Attaching package: 'rrdfqbcrnd0'</code></pre>
+<pre><code>## The following object is masked from 'package:rrdfcdisc':
+## 
+##     summarize.rdf.noprint</code></pre>
 <div id="get-the-data-and-prepare-for-derivation-of-summary-statistics" class="section level2">
 <h2>Get the data and prepare for derivation of summary statistics</h2>
 <pre class="r"><code>library(foreign)
@@ -114,7 +124,7 @@ library(sqldf)</code></pre>
 <pre><code>## Loading required package: DBI</code></pre>
 <pre class="r"><code>fnadsl&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adsl.xpt&quot;, package=&quot;rrdfqbcrndex&quot;)
 print(fnadsl)</code></pre>
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt&quot;</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt&quot;</code></pre>
 <pre class="r"><code>if (!file.exists(fnadsl)) {
   fnadsl&lt;- file.path(&quot;..&quot;, &quot;extdata/sample-xpt&quot;, &quot;adsl.xpt&quot;)
   }
@@ -464,7 +474,7 @@ adsl.summ.stat</code></pre>
 
 write.csv(adsl.summ.stat, file=dmtableFile, row.names=FALSE)
 cat(&quot;Written to &quot;, dmtableFile, &quot;\n&quot;)</code></pre>
-<pre><code>## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/dm.AR.csv</code></pre>
+<pre><code>## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/dm.AR.csv</code></pre>
 </div>
 </div>
 </div>

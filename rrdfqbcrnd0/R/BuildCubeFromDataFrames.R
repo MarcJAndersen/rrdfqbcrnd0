@@ -45,7 +45,7 @@ BuildCubeFromDataFrames<- function(cubeMetadata, obsData, common.prefixes=NULL, 
     ## Subset to the dimensions, attributes, and measure used to construct the skeleton
     skeletonSource <-cubeMetadata[grep("dimension|attribute|measure", cubeMetadata$compType),]
 
-    prefixes<- GetForSparqlPrefix.as.df(domainName=domainName)
+    prefixes<- GetForSparqlPrefix.as.df(domainName=domainName, common.prefixes=common.prefixes )
 
     store <- new.rdf()  ## Initialize
 

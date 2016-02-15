@@ -783,54 +783,54 @@ arq --data adsl-map.ttl --query ADSL-mapping.rq
     ## -----------------------------------------------------------------
     ## | mapColumn                    | d2rqcolumn      | d2rqdatatype |
     ## =================================================================
+    ## | <adsl-map.ttl#ADSL_COMP24FL> | "ADSL.COMP24FL" |              |
+    ## | <adsl-map.ttl#ADSL_DCREASCD> | "ADSL.DCREASCD" |              |
+    ## | <adsl-map.ttl#ADSL_DTHFL>    | "ADSL.DTHFL"    |              |
+    ## | <adsl-map.ttl#ADSL_TRTSDT>   | "ADSL.TRTSDT"   | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_RFENDT>   | "ADSL.RFENDT"   | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_DCDECOD>  | "ADSL.DCDECOD"  |              |
+    ## | <adsl-map.ttl#ADSL_RFENDTC>  | "ADSL.RFENDTC"  |              |
+    ## | <adsl-map.ttl#ADSL_CUMDOSE>  | "ADSL.CUMDOSE"  | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_TRT01A>   | "ADSL.TRT01A"   |              |
+    ## | <adsl-map.ttl#ADSL_AGEGR1>   | "ADSL.AGEGR1"   |              |
+    ## | <adsl-map.ttl#ADSL_USUBJID>  | "ADSL.USUBJID"  |              |
+    ## | <adsl-map.ttl#ADSL_TRT01PN>  | "ADSL.TRT01PN"  | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_ITTFL>    | "ADSL.ITTFL"    |              |
+    ## | <adsl-map.ttl#ADSL_SITEGR1>  | "ADSL.SITEGR1"  |              |
+    ## | <adsl-map.ttl#ADSL_SEX>      | "ADSL.SEX"      |              |
+    ## | <adsl-map.ttl#ADSL_ETHNIC>   | "ADSL.ETHNIC"   |              |
+    ## | <adsl-map.ttl#ADSL_COMP8FL>  | "ADSL.COMP8FL"  |              |
+    ## | <adsl-map.ttl#ADSL_RFSTDTC>  | "ADSL.RFSTDTC"  |              |
+    ## | <adsl-map.ttl#ADSL_AGE>      | "ADSL.AGE"      | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_VISNUMEN> | "ADSL.VISNUMEN" | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_EFFFL>    | "ADSL.EFFFL"    |              |
+    ## | <adsl-map.ttl#ADSL_SAFFL>    | "ADSL.SAFFL"    |              |
+    ## | <adsl-map.ttl#ADSL_HEIGHTBL> | "ADSL.HEIGHTBL" | xsd:double   |
     ## | <adsl-map.ttl#ADSL_MMSETOT>  | "ADSL.MMSETOT"  | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_RACE>     | "ADSL.RACE"     |              |
+    ## | <adsl-map.ttl#ADSL_STUDYID>  | "ADSL.STUDYID"  |              |
+    ## | <adsl-map.ttl#ADSL_RACEN>    | "ADSL.RACEN"    | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_DISONSDT> | "ADSL.DISONSDT" | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_BMIBL>    | "ADSL.BMIBL"    | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_DSRAEFL>  | "ADSL.DSRAEFL"  |              |
+    ## | <adsl-map.ttl#ADSL_AGEU>     | "ADSL.AGEU"     |              |
     ## | <adsl-map.ttl#ADSL_DURDIS>   | "ADSL.DURDIS"   | xsd:double   |
     ## | <adsl-map.ttl#ADSL_TRTDUR>   | "ADSL.TRTDUR"   | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_HEIGHTBL> | "ADSL.HEIGHTBL" | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_DCREASCD> | "ADSL.DCREASCD" |              |
-    ## | <adsl-map.ttl#ADSL_AGEGR1>   | "ADSL.AGEGR1"   |              |
-    ## | <adsl-map.ttl#ADSL_RFENDTC>  | "ADSL.RFENDTC"  |              |
-    ## | <adsl-map.ttl#ADSL_USUBJID>  | "ADSL.USUBJID"  |              |
-    ## | <adsl-map.ttl#ADSL_AGEGR1N>  | "ADSL.AGEGR1N"  | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_TRT01A>   | "ADSL.TRT01A"   |              |
-    ## | <adsl-map.ttl#ADSL_AGE>      | "ADSL.AGE"      | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_TRT01AN>  | "ADSL.TRT01AN"  | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_SITEGR1>  | "ADSL.SITEGR1"  |              |
-    ## | <adsl-map.ttl#ADSL_DISCONFL> | "ADSL.DISCONFL" |              |
-    ## | <adsl-map.ttl#ADSL_TRTEDT>   | "ADSL.TRTEDT"   | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_SUBJID>   | "ADSL.SUBJID"   |              |
-    ## | <adsl-map.ttl#ADSL_SAFFL>    | "ADSL.SAFFL"    |              |
-    ## | <adsl-map.ttl#ADSL_DURDSGR1> | "ADSL.DURDSGR1" |              |
-    ## | <adsl-map.ttl#ADSL_EFFFL>    | "ADSL.EFFFL"    |              |
-    ## | <adsl-map.ttl#ADSL_TRT01PN>  | "ADSL.TRT01PN"  | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_WEIGHTBL> | "ADSL.WEIGHTBL" | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_STUDYID>  | "ADSL.STUDYID"  |              |
-    ## | <adsl-map.ttl#ADSL_AGEU>     | "ADSL.AGEU"     |              |
-    ## | <adsl-map.ttl#ADSL_AVGDD>    | "ADSL.AVGDD"    | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_SEX>      | "ADSL.SEX"      |              |
-    ## | <adsl-map.ttl#ADSL_ARM>      | "ADSL.ARM"      |              |
-    ## | <adsl-map.ttl#ADSL_RFENDT>   | "ADSL.RFENDT"   | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_RACEN>    | "ADSL.RACEN"    | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_TRTSDT>   | "ADSL.TRTSDT"   | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_EDUCLVL>  | "ADSL.EDUCLVL"  | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_DSRAEFL>  | "ADSL.DSRAEFL"  |              |
-    ## | <adsl-map.ttl#ADSL_COMP16FL> | "ADSL.COMP16FL" |              |
-    ## | <adsl-map.ttl#ADSL_RFSTDTC>  | "ADSL.RFSTDTC"  |              |
-    ## | <adsl-map.ttl#ADSL_BMIBLGR1> | "ADSL.BMIBLGR1" |              |
-    ## | <adsl-map.ttl#ADSL_DTHFL>    | "ADSL.DTHFL"    |              |
-    ## | <adsl-map.ttl#ADSL_BMIBL>    | "ADSL.BMIBL"    | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_COMP8FL>  | "ADSL.COMP8FL"  |              |
-    ## | <adsl-map.ttl#ADSL_DISONSDT> | "ADSL.DISONSDT" | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_ITTFL>    | "ADSL.ITTFL"    |              |
-    ## | <adsl-map.ttl#ADSL_TRT01P>   | "ADSL.TRT01P"   |              |
-    ## | <adsl-map.ttl#ADSL_VISNUMEN> | "ADSL.VISNUMEN" | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_DCDECOD>  | "ADSL.DCDECOD"  |              |
     ## | <adsl-map.ttl#ADSL_VISIT1DT> | "ADSL.VISIT1DT" | xsd:double   |
-    ## | <adsl-map.ttl#ADSL_CUMDOSE>  | "ADSL.CUMDOSE"  | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_SUBJID>   | "ADSL.SUBJID"   |              |
+    ## | <adsl-map.ttl#ADSL_AVGDD>    | "ADSL.AVGDD"    | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_WEIGHTBL> | "ADSL.WEIGHTBL" | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_EDUCLVL>  | "ADSL.EDUCLVL"  | xsd:double   |
     ## | <adsl-map.ttl#ADSL_SITEID>   | "ADSL.SITEID"   |              |
-    ## | <adsl-map.ttl#ADSL_COMP24FL> | "ADSL.COMP24FL" |              |
-    ## | <adsl-map.ttl#ADSL_ETHNIC>   | "ADSL.ETHNIC"   |              |
+    ## | <adsl-map.ttl#ADSL_COMP16FL> | "ADSL.COMP16FL" |              |
+    ## | <adsl-map.ttl#ADSL_RACE>     | "ADSL.RACE"     |              |
+    ## | <adsl-map.ttl#ADSL_TRTEDT>   | "ADSL.TRTEDT"   | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_DISCONFL> | "ADSL.DISCONFL" |              |
+    ## | <adsl-map.ttl#ADSL_ARM>      | "ADSL.ARM"      |              |
+    ## | <adsl-map.ttl#ADSL_DURDSGR1> | "ADSL.DURDSGR1" |              |
+    ## | <adsl-map.ttl#ADSL_AGEGR1N>  | "ADSL.AGEGR1N"  | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_TRT01P>   | "ADSL.TRT01P"   |              |
+    ## | <adsl-map.ttl#ADSL_TRT01AN>  | "ADSL.TRT01AN"  | xsd:double   |
+    ## | <adsl-map.ttl#ADSL_BMIBLGR1> | "ADSL.BMIBLGR1" |              |
     ## -----------------------------------------------------------------
 
 Then dump the contents of a record in the database.

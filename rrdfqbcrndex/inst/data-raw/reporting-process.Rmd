@@ -40,6 +40,7 @@ mja@statgroup.dk 16-jan-2015.
 ## Setup
 
 ```{r}
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 

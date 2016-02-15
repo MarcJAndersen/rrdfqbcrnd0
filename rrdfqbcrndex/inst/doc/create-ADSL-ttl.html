@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-15" />
 
 <title>Create ADSL as TTL file</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create ADSL as TTL file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-15</em></h4>
 </div>
 
 <div id="TOC">
@@ -81,11 +81,14 @@ img {
 <h1>Create turtle version of ADSL dataset</h1>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
+<pre class="r"><code>library(rrdfancillary)</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: rrdf</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## Loading rrdfqbcrndex</code></pre>
 <pre><code>## Loading required package: xlsx</code></pre>
-<pre><code>## Loading required package: rJava</code></pre>
-<pre><code>## Loading required package: methods</code></pre>
 <pre><code>## Loading required package: xlsxjars</code></pre>
 <pre><code>## Loading required package: RCurl</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
@@ -94,8 +97,15 @@ img {
 <pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
-<pre><code>## Loading required package: rrdf</code></pre>
-<pre><code>## Loading required package: rrdflibs</code></pre>
+<pre><code>## Loading required package: rrdfcdisc</code></pre>
+<pre><code>## Loading required package: devtools</code></pre>
+<pre><code>## Loading required package: rrdfqb</code></pre>
+<pre><code>## Loading required package: rrdfqbcrnd0</code></pre>
+<pre><code>## 
+## Attaching package: 'rrdfqbcrnd0'</code></pre>
+<pre><code>## The following object is masked from 'package:rrdfcdisc':
+## 
+##     summarize.rdf.noprint</code></pre>
 <p>This script creates a turtle version of the ADSL dataset.</p>
 <p>The script uses SQLite to export the ADSL dataset, and d2rq (<a href="http://d2rq.org/" class="uri">http://d2rq.org/</a>) to create a turle version of the file. In the code below it is assumed that d2rq is installed in the directory <code>/opt/d2rq-0.8.1</code>.</p>
 <pre class="r"><code>library(foreign)
@@ -118,11 +128,11 @@ dbWriteTable(con, &quot;adsl&quot;, adsl)</code></pre>
 <pre class="r"><code>dbDisconnect(con)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database stored as  /tmp/Rtmp3PKSIB/file222b10f300d3</code></pre>
+<pre><code>## SQLite database stored as  /tmp/Rtmp2kZok1/file3fd61f408d5a</code></pre>
 <pre class="r"><code>dumpFn&lt;- tempfile()
 system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&quot; &quot;))
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump in  /tmp/Rtmp3PKSIB/file222b799ff743</code></pre>
+<pre><code>## SQLite database dump in  /tmp/Rtmp2kZok1/file3fd673e7de2b</code></pre>
 <p>Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: * change TEXT to VARCHAR(1000) * remove top 2 lines with PRAGMA * in insert statements replace “adsl” with adsl * after “MMSETOT” REAL add a comma (“,”) and a new line with PRIMARY KEY (USUBJID)</p>
 <p>This could maybe be simplified using RSQlite on dbSendQuery-methods, see (<a href="https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html" class="uri">https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html</a>). For d2rq documentation see (<a href="file:///opt/d2rq-0.8.1/doc/dump-rdf.html" class="uri">file:///opt/d2rq-0.8.1/doc/dump-rdf.html</a>).</p>
 <pre class="r"><code>dumpAfterSedFn &lt;- tempfile()
@@ -131,7 +141,7 @@ sedCmd&lt;- paste(&quot;sed&quot;,
                dumpFn, &quot;&gt;&quot;, dumpAfterSedFn, sep=&quot; &quot;)
 system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump modified stored as  /tmp/Rtmp3PKSIB/file222b49d9f9d1</code></pre>
+<pre><code>## SQLite database dump modified stored as  /tmp/Rtmp2kZok1/file3fd62ebd4012</code></pre>
 <pre class="r"><code>## Check only expected changes were applied
 ## not run due to large output
 ## system(paste(&quot;diff&quot;, dumpFn, dumpAfterSedFn, sep=&quot; &quot;))
@@ -162,11 +172,11 @@ targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbc
 if (file.copy(adslmapttlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adslmapttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/Rtmp3PKSIB/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/Rtmp2kZok1/adsl-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adslttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/Rtmp3PKSIB/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/Rtmp2kZok1/adsl.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>### This could maybe also work ..
 ## m &lt;- dbDriver(&quot;SQLite&quot;)
 ## tfile &lt;- tempfile()
@@ -186,15 +196,15 @@ cat( &quot;File &quot;, adslttlFn, &quot; copied to directory &quot;, targetDir,
 <p>First the data are loaded into a RDF model.</p>
 <pre class="r"><code>dataFilemap&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adsl-map.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
 dataFilemap</code></pre>
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl-map.ttl&quot;</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl-map.ttl&quot;</code></pre>
 <pre class="r"><code>dataFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adsl.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
 dataFile</code></pre>
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl.ttl&quot;</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl.ttl&quot;</code></pre>
 <pre class="r"><code>store &lt;- new.rdf()  # Initialize
 invisible(load.rdf(dataFilemap, format=&quot;TURTLE&quot;, appendTo= store))
 invisible(load.rdf(dataFile, format=&quot;TURTLE&quot;, appendTo= store))
 summarize.rdf(store)</code></pre>
-<pre><code>## [1] &quot;Number of triples: 13160&quot;</code></pre>
+<pre><code>## [1] &quot;Number of triples: 13161&quot;</code></pre>
 <p>Next step is to make a query showing the mappings</p>
 <pre class="r"><code>mapping.rq&lt;-&quot;
 prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
@@ -225,9 +235,9 @@ cat(mapping.rq,&quot;\n&quot;)</code></pre>
 <pre class="r"><code>resmapping&lt;- data.frame(sparql.rdf(store, mapping.rq),stringsAsFactors=FALSE)
 str(resmapping)</code></pre>
 <pre><code>## 'data.frame':    48 obs. of  3 variables:
-##  $ mapColumn   : chr  &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID&quot; ...
-##  $ d2rqcolumn  : chr  &quot;ADSL.USUBJID&quot; &quot;ADSL.TRT01A&quot; &quot;ADSL.TRT01P&quot; &quot;ADSL.STUDYID&quot; ...
-##  $ d2rqdatatype: chr  NA NA NA NA ...</code></pre>
+##  $ mapColumn   : chr  &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P&quot; ...
+##  $ d2rqcolumn  : chr  &quot;ADSL.HEIGHTBL&quot; &quot;ADSL.AVGDD&quot; &quot;ADSL.DCDECOD&quot; &quot;ADSL.TRT01P&quot; ...
+##  $ d2rqdatatype: chr  &quot;xsd:double&quot; &quot;xsd:double&quot; NA NA ...</code></pre>
 <pre class="r"><code>knitr::kable(resmapping)</code></pre>
 <table>
 <thead>
@@ -239,243 +249,243 @@ str(resmapping)</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID</a></td>
-<td align="left">ADSL.USUBJID</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A</a></td>
-<td align="left">ADSL.TRT01A</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P</a></td>
-<td align="left">ADSL.TRT01P</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID</a></td>
-<td align="left">ADSL.STUDYID</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISCONFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISCONFL</a></td>
-<td align="left">ADSL.DISCONFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEU" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEU</a></td>
-<td align="left">ADSL.AGEU</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ITTFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ITTFL</a></td>
-<td align="left">ADSL.ITTFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD</a></td>
-<td align="left">ADSL.DCDECOD</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBL</a></td>
-<td align="left">ADSL.BMIBL</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDIS" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDIS</a></td>
-<td align="left">ADSL.DURDIS</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SUBJID" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SUBJID</a></td>
-<td align="left">ADSL.SUBJID</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ETHNIC" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ETHNIC</a></td>
-<td align="left">ADSL.ETHNIC</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EFFFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EFFFL</a></td>
-<td align="left">ADSL.EFFFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEGR1" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEGR1</a></td>
-<td align="left">ADSL.SITEGR1</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP8FL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP8FL</a></td>
-<td align="left">ADSL.COMP8FL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTSDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTSDT</a></td>
-<td align="left">ADSL.TRTSDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SEX" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SEX</a></td>
-<td align="left">ADSL.SEX</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_WEIGHTBL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_WEIGHTBL</a></td>
-<td align="left">ADSL.WEIGHTBL</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGE" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGE</a></td>
-<td align="left">ADSL.AGE</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_CUMDOSE" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_CUMDOSE</a></td>
-<td align="left">ADSL.CUMDOSE</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP16FL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP16FL</a></td>
-<td align="left">ADSL.COMP16FL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1</a></td>
-<td align="left">ADSL.AGEGR1</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBLGR1" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBLGR1</a></td>
-<td align="left">ADSL.BMIBLGR1</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP24FL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP24FL</a></td>
-<td align="left">ADSL.COMP24FL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01PN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01PN</a></td>
-<td align="left">ADSL.TRT01PN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDT</a></td>
-<td align="left">ADSL.RFENDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDSGR1" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDSGR1</a></td>
-<td align="left">ADSL.DURDSGR1</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFSTDTC" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFSTDTC</a></td>
-<td align="left">ADSL.RFSTDTC</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD</a></td>
-<td align="left">ADSL.AVGDD</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTDUR" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTDUR</a></td>
-<td align="left">ADSL.TRTDUR</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL</a></td>
 <td align="left">ADSL.HEIGHTBL</td>
 <td align="left">xsd:double</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1N" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1N</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD</a></td>
+<td align="left">ADSL.AVGDD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD</a></td>
+<td align="left">ADSL.DCDECOD</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P</a></td>
+<td align="left">ADSL.TRT01P</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEID</a></td>
+<td align="left">ADSL.SITEID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP16FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP16FL</a></td>
+<td align="left">ADSL.COMP16FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP8FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP8FL</a></td>
+<td align="left">ADSL.COMP8FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1N" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1N</a></td>
 <td align="left">ADSL.AGEGR1N</td>
 <td align="left">xsd:double</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACEN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACEN</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDT</a></td>
+<td align="left">ADSL.RFENDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ETHNIC" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ETHNIC</a></td>
+<td align="left">ADSL.ETHNIC</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBL</a></td>
+<td align="left">ADSL.BMIBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACEN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACEN</a></td>
 <td align="left">ADSL.RACEN</td>
 <td align="left">xsd:double</td>
 </tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DTHFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DTHFL</a></td>
+<td align="left">ADSL.DTHFL</td>
+<td align="left">NA</td>
+</tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDTC" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDTC</a></td>
-<td align="left">ADSL.RFENDTC</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISCONFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISCONFL</a></td>
+<td align="left">ADSL.DISCONFL</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISONSDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISONSDT</a></td>
-<td align="left">ADSL.DISONSDT</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A</a></td>
+<td align="left">ADSL.TRT01A</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDSGR1" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDSGR1</a></td>
+<td align="left">ADSL.DURDSGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01PN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01PN</a></td>
+<td align="left">ADSL.TRT01PN</td>
 <td align="left">xsd:double</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEID" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEID</a></td>
-<td align="left">ADSL.SITEID</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EFFFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EFFFL</a></td>
+<td align="left">ADSL.EFFFL</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EDUCLVL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EDUCLVL</a></td>
-<td align="left">ADSL.EDUCLVL</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DSRAEFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DSRAEFL</a></td>
-<td align="left">ADSL.DSRAEFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ARM" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ARM</a></td>
-<td align="left">ADSL.ARM</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SAFFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SAFFL</a></td>
-<td align="left">ADSL.SAFFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACE" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACE</a></td>
-<td align="left">ADSL.RACE</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01AN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01AN</a></td>
-<td align="left">ADSL.TRT01AN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_MMSETOT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_MMSETOT</a></td>
-<td align="left">ADSL.MMSETOT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISNUMEN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISNUMEN</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISNUMEN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISNUMEN</a></td>
 <td align="left">ADSL.VISNUMEN</td>
 <td align="left">xsd:double</td>
 </tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ARM" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ARM</a></td>
+<td align="left">ADSL.ARM</td>
+<td align="left">NA</td>
+</tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISIT1DT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISIT1DT</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBLGR1" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBLGR1</a></td>
+<td align="left">ADSL.BMIBLGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGE</a></td>
+<td align="left">ADSL.AGE</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISIT1DT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISIT1DT</a></td>
 <td align="left">ADSL.VISIT1DT</td>
 <td align="left">xsd:double</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DTHFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DTHFL</a></td>
-<td align="left">ADSL.DTHFL</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFSTDTC" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFSTDTC</a></td>
+<td align="left">ADSL.RFSTDTC</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCREASCD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCREASCD</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SUBJID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SUBJID</a></td>
+<td align="left">ADSL.SUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EDUCLVL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EDUCLVL</a></td>
+<td align="left">ADSL.EDUCLVL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_MMSETOT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_MMSETOT</a></td>
+<td align="left">ADSL.MMSETOT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SAFFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SAFFL</a></td>
+<td align="left">ADSL.SAFFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACE</a></td>
+<td align="left">ADSL.RACE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISONSDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISONSDT</a></td>
+<td align="left">ADSL.DISONSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEU" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEU</a></td>
+<td align="left">ADSL.AGEU</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTEDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTEDT</a></td>
+<td align="left">ADSL.TRTEDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDTC" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDTC</a></td>
+<td align="left">ADSL.RFENDTC</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1</a></td>
+<td align="left">ADSL.AGEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP24FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP24FL</a></td>
+<td align="left">ADSL.COMP24FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_WEIGHTBL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_WEIGHTBL</a></td>
+<td align="left">ADSL.WEIGHTBL</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DSRAEFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DSRAEFL</a></td>
+<td align="left">ADSL.DSRAEFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ITTFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ITTFL</a></td>
+<td align="left">ADSL.ITTFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID</a></td>
+<td align="left">ADSL.STUDYID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEGR1" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEGR1</a></td>
+<td align="left">ADSL.SITEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01AN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01AN</a></td>
+<td align="left">ADSL.TRT01AN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTSDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTSDT</a></td>
+<td align="left">ADSL.TRTSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_CUMDOSE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_CUMDOSE</a></td>
+<td align="left">ADSL.CUMDOSE</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SEX" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SEX</a></td>
+<td align="left">ADSL.SEX</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCREASCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCREASCD</a></td>
 <td align="left">ADSL.DCREASCD</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTEDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTEDT</a></td>
-<td align="left">ADSL.TRTEDT</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTDUR" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTDUR</a></td>
+<td align="left">ADSL.TRTDUR</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID</a></td>
+<td align="left">ADSL.USUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDIS" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDIS</a></td>
+<td align="left">ADSL.DURDIS</td>
 <td align="left">xsd:double</td>
 </tr>
 </tbody>

@@ -3,14 +3,9 @@ all: mk-rrdfancillary  mk-rrdfcdisc mk-rrdfqb  mk-rrdfqbcrnd0 \
 
 PACKAGEVERSION=0.2.1
 
-install-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfancillary_${PACKAGEVERSION}.tar.gz")'
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqb_${PACKAGEVERSION}.tar.gz")'       
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrnd0_${PACKAGEVERSION}.tar.gz")'  
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrndex_${PACKAGEVERSION}.tar.gz")'
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrndcheck_${PACKAGEVERSION}.tar.gz")'
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbpresent_${PACKAGEVERSION}.tar.gz")'
+install-from-dir: install-rrdfancillary-from-dir install-rrdfcdisc-from-dir install-rrdfqb-from-dir \
+    install-rrdfqbcrnd0-from-dir install-rrdfqbcrndex-from-dir install-rrdfqbcrndcheck-from-dir \
+    install-rrdfqbpresent-from-dir
 
 install-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfancillary_${PACKAGEVERSION}.tar.gz")'
@@ -24,15 +19,35 @@ install-from-ReleasePackages:
 mk-rrdfcdisc:
 	cd rrdfcdisc; make
 
-install-rrdfcdisc-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
-
-
 install-rrdfancillary-from-dir:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfancillary_${PACKAGEVERSION}.tar.gz")'
 
+install-rrdfcdisc-from-dir:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
+
+install-rrdfqb-from-dir:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqb_${PACKAGEVERSION}.tar.gz")'       
+
+install-rrdfqbcrnd0-from-dir:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrnd0_${PACKAGEVERSION}.tar.gz")'  
+
+install-rrdfqbcrndex-from-dir:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrndex_${PACKAGEVERSION}.tar.gz")'
+
+install-rrdfqbcrndcheck-from-dir:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrndcheck_${PACKAGEVERSION}.tar.gz")'
+
+install-rrdfqbpresent-from-dir:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbpresent_${PACKAGEVERSION}.tar.gz")'
+
+################################################################
+
 install-rrdfancillary-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfancillary_${PACKAGEVERSION}.tar.gz")'
+
+install-rrdfcdisc-from-ReleasePackages:
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
+
 
 mk-rrdfancillary:
 	cd rrdfancillary; make
@@ -78,9 +93,9 @@ doc-which-md-files:
 rbuild:
 	cd rrdfcdisc; make rbuild
 	cd rrdfancillary; make rbuild
+	cd rrdfqb; make rbuild
 	cd rrdfqbcrnd0; make rbuild
 	cd rrdfqbcrndex; make rbuild
-	cd rrdfqb; make rbuild
 	cd rrdfqbpresent; make rbuild
 	cd rrdfqbcrndcheck; make rbuild
 
@@ -88,8 +103,8 @@ rbuild:
 clean:
 	cd rrdfcdisc; make clean
 	cd rrdfancillary; make clean
+	cd rrdfqb; make clean
 	cd rrdfqbcrnd0; make clean
 	cd rrdfqbcrndex; make clean
-	cd rrdfqb; make clean
 	cd rrdfqbpresent; make clean
 	cd rrdfqbcrndcheck; make clean

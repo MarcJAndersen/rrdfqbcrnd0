@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-15" />
 
 <title>Create ADAE as TTL file</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create ADAE as TTL file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-15</em></h4>
 </div>
 
 <div id="TOC">
@@ -81,11 +81,14 @@ img {
 <h1>Create turtle version of ADAE dataset</h1>
 <div id="setup" class="section level2">
 <h2>Setup</h2>
+<pre class="r"><code>library(rrdfancillary)</code></pre>
+<pre><code>## Loading required package: rJava</code></pre>
+<pre><code>## Loading required package: methods</code></pre>
+<pre><code>## Loading required package: rrdf</code></pre>
+<pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## Loading rrdfqbcrndex</code></pre>
 <pre><code>## Loading required package: xlsx</code></pre>
-<pre><code>## Loading required package: rJava</code></pre>
-<pre><code>## Loading required package: methods</code></pre>
 <pre><code>## Loading required package: xlsxjars</code></pre>
 <pre><code>## Loading required package: RCurl</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
@@ -94,8 +97,15 @@ img {
 <pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
-<pre><code>## Loading required package: rrdf</code></pre>
-<pre><code>## Loading required package: rrdflibs</code></pre>
+<pre><code>## Loading required package: rrdfcdisc</code></pre>
+<pre><code>## Loading required package: devtools</code></pre>
+<pre><code>## Loading required package: rrdfqb</code></pre>
+<pre><code>## Loading required package: rrdfqbcrnd0</code></pre>
+<pre><code>## 
+## Attaching package: 'rrdfqbcrnd0'</code></pre>
+<pre><code>## The following object is masked from 'package:rrdfcdisc':
+## 
+##     summarize.rdf.noprint</code></pre>
 <p>This script creates a turtle version of the ADAE dataset.</p>
 <p>The script uses SQLite to export the ADAE dataset, and d2rq (<a href="http://d2rq.org/" class="uri">http://d2rq.org/</a>) to create a turle version of the file. In the code below it is assumed that d2rq is installed in the directory <code>/opt/d2rq-0.8.1</code>.</p>
 <pre class="r"><code>library(foreign)
@@ -118,11 +128,11 @@ dbWriteTable(con, &quot;adae&quot;, adae)</code></pre>
 <pre class="r"><code>dbDisconnect(con)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database stored as  /tmp/RtmpCelJLK/file22f3f23aa1c</code></pre>
+<pre><code>## SQLite database stored as  /tmp/RtmpLlCQ05/file409e68c1ee28</code></pre>
 <pre class="r"><code>dumpFn&lt;- tempfile()
 system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&quot; &quot;))
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump in  /tmp/RtmpCelJLK/file22f3f8e498b</code></pre>
+<pre><code>## SQLite database dump in  /tmp/RtmpLlCQ05/file409e7e7a5c3b</code></pre>
 <p>Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: * change TEXT to VARCHAR(1000) * remove top 2 lines with PRAGMA * in insert statements replace “adae” with adae * after “AOCC01FL” TEXT add a comma (“,”) and a new line with PRIMARY KEY (USUBJID,AESEQ)</p>
 <p>This could maybe be simplified using RSQlite on dbSendQuery-methods, see (<a href="https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html" class="uri">https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html</a>). For d2rq documentation see (<a href="file:///opt/d2rq-0.8.1/doc/dump-rdf.html" class="uri">file:///opt/d2rq-0.8.1/doc/dump-rdf.html</a>).</p>
 <pre class="r"><code>dumpAfterSedFn &lt;- tempfile()
@@ -131,7 +141,7 @@ sedCmd&lt;- paste(&quot;sed&quot;,
                dumpFn, &quot;&gt;&quot;, dumpAfterSedFn, sep=&quot; &quot;)
 system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump modified stored as  /tmp/RtmpCelJLK/file22f32a2e09f5</code></pre>
+<pre><code>## SQLite database dump modified stored as  /tmp/RtmpLlCQ05/file409efb30d67</code></pre>
 <pre class="r"><code>## Check only expected changes were applied
 ## not run due to large output
 ## system(paste(&quot;diff&quot;, dumpFn, dumpAfterSedFn, sep=&quot; &quot;))
@@ -162,11 +172,11 @@ targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbc
 if (file.copy(adaemapttlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adaemapttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/RtmpCelJLK/adae-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/RtmpLlCQ05/adae-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>if (file.copy(adaettlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adaettlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/RtmpCelJLK/adae.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/RtmpLlCQ05/adae.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>### This could maybe also work ..
 ## m &lt;- dbDriver(&quot;SQLite&quot;)
 ## tfile &lt;- tempfile()
@@ -186,15 +196,15 @@ cat( &quot;File &quot;, adaettlFn, &quot; copied to directory &quot;, targetDir,
 <p>First the data are loaded into a RDF model.</p>
 <pre class="r"><code>dataFilemap&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adae-map.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
 dataFilemap</code></pre>
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae-map.ttl&quot;</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae-map.ttl&quot;</code></pre>
 <pre class="r"><code>dataFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;adae.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
 dataFile</code></pre>
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae.ttl&quot;</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae.ttl&quot;</code></pre>
 <pre class="r"><code>store &lt;- new.rdf()  # Initialize
 invisible(load.rdf(dataFilemap, format=&quot;TURTLE&quot;, appendTo= store))
 invisible(load.rdf(dataFile, format=&quot;TURTLE&quot;, appendTo= store))
 summarize.rdf(store)</code></pre>
-<pre><code>## [1] &quot;Number of triples: 61002&quot;</code></pre>
+<pre><code>## [1] &quot;Number of triples: 61003&quot;</code></pre>
 <p>Next step is to make a query showing the mappings</p>
 <pre class="r"><code>mapping.rq&lt;-&quot;
 prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; 
@@ -225,9 +235,9 @@ cat(mapping.rq,&quot;\n&quot;)</code></pre>
 <pre class="r"><code>resmapping&lt;- data.frame(sparql.rdf(store, mapping.rq),stringsAsFactors=FALSE)
 str(resmapping)</code></pre>
 <pre><code>## 'data.frame':    55 obs. of  3 variables:
-##  $ mapColumn   : chr  &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC&quot; &quot;file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN&quot; ...
-##  $ d2rqcolumn  : chr  &quot;ADAE.AGEGR1&quot; &quot;ADAE.TRTA&quot; &quot;ADAE.AESOC&quot; &quot;ADAE.AESCAN&quot; ...
-##  $ d2rqdatatype: chr  NA NA NA NA ...</code></pre>
+##  $ mapColumn   : chr  &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT&quot; &quot;file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU&quot; ...
+##  $ d2rqcolumn  : chr  &quot;ADAE.AOCCPFL&quot; &quot;ADAE.AESCAN&quot; &quot;ADAE.AENDT&quot; &quot;ADAE.ADURU&quot; ...
+##  $ d2rqdatatype: chr  NA NA &quot;xsd:double&quot; NA ...</code></pre>
 <pre class="r"><code>knitr::kable(resmapping)</code></pre>
 <table>
 <thead>
@@ -239,279 +249,279 @@ str(resmapping)</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1</a></td>
-<td align="left">ADAE.AGEGR1</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL</a></td>
+<td align="left">ADAE.AOCCPFL</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA</a></td>
-<td align="left">ADAE.TRTA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC</a></td>
-<td align="left">ADAE.AESOC</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN</a></td>
 <td align="left">ADAE.AESCAN</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL</a></td>
-<td align="left">ADAE.AOCC04FL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM</a></td>
-<td align="left">ADAE.CQ01NAM</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT</a></td>
-<td align="left">ADAE.TRTSDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS</a></td>
-<td align="left">ADAE.AEBODSYS</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN</a></td>
-<td align="left">ADAE.RACEN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL</a></td>
-<td align="left">ADAE.AEREL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N</a></td>
-<td align="left">ADAE.AGEGR1N</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT</a></td>
-<td align="left">ADAE.AEOUT</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL</a></td>
-<td align="left">ADAE.AOCC02FL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU</a></td>
-<td align="left">ADAE.ADURU</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY</a></td>
-<td align="left">ADAE.ASTDY</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB</a></td>
-<td align="left">ADAE.AESDISAB</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE</a></td>
-<td align="left">ADAE.RACE</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX</a></td>
-<td align="left">ADAE.SEX</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD</a></td>
-<td align="left">ADAE.AEDECOD</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP</a></td>
-<td align="left">ADAE.AESHOSP</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY</a></td>
-<td align="left">ADAE.AENDY</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN</a></td>
-<td align="left">ADAE.TRTAN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID</a></td>
-<td align="left">ADAE.STUDYID</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL</a></td>
-<td align="left">ADAE.AOCCPFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL</a></td>
-<td align="left">ADAE.AOCCFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD</a></td>
-<td align="left">ADAE.AESOD</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT</a></td>
-<td align="left">ADAE.AELLT</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT</a></td>
-<td align="left">ADAE.AEHLGT</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT</a></td>
 <td align="left">ADAE.AENDT</td>
 <td align="left">xsd:double</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF</a></td>
-<td align="left">ADAE.ASTDTF</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU</a></td>
+<td align="left">ADAE.ADURU</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD</a></td>
-<td align="left">ADAE.AEPTCD</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE</a></td>
-<td align="left">ADAE.AESLIFE</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN</a></td>
-<td align="left">ADAE.ADURN</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ</a></td>
-<td align="left">ADAE.AESEQ</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD</a></td>
-<td align="left">ADAE.AESOCCD</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL</a></td>
-<td align="left">ADAE.TRTEMFL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV</a></td>
-<td align="left">ADAE.AESEV</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID</a></td>
-<td align="left">ADAE.USUBJID</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN</a></td>
-<td align="left">ADAE.AEACN</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL</a></td>
-<td align="left">ADAE.AOCC03FL</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM</a></td>
-<td align="left">ADAE.AETERM</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT</a></td>
-<td align="left">ADAE.AEHLT</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT</a></td>
-<td align="left">ADAE.TRTEDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID</a></td>
 <td align="left">ADAE.SITEID</td>
 <td align="left">NA</td>
 </tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD</a></td>
-<td align="left">ADAE.AEHLGTCD</td>
-<td align="left">xsd:double</td>
-</tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG</a></td>
-<td align="left">ADAE.AESCONG</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH</a></td>
-<td align="left">ADAE.AESDTH</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER</a></td>
-<td align="left">ADAE.AESER</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT</a></td>
-<td align="left">ADAE.ASTDT</td>
-<td align="left">xsd:double</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL</a></td>
 <td align="left">ADAE.AOCCSFL</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN</a></td>
+<td align="left">ADAE.RACEN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC</a></td>
+<td align="left">ADAE.AESOC</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL</a></td>
 <td align="left">ADAE.AOCC01FL</td>
 <td align="left">NA</td>
 </tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL</a></td>
-<td align="left">ADAE.SAFFL</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG</a></td>
+<td align="left">ADAE.AESCONG</td>
 <td align="left">NA</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN</a></td>
+<td align="left">ADAE.AEACN</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD</a></td>
 <td align="left">ADAE.AEHLTCD</td>
 <td align="left">xsd:double</td>
 </tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ</a></td>
+<td align="left">ADAE.AESEQ</td>
+<td align="left">xsd:double</td>
+</tr>
 <tr class="even">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE</a></td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA</a></td>
+<td align="left">ADAE.TRTA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD</a></td>
+<td align="left">ADAE.AELLTCD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL</a></td>
+<td align="left">ADAE.AOCC03FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL</a></td>
+<td align="left">ADAE.TRTEMFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD</a></td>
+<td align="left">ADAE.AEPTCD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY</a></td>
+<td align="left">ADAE.AENDY</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD</a></td>
+<td align="left">ADAE.AESOCCD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1</a></td>
+<td align="left">ADAE.AGEGR1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE</a></td>
+<td align="left">ADAE.AESLIFE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE</a></td>
+<td align="left">ADAE.RACE</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT</a></td>
+<td align="left">ADAE.AELLT</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH</a></td>
+<td align="left">ADAE.AESDTH</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX</a></td>
+<td align="left">ADAE.SEX</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID</a></td>
+<td align="left">ADAE.USUBJID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL</a></td>
+<td align="left">ADAE.AOCC02FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL</a></td>
+<td align="left">ADAE.AOCCFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT</a></td>
+<td align="left">ADAE.TRTSDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM</a></td>
+<td align="left">ADAE.CQ01NAM</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT</a></td>
+<td align="left">ADAE.AEHLGT</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV</a></td>
+<td align="left">ADAE.AESEV</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT</a></td>
+<td align="left">ADAE.AEOUT</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB</a></td>
+<td align="left">ADAE.AESDISAB</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD</a></td>
+<td align="left">ADAE.AESOD</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD</a></td>
+<td align="left">ADAE.AEDECOD</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N</a></td>
+<td align="left">ADAE.AGEGR1N</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL</a></td>
+<td align="left">ADAE.AEREL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER</a></td>
+<td align="left">ADAE.AESER</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM</a></td>
+<td align="left">ADAE.AETERM</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF</a></td>
+<td align="left">ADAE.ASTDTF</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS</a></td>
+<td align="left">ADAE.AEBODSYS</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE</a></td>
 <td align="left">ADAE.AGE</td>
 <td align="left">xsd:double</td>
 </tr>
 <tr class="odd">
-<td align="left"><a href="file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD" class="uri">file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD</a></td>
-<td align="left">ADAE.AELLTCD</td>
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY</a></td>
+<td align="left">ADAE.ASTDY</td>
 <td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL</a></td>
+<td align="left">ADAE.SAFFL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD</a></td>
+<td align="left">ADAE.AEHLGTCD</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID</a></td>
+<td align="left">ADAE.STUDYID</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL</a></td>
+<td align="left">ADAE.AOCC04FL</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN</a></td>
+<td align="left">ADAE.TRTAN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN</a></td>
+<td align="left">ADAE.ADURN</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP</a></td>
+<td align="left">ADAE.AESHOSP</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT</a></td>
+<td align="left">ADAE.TRTEDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT</a></td>
+<td align="left">ADAE.ASTDT</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT" class="uri">file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT</a></td>
+<td align="left">ADAE.AEHLT</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>

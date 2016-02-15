@@ -22,6 +22,7 @@ The example is normalized.
 ```{r}
 library(RCurl)
 library(devtools)
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 

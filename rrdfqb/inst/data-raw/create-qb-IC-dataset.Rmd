@@ -22,6 +22,7 @@ The Integrity Constraints are stored as file in the package
 
 ## Setup 
 ```{r}
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 

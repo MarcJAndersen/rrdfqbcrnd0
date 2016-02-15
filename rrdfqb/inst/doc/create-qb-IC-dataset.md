@@ -9,6 +9,7 @@ Setup
 -----
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 

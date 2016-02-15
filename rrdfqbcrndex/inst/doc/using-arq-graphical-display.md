@@ -60,7 +60,7 @@ dot -x -Tpdf -ograph.pdf fordot.dot
     ##         crnd-dimension:sex          code:sex-M ;
     ##         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
     ##         crnd-measure:measure        "34"^^xsd:double .
-    ## rapper: Parsing URI file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/fordot.ttl with parser turtle
+    ## rapper: Parsing URI file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/fordot.ttl with parser turtle
     ## rapper: Serializing with serializer dot
     ## rapper: Parsing returned 18 triples
 

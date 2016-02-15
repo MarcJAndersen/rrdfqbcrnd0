@@ -9,6 +9,7 @@ Create DEMO sample table from CSV file
 This script creates the result and codelist for a simple DEMO table.
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -35,7 +36,7 @@ tmp<- load.rdf(cubeVocabularyFn, format="TURTLE", appendTo= store)
 cat("Loading cube from ", dataCubeFile, "\n")
 ```
 
-    ## Loading cube from  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
+    ## Loading cube from  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DEMO-sample.ttl
 
 ``` r
 tmp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
@@ -62,7 +63,7 @@ for (rqFile in rqFiles) {
 }
 ```
 
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOattributes.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOattributes.rq 
     ## [1] 6
     ## 
     ## 
@@ -74,7 +75,7 @@ for (rqFile in rqFiles) {
     ## crnd-attribute:denominator 
     ## crnd-attribute:unit        
     ## crnd-attribute:rowno       
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOcodelist.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOcodelist.rq 
     ## [1] 392
     ## 
     ## 
@@ -472,7 +473,7 @@ for (rqFile in rqFiles) {
     ## code:race        code:sex-U                                            code:sex         U                                         
     ## code:race        code:procedure-count                                  code:procedure   count                                     
     ## code:race        code:procedure-std                                    code:procedure   std                                       
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOdimensions.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOdimensions.rq 
     ## [1] 7
     ## 
     ## 
@@ -485,7 +486,7 @@ for (rqFile in rqFiles) {
     ## crnd-dimension:factor    
     ## crnd-dimension:trt01a    
     ## crnd-dimension:sex       
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOfactor-codelist.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOfactor-codelist.rq 
     ## [1] 53
     ## 
     ## 
@@ -544,7 +545,7 @@ for (rqFile in rqFiles) {
     ## code:factor-_ALL_        rdf:type                          rdfs:Resource                                                                               
     ## code:factor-age          rdf:type                          rdfs:Resource                                                                               
     ## code:factor-weightbl     rdf:type                          rdfs:Resource                                                                               
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOfactor.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOfactor.rq 
     ## [1] 6
     ## 
     ## 
@@ -556,7 +557,7 @@ for (rqFile in rqFiles) {
     ## code:factor-_NONMISS_    _NONMISS_    NA                          NA              
     ## code:factor-quantity     quantity     NA                          quantity        
     ## code:factor-age          age          rrdfqbcrnd0:ADSL_AGE        age             
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-data-part-1.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-data-part-1.rq 
     ## [1] 2
     ## 
     ## 
@@ -564,9 +565,9 @@ for (rqFile in rqFiles) {
     ## ----------  --------------------------------------------------  ----------------
     ## ds:obs007   http://www.example.org/datasets/vocab/ADSL_SEX      F               
     ## ds:obs007   http://www.example.org/datasets/vocab/ADSL_TRT01A   Placebo         
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-data.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-data.rq 
     ## [1] 0
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-selection.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-selection.rq 
     ## [1] 3
     ## 
     ## 
@@ -575,7 +576,7 @@ for (rqFile in rqFiles) {
     ## ds:obs027   trt01a                   ==                   Xanomeline High Dose 
     ## ds:obs056   trt01a                   ==                   Xanomeline Low Dose  
     ## ds:obs056   agegr1                   ==                   65-80                
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations.rq 
     ## [1] 588
     ## 
     ## 
@@ -1169,7 +1170,7 @@ for (rqFile in rqFiles) {
     ## ds:obs114   code:ethnic-_ALL_                    code:race-_ALL_                              code:procedure-min       code:agegr1-_ALL_       code:factor-weightbl     code:trt01a-Xanomeline_High_Dose   code:sex-_ALL_                     41.7           NA     1            %6.1f        3       33      _ALL_                    _ALL_                              min              _ALL_         weightbl      Xanomeline High Dose   _ALL_     
     ## ds:obs114   code:ethnic-_ALL_                    code:race-_ALL_                              code:procedure-min       code:agegr1-_ALL_       code:factor-weightbl     code:trt01a-Xanomeline_High_Dose   code:sex-_ALL_                     41.7           NA     1            %6.1f        3       33      _ALL_                    _ALL_                              min              _ALL_         weightbl      Xanomeline High Dose   _ALL_     
     ## ds:obs114   code:ethnic-_ALL_                    code:race-_ALL_                              code:procedure-min       code:agegr1-_ALL_       code:factor-weightbl     code:trt01a-Xanomeline_High_Dose   code:sex-_ALL_                     41.7           NA     1            %6.1f        3       33      _ALL_                    _ALL_                              min              _ALL_         weightbl      Xanomeline High Dose   _ALL_     
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure-codelist.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure-codelist.rq 
     ## [1] 100
     ## 
     ## 
@@ -1275,7 +1276,7 @@ for (rqFile in rqFiles) {
     ## code:procedure-min       rdf:type                          rdfs:Resource                                                    
     ## code:procedure-max       rdf:type                          rdfs:Resource                                                    
     ## code:procedure-n         rdf:type                          rdfs:Resource                                                    
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure-median.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure-median.rq 
     ## [1] 10
     ## 
     ## 
@@ -1291,7 +1292,7 @@ for (rqFile in rqFiles) {
     ## code:procedure-median   rdf:type                          skos:Concept                                  
     ## code:procedure-median   rdf:type                          code:Procedure                                
     ## code:procedure-median   rdf:type                          rdfs:Resource                                 
-    ## File  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure.rq 
+    ## File  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure.rq 
     ## [1] 10
     ## 
     ## 
@@ -1402,7 +1403,7 @@ values (?s) {
 save.rdf(construct.rdf( store, cons.rq) , file.path(tempdir(), "rapperin.ttl"), "TURTLE")
 ```
 
-    ## [1] "/tmp/RtmpRvLtKi/rapperin.ttl"
+    ## [1] "/tmp/RtmpdwIBaZ/rapperin.ttl"
 
 To see dot code generated by rapper:
 

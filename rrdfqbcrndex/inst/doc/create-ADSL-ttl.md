@@ -5,6 +5,7 @@ Setup
 -----
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -53,7 +54,7 @@ dbDisconnect(con)
 cat("SQLite database stored as ", tfile, "\n")
 ```
 
-    ## SQLite database stored as  /tmp/Rtmp3PKSIB/file222b723feec2
+    ## SQLite database stored as  /tmp/Rtmp2kZok1/file3fd619291448
 
 ``` r
 dumpFn<- tempfile()
@@ -61,7 +62,7 @@ system(paste("sqlite3", tfile, ".dump >", dumpFn, sep=" "))
 cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
-    ## SQLite database dump in  /tmp/Rtmp3PKSIB/file222bf1c7672
+    ## SQLite database dump in  /tmp/Rtmp2kZok1/file3fd670f7a320
 
 Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: \* change TEXT to VARCHAR(1000) \* remove top 2 lines with PRAGMA \* in insert statements replace "adsl" with adsl \* after "MMSETOT" REAL add a comma (",") and a new line with PRIMARY KEY (USUBJID)
 
@@ -76,7 +77,7 @@ system(sedCmd)
 cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
-    ## SQLite database dump modified stored as  /tmp/Rtmp3PKSIB/file222b2d345e7f
+    ## SQLite database dump modified stored as  /tmp/Rtmp2kZok1/file3fd65caaa31b
 
 ``` r
 ## Check only expected changes were applied
@@ -111,7 +112,7 @@ cat( "File ", adslmapttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/Rtmp3PKSIB/adsl-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/Rtmp2kZok1/adsl-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
@@ -119,7 +120,7 @@ cat( "File ", adslttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/Rtmp3PKSIB/adsl.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/Rtmp2kZok1/adsl.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 ### This could maybe also work ..
@@ -148,14 +149,14 @@ dataFilemap<- system.file("extdata/sample-rdf", "adsl-map.ttl", package="rrdfqbc
 dataFilemap
 ```
 
-    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl-map.ttl"
+    ## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl-map.ttl"
 
 ``` r
 dataFile<- system.file("extdata/sample-rdf", "adsl.ttl", package="rrdfqbcrndex")
 dataFile
 ```
 
-    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl.ttl"
+    ## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adsl.ttl"
 
 ``` r
 store <- new.rdf()  # Initialize
@@ -164,7 +165,7 @@ invisible(load.rdf(dataFile, format="TURTLE", appendTo= store))
 summarize.rdf(store)
 ```
 
-    ## [1] "Number of triples: 13161"
+    ## [1] "Number of triples: 13160"
 
 Next step is to make a query showing the mappings
 
@@ -204,64 +205,64 @@ str(resmapping)
 ```
 
     ## 'data.frame':    48 obs. of  3 variables:
-    ##  $ mapColumn   : chr  "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID" "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A" "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P" "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID" ...
-    ##  $ d2rqcolumn  : chr  "ADSL.USUBJID" "ADSL.TRT01A" "ADSL.TRT01P" "ADSL.STUDYID" ...
-    ##  $ d2rqdatatype: chr  NA NA NA NA ...
+    ##  $ mapColumn   : chr  "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL" "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD" "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD" "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P" ...
+    ##  $ d2rqcolumn  : chr  "ADSL.HEIGHTBL" "ADSL.AVGDD" "ADSL.DCDECOD" "ADSL.TRT01P" ...
+    ##  $ d2rqdatatype: chr  "xsd:double" "xsd:double" NA NA ...
 
 ``` r
 knitr::kable(resmapping)
 ```
 
-| mapColumn                                                                                   | d2rqcolumn    | d2rqdatatype |
-|:--------------------------------------------------------------------------------------------|:--------------|:-------------|
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID>  | ADSL.USUBJID  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A>   | ADSL.TRT01A   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P>   | ADSL.TRT01P   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID>  | ADSL.STUDYID  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISCONFL> | ADSL.DISCONFL | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEU>     | ADSL.AGEU     | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ITTFL>    | ADSL.ITTFL    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD>  | ADSL.DCDECOD  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBL>    | ADSL.BMIBL    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDIS>   | ADSL.DURDIS   | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SUBJID>   | ADSL.SUBJID   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ETHNIC>   | ADSL.ETHNIC   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EFFFL>    | ADSL.EFFFL    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEGR1>  | ADSL.SITEGR1  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP8FL>  | ADSL.COMP8FL  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTSDT>   | ADSL.TRTSDT   | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SEX>      | ADSL.SEX      | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_WEIGHTBL> | ADSL.WEIGHTBL | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGE>      | ADSL.AGE      | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_CUMDOSE>  | ADSL.CUMDOSE  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP16FL> | ADSL.COMP16FL | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1>   | ADSL.AGEGR1   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBLGR1> | ADSL.BMIBLGR1 | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP24FL> | ADSL.COMP24FL | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01PN>  | ADSL.TRT01PN  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDT>   | ADSL.RFENDT   | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDSGR1> | ADSL.DURDSGR1 | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFSTDTC>  | ADSL.RFSTDTC  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD>    | ADSL.AVGDD    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTDUR>   | ADSL.TRTDUR   | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL> | ADSL.HEIGHTBL | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1N>  | ADSL.AGEGR1N  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACEN>    | ADSL.RACEN    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDTC>  | ADSL.RFENDTC  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISONSDT> | ADSL.DISONSDT | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEID>   | ADSL.SITEID   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EDUCLVL>  | ADSL.EDUCLVL  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DSRAEFL>  | ADSL.DSRAEFL  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ARM>      | ADSL.ARM      | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SAFFL>    | ADSL.SAFFL    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACE>     | ADSL.RACE     | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01AN>  | ADSL.TRT01AN  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_MMSETOT>  | ADSL.MMSETOT  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISNUMEN> | ADSL.VISNUMEN | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISIT1DT> | ADSL.VISIT1DT | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DTHFL>    | ADSL.DTHFL    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCREASCD> | ADSL.DCREASCD | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTEDT>   | ADSL.TRTEDT   | xsd:double   |
+| mapColumn                                                                        | d2rqcolumn    | d2rqdatatype |
+|:---------------------------------------------------------------------------------|:--------------|:-------------|
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_HEIGHTBL> | ADSL.HEIGHTBL | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AVGDD>    | ADSL.AVGDD    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCDECOD>  | ADSL.DCDECOD  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01P>   | ADSL.TRT01P   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEID>   | ADSL.SITEID   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP16FL> | ADSL.COMP16FL | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP8FL>  | ADSL.COMP8FL  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1N>  | ADSL.AGEGR1N  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDT>   | ADSL.RFENDT   | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ETHNIC>   | ADSL.ETHNIC   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBL>    | ADSL.BMIBL    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACEN>    | ADSL.RACEN    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DTHFL>    | ADSL.DTHFL    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISCONFL> | ADSL.DISCONFL | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01A>   | ADSL.TRT01A   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDSGR1> | ADSL.DURDSGR1 | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01PN>  | ADSL.TRT01PN  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EFFFL>    | ADSL.EFFFL    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISNUMEN> | ADSL.VISNUMEN | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ARM>      | ADSL.ARM      | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_BMIBLGR1> | ADSL.BMIBLGR1 | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGE>      | ADSL.AGE      | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_VISIT1DT> | ADSL.VISIT1DT | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFSTDTC>  | ADSL.RFSTDTC  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SUBJID>   | ADSL.SUBJID   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_EDUCLVL>  | ADSL.EDUCLVL  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_MMSETOT>  | ADSL.MMSETOT  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SAFFL>    | ADSL.SAFFL    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RACE>     | ADSL.RACE     | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DISONSDT> | ADSL.DISONSDT | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEU>     | ADSL.AGEU     | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTEDT>   | ADSL.TRTEDT   | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_RFENDTC>  | ADSL.RFENDTC  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_AGEGR1>   | ADSL.AGEGR1   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_COMP24FL> | ADSL.COMP24FL | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_WEIGHTBL> | ADSL.WEIGHTBL | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DSRAEFL>  | ADSL.DSRAEFL  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_ITTFL>    | ADSL.ITTFL    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_STUDYID>  | ADSL.STUDYID  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SITEGR1>  | ADSL.SITEGR1  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRT01AN>  | ADSL.TRT01AN  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTSDT>   | ADSL.TRTSDT   | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_CUMDOSE>  | ADSL.CUMDOSE  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_SEX>      | ADSL.SEX      | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DCREASCD> | ADSL.DCREASCD | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_TRTDUR>   | ADSL.TRTDUR   | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_USUBJID>  | ADSL.USUBJID  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADSL_DURDIS>   | ADSL.DURDIS   | xsd:double   |
 
 The code below gets the all values in one record
 

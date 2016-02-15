@@ -23,6 +23,7 @@ TODO(mja): fix it.
 This script creates the result and codelist for a simple DEMO table.
 
 ```{r}
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 

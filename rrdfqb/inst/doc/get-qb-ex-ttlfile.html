@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-15" />
 
 <title>Get RDF data cube example file from RDF data cube specifications</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Get RDF data cube example file from RDF data cube specifications</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-15</em></h4>
 </div>
 
 <div id="TOC">
@@ -93,18 +93,19 @@ img {
 <pre><code>## Loading required package: methods</code></pre>
 <pre><code>## Loading required package: bitops</code></pre>
 <pre class="r"><code>library(devtools)
-devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
-<pre><code>## Loading rrdfqb</code></pre>
-<pre><code>## Loading required package: xlsx</code></pre>
+library(rrdfancillary)</code></pre>
 <pre><code>## Loading required package: rJava</code></pre>
 <pre><code>## 
 ## Attaching package: 'rJava'</code></pre>
 <pre><code>## The following object is masked from 'package:RCurl':
 ## 
 ##     clone</code></pre>
-<pre><code>## Loading required package: xlsxjars</code></pre>
 <pre><code>## Loading required package: rrdf</code></pre>
 <pre><code>## Loading required package: rrdflibs</code></pre>
+<pre class="r"><code>devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
+<pre><code>## Loading rrdfqb</code></pre>
+<pre><code>## Loading required package: xlsx</code></pre>
+<pre><code>## Loading required package: xlsxjars</code></pre>
 </div>
 </div>
 <div id="r-code" class="section level1">
@@ -117,7 +118,7 @@ examplettl &lt;- getURL(qbURL)
 savefile &lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;example.ttl&quot; )
 writeLines( examplettl, savefile)
 cat(&quot;written to &quot;, normalizePath(savefile), &quot;\n&quot; )</code></pre>
-<pre><code>## written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example.ttl</code></pre>
+<pre><code>## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example.ttl</code></pre>
 </div>
 <div id="show-one-observations-from-the-store" class="section level1">
 <h1>Show one observations from the store</h1>
@@ -336,7 +337,7 @@ cat(UpdateNormPhase2,&quot;\n&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>normalizedfile&lt;- file.path(system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;example-normalized.ttl&quot;  )
 save.rdf( store, normalizedfile, format=&quot;TURTLE&quot;)</code></pre>
-<pre><code>## [1] &quot;/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-normalized.ttl&quot;</code></pre>
+<pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/sample-rdf/example-normalized.ttl&quot;</code></pre>
 </div>
 <div id="update-example-cube-using-fuseki" class="section level1">
 <h1>Update example cube using Fuseki</h1>

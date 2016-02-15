@@ -18,9 +18,10 @@ output:
 This script creates the result and codelist for a simple DEMO table.
 
 ```{r}
+library(rrdfancillary)
+library(rrdfcdisc)
 library(rrdfqb)
 library(rrdfqbcrnd0)
-library(rrdfcdisc)
 devtools::load_all(pkg="../..")
 ```
 

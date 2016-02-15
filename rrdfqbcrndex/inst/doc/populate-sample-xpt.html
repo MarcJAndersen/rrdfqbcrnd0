@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-03" />
+<meta name="date" content="2016-02-15" />
 
 <title>Populate sample-xpt directory with example file in SAS transport xpt format</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Populate sample-xpt directory with example file in SAS transport xpt format</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-03</em></h4>
+<h4 class="date"><em>2016-02-15</em></h4>
 </div>
 
 <div id="TOC">
@@ -92,11 +92,21 @@ devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## The following object is masked from 'package:rJava':
 ## 
 ##     clone</code></pre>
+<pre><code>## Loading required package: rrdfancillary</code></pre>
+<pre><code>## Loading required package: rrdfcdisc</code></pre>
+<pre><code>## Loading required package: devtools</code></pre>
+<pre><code>## Loading required package: rrdfqb</code></pre>
+<pre><code>## Loading required package: rrdfqbcrnd0</code></pre>
+<pre><code>## 
+## Attaching package: 'rrdfqbcrnd0'</code></pre>
+<pre><code>## The following object is masked from 'package:rrdfcdisc':
+## 
+##     summarize.rdf.noprint</code></pre>
 <pre class="r"><code>repositoryURL&lt;- &quot;https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc&quot;
 
 fnadae&lt;- file.path( system.file(&quot;extdata/sample-xpt&quot;, package=&quot;rrdfqbcrndex&quot;), &quot;adae.xpt&quot; )
 message(&quot;Downloading to &quot;, fnadae )</code></pre>
-<pre><code>## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt</code></pre>
+<pre><code>## Downloading to /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt</code></pre>
 <pre class="r"><code>downloadURL&lt;-paste0(repositoryURL, &quot;/&quot;, &quot;adae.xpt&quot;)
 message(&quot;Downloading from &quot;, downloadURL )</code></pre>
 <pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adae.xpt</code></pre>
@@ -104,7 +114,7 @@ message(&quot;Downloading from &quot;, downloadURL )</code></pre>
 
 fnadsl&lt;- file.path( system.file(&quot;extdata/sample-xpt&quot;, package=&quot;rrdfqbcrndex&quot;), &quot;adsl.xpt&quot; )
 message(&quot;Downloading to &quot;, fnadsl )</code></pre>
-<pre><code>## Downloading to /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt</code></pre>
+<pre><code>## Downloading to /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt</code></pre>
 <pre class="r"><code>downloadURL&lt;-paste0(repositoryURL, &quot;/&quot;, &quot;adsl.xpt&quot;)
 message(&quot;Downloading from &quot;, downloadURL )</code></pre>
 <pre><code>## Downloading from https://raw.githubusercontent.com/phuse-org/phuse-scripts/master/data/adam/cdisc/adsl.xpt</code></pre>
@@ -134,8 +144,8 @@ adsl&lt;-read.xport(fnadsl)
 ## str(head(Hmisc:::importConvertDateTime(adsl$TRTSDT, &quot;date&quot;, &quot;sas&quot;)))
 }</code></pre>
 <pre><code>## Loading required package: foreign</code></pre>
-<pre><code>## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt</code></pre>
-<pre><code>## Reading SAS transport file /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt</code></pre>
+<pre><code>## Reading SAS transport file /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adae.xpt</code></pre>
+<pre><code>## Reading SAS transport file /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-xpt/adsl.xpt</code></pre>
 <p>The following code is not evaluated, as the dates are not processed as expected.</p>
 <p>TODO(mja): get numeric variables with date format converted to a R date object.</p>
 <pre class="r"><code>if (require(SASxport)) {

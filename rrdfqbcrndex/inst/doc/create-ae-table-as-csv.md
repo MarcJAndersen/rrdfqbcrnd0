@@ -4,6 +4,7 @@ Create AE sample table as CSV file and other files
 This script creates the result and codelist for a simple AE table. The script is currently written to be executed manually.
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -1554,7 +1555,7 @@ write.csv(aetable, file=aetableFile,row.names=FALSE)
 cat("Written to ", aetableFile, "\n")
 ```
 
-    ## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/ae.AR.csv
+    ## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/ae.AR.csv
 
 ``` r
 recode.aesoc.list<- sqldf("select distinct AESOC from adae", stringsAsFactors=FALSE)
@@ -1566,7 +1567,7 @@ write.csv(recode.aesoc.list, file=aesocFile, row.names=FALSE)
 cat("Written to ", aesocFile, "\n")
 ```
 
-    ## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/ae.aesoc.AR.csv
+    ## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/ae.aesoc.AR.csv
 
 ``` r
 recode.aedecod.list<- sqldf("select distinct AEDECOD from adae", stringsAsFactors=FALSE )
@@ -1579,4 +1580,4 @@ write.csv(recode.aedecod.list, file=aedecodFile, row.names=FALSE)
 cat("Written to ", aedecodFile, "\n")
 ```
 
-    ## Written to  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/ae.aedecod.AR.csv
+    ## Written to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/ae.aedecod.AR.csv

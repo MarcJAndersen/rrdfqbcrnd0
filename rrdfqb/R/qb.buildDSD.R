@@ -1,7 +1,6 @@
 ##' Add RDF Data Set Specification (DSD) to the rrdf store
 ##'
 ##' 
-##' @inheritParams BuildCubeFromDataFrames
 ##' @param store RRDF store
 ##' @param prefixlist prefix list
 ##' @param skeletonSource data.frame with skeleton source
@@ -146,11 +145,12 @@ add.data.triple(store,
     
 for (i in 1:nrow(skeletonSource)){
     if (skeletonSource[i,"compType"]=="dimension") {
-        cat("codeType: ",skeletonSource[i,"codeType"], "\n" )
-                        cat("nciDomainValue: ",skeletonSource[i,"nciDomainValue"], "\n")
-                        cat("dimName: ",skeletonSource[i,"compName"], "\n")
-                        cat("underlDataSetName: ",extra$obsDataSetName, "\n")
-                        cat("remote.endpoint: ",remote.endpoint, "\n")         
+
+        ## cat("codeType: ",skeletonSource[i,"codeType"], "\n" )
+        ##                 cat("nciDomainValue: ",skeletonSource[i,"nciDomainValue"], "\n")
+        ##                 cat("dimName: ",skeletonSource[i,"compName"], "\n")
+        ##                 cat("underlDataSetName: ",extra$obsDataSetName, "\n")
+        ##                 cat("remote.endpoint: ",remote.endpoint, "\n")         
 
   buildCodelist(store,
                 prefixlist,

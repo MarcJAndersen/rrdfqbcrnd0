@@ -1,6 +1,5 @@
 ##' Add observation for RDF Data Cube in rrdf store using values from data frame
 ##'
-##' @inheritParams BuildCubeFromDataFrames
 ##' @inheritParams qb.buildDSD
 ##' @param recode.list A list of lists specifying how to recode the
 ##' value in the data frame. If NULL then the recode.list is generated

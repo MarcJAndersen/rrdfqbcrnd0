@@ -48,8 +48,9 @@ prefix : <http://rdf.cdisc.org/sdtm-terminology#>
 prefix cts:   <http://rdf.cdisc.org/ct/schema#>
 prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
 prefix mms:   <http://rdf.cdisc.org/mms#>
+prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
 '
-    
+      
     query <- GetCDISCCodeListSparqlQuery( CDISCsparqlprefix, nciDomainValue )
 
     if (! is.null(remote.endpoint) ) {

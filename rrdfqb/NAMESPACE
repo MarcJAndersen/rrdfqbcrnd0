@@ -2,7 +2,6 @@
 
 export(Get.prefixlist.from.df)
 export(Get.rq.prefix.df)
-export(Get.rq.prefixlist.df)
 export(GetAttributesSparqlQuery)
 export(GetCodeListSparqlQuery)
 export(GetCommonPrefixDf)

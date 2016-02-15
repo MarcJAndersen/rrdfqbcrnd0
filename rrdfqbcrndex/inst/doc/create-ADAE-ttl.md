@@ -5,6 +5,7 @@ Setup
 -----
 
 ``` r
+library(rrdfancillary)
 devtools::load_all(pkg="../..")
 ```
 
@@ -53,7 +54,7 @@ dbDisconnect(con)
 cat("SQLite database stored as ", tfile, "\n")
 ```
 
-    ## SQLite database stored as  /tmp/RtmpCelJLK/file22f377e640ba
+    ## SQLite database stored as  /tmp/RtmpLlCQ05/file409e523824
 
 ``` r
 dumpFn<- tempfile()
@@ -61,7 +62,7 @@ system(paste("sqlite3", tfile, ".dump >", dumpFn, sep=" "))
 cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
-    ## SQLite database dump in  /tmp/RtmpCelJLK/file22f31f3c1b3c
+    ## SQLite database dump in  /tmp/RtmpLlCQ05/file409e2cd63ca0
 
 Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: \* change TEXT to VARCHAR(1000) \* remove top 2 lines with PRAGMA \* in insert statements replace "adae" with adae \* after "AOCC01FL" TEXT add a comma (",") and a new line with PRIMARY KEY (USUBJID,AESEQ)
 
@@ -76,7 +77,7 @@ system(sedCmd)
 cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
-    ## SQLite database dump modified stored as  /tmp/RtmpCelJLK/file22f3217b840e
+    ## SQLite database dump modified stored as  /tmp/RtmpLlCQ05/file409e4677e1f4
 
 ``` r
 ## Check only expected changes were applied
@@ -111,7 +112,7 @@ cat( "File ", adaemapttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/RtmpCelJLK/adae-map.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/RtmpLlCQ05/adae-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 if (file.copy(adaettlFn, targetDir, overwrite = TRUE)) {
@@ -119,7 +120,7 @@ cat( "File ", adaettlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/RtmpCelJLK/adae.ttl  copied to directory  /home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/RtmpLlCQ05/adae.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 ### This could maybe also work ..
@@ -148,14 +149,14 @@ dataFilemap<- system.file("extdata/sample-rdf", "adae-map.ttl", package="rrdfqbc
 dataFilemap
 ```
 
-    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae-map.ttl"
+    ## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae-map.ttl"
 
 ``` r
 dataFile<- system.file("extdata/sample-rdf", "adae.ttl", package="rrdfqbcrndex")
 dataFile
 ```
 
-    ## [1] "/home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae.ttl"
+    ## [1] "/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/adae.ttl"
 
 ``` r
 store <- new.rdf()  # Initialize
@@ -204,71 +205,71 @@ str(resmapping)
 ```
 
     ## 'data.frame':    55 obs. of  3 variables:
-    ##  $ mapColumn   : chr  "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1" "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA" "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC" "file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN" ...
-    ##  $ d2rqcolumn  : chr  "ADAE.AGEGR1" "ADAE.TRTA" "ADAE.AESOC" "ADAE.AESCAN" ...
-    ##  $ d2rqdatatype: chr  NA NA NA NA ...
+    ##  $ mapColumn   : chr  "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL" "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN" "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT" "file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU" ...
+    ##  $ d2rqcolumn  : chr  "ADAE.AOCCPFL" "ADAE.AESCAN" "ADAE.AENDT" "ADAE.ADURU" ...
+    ##  $ d2rqdatatype: chr  NA NA "xsd:double" NA ...
 
 ``` r
 knitr::kable(resmapping)
 ```
 
-| mapColumn                                                                                   | d2rqcolumn    | d2rqdatatype |
-|:--------------------------------------------------------------------------------------------|:--------------|:-------------|
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1>   | ADAE.AGEGR1   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA>     | ADAE.TRTA     | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC>    | ADAE.AESOC    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN>   | ADAE.AESCAN   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL> | ADAE.AOCC04FL | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM>  | ADAE.CQ01NAM  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT>   | ADAE.TRTSDT   | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS> | ADAE.AEBODSYS | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN>    | ADAE.RACEN    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL>    | ADAE.AEREL    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N>  | ADAE.AGEGR1N  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT>    | ADAE.AEOUT    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL> | ADAE.AOCC02FL | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU>    | ADAE.ADURU    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY>    | ADAE.ASTDY    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB> | ADAE.AESDISAB | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE>     | ADAE.RACE     | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX>      | ADAE.SEX      | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD>  | ADAE.AEDECOD  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP>  | ADAE.AESHOSP  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY>    | ADAE.AENDY    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN>    | ADAE.TRTAN    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID>  | ADAE.STUDYID  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL>  | ADAE.AOCCPFL  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL>   | ADAE.AOCCFL   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD>    | ADAE.AESOD    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT>    | ADAE.AELLT    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT>   | ADAE.AEHLGT   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT>    | ADAE.AENDT    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF>   | ADAE.ASTDTF   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD>   | ADAE.AEPTCD   | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE>  | ADAE.AESLIFE  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN>    | ADAE.ADURN    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ>    | ADAE.AESEQ    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD>  | ADAE.AESOCCD  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL>  | ADAE.TRTEMFL  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV>    | ADAE.AESEV    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID>  | ADAE.USUBJID  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN>    | ADAE.AEACN    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL> | ADAE.AOCC03FL | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM>   | ADAE.AETERM   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT>    | ADAE.AEHLT    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT>   | ADAE.TRTEDT   | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID>   | ADAE.SITEID   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD> | ADAE.AEHLGTCD | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG>  | ADAE.AESCONG  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH>   | ADAE.AESDTH   | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER>    | ADAE.AESER    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT>    | ADAE.ASTDT    | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL>  | ADAE.AOCCSFL  | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL> | ADAE.AOCC01FL | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL>    | ADAE.SAFFL    | NA           |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD>  | ADAE.AEHLTCD  | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE>      | ADAE.AGE      | xsd:double   |
-| <file:///home/ma/projects/R-projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD>  | ADAE.AELLTCD  | xsd:double   |
+| mapColumn                                                                        | d2rqcolumn    | d2rqdatatype |
+|:---------------------------------------------------------------------------------|:--------------|:-------------|
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCPFL>  | ADAE.AOCCPFL  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCAN>   | ADAE.AESCAN   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDT>    | ADAE.AENDT    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURU>    | ADAE.ADURU    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SITEID>   | ADAE.SITEID   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCSFL>  | ADAE.AOCCSFL  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACEN>    | ADAE.RACEN    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOC>    | ADAE.AESOC    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC01FL> | ADAE.AOCC01FL | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESCONG>  | ADAE.AESCONG  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEACN>    | ADAE.AEACN    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLTCD>  | ADAE.AEHLTCD  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEQ>    | ADAE.AESEQ    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTA>     | ADAE.TRTA     | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLTCD>  | ADAE.AELLTCD  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC03FL> | ADAE.AOCC03FL | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEMFL>  | ADAE.TRTEMFL  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEPTCD>   | ADAE.AEPTCD   | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AENDY>    | ADAE.AENDY    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOCCD>  | ADAE.AESOCCD  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1>   | ADAE.AGEGR1   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESLIFE>  | ADAE.AESLIFE  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_RACE>     | ADAE.RACE     | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AELLT>    | ADAE.AELLT    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDTH>   | ADAE.AESDTH   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SEX>      | ADAE.SEX      | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_USUBJID>  | ADAE.USUBJID  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC02FL> | ADAE.AOCC02FL | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCCFL>   | ADAE.AOCCFL   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTSDT>   | ADAE.TRTSDT   | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_CQ01NAM>  | ADAE.CQ01NAM  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGT>   | ADAE.AEHLGT   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESEV>    | ADAE.AESEV    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEOUT>    | ADAE.AEOUT    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESDISAB> | ADAE.AESDISAB | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESOD>    | ADAE.AESOD    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEDECOD>  | ADAE.AEDECOD  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGEGR1N>  | ADAE.AGEGR1N  | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEREL>    | ADAE.AEREL    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESER>    | ADAE.AESER    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AETERM>   | ADAE.AETERM   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDTF>   | ADAE.ASTDTF   | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEBODSYS> | ADAE.AEBODSYS | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AGE>      | ADAE.AGE      | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDY>    | ADAE.ASTDY    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_SAFFL>    | ADAE.SAFFL    | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLGTCD> | ADAE.AEHLGTCD | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_STUDYID>  | ADAE.STUDYID  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AOCC04FL> | ADAE.AOCC04FL | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTAN>    | ADAE.TRTAN    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ADURN>    | ADAE.ADURN    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AESHOSP>  | ADAE.AESHOSP  | NA           |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_TRTEDT>   | ADAE.TRTEDT   | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_ASTDT>    | ADAE.ASTDT    | xsd:double   |
+| <file:///home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/data-raw/#ADAE_AEHLT>    | ADAE.AEHLT    | NA           |
 
 The code below gets the all values in one record
 
