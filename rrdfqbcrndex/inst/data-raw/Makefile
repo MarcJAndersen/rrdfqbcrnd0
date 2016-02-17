@@ -4,7 +4,8 @@ create-ae-table-as-csv.html  create-dm-table-as-csv.html \
 create-qb-examples-as-ttl.html \
 use-demo-ttl.html  \
 using-arq.html using-arq-graphical-display.html using-arq-qb.html using-python.html \
-reporting-process.html
+reporting-process.html \
+rdf-gotchas.html
 
 # does not work package-overview.html
 
@@ -97,6 +98,8 @@ reporting-process.html reporting-process.pdf reporting-process.md: reporting-pro
 package-overview.html package-overview.pdf package-overview.md: package-overview.Rmd
 	${RMD2HTML}
 
+rdf-gotchas.html rdf-gotchas.pdf rdf-gotchas.md: rdf-gotchas.Rmd
+	${RMD2HTML}
 
 # %.pdf: %.Rnw
 # 	${RKNIT2PDF}
