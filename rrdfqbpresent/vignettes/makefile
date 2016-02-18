@@ -1,9 +1,9 @@
 
 
-all: two-dim-representation-of-cube.md two-dim-representation-of-cube.html
+all: vignette-two-dim-representation-of-cube.md vignette-two-dim-representation-of-cube.html
 
 clean:
-	rm -f two-dim-representation-of-cube.html
+	rm -f vignette-two-dim-representation-of-cube.html vignette-two-dim-representation-of-cube.md vignette-two-dim-representation-of-cube.pdf
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"
