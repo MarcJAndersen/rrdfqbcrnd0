@@ -23,12 +23,12 @@ library(rrdfancillary)
 
 # Example on what not to do
 
-Here is how I understood what happens when the exactly same triples are inserted - only one triple is stored.
+When the exactly same triples are inserted - only one triple remains.
 
 ```{r, eval=TRUE}
-store3<- new.rdf(ontology=FALSE)
+store1<- new.rdf(ontology=FALSE)
 
-sparql.rdf( store3, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
+sparql.rdf( store1, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
 
 SPARQLinsert<- '
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
@@ -38,34 +38,107 @@ INSERT DATA
   <http://example.org/subject1>  <http://example.org/property1> "mytext"^^xsd:string .
 }
 '
-
 cat(SPARQLinsert,"\n")
-
-update.rdf( store3, SPARQLinsert )
-
-sparql.rdf( store3, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
-
+update.rdf( store1, SPARQLinsert )
+sparql.rdf( store1, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
 ```
 
 Now, of course, it is always better only to store the values once, when it is intended to store one copy.
-However, as I thougth that only one trippel is stored, I was less carefull in some of the code.
+
+However, as I thougth that only one trippel is stored, so I was less carefull in some of the code.
 
 Here is what Apache/Jena does when using the RRDF interface.
 ```{r, eval=TRUE}
-store<- new.rdf(ontology=FALSE)
-add.data.triple( store, subject="http://example.org/subject1", predicate="http://example.org/property1", data="mytext", lang="en" )
-add.data.triple( store, subject="http://example.org/subject1", predicate="http://example.org/property1", data="mytext", type="string" )
-sparql.rdf( store, "select ?s ?p ?o where {?s ?p ?o}"  )
-sparql.rdf( store, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
-```
-The same tripel appears twice!
+store2<- new.rdf(ontology=FALSE)
+add.data.triple(
+    store2,
+    subject="http://example.org/subject1",
+    predicate="http://example.org/property1",
+    data="mytext",
+    lang="en"
+)
 
-Mixing `INSERT DATA` and RRDF add.data.triple gives same result - two triples.
+add.data.triple(
+    store2,
+    subject="http://example.org/subject1",
+    predicate="http://example.org/property1",
+    data="mytext",
+    type="string"
+)
+```
+
+Now query the store:
+```{r, eval=TRUE}
+sparql.rdf( store2, "select ?s ?p ?o where {?s ?p ?o}"  )
+```
+The two rows look identical. The next query also show language and datatype associate with the object.
+```{r, eval=TRUE}
+sparql.rdf( store2, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
+```
+The same tripel appears twice! That learned me that the language and data type are important. They make a difference, so to speak.
+
+
+Now using the same datatype, `string`, gives two triples again.
+```{r, eval=TRUE}
+store3<- new.rdf(ontology=FALSE)
+add.data.triple(
+    store3,
+    subject="http://example.org/subject1",
+    predicate="http://example.org/property1",
+    data="mytext",
+    type="string"
+)
+
+add.data.triple(
+    store3,
+    subject="http://example.org/subject1",
+    predicate="http://example.org/property1",
+    data="mytext",
+    type="string"
+)
+
+sparql.rdf( store3, "select ?s ?p ?o where {?s ?p ?o}"  )
+sparql.rdf( store3, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
+```
+
+
+Mixing `INSERT DATA` and RRDF `add.data.triple gives` same result - two triples.
 
 ```{r, eval=TRUE}
 store4<- new.rdf(ontology=FALSE)
 
+SPARQLinsert<- '
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+INSERT DATA
+{ 
+  <http://example.org/subject1>  <http://example.org/property1> "mytext"^^xsd:string .
+}
+'
+update.rdf( store4, SPARQLinsert )
 sparql.rdf( store4, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
+```
+One triple inserted, one triple in the store. Fine!
+
+Now add one triple - exactly the same as the previos.
+```{r, eval=TRUE}
+add.data.triple(
+    store4,
+    subject="http://example.org/subject1",
+    predicate="http://example.org/property1",
+    data="mytext",
+    type="string"
+)
+
+sparql.rdf( store4, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
+
+```
+Two triples in the store.
+
+What if doing two `INSERT DATA`?
+```{r, eval=TRUE}
+store5<- new.rdf(ontology=FALSE)
+
+sparql.rdf( store5, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
 
 SPARQLinsert<- '
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
@@ -74,16 +147,20 @@ INSERT DATA
   <http://example.org/subject1>  <http://example.org/property1> "mytext"^^xsd:string .
 }
 '
-
-cat(SPARQLinsert,"\n")
-
-update.rdf( store4, SPARQLinsert )
-
-sparql.rdf( store4, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
-
-add.data.triple( store3, subject="http://example.org/subject1", predicate="http://example.org/property1", data="mytext", type="string" )
-
-sparql.rdf( store4, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
-
+update.rdf( store5, SPARQLinsert )
+sparql.rdf( store5, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
 ```
+One triple - as expected, only triple was inserted.
 
+```{r, eval=TRUE}
+update.rdf( store5, SPARQLinsert )
+sparql.rdf( store5, "select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }"  )
+```
+One triple - as expected, as the triple already existed.
+
+
+Lessons learned:
+
+* Apache/Jena interface R to Java behaves differently than Apache Jena handling of Update Scripts.
+
+* Be carefull when changing code.

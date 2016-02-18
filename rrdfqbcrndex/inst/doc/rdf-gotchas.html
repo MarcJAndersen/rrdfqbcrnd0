@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-17" />
+<meta name="date" content="2016-02-18" />
 
 <title>RRDF gotcha</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">RRDF gotcha</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-17</em></h4>
+<h4 class="date"><em>2016-02-18</em></h4>
 </div>
 
 <div id="TOC">
@@ -85,10 +85,10 @@ img {
 </div>
 <div id="example-on-what-not-to-do" class="section level1">
 <h1>Example on what not to do</h1>
-<p>Here is how I understood what happens when the exactly same triples are inserted - only one triple is stored.</p>
-<pre class="r"><code>store3&lt;- new.rdf(ontology=FALSE)
+<p>When the exactly same triples are inserted - only one triple remains.</p>
+<pre class="r"><code>store1&lt;- new.rdf(ontology=FALSE)
 
-sparql.rdf( store3, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+sparql.rdf( store1, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
 <pre><code>## &lt;0 x 0 matrix&gt;</code></pre>
 <pre class="r"><code>SPARQLinsert&lt;- '
 PREFIX xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt;
@@ -98,7 +98,6 @@ INSERT DATA
   &lt;http://example.org/subject1&gt;  &lt;http://example.org/property1&gt; &quot;mytext&quot;^^xsd:string .
 }
 '
-
 cat(SPARQLinsert,&quot;\n&quot;)</code></pre>
 <pre><code>## 
 ## PREFIX xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt;
@@ -108,34 +107,114 @@ cat(SPARQLinsert,&quot;\n&quot;)</code></pre>
 ##   &lt;http://example.org/subject1&gt;  &lt;http://example.org/property1&gt; &quot;mytext&quot;^^xsd:string .
 ## }
 ## </code></pre>
-<pre class="r"><code>update.rdf( store3, SPARQLinsert )</code></pre>
+<pre class="r"><code>update.rdf( store1, SPARQLinsert )</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>sparql.rdf( store3, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+<pre class="r"><code>sparql.rdf( store1, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
 <pre><code>##      s                             p                              o       
 ## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
 ##      lang datatype                                 
 ## [1,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;</code></pre>
-<p>Now, of course, it is always better only to store the values once, when it is intended to store one copy. However, as I thougth that only one trippel is stored, I was less carefull in some of the code.</p>
+<p>Now, of course, it is always better only to store the values once, when it is intended to store one copy.</p>
+<p>However, as I thougth that only one trippel is stored, so I was less carefull in some of the code.</p>
 <p>Here is what Apache/Jena does when using the RRDF interface.</p>
-<pre class="r"><code>store&lt;- new.rdf(ontology=FALSE)
-add.data.triple( store, subject=&quot;http://example.org/subject1&quot;, predicate=&quot;http://example.org/property1&quot;, data=&quot;mytext&quot;, lang=&quot;en&quot; )
-add.data.triple( store, subject=&quot;http://example.org/subject1&quot;, predicate=&quot;http://example.org/property1&quot;, data=&quot;mytext&quot;, type=&quot;string&quot; )
-sparql.rdf( store, &quot;select ?s ?p ?o where {?s ?p ?o}&quot;  )</code></pre>
+<pre class="r"><code>store2&lt;- new.rdf(ontology=FALSE)
+add.data.triple(
+    store2,
+    subject=&quot;http://example.org/subject1&quot;,
+    predicate=&quot;http://example.org/property1&quot;,
+    data=&quot;mytext&quot;,
+    lang=&quot;en&quot;
+)
+
+add.data.triple(
+    store2,
+    subject=&quot;http://example.org/subject1&quot;,
+    predicate=&quot;http://example.org/property1&quot;,
+    data=&quot;mytext&quot;,
+    type=&quot;string&quot;
+)</code></pre>
+<p>Now query the store:</p>
+<pre class="r"><code>sparql.rdf( store2, &quot;select ?s ?p ?o where {?s ?p ?o}&quot;  )</code></pre>
 <pre><code>##      s                             p                              o       
 ## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
 ## [2,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;</code></pre>
-<pre class="r"><code>sparql.rdf( store, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+<p>The two rows look identical. The next query also show language and datatype associate with the object.</p>
+<pre class="r"><code>sparql.rdf( store2, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
 <pre><code>##      s                             p                              o       
 ## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
 ## [2,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
 ##      lang datatype                                               
 ## [1,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;              
 ## [2,] &quot;en&quot; &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#langString&quot;</code></pre>
-<p>The same tripel appears twice!</p>
-<p>Mixing <code>INSERT DATA</code> and RRDF add.data.triple gives same result - two triples.</p>
+<p>The same tripel appears twice! That learned me that the language and data type are important. They make a difference, so to speak.</p>
+<p>Now using the same datatype, <code>string</code>, gives two triples again.</p>
+<pre class="r"><code>store3&lt;- new.rdf(ontology=FALSE)
+add.data.triple(
+    store3,
+    subject=&quot;http://example.org/subject1&quot;,
+    predicate=&quot;http://example.org/property1&quot;,
+    data=&quot;mytext&quot;,
+    type=&quot;string&quot;
+)
+
+add.data.triple(
+    store3,
+    subject=&quot;http://example.org/subject1&quot;,
+    predicate=&quot;http://example.org/property1&quot;,
+    data=&quot;mytext&quot;,
+    type=&quot;string&quot;
+)
+
+sparql.rdf( store3, &quot;select ?s ?p ?o where {?s ?p ?o}&quot;  )</code></pre>
+<pre><code>##      s                             p                              o       
+## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
+## [2,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;</code></pre>
+<pre class="r"><code>sparql.rdf( store3, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+<pre><code>##      s                             p                              o       
+## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
+## [2,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
+##      lang datatype                                 
+## [1,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;
+## [2,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;</code></pre>
+<p>Mixing <code>INSERT DATA</code> and RRDF <code>add.data.triple gives</code> same result - two triples.</p>
 <pre class="r"><code>store4&lt;- new.rdf(ontology=FALSE)
 
+SPARQLinsert&lt;- '
+PREFIX xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt;
+INSERT DATA
+{ 
+  &lt;http://example.org/subject1&gt;  &lt;http://example.org/property1&gt; &quot;mytext&quot;^^xsd:string .
+}
+'
+update.rdf( store4, SPARQLinsert )</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>sparql.rdf( store4, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+<pre><code>##      s                             p                              o       
+## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
+##      lang datatype                                 
+## [1,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;</code></pre>
+<p>One triple inserted, one triple in the store. Fine!</p>
+<p>Now add one triple - exactly the same as the previos.</p>
+<pre class="r"><code>add.data.triple(
+    store4,
+    subject=&quot;http://example.org/subject1&quot;,
+    predicate=&quot;http://example.org/property1&quot;,
+    data=&quot;mytext&quot;,
+    type=&quot;string&quot;
+)
+
 sparql.rdf( store4, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+<pre><code>##      s                             p                              o       
+## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
+## [2,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
+##      lang datatype                                 
+## [1,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;
+## [2,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;</code></pre>
+<p>Two triples in the store.</p>
+<p>What if doing two <code>INSERT DATA</code>?</p>
+<pre class="r"><code>store5&lt;- new.rdf(ontology=FALSE)
+
+sparql.rdf( store5, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
 <pre><code>## &lt;0 x 0 matrix&gt;</code></pre>
 <pre class="r"><code>SPARQLinsert&lt;- '
 PREFIX xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt;
@@ -144,29 +223,27 @@ INSERT DATA
   &lt;http://example.org/subject1&gt;  &lt;http://example.org/property1&gt; &quot;mytext&quot;^^xsd:string .
 }
 '
-
-cat(SPARQLinsert,&quot;\n&quot;)</code></pre>
-<pre><code>## 
-## PREFIX xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt;
-## INSERT DATA
-## { 
-##   &lt;http://example.org/subject1&gt;  &lt;http://example.org/property1&gt; &quot;mytext&quot;^^xsd:string .
-## }
-## </code></pre>
-<pre class="r"><code>update.rdf( store4, SPARQLinsert )</code></pre>
+update.rdf( store5, SPARQLinsert )</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>sparql.rdf( store4, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+<pre class="r"><code>sparql.rdf( store5, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
 <pre><code>##      s                             p                              o       
 ## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
 ##      lang datatype                                 
 ## [1,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;</code></pre>
-<pre class="r"><code>add.data.triple( store3, subject=&quot;http://example.org/subject1&quot;, predicate=&quot;http://example.org/property1&quot;, data=&quot;mytext&quot;, type=&quot;string&quot; )
-
-sparql.rdf( store4, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
+<p>One triple - as expected, only triple was inserted.</p>
+<pre class="r"><code>update.rdf( store5, SPARQLinsert )</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>sparql.rdf( store5, &quot;select ?s ?p ?o (lang(?o) as ?lang) (datatype(?o) as ?datatype) where {?s ?p ?o  }&quot;  )</code></pre>
 <pre><code>##      s                             p                              o       
 ## [1,] &quot;http://example.org/subject1&quot; &quot;http://example.org/property1&quot; &quot;mytext&quot;
 ##      lang datatype                                 
 ## [1,] &quot;&quot;   &quot;http://www.w3.org/2001/XMLSchema#string&quot;</code></pre>
+<p>One triple - as expected, as the triple already existed.</p>
+<p>Lessons learned:</p>
+<ul>
+<li><p>Apache/Jena interface R to Java behaves differently than Apache Jena handling of Update Scripts.</p></li>
+<li><p>Be carefull when changing code.</p></li>
+</ul>
 </div>
 
 
