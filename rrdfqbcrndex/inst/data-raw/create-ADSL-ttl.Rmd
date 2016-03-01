@@ -121,6 +121,8 @@ cat( "File ", adslttlFn, " copied to directory ", targetDir, "\n")
 
 ```
 
+Note: consider using Produce W3C Direct Mapping (https://www.w3.org/TR/rdb-direct-mapping/) - this can be done using the option `-w3c`.
+
 ```{r}
 ### This could maybe also work ..
 ## m <- dbDriver("SQLite")

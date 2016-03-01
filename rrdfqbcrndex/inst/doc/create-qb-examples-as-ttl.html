@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-16" />
+<meta name="date" content="2016-03-01" />
 
 <title>Create DEMO table as csv file</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create DEMO table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-16</em></h4>
+<h4 class="date"><em>2016-03-01</em></h4>
 </div>
 
 <div id="TOC">
@@ -110,9 +110,11 @@ img {
 <pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf&quot;</code></pre>
 <div id="rdf-data-cubes-specified-in-workbook" class="section level2">
 <h2>RDF data cubes specified in workbook</h2>
+<p>First, get the workbook.</p>
 <pre class="r"><code>RDFCubeWorkbook&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;RDFCubeWorkbook.xlsx&quot;, package=&quot;rrdfqbcrndex&quot;)
 (RDFCubeWorkbook)</code></pre>
 <pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/RDFCubeWorkbook.xlsx&quot;</code></pre>
+<p>Create the DM sample cube.</p>
 <pre class="r"><code>dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )</code></pre>
 <pre><code>## dimName  trt01a 
 ## dimName  sex</code></pre>
@@ -123,13 +125,14 @@ img {
 ## dimName  factor 
 ## dimName  race</code></pre>
 <pre class="r"><code>cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## DM cube stored as  /tmp/Rtmpzq3Spj/DC-DM-R-V-0-5-2.ttl</code></pre>
+<pre><code>## DM cube stored as  /tmp/Rtmp0Yi1yZ/DC-DM-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DM-sample.ttl&quot;)
 
 if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
   cat(&quot;DM cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
 }</code></pre>
 <pre><code>## DM cube copied to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DM-sample.ttl</code></pre>
+<p>Create the AE sample cube.</p>
 <pre class="r"><code>ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )</code></pre>
 <pre><code>## dimName  trta 
 ## dimName  saffl 
@@ -138,7 +141,7 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 ## dimName  procedure 
 ## dimName  factor</code></pre>
 <pre class="r"><code>cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## AE cube stored as  /tmp/Rtmpzq3Spj/DC-AE-R-V-0-5-2.ttl</code></pre>
+<pre><code>## AE cube stored as  /tmp/Rtmp0Yi1yZ/DC-AE-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-AE-sample.ttl&quot;)
 if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
   cat(&quot;AE cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
@@ -170,7 +173,7 @@ demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )</code></pr
 ## dimName  procedure 
 ## dimName  factor</code></pre>
 <pre class="r"><code>cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)</code></pre>
-<pre><code>## DEMO cube stored as  /tmp/Rtmpzq3Spj/DC-DEMO-R-V-0-5-2.ttl</code></pre>
+<pre><code>## DEMO cube stored as  /tmp/Rtmp0Yi1yZ/DC-DEMO-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DEMO-sample.ttl&quot;)
 
 if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {

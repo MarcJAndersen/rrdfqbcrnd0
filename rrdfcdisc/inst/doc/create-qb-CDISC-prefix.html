@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-02-16" />
+<meta name="date" content="2016-03-01" />
 
 <title>Create prefixes for use with CDISC standards in RDF</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create prefixes for use with CDISC standards in RDF</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-02-16</em></h4>
+<h4 class="date"><em>2016-03-01</em></h4>
 </div>
 
 <div id="TOC">
@@ -100,23 +100,26 @@ devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <div id="prefixes-for-the-package" class="section level1">
 <h1>Prefixes for the package</h1>
 <p>This script creates a list with the prefix used for the package. The prefix corresponds to the usual values.</p>
-<pre class="r"><code>qbCDISCprefixes&lt;-  list(
- &quot;rdf&quot;= &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; ,
- &quot;skos&quot;=&quot;http://www.w3.org/2004/02/skos/core#&quot; ,
- &quot;prov&quot;=&quot;http://www.w3.org/ns/prov#&quot; ,
- &quot;rdfs&quot;=&quot;http://www.w3.org/2000/01/rdf-schema#&quot; ,
- &quot;dcat&quot;=&quot;http://www.w3.org/ns/dcat#&quot; ,
- &quot;owl&quot;= &quot;http://www.w3.org/2002/07/owl#&quot; ,
- &quot;xsd&quot;= &quot;http://www.w3.org/2001/XMLSchema#&quot; ,
- &quot;qb&quot;=  &quot;http://purl.org/linked-data/cube#&quot; ,
- &quot;pav&quot;= &quot;http://purl.org/pav&quot; ,
- &quot;dct&quot;= &quot;http://purl.org/dc/terms/&quot; ,
- &quot;mms&quot;= &quot;http://rdf.cdisc.org/mms#&quot; ,
- &quot;cts&quot;= &quot;http://rdf.cdisc.org/ct/schema#&quot;,
- &quot;sdtm&quot;=&quot;http://rdf.cdisc.org/sdtm-terminology#&quot;,
- &quot;rrdfqbcrnd0&quot;=&quot;http://www.example.org/rrdfqbcrnd0/&quot;
-) </code></pre>
+<pre class="r"><code>## qbCDISCprefixes&lt;-  list(
+##  &quot;rdf&quot;= &quot;http://www.w3.org/1999/02/22-rdf-syntax-ns#&quot; ,
+##  &quot;skos&quot;=&quot;http://www.w3.org/2004/02/skos/core#&quot; ,
+##  &quot;prov&quot;=&quot;http://www.w3.org/ns/prov#&quot; ,
+##  &quot;rdfs&quot;=&quot;http://www.w3.org/2000/01/rdf-schema#&quot; ,
+##  &quot;dcat&quot;=&quot;http://www.w3.org/ns/dcat#&quot; ,
+##  &quot;owl&quot;= &quot;http://www.w3.org/2002/07/owl#&quot; ,
+##  &quot;xsd&quot;= &quot;http://www.w3.org/2001/XMLSchema#&quot; ,
+##  &quot;qb&quot;=  &quot;http://purl.org/linked-data/cube#&quot; ,
+##  &quot;pav&quot;= &quot;http://purl.org/pav&quot; ,
+##  &quot;dct&quot;= &quot;http://purl.org/dc/terms/&quot; ,
+##  &quot;mms&quot;= &quot;http://rdf.cdisc.org/mms#&quot; ,
+##  &quot;cts&quot;= &quot;http://rdf.cdisc.org/ct/schema#&quot;,
+##  &quot;sdtm&quot;=&quot;http://rdf.cdisc.org/sdtm-terminology#&quot;,
+##  &quot;rrdfqbcrnd0&quot;=&quot;http://www.example.org/rrdfqbcrnd0/&quot;
+## ) 
+
+qbCDISCprefixes&lt;- env[[&quot;qbCDISCprefixes&quot;]]</code></pre>
 <p>ToDo(mja): The rrdfqbcrnd0 prefix should be moved to package rrdfqbcrnd0</p>
+<p>ToDo(mja): the <code>qbCDISCprefixes</code> is obsolete, as the <code>env[[&quot;qbCDISCprefixes&quot;]]</code> in <code>zzz.R</code> has the same function.</p>
 <pre class="r"><code>devtools::use_data(qbCDISCprefixes,overwrite=TRUE)</code></pre>
 <pre><code>## Saving qbCDISCprefixes to data/qbCDISCprefixes.rda</code></pre>
 </div>

@@ -49,17 +49,20 @@ install-rrdfcdisc-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
 
 
+mk-rrdfcdisc:
+	cd rrdfcdisc; make
+
 mk-rrdfancillary:
 	cd rrdfancillary; make
+
+mk-rrdfqb:
+	cd rrdfqb; make
 
 mk-rrdfqbcrnd0:
 	cd rrdfqbcrnd0; make
 
 mk-rrdfqbcrndex:
 	cd rrdfqbcrndex; make
-
-mk-rrdfqb:
-	cd rrdfqb; make
 
 mk-rrdfqbpresent:
 	cd rrdfqbpresent; make
