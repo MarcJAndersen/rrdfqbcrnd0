@@ -42,16 +42,17 @@ buildCodelist <- function(
     colnames(codeSource) <- ("code")  ## Rename to match SDTM approach
   }
   else if (codeType=="SDTM"){
-    ## TODO: change : prefix to the usual SDTM terminology prefix    
+
     CDISCsparqlprefix<-'
 prefix : <http://rdf.cdisc.org/sdtm-terminology#>
 prefix cts:   <http://rdf.cdisc.org/ct/schema#>
 prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
 prefix mms:   <http://rdf.cdisc.org/mms#>
-prefix sdtm: <http://rdf.cdisc.org/sdtm-terminology#>
+prefix sdtmct: <http://rdf.cdisc.org/sdtm-terminology#>
 '
-      
+
     query <- GetCDISCCodeListSparqlQuery( CDISCsparqlprefix, nciDomainValue )
+
 
     if (! is.null(remote.endpoint) ) {
       codeSource <- as.data.frame(sparql.remote(remote.endpoint, query))
