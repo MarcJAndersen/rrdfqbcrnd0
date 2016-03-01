@@ -8,7 +8,7 @@ GetCDISCCodeListSparqlQuery<- function( forsparqlprefix, nciDomainValue ) {
 codelists.rq<-   paste(forsparqlprefix,
 'select ?nciDomain ?cdiscDefinition ?code ?cdiscSynonyms ?nciCode ?nciPreferredTerm
 where {
-  ?nciDomain mms:inValueDomain ', paste0('sdtm', ':', nciDomainValue), ' .',
+  ?nciDomain mms:inValueDomain ', paste0('sdtmct', ':', nciDomainValue), ' .',
 '  ?nciDomain cts:cdiscDefinition      ?cdiscDefinition .
   ?nciDomain cts:cdiscSubmissionValue ?code .
   OPTIONAL { ?nciDomain cts:cdiscSynonyms        ?cdiscSynonyms . }
