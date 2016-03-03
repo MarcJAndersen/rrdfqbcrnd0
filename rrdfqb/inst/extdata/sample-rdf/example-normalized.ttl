@@ -102,9 +102,6 @@ eg:refArea  a               qb:DimensionProperty , rdf:Property ;
         rdfs:subPropertyOf  sdmx-dimension:refArea ;
         qb:concept          sdmx-concept:refArea .
 
-sdmx-attribute:unitMeasure
-        a       qb:AttributeProperty .
-
 eg:o22  a                           qb:Observation ;
         eg:lifeExpectancy           83.3 ;
         eg:refArea                  ex-geo:cardiff_00pt ;
@@ -112,6 +109,9 @@ eg:o22  a                           qb:Observation ;
         qb:dataSet                  eg:dataset-le3 ;
         sdmx-attribute:unitMeasure  <http://dbpedia.org/resource/Year> ;
         sdmx-dimension:sex          sdmx-code:sex-F .
+
+sdmx-attribute:unitMeasure
+        a       qb:AttributeProperty .
 
 eg:o63  a                           qb:Observation ;
         eg:lifeExpectancy           81.7 ;
