@@ -36,10 +36,11 @@ if (! url.exists(qbURL) ) {
 cube.vocabulary.ttl <- getURL(qbURL)
 savefile <- file.path(system.file("extdata/cube-vocabulary-rdf", package="rrdfqb"), "cube.ttl" )
 writeLines( cube.vocabulary.ttl, savefile)
-cat("written to ", normalizePath(savefile) )
+cat("written to ", normalizePath(savefile), "\n" )
 ```
 
-## SPARQL for getting the cube vocabulary using FROM in the SPARQL query 
+
+# SPARQL for getting the cube vocabulary using FROM in the SPARQL query 
 
 The following is experimental and not needed for the present
 package. See below for explanation.
@@ -47,10 +48,10 @@ package. See below for explanation.
 ```{r, results='asis', eval=TRUE}
 rdf.data.cube.URLstem<- qbURL
 SPARQLscript<- paste(
-  "CONSTRUCT { ?s ?p ?o }",
-paste0( "FROM ", "<", rdf.data.cube.URLstem, ">", collapse="\n" )
-  ,
-  "WHERE { ?s ?p ?o }", sep="\n", collapse="\n"
+    "CONSTRUCT { ?s ?p ?o }",
+    paste0( "FROM ", "<", rdf.data.cube.URLstem, ">", collapse="\n" ),
+    "WHERE { ?s ?p ?o }",
+    sep="\n", collapse="\n"
 )
 cat(SPARQLscript,"\n")
 SPARQLscriptfn<- file.path(tempdir(),"get-cube.rq")
@@ -59,12 +60,23 @@ cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
 ### Using the script with R
-The R-code below does not work with rrdf.
+The R-code below does not work with `rrdf`, presumably because the FROM clause is not evaluated.
 
 ```{r, results='asis', eval=FALSE}
 store <- new.rdf()
-results <- construct.rdf(store, SPARQLscript )
-summarize.rdf(results)
+summarize.rdf(store)
+results.rdf <- construct.rdf(store, SPARQLscript )
+summarize.rdf(results.rdf)
+
+dump.rq<- paste(
+    "SELECT  ?s ?p ?o ",
+    "WHERE { ?s ?p ?o }",
+    sep="\n", collapse="\n"
+)
+cat(dump.rq,"\n")
+cube.triples<- data.frame(sparql.rdf(results.rdf, dump.rq ), stringsAsFactors=FALSE)
+knitr::kable(cube.triples)
+
 ```
 
 However, it works using a local Fuseki instance. 

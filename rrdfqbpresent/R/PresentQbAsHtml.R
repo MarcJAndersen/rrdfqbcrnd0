@@ -1,5 +1,4 @@
-##' 
-##'
+##' Create HTML file for RDF data cube given by turtle file
 ##' 
 ##' @param dataCubeFile 
 ##' @param htmlfile 

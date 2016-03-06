@@ -1,28 +1,32 @@
 ---
 title: "RDF data cube SPARQL queries"
-author: "mja@statgroup.dk"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: 
-  %\VignetteIndexEntry{RDF data cube SPARQL queries}
+vignette: >
+  %\VignetteIndexEntry{Explore RDF data cube vocabulary}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
+output:
+  html_document:
+    toc: true
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  md_document:
+    variant: markdown_github
 ---
 
 # Setup
 ```{r, results='asis', eval=TRUE}
-devtools::load_all(pkg="..")
-
-#library(rrdf)
-
+library(rrdfancillary)
+library(rrdfqb)
 ```
 
 # Load example cube and define SPARQL prefixes
 
 ```{r, results='asis', eval=TRUE}
-
-qbfile <- file.path(system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb") )
-qbfile <- file.path(system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqb") )
+qbfile <- file.path(system.file("extdata/sample-rdf", "example-normalized.ttl", package="rrdfqb") )
+# qbfile <- file.path(system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb") )
+# qbfile <- file.path(system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfcrndex") )
 cube <- new.rdf(ontology=FALSE)
 invisible(load.rdf( qbfile, format="TURTLE", cube))
 
@@ -159,7 +163,7 @@ SPARQLquery<- paste( "select * where {",
       )
 
 SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
-cat(SPARQLscript)
+cat(SPARQLscript, "\n")
 oresult <- data.frame(sparql.rdf(cube, SPARQLscript ),stringsAsFactors=FALSE)
 knitr::kable(oresult)
 
@@ -169,21 +173,24 @@ knitr::kable(oresult)
 
 # Make SPARQL query for getting observations for example.ttl
 
-This will not work as the cube is not normalized.
+This query below expects the cube is normalized, which is the case for
+the cube loaded in the store. Note, it will not work on the example
+cube as presented in RDF Data Cube Vocabulary, as the example cube is
+by purpose not normalised.
 
 
-```{r, results='asis', eval=FALSE}
+```{r, results='asis', eval=TRUE}
 genfor<- result[result$dataset==result$dataset[1],]
 genfor$colnames<- sapply(strsplit(genfor$componentReference, "#"), "[", 2)
 
 SPARQLquery<- paste( "select * where {",
       "?obs a qb:Observation;",
-      "# qb:dataSet  ?dataset ; ",
-      paste("",
+      "qb:dataSet  ?dataset ; ",
+      paste(
           "<", genfor$componentReference, ">", " ", "?", genfor$colnames, " ;", sep="", collapse="\n"
       ),
       ".", 
-      paste( "#values (?dataset) { (",
+      paste( "values (?dataset) { (",
             "<", result$dataset[1], ">",
             ") }", sep="", collapse="\n"
             ),
@@ -191,35 +198,7 @@ SPARQLquery<- paste( "select * where {",
       )
 
 SPARQLscript<- paste( SPARQLprefix, SPARQLquery )
-cat(SPARQLscript)
+cat(SPARQLscript, "\n")
 oresult <- data.frame(sparql.rdf(cube, SPARQLscript ),stringsAsFactors=FALSE)
 knitr::kable(oresult)
-
-qq<-'
-prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
-prefix skos: <http://www.w3.org/2004/02/skos/core#>  
-prefix prov: <http://www.w3.org/ns/prov#>  
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>  
-prefix dcat: <http://www.w3.org/ns/dcat#>  
-prefix owl: <http://www.w3.org/2002/07/owl#>  
-prefix xsd: <http://www.w3.org/2001/XMLSchema#>  
-prefix qb: <http://purl.org/linked-data/cube#>  
-prefix pav: <http://purl.org/pav>  
-prefix dct: <http://purl.org/dc/terms/>  
- select * where {
-?obs a qb:Observation;
- qb:dataSet  ?dataset ; 
- <http://example.org/ns#refArea> ?refArea ;
- <http://example.org/ns#refPeriod> ?refPeriod ;
- <http://purl.org/linked-data/sdmx/2009/dimension#sex> ?sex ;
- <http://example.org/ns#lifeExpectancy> ?lifeExpectancy ;
-# <http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure> ?unitMeasure ;
-.
-#values (?dataset) { (<http://example.org/ns#dataset-le3>) }
-}
-'
-oresult <- data.frame(sparql.rdf(cube, qq ),stringsAsFactors=FALSE)
-knitr::kable(oresult)
-
-
 ```

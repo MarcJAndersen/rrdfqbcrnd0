@@ -2,6 +2,7 @@
 % Please edit documentation in R/PresentQbAsHtml.R
 \name{PresentQbAsHtml}
 \alias{PresentQbAsHtml}
+\title{Create HTML file for RDF data cube given by turtle file}
 \usage{
 PresentQbAsHtml(dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol)
 }
@@ -17,5 +18,8 @@ PresentQbAsHtml(dataCubeFile, htmlfile, rowdim, coldim, idrow, idcol)
 \item{idrow}{}
 
 \item{idcol}{}
+}
+\description{
+Create HTML file for RDF data cube given by turtle file
 }
 
