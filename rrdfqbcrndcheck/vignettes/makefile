@@ -9,10 +9,10 @@ TARGETS=${MDS} ${PDFS} ${HTMLS}
 all: ${TARGETS}
 
 clean:
-	echo rm -f ${TARGETS}
+	rm -f ${TARGETS}
 
 %.pdf: %.Rmd
-	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rnw','pdf_document')"
+	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"

@@ -6,6 +6,11 @@
 \usage{
 GetFormularFromCube(store, forsparqlprefixcommon)
 }
+\arguments{
+\item{store}{RDF store containing the RDF data cube}
+
+\item{forsparqlprefixcommon}{Prefix for making the query}
+}
 \value{
 expression with the formulars representing the RDF data cube
 }

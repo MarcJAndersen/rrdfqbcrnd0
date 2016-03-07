@@ -6,7 +6,7 @@
 \usage{
 DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet,
   deriveMeasureList = NULL, checkOnly = TRUE, validation.measure = NULL,
-  myprefixes)
+  myprefixes = NULL, filterexpr = NULL)
 }
 \arguments{
 \item{store}{a RRDF store containing one or more date cubes}
@@ -26,9 +26,11 @@ FALSE then measure is overwritten with the results}
 
 \item{validation.measure}{list with property, prefix and
 URIprefix. The derived results is stored in the cube in the store
-using the property. This is only used is checkOnly==TRUE}
+using the property. This is only used if checkOnly==TRUE}
 
 \item{myprefixes}{Prefixes used for storing the results - TODO(mja): combined with forsparqlprefix}
+
+\item{filterexpr}{SPARQL filter expression for selecting the observations to return. Default is observations where measure in the qube differs from the caculated results. If blank (" "), then the all observations are returned, including the results derived from the cube. THis is usefull to get the results without having any measures defined.}
 }
 \value{
 list with status TRUE if the operation was sucessfull

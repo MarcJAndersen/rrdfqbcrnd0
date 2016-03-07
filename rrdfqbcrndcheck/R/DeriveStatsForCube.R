@@ -1,6 +1,5 @@
 ##' Derive the descriptive statistics defined in a cube
 ##' 
-##' @inheritParams GetObservationsSparqlQuery
 ##' @param store a RRDF store containing one or more date cubes
 ##' @param forsparqlprefix prefixes for SPARQL queries
 ##' @param domainName domainName for the RRDF cube
@@ -13,6 +12,7 @@
 ##' @param checkOnly TRUE if only the check is performed (default),
 ##' FALSE then measure is overwritten with the results
 ##' @param myprefixes Prefixes used for storing the results - TODO(mja): combined with forsparqlprefix
+##' @param filterexpr SPARQL filter expression for selecting the observations to return. Default is observations where measure in the qube differs from the caculated results. If blank (" "), then the all observations are returned, including the results derived from the cube. THis is usefull to get the results without having any measures defined.
 ##' @return list with status TRUE if the operation was sucessfull
 ##' @export
 
@@ -103,21 +103,21 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
     ##    cat("   ", "Data subsetting expression ", logicalExpr, ".\n",
     ##        "   Data set row contributing ", sum(data.subset.logical), "\n")
     
-    has.result<- FALSE
+    has.calculated.result<- FALSE
 
     if (thisobs["procedure"] %in% names(proc) ) {
       forthis<- proc[[ as.character(thisobs["procedure" ]) ]]
       if (forthis$univfunc=="univfunc1")  {
         AOD<- as.vector(dataSet[data.subset.logical, as.character(thisobs["factorvalue"])])
         result<- (forthis$fun)(AOD)
-        has.result<- TRUE
+        has.calculated.result<- TRUE
         ##   print(paste("AOD number of observations", nrow(AOD)))
       } else if (forthis$univfunc=="univfunc2") {
         ## Here the result must be a vector
         ## TODO(mja): USUBJID should not be hardcoded, but change to be a parameter 
         AOD<- dataSet$USUBJID[data.subset.logical]
         result<- (forthis$fun)(AOD)
-        has.result<- TRUE
+        has.calculated.result<- TRUE
       } else if (forthis$univfunc=="univfunc3" & thisobs["factor"]== "code:factor-proportion") {
         
         denom.def<- tolower(thisobs["denominator"])
@@ -132,14 +132,14 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
         AOD<- dataSet$USUBJID[data.subset.logical]
         denom.data<- dataSet$USUBJID[denom.data.subset.logical]     
         result<- length(AOD) / length( denom.data ) * 100;
-        has.result<- TRUE
+        has.calculated.result<- TRUE
       }
       }
       else {
         stop("Handling of ", thisobs["procedure"], " is not defined")
       }
 
-      if (has.result) {
+      if (has.calculated.result) {
         ##      cat("   ", paste("result", result, " in cube ", thisobs["measure"], sep=" "), "\n" )
         if (result != thisobs["measure"]) {
              message(paste("difference result", result, " in cube ", thisobs["measure"], sep=" "), "\n" )
@@ -159,8 +159,8 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
       }
       else {
           Ndiff<- Ndiff+1
-          message(thisobs["s"], ifelse(has.result, result, "No result determined") )
-          print( paste( thisobs["s"], ifelse(has.result, result, "No result determined") ) )
+          message(thisobs["s"], ifelse(has.calculated.result, result, "No result determined") )
+          print( paste( thisobs["s"], ifelse(has.calculated.result, result, "No result determined") ) )
       }
       
       

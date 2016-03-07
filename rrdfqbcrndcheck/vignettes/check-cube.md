@@ -1,7 +1,7 @@
 ---
 title: "Derive results in RDF data cube and compare with results in data cube"
 author: "mja@statgroup.dk"
-date: "2016-01-16"
+date: "2016-03-07"
 vignette: >
   %\VignetteIndexEntry{Derive results in RDF data cube and compare with results in data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -62,8 +62,34 @@ library(rrdfqb)
 ##     clone
 ```
 
+```
+## Loading required package: rrdfancillary
+```
+
 ```r
 library(rrdfqbcrnd0)
+```
+
+```
+## Loading required package: rrdfcdisc
+```
+
+```
+## Loading required package: devtools
+```
+
+```
+## 
+## Attaching package: 'rrdfqbcrnd0'
+```
+
+```
+## The following object is masked from 'package:rrdfcdisc':
+## 
+##     summarize.rdf.noprint
+```
+
+```r
 library(rrdfqbcrndex)
 library(rrdfqbcrndcheck)
 
@@ -75,8 +101,13 @@ obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
 dataSet<-read.xport(obsFile)
 ii <- sapply(dataSet, is.factor)
 dataSet[ii] <- lapply(dataSet[ii], as.character)
+```
+The conversion to character can be avoided by using
+`library(SASxport)`, see
+(../../rrdfqbcrndex/inst/data-raw/create-dm-table-as-csv.Rmd).
 
 
+```r
 dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrndex")
 store <- new.rdf()  # Initialize
 cat("Reading turtle definition from ", dataCubeFile, "\n")
@@ -92,7 +123,7 @@ summarize.rdf(store)
 ```
 
 ```
-## [1] "Number of triples: 1460"
+## [1] "Number of triples: 1450"
 ```
 
 ```r
@@ -123,12 +154,11 @@ common.prefixes <-data.frame(
 
   myprefixes<- qb.def.prefixlist(store, prefixes )
 
-res<- DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=FALSE, myprefixes=myprefixes ) 
+res<- DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=FALSE, myprefixes=myprefixes, filterexpr=" " ) 
 ```
 
 ```
-## Number of differences  1 
-## [1] "If the result is <0 x 0> matrix then all value matches"
+## Error in DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, : unused argument (filterexpr = " ")
 ```
 
 ```r
@@ -136,7 +166,7 @@ print(res)
 ```
 
 ```
-## <0 x 0 matrix>
+## Error in print(res): object 'res' not found
 ```
 
 TODO(mja): naming of parameters to function _DeriveStatsForCube_ to be updated.

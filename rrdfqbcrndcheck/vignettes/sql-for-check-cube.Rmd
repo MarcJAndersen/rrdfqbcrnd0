@@ -32,6 +32,10 @@ ii <- sapply(adsl, is.factor)
 adsl[ii] <- lapply(adsl[ii], as.character)
 ```
 
+The conversion to character can be avoided by using
+`library(SASxport)`, see
+(../../rrdfqbcrndex/inst/data-raw/create-dm-table-as-csv.Rmd).
+
 ## Load the RDF data cube
 The RDF data cube is loaded.
 ```{r}

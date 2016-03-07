@@ -16,9 +16,6 @@ install-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbcrndcheck_${PACKAGEVERSION}.tar.gz")'
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbpresent_${PACKAGEVERSION}.tar.gz")'
 
-mk-rrdfcdisc:
-	cd rrdfcdisc; make
-
 install-rrdfancillary-from-dir:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfancillary_${PACKAGEVERSION}.tar.gz")'
 

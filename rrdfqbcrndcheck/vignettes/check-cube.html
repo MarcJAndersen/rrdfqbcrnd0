@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-03-01" />
+<meta name="date" content="2016-03-07" />
 
 <title>Derive results in RDF data cube and compare with results in data cube</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Derive results in RDF data cube and compare with results in data cube</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-03-01</em></h4>
+<h4 class="date"><em>2016-03-07</em></h4>
 </div>
 
 
@@ -106,10 +106,9 @@ obsFile&lt;- system.file(&quot;extdata/sample-xpt&quot;, &quot;adsl.xpt&quot;, p
 ## better to use library(SASxport) - see inst/data-raw/create-dm-table-as-csv.Rmd
 dataSet&lt;-read.xport(obsFile)
 ii &lt;- sapply(dataSet, is.factor)
-dataSet[ii] &lt;- lapply(dataSet[ii], as.character)
-
-
-dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DM-sample.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
+dataSet[ii] &lt;- lapply(dataSet[ii], as.character)</code></pre>
+<p>The conversion to character can be avoided by using <code>library(SASxport)</code>, see (../../rrdfqbcrndex/inst/data-raw/create-dm-table-as-csv.Rmd).</p>
+<pre class="r"><code>dataCubeFile&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;DC-DM-sample.ttl&quot;, package=&quot;rrdfqbcrndex&quot;)
 store &lt;- new.rdf()  # Initialize
 cat(&quot;Reading turtle definition from &quot;, dataCubeFile, &quot;\n&quot;)</code></pre>
 <pre><code>## Reading turtle definition from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrndex/extdata/sample-rdf/DC-DM-sample.ttl</code></pre>
@@ -143,11 +142,128 @@ common.prefixes &lt;-data.frame(
 
   myprefixes&lt;- qb.def.prefixlist(store, prefixes )
 
-res&lt;- DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=FALSE, myprefixes=myprefixes ) </code></pre>
+res&lt;- DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=FALSE, myprefixes=myprefixes, filterexpr=&quot; &quot; ) </code></pre>
+<pre><code>## difference result 8.59016712714193  in cube  8.59016712714194</code></pre>
 <pre><code>## Number of differences  1 
+## prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+## prefix skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+## prefix prov: &lt;http://www.w3.org/ns/prov#&gt;
+## prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+## prefix dcat: &lt;http://www.w3.org/ns/dcat#&gt;
+## prefix owl: &lt;http://www.w3.org/2002/07/owl#&gt;
+## prefix xsd: &lt;http://www.w3.org/2001/XMLSchema#&gt;
+## prefix pav: &lt;http://purl.org/pav&gt;
+## prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt;
+## prefix dct: &lt;http://purl.org/dc/terms/&gt;
+## prefix mms: &lt;http://rdf.cdisc.org/mms#&gt;
+## prefix cts: &lt;http://rdf.cdisc.org/ct/schema#&gt;
+## prefix cdiscs: &lt;http://rdf.cdisc.org/std/schema#&gt;
+## prefix cdash-1-1: &lt;http://rdf.cdisc.org/std/cdash-1-1#&gt;
+## prefix cdashct: &lt;http://rdf.cdisc.org/cdash-terminology#&gt;
+## prefix sdtmct: &lt;http://rdf.cdisc.org/sdtm-terminology#&gt;
+## prefix sdtm-1-2: &lt;http://rdf.cdisc.org/std/sdtm-1-2#&gt;
+## prefix sdtm-1-3: &lt;http://rdf.cdisc.org/std/sdtm-1-3#&gt;
+## prefix sdtms-1-3: &lt;http://rdf.cdisc.org/sdtm-1-3/schema#&gt;
+## prefix sdtmig-3-1-2: &lt;http://rdf.cdisc.org/std/sdtmig-3-1-2#&gt;
+## prefix sdtmig-3-1-3: &lt;http://rdf.cdisc.org/std/sdtmig-3-1-3#&gt;
+## prefix sendct: &lt;http://rdf.cdisc.org/send-terminology#&gt;
+## prefix sendig-3-0: &lt;http://rdf.cdisc.org/std/sendig-3-0#&gt;
+## prefix adamct: &lt;http://rdf.cdisc.org/adam-terminology#&gt;
+## prefix adam-2-1: &lt;http://rdf.cdisc.org/std/adam-2-1#&gt;
+## prefix adamig-1-0: &lt;http://rdf.cdisc.org/std/adamig-1-0#&gt;
+## prefix adamvr-1-2: &lt;http://rdf.cdisc.org/std/adamvr-1-2#&gt;
+## prefix qb: &lt;http://purl.org/linked-data/cube#&gt;
+## prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt;
+## prefix code: &lt;http://www.example.org/dc/code/&gt;
+## prefix dccs: &lt;http://www.example.org/dc/dm/dccs/&gt;
+## prefix ds: &lt;http://www.example.org/dc/dm/ds/&gt;
+## prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt;
+## prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt;
+## prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt;
+## prefix validmeas: &lt;http://www.example.org/dc/dm/validmeas/&gt;
+## prefix qbderiv: &lt;http://www.example.org/dc/dm/validmeas/&gt;
+## 
+## select * where {
+##     ?s a qb:Observation  ;
+##        qb:dataSet ds:dataset-DM ; 
+##        crnd-dimension:procedure      ?procedure ;      
+##        crnd-measure:measure      ?measure ;      
+##     .
+##       optional{ ?s qbderiv:result ?result }      
+## } order by ?s
+## 
+##  
 ## [1] &quot;If the result is &lt;0 x 0&gt; matrix then all value matches&quot;</code></pre>
 <pre class="r"><code>print(res)</code></pre>
-<pre><code>## &lt;0 x 0 matrix&gt;</code></pre>
+<pre><code>##       s          procedure                measure            result             diff 
+##  [1,] &quot;ds:obs01&quot; &quot;code:procedure-count&quot;   &quot;143&quot;              &quot;143&quot;              &quot;0.0&quot;
+##  [2,] &quot;ds:obs02&quot; &quot;code:procedure-count&quot;   &quot;111&quot;              &quot;111&quot;              &quot;0.0&quot;
+##  [3,] &quot;ds:obs03&quot; &quot;code:procedure-count&quot;   &quot;1&quot;                &quot;1&quot;                &quot;0.0&quot;
+##  [4,] &quot;ds:obs04&quot; &quot;code:procedure-count&quot;   &quot;23&quot;               &quot;23&quot;               &quot;0.0&quot;
+##  [5,] &quot;ds:obs05&quot; &quot;code:procedure-count&quot;   &quot;230&quot;              &quot;230&quot;              &quot;0.0&quot;
+##  [6,] &quot;ds:obs06&quot; &quot;code:procedure-max&quot;     &quot;89&quot;               &quot;89&quot;               &quot;0.0&quot;
+##  [7,] &quot;ds:obs07&quot; &quot;code:procedure-mean&quot;    &quot;75.2093023255814&quot; &quot;75.2093023255814&quot; &quot;0.0&quot;
+##  [8,] &quot;ds:obs08&quot; &quot;code:procedure-median&quot;  &quot;76&quot;               &quot;76&quot;               &quot;0.0&quot;
+##  [9,] &quot;ds:obs09&quot; &quot;code:procedure-min&quot;     &quot;52&quot;               &quot;52&quot;               &quot;0.0&quot;
+## [10,] &quot;ds:obs10&quot; &quot;code:procedure-stdev&quot;   &quot;8.59016712714194&quot; &quot;8.59016712714193&quot; &quot;0.0&quot;
+## [11,] &quot;ds:obs11&quot; &quot;code:procedure-percent&quot; &quot;61.6279069767442&quot; &quot;61.6279069767442&quot; &quot;0.0&quot;
+## [12,] &quot;ds:obs12&quot; &quot;code:procedure-percent&quot; &quot;38.3720930232558&quot; &quot;38.3720930232558&quot; &quot;0.0&quot;
+## [13,] &quot;ds:obs13&quot; &quot;code:procedure-count&quot;   &quot;86&quot;               &quot;86&quot;               &quot;0.0&quot;
+## [14,] &quot;ds:obs14&quot; &quot;code:procedure-count&quot;   &quot;53&quot;               &quot;53&quot;               &quot;0.0&quot;
+## [15,] &quot;ds:obs15&quot; &quot;code:procedure-count&quot;   &quot;33&quot;               &quot;33&quot;               &quot;0.0&quot;
+## [16,] &quot;ds:obs16&quot; &quot;code:procedure-max&quot;     &quot;86.2&quot;             &quot;86.2&quot;             &quot;0.0&quot;
+## [17,] &quot;ds:obs17&quot; &quot;code:procedure-mean&quot;    &quot;62.7593023255814&quot; &quot;62.7593023255814&quot; &quot;0.0&quot;
+## [18,] &quot;ds:obs18&quot; &quot;code:procedure-median&quot;  &quot;60.55&quot;            &quot;60.55&quot;            &quot;0.0&quot;
+## [19,] &quot;ds:obs19&quot; &quot;code:procedure-min&quot;     &quot;34&quot;               &quot;34&quot;               &quot;0.0&quot;
+## [20,] &quot;ds:obs20&quot; &quot;code:procedure-stdev&quot;   &quot;12.7715435329253&quot; &quot;12.7715435329253&quot; &quot;0.0&quot;
+## [21,] &quot;ds:obs21&quot; &quot;code:procedure-percent&quot; &quot;0&quot;                &quot;0&quot;                &quot;0.0&quot;
+## [22,] &quot;ds:obs22&quot; &quot;code:procedure-count&quot;   &quot;0&quot;                &quot;0&quot;                &quot;0.0&quot;
+## [23,] &quot;ds:obs23&quot; &quot;code:procedure-percent&quot; &quot;9.30232558139535&quot; &quot;9.30232558139535&quot; &quot;0.0&quot;
+## [24,] &quot;ds:obs24&quot; &quot;code:procedure-count&quot;   &quot;8&quot;                &quot;8&quot;                &quot;0.0&quot;
+## [25,] &quot;ds:obs25&quot; &quot;code:procedure-percent&quot; &quot;90.6976744186046&quot; &quot;90.6976744186046&quot; &quot;0.0&quot;
+## [26,] &quot;ds:obs26&quot; &quot;code:procedure-count&quot;   &quot;78&quot;               &quot;78&quot;               &quot;0.0&quot;
+## [27,] &quot;ds:obs27&quot; &quot;code:procedure-max&quot;     &quot;88&quot;               &quot;88&quot;               &quot;0.0&quot;
+## [28,] &quot;ds:obs28&quot; &quot;code:procedure-mean&quot;    &quot;74.3809523809524&quot; &quot;74.3809523809524&quot; &quot;0.0&quot;
+## [29,] &quot;ds:obs29&quot; &quot;code:procedure-median&quot;  &quot;76&quot;               &quot;76&quot;               &quot;0.0&quot;
+## [30,] &quot;ds:obs30&quot; &quot;code:procedure-min&quot;     &quot;56&quot;               &quot;56&quot;               &quot;0.0&quot;
+## [31,] &quot;ds:obs31&quot; &quot;code:procedure-stdev&quot;   &quot;7.88609384869824&quot; &quot;7.88609384869824&quot; &quot;0.0&quot;
+## [32,] &quot;ds:obs32&quot; &quot;code:procedure-percent&quot; &quot;47.6190476190476&quot; &quot;47.6190476190476&quot; &quot;0.0&quot;
+## [33,] &quot;ds:obs33&quot; &quot;code:procedure-percent&quot; &quot;52.3809523809524&quot; &quot;52.3809523809524&quot; &quot;0.0&quot;
+## [34,] &quot;ds:obs34&quot; &quot;code:procedure-count&quot;   &quot;84&quot;               &quot;84&quot;               &quot;0.0&quot;
+## [35,] &quot;ds:obs35&quot; &quot;code:procedure-count&quot;   &quot;40&quot;               &quot;40&quot;               &quot;0.0&quot;
+## [36,] &quot;ds:obs36&quot; &quot;code:procedure-count&quot;   &quot;44&quot;               &quot;44&quot;               &quot;0.0&quot;
+## [37,] &quot;ds:obs37&quot; &quot;code:procedure-max&quot;     &quot;108&quot;              &quot;108&quot;              &quot;0.0&quot;
+## [38,] &quot;ds:obs38&quot; &quot;code:procedure-mean&quot;    &quot;70.0047619047619&quot; &quot;70.0047619047619&quot; &quot;0.0&quot;
+## [39,] &quot;ds:obs39&quot; &quot;code:procedure-median&quot;  &quot;69.2&quot;             &quot;69.2&quot;             &quot;0.0&quot;
+## [40,] &quot;ds:obs40&quot; &quot;code:procedure-min&quot;     &quot;41.7&quot;             &quot;41.7&quot;             &quot;0.0&quot;
+## [41,] &quot;ds:obs41&quot; &quot;code:procedure-stdev&quot;   &quot;14.6534333717795&quot; &quot;14.6534333717795&quot; &quot;0.0&quot;
+## [42,] &quot;ds:obs42&quot; &quot;code:procedure-percent&quot; &quot;1.19047619047619&quot; &quot;1.19047619047619&quot; &quot;0.0&quot;
+## [43,] &quot;ds:obs43&quot; &quot;code:procedure-count&quot;   &quot;1&quot;                &quot;1&quot;                &quot;0.0&quot;
+## [44,] &quot;ds:obs44&quot; &quot;code:procedure-percent&quot; &quot;10.7142857142857&quot; &quot;10.7142857142857&quot; &quot;0.0&quot;
+## [45,] &quot;ds:obs45&quot; &quot;code:procedure-count&quot;   &quot;9&quot;                &quot;9&quot;                &quot;0.0&quot;
+## [46,] &quot;ds:obs46&quot; &quot;code:procedure-percent&quot; &quot;88.0952380952381&quot; &quot;88.0952380952381&quot; &quot;0.0&quot;
+## [47,] &quot;ds:obs47&quot; &quot;code:procedure-count&quot;   &quot;74&quot;               &quot;74&quot;               &quot;0.0&quot;
+## [48,] &quot;ds:obs48&quot; &quot;code:procedure-max&quot;     &quot;88&quot;               &quot;88&quot;               &quot;0.0&quot;
+## [49,] &quot;ds:obs49&quot; &quot;code:procedure-mean&quot;    &quot;75.6666666666667&quot; &quot;75.6666666666667&quot; &quot;0.0&quot;
+## [50,] &quot;ds:obs50&quot; &quot;code:procedure-median&quot;  &quot;77.5&quot;             &quot;77.5&quot;             &quot;0.0&quot;
+## [51,] &quot;ds:obs51&quot; &quot;code:procedure-min&quot;     &quot;51&quot;               &quot;51&quot;               &quot;0.0&quot;
+## [52,] &quot;ds:obs52&quot; &quot;code:procedure-stdev&quot;   &quot;8.28605059954093&quot; &quot;8.28605059954093&quot; &quot;0.0&quot;
+## [53,] &quot;ds:obs53&quot; &quot;code:procedure-percent&quot; &quot;59.5238095238095&quot; &quot;59.5238095238095&quot; &quot;0.0&quot;
+## [54,] &quot;ds:obs54&quot; &quot;code:procedure-percent&quot; &quot;40.4761904761905&quot; &quot;40.4761904761905&quot; &quot;0.0&quot;
+## [55,] &quot;ds:obs55&quot; &quot;code:procedure-count&quot;   &quot;84&quot;               &quot;84&quot;               &quot;0.0&quot;
+## [56,] &quot;ds:obs56&quot; &quot;code:procedure-count&quot;   &quot;50&quot;               &quot;50&quot;               &quot;0.0&quot;
+## [57,] &quot;ds:obs57&quot; &quot;code:procedure-count&quot;   &quot;34&quot;               &quot;34&quot;               &quot;0.0&quot;
+## [58,] &quot;ds:obs58&quot; &quot;code:procedure-max&quot;     &quot;106.1&quot;            &quot;106.1&quot;            &quot;0.0&quot;
+## [59,] &quot;ds:obs59&quot; &quot;code:procedure-mean&quot;    &quot;67.2795180722892&quot; &quot;67.2795180722892&quot; &quot;0.0&quot;
+## [60,] &quot;ds:obs60&quot; &quot;code:procedure-median&quot;  &quot;64.9&quot;             &quot;64.9&quot;             &quot;0.0&quot;
+## [61,] &quot;ds:obs61&quot; &quot;code:procedure-min&quot;     &quot;45.4&quot;             &quot;45.4&quot;             &quot;0.0&quot;
+## [62,] &quot;ds:obs62&quot; &quot;code:procedure-stdev&quot;   &quot;14.1235986486909&quot; &quot;14.1235986486909&quot; &quot;0.0&quot;
+## [63,] &quot;ds:obs63&quot; &quot;code:procedure-percent&quot; &quot;0&quot;                &quot;0&quot;                &quot;0.0&quot;
+## [64,] &quot;ds:obs64&quot; &quot;code:procedure-count&quot;   &quot;0&quot;                &quot;0&quot;                &quot;0.0&quot;
+## [65,] &quot;ds:obs65&quot; &quot;code:procedure-percent&quot; &quot;7.14285714285714&quot; &quot;7.14285714285714&quot; &quot;0.0&quot;
+## [66,] &quot;ds:obs66&quot; &quot;code:procedure-count&quot;   &quot;6&quot;                &quot;6&quot;                &quot;0.0&quot;
+## [67,] &quot;ds:obs67&quot; &quot;code:procedure-percent&quot; &quot;92.8571428571429&quot; &quot;92.8571428571429&quot; &quot;0.0&quot;
+## [68,] &quot;ds:obs68&quot; &quot;code:procedure-count&quot;   &quot;78&quot;               &quot;78&quot;               &quot;0.0&quot;</code></pre>
 <p>TODO(mja): naming of parameters to function <em>DeriveStatsForCube</em> to be updated.</p>
 <p>End of file.</p>
 </div>
