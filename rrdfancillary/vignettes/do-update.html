@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-03-01" />
+<meta name="date" content="2016-03-07" />
 
 <title>SPARQL update example</title>
 
@@ -64,22 +64,12 @@ img {
 <div id="header">
 <h1 class="title">SPARQL update example</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-03-01</em></h4>
+<h4 class="date"><em>2016-03-07</em></h4>
 </div>
 
 
-<div id="how-to-run-from-command-prompt-when-developing" class="section level3">
-<h3>How to run from command prompt when developing</h3>
-<p>Start in the package root directory</p>
-<p>Devtools should reply reply <code>Loading rrdfancillary</code>.</p>
-<p>The knit command should generate .md file in the present work directory - the package root directory</p>
-<pre class="r"><code>library(devtools)
-devtools::document()
-devtools::load_all(&quot;..&quot;)
-devtools::install()
-library(knitr)
-knit(&quot;vignettes/do-update.Rmd&quot;)
-library(rrdfancillary)</code></pre>
+<div id="sparql-update-example" class="section level1">
+<h1>SPARQL update example</h1>
 <pre class="r"><code>library(rrdf)</code></pre>
 <pre><code>## Loading required package: rJava</code></pre>
 <pre><code>## Loading required package: methods</code></pre>
@@ -90,14 +80,15 @@ add.data.triple(store,
                 subject=&quot;http://example.org/Subject&quot;,
                 predicate=&quot;http://example.org/Predicate&quot;,
                 data=&quot;Value&quot;)
-cat(asString.rdf(store))</code></pre>
+cat(asString.rdf(store),&quot;\n&quot;)</code></pre>
 <pre><code>## @prefix owl:   &lt;http://www.w3.org/2002/07/owl#&gt; .
 ## @prefix rdf:   &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 ## @prefix xsd:   &lt;http://www.w3.org/2001/XMLSchema#&gt; .
 ## @prefix rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 ## 
 ## &lt;http://example.org/Subject&gt;
-##         &lt;http://example.org/Predicate&gt;  &quot;Value&quot; .</code></pre>
+##         &lt;http://example.org/Predicate&gt;  &quot;Value&quot; .
+## </code></pre>
 <pre class="r"><code>SPARQLinsert&lt;- '
 PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
 INSERT DATA
@@ -109,7 +100,7 @@ INSERT DATA
 
 update.rdf( store, SPARQLinsert )</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>cat(asString.rdf(store))</code></pre>
+<pre class="r"><code>cat(asString.rdf(store), &quot;\n&quot;)</code></pre>
 <pre><code>## @prefix owl:   &lt;http://www.w3.org/2002/07/owl#&gt; .
 ## @prefix rdf:   &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
 ## @prefix xsd:   &lt;http://www.w3.org/2001/XMLSchema#&gt; .
@@ -122,7 +113,8 @@ update.rdf( store, SPARQLinsert )</code></pre>
 ##                 &quot;A new book&quot; .
 ## 
 ## &lt;http://example.org/Subject&gt;
-##         &lt;http://example.org/Predicate&gt;  &quot;Value&quot; .</code></pre>
+##         &lt;http://example.org/Predicate&gt;  &quot;Value&quot; .
+## </code></pre>
 </div>
 
 

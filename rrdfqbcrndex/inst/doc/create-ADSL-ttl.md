@@ -54,7 +54,7 @@ dbDisconnect(con)
 cat("SQLite database stored as ", tfile, "\n")
 ```
 
-    ## SQLite database stored as  /tmp/RtmpGxWH2c/file3ffd16892d16
+    ## SQLite database stored as  /tmp/RtmpLfkzxr/file1a0a7a74f2c1
 
 ``` r
 dumpFn<- tempfile()
@@ -62,7 +62,7 @@ system(paste("sqlite3", tfile, ".dump >", dumpFn, sep=" "))
 cat("SQLite database dump in ", dumpFn, "\n")
 ```
 
-    ## SQLite database dump in  /tmp/RtmpGxWH2c/file3ffd66665edc
+    ## SQLite database dump in  /tmp/RtmpLfkzxr/file1a0a76468c8b
 
 Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: \* change TEXT to VARCHAR(1000) \* remove top 2 lines with PRAGMA \* in insert statements replace "adsl" with adsl \* after "MMSETOT" REAL add a comma (",") and a new line with PRIMARY KEY (USUBJID)
 
@@ -77,7 +77,7 @@ system(sedCmd)
 cat("SQLite database dump modified stored as ", dumpAfterSedFn, "\n")
 ```
 
-    ## SQLite database dump modified stored as  /tmp/RtmpGxWH2c/file3ffd69002c97
+    ## SQLite database dump modified stored as  /tmp/RtmpLfkzxr/file1a0a763bacdc
 
 ``` r
 ## Check only expected changes were applied
@@ -112,7 +112,7 @@ cat( "File ", adslmapttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/RtmpGxWH2c/adsl-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/RtmpLfkzxr/adsl-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 ``` r
 if (file.copy(adslttlFn, targetDir, overwrite = TRUE)) {
@@ -120,7 +120,7 @@ cat( "File ", adslttlFn, " copied to directory ", targetDir, "\n")
 }
 ```
 
-    ## File  /tmp/RtmpGxWH2c/adsl.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
+    ## File  /tmp/RtmpLfkzxr/adsl.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf
 
 Note: consider using Produce W3C Direct Mapping (<https://www.w3.org/TR/rdb-direct-mapping/>) - this can be done using the option `-w3c`.
 

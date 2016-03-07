@@ -10,7 +10,7 @@
 
 <meta name="author" content="PhuseSubTeamAnalysisResults@example.org" />
 
-<meta name="date" content="2016-03-01" />
+<meta name="date" content="2016-03-07" />
 
 <title>Store CDISC RDF as RRDF data model</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Store CDISC RDF as RRDF data model</h1>
 <h4 class="author"><em><a href="mailto:PhuseSubTeamAnalysisResults@example.org">PhuseSubTeamAnalysisResults@example.org</a></em></h4>
-<h4 class="date"><em>2016-03-01</em></h4>
+<h4 class="date"><em>2016-03-07</em></h4>
 </div>
 
 <div id="TOC">
@@ -219,14 +219,14 @@ filesToLoad&lt;- c(
 <pre><code>## Loading /home/ma/projects/phrmwg/rdf.cdisc.org/schemas/cdisc-schema.owl ..</code></pre>
 <pre><code>## .. total number of triples: 164711</code></pre>
 <pre><code>## Final rdf.cdisc.org rrdf store, number of triples: 164711</code></pre>
-<pre><code>## rrdf store saved to turle file: /tmp/RtmplYWsBk/cdisc-rdf.ttl</code></pre>
+<pre><code>## rrdf store saved to turle file: /tmp/RtmpWxmir4/cdisc-rdf.ttl</code></pre>
 <pre><code>## Warning in normalizePath(full.cdisc.save.zip): path[1]=&quot;/home/ma/projects/
 ## rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip&quot;: No
 ## such file or directory</code></pre>
 <pre><code>## Writing to zip file /home/ma/projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip</code></pre>
 <pre class="r"><code>cdisc.save.zip.info&lt;- file.info(cdisc.save.zip)
 message(&quot;File &quot;, normalizePath(cdisc.save.zip), &quot; created &quot;, cdisc.save.zip.info$ctime, &quot; size &quot;, cdisc.save.zip.info$size, &quot; bytes&quot;)</code></pre>
-<pre><code>## File /home/ma/projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-03-01 21:45:40 size 2310300 bytes</code></pre>
+<pre><code>## File /home/ma/projects/rrdfqbcrnd0/rrdfcdisc/inst/extdata/CDISC-standards-rdf/cdisc-rdf.zip created 2016-03-07 23:01:06 size 2310300 bytes</code></pre>
 <div id="creating-sparql-construct-script-for-getting-cdisc-standard-using-from-dataset" class="section level3">
 <h3>Creating SPARQL construct script for getting CDISC standard using FROM dataset</h3>
 <p>The following is experimental and not needed for the present package. See below for explanation.</p>
@@ -250,7 +250,7 @@ cat(SPARQLscript,&quot;\n&quot;)</code></pre>
 SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-rdf.disc.org.rq&quot;)
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)</code></pre>
-<p>SPARQL script stored in /tmp/RtmplYWsBk/get-rdf.disc.org.rq</p>
+<p>SPARQL script stored in /tmp/RtmpWxmir4/get-rdf.disc.org.rq</p>
 <pre class="r"><code>targetDir&lt;- system.file(&quot;extdata/CDISC-standards-rdf&quot;, package=&quot;rrdfcdisc&quot;)
 targetFile&lt;- file.path(targetDir,basename(SPARQLscriptfn) )
 

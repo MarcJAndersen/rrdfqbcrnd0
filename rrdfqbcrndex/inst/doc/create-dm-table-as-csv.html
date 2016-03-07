@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-03-01" />
+<meta name="date" content="2016-03-07" />
 
 <title>Create DM table as csv file</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create DM table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-03-01</em></h4>
+<h4 class="date"><em>2016-03-07</em></h4>
 </div>
 
 <div id="TOC">
@@ -188,6 +188,7 @@ print(tempfile)</code></pre>
 <h2>Define SQL statements directly</h2>
 <p>The statements below are inserted from the file generated above.</p>
 <p>Work-around: add SELECT statments below corresponding to the desired statistics. Update the .csv file, and re-create the cube. Repeat until done. This is of course not the ideal way; waiting to the formular interface to the cube.</p>
+<p>Note: the <code>GetSQLFromCube</code> functions in package <code>rrdfqbcrndcheck</code> generates the SQL statements from the cube obversvations.</p>
 <pre class="r"><code>res.text&lt;- &quot;
 SELECT a.TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SEX, a.SAFFL
 UNION

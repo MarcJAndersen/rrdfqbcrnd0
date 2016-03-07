@@ -249,7 +249,70 @@ packageVersion("rrdf")
 
 ## Documentation for generation
 
+|Package            |File        |Description|
+|-------------------|------------|-----------|
+|./rrdfcdisc|[store-cdisc-rdf-as-rrdf](./rrdfcdisc/inst/doc/store-cdisc-rdf-as-rrdf.html)| Store CDISC RDF as RRDF data model |
+|./rrdfcdisc|[create-qb-CDISC-prefix](./rrdfcdisc/inst/doc/create-qb-CDISC-prefix.html)| Create prefixes for use with CDISC standards in RDF |
+|./rrdfqb|[get-cube-vocabulary](./rrdfqb/inst/doc/get-cube-vocabulary.html)| Get RDF data cube vocabulary as turtle file from qb: (<http://purl.org/linked-data/cube>\#). |
+|./rrdfqb|[create-qb-IC-dataset](./rrdfqb/inst/doc/create-qb-IC-dataset.html)| Create Integrity Contraints SPARQL Queries from RDF data cube definition |
+|./rrdfqb|[get-qb-ex-ttlfile](./rrdfqb/inst/doc/get-qb-ex-ttlfile.html)| Get RDF data cube example file from RDF data cube specifications |
+|./rrdfqbcrnd0|[codelist-procedure](./rrdfqbcrnd0/inst/doc/codelist-procedure.html)| Introduction |
+|./rrdfqbcrndex|[use-demo-ttl](./rrdfqbcrndex/inst/doc/use-demo-ttl.html)| Introduction |
+|./rrdfqbcrndex|[rdf-gotchas](./rrdfqbcrndex/inst/doc/rdf-gotchas.html)| Setup |
+|./rrdfqbcrndex|[create-ADSL-ttl](./rrdfqbcrndex/inst/doc/create-ADSL-ttl.html)| Create turtle version of ADSL dataset |
+|./rrdfqbcrndex|[using-arq-qb](./rrdfqbcrndex/inst/doc/using-arq-qb.html)| SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl) |
+|./rrdfqbcrndex|[using-arq](./rrdfqbcrndex/inst/doc/using-arq.html)| SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl) |
+|./rrdfqbcrndex|[create-ae-table-as-csv](./rrdfqbcrndex/inst/doc/create-ae-table-as-csv.html)| Create AE sample table as CSV file and other files |
+|./rrdfqbcrndex|[create-ADAE-ttl](./rrdfqbcrndex/inst/doc/create-ADAE-ttl.html)| Create turtle version of ADAE dataset |
+|./rrdfqbcrndex|[create-dm-table-as-csv](./rrdfqbcrndex/inst/doc/create-dm-table-as-csv.html)| Introduction |
+|./rrdfqbcrndex|[populate-sample-xpt](./rrdfqbcrndex/inst/doc/populate-sample-xpt.html)| Populate sample-xpt with example file in SAS transport xpt format |
+|./rrdfqbcrndex|[reporting-process](./rrdfqbcrndex/inst/doc/reporting-process.html)| Introduction |
+|./rrdfqbcrndex|[using-python](./rrdfqbcrndex/inst/doc/using-python.html)| Using Python with SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl) |
+|./rrdfqbcrndex|[using-arq-graphical-display](./rrdfqbcrndex/inst/doc/using-arq-graphical-display.html)| Graphical display of results from SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl) |
+|./rrdfqbcrndex|[create-qb-examples-as-ttl](./rrdfqbcrndex/inst/doc/create-qb-examples-as-ttl.html)| Create turtle version of example files |
+|./rrdfqbpresent|[two-dim-representation-of-cube](./rrdfqbpresent/inst/doc/two-dim-representation-of-cube.html)| Setup |
+
+
 ## Vignette documents
+
+|Package            |File        |Description|
+|-------------------|------------|-----------|
+|./rrdfqb|[check-ic](./rrdfqb/vignettes/check-ic.html) |Execute SPARQL integrity constraints on a data cube|
+|./rrdfqb|[explore-cube-vocabulary](./rrdfqb/vignettes/explore-cube-vocabulary.html) |Explore RDF data cube vocabulary|
+|./rrdfqb|[qb-sparql-queries](./rrdfqb/vignettes/qb-sparql-queries.html) |RDF data cube SPARQL queries|
+|./rrdfqbcrnd0|[SPARQL-scripts-for-qb](./rrdfqbcrnd0/vignettes/SPARQL-scripts-for-qb.html) |SPARQL scripts for RDF data cubes|
+|./rrdfqbcrnd0|[SPARQL-query](./rrdfqbcrnd0/vignettes/SPARQL-query.html) |SPARQL query using Shiny to build interface|
+|./rrdfqbcrnd0|[first-cube](./rrdfqbcrnd0/vignettes/first-cube.html) |Create simple RDF data qube|
+|./rrdfqbcrnd0|[howto-create-vignette](./rrdfqbcrnd0/vignettes/howto-create-vignette.html) title: How to create vignette"
+|./rrdfqbcrndex|[cube-from-workbook](./rrdfqbcrndex/vignettes/cube-from-workbook.html) |Data qubes from Workbook|
+|./rrdfancillary|[do-update](./rrdfancillary/vignettes/do-update.html) |SPARQL update example|
+|./rrdfqbpresent|[two-dim-representation-of-cube](./rrdfqbpresent/vignettes/two-dim-representation-of-cube.html) |Two dimensional representation of RDF data cube|
+|./rrdfqbpresent|[vignette-two-dim-representation-of-cube](./rrdfqbpresent/vignettes/vignette-two-dim-representation-of-cube.html) |Two dimensional representation of RDF data cube|
+|./rrdfqbcrndcheck|[sql-for-check-cube](./rrdfqbcrndcheck/vignettes/sql-for-check-cube.html) |SQL code for verifying results in RDF data cube|
+|./rrdfqbcrndcheck|[check-cube](./rrdfqbcrndcheck/vignettes/check-cube.html) |Derive results in RDF data cube and compare with results in data cube|
+
+## SPARQL scripts
+
+|Package            |File        |Description|
+|-------------------|------------|-----------|
+|rrdfcdisc|[inst/extdata/CDISC-standards-rdf/get-rdf.disc.org](rrdfcdisc/inst/extdata/CDISC-standards-rdf/get-rdf.disc.org.rq) | CONSTRUCT { ?s ?p ?o } |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOprocedure-median](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure-median.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/qb-construct-ComponentProperty](rrdfqbcrndex/inst/extdata/sample-rdf/qb-construct-ComponentProperty.rq) | prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#> |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOattributes](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOattributes.rq) | ## @knitr DEMOattributes   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOdimensions](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOdimensions.rq) | ## @knitr DEMOdimensions   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/ADSL-record](rrdfqbcrndex/inst/extdata/sample-rdf/ADSL-record.rq) | ## @knitr ADSL-record |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOprocedure-codelist](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure-codelist.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOobservations-R-data](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-data.rq) | ## @knitr DEMOobservations-R-data |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOfactor](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOfactor.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOcodelist](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOcodelist.rq) | ## @knitr DEMOcodelist   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/get-procedure-codelist](rrdfqbcrndex/inst/extdata/sample-rdf/get-procedure-codelist.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOobservations-R-selection](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-selection.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/ADSL-mapping](rrdfqbcrndex/inst/extdata/sample-rdf/ADSL-mapping.rq) | ## @knitr ADSL-mapping |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOfactor-codelist](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOfactor-codelist.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOobservations](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOprocedure](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOprocedure.rq) | ## @knitr DEMOobservations   |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/DEMOobservations-R-data-part-1](rrdfqbcrndex/inst/extdata/sample-rdf/DEMOobservations-R-data-part-1.rq) | ## @knitr DEMOobservations-R-data |
+|rrdfqbcrndex|[inst/extdata/sample-rdf/OneQBobservation](rrdfqbcrndex/inst/extdata/sample-rdf/OneQBobservation.rq) | ## @knitr DEMOobservations   |
 
 # References, hints and acknowlegements
 

@@ -46,11 +46,11 @@ install-rrdfcdisc-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
 
 
-mk-rrdfcdisc:
-	cd rrdfcdisc; make
-
 mk-rrdfancillary:
 	cd rrdfancillary; make
+
+mk-rrdfcdisc:
+	cd rrdfcdisc; make
 
 mk-rrdfqb:
 	cd rrdfqb; make
@@ -82,12 +82,26 @@ doc-which-version-pakages:
 doc-which-md-files:
 	@echo "|Package            |File        |Description|"
 	@echo "|-------------------|------------|-----------|"
-	@find -path "*/inst/doc/*" -name "*.md" -and -not -name "README.md"| gawk '{ getline line < $$0; a=gensub( /^(.+)\/inst\/doc\/(.+).md/, "|\\1|[\\2](\\1/inst/doc/\\2.html)|", "g",$$0 ); print a, line, "|";  }'
+	@find -path "*/inst/doc/*" -name "*.md" -and -not -name "README.md" | gawk '{ getline line < $$0; a=gensub( /^(.+)(\/inst\/doc\/)(.+).md/, "|\\1|[\\3](\\1\\2\\3.html)|", "g",$$0 ); print a, line, "|";  }'
+
+doc-which-vignette-md-files:
+	@echo "|Package            |File        |Description|"
+	@echo "|-------------------|------------|-----------|"
+	@find -path "*/vignettes/*" -name "*.md" -and -not -name "README.md"| \
+         gawk '{ getline line < $$0; a=gensub( /^(.+)(\/vignettes\/)(.+).md/, "|\\1|[\\2](\\1\\2\\3.html)", "g",$$0 ); \
+               getline line < $$0; b=gensub( /^title: "([^"]+)"/, "|\\1|", "g", line ); \
+               print a, b;  }'
 
 # make doc-which-md-files  > overview-md.md
 # pandoc --from markdown_github --to html --standalone README.md > README.html
 # firefox README.html 
 # make doc-which-md-files | pandoc --from markdown_github --to html --standalone > mdrendered.html
+
+# regexp in gensub correct for these files; not in general - problem with file names with more than one period
+doc-which-rq-files:
+	@echo "|Package            |File        |Description|"
+	@echo "|-------------------|------------|-----------|"
+	@find -name "*.rq" | gawk '{ getline line < $$0; a=gensub( /^([^\/]+)\/([^\/]+)\/(.+).rq/, "|\\2|[\\3](\\2/\\3.rq)", "g",$$0 ); print a, "|", line, "|";  }'
 
 
 rbuild:

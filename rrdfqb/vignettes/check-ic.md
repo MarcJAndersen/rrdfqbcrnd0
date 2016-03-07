@@ -1,7 +1,7 @@
 ---
 title: "Execute SPARQL integrity constraints on a data cube"
 author: "mja@statgroup.dk"
-date: "2016-03-06"
+date: "2016-03-07"
 vignette: >
   %\VignetteIndexEntry{Execute SPARQL integrity constraints on a data cube}
   %\VignetteEngine{knitr::rmarkdown}

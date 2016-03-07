@@ -8,8 +8,136 @@ library(rrdf)
 library(rrdfancillary)
 ```
 
-Example on what not to do
-=========================
+Getting information out from a store
+====================================
+
+``` r
+storeex<- new.rdf(ontology=FALSE)
+query.rq<- '
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex:   <http://example.org/>
+SELECT ?s (isIRI(?s) as ?isiri_s) ?p (isIRI(?p) as ?isiri_p)  ?o (isIRI(?o) as ?isiri_o)  (lang(?o) as ?olang) (datatype(?o) as ?idatatype)
+where {
+values (?s ?p ?o) {
+(ex:a ex:p 1)
+(ex:a ex:p 1.0)
+(ex:a ex:p "1.00"^^xsd:float)
+(ex:a ex:p "1.000"^^xsd:double)
+(ex:a ex:p "NaN"^^xsd:float)
+(ex:a ex:p "NaN"^^xsd:double)
+(ex:b ex:p "a")
+(ex:b ex:p "a"@en)
+(ex:b ex:p "a"^^xsd:string)
+("a" "b" "c")
+}
+}
+'
+
+query.res<- sparql.rdf( storeex, query.rq )
+knitr::kable(query.res)
+```
+
+| s    | isiri\_s | p    | isiri\_p | o     | isiri\_o | olang | idatatype                                               |
+|:-----|:---------|:-----|:---------|:------|:---------|:------|:--------------------------------------------------------|
+| ex:a | true     | ex:p | true     | 1     | false    |       | xsd:integer                                             |
+| ex:a | true     | ex:p | true     | 1.0   | false    |       | xsd:decimal                                             |
+| ex:a | true     | ex:p | true     | 1.00  | false    |       | xsd:float                                               |
+| ex:a | true     | ex:p | true     | 1.000 | false    |       | xsd:double                                              |
+| ex:a | true     | ex:p | true     | NaN   | false    |       | xsd:float                                               |
+| ex:a | true     | ex:p | true     | NaN   | false    |       | xsd:double                                              |
+| ex:b | true     | ex:p | true     | a     | false    |       | xsd:string                                              |
+| ex:b | true     | ex:p | true     | a     | false    | en    | <http://www.w3.org/1999/02/22-rdf-syntax-ns#langString> |
+| ex:b | true     | ex:p | true     | a     | false    |       | xsd:string                                              |
+| a    | false    | b    | false    | c     | false    |       | xsd:string                                              |
+
+`sparql.rdf` return result is a character matrix
+================================================
+
+``` r
+storeex2<- new.rdf(ontology=FALSE)
+query2.rq<- '
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex:   <http://example.org/>
+SELECT ?s ?p  ?o  (datatype(?o) as ?idatatype)
+where {
+values (?s ?p ?o) {
+(ex:a ex:p 1)
+(ex:a ex:p 1.0)
+(ex:a ex:p 1.0E0)
+(ex:a ex:p "NaN"^^xsd:double )
+}
+}
+'
+
+query2.res<- sparql.rdf( storeex2, query2.rq )
+knitr::kable(query2.res)
+```
+
+| s    | p    | o     | idatatype   |
+|:-----|:-----|:------|:------------|
+| ex:a | ex:p | 1     | xsd:integer |
+| ex:a | ex:p | 1.0   | xsd:decimal |
+| ex:a | ex:p | 1.0E0 | xsd:double  |
+| ex:a | ex:p | NaN   | xsd:double  |
+
+``` r
+query2.df<- as.data.frame(query2.res, stringsAsFactors=FALSE)
+knitr::kable(query2.df)
+```
+
+| s    | p    | o     | idatatype   |
+|:-----|:-----|:------|:------------|
+| ex:a | ex:p | 1     | xsd:integer |
+| ex:a | ex:p | 1.0   | xsd:decimal |
+| ex:a | ex:p | 1.0E0 | xsd:double  |
+| ex:a | ex:p | NaN   | xsd:double  |
+
+``` r
+str(query2.df)
+```
+
+    ## 'data.frame':    4 obs. of  4 variables:
+    ##  $ s        : chr  "ex:a" "ex:a" "ex:a" "ex:a"
+    ##  $ p        : chr  "ex:p" "ex:p" "ex:p" "ex:p"
+    ##  $ o        : chr  "1" "1.0" "1.0E0" "NaN"
+    ##  $ idatatype: chr  "xsd:integer" "xsd:decimal" "xsd:double" "xsd:double"
+
+So, if the numeric columns are needed, they must explicitely be made by coversion. Below a new column `on` contains the numeric representation of the `o` column.
+
+``` r
+query21.df<- query2.df
+query21.df$on <- as.numeric(query21.df$o)
+knitr::kable(query21.df)
+```
+
+| s    | p    | o     | idatatype   |   on|
+|:-----|:-----|:------|:------------|----:|
+| ex:a | ex:p | 1     | xsd:integer |    1|
+| ex:a | ex:p | 1.0   | xsd:decimal |    1|
+| ex:a | ex:p | 1.0E0 | xsd:double  |    1|
+| ex:a | ex:p | NaN   | xsd:double  |  NaN|
+
+``` r
+Map(mode,query21.df)
+```
+
+    ## $s
+    ## [1] "character"
+    ## 
+    ## $p
+    ## [1] "character"
+    ## 
+    ## $o
+    ## [1] "character"
+    ## 
+    ## $idatatype
+    ## [1] "character"
+    ## 
+    ## $on
+    ## [1] "numeric"
+
+Same triple repeated: difference between Apache/Jena Store and SPARQL insert using Apache/Jena
+==============================================================================================
 
 When the exactly same triples are inserted - only one triple remains.
 

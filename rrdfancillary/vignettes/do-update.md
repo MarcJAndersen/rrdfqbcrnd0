@@ -1,7 +1,7 @@
 ---
 title: "SPARQL update example"
 author: "mja@statgroup.dk"
-date: "2016-03-01"
+date: "2016-03-07"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{SPARQL update example}
@@ -10,25 +10,7 @@ vignette: >
 ---
 
 
-### How to run from command prompt when developing
-
-Start in the package root directory
-
-Devtools should reply reply `Loading rrdfancillary`.
-
-The knit command should generate .md file in the present work directory - the package root directory
-
-
-
-```r
-library(devtools)
-devtools::document()
-devtools::load_all("..")
-devtools::install()
-library(knitr)
-knit("vignettes/do-update.Rmd")
-library(rrdfancillary)
-```
+# SPARQL update example
 
 
 ```r
@@ -54,7 +36,7 @@ add.data.triple(store,
                 subject="http://example.org/Subject",
                 predicate="http://example.org/Predicate",
                 data="Value")
-cat(asString.rdf(store))
+cat(asString.rdf(store),"\n")
 ```
 
 ```
@@ -65,6 +47,7 @@ cat(asString.rdf(store))
 ## 
 ## <http://example.org/Subject>
 ##         <http://example.org/Predicate>  "Value" .
+## 
 ```
 
 ```r
@@ -85,7 +68,7 @@ update.rdf( store, SPARQLinsert )
 ```
 
 ```r
-cat(asString.rdf(store))
+cat(asString.rdf(store), "\n")
 ```
 
 ```
@@ -102,4 +85,6 @@ cat(asString.rdf(store))
 ## 
 ## <http://example.org/Subject>
 ##         <http://example.org/Predicate>  "Value" .
+## 
 ```
+

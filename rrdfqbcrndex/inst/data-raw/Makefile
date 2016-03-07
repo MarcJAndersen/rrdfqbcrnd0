@@ -33,12 +33,7 @@ FORDOC= ${HTMLS} ${MDS} ${PDFS}
 
 TARGETS=${XPTS} ${TTLS}  ${FORDOC}
 
-RKNIT2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
-RKNIT2PDF=$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$<')"
-RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
-
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
-
 
 all: ${TARGETS} cleantemp
 
@@ -101,17 +96,3 @@ package-overview.html package-overview.pdf package-overview.md: package-overview
 rdf-gotchas.html rdf-gotchas.pdf rdf-gotchas.md: rdf-gotchas.Rmd
 	${RMD2HTML}
 
-# %.pdf: %.Rnw
-# 	${RKNIT2PDF}
-#
-# %.html: %.Rmd
-#	${RMD2HTML}
-
-# # not clever rule - also creates HTML version
-# %.pdf: %.Rmd
-#	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
-#	mv -f $*.pdf ../doc
-
-# %.html: %.Rmd
-# 	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','html_document')"
-# 	mv -f $*.html ../doc

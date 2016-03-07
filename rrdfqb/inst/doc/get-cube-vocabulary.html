@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-03-03" />
+<meta name="date" content="2016-03-07" />
 
 <title>Get RDF data cube vocabulary as turtle file from qb: (http://purl.org/linked-data/cube#)</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube" class="uri">http://purl.org/linked-data/cube</a>#)</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-03-03</em></h4>
+<h4 class="date"><em>2016-03-07</em></h4>
 </div>
 
 <div id="TOC">
@@ -72,10 +72,9 @@ img {
 <li><a href="#get-rdf-data-cube-vocabulary-as-turtle-file-from-qb-httppurl.orglinked-datacube.">Get RDF data cube vocabulary as turtle file from qb: (<a href="http://purl.org/linked-data/cube" class="uri">http://purl.org/linked-data/cube</a>#).</a><ul>
 <li><a href="#setup">Setup</a></li>
 </ul></li>
-<li><a href="#get-and-store-rdf-data-vocabulary">Get and store RDF data vocabulary</a><ul>
+<li><a href="#get-and-store-rdf-data-vocabulary">Get and store RDF data vocabulary</a></li>
 <li><a href="#sparql-for-getting-the-cube-vocabulary-using-from-in-the-sparql-query">SPARQL for getting the cube vocabulary using FROM in the SPARQL query</a><ul>
 <li><a href="#using-the-script-with-r">Using the script with R</a></li>
-</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -114,35 +113,45 @@ if (! url.exists(qbURL) ) {
 cube.vocabulary.ttl &lt;- getURL(qbURL)
 savefile &lt;- file.path(system.file(&quot;extdata/cube-vocabulary-rdf&quot;, package=&quot;rrdfqb&quot;), &quot;cube.ttl&quot; )
 writeLines( cube.vocabulary.ttl, savefile)
-cat(&quot;written to &quot;, normalizePath(savefile) )</code></pre>
+cat(&quot;written to &quot;, normalizePath(savefile), &quot;\n&quot; )</code></pre>
 <pre><code>## written to  /home/ma/projects/rrdfqbcrnd0/rrdfqb/inst/extdata/cube-vocabulary-rdf/cube.ttl</code></pre>
-<div id="sparql-for-getting-the-cube-vocabulary-using-from-in-the-sparql-query" class="section level2">
-<h2>SPARQL for getting the cube vocabulary using FROM in the SPARQL query</h2>
+</div>
+<div id="sparql-for-getting-the-cube-vocabulary-using-from-in-the-sparql-query" class="section level1">
+<h1>SPARQL for getting the cube vocabulary using FROM in the SPARQL query</h1>
 <p>The following is experimental and not needed for the present package. See below for explanation.</p>
 <pre class="r"><code>rdf.data.cube.URLstem&lt;- qbURL
 SPARQLscript&lt;- paste(
-  &quot;CONSTRUCT { ?s ?p ?o }&quot;,
-paste0( &quot;FROM &quot;, &quot;&lt;&quot;, rdf.data.cube.URLstem, &quot;&gt;&quot;, collapse=&quot;\n&quot; )
-  ,
-  &quot;WHERE { ?s ?p ?o }&quot;, sep=&quot;\n&quot;, collapse=&quot;\n&quot;
+    &quot;CONSTRUCT { ?s ?p ?o }&quot;,
+    paste0( &quot;FROM &quot;, &quot;&lt;&quot;, rdf.data.cube.URLstem, &quot;&gt;&quot;, collapse=&quot;\n&quot; ),
+    &quot;WHERE { ?s ?p ?o }&quot;,
+    sep=&quot;\n&quot;, collapse=&quot;\n&quot;
 )
 cat(SPARQLscript,&quot;\n&quot;)</code></pre>
 <p>CONSTRUCT { ?s ?p ?o } FROM <a href="https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl" class="uri">https://raw.githubusercontent.com/UKGovLD/publishing-statistical-data/master/specs/src/main/vocab/cube.ttl</a> WHERE { ?s ?p ?o }</p>
 <pre class="r"><code>SPARQLscriptfn&lt;- file.path(tempdir(),&quot;get-cube.rq&quot;)
 writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat(&quot;SPARQL script stored in  &quot;, normalizePath(SPARQLscriptfn), &quot;\n&quot;)</code></pre>
-<p>SPARQL script stored in /tmp/RtmpuYCbQ9/get-cube.rq</p>
+<p>SPARQL script stored in /tmp/Rtmpp2Bn2R/get-cube.rq</p>
 <div id="using-the-script-with-r" class="section level3">
 <h3>Using the script with R</h3>
-<p>The R-code below does not work with rrdf.</p>
+<p>The R-code below does not work with <code>rrdf</code>, presumably because the FROM clause is not evaluated.</p>
 <pre class="r"><code>store &lt;- new.rdf()
-results &lt;- construct.rdf(store, SPARQLscript )
-summarize.rdf(results)</code></pre>
+summarize.rdf(store)
+results.rdf &lt;- construct.rdf(store, SPARQLscript )
+summarize.rdf(results.rdf)
+
+dump.rq&lt;- paste(
+    &quot;SELECT  ?s ?p ?o &quot;,
+    &quot;WHERE { ?s ?p ?o }&quot;,
+    sep=&quot;\n&quot;, collapse=&quot;\n&quot;
+)
+cat(dump.rq,&quot;\n&quot;)
+cube.triples&lt;- data.frame(sparql.rdf(results.rdf, dump.rq ), stringsAsFactors=FALSE)
+knitr::kable(cube.triples)</code></pre>
 <p>However, it works using a local Fuseki instance. The code below assumes a local Fuseki instance is running at <code>http://localhost:3030/arm/query</code>. Change to follow your setup.</p>
 <pre class="r"><code>endpoint&lt;- &quot;http://localhost:3030/arm/query&quot;
 results.fuseki &lt;- construct.remote(endpoint, SPARQLscript )
 summarize.rdf(results.fuseki)</code></pre>
-</div>
 </div>
 </div>
 

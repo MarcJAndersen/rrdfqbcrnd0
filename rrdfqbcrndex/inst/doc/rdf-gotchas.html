@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-03-01" />
+<meta name="date" content="2016-03-07" />
 
 <title>RRDF gotcha</title>
 
@@ -64,13 +64,15 @@ img {
 <div id="header">
 <h1 class="title">RRDF gotcha</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-03-01</em></h4>
+<h4 class="date"><em>2016-03-07</em></h4>
 </div>
 
 <div id="TOC">
 <ul>
 <li><a href="#setup">Setup</a></li>
-<li><a href="#example-on-what-not-to-do">Example on what not to do</a></li>
+<li><a href="#getting-information-out-from-a-store">Getting information out from a store</a></li>
+<li><a href="#sparql.rdf-return-result-is-a-character-matrix"><code>sparql.rdf</code> return result is a character matrix</a></li>
+<li><a href="#same-triple-repeated-difference-between-apachejena-store-and-sparql-insert-using-apachejena">Same triple repeated: difference between Apache/Jena Store and SPARQL insert using Apache/Jena</a></li>
 </ul>
 </div>
 
@@ -83,8 +85,310 @@ img {
 <pre><code>## Loading required package: rrdflibs</code></pre>
 <pre class="r"><code>library(rrdfancillary)</code></pre>
 </div>
-<div id="example-on-what-not-to-do" class="section level1">
-<h1>Example on what not to do</h1>
+<div id="getting-information-out-from-a-store" class="section level1">
+<h1>Getting information out from a store</h1>
+<pre class="r"><code>storeex&lt;- new.rdf(ontology=FALSE)
+query.rq&lt;- '
+PREFIX xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX ex:   &lt;http://example.org/&gt;
+SELECT ?s (isIRI(?s) as ?isiri_s) ?p (isIRI(?p) as ?isiri_p)  ?o (isIRI(?o) as ?isiri_o)  (lang(?o) as ?olang) (datatype(?o) as ?idatatype)
+where {
+values (?s ?p ?o) {
+(ex:a ex:p 1)
+(ex:a ex:p 1.0)
+(ex:a ex:p &quot;1.00&quot;^^xsd:float)
+(ex:a ex:p &quot;1.000&quot;^^xsd:double)
+(ex:a ex:p &quot;NaN&quot;^^xsd:float)
+(ex:a ex:p &quot;NaN&quot;^^xsd:double)
+(ex:b ex:p &quot;a&quot;)
+(ex:b ex:p &quot;a&quot;@en)
+(ex:b ex:p &quot;a&quot;^^xsd:string)
+(&quot;a&quot; &quot;b&quot; &quot;c&quot;)
+}
+}
+'
+
+query.res&lt;- sparql.rdf( storeex, query.rq )
+knitr::kable(query.res)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">s</th>
+<th align="left">isiri_s</th>
+<th align="left">p</th>
+<th align="left">isiri_p</th>
+<th align="left">o</th>
+<th align="left">isiri_o</th>
+<th align="left">olang</th>
+<th align="left">idatatype</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">1</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:integer</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">1.0</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:decimal</td>
+</tr>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">1.00</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:float</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">1.000</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">NaN</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:float</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">NaN</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="odd">
+<td align="left">ex:b</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">a</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:string</td>
+</tr>
+<tr class="even">
+<td align="left">ex:b</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">a</td>
+<td align="left">false</td>
+<td align="left">en</td>
+<td align="left"><a href="http://www.w3.org/1999/02/22-rdf-syntax-ns#langString" class="uri">http://www.w3.org/1999/02/22-rdf-syntax-ns#langString</a></td>
+</tr>
+<tr class="odd">
+<td align="left">ex:b</td>
+<td align="left">true</td>
+<td align="left">ex:p</td>
+<td align="left">true</td>
+<td align="left">a</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:string</td>
+</tr>
+<tr class="even">
+<td align="left">a</td>
+<td align="left">false</td>
+<td align="left">b</td>
+<td align="left">false</td>
+<td align="left">c</td>
+<td align="left">false</td>
+<td align="left"></td>
+<td align="left">xsd:string</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="sparql.rdf-return-result-is-a-character-matrix" class="section level1">
+<h1><code>sparql.rdf</code> return result is a character matrix</h1>
+<pre class="r"><code>storeex2&lt;- new.rdf(ontology=FALSE)
+query2.rq&lt;- '
+PREFIX xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt;
+PREFIX ex:   &lt;http://example.org/&gt;
+SELECT ?s ?p  ?o  (datatype(?o) as ?idatatype)
+where {
+values (?s ?p ?o) {
+(ex:a ex:p 1)
+(ex:a ex:p 1.0)
+(ex:a ex:p 1.0E0)
+(ex:a ex:p &quot;NaN&quot;^^xsd:double )
+}
+}
+'
+
+query2.res&lt;- sparql.rdf( storeex2, query2.rq )
+knitr::kable(query2.res)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+<th align="left">idatatype</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1</td>
+<td align="left">xsd:integer</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1.0</td>
+<td align="left">xsd:decimal</td>
+</tr>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1.0E0</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">NaN</td>
+<td align="left">xsd:double</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>query2.df&lt;- as.data.frame(query2.res, stringsAsFactors=FALSE)
+knitr::kable(query2.df)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+<th align="left">idatatype</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1</td>
+<td align="left">xsd:integer</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1.0</td>
+<td align="left">xsd:decimal</td>
+</tr>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1.0E0</td>
+<td align="left">xsd:double</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">NaN</td>
+<td align="left">xsd:double</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>str(query2.df)</code></pre>
+<pre><code>## 'data.frame':    4 obs. of  4 variables:
+##  $ s        : chr  &quot;ex:a&quot; &quot;ex:a&quot; &quot;ex:a&quot; &quot;ex:a&quot;
+##  $ p        : chr  &quot;ex:p&quot; &quot;ex:p&quot; &quot;ex:p&quot; &quot;ex:p&quot;
+##  $ o        : chr  &quot;1&quot; &quot;1.0&quot; &quot;1.0E0&quot; &quot;NaN&quot;
+##  $ idatatype: chr  &quot;xsd:integer&quot; &quot;xsd:decimal&quot; &quot;xsd:double&quot; &quot;xsd:double&quot;</code></pre>
+<p>So, if the numeric columns are needed, they must explicitely be made by coversion. Below a new column <code>on</code> contains the numeric representation of the <code>o</code> column.</p>
+<pre class="r"><code>query21.df&lt;- query2.df
+query21.df$on &lt;- as.numeric(query21.df$o)
+knitr::kable(query21.df)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">s</th>
+<th align="left">p</th>
+<th align="left">o</th>
+<th align="left">idatatype</th>
+<th align="right">on</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1</td>
+<td align="left">xsd:integer</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1.0</td>
+<td align="left">xsd:decimal</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">1.0E0</td>
+<td align="left">xsd:double</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">ex:a</td>
+<td align="left">ex:p</td>
+<td align="left">NaN</td>
+<td align="left">xsd:double</td>
+<td align="right">NaN</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>Map(mode,query21.df)</code></pre>
+<pre><code>## $s
+## [1] &quot;character&quot;
+## 
+## $p
+## [1] &quot;character&quot;
+## 
+## $o
+## [1] &quot;character&quot;
+## 
+## $idatatype
+## [1] &quot;character&quot;
+## 
+## $on
+## [1] &quot;numeric&quot;</code></pre>
+</div>
+<div id="same-triple-repeated-difference-between-apachejena-store-and-sparql-insert-using-apachejena" class="section level1">
+<h1>Same triple repeated: difference between Apache/Jena Store and SPARQL insert using Apache/Jena</h1>
 <p>When the exactly same triples are inserted - only one triple remains.</p>
 <pre class="r"><code>store1&lt;- new.rdf(ontology=FALSE)
 
