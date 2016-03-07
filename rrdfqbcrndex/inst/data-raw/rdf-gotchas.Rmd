@@ -21,7 +21,70 @@ library(rrdf)
 library(rrdfancillary)
 ```
 
-# Example on what not to do
+# Getting information out from a store
+
+```{r, eval=TRUE}
+storeex<- new.rdf(ontology=FALSE)
+query.rq<- '
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex:   <http://example.org/>
+SELECT ?s (isIRI(?s) as ?isiri_s) ?p (isIRI(?p) as ?isiri_p)  ?o (isIRI(?o) as ?isiri_o)  (lang(?o) as ?olang) (datatype(?o) as ?idatatype)
+where {
+values (?s ?p ?o) {
+(ex:a ex:p 1)
+(ex:a ex:p 1.0)
+(ex:a ex:p "1.00"^^xsd:float)
+(ex:a ex:p "1.000"^^xsd:double)
+(ex:a ex:p "NaN"^^xsd:float)
+(ex:a ex:p "NaN"^^xsd:double)
+(ex:b ex:p "a")
+(ex:b ex:p "a"@en)
+(ex:b ex:p "a"^^xsd:string)
+("a" "b" "c")
+}
+}
+'
+
+query.res<- sparql.rdf( storeex, query.rq )
+knitr::kable(query.res)
+```
+
+# `sparql.rdf` return result is a character matrix
+
+```{r, eval=TRUE}
+storeex2<- new.rdf(ontology=FALSE)
+query2.rq<- '
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX ex:   <http://example.org/>
+SELECT ?s ?p  ?o  (datatype(?o) as ?idatatype)
+where {
+values (?s ?p ?o) {
+(ex:a ex:p 1)
+(ex:a ex:p 1.0)
+(ex:a ex:p 1.0E0)
+(ex:a ex:p "NaN"^^xsd:double )
+}
+}
+'
+
+query2.res<- sparql.rdf( storeex2, query2.rq )
+knitr::kable(query2.res)
+
+query2.df<- as.data.frame(query2.res, stringsAsFactors=FALSE)
+knitr::kable(query2.df)
+str(query2.df)
+```
+
+So, if the numeric columns are needed, they must explicitely be made by coversion. Below a new column `on` contains the numeric representation of the `o` column.
+```{r, eval=TRUE}
+query21.df<- query2.df
+query21.df$on <- as.numeric(query21.df$o)
+knitr::kable(query21.df)
+Map(mode,query21.df)
+```
+
+
+# Same triple repeated: difference between Apache/Jena Store and SPARQL insert using Apache/Jena
 
 When the exactly same triples are inserted - only one triple remains.
 

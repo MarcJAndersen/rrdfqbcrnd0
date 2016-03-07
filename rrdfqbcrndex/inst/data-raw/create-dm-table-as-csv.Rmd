@@ -122,6 +122,8 @@ The statements below are inserted from the file generated above.
 Work-around: add SELECT statments below corresponding to the desired statistics.
 Update the .csv file, and re-create the cube. Repeat until done. This is of course not the ideal way; waiting to the formular interface to the cube.
 
+Note: the `GetSQLFromCube` functions in package `rrdfqbcrndcheck` generates the SQL statements from the cube obversvations.
+
 ```{r}
 res.text<- "
 SELECT a.TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SEX, a.SAFFL

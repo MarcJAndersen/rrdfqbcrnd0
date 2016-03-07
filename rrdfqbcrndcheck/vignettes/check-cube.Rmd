@@ -65,7 +65,7 @@ common.prefixes <-data.frame(
 
   myprefixes<- qb.def.prefixlist(store, prefixes )
 
-res<- DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=FALSE, myprefixes=myprefixes ) 
+res<- DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=FALSE, myprefixes=myprefixes, filterexpr=" " ) 
 
 print(res)
 

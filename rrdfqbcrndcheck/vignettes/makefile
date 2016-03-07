@@ -1,17 +1,21 @@
 
+RMDS=check-cube.Rmd sql-for-check-cube.Rmd
+MDS=$(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.md/g") 
+PDFS=$(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.pdf/g" )
+HTMLS=$(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.html/g" )
 
-all: check-cube.md check-cube.html
+TARGETS=${MDS} ${PDFS} ${HTMLS}
+
+all: ${TARGETS}
 
 clean:
-	rm -f check-cube.html
+	echo rm -f ${TARGETS}
+
+%.pdf: %.Rmd
+	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rnw','pdf_document')"
 
 %.pdf: %.Rnw
 	$(R_HOME)/bin/Rscript -e "knitr::knit2pdf('$*.Rnw')"
-
-# not clever rule - also creates HTML version
-# disabled 2015-09-22 MJA - does not work
-# %.pdf: %.Rmd
-# 	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$*.Rmd','pdf_document')"
 
 %.md: %.Rmd
 	$(R_HOME)/bin/Rscript -e "knitr::knit('$*.Rmd')"

@@ -8,7 +8,7 @@
 ##' @param deriveMeasureList TODO(mja): add code for this variabel
 ##' @param validation.measure list with property, prefix and
 ##' URIprefix. The derived results is stored in the cube in the store
-##' using the property. This is only used is checkOnly==TRUE
+##' using the property. This is only used if checkOnly==TRUE
 ##' @param dsdName Dataset Descriptor Name
 ##' @param checkOnly TRUE if only the check is performed (default),
 ##' FALSE then measure is overwritten with the results
@@ -16,7 +16,7 @@
 ##' @return list with status TRUE if the operation was sucessfull
 ##' @export
 
-DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=TRUE, validation.measure=NULL, myprefixes ) {
+DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataSet, deriveMeasureList=NULL, checkOnly=TRUE, validation.measure=NULL, myprefixes=NULL, filterexpr=NULL ) {
 
   if (!is.data.frame(dataSet)) {
     message("Changing dataSet to data.frame")
@@ -79,9 +79,12 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
     stop("no rows in observations")
   }
 
+    
   ##  cat("Subsetting dimensions: ", paste0(names(subsetting.dimensions),sep=", "),"\n")
-  
-  for (r in  1:nrow(observations )  ) {
+    
+    results<- new.rdf(ontology=FALSE)
+    
+    for (r in  1:nrow(observations )  ) {
     ##    cat("Cube observation sequence number ", r,  ".\n" )
     thisobs<-  observations[r,]
     ##    cat("   Derive results for procedure ", as.character(thisobs["procedure"]),
@@ -139,6 +142,7 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
       if (has.result) {
         ##      cat("   ", paste("result", result, " in cube ", thisobs["measure"], sep=" "), "\n" )
         if (result != thisobs["measure"]) {
+             message(paste("difference result", result, " in cube ", thisobs["measure"], sep=" "), "\n" )
           Ndiff<- Ndiff+1
         }
         if (! checkOnly ) {
@@ -147,15 +151,16 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
           ##      cat( "-->  ", subj, "\n")
           ##      cat( "-->  ", pred, "\n")
           ##      cat( "-->  ", paste(result), "\n")
-          add.data.triple( store,
+          add.data.triple( results,
                           subject=subj, 
                           predicate=pred,
-                          data=paste(result), type="float")
+                          data=paste(result), type="double")
         }
       }
       else {
-        Ndiff<- Ndiff+1
-        ##      print( paste( thisobs["s"], ifelse(has.result, result, "No result determined") ) )
+          Ndiff<- Ndiff+1
+          message(thisobs["s"], ifelse(has.result, result, "No result determined") )
+          print( paste( thisobs["s"], ifelse(has.result, result, "No result determined") ) )
       }
       
       
@@ -181,14 +186,16 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
               sep="\n"
               )
 
-      ## cat(cube.measure.result.rq, "\n" )
-      cube.measure.result<-  sparql.rdf(store, cube.measure.result.rq);
+      cat(cube.measure.result.rq, "\n" )
+      cube.measure.result<-  sparql.rdf(combine.rdf(store,results), cube.measure.result.rq);
       
       ## print(cube.measure.result)
-      
+
+      if (is.null(filterexpr)) {
       filterexpr<- " filter ( (xsd:float(?measure)-xsd:float(?result)) != 0 || !bound(?result) ) "
                                         #  filterexpr<- " "
-
+      }
+        
       cube.check.rq<-  
         paste(forsparqlprefix, prval,
               "select ?s ?procedure ?measure ?result ((xsd:float(?measure)-xsd:float(?result)) as ?diff) where {",
@@ -204,7 +211,7 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
               sep="\n"
               )
 
-      cube.check<- sparql.rdf(store, cube.check.rq );
+      cube.check<- sparql.rdf(combine.rdf(store,results), cube.check.rq );
       
       print("If the result is <0 x 0> matrix then all value matches")
 

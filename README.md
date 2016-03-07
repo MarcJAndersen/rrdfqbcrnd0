@@ -64,9 +64,25 @@ The R-packages are made using a modular approach. After having a monolithic pack
 | `rrdfqb`          |RDF data cube R interface |
 | `rrdfqbcrnd0`     |R-RDF Data Cube for Clinical Research & Development |
 | `rrdfqbcrndex`    |R-RDF Examples for RDF data cube for Clinical Research and Development |
-| `rrdfqbcrndcheck` |Check of numbers in R-RDF Data Cube for Clinical Research & Development |
+| `rrdfqbcrndcheck` |Check of results against underlying data in R-RDF Data Cube for Clinical Research & Development |
 | `rrdfqbpresent`   |Present data cube as two dimensional table (does not work as of 06-jan-2016)  |
 
+
+A crude overview of the packages is given below.
+
+<table border="1">
+<body>
+<tr><td colspan="2">rrdfqbcrndex</td><td colspan="2">rrdfqbcrndcheck</td><td colspan="2">rrdfqbpresent</td></tr>
+<tr></tr>
+<tr><td colspan="2"></td><td colspan="2">rrdfqbcrnd0</td><td colspan="2"></td></tr>
+<tr></tr>
+<tr><td colspan="2">rrdfqb</td><td colspan="2"></td><td colspan="2">rrdfcdisc</td></tr>
+<tr></tr>
+<tr><td colspan="2">rrdf</td><td colspan="2"></td><td colspan="2">rrdfancillary</td></tr>
+<tr></tr>
+<tr><td colspan="2"></td><td colspan="2">rrdflibs</td><td colspan="2"></td></tr>
+</body>
+</table>
 
 ### Install as a package
 
@@ -99,7 +115,10 @@ To see the contents of the libraries with packages use
 library()
 ```
 
-To do a cleanup of the personal library, usually `.libPaths()[1]`, use the following comman
+The personal library may fill up over time. To remove the contents of
+the personal library, usually in `.libPaths()[1]`, use the following
+command
+
 ```r
 remove.packages((library(lib=.libPaths()[1])$results)[,"Package"])
 ```

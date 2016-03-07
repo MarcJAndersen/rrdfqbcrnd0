@@ -10,24 +10,7 @@ vignette: >
 ---
 
 
-### How to run from command prompt when developing
-
-Start in the package root directory
-
-Devtools should reply reply `Loading rrdfancillary`.
-
-The knit command should generate .md file in the present work directory - the package root directory
-
-
-```{r, eval=FALSE}
-library(devtools)
-devtools::document()
-devtools::load_all("..")
-devtools::install()
-library(knitr)
-knit("vignettes/do-update.Rmd")
-library(rrdfancillary)
-```
+# SPARQL update example
 
 ```{r, eval=TRUE}
 library(rrdf)
@@ -37,7 +20,7 @@ add.data.triple(store,
                 subject="http://example.org/Subject",
                 predicate="http://example.org/Predicate",
                 data="Value")
-cat(asString.rdf(store))
+cat(asString.rdf(store),"\n")
 
 SPARQLinsert<- '
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
@@ -50,6 +33,7 @@ INSERT DATA
 
 update.rdf( store, SPARQLinsert )
 
-cat(asString.rdf(store))
+cat(asString.rdf(store), "\n")
 
 ```
+
