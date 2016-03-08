@@ -96,3 +96,6 @@ package-overview.html package-overview.pdf package-overview.md: package-overview
 rdf-gotchas.html rdf-gotchas.pdf rdf-gotchas.md: rdf-gotchas.Rmd
 	${RMD2HTML}
 
+things-to-note.html: things-to-note.Rmd
+	${RMD2HTML}
+

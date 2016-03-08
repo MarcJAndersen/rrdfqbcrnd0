@@ -1,21 +1,18 @@
 ---
 title: "Data qubes from Workbook"
-author: "PhuseSubTeamAnalysisResults@example.org"
+author: "mja@statgroup.dk, tim.williams@ucb.com"
 date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data qubes from Workbook}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[utf8]{inputenc}
-  %\SweaveUTF8
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
 ---
 
 # Setup
 
 First load the package.
 ```{r, eval=TRUE}
-library(rrdfcdisc)
-library(rrdfqb)
-library(rrdfqbcrnd0)
 library(rrdfqbcrndex)
 ```
 

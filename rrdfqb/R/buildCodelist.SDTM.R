@@ -28,14 +28,7 @@ buildCodelist.SDTM <- function(
 #############################################################################
     ## codeNoBlank - used in URI formation
 
-    CDISCsparqlprefix<-'
-prefix : <http://rdf.cdisc.org/sdtm-terminology#>
-prefix cts:   <http://rdf.cdisc.org/ct/schema#>
-prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
-prefix mms:   <http://rdf.cdisc.org/mms#>
-'
-    
-    query <- GetCDISCCodeListSparqlQuery( CDISCsparqlprefix, nciDomainValue )
+    query <- GetCDISCCodeListSparqlQuery( Get.rq.prefixlist.df(qbCDISCprefixes), paste0("sdtmct:", nciDomainValue ))
 
     if (! is.null(remote.endpoint) ) {
         codeSource <- as.data.frame(sparql.remote(remote.endpoint, query))

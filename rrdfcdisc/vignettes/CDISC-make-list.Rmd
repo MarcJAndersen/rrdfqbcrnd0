@@ -1,6 +1,6 @@
 ---
 title: "Use R RDF version of CDISC standards"
-author: "PhuseSubTeamAnalysisResults@example.org"
+author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
 vignette: >
   %\VignetteIndexEntry{Create simple RDF data qube}
@@ -10,9 +10,9 @@ vignette: >
 
 ## Introduction
 This vignette shows how to 
-- load the CDISC standards from the packages
-- make a SPARQL query for extracting a codelist
-- make a SPARQL query for extracting the definition for the SDTM DM dataset
+* load the CDISC standards from the packages
+* make a SPARQL query for extracting a codelist
+* make a SPARQL query for extracting the definition for the SDTM DM dataset
 
 ## Setup
 
@@ -33,10 +33,8 @@ message(".. total number of triples: ", summarize.rdf.noprint(cdisc.rdf) )
 
 ### Extract codelist
 
-Note: consider using `qbCDISCprefixes` .
-
 ```{r, results='asis', eval=TRUE}
-nciDomainValue<- "C66731"
+nciDomainValue<- "sdtmct:C66731"
 query <- GetCDISCCodeListSparqlQuery( Get.rq.prefixlist.df(qbCDISCprefixes), nciDomainValue )
 codeSource <- as.data.frame(sparql.rdf(cdisc.rdf, query),stringsAsFactors=FALSE)
 

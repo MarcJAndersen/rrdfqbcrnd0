@@ -1,20 +1,25 @@
 ##' SPARQL query for CDISC codelists
-##'
+##' The query uses the prefixes mms: and cts:.
 ##' @param forsparqlprefix SPARQL prefix
-##' @param nciDomainValue NCI domain value
+##' @param nciDomainValue NCI domain value as IRI, for example: sdtmct:C66731 assuming sdtmct: is defined as prefix
 ##' @return SPARQL query
 ##' @export
 GetCDISCCodeListSparqlQuery<- function( forsparqlprefix, nciDomainValue ) {
 codelists.rq<-   paste(forsparqlprefix,
-'select ?nciDomain ?cdiscDefinition ?code ?cdiscSynonyms ?nciCode ?nciPreferredTerm
+'select ?nciDomain ?cdiscDefinition ?code ?cdiscSynonyms ?nciCode ?nciPreferredTerm ?nciDomainValue
 where {
-  ?nciDomain mms:inValueDomain ', paste0('sdtmct', ':', nciDomainValue), ' .',
-'  ?nciDomain cts:cdiscDefinition      ?cdiscDefinition .
+  ?nciDomain mms:inValueDomain        ?nciDomainValue ;
+  ?nciDomain cts:cdiscDefinition      ?cdiscDefinition .
   ?nciDomain cts:cdiscSubmissionValue ?code .
-  OPTIONAL { ?nciDomain cts:cdiscSynonyms        ?cdiscSynonyms . }
   ?nciDomain cts:nciCode              ?nciCode .
   ?nciDomain cts:nciPreferredTerm     ?nciPreferredTerm
+  OPTIONAL { ?nciDomain cts:cdiscSynonyms        ?cdiscSynonyms . }
+values (?nciDomainValue) {
+',
+paste0("(", nciDomainValue, ")",collapse="\n"),
+'
   }
+}
 '
 )
 codelists.rq

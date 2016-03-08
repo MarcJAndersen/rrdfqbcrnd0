@@ -6,7 +6,7 @@
 ##' @param obsData Data Frame with the data for which the code list is to be generated
 ##' @param codeType Character "DATA" or "SDTM".
 ##' "DATA" to derive code list from the data.
-##' "SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query
+##' "SDTM" to derive the code list from the rdf.cdisc.org documentation using a SPARQL query
 ##' @param nciDomainValue When codetype="SDTM" the nciDomain used for identifying the codelist
 ##' @param dimName the name of the dimension - for codeType="DATA" the name of the variable in the data frame ObsData
 ##' @param underlDataSetName underlying data set name. Used for finding name for D2RQ propertybridge. If NULL then not used. 
@@ -43,16 +43,7 @@ buildCodelist <- function(
   }
   else if (codeType=="SDTM"){
 
-    CDISCsparqlprefix<-'
-prefix : <http://rdf.cdisc.org/sdtm-terminology#>
-prefix cts:   <http://rdf.cdisc.org/ct/schema#>
-prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
-prefix mms:   <http://rdf.cdisc.org/mms#>
-prefix sdtmct: <http://rdf.cdisc.org/sdtm-terminology#>
-'
-
-    query <- GetCDISCCodeListSparqlQuery( CDISCsparqlprefix, nciDomainValue )
-
+    query <- GetCDISCCodeListSparqlQuery( Get.rq.prefixlist.df(qbCDISCprefixes), paste0("sdtmct:", nciDomainValue ))
 
     if (! is.null(remote.endpoint) ) {
       codeSource <- as.data.frame(sparql.remote(remote.endpoint, query))
