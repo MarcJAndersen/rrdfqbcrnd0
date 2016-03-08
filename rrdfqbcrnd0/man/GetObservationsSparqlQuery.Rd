@@ -11,9 +11,9 @@ GetObservationsSparqlQuery(forsparqlprefix, domainName, dimensions, attributes)
 
 \item{domainName}{domainName for the RRDF cube}
 
-\item{dimensions}{dimensions}
+\item{dimensions}{dimensions, vector or r x 1 matrix}
 
-\item{attributes}{attributes}
+\item{attributes}{attributes, vector or r x 1 matrix}
 }
 \value{
 SPARQL query

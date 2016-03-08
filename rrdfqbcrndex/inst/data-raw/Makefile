@@ -1,23 +1,24 @@
+RMDS= populate-sample-xpt.Rmd  create-ADSL-ttl.Rmd create-ADAE-ttl.Rmd \
+create-ae-table-as-csv.Rmd  create-dm-table-as-csv.Rmd \
+create-qb-examples-as-ttl.Rmd \
+use-demo-ttl.Rmd  \
+using-arq.Rmd using-arq-graphical-display.Rmd using-arq-qb.Rmd \
+reporting-process.Rmd \
+rdf-gotchas.Rmd \
+SPARQL-scripts-for-qb.Rmd \
+using-python.Rmd
 
-HTMLS= populate-sample-xpt.html  create-ADSL-ttl.html create-ADAE-ttl.html \
-create-ae-table-as-csv.html  create-dm-table-as-csv.html \
-create-qb-examples-as-ttl.html \
-use-demo-ttl.html  \
-using-arq.html using-arq-graphical-display.html using-arq-qb.html using-python.html \
-reporting-process.html \
-rdf-gotchas.html
 
 # does not work package-overview.html
 
 # List of files with .md extension
-MDS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.md/g" )
-PDFS= $(shell echo "${HTMLS}" | sed -e "s/\.html/\.pdf/g" )
+MDS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.md/g" )
+PDFS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.pdf/g" )
+HTMLS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.html/g" )
 
 ADSLTTL=../extdata/sample-rdf/adsl-map.ttl ../extdata/sample-rdf/adsl.ttl
 ADAETTL=../extdata/sample-rdf/adae-map.ttl ../extdata/sample-rdf/adae.ttl
-
 QBTTLS=../extdata/sample-rdf/DC-AE-sample.ttl ../extdata/sample-rdf/DC-DM-sample.ttl ../extdata/sample-rdf/DC-DEMO-sample.ttl
-
 
 TTLS=${ADSLTTL} ${ADAETTL} ${QBTTLS}
 
@@ -38,7 +39,7 @@ RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 all: ${TARGETS} cleantemp
 
 clean: 
-	rm -f ${TARGETS}
+	rm -f ${TARGETS} highlight.css
 
 cleantemp:
 	rm -f ../extdata/sample-rdf/fordot.ttl ../extdata/sample-rdf/fordot.dot
@@ -94,6 +95,9 @@ package-overview.html package-overview.pdf package-overview.md: package-overview
 	${RMD2HTML}
 
 rdf-gotchas.html rdf-gotchas.pdf rdf-gotchas.md: rdf-gotchas.Rmd
+	${RMD2HTML}
+
+SPARQL-scripts-for-qb.html SPARQL-scripts-for-qb.pdf SPARQL-scripts-for-qb.md: SPARQL-scripts-for-qb.Rmd
 	${RMD2HTML}
 
 things-to-note.html: things-to-note.Rmd

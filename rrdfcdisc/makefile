@@ -6,7 +6,7 @@ cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
 
 rbuildforce: 
-	cd ..; R CMD build --force ${PACKAGENAME}
+	cd ..; R CMD build --force --no-build-vignettes  ${PACKAGENAME}
 
 # checking package
 # see http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-packages

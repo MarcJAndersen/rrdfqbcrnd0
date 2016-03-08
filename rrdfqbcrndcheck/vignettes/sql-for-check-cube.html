@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-03-07" />
+<meta name="date" content="2016-03-08" />
 
 <title>SQL code for verifying results in RDF data cube</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">SQL code for verifying results in RDF data cube</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-03-07</em></h4>
+<h4 class="date"><em>2016-03-08</em></h4>
 </div>
 
 
@@ -93,11 +93,6 @@ library(rrdf)</code></pre>
 <pre class="r"><code>library(rrdfqbcrnd0)</code></pre>
 <pre><code>## Loading required package: rrdfcdisc</code></pre>
 <pre><code>## Loading required package: devtools</code></pre>
-<pre><code>## 
-## Attaching package: 'rrdfqbcrnd0'</code></pre>
-<pre><code>## The following object is masked from 'package:rrdfcdisc':
-## 
-##     summarize.rdf.noprint</code></pre>
 <pre class="r"><code>library(rrdfqbcrndex)
 library(rrdfqbcrndcheck)</code></pre>
 </div>
@@ -189,9 +184,9 @@ knitr::kable(data.frame(sparql.rdf( store, rq)))</code></pre>
 </table>
 <pre class="r"><code>stmtSQL&lt;- GetSQLFromCube( store, srcDsName=&quot;adsl&quot; )
 cat(paste(unlist(strsplit(stmtSQL$summStatSQL,split=&quot;\n&quot;))[1:3],collapse=&quot;\n&quot;),&quot;\n&quot;)</code></pre>
-<pre><code>## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'min' as procedure, 'AGE' as factor, '_NULL_' as denominator, 'YEARS' as unit, min(AGE) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
+<pre><code>## SELECT '_ALL_' as TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.SEX, a.SAFFL
 ## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SEX, a.SAFFL</code></pre>
+## SELECT '_ALL_' as TRT01A, a.RACE, '_ALL_' as SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.RACE, a.SAFFL</code></pre>
 </div>
 <div id="derive-the-descriptive-statistics" class="section level2">
 <h2>Derive the descriptive statistics</h2>
@@ -1014,9 +1009,9 @@ knitr::kable(adsl.summ.stat.mod.res[adsl.summ.stat.mod.res$factor==&quot;WEIGHTB
 <thead>
 <tr class="header">
 <th align="left"></th>
-<th align="left">a.TRT01A</th>
+<th align="left">TRT01A</th>
 <th align="left">RACE</th>
-<th align="left">SEX</th>
+<th align="left">a.SEX</th>
 <th align="left">a.SAFFL</th>
 <th align="left">procedure</th>
 <th align="left">factor</th>

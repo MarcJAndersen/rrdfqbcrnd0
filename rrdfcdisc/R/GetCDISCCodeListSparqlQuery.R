@@ -4,11 +4,12 @@
 ##' @param nciDomainValue NCI domain value as IRI, for example: sdtmct:C66731 assuming sdtmct: is defined as prefix
 ##' @return SPARQL query
 ##' @export
+##ToDo(mja): In SPARQL statement consider using ; instead of repeating ?nciDomain.
 GetCDISCCodeListSparqlQuery<- function( forsparqlprefix, nciDomainValue ) {
 codelists.rq<-   paste(forsparqlprefix,
 'select ?nciDomain ?cdiscDefinition ?code ?cdiscSynonyms ?nciCode ?nciPreferredTerm ?nciDomainValue
 where {
-  ?nciDomain mms:inValueDomain        ?nciDomainValue ;
+  ?nciDomain mms:inValueDomain        ?nciDomainValue .
   ?nciDomain cts:cdiscDefinition      ?cdiscDefinition .
   ?nciDomain cts:cdiscSubmissionValue ?code .
   ?nciDomain cts:nciCode              ?nciCode .

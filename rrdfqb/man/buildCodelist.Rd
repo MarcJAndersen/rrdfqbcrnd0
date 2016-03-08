@@ -16,7 +16,7 @@ buildCodelist(store, prefixlist, obsData, codeType, nciDomainValue, dimName,
 
 \item{codeType}{Character "DATA" or "SDTM".
 "DATA" to derive code list from the data.
-"SDTM" to derive the code list from the rdf.cdisc documentation using a SPARQL query}
+"SDTM" to derive the code list from the rdf.cdisc.org documentation using a SPARQL query}
 
 \item{nciDomainValue}{When codetype="SDTM" the nciDomain used for identifying the codelist}
 

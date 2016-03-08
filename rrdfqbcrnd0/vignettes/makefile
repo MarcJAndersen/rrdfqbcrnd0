@@ -1,5 +1,5 @@
 
-TARGETS=first-cube.md howto-create-vignette.md SPARQL-query.md SPARQL-scripts-for-qb.md
+TARGETS=first-cube.md howto-create-vignette.md
 
 all: ${TARGETS}
 

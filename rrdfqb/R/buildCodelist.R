@@ -14,6 +14,7 @@
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
 ##' @export
+## TODO(mja): Move this to rrdqbcrnd0 as it uses rrdfcdisc
 buildCodelist <- function(
   store,
   prefixlist,
@@ -28,7 +29,6 @@ buildCodelist <- function(
 {
   dimName <- tolower(dimName)        ## dimName in all lower case is default
     capDimName <- capitalize(dimName)  ## capDim used in Class name
-    cat("dimName ", dimName, "\n")
   ################
   ## Obtain codes #
   #############################################################################

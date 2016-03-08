@@ -1,7 +1,7 @@
 ---
 title: "Execute SPARQL integrity constraints on a data cube"
 author: "mja@statgroup.dk"
-date: "2016-03-07"
+date: "2016-03-08"
 vignette: >
   %\VignetteIndexEntry{Execute SPARQL integrity constraints on a data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -73,17 +73,6 @@ library(rrdfqbcrnd0)
 
 ```
 ## Loading required package: devtools
-```
-
-```
-## 
-## Attaching package: 'rrdfqbcrnd0'
-```
-
-```
-## The following object is masked from 'package:rrdfcdisc':
-## 
-##     summarize.rdf.noprint
 ```
 
 ```r

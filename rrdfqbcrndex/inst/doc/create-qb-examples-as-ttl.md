@@ -38,20 +38,10 @@ Create the DM sample cube.
 
 ``` r
 dm.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "DM" )
-```
-
-    ## dimName  trt01a 
-    ## dimName  sex 
-    ## dimName  saffl 
-    ## dimName  procedure 
-    ## dimName  factor 
-    ## dimName  race
-
-``` r
 cat("DM cube stored as ", dm.cube.fn, "\n")
 ```
 
-    ## DM cube stored as  /tmp/RtmpFgEr66/DC-DM-R-V-0-5-2.ttl
+    ## DM cube stored as  /tmp/RtmpXS17mo/DC-DM-R-V-0-5-2.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"DC-DM-sample.ttl")
@@ -67,20 +57,10 @@ Create the AE sample cube.
 
 ``` r
 ae.cube.fn<- BuildCubeFromWorkbook(RDFCubeWorkbook, "AE" )
-```
-
-    ## dimName  trta 
-    ## dimName  saffl 
-    ## dimName  aesoc 
-    ## dimName  aedecod 
-    ## dimName  procedure 
-    ## dimName  factor
-
-``` r
 cat("AE cube stored as ", ae.cube.fn, "\n")
 ```
 
-    ## AE cube stored as  /tmp/RtmpFgEr66/DC-AE-R-V-0-5-2.ttl
+    ## AE cube stored as  /tmp/RtmpXS17mo/DC-AE-R-V-0-5-2.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"DC-AE-sample.ttl")
@@ -110,21 +90,10 @@ demoMetaDataCsvFn<- system.file("extdata/sample-cfg", "DEMO-Components.csv", pac
 demoMetaData <- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 
 demo.cube.fn<- BuildCubeFromDataFrames(demoMetaData, demoObsData )
-```
-
-    ## dimName  trt01a 
-    ## dimName  sex 
-    ## dimName  race 
-    ## dimName  ethnic 
-    ## dimName  agegr1 
-    ## dimName  procedure 
-    ## dimName  factor
-
-``` r
 cat("DEMO cube stored as ", normalizePath(demo.cube.fn), "\n")
 ```
 
-    ## DEMO cube stored as  /tmp/RtmpFgEr66/DC-DEMO-R-V-0-5-2.ttl
+    ## DEMO cube stored as  /tmp/RtmpXS17mo/DC-DEMO-R-V-0-5-2.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"DC-DEMO-sample.ttl")

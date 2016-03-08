@@ -93,10 +93,6 @@ The RDF data cube for the data above is created using
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
 
-    ## dimName  category 
-    ## dimName  procedure 
-    ## dimName  factor
-
 This shows a simple use of the BuildCubeFromDataFrames function. The warning message from log4j can be ignored.
 
 The RDF data cube is serialized in turtle format and stored as a text file in
@@ -105,7 +101,7 @@ The RDF data cube is serialized in turtle format and stored as a text file in
 cat(normalizePath(outcube),"\n")
 ```
 
-    ## /tmp/RtmptEeZvt/DC-EXAMPLE-R-V-0-0-0.ttl
+    ## /tmp/RtmpxG3o0u/DC-EXAMPLE-R-V-0-0-0.ttl
 
 Query the cube using SPARQL
 ===========================

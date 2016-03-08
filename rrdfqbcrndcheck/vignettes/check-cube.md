@@ -1,7 +1,7 @@
 ---
 title: "Derive results in RDF data cube and compare with results in data cube"
 author: "mja@statgroup.dk"
-date: "2016-03-07"
+date: "2016-03-08"
 vignette: >
   %\VignetteIndexEntry{Derive results in RDF data cube and compare with results in data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -78,21 +78,9 @@ library(rrdfqbcrnd0)
 ## Loading required package: devtools
 ```
 
-```
-## 
-## Attaching package: 'rrdfqbcrnd0'
-```
-
-```
-## The following object is masked from 'package:rrdfcdisc':
-## 
-##     summarize.rdf.noprint
-```
-
 ```r
 library(rrdfqbcrndex)
 library(rrdfqbcrndcheck)
-
 
 obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
 ## TODO do not want factors in the data.frame
@@ -102,6 +90,7 @@ dataSet<-read.xport(obsFile)
 ii <- sapply(dataSet, is.factor)
 dataSet[ii] <- lapply(dataSet[ii], as.character)
 ```
+
 The conversion to character can be avoided by using
 `library(SASxport)`, see
 (../../rrdfqbcrndex/inst/data-raw/create-dm-table-as-csv.Rmd).

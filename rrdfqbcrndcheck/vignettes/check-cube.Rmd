@@ -22,7 +22,6 @@ library(rrdfqbcrnd0)
 library(rrdfqbcrndex)
 library(rrdfqbcrndcheck)
 
-
 obsFile<- system.file("extdata/sample-xpt", "adsl.xpt", package="rrdfqbcrndex")
 ## TODO do not want factors in the data.frame
 ## http://stackoverflow.com/questions/2851015/convert-data-frame-columns-from-factors-to-characters
@@ -31,6 +30,7 @@ dataSet<-read.xport(obsFile)
 ii <- sapply(dataSet, is.factor)
 dataSet[ii] <- lapply(dataSet[ii], as.character)
 ```
+
 The conversion to character can be avoided by using
 `library(SASxport)`, see
 (../../rrdfqbcrndex/inst/data-raw/create-dm-table-as-csv.Rmd).

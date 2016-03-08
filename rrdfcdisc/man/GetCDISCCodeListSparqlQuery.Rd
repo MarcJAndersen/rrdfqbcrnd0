@@ -2,19 +2,21 @@
 % Please edit documentation in R/GetCDISCCodeListSparqlQuery.R
 \name{GetCDISCCodeListSparqlQuery}
 \alias{GetCDISCCodeListSparqlQuery}
-\title{SPARQL query for CDISC codelists}
+\title{SPARQL query for CDISC codelists
+The query uses the prefixes mms: and cts:.}
 \usage{
 GetCDISCCodeListSparqlQuery(forsparqlprefix, nciDomainValue)
 }
 \arguments{
 \item{forsparqlprefix}{SPARQL prefix}
 
-\item{nciDomainValue}{NCI domain value}
+\item{nciDomainValue}{NCI domain value as IRI, for example: sdtmct:C66731 assuming sdtmct: is defined as prefix}
 }
 \value{
 SPARQL query
 }
 \description{
 SPARQL query for CDISC codelists
+The query uses the prefixes mms: and cts:.
 }
 

@@ -1,7 +1,7 @@
 ---
 title: "SQL code for verifying results in RDF data cube"
 author: "mja@statgroup.dk"
-date: "2016-03-07"
+date: "2016-03-08"
 vignette: >
   %\VignetteIndexEntry{SQL code for verifying results in RDF data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -76,17 +76,6 @@ library(rrdfqbcrnd0)
 
 ```
 ## Loading required package: devtools
-```
-
-```
-## 
-## Attaching package: 'rrdfqbcrnd0'
-```
-
-```
-## The following object is masked from 'package:rrdfcdisc':
-## 
-##     summarize.rdf.noprint
 ```
 
 ```r
@@ -173,9 +162,9 @@ cat(paste(unlist(strsplit(stmtSQL$summStatSQL,split="\n"))[1:3],collapse="\n"),"
 ```
 
 ```
-## SELECT a.TRT01A, '_ALL_' as RACE, '_ALL_' as SEX, a.SAFFL, 'min' as procedure, 'AGE' as factor, '_NULL_' as denominator, 'YEARS' as unit, min(AGE) as measure from  adsl  as a   group by  a.TRT01A, a.SAFFL
+## SELECT '_ALL_' as TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.SEX, a.SAFFL
 ## UNION
-## SELECT a.TRT01A, '_ALL_' as RACE, a.SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.TRT01A, a.SEX, a.SAFFL
+## SELECT '_ALL_' as TRT01A, a.RACE, '_ALL_' as SEX, a.SAFFL, 'count' as procedure, 'quantity' as factor, '_ALL_' as denominator, '_NULL_' as unit, count(*) as measure from  adsl  as a   group by  a.RACE, a.SAFFL
 ```
 
 ## Derive the descriptive statistics
@@ -311,7 +300,7 @@ knitr::kable(adsl.summ.stat.mod.res[adsl.summ.stat.mod.res$factor=="WEIGHTBL" & 
 
 
 
-|   |a.TRT01A             |RACE  |SEX   |a.SAFFL |procedure |factor   |denominator |unit |  measure|
+|   |TRT01A               |RACE  |a.SEX |a.SAFFL |procedure |factor   |denominator |unit |  measure|
 |:--|:--------------------|:-----|:-----|:-------|:---------|:--------|:-----------|:----|--------:|
 |14 |Placebo              |_ALL_ |_ALL_ |Y       |mean      |WEIGHTBL |_NULL_      |KG   | 6275.930|
 |35 |Xanomeline High Dose |_ALL_ |_ALL_ |Y       |mean      |WEIGHTBL |_NULL_      |KG   | 7000.476|

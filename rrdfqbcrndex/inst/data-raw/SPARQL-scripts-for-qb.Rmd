@@ -1,26 +1,27 @@
 ---
 title: "SPARQL scripts for RDF data cubes"
-author: "PhuseSubTeamAnalysisResults@example.org"
+author: "mja@statgroup.dk"
 date: "`r Sys.Date()`"
-output: 
-  html_document
-  pdf_document
-vignette: >
-  %\VignetteIndexEntry{SPARQL scripts for RDF data cubes}
-  %\VignetteEngine{knitr::knitr}
-  %\usepackage[utf8]{inputenc}
-  %\SweaveUTF8
+output:
+  html_document:
+    toc: true
+    theme: united
+  pdf_document:
+    toc: true
+    highlight: zenburn
+  md_document:
+    variant: markdown_github
 ---
 
 # SPARQL scripts for the demographics cube (DC-DEMO-sample.ttl)
-
 
 ## Setup
 
 First load the package.
 ```{r, eval=TRUE}
 library(knitr)
-library(rrdfqbcrnd0)
+library(rrdfancillary)
+devtools::load_all(pkg="../..")
 ```
 
 ## Internals
@@ -29,7 +30,7 @@ The display of SPARQL script in markdown is done by first creating a chunk, and 
 ```{r helperfunction}
 mdwrite<- function( sparqlStatements, refname ) {
 # fn<- file.path(tempdir(), paste0( refname, ".rq" ) )
-fn<- file.path(system.file("extdata/sample-rdf", package="rrdfqbcrnd0"), paste0( refname, ".rq" ) )
+fn<- file.path(system.file("extdata/sample-rdf", package="rrdfqbcrndex"), paste0( refname, ".rq" ) )
 cat( paste0("## @knitr ", refname), gsub("\\n", "  \n", sparqlStatements), sep="  \n", file=fn)
 knitr::read_chunk( fn, from=c(1))
 invisible(fn)
@@ -49,14 +50,14 @@ rmarkdown::render("vignettes/SPARQL-scripts-for-qb.Rmd", rmarkdown::pdf_document
 
 ## SPARQL scripts
 
-The rrdfqbcrnd0 package uses SPARQL scripts to access the RRDF triple
-store.  This is implemented by having a function generating the SPARQL
+SPARQL scripts can be used to access the RDF triple store.
+In the package the scripts are made by a function generating the SPARQL
 script. The generated SPARQL scripts are shown here for the
 demographics cube in DC-DEMO-sample.ttl.
 
 The turtle file and the scrips are stored in
 ```{r}
-system.file("extdata/sample-xpt", package="rrdfqbcrnd0")
+system.file("extdata/sample-xpt", package="rrdfqbcrndex")
 ```
 
 ## Setup for generating SPARQL scripts for the demographics cube (DC-DEMO-sample.TTL)
@@ -64,7 +65,7 @@ system.file("extdata/sample-xpt", package="rrdfqbcrnd0")
 The DEMO data exists as a turtle file in the sample-rdf directory.
 
 ```{r}
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrnd0")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrndex")
 store <- new.rdf()  # Initialize
 cat("Loading ", dataCubeFile, "\n")
 temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
@@ -87,15 +88,14 @@ dimensionsRq <- GetDimensionsSparqlQuery( forsparqlprefix )
 mdwrite( dimensionsRq, "DEMOdimensions" )
 ```
 
-This does not work as of 07-dec-2015.
-    {r DEMOdimensions, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
-    
+```{r DEMOdimensions, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
+```    
 
 Executing the SPARQL query gives:
 
 ```{r}
 dimensions<- sparql.rdf(store, dimensionsRq)
-knitr::kable(dimensions)
+knitr::kable(dimensions,col.names=c("dimension"),caption="Dimensions")
 ```
 
 
@@ -107,15 +107,14 @@ attributesRq<- GetAttributesSparqlQuery( forsparqlprefix )
 mdwrite( attributesRq, "DEMOattributes" )
 ```
 
-This does not work as of 07-dec-2015.
-    {r DEMOattributes, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
-    
+```{r DEMOattributes, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
+```    
 
 Executing the SPARQL query gives:
 
 ```{r}
 attributes<- sparql.rdf(store, attributesRq)
-knitr::kable(attributes)
+knitr::kable(attributes,col.names=c("attribute"),caption="Attributes")
 ```
 
 ## SPARQL query for observations from RDF data cube in workbook format
@@ -129,15 +128,14 @@ observationsRq<- GetObservationsSparqlQuery( forsparqlprefix, domainName, dimens
 mdwrite( observationsRq, "DEMOobservations" )
 ```
 
-This does not work as of 07-dec-2015.
-    {r DEMOobservations, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
-    
+```{r DEMOobservations, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
+```    
 
 The first 2 rows of result of the query is:
 
 ```{r}
-observations<- sparql.rdf(store, observationsRq)
-knitr::kable(head(observations,2))
+observations<- data.frame(sparql.rdf(store, observationsRq),stringsAsFactors=FALSE)
+knitr::kable(head(observations,2),caption="Observations (only 2)")
 ```
 
 # TODO(mja): SPARQL scripts parametrised
@@ -155,7 +153,7 @@ TODO(mja): enter the commands here as example in each of the .Rd files.
 Then the output here can be generated from the .Rd files.
 
 ```{r, eval=FALSE, echo=FALSE}
-db <- Rd_db("rrdfqbcrnd0")
+db <- Rd_db("rrdfqbcrndex")
 keywords <- lapply(db, tools:::.Rd_get_metadata, "keyword")
 db$qbIClist.Rd
 tools:::RdTags(db$qbIClist.Rd)

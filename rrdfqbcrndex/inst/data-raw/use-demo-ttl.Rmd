@@ -15,7 +15,7 @@ output:
 
 # Introduction
 
-This is not a good example yet.
+This is not a good example yet - there is not real message nor flow in the document.
 TODO(mja): fix it.
 
 # Create DEMO sample table from CSV file

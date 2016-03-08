@@ -10,7 +10,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-03-07" />
+<meta name="date" content="2016-03-08" />
 
 <title>Create DEMO table as csv file</title>
 
@@ -64,7 +64,7 @@ img {
 <div id="header">
 <h1 class="title">Create DEMO table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-03-07</em></h4>
+<h4 class="date"><em>2016-03-08</em></h4>
 </div>
 
 <div id="TOC">
@@ -96,13 +96,8 @@ img {
 <pre class="r"><code>library(rrdfqb)</code></pre>
 <pre><code>## Loading required package: xlsx</code></pre>
 <pre><code>## Loading required package: xlsxjars</code></pre>
-<pre class="r"><code>library(rrdfqbcrnd0)</code></pre>
-<pre><code>## 
-## Attaching package: 'rrdfqbcrnd0'</code></pre>
-<pre><code>## The following object is masked from 'package:rrdfcdisc':
-## 
-##     summarize.rdf.noprint</code></pre>
-<pre class="r"><code>devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
+<pre class="r"><code>library(rrdfqbcrnd0)
+devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## Loading rrdfqbcrndex</code></pre>
 <p>All files are stored in the directory</p>
 <pre class="r"><code>targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbcrndex&quot;)
@@ -116,16 +111,10 @@ img {
 <pre><code>## [1] &quot;/home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-cfg/RDFCubeWorkbook.xlsx&quot;</code></pre>
 <p>Create the DM sample cube.</p>
 <pre class="r"><code>dm.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;DM&quot; )</code></pre>
-<pre><code>## dimName  trt01a 
-## dimName  sex</code></pre>
 <pre><code>## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrnd0/extdata/CDISC-standards-rdf/cdisc-rdf.zip</code></pre>
-<pre><code>## Done loading rdf.cdisc.org contents, number of triples: 165672</code></pre>
-<pre><code>## dimName  saffl 
-## dimName  procedure 
-## dimName  factor 
-## dimName  race</code></pre>
+<pre><code>## Done loading rdf.cdisc.org contents, number of triples: 165700</code></pre>
 <pre class="r"><code>cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## DM cube stored as  /tmp/RtmpFgEr66/DC-DM-R-V-0-5-2.ttl</code></pre>
+<pre><code>## DM cube stored as  /tmp/RtmpXS17mo/DC-DM-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DM-sample.ttl&quot;)
 
 if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
@@ -133,15 +122,9 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 }</code></pre>
 <pre><code>## DM cube copied to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/DC-DM-sample.ttl</code></pre>
 <p>Create the AE sample cube.</p>
-<pre class="r"><code>ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )</code></pre>
-<pre><code>## dimName  trta 
-## dimName  saffl 
-## dimName  aesoc 
-## dimName  aedecod 
-## dimName  procedure 
-## dimName  factor</code></pre>
-<pre class="r"><code>cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## AE cube stored as  /tmp/RtmpFgEr66/DC-AE-R-V-0-5-2.ttl</code></pre>
+<pre class="r"><code>ae.cube.fn&lt;- BuildCubeFromWorkbook(RDFCubeWorkbook, &quot;AE&quot; )
+cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)</code></pre>
+<pre><code>## AE cube stored as  /tmp/RtmpXS17mo/DC-AE-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-AE-sample.ttl&quot;)
 if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
   cat(&quot;AE cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
@@ -164,16 +147,9 @@ demoObsData$measurefmt[ demoObsData$procedure %in% c(&quot;n&quot;, &quot;nmiss&
 demoMetaDataCsvFn&lt;- system.file(&quot;extdata/sample-cfg&quot;, &quot;DEMO-Components.csv&quot;, package=&quot;rrdfqbcrndex&quot;)
 demoMetaData &lt;- read.csv(demoMetaDataCsvFn,stringsAsFactors=FALSE)
 
-demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )</code></pre>
-<pre><code>## dimName  trt01a 
-## dimName  sex 
-## dimName  race 
-## dimName  ethnic 
-## dimName  agegr1 
-## dimName  procedure 
-## dimName  factor</code></pre>
-<pre class="r"><code>cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)</code></pre>
-<pre><code>## DEMO cube stored as  /tmp/RtmpFgEr66/DC-DEMO-R-V-0-5-2.ttl</code></pre>
+demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )
+cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)</code></pre>
+<pre><code>## DEMO cube stored as  /tmp/RtmpXS17mo/DC-DEMO-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DEMO-sample.ttl&quot;)
 
 if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {
