@@ -1,6 +1,6 @@
 
 
-all:  cube-from-workbook.md  
+all:  cube-from-workbook.md  overview-prefixes-for-SPARQL.md
 
 clean: 
 
