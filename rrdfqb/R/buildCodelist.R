@@ -230,7 +230,6 @@ buildCodelist <- function(
                         type="string"
                         )
         
-    ## TODO(mja): consider adding type here ...
         if (mode(codeSource[i,"code"])=="character") {
             add.data.triple(store,
                             codeSubj,

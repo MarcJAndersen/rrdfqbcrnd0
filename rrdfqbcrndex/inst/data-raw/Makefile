@@ -6,7 +6,8 @@ using-arq.Rmd using-arq-graphical-display.Rmd using-arq-qb.Rmd \
 reporting-process.Rmd \
 rdf-gotchas.Rmd \
 SPARQL-scripts-for-qb.Rmd \
-using-python.Rmd
+using-python.Rmd \
+overview-prefixes-for-SPARQL.Rmd
 
 
 # does not work package-overview.html
@@ -103,3 +104,5 @@ SPARQL-scripts-for-qb.html SPARQL-scripts-for-qb.pdf SPARQL-scripts-for-qb.md: S
 things-to-note.html: things-to-note.Rmd
 	${RMD2HTML}
 
+overview-prefixes-for-SPARQL.html: overview-prefixes-for-SPARQL.Rmd
+	${RMD2HTML}

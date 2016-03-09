@@ -79,6 +79,24 @@ domainName<- GetDomainNameFromCube( store )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
 
+## SPARQL query for codelists in RDF data cube
+
+The SPARQL query for the dimensions is made by the function GetDimensionsSparqlQuery.
+```{r}
+codelistRq <- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
+mdwrite( codelistRq, "DEMOcodelist" )
+```
+
+```{r DEMOcodelist, results='asis', engine='highlight', engine.opts='-S n3 --inline-css'}
+```    
+
+Executing the SPARQL query gives:
+
+```{r}
+codelists<- sparql.rdf(store, codelistRq)
+knitr::kable(codelists,caption="Codelists")
+```
+
 
 ## SPARQL query for dimensions in RDF data cube
 

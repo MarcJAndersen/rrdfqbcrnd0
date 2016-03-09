@@ -26,6 +26,11 @@ for (i in 1:nrow(skeletonSource)){
     add.triple(store,
                paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]),
                paste0(prefixlist$prefixRDF,"type" ),
+               paste0(prefixlist$prefixQB, "CodedProperty"))
+      
+    add.triple(store,
+               paste0(prefixlist$`prefixCRND-DIMENSION`, skeletonSource[i,"compName"]),
+               paste0(prefixlist$prefixRDF,"type" ),
                paste0(prefixlist$prefixRDF, "Property"))
 
     ## Label for property. Example:   rdfs:label "Treatment Arm"@en .
