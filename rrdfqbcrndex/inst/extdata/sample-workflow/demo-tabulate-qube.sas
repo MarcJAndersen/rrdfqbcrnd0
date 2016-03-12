@@ -181,6 +181,11 @@ run;
 
 %include "include_tabulate_to_qb.sas" /source;
 
+libname this ".";
+data this.observations; set observations; run;
+data this.codes; set codes; run;
+
+    
 %MACRO OldCode;
     
 data forexport;

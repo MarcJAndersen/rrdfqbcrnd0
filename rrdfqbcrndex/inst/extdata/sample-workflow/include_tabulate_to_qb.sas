@@ -81,11 +81,12 @@ run;
 
 data codesdef;
     attrib name length=$32;
+    attrib namelabel length=$200;
     attrib datatype length=$32;
     attrib codedvalue length=$32;
     attrib ordernumber length=$32;
     attrib decode  length=$200;
-    call missing( name, datatype, codedvalue, codedvaluen, ordernumber, decode);
+    call missing( name, nameorder, namelabel, datatype, codedvalue, codedvaluen, ordernumber, decode);
     delete;
 run;
 
@@ -118,6 +119,9 @@ data observations;
     length procedure factor denominator $64;
     keep procedure factor denominator;
     array resdimc(*) &classvarlistc. procedure factor denominator;
+    label procedure="Method for descriptive statistic";
+    label factor="Names of variable for descriptive statistics";
+    label denominator="Denominator for statistics";
     array resdimn(*) &classvarlistn. ;
     keep measure;
     do i=1 to dim(results);
@@ -157,13 +161,16 @@ data observations;
     
 
  /* not ideal - STD is undefined for n=2, and would like to have it in the results */
+ /* one approach could be to use vname(results(i)) to determine what to do and also have a flag for std being included */        
         if not missing(measure) then do;
             output;
             
             do j=1 to dim(resdimc); /* do not need to do it again for &classvarlistc. variables */
                 name=lowcase(vname(resdimc(j)));
+                namelabel=vlabel(resdimc(j));
                 datatype= "text";
                 codedvaluen= .;
+                nameorder= j+dim(resdimn);
                 if missing(resdimc(j)) then do;
                     codedvalue="_ALL_";
                     decode= "All";
@@ -190,6 +197,7 @@ data observations;
             do j=1 to dim(resdimn);
                 name=lowcase(vname(resdimn(j)));
                 datatype= "integer";
+                nameorder= j;
                 if missing(resdimn(j)) then do;
                     codedvalue="_ALL_";
                     decode= "All";
