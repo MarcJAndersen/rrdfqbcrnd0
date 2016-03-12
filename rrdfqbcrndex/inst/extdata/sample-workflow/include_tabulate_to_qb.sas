@@ -19,7 +19,7 @@
     %put SetGlMacroVar: &mv.=&&&mv.;
 %MEND;
 
-%SetGlMacroVar(tabulateOutputDs,demo_tabulate);
+%SetGlMacroVar(tabulateOutputDs,work.demo_tabulate);
 %SetGlMacroVar(orderfmt,$orderfmt. );
 
 proc contents data=&tabulateOutputDs. varnum;
@@ -30,9 +30,34 @@ proc print data=&tabulateOutputDs.;
     format _all_;
 run;
 
-data _null_;
-    tableid=open("&tabulateOutputDs.",'i');
+data tablesdef; /* well, only one table for now */
+    length tablename $200;
+    tablename=symget("tabulateOutputDs");
+    output;
+run;
 
+/*
+
+   Create macrovariables with the variable names.
+   The macrovariables are specific for the table.
+    
+   Instead of having the macro variable, the processing later could be
+   also done in the datastep using varname, getvarc, getvarn. Decided against this,
+   as this is more complex code. The benefit would be that it could process more than
+   one tbale.
+   
+    */
+    
+data _null_;
+    set tablesdef;
+    tableid=open(tablename,'i');
+    if tableid=0 then do;
+        length sysmsgtxt $200;
+        sysmsgtxt=sysmsg();
+        putlog "Could not open " tablename= ;
+        putlog "Message: " sysmsgtxt=;
+        abort cancel;
+        end;
     length classvarlist classvarlistc classvarlistn resultvarlist $32000;
     classvarlist=" ";
     classvarlistc=" ";
@@ -62,7 +87,6 @@ run;
 %put classvarlistc=&classvarlistc.;
 %put classvarlistn=&classvarlistn.;
 %put resultvarlist=&resultvarlist.;
-
 
 data variablesdef; /* Naming inspired from define-xml */
     attrib DataType length=$32;

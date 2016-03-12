@@ -182,9 +182,11 @@ run;
 %include "include_tabulate_to_qb.sas" /source;
 
 libname this ".";
+data this.tablesdef; set tablesdef; run;
 data this.observations; set observations; run;
 data this.codes; set codes; run;
-
+proc format library=work cntlout=this.formats; run;
+    
     
 %MACRO OldCode;
     
