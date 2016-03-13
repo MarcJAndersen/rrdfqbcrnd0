@@ -192,7 +192,7 @@ data observations;
             do j=1 to dim(resdimc); /* do not need to do it again for &classvarlistc. variables */
                 name=lowcase(vname(resdimc(j)));
                 namelabel=vlabel(resdimc(j));
-                datatype= "text";
+                datatype= "character"; /* character in the SAS sense */
                 codedvaluen= .;
                 nameorder= j+dim(resdimn);
                 if missing(resdimc(j)) then do;
@@ -220,7 +220,7 @@ data observations;
             
             do j=1 to dim(resdimn);
                 name=lowcase(vname(resdimn(j)));
-                datatype= "integer";
+                datatype= "numeric";  /* using numeric in the SAS sense */
                 nameorder= j;
                 if missing(resdimn(j)) then do;
                     codedvalue="_ALL_";
