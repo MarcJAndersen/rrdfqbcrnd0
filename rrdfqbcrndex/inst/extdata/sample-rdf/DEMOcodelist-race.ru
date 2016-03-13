@@ -1,4 +1,4 @@
-## @knitr DEMOcodelist  
+xs## @knitr DEMOcodelistfull-race.ru 
 prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>  
 prefix skos: <http://www.w3.org/2004/02/skos/core#>  
 prefix prov: <http://www.w3.org/ns/prov#>  
@@ -35,19 +35,34 @@ prefix crnd-dimension: <http://www.example.org/dc/dimension#>
 prefix crnd-attribute: <http://www.example.org/dc/attribute#>  
 prefix crnd-measure: <http://www.example.org/dc/measure#>  
    
-select distinct ?p ?vn ?cl ?prefLabel   
-where {  
-?DataStructureDefinition a qb:DataStructureDefinition ;  
-   qb:component ?component .  
-?component a qb:ComponentSpecification .  
-?component qb:dimension ?p .  
-?p qb:codeList ?c .  
-?c skos:hasTopConcept ?cl .  
-?cl skos:prefLabel ?prefLabel .  
-OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn }   
-values ( ?DataStructureDefinition ) {  
- (ds:dsd-DEMO)   
+INSERT { 
+   ?dimension qb:codeList ?c .  
+   ?c skos:prefLabel ?cprefLabel .   
+}
+WHERE { 
+  select * where {
+ values ( ?dimension ?c ?cprefLabel  ) {  
+( crnd-dimension:race  code:race  "Codelist scheme: race"                           )
+ }   
+  }
 }  
-}  
-order by ?p ?cl ?prefLabel  
+;
+INSERT { 
+   ?c skos:hasTopConcept ?cl .  
+  ?cl skos:prefLabel ?clprefLabel .
+}
+WHERE { 
+  select * where {
+ values ( ?c ?cl ?clprefLabel ) {  
 
+( code:race  code:race-ASIAN                                     "ASIAN"                                  )
+( code:race  code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          "AMERICAN INDIAN OR ALASKA NATIVE"       )
+( code:race  code:race-BLACK_OR_AFRICAN_AMERICAN                 "BLACK OR AFRICAN AMERICAN"              )
+( code:race  code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"  )
+( code:race  code:race-WHITE                                     "WHITE"                                  )
+( code:race  code:race-_ALL_                                     "_ALL_"                                  )
+( code:race  code:race-_NONMISS_                                 "_NONMISS_"                              )
+
+ }   
+  }
+}  

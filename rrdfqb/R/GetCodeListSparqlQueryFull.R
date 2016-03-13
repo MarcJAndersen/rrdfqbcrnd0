@@ -6,10 +6,10 @@
 ##' @family SPARQL queries
 ##' @export
 ## ToDo(mja): Note CodedProperty is not defined in the codelist - maybe we should do that
-GetCodeListSparqlQuery<- function( forsparqlprefix, dsdName=NULL ) {
+GetCodeListSparqlQueryFull<- function( forsparqlprefix, dsdName=NULL ) {
 codelists.rq<-   paste(forsparqlprefix,
 '
-select distinct ?DataStructureDefinition ?dimension ?cprefLabel ?cl ?clprefLabel ?vn ?vct ?vnop ?vnval
+select distinct ?DataStructureDefinition ?component ?dimension ?c ?cprefLabel ?cl ?clprefLabel ?vn ?vnd2rq ?vct ?vnop ?vnval
 where {
    ?DataStructureDefinition a qb:DataStructureDefinition ;
         qb:component ?component .
@@ -18,7 +18,7 @@ where {
 
    ?dimension qb:codeList ?c .
    OPTIONAL { ?c skos:prefLabel ?cprefLabel .   }
-   OPTIONAL { ?c rrdfqbcrnd0:DataSetRefD2RQ ?vnop . }
+   OPTIONAL { ?c rrdfqbcrnd0:DataSetRefD2RQ ?vnd2rq . }
    OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn . }
    OPTIONAL { ?c rrdfqbcrnd0:codeType     ?vct .          }
 
