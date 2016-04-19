@@ -1,6 +1,7 @@
 RMDS= populate-sample-xpt.Rmd  create-ADSL-ttl.Rmd create-ADAE-ttl.Rmd \
 create-ae-table-as-csv.Rmd  create-dm-table-as-csv.Rmd \
 create-qb-examples-as-ttl.Rmd \
+PhUSE-2016-cube-from-csv.Rmd \
 use-demo-ttl.Rmd  \
 using-arq.Rmd using-arq-graphical-display.Rmd using-arq-qb.Rmd \
 reporting-process.Rmd \
@@ -105,4 +106,7 @@ things-to-note.html: things-to-note.Rmd
 	${RMD2HTML}
 
 overview-prefixes-for-SPARQL.html: overview-prefixes-for-SPARQL.Rmd
+	${RMD2HTML}
+
+PhUSE-2016-cube-from-csv.html: PhUSE-2016-cube-from-csv.Rmd
 	${RMD2HTML}
