@@ -27,8 +27,8 @@ extra step with the workbook, as the input files may be updated by
 running the SAS program.
 
 ```{r, eval=TRUE}
-# tab1x01ObsDataCsvFn<- system.file("extdata/sample-cfg", "TAB1X01.csv", package="rrdfqbcrndex")
-tab1x01ObsDataCsvFn<- "TAB1X01.csv"
+tab1x01ObsDataCsvFn<- system.file("extdata/sample-cfg", "TAB1X01.csv", package="rrdfqbcrndex")
+# tab1x01ObsDataCsvFn<- "TAB1X01.csv"
 tab1x01ObsData <- read.csv(tab1x01ObsDataCsvFn,stringsAsFactors=FALSE)
 
 ##TODO add measurefmt; quick hack - affects vignettes/cube-from-workbook.Rmd and
@@ -39,8 +39,8 @@ tab1x01ObsData$measurefmt[ tab1x01ObsData$procedure %in% c("n", "nmiss", "count"
 ## sprintf( tab1x01ObsData$measurefmt, tab1x01ObsData$measure)
 }
 
-# tab1x01MetaDataCsvFn<- system.file("extdata/sample-cfg", "TAB1X01-Components.csv", package="rrdfqbcrndex")
-tab1x01MetaDataCsvFn<- "TAB1X01-Components.csv"
+tab1x01MetaDataCsvFn<- system.file("extdata/sample-cfg", "TAB1X01-Components.csv", package="rrdfqbcrndex")
+# tab1x01MetaDataCsvFn<- "TAB1X01-Components.csv"
 tab1x01MetaData <- read.csv(tab1x01MetaDataCsvFn,stringsAsFactors=FALSE)
 
 
