@@ -60,6 +60,13 @@ tab1x01MetaData <- read.csv(tab1x01MetaDataCsvFn,stringsAsFactors=FALSE)
 
 tab1x01.cube.fn<- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )
 cat("TAB1X01 cube stored as ", normalizePath(tab1x01.cube.fn), "\n")
+
+targetFile<- file.path(targetDir,"CDISC-pilot-TAB1X01.ttl")
+
+if (file.copy( tab1x01.cube.fn, targetFile, overwrite=TRUE)) {
+   cat("RDF data cube copied to ", normalizePath(targetFile), "\n")
+ }
+
 ```
 
 

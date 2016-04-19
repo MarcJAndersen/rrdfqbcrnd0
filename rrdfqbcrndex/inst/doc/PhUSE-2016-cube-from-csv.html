@@ -303,7 +303,13 @@ tab1x01.cube.fn&lt;- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )</
 ## 29                 &lt;NA&gt;
 ## crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:disconfl crnd-dimension:disconfl crnd-dimension:disconfl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:factor crnd-dimension:factor crnd-dimension:factor crnd-dimension:factor crnd-dimension:ittfl crnd-dimension:ittfl crnd-dimension:ittfl crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:saffl crnd-dimension:saffl crnd-dimension:saffl crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p</code></pre>
 <pre class="r"><code>cat(&quot;TAB1X01 cube stored as &quot;, normalizePath(tab1x01.cube.fn), &quot;\n&quot;)</code></pre>
-<pre><code>## TAB1X01 cube stored as  /tmp/Rtmp6EpyEA/DC-TAB1X01-R-V-0-0-0.ttl</code></pre>
+<pre><code>## TAB1X01 cube stored as  /tmp/RtmpmybZeB/DC-TAB1X01-R-V-0-0-0.ttl</code></pre>
+<pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;CDISC-pilot-TAB1X01.ttl&quot;)
+
+if (file.copy( tab1x01.cube.fn, targetFile, overwrite=TRUE)) {
+   cat(&quot;RDF data cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
+ }</code></pre>
+<pre><code>## RDF data cube copied to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/CDISC-pilot-TAB1X01.ttl</code></pre>
 <p>Now look at the generated cubes by loading the turtle files.</p>
 <pre class="r"><code>dataCubeFile&lt;- tab1x01.cube.fn</code></pre>
 <p>The rest of the code only depends on the value of dataCubeFile.</p>

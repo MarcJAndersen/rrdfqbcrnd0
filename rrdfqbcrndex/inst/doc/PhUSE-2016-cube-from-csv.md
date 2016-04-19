@@ -175,7 +175,17 @@ tab1x01.cube.fn<- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )
 cat("TAB1X01 cube stored as ", normalizePath(tab1x01.cube.fn), "\n")
 ```
 
-    ## TAB1X01 cube stored as  /tmp/Rtmp6EpyEA/DC-TAB1X01-R-V-0-0-0.ttl
+    ## TAB1X01 cube stored as  /tmp/RtmpmybZeB/DC-TAB1X01-R-V-0-0-0.ttl
+
+``` r
+targetFile<- file.path(targetDir,"CDISC-pilot-TAB1X01.ttl")
+
+if (file.copy( tab1x01.cube.fn, targetFile, overwrite=TRUE)) {
+   cat("RDF data cube copied to ", normalizePath(targetFile), "\n")
+ }
+```
+
+    ## RDF data cube copied to  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/CDISC-pilot-TAB1X01.ttl
 
 Now look at the generated cubes by loading the turtle files.
 
