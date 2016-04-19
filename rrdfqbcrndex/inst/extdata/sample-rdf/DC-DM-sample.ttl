@@ -363,7 +363,7 @@ ds:obs36  a                         qb:Observation ;
         crnd-measure:measure        "44"^^xsd:double .
 
 crnd-dimension:procedure
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Statistical Procedure" ;
         rdfs:range   code:Procedure ;
         qb:codeList  code:procedure .
@@ -413,7 +413,7 @@ ds:obs49  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "75.6666666666667"^^xsd:double .
 
-crnd-dimension:sex  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:sex  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Sex (Gender)" ;
         rdfs:range   code:Sex ;
         qb:codeList  code:sex .
@@ -962,7 +962,7 @@ dccs:measure  a     qb:ComponentSpecification ;
         qb:measure  crnd-measure:measure .
 
 crnd-dimension:trt01a
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Treatment Arm" ;
         rdfs:range   code:Trt01a ;
         qb:codeList  code:trt01a .
@@ -1029,7 +1029,7 @@ ds:obs13  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "86"^^xsd:double .
 
-crnd-dimension:race  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:race  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Race" ;
         rdfs:range   code:Race ;
         qb:codeList  code:race .
@@ -1200,7 +1200,7 @@ ds:obs46  a                         qb:Observation ;
         crnd-measure:measure        "88.0952380952381"^^xsd:double .
 
 crnd-dimension:factor
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Type of procedure (quantity, proportion...)" ;
         rdfs:range   code:Factor ;
         qb:codeList  code:factor .
@@ -1389,7 +1389,7 @@ ds:dataset-DM  a                      qb:DataSet ;
         dct:title                     "Demographics Analysis Results"^^xsd:string ;
         qb:structure                  ds:dsd-DM ;
         pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-03-08T22:33:25+01:00"^^xsd:dateTime ;
+        pav:createdOn                 "2016-04-20T00:53:00+02:00"^^xsd:dateTime ;
         pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
         pav:version                   "0.0.0"^^xsd:string ;
         rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
@@ -1449,7 +1449,7 @@ ds:obs32  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "47.6190476190476"^^xsd:double .
 
-crnd-dimension:saffl  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:saffl  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Safety Population Flag" ;
         rdfs:range   code:Saffl ;
         qb:codeList  code:saffl .

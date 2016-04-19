@@ -232,311 +232,53 @@ cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOcodelist.rq 
 ```
 
-    ## ---------------------------------------------------------------------------------------------------------------------------------------
-    ## | codeList       | codelevel                                           | codelist       | prefLabel                                   |
-    ## =======================================================================================================================================
-    ## | code:ethnic    | code:factor-quantity                                | code:factor    | "quantity"                                  |
-    ## | code:ethnic    | code:procedure-max                                  | code:procedure | "max"                                       |
-    ## | code:ethnic    | code:procedure-q3                                   | code:procedure | "q3"                                        |
-    ## | code:ethnic    | code:sex-F                                          | code:sex       | "F"                                         |
-    ## | code:ethnic    | code:agegr1-_65                                     | code:agegr1    | "<65"                                       |
-    ## | code:ethnic    | code:factor-proportion                              | code:factor    | "proportion"                                |
-    ## | code:ethnic    | code:agegr1-_80                                     | code:agegr1    | ">80"                                       |
-    ## | code:ethnic    | code:race-_ALL_                                     | code:race      | "_ALL_"                                     |
-    ## | code:ethnic    | code:procedure-mean                                 | code:procedure | "mean"                                      |
-    ## | code:ethnic    | code:trt01a-_ALL_                                   | code:trt01a    | "_ALL_"                                     |
-    ## | code:ethnic    | code:sex-M                                          | code:sex       | "M"                                         |
-    ## | code:ethnic    | code:ethnic-HISPANIC_OR_LATINO                      | code:ethnic    | "HISPANIC OR LATINO"                        |
-    ## | code:ethnic    | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | code:race      | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
-    ## | code:ethnic    | code:ethnic-NOT_HISPANIC_OR_LATINO                  | code:ethnic    | "NOT HISPANIC OR LATINO"                    |
-    ## | code:ethnic    | code:procedure-median                               | code:procedure | "median"                                    |
-    ## | code:ethnic    | code:ethnic-_NONMISS_                               | code:ethnic    | "_NONMISS_"                                 |
-    ## | code:ethnic    | code:procedure-q1                                   | code:procedure | "q1"                                        |
-    ## | code:ethnic    | code:trt01a-Xanomeline_High_Dose                    | code:trt01a    | "Xanomeline High Dose"                      |
-    ## | code:ethnic    | code:agegr1-_ALL_                                   | code:agegr1    | "_ALL_"                                     |
-    ## | code:ethnic    | code:sex-UN                                         | code:sex       | "UN"                                        |
-    ## | code:ethnic    | code:sex-_ALL_                                      | code:sex       | "_ALL_"                                     |
-    ## | code:ethnic    | code:race-ASIAN                                     | code:race      | "ASIAN"                                     |
-    ## | code:ethnic    | code:race-WHITE                                     | code:race      | "WHITE"                                     |
-    ## | code:ethnic    | code:trt01a-_NONMISS_                               | code:trt01a    | "_NONMISS_"                                 |
-    ## | code:ethnic    | code:sex-_NONMISS_                                  | code:sex       | "_NONMISS_"                                 |
-    ## | code:ethnic    | code:factor-age                                     | code:factor    | "age"                                       |
-    ## | code:ethnic    | code:ethnic-_ALL_                                   | code:ethnic    | "_ALL_"                                     |
-    ## | code:ethnic    | code:procedure-n                                    | code:procedure | "n"                                         |
-    ## | code:ethnic    | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | code:race      | "AMERICAN INDIAN OR ALASKA NATIVE"          |
-    ## | code:ethnic    | code:trt01a-Placebo                                 | code:trt01a    | "Placebo"                                   |
-    ## | code:ethnic    | code:factor-weightbl                                | code:factor    | "weightbl"                                  |
-    ## | code:ethnic    | code:trt01a-Xanomeline_Low_Dose                     | code:trt01a    | "Xanomeline Low Dose"                       |
-    ## | code:ethnic    | code:factor-_ALL_                                   | code:factor    | "_ALL_"                                     |
-    ## | code:ethnic    | code:procedure-percent                              | code:procedure | "percent"                                   |
-    ## | code:ethnic    | code:agegr1-65-80                                   | code:agegr1    | "65-80"                                     |
-    ## | code:ethnic    | code:procedure-min                                  | code:procedure | "min"                                       |
-    ## | code:ethnic    | code:race-_NONMISS_                                 | code:race      | "_NONMISS_"                                 |
-    ## | code:ethnic    | code:agegr1-_NONMISS_                               | code:agegr1    | "_NONMISS_"                                 |
-    ## | code:ethnic    | code:race-BLACK_OR_AFRICAN_AMERICAN                 | code:race      | "BLACK OR AFRICAN AMERICAN"                 |
-    ## | code:ethnic    | code:factor-_NONMISS_                               | code:factor    | "_NONMISS_"                                 |
-    ## | code:ethnic    | code:sex-U                                          | code:sex       | "U"                                         |
-    ## | code:ethnic    | code:procedure-count                                | code:procedure | "count"                                     |
-    ## | code:ethnic    | code:procedure-std                                  | code:procedure | "std"                                       |
-    ## | code:agegr1    | code:factor-quantity                                | code:factor    | "quantity"                                  |
-    ## | code:agegr1    | code:procedure-max                                  | code:procedure | "max"                                       |
-    ## | code:agegr1    | code:procedure-q3                                   | code:procedure | "q3"                                        |
-    ## | code:agegr1    | code:sex-F                                          | code:sex       | "F"                                         |
-    ## | code:agegr1    | code:agegr1-_65                                     | code:agegr1    | "<65"                                       |
-    ## | code:agegr1    | code:factor-proportion                              | code:factor    | "proportion"                                |
-    ## | code:agegr1    | code:agegr1-_80                                     | code:agegr1    | ">80"                                       |
-    ## | code:agegr1    | code:race-_ALL_                                     | code:race      | "_ALL_"                                     |
-    ## | code:agegr1    | code:procedure-mean                                 | code:procedure | "mean"                                      |
-    ## | code:agegr1    | code:trt01a-_ALL_                                   | code:trt01a    | "_ALL_"                                     |
-    ## | code:agegr1    | code:sex-M                                          | code:sex       | "M"                                         |
-    ## | code:agegr1    | code:ethnic-HISPANIC_OR_LATINO                      | code:ethnic    | "HISPANIC OR LATINO"                        |
-    ## | code:agegr1    | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | code:race      | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
-    ## | code:agegr1    | code:ethnic-NOT_HISPANIC_OR_LATINO                  | code:ethnic    | "NOT HISPANIC OR LATINO"                    |
-    ## | code:agegr1    | code:procedure-median                               | code:procedure | "median"                                    |
-    ## | code:agegr1    | code:ethnic-_NONMISS_                               | code:ethnic    | "_NONMISS_"                                 |
-    ## | code:agegr1    | code:procedure-q1                                   | code:procedure | "q1"                                        |
-    ## | code:agegr1    | code:trt01a-Xanomeline_High_Dose                    | code:trt01a    | "Xanomeline High Dose"                      |
-    ## | code:agegr1    | code:agegr1-_ALL_                                   | code:agegr1    | "_ALL_"                                     |
-    ## | code:agegr1    | code:sex-UN                                         | code:sex       | "UN"                                        |
-    ## | code:agegr1    | code:sex-_ALL_                                      | code:sex       | "_ALL_"                                     |
-    ## | code:agegr1    | code:race-ASIAN                                     | code:race      | "ASIAN"                                     |
-    ## | code:agegr1    | code:race-WHITE                                     | code:race      | "WHITE"                                     |
-    ## | code:agegr1    | code:trt01a-_NONMISS_                               | code:trt01a    | "_NONMISS_"                                 |
-    ## | code:agegr1    | code:sex-_NONMISS_                                  | code:sex       | "_NONMISS_"                                 |
-    ## | code:agegr1    | code:factor-age                                     | code:factor    | "age"                                       |
-    ## | code:agegr1    | code:ethnic-_ALL_                                   | code:ethnic    | "_ALL_"                                     |
-    ## | code:agegr1    | code:procedure-n                                    | code:procedure | "n"                                         |
-    ## | code:agegr1    | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | code:race      | "AMERICAN INDIAN OR ALASKA NATIVE"          |
-    ## | code:agegr1    | code:trt01a-Placebo                                 | code:trt01a    | "Placebo"                                   |
-    ## | code:agegr1    | code:factor-weightbl                                | code:factor    | "weightbl"                                  |
-    ## | code:agegr1    | code:trt01a-Xanomeline_Low_Dose                     | code:trt01a    | "Xanomeline Low Dose"                       |
-    ## | code:agegr1    | code:factor-_ALL_                                   | code:factor    | "_ALL_"                                     |
-    ## | code:agegr1    | code:procedure-percent                              | code:procedure | "percent"                                   |
-    ## | code:agegr1    | code:agegr1-65-80                                   | code:agegr1    | "65-80"                                     |
-    ## | code:agegr1    | code:procedure-min                                  | code:procedure | "min"                                       |
-    ## | code:agegr1    | code:race-_NONMISS_                                 | code:race      | "_NONMISS_"                                 |
-    ## | code:agegr1    | code:agegr1-_NONMISS_                               | code:agegr1    | "_NONMISS_"                                 |
-    ## | code:agegr1    | code:race-BLACK_OR_AFRICAN_AMERICAN                 | code:race      | "BLACK OR AFRICAN AMERICAN"                 |
-    ## | code:agegr1    | code:factor-_NONMISS_                               | code:factor    | "_NONMISS_"                                 |
-    ## | code:agegr1    | code:sex-U                                          | code:sex       | "U"                                         |
-    ## | code:agegr1    | code:procedure-count                                | code:procedure | "count"                                     |
-    ## | code:agegr1    | code:procedure-std                                  | code:procedure | "std"                                       |
-    ## | code:procedure | code:factor-quantity                                | code:factor    | "quantity"                                  |
-    ## | code:procedure | code:procedure-max                                  | code:procedure | "max"                                       |
-    ## | code:procedure | code:procedure-q3                                   | code:procedure | "q3"                                        |
-    ## | code:procedure | code:sex-F                                          | code:sex       | "F"                                         |
-    ## | code:procedure | code:agegr1-_65                                     | code:agegr1    | "<65"                                       |
-    ## | code:procedure | code:factor-proportion                              | code:factor    | "proportion"                                |
-    ## | code:procedure | code:agegr1-_80                                     | code:agegr1    | ">80"                                       |
-    ## | code:procedure | code:race-_ALL_                                     | code:race      | "_ALL_"                                     |
-    ## | code:procedure | code:procedure-mean                                 | code:procedure | "mean"                                      |
-    ## | code:procedure | code:trt01a-_ALL_                                   | code:trt01a    | "_ALL_"                                     |
-    ## | code:procedure | code:sex-M                                          | code:sex       | "M"                                         |
-    ## | code:procedure | code:ethnic-HISPANIC_OR_LATINO                      | code:ethnic    | "HISPANIC OR LATINO"                        |
-    ## | code:procedure | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | code:race      | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
-    ## | code:procedure | code:ethnic-NOT_HISPANIC_OR_LATINO                  | code:ethnic    | "NOT HISPANIC OR LATINO"                    |
-    ## | code:procedure | code:procedure-median                               | code:procedure | "median"                                    |
-    ## | code:procedure | code:ethnic-_NONMISS_                               | code:ethnic    | "_NONMISS_"                                 |
-    ## | code:procedure | code:procedure-q1                                   | code:procedure | "q1"                                        |
-    ## | code:procedure | code:trt01a-Xanomeline_High_Dose                    | code:trt01a    | "Xanomeline High Dose"                      |
-    ## | code:procedure | code:agegr1-_ALL_                                   | code:agegr1    | "_ALL_"                                     |
-    ## | code:procedure | code:sex-UN                                         | code:sex       | "UN"                                        |
-    ## | code:procedure | code:sex-_ALL_                                      | code:sex       | "_ALL_"                                     |
-    ## | code:procedure | code:race-ASIAN                                     | code:race      | "ASIAN"                                     |
-    ## | code:procedure | code:race-WHITE                                     | code:race      | "WHITE"                                     |
-    ## | code:procedure | code:trt01a-_NONMISS_                               | code:trt01a    | "_NONMISS_"                                 |
-    ## | code:procedure | code:sex-_NONMISS_                                  | code:sex       | "_NONMISS_"                                 |
-    ## | code:procedure | code:factor-age                                     | code:factor    | "age"                                       |
-    ## | code:procedure | code:ethnic-_ALL_                                   | code:ethnic    | "_ALL_"                                     |
-    ## | code:procedure | code:procedure-n                                    | code:procedure | "n"                                         |
-    ## | code:procedure | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | code:race      | "AMERICAN INDIAN OR ALASKA NATIVE"          |
-    ## | code:procedure | code:trt01a-Placebo                                 | code:trt01a    | "Placebo"                                   |
-    ## | code:procedure | code:factor-weightbl                                | code:factor    | "weightbl"                                  |
-    ## | code:procedure | code:trt01a-Xanomeline_Low_Dose                     | code:trt01a    | "Xanomeline Low Dose"                       |
-    ## | code:procedure | code:factor-_ALL_                                   | code:factor    | "_ALL_"                                     |
-    ## | code:procedure | code:procedure-percent                              | code:procedure | "percent"                                   |
-    ## | code:procedure | code:agegr1-65-80                                   | code:agegr1    | "65-80"                                     |
-    ## | code:procedure | code:procedure-min                                  | code:procedure | "min"                                       |
-    ## | code:procedure | code:race-_NONMISS_                                 | code:race      | "_NONMISS_"                                 |
-    ## | code:procedure | code:agegr1-_NONMISS_                               | code:agegr1    | "_NONMISS_"                                 |
-    ## | code:procedure | code:race-BLACK_OR_AFRICAN_AMERICAN                 | code:race      | "BLACK OR AFRICAN AMERICAN"                 |
-    ## | code:procedure | code:factor-_NONMISS_                               | code:factor    | "_NONMISS_"                                 |
-    ## | code:procedure | code:sex-U                                          | code:sex       | "U"                                         |
-    ## | code:procedure | code:procedure-count                                | code:procedure | "count"                                     |
-    ## | code:procedure | code:procedure-std                                  | code:procedure | "std"                                       |
-    ## | code:factor    | code:factor-quantity                                | code:factor    | "quantity"                                  |
-    ## | code:factor    | code:procedure-max                                  | code:procedure | "max"                                       |
-    ## | code:factor    | code:procedure-q3                                   | code:procedure | "q3"                                        |
-    ## | code:factor    | code:sex-F                                          | code:sex       | "F"                                         |
-    ## | code:factor    | code:agegr1-_65                                     | code:agegr1    | "<65"                                       |
-    ## | code:factor    | code:factor-proportion                              | code:factor    | "proportion"                                |
-    ## | code:factor    | code:agegr1-_80                                     | code:agegr1    | ">80"                                       |
-    ## | code:factor    | code:race-_ALL_                                     | code:race      | "_ALL_"                                     |
-    ## | code:factor    | code:procedure-mean                                 | code:procedure | "mean"                                      |
-    ## | code:factor    | code:trt01a-_ALL_                                   | code:trt01a    | "_ALL_"                                     |
-    ## | code:factor    | code:sex-M                                          | code:sex       | "M"                                         |
-    ## | code:factor    | code:ethnic-HISPANIC_OR_LATINO                      | code:ethnic    | "HISPANIC OR LATINO"                        |
-    ## | code:factor    | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | code:race      | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
-    ## | code:factor    | code:ethnic-NOT_HISPANIC_OR_LATINO                  | code:ethnic    | "NOT HISPANIC OR LATINO"                    |
-    ## | code:factor    | code:procedure-median                               | code:procedure | "median"                                    |
-    ## | code:factor    | code:ethnic-_NONMISS_                               | code:ethnic    | "_NONMISS_"                                 |
-    ## | code:factor    | code:procedure-q1                                   | code:procedure | "q1"                                        |
-    ## | code:factor    | code:trt01a-Xanomeline_High_Dose                    | code:trt01a    | "Xanomeline High Dose"                      |
-    ## | code:factor    | code:agegr1-_ALL_                                   | code:agegr1    | "_ALL_"                                     |
-    ## | code:factor    | code:sex-UN                                         | code:sex       | "UN"                                        |
-    ## | code:factor    | code:sex-_ALL_                                      | code:sex       | "_ALL_"                                     |
-    ## | code:factor    | code:race-ASIAN                                     | code:race      | "ASIAN"                                     |
-    ## | code:factor    | code:race-WHITE                                     | code:race      | "WHITE"                                     |
-    ## | code:factor    | code:trt01a-_NONMISS_                               | code:trt01a    | "_NONMISS_"                                 |
-    ## | code:factor    | code:sex-_NONMISS_                                  | code:sex       | "_NONMISS_"                                 |
-    ## | code:factor    | code:factor-age                                     | code:factor    | "age"                                       |
-    ## | code:factor    | code:ethnic-_ALL_                                   | code:ethnic    | "_ALL_"                                     |
-    ## | code:factor    | code:procedure-n                                    | code:procedure | "n"                                         |
-    ## | code:factor    | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | code:race      | "AMERICAN INDIAN OR ALASKA NATIVE"          |
-    ## | code:factor    | code:trt01a-Placebo                                 | code:trt01a    | "Placebo"                                   |
-    ## | code:factor    | code:factor-weightbl                                | code:factor    | "weightbl"                                  |
-    ## | code:factor    | code:trt01a-Xanomeline_Low_Dose                     | code:trt01a    | "Xanomeline Low Dose"                       |
-    ## | code:factor    | code:factor-_ALL_                                   | code:factor    | "_ALL_"                                     |
-    ## | code:factor    | code:procedure-percent                              | code:procedure | "percent"                                   |
-    ## | code:factor    | code:agegr1-65-80                                   | code:agegr1    | "65-80"                                     |
-    ## | code:factor    | code:procedure-min                                  | code:procedure | "min"                                       |
-    ## | code:factor    | code:race-_NONMISS_                                 | code:race      | "_NONMISS_"                                 |
-    ## | code:factor    | code:agegr1-_NONMISS_                               | code:agegr1    | "_NONMISS_"                                 |
-    ## | code:factor    | code:race-BLACK_OR_AFRICAN_AMERICAN                 | code:race      | "BLACK OR AFRICAN AMERICAN"                 |
-    ## | code:factor    | code:factor-_NONMISS_                               | code:factor    | "_NONMISS_"                                 |
-    ## | code:factor    | code:sex-U                                          | code:sex       | "U"                                         |
-    ## | code:factor    | code:procedure-count                                | code:procedure | "count"                                     |
-    ## | code:factor    | code:procedure-std                                  | code:procedure | "std"                                       |
-    ## | code:trt01a    | code:factor-quantity                                | code:factor    | "quantity"                                  |
-    ## | code:trt01a    | code:procedure-max                                  | code:procedure | "max"                                       |
-    ## | code:trt01a    | code:procedure-q3                                   | code:procedure | "q3"                                        |
-    ## | code:trt01a    | code:sex-F                                          | code:sex       | "F"                                         |
-    ## | code:trt01a    | code:agegr1-_65                                     | code:agegr1    | "<65"                                       |
-    ## | code:trt01a    | code:factor-proportion                              | code:factor    | "proportion"                                |
-    ## | code:trt01a    | code:agegr1-_80                                     | code:agegr1    | ">80"                                       |
-    ## | code:trt01a    | code:race-_ALL_                                     | code:race      | "_ALL_"                                     |
-    ## | code:trt01a    | code:procedure-mean                                 | code:procedure | "mean"                                      |
-    ## | code:trt01a    | code:trt01a-_ALL_                                   | code:trt01a    | "_ALL_"                                     |
-    ## | code:trt01a    | code:sex-M                                          | code:sex       | "M"                                         |
-    ## | code:trt01a    | code:ethnic-HISPANIC_OR_LATINO                      | code:ethnic    | "HISPANIC OR LATINO"                        |
-    ## | code:trt01a    | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | code:race      | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
-    ## | code:trt01a    | code:ethnic-NOT_HISPANIC_OR_LATINO                  | code:ethnic    | "NOT HISPANIC OR LATINO"                    |
-    ## | code:trt01a    | code:procedure-median                               | code:procedure | "median"                                    |
-    ## | code:trt01a    | code:ethnic-_NONMISS_                               | code:ethnic    | "_NONMISS_"                                 |
-    ## | code:trt01a    | code:procedure-q1                                   | code:procedure | "q1"                                        |
-    ## | code:trt01a    | code:trt01a-Xanomeline_High_Dose                    | code:trt01a    | "Xanomeline High Dose"                      |
-    ## | code:trt01a    | code:agegr1-_ALL_                                   | code:agegr1    | "_ALL_"                                     |
-    ## | code:trt01a    | code:sex-UN                                         | code:sex       | "UN"                                        |
-    ## | code:trt01a    | code:sex-_ALL_                                      | code:sex       | "_ALL_"                                     |
-    ## | code:trt01a    | code:race-ASIAN                                     | code:race      | "ASIAN"                                     |
-    ## | code:trt01a    | code:race-WHITE                                     | code:race      | "WHITE"                                     |
-    ## | code:trt01a    | code:trt01a-_NONMISS_                               | code:trt01a    | "_NONMISS_"                                 |
-    ## | code:trt01a    | code:sex-_NONMISS_                                  | code:sex       | "_NONMISS_"                                 |
-    ## | code:trt01a    | code:factor-age                                     | code:factor    | "age"                                       |
-    ## | code:trt01a    | code:ethnic-_ALL_                                   | code:ethnic    | "_ALL_"                                     |
-    ## | code:trt01a    | code:procedure-n                                    | code:procedure | "n"                                         |
-    ## | code:trt01a    | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | code:race      | "AMERICAN INDIAN OR ALASKA NATIVE"          |
-    ## | code:trt01a    | code:trt01a-Placebo                                 | code:trt01a    | "Placebo"                                   |
-    ## | code:trt01a    | code:factor-weightbl                                | code:factor    | "weightbl"                                  |
-    ## | code:trt01a    | code:trt01a-Xanomeline_Low_Dose                     | code:trt01a    | "Xanomeline Low Dose"                       |
-    ## | code:trt01a    | code:factor-_ALL_                                   | code:factor    | "_ALL_"                                     |
-    ## | code:trt01a    | code:procedure-percent                              | code:procedure | "percent"                                   |
-    ## | code:trt01a    | code:agegr1-65-80                                   | code:agegr1    | "65-80"                                     |
-    ## | code:trt01a    | code:procedure-min                                  | code:procedure | "min"                                       |
-    ## | code:trt01a    | code:race-_NONMISS_                                 | code:race      | "_NONMISS_"                                 |
-    ## | code:trt01a    | code:agegr1-_NONMISS_                               | code:agegr1    | "_NONMISS_"                                 |
-    ## | code:trt01a    | code:race-BLACK_OR_AFRICAN_AMERICAN                 | code:race      | "BLACK OR AFRICAN AMERICAN"                 |
-    ## | code:trt01a    | code:factor-_NONMISS_                               | code:factor    | "_NONMISS_"                                 |
-    ## | code:trt01a    | code:sex-U                                          | code:sex       | "U"                                         |
-    ## | code:trt01a    | code:procedure-count                                | code:procedure | "count"                                     |
-    ## | code:trt01a    | code:procedure-std                                  | code:procedure | "std"                                       |
-    ## | code:sex       | code:factor-quantity                                | code:factor    | "quantity"                                  |
-    ## | code:sex       | code:procedure-max                                  | code:procedure | "max"                                       |
-    ## | code:sex       | code:procedure-q3                                   | code:procedure | "q3"                                        |
-    ## | code:sex       | code:sex-F                                          | code:sex       | "F"                                         |
-    ## | code:sex       | code:agegr1-_65                                     | code:agegr1    | "<65"                                       |
-    ## | code:sex       | code:factor-proportion                              | code:factor    | "proportion"                                |
-    ## | code:sex       | code:agegr1-_80                                     | code:agegr1    | ">80"                                       |
-    ## | code:sex       | code:race-_ALL_                                     | code:race      | "_ALL_"                                     |
-    ## | code:sex       | code:procedure-mean                                 | code:procedure | "mean"                                      |
-    ## | code:sex       | code:trt01a-_ALL_                                   | code:trt01a    | "_ALL_"                                     |
-    ## | code:sex       | code:sex-M                                          | code:sex       | "M"                                         |
-    ## | code:sex       | code:ethnic-HISPANIC_OR_LATINO                      | code:ethnic    | "HISPANIC OR LATINO"                        |
-    ## | code:sex       | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | code:race      | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
-    ## | code:sex       | code:ethnic-NOT_HISPANIC_OR_LATINO                  | code:ethnic    | "NOT HISPANIC OR LATINO"                    |
-    ## | code:sex       | code:procedure-median                               | code:procedure | "median"                                    |
-    ## | code:sex       | code:ethnic-_NONMISS_                               | code:ethnic    | "_NONMISS_"                                 |
-    ## | code:sex       | code:procedure-q1                                   | code:procedure | "q1"                                        |
-    ## | code:sex       | code:trt01a-Xanomeline_High_Dose                    | code:trt01a    | "Xanomeline High Dose"                      |
-    ## | code:sex       | code:agegr1-_ALL_                                   | code:agegr1    | "_ALL_"                                     |
-    ## | code:sex       | code:sex-UN                                         | code:sex       | "UN"                                        |
-    ## | code:sex       | code:sex-_ALL_                                      | code:sex       | "_ALL_"                                     |
-    ## | code:sex       | code:race-ASIAN                                     | code:race      | "ASIAN"                                     |
-    ## | code:sex       | code:race-WHITE                                     | code:race      | "WHITE"                                     |
-    ## | code:sex       | code:trt01a-_NONMISS_                               | code:trt01a    | "_NONMISS_"                                 |
-    ## | code:sex       | code:sex-_NONMISS_                                  | code:sex       | "_NONMISS_"                                 |
-    ## | code:sex       | code:factor-age                                     | code:factor    | "age"                                       |
-    ## | code:sex       | code:ethnic-_ALL_                                   | code:ethnic    | "_ALL_"                                     |
-    ## | code:sex       | code:procedure-n                                    | code:procedure | "n"                                         |
-    ## | code:sex       | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | code:race      | "AMERICAN INDIAN OR ALASKA NATIVE"          |
-    ## | code:sex       | code:trt01a-Placebo                                 | code:trt01a    | "Placebo"                                   |
-    ## | code:sex       | code:factor-weightbl                                | code:factor    | "weightbl"                                  |
-    ## | code:sex       | code:trt01a-Xanomeline_Low_Dose                     | code:trt01a    | "Xanomeline Low Dose"                       |
-    ## | code:sex       | code:factor-_ALL_                                   | code:factor    | "_ALL_"                                     |
-    ## | code:sex       | code:procedure-percent                              | code:procedure | "percent"                                   |
-    ## | code:sex       | code:agegr1-65-80                                   | code:agegr1    | "65-80"                                     |
-    ## | code:sex       | code:procedure-min                                  | code:procedure | "min"                                       |
-    ## | code:sex       | code:race-_NONMISS_                                 | code:race      | "_NONMISS_"                                 |
-    ## | code:sex       | code:agegr1-_NONMISS_                               | code:agegr1    | "_NONMISS_"                                 |
-    ## | code:sex       | code:race-BLACK_OR_AFRICAN_AMERICAN                 | code:race      | "BLACK OR AFRICAN AMERICAN"                 |
-    ## | code:sex       | code:factor-_NONMISS_                               | code:factor    | "_NONMISS_"                                 |
-    ## | code:sex       | code:sex-U                                          | code:sex       | "U"                                         |
-    ## | code:sex       | code:procedure-count                                | code:procedure | "count"                                     |
-    ## | code:sex       | code:procedure-std                                  | code:procedure | "std"                                       |
-    ## | code:race      | code:factor-quantity                                | code:factor    | "quantity"                                  |
-    ## | code:race      | code:procedure-max                                  | code:procedure | "max"                                       |
-    ## | code:race      | code:procedure-q3                                   | code:procedure | "q3"                                        |
-    ## | code:race      | code:sex-F                                          | code:sex       | "F"                                         |
-    ## | code:race      | code:agegr1-_65                                     | code:agegr1    | "<65"                                       |
-    ## | code:race      | code:factor-proportion                              | code:factor    | "proportion"                                |
-    ## | code:race      | code:agegr1-_80                                     | code:agegr1    | ">80"                                       |
-    ## | code:race      | code:race-_ALL_                                     | code:race      | "_ALL_"                                     |
-    ## | code:race      | code:procedure-mean                                 | code:procedure | "mean"                                      |
-    ## | code:race      | code:trt01a-_ALL_                                   | code:trt01a    | "_ALL_"                                     |
-    ## | code:race      | code:sex-M                                          | code:sex       | "M"                                         |
-    ## | code:race      | code:ethnic-HISPANIC_OR_LATINO                      | code:ethnic    | "HISPANIC OR LATINO"                        |
-    ## | code:race      | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | code:race      | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
-    ## | code:race      | code:ethnic-NOT_HISPANIC_OR_LATINO                  | code:ethnic    | "NOT HISPANIC OR LATINO"                    |
-    ## | code:race      | code:procedure-median                               | code:procedure | "median"                                    |
-    ## | code:race      | code:ethnic-_NONMISS_                               | code:ethnic    | "_NONMISS_"                                 |
-    ## | code:race      | code:procedure-q1                                   | code:procedure | "q1"                                        |
-    ## | code:race      | code:trt01a-Xanomeline_High_Dose                    | code:trt01a    | "Xanomeline High Dose"                      |
-    ## | code:race      | code:agegr1-_ALL_                                   | code:agegr1    | "_ALL_"                                     |
-    ## | code:race      | code:sex-UN                                         | code:sex       | "UN"                                        |
-    ## | code:race      | code:sex-_ALL_                                      | code:sex       | "_ALL_"                                     |
-    ## | code:race      | code:race-ASIAN                                     | code:race      | "ASIAN"                                     |
-    ## | code:race      | code:race-WHITE                                     | code:race      | "WHITE"                                     |
-    ## | code:race      | code:trt01a-_NONMISS_                               | code:trt01a    | "_NONMISS_"                                 |
-    ## | code:race      | code:sex-_NONMISS_                                  | code:sex       | "_NONMISS_"                                 |
-    ## | code:race      | code:factor-age                                     | code:factor    | "age"                                       |
-    ## | code:race      | code:ethnic-_ALL_                                   | code:ethnic    | "_ALL_"                                     |
-    ## | code:race      | code:procedure-n                                    | code:procedure | "n"                                         |
-    ## | code:race      | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | code:race      | "AMERICAN INDIAN OR ALASKA NATIVE"          |
-    ## | code:race      | code:trt01a-Placebo                                 | code:trt01a    | "Placebo"                                   |
-    ## | code:race      | code:factor-weightbl                                | code:factor    | "weightbl"                                  |
-    ## | code:race      | code:trt01a-Xanomeline_Low_Dose                     | code:trt01a    | "Xanomeline Low Dose"                       |
-    ## | code:race      | code:factor-_ALL_                                   | code:factor    | "_ALL_"                                     |
-    ## | code:race      | code:procedure-percent                              | code:procedure | "percent"                                   |
-    ## | code:race      | code:agegr1-65-80                                   | code:agegr1    | "65-80"                                     |
-    ## | code:race      | code:procedure-min                                  | code:procedure | "min"                                       |
-    ## | code:race      | code:race-_NONMISS_                                 | code:race      | "_NONMISS_"                                 |
-    ## | code:race      | code:agegr1-_NONMISS_                               | code:agegr1    | "_NONMISS_"                                 |
-    ## | code:race      | code:race-BLACK_OR_AFRICAN_AMERICAN                 | code:race      | "BLACK OR AFRICAN AMERICAN"                 |
-    ## | code:race      | code:factor-_NONMISS_                               | code:factor    | "_NONMISS_"                                 |
-    ## | code:race      | code:sex-U                                          | code:sex       | "U"                                         |
-    ## | code:race      | code:procedure-count                                | code:procedure | "count"                                     |
-    ## | code:race      | code:procedure-std                                  | code:procedure | "std"                                       |
-    ## ---------------------------------------------------------------------------------------------------------------------------------------
+    ## ----------------------------------------------------------------------------------------------------------------------------------------------
+    ## | p                        | vn          | cl                                                  | prefLabel                                   |
+    ## ==============================================================================================================================================
+    ## | crnd-dimension:agegr1    | "agegr1"    | code:agegr1-65-80                                   | "65-80"                                     |
+    ## | crnd-dimension:agegr1    | "agegr1"    | code:agegr1-_65                                     | "<65"                                       |
+    ## | crnd-dimension:agegr1    | "agegr1"    | code:agegr1-_80                                     | ">80"                                       |
+    ## | crnd-dimension:agegr1    | "agegr1"    | code:agegr1-_ALL_                                   | "_ALL_"                                     |
+    ## | crnd-dimension:agegr1    | "agegr1"    | code:agegr1-_NONMISS_                               | "_NONMISS_"                                 |
+    ## | crnd-dimension:ethnic    | "ethnic"    | code:ethnic-HISPANIC_OR_LATINO                      | "HISPANIC OR LATINO"                        |
+    ## | crnd-dimension:ethnic    | "ethnic"    | code:ethnic-NOT_HISPANIC_OR_LATINO                  | "NOT HISPANIC OR LATINO"                    |
+    ## | crnd-dimension:ethnic    | "ethnic"    | code:ethnic-_ALL_                                   | "_ALL_"                                     |
+    ## | crnd-dimension:ethnic    | "ethnic"    | code:ethnic-_NONMISS_                               | "_NONMISS_"                                 |
+    ## | crnd-dimension:factor    | "factor"    | code:factor-_ALL_                                   | "_ALL_"                                     |
+    ## | crnd-dimension:factor    | "factor"    | code:factor-_NONMISS_                               | "_NONMISS_"                                 |
+    ## | crnd-dimension:factor    | "factor"    | code:factor-age                                     | "age"                                       |
+    ## | crnd-dimension:factor    | "factor"    | code:factor-proportion                              | "proportion"                                |
+    ## | crnd-dimension:factor    | "factor"    | code:factor-quantity                                | "quantity"                                  |
+    ## | crnd-dimension:factor    | "factor"    | code:factor-weightbl                                | "weightbl"                                  |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-count                                | "count"                                     |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-max                                  | "max"                                       |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-mean                                 | "mean"                                      |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-median                               | "median"                                    |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-min                                  | "min"                                       |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-n                                    | "n"                                         |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-percent                              | "percent"                                   |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-q1                                   | "q1"                                        |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-q3                                   | "q3"                                        |
+    ## | crnd-dimension:procedure | "procedure" | code:procedure-std                                  | "std"                                       |
+    ## | crnd-dimension:race      | "race"      | code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE          | "AMERICAN INDIAN OR ALASKA NATIVE"          |
+    ## | crnd-dimension:race      | "race"      | code:race-ASIAN                                     | "ASIAN"                                     |
+    ## | crnd-dimension:race      | "race"      | code:race-BLACK_OR_AFRICAN_AMERICAN                 | "BLACK OR AFRICAN AMERICAN"                 |
+    ## | crnd-dimension:race      | "race"      | code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER | "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" |
+    ## | crnd-dimension:race      | "race"      | code:race-WHITE                                     | "WHITE"                                     |
+    ## | crnd-dimension:race      | "race"      | code:race-_ALL_                                     | "_ALL_"                                     |
+    ## | crnd-dimension:race      | "race"      | code:race-_NONMISS_                                 | "_NONMISS_"                                 |
+    ## | crnd-dimension:sex       | "sex"       | code:sex-F                                          | "F"                                         |
+    ## | crnd-dimension:sex       | "sex"       | code:sex-M                                          | "M"                                         |
+    ## | crnd-dimension:sex       | "sex"       | code:sex-U                                          | "U"                                         |
+    ## | crnd-dimension:sex       | "sex"       | code:sex-UN                                         | "UN"                                        |
+    ## | crnd-dimension:sex       | "sex"       | code:sex-_ALL_                                      | "_ALL_"                                     |
+    ## | crnd-dimension:sex       | "sex"       | code:sex-_NONMISS_                                  | "_NONMISS_"                                 |
+    ## | crnd-dimension:trt01a    | "trt01a"    | code:trt01a-Placebo                                 | "Placebo"                                   |
+    ## | crnd-dimension:trt01a    | "trt01a"    | code:trt01a-Xanomeline_High_Dose                    | "Xanomeline High Dose"                      |
+    ## | crnd-dimension:trt01a    | "trt01a"    | code:trt01a-Xanomeline_Low_Dose                     | "Xanomeline Low Dose"                       |
+    ## | crnd-dimension:trt01a    | "trt01a"    | code:trt01a-_ALL_                                   | "_ALL_"                                     |
+    ## | crnd-dimension:trt01a    | "trt01a"    | code:trt01a-_NONMISS_                               | "_NONMISS_"                                 |
+    ## ----------------------------------------------------------------------------------------------------------------------------------------------
 
 Get the codelist definition for all descriptive statistics - class `code:procedure`
 -----------------------------------------------------------------------------------

@@ -17,7 +17,9 @@ SPARQL query for dimensions in RDF data cube
 }
 \seealso{
 Other SPARQL.queries: \code{\link{GetAttributesSparqlQuery}},
+  \code{\link{GetCodeListSparqlQueryFull}},
   \code{\link{GetCodeListSparqlQuery}},
+  \code{\link{GetCodeListSpecSparqlQuery}},
   \code{\link{GetComponentSparqlQuery}},
   \code{\link{GetDimAttrSparqlQuery}},
   \code{\link{GetDimsubsetDescSparqlQuery}},

@@ -507,7 +507,7 @@ TODO(mja): Extract nomalization scripts and store also.
 devtools::use_data(qbIClist,overwrite=TRUE)
 ```
 
-    ## Saving qbIClist to data/qbIClist.rda
+    ## Saving qbIClist as qbIClist.rda to /home/ma/projects/rrdfqbcrnd0/rrdfqb/data
 
 ``` r
 print("Done")

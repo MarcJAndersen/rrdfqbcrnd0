@@ -141,7 +141,7 @@ cube.codelists<- as.data.frame(sparql.rdf(cube, codelists.rq), stringsAsFactors=
 ## TODO this involves a new version of the ph.recode function
 ## TODO(mja): change the GetCodeListSparqlQuery to plain text versions of the clc also
 cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
-knitr::kable(print(cube.codelists[,c("vn", "clc", "prefLabel")]))
+knitr::kable(print(cube.codelists[,c("vn", "clc", "clprefLabel")]))
 
 ```
 

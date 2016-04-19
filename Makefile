@@ -1,7 +1,7 @@
 all: mk-rrdfancillary  mk-rrdfcdisc mk-rrdfqb  mk-rrdfqbcrnd0 \
       mk-rrdfqbcrndex mk-rrdfqbcrndcheck mk-rrdfqbpresent
 
-PACKAGEVERSION=0.2.1
+PACKAGEVERSION=0.2.2
 
 install-from-dir: install-rrdfancillary-from-dir install-rrdfcdisc-from-dir install-rrdfqb-from-dir \
     install-rrdfqbcrnd0-from-dir install-rrdfqbcrndex-from-dir install-rrdfqbcrndcheck-from-dir \

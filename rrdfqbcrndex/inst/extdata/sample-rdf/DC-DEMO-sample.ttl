@@ -458,7 +458,7 @@ ds:obs016  a                        qb:Observation ;
 dccs:colno  a         qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:colno .
 
-crnd-dimension:race  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:race  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Race" ;
         rdfs:range   code:Race ;
         qb:codeList  code:race .
@@ -544,7 +544,7 @@ ds:obs045  a                        qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "84"^^xsd:double .
 
-crnd-dimension:sex  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:sex  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Sex (Gender)" ;
         rdfs:range   code:Sex ;
         qb:codeList  code:sex .
@@ -595,7 +595,7 @@ code:agegr1-_NONMISS_
         skos:topConceptOf  code:agegr1 .
 
 crnd-dimension:trt01a
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Treatment Arm" ;
         rdfs:range   code:Trt01a ;
         qb:codeList  code:trt01a .
@@ -690,7 +690,7 @@ ds:obs095  a                        qb:Observation ;
         crnd-measure:measure        "83"^^xsd:double .
 
 crnd-dimension:factor
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Type of procedure (quantity, proportion...)" ;
         rdfs:range   code:Factor ;
         qb:codeList  code:factor .
@@ -1741,7 +1741,7 @@ ds:dataset-DEMO  a                    qb:DataSet ;
         dct:title                     "Demographics Analysis Results"^^xsd:string ;
         qb:structure                  ds:dsd-DEMO ;
         pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-03-08T22:33:30+01:00"^^xsd:dateTime ;
+        pav:createdOn                 "2016-04-20T00:53:05+02:00"^^xsd:dateTime ;
         pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
         pav:version                   "0.0.0"^^xsd:string ;
         rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
@@ -2161,7 +2161,7 @@ ds:obs020  a                        qb:Observation ;
         crnd-measure:measure        "8.2860505995"^^xsd:double .
 
 crnd-dimension:procedure
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Statistical Procedure" ;
         rdfs:range   code:Procedure ;
         qb:codeList  code:procedure .
@@ -2629,7 +2629,7 @@ ds:obs102  a                        qb:Observation ;
         crnd-measure:measure        "70.004761905"^^xsd:double .
 
 crnd-dimension:agegr1
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Age group" ;
         rdfs:range   code:Agegr1 ;
         qb:codeList  code:agegr1 .
@@ -2720,7 +2720,7 @@ code:race-BLACK_OR_AFRICAN_AMERICAN
         skos:topConceptOf             code:race .
 
 crnd-dimension:ethnic
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Ethnic" ;
         rdfs:range   code:Ethnic ;
         qb:codeList  code:ethnic .

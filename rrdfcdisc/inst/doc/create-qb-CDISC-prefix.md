@@ -46,4 +46,4 @@ ToDo(mja): the `qbCDISCprefixes` is obsolete, as the `env[["qbCDISCprefixes"]]` 
 devtools::use_data(qbCDISCprefixes,overwrite=TRUE)
 ```
 
-    ## Saving qbCDISCprefixes to data/qbCDISCprefixes.rda
+    ## Saving qbCDISCprefixes as qbCDISCprefixes.rda to /home/ma/projects/rrdfqbcrnd0/rrdfcdisc/data

@@ -16,7 +16,9 @@ SPARQL query
 SPARQL query for attributes in RDF data cube
 }
 \seealso{
-Other SPARQL.queries: \code{\link{GetCodeListSparqlQuery}},
+Other SPARQL.queries: \code{\link{GetCodeListSparqlQueryFull}},
+  \code{\link{GetCodeListSparqlQuery}},
+  \code{\link{GetCodeListSpecSparqlQuery}},
   \code{\link{GetComponentSparqlQuery}},
   \code{\link{GetDimAttrSparqlQuery}},
   \code{\link{GetDimensionsSparqlQuery}},

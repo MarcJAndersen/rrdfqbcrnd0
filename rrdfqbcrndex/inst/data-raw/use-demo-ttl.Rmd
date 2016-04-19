@@ -81,8 +81,7 @@ rq<-  paste( forsparqlprefix,
 select *
 where { 
 ?s a qb:Observation ; 
-?p ?o ;
-.
+?p ?o .
 [] qb:dimension ?p .
 values (?s) {
 (ds:obs114)

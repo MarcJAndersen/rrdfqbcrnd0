@@ -1,6 +1,6 @@
 Package: rrdfqbcrndcheck
 Title: Check of numbers in R-RDF Data Cube for Clinical Research & Development
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") )
     )

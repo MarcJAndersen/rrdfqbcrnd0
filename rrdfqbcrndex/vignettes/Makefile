@@ -1,6 +1,6 @@
 
 
-all:  cube-from-workbook.md  
+all:  cube-from-workbook.md PhUSE-2016-cube-from-csv.md
 
 clean: 
 

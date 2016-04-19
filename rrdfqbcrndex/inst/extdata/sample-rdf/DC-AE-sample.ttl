@@ -1974,7 +1974,7 @@ ds:obs0566  a                       qb:Observation ;
         crnd-measure:measure        "1"^^xsd:double .
 
 crnd-dimension:aedecod
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Preferred Term" ;
         rdfs:range   code:Aedecod ;
         qb:codeList  code:aedecod .
@@ -2085,7 +2085,7 @@ ds:obs0873  a                       qb:Observation ;
         crnd-measure:measure        "1"^^xsd:double .
 
 crnd-dimension:procedure
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Statistical Procedure" ;
         rdfs:range   code:Procedure ;
         qb:codeList  code:procedure .
@@ -8755,7 +8755,7 @@ ds:obs1050  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-_ALL_ ;
         crnd-measure:measure        "1"^^xsd:double .
 
-crnd-dimension:aesoc  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:aesoc  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "System Organ Class" ;
         rdfs:range   code:Aesoc ;
         qb:codeList  code:aesoc .
@@ -12550,7 +12550,7 @@ ds:obs0636  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-Xanomeline_Low_Dose ;
         crnd-measure:measure        "1"^^xsd:double .
 
-crnd-dimension:saffl  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:saffl  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Safety Population Flag" ;
         rdfs:range   code:Saffl ;
         qb:codeList  code:saffl .
@@ -13235,7 +13235,7 @@ ds:dataset-AE  a                      qb:DataSet ;
         dct:title                     "Adverse Event Analysis Results"^^xsd:string ;
         qb:structure                  ds:dsd-AE ;
         pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-03-08T22:33:25+01:00"^^xsd:dateTime ;
+        pav:createdOn                 "2016-04-20T00:53:01+02:00"^^xsd:dateTime ;
         pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
         pav:version                   "0.0.0"^^xsd:string ;
         rrdfqbcrnd0:D2RQ-DataSetName  "ADAE"^^xsd:string ;
@@ -15098,7 +15098,7 @@ code:aedecod-APPLICATION_SITE_INDURATION
         skos:topConceptOf             code:aedecod .
 
 crnd-dimension:factor
-        a            rdf:Property , qb:DimensionProperty ;
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Type of procedure (quantity, proportion...)" ;
         rdfs:range   code:Factor ;
         qb:codeList  code:factor .
@@ -25956,7 +25956,7 @@ ds:obs0503  a                       qb:Observation ;
         crnd-dimension:trta         code:trta-Xanomeline_High_Dose ;
         crnd-measure:measure        "1"^^xsd:double .
 
-crnd-dimension:trta  a  rdf:Property , qb:DimensionProperty ;
+crnd-dimension:trta  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:label   "Treatment Arm" ;
         rdfs:range   code:Trta ;
         qb:codeList  code:trta .

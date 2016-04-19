@@ -60,7 +60,7 @@ temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
 ```
 
-    ## [1] "Number of triples: 3081"
+    ## [1] "Number of triples: 3088"
 
 For the functions in the package the datasets definition in the cube is needed.
 
@@ -69,6 +69,128 @@ dsdName<- GetDsdNameFromCube( store )
 domainName<- GetDomainNameFromCube( store )
 forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```
+
+SPARQL query for codelists in RDF data cube
+-------------------------------------------
+
+The SPARQL query for the dimensions is made by the function GetDimensionsSparqlQuery.
+
+``` r
+codelistRq <- GetCodeListSparqlQuery( forsparqlprefix, dsdName )
+mdwrite( codelistRq, "DEMOcodelist" )
+```
+
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">rdf</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.w3.org/1999/02/22-rdf-syntax-ns>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">skos</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.w3.org/2004/02/skos/core>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">prov</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.w3.org/ns/prov>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">rdfs</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.w3.org/2000/01/rdf-schema>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">dcat</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.w3.org/ns/dcat>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">owl</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.w3.org/2002/07/owl>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">xsd</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.w3.org/2001/XMLSchema>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">pav</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<[http://purl.org/pav\>](http://purl.org/pav>)</span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">dc</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<[http://purl.org/dc/elements/1.1/\>](http://purl.org/dc/elements/1.1/>)</span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">dct</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<[http://purl.org/dc/terms/\>](http://purl.org/dc/terms/>)</span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">mms</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/mms>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">cts</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/ct/schema>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">cdiscs</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/schema>\#\></span>
+<span style="color:#010181">prefix cdash</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">1</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/cdash-1-1>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">cdashct</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/cdash-terminology>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">sdtmct</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/sdtm-terminology>\#\></span>
+<span style="color:#010181">prefix sdtm</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">2</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/sdtm-1-2>\#\></span>
+<span style="color:#010181">prefix sdtm</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">3</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/sdtm-1-3>\#\></span>
+<span style="color:#010181">prefix sdtms</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">3</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/sdtm-1-3/schema>\#\></span>
+<span style="color:#010181">prefix sdtmig</span><span style="color:#000000">-</span><span style="color:#010181">3</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">2</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/sdtmig-3-1-2>\#\></span>
+<span style="color:#010181">prefix sdtmig</span><span style="color:#000000">-</span><span style="color:#010181">3</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">3</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/sdtmig-3-1-3>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">sendct</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/send-terminology>\#\></span>
+<span style="color:#010181">prefix sendig</span><span style="color:#000000">-</span><span style="color:#010181">3</span><span style="color:#000000">-</span><span style="color:#0057ae">0</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/sendig-3-0>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">adamct</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/adam-terminology>\#\></span>
+<span style="color:#010181">prefix adam</span><span style="color:#000000">-</span><span style="color:#010181">2</span><span style="color:#000000">-</span><span style="color:#0057ae">1</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/adam-2-1>\#\></span>
+<span style="color:#010181">prefix adamig</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">0</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/adamig-1-0>\#\></span>
+<span style="color:#010181">prefix adamvr</span><span style="color:#000000">-</span><span style="color:#010181">1</span><span style="color:#000000">-</span><span style="color:#0057ae">2</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://rdf.cdisc.org/std/adamvr-1-2>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">qb</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://purl.org/linked-data/cube>\#\></span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">rrdfqbcrnd0</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<[http://www.example.org/rrdfqbcrnd0/\>](http://www.example.org/rrdfqbcrnd0/>)</span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">code</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<[http://www.example.org/dc/code/\>](http://www.example.org/dc/code/>)</span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">dccs</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<[http://www.example.org/dc/demo/dccs/\>](http://www.example.org/dc/demo/dccs/>)</span>
+<span style="color:#010181">prefix</span> <span style="color:#0057ae">ds</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<[http://www.example.org/dc/demo/ds/\>](http://www.example.org/dc/demo/ds/>)</span>
+<span style="color:#010181">prefix crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">dimension</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.example.org/dc/dimension>\#\></span>
+<span style="color:#010181">prefix crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">attribute</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.example.org/dc/attribute>\#\></span>
+<span style="color:#010181">prefix crnd</span><span style="color:#000000">-</span><span style="color:#0057ae">measure</span><span style="color:#000000">:</span> <span style="color:#000000; font-weight:bold">\<<http://www.example.org/dc/measure>\#\></span>
+
+<span style="color:#010181">select distinct</span> ?DataStructureDefinition ?dimension ?cprefLabel ?cl ?clprefLabel ?vn ?vct ?vnop ?vnval
+<span style="color:#010181">where</span> <span style="color:#000000">{</span>
+ ?DataStructureDefinition <span style="color:#010181">a</span> <span style="color:#0057ae">qb</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">DataStructureDefinition</span> <span style="color:#000000">;</span>
+ <span style="color:#0057ae">qb</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">component</span> ?component <span style="color:#000000">.</span>
+ ?component <span style="color:#010181">a</span> <span style="color:#0057ae">qb</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">ComponentSpecification</span> <span style="color:#000000">.</span>
+ ?component <span style="color:#0057ae">qb</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">dimension</span> ?dimension <span style="color:#000000">.</span>
+
+?dimension <span style="color:#0057ae">qb</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">codeList</span> ?c <span style="color:#000000">.</span>
+ <span style="color:#010181">OPTIONAL</span> <span style="color:#000000">{</span> ?c <span style="color:#0057ae">skos</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">prefLabel</span> ?cprefLabel <span style="color:#000000">. }</span>
+ <span style="color:#010181">OPTIONAL</span> <span style="color:#000000">{</span> ?c <span style="color:#0057ae">rrdfqbcrnd0</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">DataSetRefD2RQ</span> ?vnop <span style="color:#000000">. }</span>
+ <span style="color:#010181">OPTIONAL</span> <span style="color:#000000">{</span> ?c <span style="color:#0057ae">rrdfqbcrnd0</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">R</span><span style="color:#000000">-</span><span style="color:#010181">columnname</span> ?vn <span style="color:#000000">. }</span>
+ <span style="color:#010181">OPTIONAL</span> <span style="color:#000000">{</span> ?c <span style="color:#0057ae">rrdfqbcrnd0</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">codeType</span> ?vct <span style="color:#000000">. }</span>
+
+?c <span style="color:#0057ae">skos</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">hasTopConcept</span> ?cl <span style="color:#000000">.</span>
+ <span style="color:#010181">OPTIONAL</span> <span style="color:#000000">{</span> ?cl <span style="color:#0057ae">skos</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">prefLabel</span> ?clprefLabel <span style="color:#000000">. }</span>
+ <span style="color:#010181">OPTIONAL</span> <span style="color:#000000">{</span> ?cl <span style="color:#0057ae">rrdfqbcrnd0</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">R</span><span style="color:#000000">-</span><span style="color:#010181">selectionoperator</span> ?vnop <span style="color:#000000">. }</span>
+ <span style="color:#010181">OPTIONAL</span> <span style="color:#000000">{</span> ?cl <span style="color:#0057ae">rrdfqbcrnd0</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">R</span><span style="color:#000000">-</span><span style="color:#010181">selectionvalue</span> ?vnval <span style="color:#000000">. }</span>
+ <span style="color:#010181">values</span> <span style="color:#000000">(</span> ?DataStructureDefinition <span style="color:#000000">) {</span>
+<span style="color:#000000">(</span><span style="color:#0057ae">ds</span><span style="color:#000000">:</span><span style="color:#000000; font-weight:bold">dsd</span><span style="color:#000000">-</span><span style="color:#010181">DEMO</span><span style="color:#000000">)</span>
+<span style="color:#000000">}</span>
+<span style="color:#000000">}</span>
+<span style="color:#010181">order by</span> ?dimension ?cl ?dimensionrefLabel
+
+Executing the SPARQL query gives:
+
+``` r
+codelists<- sparql.rdf(store, codelistRq)
+knitr::kable(codelists,caption="Codelists")
+```
+
+| DataStructureDefinition | dimension                | cprefLabel                 | cl                                                       | clprefLabel                               | vn        | vct  | vnop                     | vnval                                     |
+|:------------------------|:-------------------------|:---------------------------|:---------------------------------------------------------|:------------------------------------------|:----------|:-----|:-------------------------|:------------------------------------------|
+| ds:dsd-DEMO             | crnd-dimension:agegr1    | Codelist scheme: agegr1    | code:agegr1-65-80                                        | 65-80                                     | agegr1    | DATA | rrdfqbcrnd0:ADSL\_AGEGR1 | 65-80                                     |
+| ds:dsd-DEMO             | crnd-dimension:agegr1    | Codelist scheme: agegr1    | code:agegr1-\_65                                         | \<65                                      | agegr1    | DATA | rrdfqbcrnd0:ADSL\_AGEGR1 | \<65                                      |
+| ds:dsd-DEMO             | crnd-dimension:agegr1    | Codelist scheme: agegr1    | code:agegr1-\_80                                         | \>80                                      | agegr1    | DATA | rrdfqbcrnd0:ADSL\_AGEGR1 | \>80                                      |
+| ds:dsd-DEMO             | crnd-dimension:agegr1    | Codelist scheme: agegr1    | code:agegr1-*ALL*                                        | *ALL*                                     | agegr1    | DATA | rrdfqbcrnd0:ADSL\_AGEGR1 | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:agegr1    | Codelist scheme: agegr1    | code:agegr1-*NONMISS*                                    | *NONMISS*                                 | agegr1    | DATA | rrdfqbcrnd0:ADSL\_AGEGR1 | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:ethnic    | Codelist scheme: ethnic    | code:ethnic-HISPANIC\_OR\_LATINO                         | HISPANIC OR LATINO                        | ethnic    | DATA | rrdfqbcrnd0:ADSL\_ETHNIC | HISPANIC OR LATINO                        |
+| ds:dsd-DEMO             | crnd-dimension:ethnic    | Codelist scheme: ethnic    | code:ethnic-NOT\_HISPANIC\_OR\_LATINO                    | NOT HISPANIC OR LATINO                    | ethnic    | DATA | rrdfqbcrnd0:ADSL\_ETHNIC | NOT HISPANIC OR LATINO                    |
+| ds:dsd-DEMO             | crnd-dimension:ethnic    | Codelist scheme: ethnic    | code:ethnic-*ALL*                                        | *ALL*                                     | ethnic    | DATA | rrdfqbcrnd0:ADSL\_ETHNIC | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:ethnic    | Codelist scheme: ethnic    | code:ethnic-*NONMISS*                                    | *NONMISS*                                 | ethnic    | DATA | rrdfqbcrnd0:ADSL\_ETHNIC | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:factor    | Codelist scheme: factor    | code:factor-*ALL*                                        | *ALL*                                     | factor    | DATA | NA                       | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:factor    | Codelist scheme: factor    | code:factor-*NONMISS*                                    | *NONMISS*                                 | factor    | DATA | NA                       | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:factor    | Codelist scheme: factor    | code:factor-age                                          | age                                       | factor    | DATA | ==                       | age                                       |
+| ds:dsd-DEMO             | crnd-dimension:factor    | Codelist scheme: factor    | code:factor-proportion                                   | proportion                                | factor    | DATA | ==                       | proportion                                |
+| ds:dsd-DEMO             | crnd-dimension:factor    | Codelist scheme: factor    | code:factor-quantity                                     | quantity                                  | factor    | DATA | ==                       | quantity                                  |
+| ds:dsd-DEMO             | crnd-dimension:factor    | Codelist scheme: factor    | code:factor-weightbl                                     | weightbl                                  | factor    | DATA | ==                       | weightbl                                  |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-count                                     | count                                     | procedure | DATA | ==                       | count                                     |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-max                                       | max                                       | procedure | DATA | ==                       | max                                       |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-mean                                      | mean                                      | procedure | DATA | ==                       | mean                                      |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-median                                    | median                                    | procedure | DATA | ==                       | median                                    |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-min                                       | min                                       | procedure | DATA | ==                       | min                                       |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-n                                         | n                                         | procedure | DATA | ==                       | n                                         |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-percent                                   | percent                                   | procedure | DATA | ==                       | percent                                   |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-q1                                        | q1                                        | procedure | DATA | ==                       | q1                                        |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-q3                                        | q3                                        | procedure | DATA | ==                       | q3                                        |
+| ds:dsd-DEMO             | crnd-dimension:procedure | Codelist scheme: procedure | code:procedure-std                                       | std                                       | procedure | DATA | ==                       | std                                       |
+| ds:dsd-DEMO             | crnd-dimension:race      | Codelist scheme: race      | code:race-AMERICAN\_INDIAN\_OR\_ALASKA\_NATIVE           | AMERICAN INDIAN OR ALASKA NATIVE          | race      | SDTM | rrdfqbcrnd0:ADSL\_RACE   | AMERICAN INDIAN OR ALASKA NATIVE          |
+| ds:dsd-DEMO             | crnd-dimension:race      | Codelist scheme: race      | code:race-ASIAN                                          | ASIAN                                     | race      | SDTM | rrdfqbcrnd0:ADSL\_RACE   | ASIAN                                     |
+| ds:dsd-DEMO             | crnd-dimension:race      | Codelist scheme: race      | code:race-BLACK\_OR\_AFRICAN\_AMERICAN                   | BLACK OR AFRICAN AMERICAN                 | race      | SDTM | rrdfqbcrnd0:ADSL\_RACE   | BLACK OR AFRICAN AMERICAN                 |
+| ds:dsd-DEMO             | crnd-dimension:race      | Codelist scheme: race      | code:race-NATIVE\_HAWAIIAN\_OR\_OTHER\_PACIFIC\_ISLANDER | NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER | race      | SDTM | rrdfqbcrnd0:ADSL\_RACE   | NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER |
+| ds:dsd-DEMO             | crnd-dimension:race      | Codelist scheme: race      | code:race-WHITE                                          | WHITE                                     | race      | SDTM | rrdfqbcrnd0:ADSL\_RACE   | WHITE                                     |
+| ds:dsd-DEMO             | crnd-dimension:race      | Codelist scheme: race      | code:race-*ALL*                                          | *ALL*                                     | race      | SDTM | rrdfqbcrnd0:ADSL\_RACE   | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:race      | Codelist scheme: race      | code:race-*NONMISS*                                      | *NONMISS*                                 | race      | SDTM | rrdfqbcrnd0:ADSL\_RACE   | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:sex       | Codelist scheme: sex       | code:sex-F                                               | F                                         | sex       | SDTM | rrdfqbcrnd0:ADSL\_SEX    | F                                         |
+| ds:dsd-DEMO             | crnd-dimension:sex       | Codelist scheme: sex       | code:sex-M                                               | M                                         | sex       | SDTM | rrdfqbcrnd0:ADSL\_SEX    | M                                         |
+| ds:dsd-DEMO             | crnd-dimension:sex       | Codelist scheme: sex       | code:sex-U                                               | U                                         | sex       | SDTM | rrdfqbcrnd0:ADSL\_SEX    | U                                         |
+| ds:dsd-DEMO             | crnd-dimension:sex       | Codelist scheme: sex       | code:sex-UN                                              | UN                                        | sex       | SDTM | rrdfqbcrnd0:ADSL\_SEX    | UN                                        |
+| ds:dsd-DEMO             | crnd-dimension:sex       | Codelist scheme: sex       | code:sex-*ALL*                                           | *ALL*                                     | sex       | SDTM | rrdfqbcrnd0:ADSL\_SEX    | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:sex       | Codelist scheme: sex       | code:sex-*NONMISS*                                       | *NONMISS*                                 | sex       | SDTM | rrdfqbcrnd0:ADSL\_SEX    | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:trt01a    | Codelist scheme: trt01a    | code:trt01a-Placebo                                      | Placebo                                   | trt01a    | DATA | rrdfqbcrnd0:ADSL\_TRT01A | Placebo                                   |
+| ds:dsd-DEMO             | crnd-dimension:trt01a    | Codelist scheme: trt01a    | code:trt01a-Xanomeline\_High\_Dose                       | Xanomeline High Dose                      | trt01a    | DATA | rrdfqbcrnd0:ADSL\_TRT01A | Xanomeline High Dose                      |
+| ds:dsd-DEMO             | crnd-dimension:trt01a    | Codelist scheme: trt01a    | code:trt01a-Xanomeline\_Low\_Dose                        | Xanomeline Low Dose                       | trt01a    | DATA | rrdfqbcrnd0:ADSL\_TRT01A | Xanomeline Low Dose                       |
+| ds:dsd-DEMO             | crnd-dimension:trt01a    | Codelist scheme: trt01a    | code:trt01a-*ALL*                                        | *ALL*                                     | trt01a    | DATA | rrdfqbcrnd0:ADSL\_TRT01A | NA                                        |
+| ds:dsd-DEMO             | crnd-dimension:trt01a    | Codelist scheme: trt01a    | code:trt01a-*NONMISS*                                    | *NONMISS*                                 | trt01a    | DATA | rrdfqbcrnd0:ADSL\_TRT01A | NA                                        |
 
 SPARQL query for dimensions in RDF data cube
 --------------------------------------------

@@ -4,12 +4,12 @@
 \alias{GetCodeListSparqlQuery}
 \title{SPARQL query for codelists in RDF data cube}
 \usage{
-GetCodeListSparqlQuery(forsparqlprefix, dsdName)
+GetCodeListSparqlQuery(forsparqlprefix, dsdName = NULL)
 }
 \arguments{
 \item{forsparqlprefix}{string with prefix defintions}
 
-\item{dsdName}{Dataset Descriptor Name}
+\item{dsdName}{Dataset Descriptor Name, if NULL then return for all dsd in the cube}
 }
 \value{
 SPARQL query
@@ -19,6 +19,8 @@ SPARQL query for codelists in RDF data cube
 }
 \seealso{
 Other SPARQL.queries: \code{\link{GetAttributesSparqlQuery}},
+  \code{\link{GetCodeListSparqlQueryFull}},
+  \code{\link{GetCodeListSpecSparqlQuery}},
   \code{\link{GetComponentSparqlQuery}},
   \code{\link{GetDimAttrSparqlQuery}},
   \code{\link{GetDimensionsSparqlQuery}},
