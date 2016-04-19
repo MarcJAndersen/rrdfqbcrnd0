@@ -45,15 +45,17 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
             "percent"="double"
             )
     }
-
+    
     if (is.null(recode.list)) {
         forsparqlprefix<- Get.rq.prefixlist.df( prefixlist )
-
+        # new                             ?DataStructureDefinition ?dimension ?cprefLabel ?cl ?clprefLabel ?vn ?vct ?vnop ?vnval
+                                        # ?p ?vn ?cl ?prefLabel
+        
         ## identify codelists
         codelists.rq<-   GetCodeListSparqlQuery(forsparqlprefix, dsdName )
-        ## cat(codelists.rq)
+        print(codelists.rq)
         cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors=FALSE)
-
+        print(cube.codelists)
         ## TODO instead of gsub make a more straightforward way
         ## TOTO this involves a new version of the ph.recode function
         ## Next three lines classical error - starting from
@@ -62,17 +64,18 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         ## cube.codelists$vn<- gsub("crnd-dimension:","",cube.codelists$p)
         ## cube.codelists$vn<- gsub("crnd-attribute:","",cube.codelists$p)
         ## cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$p)
-        cube.codelists$vn1<- gsub("crnd-dimension:","",cube.codelists$p)
+        cat( cube.codelists$dimension, "\n")
+        cube.codelists$vn1<- gsub("crnd-dimension:","",cube.codelists$dimension)
         cube.codelists$vn2<- gsub("crnd-attribute:","",cube.codelists$vn1)
-        cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$vn2)
+        cube.codelists$dimension<- gsub("crnd-measure:","",cube.codelists$vn2)
         cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
         ## print(cube.codelists)
 
-        recode.list<-by(cube.codelists, cube.codelists$vn, function(x){
-            ##  print(x)
+        recode.list<-by(cube.codelists, cube.codelists$dimension, function(x){
+             # print(x)
             pl<-list();
-            for (i in 1:nrow(x)) { pl[[ as.character(x[i,"prefLabel"]) ]] <-  as.character(x[i,"clc"])}
-            ##  print(pl)
+            for (i in 1:nrow(x)) { pl[[ as.character(x[i,"cprefLabel"]) ]] <-  as.character(x[i,"clc"])}
+            #  print(pl)
             pl
         }
         )
