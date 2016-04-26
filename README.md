@@ -97,13 +97,13 @@ Tip for Rstudio: use the file explore window to navigate to the directory, then 
 In R issue
 ```r
 library(devtools)
-install_local("rrdfancillary_0.2.0.tar.gz")
-install_local("rrdfcdisc_0.2.0.tar.gz")    
-install_local("rrdfqb_0.2.0.tar.gz")       
-install_local("rrdfqbcrnd0_0.2.0.tar.gz")  
-install_local("rrdfqbcrndex_0.2.0.tar.gz")
-install_local("rrdfqbcrndcheck_0.2.0.tar.gz")
-install_local("rrdfqbpresent_0.2.0.tar.gz")
+install_local("rrdfancillary_0.2.2.tar.gz")
+install_local("rrdfcdisc_0.2.2.tar.gz")    
+install_local("rrdfqb_0.2.2.tar.gz")       
+install_local("rrdfqbcrnd0_0.2.2.tar.gz")  
+install_local("rrdfqbcrndex_0.2.2.tar.gz")
+install_local("rrdfqbcrndcheck_0.2.2.tar.gz")
+install_local("rrdfqbpresent_0.2.2.tar.gz")
 ```
 
 Note: the package `rrdfqbcrnd0` may not be able to install using "install.packages" in Rstudio due to "rrdf(>= 2.0.4)".

@@ -73,12 +73,13 @@ if (file.copy( tab1x01.cube.fn, targetFile, overwrite=TRUE)) {
 Now look at the generated cubes by loading the turtle files. 
 
 ```{r, echo=TRUE, results='asis'}
-dataCubeFile<- tab1x01.cube.fn
+dataCubeFile<- targetFile
 ```
 
 The rest of the code only depends on the value of dataCubeFile.
 ```{r, echo=TRUE}
-checkCube <- new.rdf()  # Initialize
+checkCube <- new.rdf(ontology=FALSE)  # Initialize
+cat("Loading RDF data cube from ", normalizePath(dataCubeFile), "\n")
 temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
