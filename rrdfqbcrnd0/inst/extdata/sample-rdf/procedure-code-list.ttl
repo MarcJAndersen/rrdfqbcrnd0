@@ -34,7 +34,21 @@
 @prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/> .
 @prefix dc:    <http://purl.org/dc/elements/1.1/> .
 
-code:q3  a      code:Procedure , skos:Concept , rdfs:Resource .
+code:procedure-q3  a                  code:Procedure , skos:Concept , rdfs:Resource ;
+        rdfs:comment                  "Descriptive statistics q3"@en ;
+        rrdfqbcrnd0:R-selectionoperator
+                "=="^^xsd:string ;
+        rrdfqbcrnd0:R-selectionvalue  "q3"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }" ;
+        skos:inScheme                 code:procedure ;
+        skos:prefLabel                "q3"^^xsd:string ;
+        skos:topConceptOf             code:procedure .
+
+code:Procedure  a        rdfs:Resource , rdfs:Class , owl:Class ;
+        rdfs:comment     "Specifies the procedure for each observation"@en ;
+        rdfs:label       "Class for code list: procedure"@en ;
+        rdfs:seeAlso     code:procedure ;
+        rdfs:subClassOf  code:Procedure , skos:Concept , rdfs:Resource .
 
 code:procedure-q1  a                  code:Procedure , rdfs:Resource , skos:Concept ;
         rdfs:comment                  "Descriptive statistics q1"@en ;
@@ -45,8 +59,6 @@ code:procedure-q1  a                  code:Procedure , rdfs:Resource , skos:Conc
         skos:inScheme                 code:procedure ;
         skos:prefLabel                "q1"^^xsd:string ;
         skos:topConceptOf             code:procedure .
-
-code:median  a  code:Procedure , skos:Concept , rdfs:Resource .
 
 code:procedure-stddev
         a                             code:Procedure , skos:Concept , rdfs:Resource ;
@@ -60,58 +72,26 @@ code:procedure-stddev
         skos:prefLabel                "stddev"^^xsd:string ;
         skos:topConceptOf             code:procedure .
 
-code:min  a     code:Procedure , skos:Concept , rdfs:Resource .
-
-code:procedure-n  a                   code:Procedure , skos:Concept , rdfs:Resource ;
-        rdfs:comment                  "Descriptive statistics n"@en ;
+code:procedure-mean  a                skos:Concept , code:Procedure , rdfs:Resource ;
+        rdfs:comment                  "Descriptive statistics mean"@en ;
+        rdfs:seeAlso                  <purl.obolibrary.org/obo/IAO_0000125> ;
         rrdfqbcrnd0:R-selectionoperator
                 "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "n"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     length(x[!is.na(x)]) }" ;
+        rrdfqbcrnd0:R-selectionvalue  "mean"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     mean(x, na.rm = TRUE) }" ;
         skos:inScheme                 code:procedure ;
-        skos:prefLabel                "n"^^xsd:string ;
+        skos:prefLabel                "mean"^^xsd:string ;
         skos:topConceptOf             code:procedure .
 
-code:n  a       code:Procedure , skos:Concept , rdfs:Resource .
-
-code:stdev  a   code:Procedure , skos:Concept , rdfs:Resource .
-
-code:max  a     code:Procedure , skos:Concept , rdfs:Resource .
-
-code:percent  a  code:Procedure , skos:Concept , rdfs:Resource .
-
-code:countdistinct  a  code:Procedure , skos:Concept , rdfs:Resource .
-
-code:procedure-std  a                 code:Procedure , skos:Concept , rdfs:Resource ;
-        rdfs:comment                  "Descriptive statistics std"@en ;
+code:procedure-max  a                 skos:Concept , code:Procedure , rdfs:Resource ;
+        rdfs:comment                  "Descriptive statistics max"@en ;
         rrdfqbcrnd0:R-selectionoperator
                 "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "std"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     sd(x, na.rm = TRUE) }" ;
+        rrdfqbcrnd0:R-selectionvalue  "max"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     max(x, na.rm = TRUE) }" ;
         skos:inScheme                 code:procedure ;
-        skos:prefLabel                "std"^^xsd:string ;
+        skos:prefLabel                "max"^^xsd:string ;
         skos:topConceptOf             code:procedure .
-
-code:Procedure  a        rdfs:Resource , rdfs:Class , owl:Class ;
-        rdfs:comment     "Specifies the procedure for each observation"@en ;
-        rdfs:label       "Class for code list: procedure"@en ;
-        rdfs:seeAlso     code:procedure ;
-        rdfs:subClassOf  code:Procedure , skos:Concept , rdfs:Resource .
-
-code:procedure-countdistinct
-        a                             skos:Concept , code:Procedure , rdfs:Resource ;
-        rdfs:comment                  "Descriptive statistics countdistinct"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "countdistinct"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     length(unique(x)) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "countdistinct"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
-
-code:count  a   code:Procedure , skos:Concept , rdfs:Resource .
-
-code:q1  a      code:Procedure , skos:Concept , rdfs:Resource .
 
 code:procedure-stdev  a               code:Procedure , skos:Concept , rdfs:Resource ;
         rdfs:comment                  "Descriptive statistics stdev"@en ;
@@ -135,62 +115,17 @@ code:procedure-median
         skos:prefLabel                "median"^^xsd:string ;
         skos:topConceptOf             code:procedure .
 
-code:procedure-min  a                 skos:Concept , rdfs:Resource , code:Procedure ;
-        rdfs:comment                  "Descriptive statistics min"@en ;
+<http://www.example.org/dc/code/CODING ERROR- no decode value>
+        a       code:Factor , code:Category , code:Procedure , skos:Concept , rdfs:Resource .
+
+code:procedure-std  a                 code:Procedure , skos:Concept , rdfs:Resource ;
+        rdfs:comment                  "Descriptive statistics std"@en ;
         rrdfqbcrnd0:R-selectionoperator
                 "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "min"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     min(x, na.rm = TRUE) }" ;
+        rrdfqbcrnd0:R-selectionvalue  "std"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     sd(x, na.rm = TRUE) }" ;
         skos:inScheme                 code:procedure ;
-        skos:prefLabel                "min"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
-
-code:stddev  a  code:Procedure , skos:Concept , rdfs:Resource .
-
-code:mean  a    code:Procedure , skos:Concept , rdfs:Resource .
-
-code:procedure-percent
-        a                             skos:Concept , code:Procedure , rdfs:Resource ;
-        rdfs:comment                  "Descriptive statistics percent"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "percent"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     -1 }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "percent"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
-
-code:procedure-q3  a                  code:Procedure , skos:Concept , rdfs:Resource ;
-        rdfs:comment                  "Descriptive statistics q3"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "q3"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "q3"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
-
-code:procedure-max  a                 skos:Concept , code:Procedure , rdfs:Resource ;
-        rdfs:comment                  "Descriptive statistics max"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "max"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     max(x, na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "max"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
-
-code:std  a     code:Procedure , skos:Concept , rdfs:Resource .
-
-code:procedure-mean  a                skos:Concept , code:Procedure , rdfs:Resource ;
-        rdfs:comment                  "Descriptive statistics mean"@en ;
-        rdfs:seeAlso                  <purl.obolibrary.org/obo/IAO_0000125> ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "mean"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     mean(x, na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "mean"^^xsd:string ;
+        skos:prefLabel                "std"^^xsd:string ;
         skos:topConceptOf             code:procedure .
 
 code:procedure-count  a               code:Procedure , skos:Concept , rdfs:Resource ;
@@ -201,4 +136,46 @@ code:procedure-count  a               code:Procedure , skos:Concept , rdfs:Resou
         rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     length(x) }" ;
         skos:inScheme                 code:procedure ;
         skos:prefLabel                "count"^^xsd:string ;
+        skos:topConceptOf             code:procedure .
+
+code:procedure-countdistinct
+        a                             skos:Concept , code:Procedure , rdfs:Resource ;
+        rdfs:comment                  "Descriptive statistics countdistinct"@en ;
+        rrdfqbcrnd0:R-selectionoperator
+                "=="^^xsd:string ;
+        rrdfqbcrnd0:R-selectionvalue  "countdistinct"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     length(unique(x)) }" ;
+        skos:inScheme                 code:procedure ;
+        skos:prefLabel                "countdistinct"^^xsd:string ;
+        skos:topConceptOf             code:procedure .
+
+code:procedure-n  a                   code:Procedure , skos:Concept , rdfs:Resource ;
+        rdfs:comment                  "Descriptive statistics n"@en ;
+        rrdfqbcrnd0:R-selectionoperator
+                "=="^^xsd:string ;
+        rrdfqbcrnd0:R-selectionvalue  "n"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     length(x[!is.na(x)]) }" ;
+        skos:inScheme                 code:procedure ;
+        skos:prefLabel                "n"^^xsd:string ;
+        skos:topConceptOf             code:procedure .
+
+code:procedure-min  a                 skos:Concept , rdfs:Resource , code:Procedure ;
+        rdfs:comment                  "Descriptive statistics min"@en ;
+        rrdfqbcrnd0:R-selectionoperator
+                "=="^^xsd:string ;
+        rrdfqbcrnd0:R-selectionvalue  "min"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     min(x, na.rm = TRUE) }" ;
+        skos:inScheme                 code:procedure ;
+        skos:prefLabel                "min"^^xsd:string ;
+        skos:topConceptOf             code:procedure .
+
+code:procedure-percent
+        a                             skos:Concept , code:Procedure , rdfs:Resource ;
+        rdfs:comment                  "Descriptive statistics percent"@en ;
+        rrdfqbcrnd0:R-selectionoperator
+                "=="^^xsd:string ;
+        rrdfqbcrnd0:R-selectionvalue  "percent"^^xsd:string ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     -1 }" ;
+        skos:inScheme                 code:procedure ;
+        skos:prefLabel                "percent"^^xsd:string ;
         skos:topConceptOf             code:procedure .

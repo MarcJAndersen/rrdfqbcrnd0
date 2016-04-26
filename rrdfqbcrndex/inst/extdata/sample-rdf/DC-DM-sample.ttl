@@ -41,12 +41,12 @@ ds:obs11  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-F ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "61.6279069767442"^^xsd:double .
 
 code:trt01a  a                      skos:ConceptScheme ;
@@ -65,12 +65,12 @@ ds:obs52  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-stdev ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "8.28605059954093"^^xsd:double .
 
 code:saffl-_NONMISS_  a    code:Saffl , skos:Concept ;
@@ -87,12 +87,12 @@ ds:obs24  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "8"^^xsd:double .
 
 dccs:sex  a           qb:ComponentSpecification ;
@@ -105,12 +105,12 @@ ds:obs65  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "7.14285714285714"^^xsd:double .
 
 ds:obs37  a                         qb:Observation ;
@@ -119,12 +119,12 @@ ds:obs37  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-max ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "108"^^xsd:double .
 
 ds:obs09  a                         qb:Observation ;
@@ -133,12 +133,12 @@ ds:obs09  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-min ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "52"^^xsd:double .
 
 code:race-WHITE  a                    skos:Concept , code:Race ;
@@ -182,12 +182,12 @@ ds:obs31  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-stdev ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "7.88609384869824"^^xsd:double .
 
 code:trt01a-_ALL_  a       code:Trt01a , skos:Concept ;
@@ -202,12 +202,12 @@ ds:obs03  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-_ALL_ ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "1"^^xsd:double .
 
 ds:obs44  a                         qb:Observation ;
@@ -216,12 +216,12 @@ ds:obs44  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "10.7142857142857"^^xsd:double .
 
 ds:obs16  a                         qb:Observation ;
@@ -230,12 +230,12 @@ ds:obs16  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-max ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "86.2"^^xsd:double .
 
 ds:obs57  a                         qb:Observation ;
@@ -244,12 +244,12 @@ ds:obs57  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-M ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "34"^^xsd:double .
 
 ds:obs29  a                         qb:Observation ;
@@ -258,12 +258,12 @@ ds:obs29  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-median ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "76"^^xsd:double .
 
 code:procedure-mean  a                code:Procedure , skos:Concept ;
@@ -288,12 +288,12 @@ ds:obs10  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-stdev ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "8.59016712714194"^^xsd:double .
 
 ds:obs51  a                         qb:Observation ;
@@ -302,12 +302,12 @@ ds:obs51  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-min ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "51"^^xsd:double .
 
 ds:obs23  a                         qb:Observation ;
@@ -316,12 +316,12 @@ ds:obs23  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "9.30232558139535"^^xsd:double .
 
 code:factor-proportion
@@ -340,12 +340,12 @@ ds:obs64  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "0"^^xsd:double .
 
 ds:obs36  a                         qb:Observation ;
@@ -354,12 +354,12 @@ ds:obs36  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-M ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "44"^^xsd:double .
 
 crnd-dimension:procedure
@@ -391,12 +391,12 @@ ds:obs08  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-median ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "76"^^xsd:double .
 
 ds:obs49  a                         qb:Observation ;
@@ -405,12 +405,12 @@ ds:obs49  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-mean ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "75.6666666666667"^^xsd:double .
 
 crnd-dimension:sex  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
@@ -435,12 +435,12 @@ ds:obs30  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-min ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "56"^^xsd:double .
 
 ds:obs02  a                         qb:Observation ;
@@ -449,12 +449,12 @@ ds:obs02  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-M ;
-        crnd-dimension:trt01a       code:trt01a-_ALL_ ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "111"^^xsd:double .
 
 ds:obs43  a                         qb:Observation ;
@@ -463,12 +463,12 @@ ds:obs43  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "1"^^xsd:double .
 
 ds:obs15  a                         qb:Observation ;
@@ -477,12 +477,12 @@ ds:obs15  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-M ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "33"^^xsd:double .
 
 rrdfqbcrnd0:ADSL_AGE  rrdfqbcrnd0:D2RQ-DataSetName
@@ -502,12 +502,12 @@ ds:obs56  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-F ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "50"^^xsd:double .
 
 ds:obs28  a                         qb:Observation ;
@@ -516,12 +516,12 @@ ds:obs28  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-mean ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "74.3809523809524"^^xsd:double .
 
 rrdfqbcrnd0:ADSL_SAFFL
@@ -546,12 +546,12 @@ ds:obs50  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-median ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "77.5"^^xsd:double .
 
 code:race-_NONMISS_  a     code:Race , skos:Concept ;
@@ -576,12 +576,12 @@ ds:obs22  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "0"^^xsd:double .
 
 code:Race  a             rdfs:Class , owl:Class ;
@@ -596,12 +596,12 @@ ds:obs63  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "0"^^xsd:double .
 
 ds:obs35  a                         qb:Observation ;
@@ -610,12 +610,12 @@ ds:obs35  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-F ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "40"^^xsd:double .
 
 ds:obs07  a                         qb:Observation ;
@@ -624,12 +624,12 @@ ds:obs07  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-mean ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "75.2093023255814"^^xsd:double .
 
 code:procedure-count  a               code:Procedure , skos:Concept ;
@@ -651,12 +651,12 @@ ds:obs48  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-max ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "88"^^xsd:double .
 
 code:procedure-median
@@ -676,12 +676,12 @@ ds:obs01  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-F ;
-        crnd-dimension:trt01a       code:trt01a-_ALL_ ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "143"^^xsd:double .
 
 code:Trt01a  a           rdfs:Class , owl:Class ;
@@ -706,12 +706,12 @@ ds:obs42  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "1.19047619047619"^^xsd:double .
 
 ds:obs14  a                         qb:Observation ;
@@ -720,12 +720,12 @@ ds:obs14  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-F ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "53"^^xsd:double .
 
 ds:obs55  a                         qb:Observation ;
@@ -734,12 +734,12 @@ ds:obs55  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "84"^^xsd:double .
 
 code:trt01a-_NONMISS_
@@ -757,12 +757,12 @@ ds:obs27  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-max ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "88"^^xsd:double .
 
 ds:obs68  a                         qb:Observation ;
@@ -771,12 +771,12 @@ ds:obs68  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-WHITE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "78"^^xsd:double .
 
 code:trt01a-Xanomeline_High_Dose
@@ -824,12 +824,12 @@ ds:obs21  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "0"^^xsd:double .
 
 dccs:procedure  a     qb:ComponentSpecification ;
@@ -853,12 +853,12 @@ ds:obs62  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-stdev ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "14.1235986486909"^^xsd:double .
 
 ds:obs34  a                         qb:Observation ;
@@ -867,12 +867,12 @@ ds:obs34  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "84"^^xsd:double .
 
 ds:obs06  a                         qb:Observation ;
@@ -881,12 +881,12 @@ ds:obs06  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "YEARS"^^xsd:string ;
-        crnd-dimension:factor       code:factor-AGE ;
-        crnd-dimension:procedure    code:procedure-max ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "89"^^xsd:double .
 
 code:saffl-Y  a                       code:Saffl , skos:Concept ;
@@ -935,12 +935,12 @@ ds:obs47  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-WHITE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "74"^^xsd:double .
 
 ds:obs19  a                         qb:Observation ;
@@ -949,12 +949,12 @@ ds:obs19  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-min ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "34"^^xsd:double .
 
 dccs:measure  a     qb:ComponentSpecification ;
@@ -988,12 +988,12 @@ ds:obs41  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-stdev ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "14.6534333717795"^^xsd:double .
 
 code:race-_ALL_  a         code:Race , skos:Concept ;
@@ -1021,12 +1021,12 @@ ds:obs13  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "86"^^xsd:double .
 
 crnd-dimension:race  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
@@ -1046,12 +1046,12 @@ ds:obs54  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-M ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "40.4761904761905"^^xsd:double .
 
 ds:obs26  a                         qb:Observation ;
@@ -1060,12 +1060,12 @@ ds:obs26  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-WHITE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "78"^^xsd:double .
 
 ds:obs67  a                         qb:Observation ;
@@ -1074,12 +1074,12 @@ ds:obs67  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-WHITE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "92.8571428571429"^^xsd:double .
 
 ds:obs39  a                         qb:Observation ;
@@ -1088,12 +1088,12 @@ ds:obs39  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-median ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "69.2"^^xsd:double .
 
 dccs:unit  a          qb:ComponentSpecification ;
@@ -1105,12 +1105,12 @@ ds:obs20  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-stdev ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "12.7715435329253"^^xsd:double .
 
 code:factor-WEIGHTBL  a               code:Factor , skos:Concept ;
@@ -1144,12 +1144,12 @@ ds:obs61  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-min ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "45.4"^^xsd:double .
 
 ds:obs33  a                         qb:Observation ;
@@ -1158,12 +1158,12 @@ ds:obs33  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-M ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "52.3809523809524"^^xsd:double .
 
 ds:obs05  a                         qb:Observation ;
@@ -1172,12 +1172,12 @@ ds:obs05  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-WHITE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-_ALL_ ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "230"^^xsd:double .
 
 rrdfqbcrnd0:ADSL_TRT01A
@@ -1191,12 +1191,12 @@ ds:obs46  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-WHITE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "88.0952380952381"^^xsd:double .
 
 crnd-dimension:factor
@@ -1211,12 +1211,12 @@ ds:obs18  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-median ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "60.55"^^xsd:double .
 
 code:procedure-max  a                 code:Procedure , skos:Concept ;
@@ -1235,12 +1235,12 @@ ds:obs59  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-mean ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "67.2795180722892"^^xsd:double .
 
 code:Saffl  a            rdfs:Class , owl:Class ;
@@ -1265,12 +1265,12 @@ ds:obs40  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-min ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "41.7"^^xsd:double .
 
 ds:obs12  a                         qb:Observation ;
@@ -1279,12 +1279,12 @@ ds:obs12  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-M ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "38.3720930232558"^^xsd:double .
 
 ds:obs53  a                         qb:Observation ;
@@ -1293,12 +1293,12 @@ ds:obs53  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-F ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "59.5238095238095"^^xsd:double .
 
 ds:obs25  a                         qb:Observation ;
@@ -1307,12 +1307,12 @@ ds:obs25  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "RACE" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-WHITE ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "90.6976744186046"^^xsd:double .
 
 dccs:factor  a        qb:ComponentSpecification ;
@@ -1329,12 +1329,12 @@ ds:obs66  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "6"^^xsd:double .
 
 code:factor-quantity  a               code:Factor , skos:Concept ;
@@ -1364,12 +1364,12 @@ ds:obs38  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-mean ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "70.0047619047619"^^xsd:double .
 
 dccs:race  a          qb:ComponentSpecification ;
@@ -1389,7 +1389,7 @@ ds:dataset-DM  a                      qb:DataSet ;
         dct:title                     "Demographics Analysis Results"^^xsd:string ;
         qb:structure                  ds:dsd-DM ;
         pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-04-20T00:53:00+02:00"^^xsd:dateTime ;
+        pav:createdOn                 "2016-04-26T11:59:43+02:00"^^xsd:dateTime ;
         pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
         pav:version                   "0.0.0"^^xsd:string ;
         rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
@@ -1418,12 +1418,12 @@ ds:obs60  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-median ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "64.9"^^xsd:double .
 
 code:factor  a                    skos:ConceptScheme ;
@@ -1441,12 +1441,12 @@ ds:obs32  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "SEX" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-F ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "47.6190476190476"^^xsd:double .
 
 crnd-dimension:saffl  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
@@ -1460,12 +1460,12 @@ ds:obs04  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-_ALL_ ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "23"^^xsd:double .
 
 dccs:trt01a  a        qb:ComponentSpecification ;
@@ -1478,12 +1478,12 @@ ds:obs45  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_ALL_" ;
         crnd-attribute:unit         "_NULL_"^^xsd:string ;
-        crnd-dimension:factor       code:factor-quantity ;
-        crnd-dimension:procedure    code:procedure-count ;
-        crnd-dimension:race         code:race-BLACK_OR_AFRICAN_AMERICAN ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "9"^^xsd:double .
 
 ds:obs17  a                         qb:Observation ;
@@ -1492,12 +1492,12 @@ ds:obs17  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-mean ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Placebo ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "62.7593023255814"^^xsd:double .
 
 code:procedure  a                 skos:ConceptScheme ;
@@ -1515,10 +1515,10 @@ ds:obs58  a                         qb:Observation ;
         qb:dataSet                  ds:dataset-DM ;
         crnd-attribute:denominator  "_NULL_" ;
         crnd-attribute:unit         "KG"^^xsd:string ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
-        crnd-dimension:procedure    code:procedure-max ;
-        crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
-        crnd-dimension:sex          code:sex-_ALL_ ;
-        crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
+        crnd-dimension:factor       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:procedure    <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:race         <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:saffl        <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:sex          <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
+        crnd-dimension:trt01a       <http://www.example.org/dc/code/CODING ERROR- no decode value> ;
         crnd-measure:measure        "106.1"^^xsd:double .

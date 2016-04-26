@@ -1,29 +1,45 @@
-PACKAGENAME=rrdfcdisc
+PACKAGENAME:=$(shell gawk 'BEGIN { FS=": *" } ; /^Package:/{print $$2}' DESCRIPTION)
+PACKAGEVERSION:=$(shell gawk 'BEGIN { FS=": *" } ; /^Version:/{print $$2}' DESCRIPTION)
+RPACKAGE=${PACKAGENAME}_${PACKAGEVERSION}.tar.gz
+
+JAVATARGETS=
+VIGNETTETARGETS=
+TARGETS=../${RPACKAGE} ${JAVATARGETS} ${VIGNETTETARGETS}
 
 all: createRD data-raw rbuildforce rbuild 
+
+clean:
+	(cd inst/data-raw; make clean)
+	(cd vignettes; make clean)
+	rm -f ${TARGETS}
 
 cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
 
+install-rpackage-from-dir: ${RPACKAGE}
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("../${RPACKAGE}")'
+
 rbuildforce: 
 	cd ..; R CMD build --force --no-build-vignettes  ${PACKAGENAME}
+
+rbuildforce: ${RPACKAGE}
+
 
 # checking package
 # see http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-packages
 # see http://stackoverflow.com/questions/15324705/should-there-be-a-package-subfolder-in-a-github-package-repo?lq=1
 # removing --as-cran - ma 2015-11-25
 rcheck: 
-	cd ..; R CMD check  ${PACKAGENAME}*.tar.gz
+	cd ..; R CMD check  ${RPACKAGE}
 
 rbuild: 
 	cd ..; R CMD build  ${PACKAGENAME}
 
-createRD:
-	$(R_HOME)/bin/Rscript -e "library(rrdfancillary);library(devtools); devtools::document()"
+${RPACKAGE}:
+	cd ..; R CMD build --force ${PACKAGENAME}
 
-clean:
-	(cd inst/data-raw; make clean)
-	(cd vignettes; make clean)
+createRD:
+	$(R_HOME)/bin/Rscript -e "library(rrdfancillary); library(devtools); devtools::document()"
 
 data-raw:
 	(cd inst/data-raw; make all; make installDoc)

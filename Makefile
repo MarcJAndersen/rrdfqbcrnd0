@@ -1,6 +1,11 @@
 all: mk-rrdfancillary  mk-rrdfcdisc mk-rrdfqb  mk-rrdfqbcrnd0 \
       mk-rrdfqbcrndex mk-rrdfqbcrndcheck mk-rrdfqbpresent
 
+# ToDo(MJA): PACKAGEVERSION refers to the version in the DESCRIPTION files in each
+# each of the directories. This implies that the version must be the same.
+# Would be better to have the different version numbers, and extract the version number from
+# the description file.
+
 PACKAGEVERSION=0.2.2
 
 install-from-dir: install-rrdfancillary-from-dir install-rrdfcdisc-from-dir install-rrdfqb-from-dir \
@@ -17,10 +22,10 @@ install-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbpresent_${PACKAGEVERSION}.tar.gz")'
 
 install-rrdfancillary-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfancillary_${PACKAGEVERSION}.tar.gz")'
+	(cd rrdfancillary; make install-rpackage-from-dir)
 
 install-rrdfcdisc-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
+	(cd rrdfcdisc; make install-rpackage-from-dir)
 
 install-rrdfqb-from-dir:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqb_${PACKAGEVERSION}.tar.gz")'       

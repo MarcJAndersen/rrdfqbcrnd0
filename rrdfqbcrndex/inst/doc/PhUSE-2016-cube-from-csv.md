@@ -171,11 +171,1547 @@ tab1x01.cube.fn<- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )
     ## 29                 <NA>
     ## crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:disconfl crnd-dimension:disconfl crnd-dimension:disconfl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:factor crnd-dimension:factor crnd-dimension:factor crnd-dimension:factor crnd-dimension:ittfl crnd-dimension:ittfl crnd-dimension:ittfl crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:saffl crnd-dimension:saffl crnd-dimension:saffl crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p
 
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): N -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## High Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Xanomeline
+    ## Low Dose -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): count --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): quantity --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): _ALL_ --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Y -- CODING
+    ## ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): percent --
+    ## CODING ERROR- no decode value
+
+    ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): proportion
+    ## -- CODING ERROR- no decode value
+
 ``` r
 cat("TAB1X01 cube stored as ", normalizePath(tab1x01.cube.fn), "\n")
 ```
 
-    ## TAB1X01 cube stored as  /tmp/RtmpmybZeB/DC-TAB1X01-R-V-0-0-0.ttl
+    ## TAB1X01 cube stored as  /tmp/RtmpEOWBli/DC-TAB1X01-R-V-0-0-0.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"CDISC-pilot-TAB1X01.ttl")
@@ -253,18 +1789,18 @@ observations2<- sparql.rdf(checkCube, observations2Rq)
 knitr::kable(head(observations2, 10))
 ```
 
-| s        | p                          | o                                                                            |
-|:---------|:---------------------------|:-----------------------------------------------------------------------------|
-| ds:obs49 | rdfs:label                 | 49                                                                           |
-| ds:obs49 | qb:dataSet                 | ds:dataset-TAB1X01                                                           |
-| ds:obs49 | crnd-dimension:ittfl       | code:ittfl-*ALL*                                                             |
-| ds:obs49 | crnd-attribute:denominator |                                                                              |
-| ds:obs49 | crnd-dimension:saffl       | code:saffl-*ALL*                                                             |
-| ds:obs49 | crnd-dimension:efffl       | code:efffl-*ALL*                                                             |
-| ds:obs49 | crnd-attribute:unit        | NA                                                                           |
-| ds:obs49 | rdfs:comment               | Statistic for number of records/Statistics for factor with the dimensions XX |
-| ds:obs49 | crnd-dimension:factor      | code:factor-quantity                                                         |
-| ds:obs49 | crnd-dimension:disconfl    | code:disconfl-*ALL*                                                          |
+| s        | p                          | o                                  |
+|:---------|:---------------------------|:-----------------------------------|
+| ds:obs49 | rdfs:label                 | 49                                 |
+| ds:obs49 | crnd-dimension:disconfl    | code:CODING ERROR- no decode value |
+| ds:obs49 | crnd-dimension:trt01p      | code:CODING ERROR- no decode value |
+| ds:obs49 | crnd-dimension:procedure   | code:CODING ERROR- no decode value |
+| ds:obs49 | qb:dataSet                 | ds:dataset-TAB1X01                 |
+| ds:obs49 | crnd-dimension:comp24fl    | code:CODING ERROR- no decode value |
+| ds:obs49 | crnd-dimension:ittfl       | code:CODING ERROR- no decode value |
+| ds:obs49 | crnd-attribute:denominator |                                    |
+| ds:obs49 | crnd-dimension:efffl       | code:CODING ERROR- no decode value |
+| ds:obs49 | crnd-attribute:unit        | NA                                 |
 
 Get cube components
 -------------------
@@ -440,18 +1976,18 @@ knitr::kable(observations[ 1:10 ,
    c(paste0(sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", dimensions), "value"),sub("crnd-dimension:|crnd-attribute:|crnd-measure:", "", attributes), "measure")])
 ```
 
-| disconflvalue | safflvalue | trt01pvalue          | factorvalue | procedurevalue | comp24flvalue | ittflvalue | effflvalue | denominator | unit | measure |
-|:--------------|:-----------|:---------------------|:------------|:---------------|:--------------|:-----------|:-----------|:------------|:-----|:--------|
-| *ALL*         | *ALL*      | Placebo              | quantity    | count          | *ALL*         | Y          | *ALL*      |             | NA   | 86      |
-| *ALL*         | *ALL*      | Placebo              | proportion  | percent        | *ALL*         | Y          | *ALL*      | ittfl       | NA   | 100     |
-| *ALL*         | *ALL*      | Xanomeline High Dose | quantity    | count          | *ALL*         | Y          | *ALL*      |             | NA   | 84      |
-| *ALL*         | *ALL*      | Xanomeline High Dose | proportion  | percent        | *ALL*         | Y          | *ALL*      | ittfl       | NA   | 100     |
-| *ALL*         | *ALL*      | Xanomeline Low Dose  | quantity    | count          | *ALL*         | Y          | *ALL*      |             | NA   | 84      |
-| *ALL*         | *ALL*      | Xanomeline Low Dose  | proportion  | percent        | *ALL*         | Y          | *ALL*      | ittfl       | NA   | 100     |
-| *ALL*         | *ALL*      | NA                   | quantity    | count          | *ALL*         | Y          | *ALL*      |             | NA   | 254     |
-| *ALL*         | *ALL*      | NA                   | proportion  | percent        | *ALL*         | Y          | *ALL*      | ittfl       | NA   | 100     |
-| *ALL*         | Y          | Placebo              | quantity    | count          | *ALL*         | *ALL*      | *ALL*      |             | NA   | 86      |
-| *ALL*         | Y          | Placebo              | proportion  | percent        | *ALL*         | *ALL*      | *ALL*      | saffl       | NA   | 100     |
+| disconflvalue | safflvalue | trt01pvalue | factorvalue | procedurevalue | comp24flvalue | ittflvalue | effflvalue | denominator | unit | measure |
+|:--------------|:-----------|:------------|:------------|:---------------|:--------------|:-----------|:-----------|:------------|:-----|:--------|
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         |             | NA   | 86      |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         | ittfl       | NA   | 100     |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         |             | NA   | 84      |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         | ittfl       | NA   | 100     |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         |             | NA   | 84      |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         | ittfl       | NA   | 100     |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         |             | NA   | 254     |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         | ittfl       | NA   | 100     |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         |             | NA   | 86      |
+| NA            | NA         | NA          | NA          | NA             | NA            | NA         | NA         | saffl       | NA   | 100     |
 
 Get observations with labels
 ----------------------------
@@ -549,18 +2085,18 @@ knitr::kable(observationsDesc[ 1:10 ,
        )
 ```
 
-| disconfllabel | disconflvalue | disconflIRI             | saffllabel | safflvalue | safflIRI             | trt01plabel   | trt01pvalue          | trt01pIRI             | factorlabel                                 | factorvalue | factorIRI             | procedurelabel        | procedurevalue | procedureIRI             | comp24fllabel | comp24flvalue | comp24flIRI             | ittfllabel | ittflvalue | ittflIRI             | efffllabel | effflvalue | effflIRI             | denominator | unit | measure      | measureIRI |
-|:--------------|:--------------|:------------------------|:-----------|:-----------|:---------------------|:--------------|:---------------------|:----------------------|:--------------------------------------------|:------------|:----------------------|:----------------------|:---------------|:-------------------------|:--------------|:--------------|:------------------------|:-----------|:-----------|:---------------------|:-----------|:-----------|:---------------------|:------------|:-----|:-------------|:-----------|
-| disconfl      | *ALL*         | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Placebo              | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | quantity    | crnd-dimension:factor | Statistical Procedure | count          | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | *ALL*      | crnd-dimension:efffl |             | NA   | 58           | ds:obs49   |
-| disconfl      | *ALL*         | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Placebo              | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | quantity    | crnd-dimension:factor | Statistical Procedure | count          | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | Y          | crnd-dimension:efffl |             | NA   | 79           | ds:obs23   |
-| disconfl      | *ALL*         | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | NA                   | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | proportion  | crnd-dimension:factor | Statistical Procedure | percent        | crnd-dimension:procedure | comp24fl      | Y             | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | *ALL*      | crnd-dimension:efffl | comp24fl    | NA   | 46.456692913 | ds:obs48   |
-| disconfl      | *ALL*         | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Xanomeline Low Dose  | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | proportion  | crnd-dimension:factor | Statistical Procedure | percent        | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | N          | crnd-dimension:efffl | efffl       | NA   | 3.5714285714 | ds:obs22   |
-| disconfl      | Y             | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Xanomeline High Dose | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | proportion  | crnd-dimension:factor | Statistical Procedure | percent        | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | *ALL*      | crnd-dimension:efffl | disconfl    | NA   | 67.857142857 | ds:obs58   |
-| disconfl      | *ALL*         | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Xanomeline Low Dose  | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | proportion  | crnd-dimension:factor | Statistical Procedure | percent        | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | Y          | crnd-dimension:efffl | efffl       | NA   | 96.428571429 | ds:obs28   |
-| disconfl      | *ALL*         | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Xanomeline Low Dose  | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | quantity    | crnd-dimension:factor | Statistical Procedure | count          | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | *ALL*      | crnd-dimension:efffl |             | NA   | 25           | ds:obs53   |
-| disconfl      | Y             | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Xanomeline High Dose | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | quantity    | crnd-dimension:factor | Statistical Procedure | count          | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | *ALL*      | crnd-dimension:efffl |             | NA   | 57           | ds:obs57   |
-| disconfl      | Y             | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | NA                   | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | quantity    | crnd-dimension:factor | Statistical Procedure | count          | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | *ALL*      | crnd-dimension:ittfl | efffl      | *ALL*      | crnd-dimension:efffl |             | NA   | 144          | ds:obs63   |
-| disconfl      | *ALL*         | crnd-dimension:disconfl | saffl      | *ALL*      | crnd-dimension:saffl | Treatment Arm | Placebo              | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | quantity    | crnd-dimension:factor | Statistical Procedure | count          | crnd-dimension:procedure | comp24fl      | *ALL*         | crnd-dimension:comp24fl | ittfl      | Y          | crnd-dimension:ittfl | efffl      | *ALL*      | crnd-dimension:efffl |             | NA   | 86           | ds:obs01   |
+| disconfllabel | disconflvalue | disconflIRI             | saffllabel | safflvalue | safflIRI             | trt01plabel   | trt01pvalue | trt01pIRI             | factorlabel                                 | factorvalue | factorIRI             | procedurelabel        | procedurevalue | procedureIRI             | comp24fllabel | comp24flvalue | comp24flIRI             | ittfllabel | ittflvalue | ittflIRI             | efffllabel | effflvalue | effflIRI             | denominator | unit | measure      | measureIRI |
+|:--------------|:--------------|:------------------------|:-----------|:-----------|:---------------------|:--------------|:------------|:----------------------|:--------------------------------------------|:------------|:----------------------|:----------------------|:---------------|:-------------------------|:--------------|:--------------|:------------------------|:-----------|:-----------|:---------------------|:-----------|:-----------|:---------------------|:------------|:-----|:-------------|:-----------|
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl |             | NA   | 58           | ds:obs49   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl |             | NA   | 79           | ds:obs23   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl | comp24fl    | NA   | 46.456692913 | ds:obs48   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl | efffl       | NA   | 3.5714285714 | ds:obs22   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl | disconfl    | NA   | 67.857142857 | ds:obs58   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl | efffl       | NA   | 96.428571429 | ds:obs28   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl |             | NA   | 25           | ds:obs53   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl |             | NA   | 57           | ds:obs57   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl |             | NA   | 144          | ds:obs63   |
+| disconfl      | NA            | crnd-dimension:disconfl | saffl      | NA         | crnd-dimension:saffl | Treatment Arm | NA          | crnd-dimension:trt01p | Type of procedure (quantity, proportion...) | NA          | crnd-dimension:factor | Statistical Procedure | NA             | crnd-dimension:procedure | comp24fl      | NA            | crnd-dimension:comp24fl | ittfl      | NA         | crnd-dimension:ittfl | efffl      | NA         | crnd-dimension:efffl |             | NA   | 86           | ds:obs01   |
 
 Reproduce the metadata for the workbook from cube
 -------------------------------------------------
@@ -634,7 +2170,7 @@ sessionInfo()
     ## other attached packages:
     ##  [1] rrdfqbcrndex_0.2.2  rrdfqbcrnd0_0.2.2   rrdfqb_0.2.2       
     ##  [4] xlsx_0.5.7          xlsxjars_0.6.1      rrdfcdisc_0.2.2    
-    ##  [7] devtools_1.11.0     RCurl_1.95-4.8      bitops_1.0-6       
+    ##  [7] devtools_1.11.1     RCurl_1.95-4.8      bitops_1.0-6       
     ## [10] rrdfancillary_0.2.2 rrdf_2.1.2          rrdflibs_1.4.0     
     ## [13] rJava_0.9-8        
     ## 
