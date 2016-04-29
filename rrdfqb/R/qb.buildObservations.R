@@ -53,11 +53,11 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         
         ## identify codelists
         codelists.rq<-   GetCodeListSparqlQuery(forsparqlprefix, dsdName )
-        cat("SPARQL query for codelists\n", codelists.rq, "\n")
+##        cat("SPARQL query for codelists\n", codelists.rq, "\n")
         cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors=FALSE)
-        cat("Resulting codelists\n")
-        print(cube.codelists)
-        cat("--------------\n")
+##        cat("Resulting codelists\n")
+##        print(cube.codelists)
+##        cat("--------------\n")
         ## TODO instead of gsub make a more straightforward way
         ## TOTO this involves a new version of the ph.recode function
         ## Next three lines classical error - starting from
@@ -66,36 +66,36 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         ## cube.codelists$vn<- gsub("crnd-dimension:","",cube.codelists$p)
         ## cube.codelists$vn<- gsub("crnd-attribute:","",cube.codelists$p)
         ## cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$p)
-        cat( cube.codelists$dimension, "\n")
+##        cat( cube.codelists$dimension, "\n")
         cube.codelists$vn1<- gsub("crnd-dimension:","",cube.codelists$dimension)
         cube.codelists$vn2<- gsub("crnd-attribute:","",cube.codelists$vn1)
         cube.codelists$dimension<- gsub("crnd-measure:","",cube.codelists$vn2)
         cube.codelists$clc<- gsub("code:","",cube.codelists$cl)
-        cat("Resulting codelists after gsub\n")
-        print(cube.codelists)
+##        cat("Resulting codelists after gsub\n")
+##        print(cube.codelists)
 
-        cat("Before making record.list\n")
-        print(cube.codelists$dimension)
-        cat("--------------\n")
+##        cat("Before making record.list\n")
+##        print(cube.codelists$dimension)
+##        cat("--------------\n")
         recode.list<-by(cube.codelists, cube.codelists$dimension, function(x){
-            cat("x\n")
-             print(x)
-            cat("---\n")
+##            cat("x\n")
+##             print(x)
+##            cat("---\n")
              pl<-list();
              for (i in 1:nrow(x)) {
-             cat("clpreflabel: ", as.character(x[i,"clprefLabel"]),"\n");
-             cat(as.character(x[i,"clc"]),"\n")
+##             cat("clpreflabel: ", as.character(x[i,"clprefLabel"]),"\n");
+##             cat(as.character(x[i,"clc"]),"\n")
              pl[[ as.character(x[i,"clprefLabel"]) ]] <-  as.character(x[i,"clc"])
              }
-             cat("pl\n");
-            print(pl)
-            cat("---\n")
+##             cat("pl\n");
+##            print(pl)
+##            cat("---\n")
             pl
         }
         )
-        cat("Print recode.list\n")
-        print(recode.list)
-        cat("---\n")
+##        cat("Print recode.list\n")
+##        print(recode.list)
+##        cat("---\n")
     }
 
     obs.width<- floor(log10(nrow(obsData)))+1

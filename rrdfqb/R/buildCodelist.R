@@ -68,17 +68,12 @@ cat("!!!!!!!!!\n")
   
     ##  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
   
-  cat("@@@@@@@@@@@@@@@\n")
-  print(codeSource)
-  print(names(codeSource))
+
   for (i in 1:nrow(codeSource)) {
-     message( i, ": ", codeSource[i,"code"] )
-     cat( i, ": ", codeSource[i,"code"], "\n" )
+#     message( i, ": ", codeSource[i,"code"] )
     codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"]))
   }
-  print(codeSource)
-  print(nrow(codeSource))
-  cat("@@@@@@@@@@@@@@@\n")
+
     
 #############################################################################
   ## SKELETON
@@ -188,14 +183,7 @@ cat("!!!!!!!!!\n")
   ## --------- hasTopConcept ---------
   ## For each unique code
     for (i in 1:nrow(codeSource)){
-        cat(
-               paste0(prefixlist$prefixCODE,dimName),
-               paste0(prefixlist$prefixSKOS, "hasTopConcept"),
-            paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
-            "----------\n"
-        )
-            
-    add.triple(store,
+        add.triple(store,
                paste0(prefixlist$prefixCODE,dimName),
                paste0(prefixlist$prefixSKOS, "hasTopConcept"),
                paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]))

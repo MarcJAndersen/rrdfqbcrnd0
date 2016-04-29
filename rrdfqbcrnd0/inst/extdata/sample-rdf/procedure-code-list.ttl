@@ -115,9 +115,6 @@ code:procedure-median
         skos:prefLabel                "median"^^xsd:string ;
         skos:topConceptOf             code:procedure .
 
-<http://www.example.org/dc/code/CODING ERROR- no decode value>
-        a       code:Factor , code:Category , code:Procedure , skos:Concept , rdfs:Resource .
-
 code:procedure-std  a                 code:Procedure , skos:Concept , rdfs:Resource ;
         rdfs:comment                  "Descriptive statistics std"@en ;
         rrdfqbcrnd0:R-selectionoperator

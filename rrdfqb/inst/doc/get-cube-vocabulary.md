@@ -55,7 +55,7 @@ writeLines( SPARQLscript, con=SPARQLscriptfn )
 cat("SPARQL script stored in  ", normalizePath(SPARQLscriptfn), "\n")
 ```
 
-SPARQL script stored in /tmp/Rtmp8M3SCQ/get-cube.rq
+SPARQL script stored in /tmp/RtmpI2WEJK/get-cube.rq
 
 ### Using the script with R
 
