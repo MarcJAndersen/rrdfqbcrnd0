@@ -6,7 +6,7 @@ all: mk-rrdfancillary  mk-rrdfcdisc mk-rrdfqb  mk-rrdfqbcrnd0 \
 # Would be better to have the different version numbers, and extract the version number from
 # the description file.
 
-PACKAGEVERSION=0.2.2
+PACKAGEVERSION=0.2.3
 
 install-from-dir: install-rrdfancillary-from-dir install-rrdfcdisc-from-dir install-rrdfqb-from-dir \
     install-rrdfqbcrnd0-from-dir install-rrdfqbcrndex-from-dir install-rrdfqbcrndcheck-from-dir \
@@ -51,23 +51,29 @@ install-rrdfcdisc-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfcdisc_${PACKAGEVERSION}.tar.gz")'
 
 
-mk-rrdfancillary:
+1 mk-rrdfancillary:
 	cd rrdfancillary; make
+	cd rrdfancillary; make install-rpackage-from-dir
 
-mk-rrdfcdisc:
+2 mk-rrdfcdisc:
 	cd rrdfcdisc; make
+	cd rrdfcdisc; make install-rpackage-from-dir
 
-mk-rrdfqb:
+3 mk-rrdfqb:
 	cd rrdfqb; make
+	cd rrdfqb; make install-rpackage-from-dir
 
-mk-rrdfqbcrnd0:
+4 mk-rrdfqbcrnd0:
 	cd rrdfqbcrnd0; make
+	cd rrdfqbcrnd0; make install-rpackage-from-dir
 
-mk-rrdfqbcrndex:
+5 mk-rrdfqbcrndex:
 	cd rrdfqbcrndex; make
+	cd rrdfqbcrndex; make install-rpackage-from-dir
 
-mk-rrdfqbpresent:
+6 mk-rrdfqbpresent:
 	cd rrdfqbpresent; make
+	cd rrdfqbpresent; make install-rpackage-from-dir
 
 mk-rrdfqbcrndcheck:
 	cd rrdfqbcrndcheck; make

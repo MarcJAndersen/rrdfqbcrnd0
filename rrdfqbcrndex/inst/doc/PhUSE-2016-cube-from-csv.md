@@ -48,129 +48,6 @@ tab1x01MetaData <- read.csv(tab1x01MetaDataCsvFn,stringsAsFactors=FALSE)
 tab1x01.cube.fn<- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )
 ```
 
-    ## [1] "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix dcat: <http://www.w3.org/ns/dcat#>\nprefix owl: <http://www.w3.org/2002/07/owl#>\nprefix xsd: <http://www.w3.org/2001/XMLSchema#>\nprefix pav: <http://purl.org/pav>\nprefix dc: <http://purl.org/dc/elements/1.1/>\nprefix dct: <http://purl.org/dc/terms/>\nprefix mms: <http://rdf.cdisc.org/mms#>\nprefix cts: <http://rdf.cdisc.org/ct/schema#>\nprefix cdiscs: <http://rdf.cdisc.org/std/schema#>\nprefix cdash-1-1: <http://rdf.cdisc.org/std/cdash-1-1#>\nprefix cdashct: <http://rdf.cdisc.org/cdash-terminology#>\nprefix sdtmct: <http://rdf.cdisc.org/sdtm-terminology#>\nprefix sdtm-1-2: <http://rdf.cdisc.org/std/sdtm-1-2#>\nprefix sdtm-1-3: <http://rdf.cdisc.org/std/sdtm-1-3#>\nprefix sdtms-1-3: <http://rdf.cdisc.org/sdtm-1-3/schema#>\nprefix sdtmig-3-1-2: <http://rdf.cdisc.org/std/sdtmig-3-1-2#>\nprefix sdtmig-3-1-3: <http://rdf.cdisc.org/std/sdtmig-3-1-3#>\nprefix sendct: <http://rdf.cdisc.org/send-terminology#>\nprefix sendig-3-0: <http://rdf.cdisc.org/std/sendig-3-0#>\nprefix adamct: <http://rdf.cdisc.org/adam-terminology#>\nprefix adam-2-1: <http://rdf.cdisc.org/std/adam-2-1#>\nprefix adamig-1-0: <http://rdf.cdisc.org/std/adamig-1-0#>\nprefix adamvr-1-2: <http://rdf.cdisc.org/std/adamvr-1-2#>\nprefix qb: <http://purl.org/linked-data/cube#>\nprefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>\nprefix code: <http://www.example.org/dc/code/>\nprefix dccs: <http://www.example.org/dc/tab1x01/dccs/>\nprefix ds: <http://www.example.org/dc/tab1x01/ds/>\nprefix crnd-dimension: <http://www.example.org/dc/dimension#>\nprefix crnd-attribute: <http://www.example.org/dc/attribute#>\nprefix crnd-measure: <http://www.example.org/dc/measure#>\n \nselect distinct ?DataStructureDefinition ?dimension ?cprefLabel ?cl ?clprefLabel ?vn ?vct ?vnop ?vnval\nwhere {\n   ?DataStructureDefinition a qb:DataStructureDefinition ;\n        qb:component ?component .\n   ?component a qb:ComponentSpecification .\n   ?component qb:dimension ?dimension .\n\n   ?dimension qb:codeList ?c .\n   OPTIONAL { ?c skos:prefLabel ?cprefLabel .   }\n   OPTIONAL { ?c rrdfqbcrnd0:DataSetRefD2RQ ?vnop . }\n   OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn . }\n   OPTIONAL { ?c rrdfqbcrnd0:codeType     ?vct .          }\n\n   ?c skos:hasTopConcept ?cl .\n   OPTIONAL { ?cl skos:prefLabel ?clprefLabel . }\n   OPTIONAL { ?cl rrdfqbcrnd0:R-selectionoperator ?vnop . }\n   OPTIONAL { ?cl rrdfqbcrnd0:R-selectionvalue ?vnval .   }\n values ( ?DataStructureDefinition ) {\n(ds:dsd-TAB1X01)\n} \n}\norder by ?dimension ?cl ?dimensionrefLabel\n"
-    ##    DataStructureDefinition                dimension
-    ## 1           ds:dsd-TAB1X01  crnd-dimension:comp24fl
-    ## 2           ds:dsd-TAB1X01  crnd-dimension:comp24fl
-    ## 3           ds:dsd-TAB1X01  crnd-dimension:comp24fl
-    ## 4           ds:dsd-TAB1X01  crnd-dimension:comp24fl
-    ## 5           ds:dsd-TAB1X01  crnd-dimension:disconfl
-    ## 6           ds:dsd-TAB1X01  crnd-dimension:disconfl
-    ## 7           ds:dsd-TAB1X01  crnd-dimension:disconfl
-    ## 8           ds:dsd-TAB1X01     crnd-dimension:efffl
-    ## 9           ds:dsd-TAB1X01     crnd-dimension:efffl
-    ## 10          ds:dsd-TAB1X01     crnd-dimension:efffl
-    ## 11          ds:dsd-TAB1X01     crnd-dimension:efffl
-    ## 12          ds:dsd-TAB1X01    crnd-dimension:factor
-    ## 13          ds:dsd-TAB1X01    crnd-dimension:factor
-    ## 14          ds:dsd-TAB1X01    crnd-dimension:factor
-    ## 15          ds:dsd-TAB1X01    crnd-dimension:factor
-    ## 16          ds:dsd-TAB1X01     crnd-dimension:ittfl
-    ## 17          ds:dsd-TAB1X01     crnd-dimension:ittfl
-    ## 18          ds:dsd-TAB1X01     crnd-dimension:ittfl
-    ## 19          ds:dsd-TAB1X01 crnd-dimension:procedure
-    ## 20          ds:dsd-TAB1X01 crnd-dimension:procedure
-    ## 21          ds:dsd-TAB1X01     crnd-dimension:saffl
-    ## 22          ds:dsd-TAB1X01     crnd-dimension:saffl
-    ## 23          ds:dsd-TAB1X01     crnd-dimension:saffl
-    ## 24          ds:dsd-TAB1X01    crnd-dimension:trt01p
-    ## 25          ds:dsd-TAB1X01    crnd-dimension:trt01p
-    ## 26          ds:dsd-TAB1X01    crnd-dimension:trt01p
-    ## 27          ds:dsd-TAB1X01    crnd-dimension:trt01p
-    ## 28          ds:dsd-TAB1X01    crnd-dimension:trt01p
-    ## 29          ds:dsd-TAB1X01    crnd-dimension:trt01p
-    ##                    cprefLabel                               cl
-    ## 1   Codelist scheme: comp24fl                  code:comp24fl-N
-    ## 2   Codelist scheme: comp24fl                  code:comp24fl-Y
-    ## 3   Codelist scheme: comp24fl              code:comp24fl-_ALL_
-    ## 4   Codelist scheme: comp24fl          code:comp24fl-_NONMISS_
-    ## 5   Codelist scheme: disconfl                  code:disconfl-Y
-    ## 6   Codelist scheme: disconfl              code:disconfl-_ALL_
-    ## 7   Codelist scheme: disconfl          code:disconfl-_NONMISS_
-    ## 8      Codelist scheme: efffl                     code:efffl-N
-    ## 9      Codelist scheme: efffl                     code:efffl-Y
-    ## 10     Codelist scheme: efffl                 code:efffl-_ALL_
-    ## 11     Codelist scheme: efffl             code:efffl-_NONMISS_
-    ## 12    Codelist scheme: factor                code:factor-_ALL_
-    ## 13    Codelist scheme: factor            code:factor-_NONMISS_
-    ## 14    Codelist scheme: factor           code:factor-proportion
-    ## 15    Codelist scheme: factor             code:factor-quantity
-    ## 16     Codelist scheme: ittfl                     code:ittfl-Y
-    ## 17     Codelist scheme: ittfl                 code:ittfl-_ALL_
-    ## 18     Codelist scheme: ittfl             code:ittfl-_NONMISS_
-    ## 19 Codelist scheme: procedure             code:procedure-count
-    ## 20 Codelist scheme: procedure           code:procedure-percent
-    ## 21     Codelist scheme: saffl                     code:saffl-Y
-    ## 22     Codelist scheme: saffl                 code:saffl-_ALL_
-    ## 23     Codelist scheme: saffl             code:saffl-_NONMISS_
-    ## 24    Codelist scheme: trt01p                     code:trt01p-
-    ## 25    Codelist scheme: trt01p              code:trt01p-Placebo
-    ## 26    Codelist scheme: trt01p code:trt01p-Xanomeline_High_Dose
-    ## 27    Codelist scheme: trt01p  code:trt01p-Xanomeline_Low_Dose
-    ## 28    Codelist scheme: trt01p                code:trt01p-_ALL_
-    ## 29    Codelist scheme: trt01p            code:trt01p-_NONMISS_
-    ##             clprefLabel        vn  vct                      vnop
-    ## 1                     N  comp24fl DATA rrdfqbcrnd0:ADSL_COMP24FL
-    ## 2                     Y  comp24fl DATA rrdfqbcrnd0:ADSL_COMP24FL
-    ## 3                 _ALL_  comp24fl DATA rrdfqbcrnd0:ADSL_COMP24FL
-    ## 4             _NONMISS_  comp24fl DATA rrdfqbcrnd0:ADSL_COMP24FL
-    ## 5                     Y  disconfl DATA rrdfqbcrnd0:ADSL_DISCONFL
-    ## 6                 _ALL_  disconfl DATA rrdfqbcrnd0:ADSL_DISCONFL
-    ## 7             _NONMISS_  disconfl DATA rrdfqbcrnd0:ADSL_DISCONFL
-    ## 8                     N     efffl DATA    rrdfqbcrnd0:ADSL_EFFFL
-    ## 9                     Y     efffl DATA    rrdfqbcrnd0:ADSL_EFFFL
-    ## 10                _ALL_     efffl DATA    rrdfqbcrnd0:ADSL_EFFFL
-    ## 11            _NONMISS_     efffl DATA    rrdfqbcrnd0:ADSL_EFFFL
-    ## 12                _ALL_    factor DATA                      <NA>
-    ## 13            _NONMISS_    factor DATA                      <NA>
-    ## 14           proportion    factor DATA                        ==
-    ## 15             quantity    factor DATA                        ==
-    ## 16                    Y     ittfl DATA    rrdfqbcrnd0:ADSL_ITTFL
-    ## 17                _ALL_     ittfl DATA    rrdfqbcrnd0:ADSL_ITTFL
-    ## 18            _NONMISS_     ittfl DATA    rrdfqbcrnd0:ADSL_ITTFL
-    ## 19                count procedure DATA                        ==
-    ## 20              percent procedure DATA                        ==
-    ## 21                    Y     saffl DATA    rrdfqbcrnd0:ADSL_SAFFL
-    ## 22                _ALL_     saffl DATA    rrdfqbcrnd0:ADSL_SAFFL
-    ## 23            _NONMISS_     saffl DATA    rrdfqbcrnd0:ADSL_SAFFL
-    ## 24                         trt01p DATA   rrdfqbcrnd0:ADSL_TRT01P
-    ## 25              Placebo    trt01p DATA   rrdfqbcrnd0:ADSL_TRT01P
-    ## 26 Xanomeline High Dose    trt01p DATA   rrdfqbcrnd0:ADSL_TRT01P
-    ## 27  Xanomeline Low Dose    trt01p DATA   rrdfqbcrnd0:ADSL_TRT01P
-    ## 28                _ALL_    trt01p DATA   rrdfqbcrnd0:ADSL_TRT01P
-    ## 29            _NONMISS_    trt01p DATA   rrdfqbcrnd0:ADSL_TRT01P
-    ##                   vnval
-    ## 1                     N
-    ## 2                     Y
-    ## 3                  <NA>
-    ## 4                  <NA>
-    ## 5                     Y
-    ## 6                  <NA>
-    ## 7                  <NA>
-    ## 8                     N
-    ## 9                     Y
-    ## 10                 <NA>
-    ## 11                 <NA>
-    ## 12                 <NA>
-    ## 13                 <NA>
-    ## 14           proportion
-    ## 15             quantity
-    ## 16                    Y
-    ## 17                 <NA>
-    ## 18                 <NA>
-    ## 19                count
-    ## 20              percent
-    ## 21                    Y
-    ## 22                 <NA>
-    ## 23                 <NA>
-    ## 24                     
-    ## 25              Placebo
-    ## 26 Xanomeline High Dose
-    ## 27  Xanomeline Low Dose
-    ## 28                 <NA>
-    ## 29                 <NA>
-    ## crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:comp24fl crnd-dimension:disconfl crnd-dimension:disconfl crnd-dimension:disconfl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:efffl crnd-dimension:factor crnd-dimension:factor crnd-dimension:factor crnd-dimension:factor crnd-dimension:ittfl crnd-dimension:ittfl crnd-dimension:ittfl crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:saffl crnd-dimension:saffl crnd-dimension:saffl crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p crnd-dimension:trt01p
-
     ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): Placebo --
     ## CODING ERROR- no decode value
 
@@ -1711,7 +1588,7 @@ tab1x01.cube.fn<- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )
 cat("TAB1X01 cube stored as ", normalizePath(tab1x01.cube.fn), "\n")
 ```
 
-    ## TAB1X01 cube stored as  /tmp/RtmpEOWBli/DC-TAB1X01-R-V-0-0-0.ttl
+    ## TAB1X01 cube stored as  /tmp/Rtmp5E1kxG/DC-TAB1X01-R-V-0-0-0.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"CDISC-pilot-TAB1X01.ttl")
@@ -1726,18 +1603,24 @@ if (file.copy( tab1x01.cube.fn, targetFile, overwrite=TRUE)) {
 Now look at the generated cubes by loading the turtle files.
 
 ``` r
-dataCubeFile<- tab1x01.cube.fn
+dataCubeFile<- targetFile
 ```
 
 The rest of the code only depends on the value of dataCubeFile.
 
 ``` r
-checkCube <- new.rdf()  # Initialize
+checkCube <- new.rdf(ontology=FALSE)  # Initialize
+cat("Loading RDF data cube from ", normalizePath(dataCubeFile), "\n")
+```
+
+    ## Loading RDF data cube from  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/CDISC-pilot-TAB1X01.ttl
+
+``` r
 temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
 
-    ## [1] "Number of triples: 1501"
+    ## [1] "Number of triples: 1442"
 
 Get the values in the cube
 --------------------------
@@ -1765,14 +1648,14 @@ observations1<- sparql.rdf(checkCube, observations1Rq  )
 knitr::kable(head(observations1))
 ```
 
-| s            | p                  | o            |
-|:-------------|:-------------------|:-------------|
-| rdfs:domain  | rdfs:domain        | rdf:Property |
-| rdfs:domain  | rdfs:range         | rdfs:Class   |
-| rdfs:comment | rdfs:range         | rdfs:Literal |
-| rdf:first    | rdf:type           | rdf:Property |
-| rdf:first    | rdfs:domain        | rdf:List     |
-| rdf:first    | rdfs:subPropertyOf | rdf:first    |
+| s        | p                        | o                                  |
+|:---------|:-------------------------|:-----------------------------------|
+| ds:obs50 | rdf:type                 | qb:Observation                     |
+| ds:obs50 | crnd-dimension:ittfl     | code:CODING ERROR- no decode value |
+| ds:obs50 | crnd-dimension:comp24fl  | code:CODING ERROR- no decode value |
+| ds:obs50 | crnd-dimension:trt01p    | code:CODING ERROR- no decode value |
+| ds:obs50 | crnd-dimension:procedure | code:CODING ERROR- no decode value |
+| ds:obs50 | crnd-dimension:efffl     | code:CODING ERROR- no decode value |
 
 The next statement shows the first 10 triples in the cube, where the subject is a qb:Observation.
 
@@ -2168,10 +2051,10 @@ sessionInfo()
     ## [1] methods   stats     graphics  grDevices utils     datasets  base     
     ## 
     ## other attached packages:
-    ##  [1] rrdfqbcrndex_0.2.2  rrdfqbcrnd0_0.2.2   rrdfqb_0.2.2       
-    ##  [4] xlsx_0.5.7          xlsxjars_0.6.1      rrdfcdisc_0.2.2    
-    ##  [7] devtools_1.11.1     RCurl_1.95-4.8      bitops_1.0-6       
-    ## [10] rrdfancillary_0.2.2 rrdf_2.1.2          rrdflibs_1.4.0     
+    ##  [1] rrdfqbcrndex_0.2.3  rrdfqbcrnd0_0.2.3   rrdfqb_0.2.3       
+    ##  [4] xlsx_0.5.7          xlsxjars_0.6.1      rrdfcdisc_0.2.3    
+    ##  [7] devtools_1.11.0     RCurl_1.95-4.8      bitops_1.0-6       
+    ## [10] rrdfancillary_0.2.3 rrdf_2.1.2          rrdflibs_1.4.0     
     ## [13] rJava_0.9-8        
     ## 
     ## loaded via a namespace (and not attached):

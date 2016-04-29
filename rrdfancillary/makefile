@@ -19,9 +19,7 @@ cleantempemacs:
 install-rpackage-from-dir: ${RPACKAGE}
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("../${RPACKAGE}")'
 
-
 rbuildforce: ${RPACKAGE}
-
 
 # checking package
 # see http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-packages

@@ -289,7 +289,7 @@ buildCodelist <- function(
                       paste0(codeSource[i,"cdiscSynonyms"]))
 
       ## Remove the prefix colon to specify the value directly (without prefix)
-      nciDomain<-gsub(":","",codeSource[i,"nciDomain"])
+      nciDomain<-gsub("sdtmct:","",codeSource[i,"nciDomain"])
 
       ## ?  MMS may be incorrect here. How refer back to sdtm-terminology?
       add.data.triple(store,

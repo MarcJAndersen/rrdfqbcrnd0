@@ -1,12 +1,26 @@
-PACKAGENAME=rrdfqbcrndex
+PACKAGENAME:=$(shell gawk 'BEGIN { FS=": *" } ; /^Package:/{print $$2}' DESCRIPTION)
+PACKAGEVERSION:=$(shell gawk 'BEGIN { FS=": *" } ; /^Version:/{print $$2}' DESCRIPTION)
+RPACKAGE=${PACKAGENAME}_${PACKAGEVERSION}.tar.gz
+
+JAVATARGETS=
+VIGNETTETARGETS=./vignettes/cube-from-workbook.md 
+TARGETS=../${RPACKAGE} ${JAVATARGETS} ${VIGNETTETARGETS}
+
 
 all: createRD data-raw rbuildforce rbuild vignettedoc
+
+clean:
+	(cd inst/data-raw; make clean)
+	(cd vignettes; make clean)
+	rm -f ${TARGETS}
 
 cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
 
-rbuildforce: 
-	cd ..; R CMD build --force ${PACKAGENAME}
+install-rpackage-from-dir: ../${RPACKAGE}
+	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("../${RPACKAGE}")'
+
+rbuildforce: ../${RPACKAGE}
 
 # checking package
 # see http://cran.r-project.org/doc/manuals/r-release/R-exts.html#Checking-packages
@@ -18,12 +32,16 @@ rcheck:
 rbuild: 
 	cd ..; R CMD build  ${PACKAGENAME}
 
+../${RPACKAGE}:
+	cd ..; R CMD build --force ${PACKAGENAME}
+
 createRD:
 	$(R_HOME)/bin/Rscript -e "library(devtools); library(rrdfancillary); devtools::document()"
 
+java: ${JAVATARGETS}
 
-clean:
-	(cd inst/data-raw; make clean)
+${JAVATARGETS}:
+	(cd java; make all)
 
 data-raw:
 	(cd inst/data-raw; make all; make installDoc)

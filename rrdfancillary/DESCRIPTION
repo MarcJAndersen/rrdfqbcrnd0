@@ -2,7 +2,7 @@ Package: rrdfancillary
 Type: Package
 Title: Ancilary functions to the rrdf package - support for the Resource
     Description Framework
-Version: 0.2.2
+Version: 0.2.3
 Date: 2015-12-29
 Authors@R: c(person("Marc", "Andersen", role = c("aut", "cre"),
   email = "mja@statgroup.dk"))

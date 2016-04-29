@@ -93,69 +93,6 @@ The RDF data cube for the data above is created using
 outcube<- BuildCubeFromDataFrames(cubeMetadata, obsData )
 ```
 
-    ## [1] "prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nprefix skos: <http://www.w3.org/2004/02/skos/core#>\nprefix prov: <http://www.w3.org/ns/prov#>\nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nprefix dcat: <http://www.w3.org/ns/dcat#>\nprefix owl: <http://www.w3.org/2002/07/owl#>\nprefix xsd: <http://www.w3.org/2001/XMLSchema#>\nprefix pav: <http://purl.org/pav>\nprefix dc: <http://purl.org/dc/elements/1.1/>\nprefix dct: <http://purl.org/dc/terms/>\nprefix mms: <http://rdf.cdisc.org/mms#>\nprefix cts: <http://rdf.cdisc.org/ct/schema#>\nprefix cdiscs: <http://rdf.cdisc.org/std/schema#>\nprefix cdash-1-1: <http://rdf.cdisc.org/std/cdash-1-1#>\nprefix cdashct: <http://rdf.cdisc.org/cdash-terminology#>\nprefix sdtmct: <http://rdf.cdisc.org/sdtm-terminology#>\nprefix sdtm-1-2: <http://rdf.cdisc.org/std/sdtm-1-2#>\nprefix sdtm-1-3: <http://rdf.cdisc.org/std/sdtm-1-3#>\nprefix sdtms-1-3: <http://rdf.cdisc.org/sdtm-1-3/schema#>\nprefix sdtmig-3-1-2: <http://rdf.cdisc.org/std/sdtmig-3-1-2#>\nprefix sdtmig-3-1-3: <http://rdf.cdisc.org/std/sdtmig-3-1-3#>\nprefix sendct: <http://rdf.cdisc.org/send-terminology#>\nprefix sendig-3-0: <http://rdf.cdisc.org/std/sendig-3-0#>\nprefix adamct: <http://rdf.cdisc.org/adam-terminology#>\nprefix adam-2-1: <http://rdf.cdisc.org/std/adam-2-1#>\nprefix adamig-1-0: <http://rdf.cdisc.org/std/adamig-1-0#>\nprefix adamvr-1-2: <http://rdf.cdisc.org/std/adamvr-1-2#>\nprefix qb: <http://purl.org/linked-data/cube#>\nprefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/>\nprefix code: <http://www.example.org/dc/code/>\nprefix dccs: <http://www.example.org/dc/example/dccs/>\nprefix ds: <http://www.example.org/dc/example/ds/>\nprefix crnd-dimension: <http://www.example.org/dc/dimension#>\nprefix crnd-attribute: <http://www.example.org/dc/attribute#>\nprefix crnd-measure: <http://www.example.org/dc/measure#>\n \nselect distinct ?DataStructureDefinition ?dimension ?cprefLabel ?cl ?clprefLabel ?vn ?vct ?vnop ?vnval\nwhere {\n   ?DataStructureDefinition a qb:DataStructureDefinition ;\n        qb:component ?component .\n   ?component a qb:ComponentSpecification .\n   ?component qb:dimension ?dimension .\n\n   ?dimension qb:codeList ?c .\n   OPTIONAL { ?c skos:prefLabel ?cprefLabel .   }\n   OPTIONAL { ?c rrdfqbcrnd0:DataSetRefD2RQ ?vnop . }\n   OPTIONAL { ?c rrdfqbcrnd0:R-columnname ?vn . }\n   OPTIONAL { ?c rrdfqbcrnd0:codeType     ?vct .          }\n\n   ?c skos:hasTopConcept ?cl .\n   OPTIONAL { ?cl skos:prefLabel ?clprefLabel . }\n   OPTIONAL { ?cl rrdfqbcrnd0:R-selectionoperator ?vnop . }\n   OPTIONAL { ?cl rrdfqbcrnd0:R-selectionvalue ?vnval .   }\n values ( ?DataStructureDefinition ) {\n(ds:dsd-EXAMPLE)\n} \n}\norder by ?dimension ?cl ?dimensionrefLabel\n"
-    ##    DataStructureDefinition                dimension
-    ## 1           ds:dsd-EXAMPLE  crnd-dimension:category
-    ## 2           ds:dsd-EXAMPLE  crnd-dimension:category
-    ## 3           ds:dsd-EXAMPLE  crnd-dimension:category
-    ## 4           ds:dsd-EXAMPLE    crnd-dimension:factor
-    ## 5           ds:dsd-EXAMPLE    crnd-dimension:factor
-    ## 6           ds:dsd-EXAMPLE    crnd-dimension:factor
-    ## 7           ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 8           ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 9           ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 10          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 11          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 12          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 13          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 14          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 15          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 16          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 17          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 18          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ## 19          ds:dsd-EXAMPLE crnd-dimension:procedure
-    ##                    cprefLabel                           cl   clprefLabel
-    ## 1   Codelist scheme: category       code:category-AA-group      AA-group
-    ## 2   Codelist scheme: category          code:category-_ALL_         _ALL_
-    ## 3   Codelist scheme: category      code:category-_NONMISS_     _NONMISS_
-    ## 4     Codelist scheme: factor             code:factor-VARA          VARA
-    ## 5     Codelist scheme: factor            code:factor-_ALL_         _ALL_
-    ## 6     Codelist scheme: factor        code:factor-_NONMISS_     _NONMISS_
-    ## 7  Codelist scheme: procedure         code:procedure-count         count
-    ## 8  Codelist scheme: procedure code:procedure-countdistinct countdistinct
-    ## 9  Codelist scheme: procedure           code:procedure-max           max
-    ## 10 Codelist scheme: procedure          code:procedure-mean          mean
-    ## 11 Codelist scheme: procedure        code:procedure-median        median
-    ## 12 Codelist scheme: procedure           code:procedure-min           min
-    ## 13 Codelist scheme: procedure             code:procedure-n             n
-    ## 14 Codelist scheme: procedure       code:procedure-percent       percent
-    ## 15 Codelist scheme: procedure            code:procedure-q1            q1
-    ## 16 Codelist scheme: procedure            code:procedure-q3            q3
-    ## 17 Codelist scheme: procedure           code:procedure-std           std
-    ## 18 Codelist scheme: procedure        code:procedure-stddev        stddev
-    ## 19 Codelist scheme: procedure         code:procedure-stdev         stdev
-    ##           vn  vct                          vnop         vnval
-    ## 1   category DATA rrdfqbcrnd0:NOTGIVEN_CATEGORY      AA-group
-    ## 2   category DATA rrdfqbcrnd0:NOTGIVEN_CATEGORY          <NA>
-    ## 3   category DATA rrdfqbcrnd0:NOTGIVEN_CATEGORY          <NA>
-    ## 4     factor DATA                            ==          VARA
-    ## 5     factor DATA                          <NA>          <NA>
-    ## 6     factor DATA                          <NA>          <NA>
-    ## 7  procedure DATA                            ==         count
-    ## 8  procedure DATA                            == countdistinct
-    ## 9  procedure DATA                            ==           max
-    ## 10 procedure DATA                            ==          mean
-    ## 11 procedure DATA                            ==        median
-    ## 12 procedure DATA                            ==           min
-    ## 13 procedure DATA                            ==             n
-    ## 14 procedure DATA                            ==       percent
-    ## 15 procedure DATA                            ==            q1
-    ## 16 procedure DATA                            ==            q3
-    ## 17 procedure DATA                            ==           std
-    ## 18 procedure DATA                            ==        stddev
-    ## 19 procedure DATA                            ==         stdev
-    ## crnd-dimension:category crnd-dimension:category crnd-dimension:category crnd-dimension:factor crnd-dimension:factor crnd-dimension:factor crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure crnd-dimension:procedure
-
     ## Warning in ph.recode(obsData[i, qbdim], recode.list[[qbdim]]): AA-group --
     ## CODING ERROR- no decode value
 
@@ -281,7 +218,7 @@ The RDF data cube is serialized in turtle format and stored as a text file in
 cat(normalizePath(outcube),"\n")
 ```
 
-    ## /tmp/Rtmpld81Kt/DC-EXAMPLE-R-V-0-0-0.ttl
+    ## /tmp/Rtmpe4mfKs/DC-EXAMPLE-R-V-0-0-0.ttl
 
 Query the cube using SPARQL
 ===========================

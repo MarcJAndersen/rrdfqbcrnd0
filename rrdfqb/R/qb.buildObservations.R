@@ -53,9 +53,9 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         
         ## identify codelists
         codelists.rq<-   GetCodeListSparqlQuery(forsparqlprefix, dsdName )
-        print(codelists.rq)
+##        print(codelists.rq)
         cube.codelists<- as.data.frame(sparql.rdf(store, codelists.rq), stringsAsFactors=FALSE)
-        print(cube.codelists)
+##        print(cube.codelists)
         ## TODO instead of gsub make a more straightforward way
         ## TOTO this involves a new version of the ph.recode function
         ## Next three lines classical error - starting from
@@ -64,7 +64,7 @@ qb.buildObservations<- function( store, prefixlist, obsData, skeletonSource, dsd
         ## cube.codelists$vn<- gsub("crnd-dimension:","",cube.codelists$p)
         ## cube.codelists$vn<- gsub("crnd-attribute:","",cube.codelists$p)
         ## cube.codelists$vn<- gsub("crnd-measure:","",cube.codelists$p)
-        cat( cube.codelists$dimension, "\n")
+##        cat( cube.codelists$dimension, "\n")
         cube.codelists$vn1<- gsub("crnd-dimension:","",cube.codelists$dimension)
         cube.codelists$vn2<- gsub("crnd-attribute:","",cube.codelists$vn1)
         cube.codelists$dimension<- gsub("crnd-measure:","",cube.codelists$vn2)
