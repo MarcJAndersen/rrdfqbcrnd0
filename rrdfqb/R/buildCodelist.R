@@ -27,8 +27,9 @@ buildCodelist <- function(
   ##  codelist.source
   )
 {
+cat("!!!!!!!!!\n")    
   dimName <- tolower(dimName)        ## dimName in all lower case is default
-    capDimName <- capitalize(dimName)  ## capDim used in Class name
+  capDimName <- capitalize(dimName)  ## capDim used in Class name
   ################
   ## Obtain codes #
   #############################################################################
@@ -65,14 +66,20 @@ buildCodelist <- function(
     message("ERROR: unknown codeType ", codeType, " for ", dimName )
   }
   
-  ##  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
-  ##    print(codeSource)
-  ##  print(names(codeSource))
+    ##  codeSource[,"codeNoBlank"]<- toupper(gsub(" ","_",codeSource[,"code"]))
+  
+  cat("@@@@@@@@@@@@@@@\n")
+  print(codeSource)
+  print(names(codeSource))
   for (i in 1:nrow(codeSource)) {
-    ##    message( i, ": ", codeSource[i,"code"] )
+     message( i, ": ", codeSource[i,"code"] )
+     cat( i, ": ", codeSource[i,"code"], "\n" )
     codeSource[i,"codeNoBlank"]<- encodetouri( as.character(codeSource[i,"code"]))
   }
-
+  print(codeSource)
+  print(nrow(codeSource))
+  cat("@@@@@@@@@@@@@@@\n")
+    
 #############################################################################
   ## SKELETON
   ## --------- Class ---------
@@ -180,7 +187,14 @@ buildCodelist <- function(
   
   ## --------- hasTopConcept ---------
   ## For each unique code
-  for (i in 1:nrow(codeSource)){
+    for (i in 1:nrow(codeSource)){
+        cat(
+               paste0(prefixlist$prefixCODE,dimName),
+               paste0(prefixlist$prefixSKOS, "hasTopConcept"),
+            paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"]),
+            "----------\n"
+        )
+            
     add.triple(store,
                paste0(prefixlist$prefixCODE,dimName),
                paste0(prefixlist$prefixSKOS, "hasTopConcept"),

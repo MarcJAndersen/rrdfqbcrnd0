@@ -7,8 +7,8 @@ ph.recode<- function( s, l ) {
   if (s %in% names(l)) {
     return(l[[as.character(s)]])  # as.character !!!
  } else {
-    warning( paste0( s, " -- ", 'CODING ERROR- no decode value'))
-    'CODING ERROR- no decode value'
+    warning( paste0( 'Value "', s, '" -- ', 'CODING ERROR- no decode value'))
+    return('CODING_ERROR-_no_decode_value')
   }
 }
 
