@@ -1,4 +1,4 @@
-##' SPARQL query for observations from RDF data cube in workbook format
+##' SPARQL query for dimensions and attributes from RDF data cube in workbook format
 ##' @param forsparqlprefix PREFIX part of SPARQL query
 ##' @param domainName domainName for the RRDF cube
 ##' @param dimensions dimensions
