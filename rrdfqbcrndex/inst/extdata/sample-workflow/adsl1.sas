@@ -61,7 +61,7 @@ data forexport;
 
     keep measure;
 
-    array adim(*) ittfl saffl efffl comp24fl disconfl trt01pn;
+    array adim(*) ittfl saffl efffl comp24fl disconfl trt01p;
 
     do i=1 to dim(adim);
         select;
