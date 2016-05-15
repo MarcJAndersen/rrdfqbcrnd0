@@ -2,7 +2,7 @@
 % Please edit documentation in R/GetObservationsWithDescriptionSparqlQuery.R
 \name{GetObservationsWithDescriptionSparqlQuery}
 \alias{GetObservationsWithDescriptionSparqlQuery}
-\title{SPARQL query for observations from RDF data cube in workbook format}
+\title{SPARQL query for dimensions and attributes from RDF data cube in workbook format}
 \usage{
 GetObservationsWithDescriptionSparqlQuery(forsparqlprefix, domainName,
   dimensions, attributes)
@@ -20,6 +20,6 @@ GetObservationsWithDescriptionSparqlQuery(forsparqlprefix, domainName,
 SPARQL query
 }
 \description{
-SPARQL query for observations from RDF data cube in workbook format
+SPARQL query for dimensions and attributes from RDF data cube in workbook format
 }
 

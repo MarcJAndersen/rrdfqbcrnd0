@@ -36,7 +36,7 @@ The conversion to character can be avoided by using
 (../../rrdfqbcrndex/inst/data-raw/create-dm-table-as-csv.Rmd).
 
 ```{r}
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrndex")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrndex")
 store <- new.rdf()  # Initialize
 cat("Reading turtle definition from ", dataCubeFile, "\n")
 temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)

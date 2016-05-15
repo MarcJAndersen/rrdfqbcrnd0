@@ -23,7 +23,8 @@ metadata,providedBy,,,PhUSE Results Metadata Working Group,
 metadata,comment,,,Example demographics table from demo.sas program,
 metadata,title,,,Demographics Analysis Results,
 metadata,label,,,Demographics results data set.,
-metadata,wasDerivedFrom,,,demo.AR.csv,Data source (obsFileName). Set this programmtically based on name of input file!
+metadata,wasDerivedFrom,,,demo.AR.csv,Data source (obsFileName). Set this programmtically based on name of input file.
 metadata,domainName,,,DEMO,"The domain name, also part of the spreadsheet tab name"
-metadata,obsFileNameDirec,,,!example,The directory containd the wasDerivedFrom file
-metadata,dataCubeOutDirec,,,!temporary,
+metadata,obsFileNameDirectory,,,!example,The directory containing the wasDerivedFrom file
+metadata,dataCubeOutDirectory,,,!temporary,
+metadata,extension.rrdfqbcrnd0,,,TRUE

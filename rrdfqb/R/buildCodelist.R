@@ -1,8 +1,6 @@
 ##' Add RDF data cube codelist to RDF store
 ##'
 ##' This function could be split into two function corresponding to the usage.
-##' @param store The name for the rrdf store
-##' @param prefixlist R list of the prefixes
 ##' @param obsData Data Frame with the data for which the code list is to be generated
 ##' @param codeType Character "DATA" or "SDTM".
 ##' "DATA" to derive code list from the data.
@@ -11,10 +9,12 @@
 ##' @param dimName the name of the dimension - for codeType="DATA" the name of the variable in the data frame ObsData
 ##' @param underlDataSetName underlying data set name. Used for finding name for D2RQ propertybridge. If NULL then not used. 
 ##' @param remote.endpoint Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.
+##' @param extension.rrdfqbcrnd0 If TRUE then rrdfqbcrnd0 specific values will be added to the generated cube
 ##' @return Alway TRUE - to be corrected
 ##' @author Tim Williams, Marc Andersen
 ##' @export
 ## TODO(mja): Move this to rrdqbcrnd0 as it uses rrdfcdisc
+## TODO(mja): split function in two - one CDISC related and one for codelists from values
 buildCodelist <- function(
   store,
   prefixlist,
@@ -23,7 +23,8 @@ buildCodelist <- function(
   nciDomainValue,
   dimName,
   underlDataSetName=NULL,
-  remote.endpoint=NULL
+  remote.endpoint=NULL,
+  extension.rrdfqbcrnd0=FALSE
   ##  codelist.source
   )
 {
@@ -132,7 +133,9 @@ cat("!!!!!!!!!\n")
                   paste0(prefixlist$prefixSKOS,"notation"),
                   paste0("CL_",toupper(dimName)))
 
+  
   ## Add rrdfqbcrnd0 information
+        if (extension.rrdfqbcrnd0) {
   add.data.triple(store,
                   paste0(prefixlist$prefixCODE,dimName),
                   paste0(prefixlist$prefixRRDFQBCRND0, "codeType"),
@@ -146,12 +149,13 @@ cat("!!!!!!!!!\n")
                   paste0(dimName),
                   type="string"
                   )
-
+        }
     ## Should only be added if data available in D2RQ format
     ## ToDo(mja): the stem for the URI for the property is hard coded - this should be changed to use a prefix
     ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
     if (!is.null(underlDataSetName) & dimName!="procedure" & dimName!="factor") {
         datasetname.subject<- paste0(prefixlist$prefixRRDFQBCRND0,toupper(underlDataSetName),"_", toupper(dimName))
+        if (extension.rrdfqbcrnd0) {
         add.triple(store,
                   paste0(prefixlist$prefixCODE,dimName),
                   paste0(prefixlist$prefixRRDFQBCRND0, "DataSetRefD2RQ"),
@@ -168,6 +172,7 @@ cat("!!!!!!!!!\n")
                   toupper(underlDataSetName),
                   type="string"
                   )
+        }
     }
 
   if (codeType=="SDTM"){
@@ -224,30 +229,32 @@ cat("!!!!!!!!!\n")
       if (! hasALL     ) { hasALL<- codeSource[i,"code"]=="_ALL_" }
       if (! hasNONMISS ) { hasNONMISS<- codeSource[i,"code"]=="_NONMISS_" }
       
-    if (codeSource[i,"code"]!="_ALL_" & codeSource[i,"code"]!="_NONMISS_") {
-        add.data.triple(store,
-                        codeSubj,
-                        paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionoperator"),
-                        "==",
-                        type="string"
-                        )
-        
-        if (mode(codeSource[i,"code"])=="character") {
-            add.data.triple(store,
-                            codeSubj,
-                            paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
-                            paste0('\\"',codeSource[i,"code"], '\\"'),
-                            type="string"
-                            )
-        }  else {
-            add.data.triple(store,
-                            codeSubj,
-                            paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
-                            paste0(codeSource[i,"code"]),
-                            type="string"
-                            )
-        }
-    }
+      if (codeSource[i,"code"]!="_ALL_" & codeSource[i,"code"]!="_NONMISS_") {
+          if (extension.rrdfqbcrnd0) {
+              add.data.triple(store,
+                              codeSubj,
+                              paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionoperator"),
+                              "==",
+                              type="string"
+                              )
+              
+              if (mode(codeSource[i,"code"])=="character") {
+                  add.data.triple(store,
+                                  codeSubj,
+                                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
+                                  paste0('\\"',codeSource[i,"code"], '\\"'),
+                                  type="string"
+                                  )
+              }  else {
+                  add.data.triple(store,
+                                  codeSubj,
+                                  paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionvalue"),
+                                  paste0(codeSource[i,"code"]),
+                                  type="string"
+                                  )
+              }
+          }
+      }
       
       
     ## Should only be added if data available in D2RQ format
@@ -255,22 +262,24 @@ cat("!!!!!!!!!\n")
     ## ToDo(mja): The derivation of property name should be more integrated with D2RQ
     if (!is.null(underlDataSetName) & dimName=="factor" & ! (codeSource[i,"code"] %in% c("quantity","proportion") ) ) {
         datasetname.subject<- paste0(prefixlist$prefixRRDFQBCRND0,toupper(underlDataSetName),"_", toupper(codeSource[i,"code"]))
-        add.triple(store,
+        if (extension.rrdfqbcrnd0) {
+            add.triple(store,
                   codeSubj,
                   paste0(prefixlist$prefixRRDFQBCRND0, "DataSetRefD2RQ"),
                   datasetname.subject
                   )
-        add.triple(store,
+            add.triple(store,
                   datasetname.subject,
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-PropertyBridge"),
                   paste0("http://www.example.org/datasets/vocab/", toupper(underlDataSetName), "_", toupper(codeSource[i,"code"]) )
                   )
-        add.data.triple(store,
+            add.data.triple(store,
                   datasetname.subject,
                   paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
                   toupper(underlDataSetName),
                   type="string"
                   )
+        }
     }
 
       ## Document when the codes come from the source data without reconciliation
@@ -331,11 +340,13 @@ cat("!!!!!!!!!\n")
       codeSubjInList<- paste0("code:",dimName,"-",codeSource[i,"codeNoBlank"])
       codeSubj<- paste0(prefixlist$prefixCODE,dimName,"-",codeSource[i,"codeNoBlank"])
       if (codeSubjInList %in% names(proc)) {
-        add.data.triple(store,
+          if (extension.rrdfqbcrnd0) {
+          add.data.triple(store,
                         codeSubj,
                         paste0(prefixlist$prefixRRDFQBCRND0, "RdescStatDefFun"),
                         paste0(deparse(proc[[codeSubjInList]]$fun), collapse=" ")
                         )
+          }
       add.data.triple(store,
                       codeSubj,
                       paste0(prefixlist$prefixRDFS, "comment"),
@@ -380,14 +391,15 @@ cat("!!!!!!!!!\n")
                       paste0(prefixlist$prefixRDFS, "comment"),
                       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values.",
                       lang="en")
+      if (extension.rrdfqbcrnd0) {
       add.data.triple(store,
                   codeSubj,
                   paste0(prefixlist$prefixRRDFQBCRND0, "R-selectionfunction"),
                   "is.na",
                   type="string"
                   )
-
-      
+      }
+          
 
       ## _ALL_
       ##   Cross reference:  _ALL_ creation for TopConcept.

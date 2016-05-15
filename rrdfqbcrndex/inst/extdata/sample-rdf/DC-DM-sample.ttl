@@ -23,17 +23,14 @@ dccs:saffl  a         qb:ComponentSpecification ;
         rdfs:label    "Safety Population Flag" ;
         qb:dimension  crnd-dimension:saffl .
 
-code:sex-M  a                         code:Sex , skos:Concept ;
-        cts:cdiscDefinition           "A person who belongs to the sex that normally produces sperm. The term is used to indicate biological sex distinctions, cultural gender role distinctions, or both. (NCI)" ;
-        cts:cdiscSubmissionValue      "M" ;
-        cts:cdiscSynonyms             "Male" ;
-        mms:nciDomain                 "C66731.C20197" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "M"^^xsd:string ;
-        skos:inScheme                 code:sex ;
-        skos:prefLabel                "M"^^xsd:string ;
-        skos:topConceptOf             code:sex .
+code:sex-M  a                     code:Sex , skos:Concept ;
+        cts:cdiscDefinition       "A person who belongs to the sex that normally produces sperm. The term is used to indicate biological sex distinctions, cultural gender role distinctions, or both. (NCI)" ;
+        cts:cdiscSubmissionValue  "M" ;
+        cts:cdiscSynonyms         "Male" ;
+        mms:nciDomain             "C66731.C20197" ;
+        skos:inScheme             code:sex ;
+        skos:prefLabel            "M"^^xsd:string ;
+        skos:topConceptOf         code:sex .
 
 ds:obs11  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -49,15 +46,12 @@ ds:obs11  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "61.6279069767442"^^xsd:double .
 
-code:trt01a  a                      skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: trt01a"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_TRT01A ;
-        rrdfqbcrnd0:R-columnname    "trt01a"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
-        skos:notation               "CL_TRT01A" ;
-        skos:note                   "Specifies the trt01a for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: trt01a"@en .
+code:trt01a  a              skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: trt01a"@en ;
+        skos:hasTopConcept  code:trt01a-_ALL_ , code:trt01a-Xanomeline_Low_Dose , code:trt01a-Xanomeline_High_Dose , code:trt01a-_NONMISS_ , code:trt01a-Placebo ;
+        skos:notation       "CL_TRT01A" ;
+        skos:note           "Specifies the trt01a for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: trt01a"@en .
 
 ds:obs52  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -75,8 +69,6 @@ ds:obs52  a                         qb:Observation ;
 
 code:saffl-_NONMISS_  a    code:Saffl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:saffl ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:saffl .
@@ -141,37 +133,23 @@ ds:obs09  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "52"^^xsd:double .
 
-code:race-WHITE  a                    skos:Concept , code:Race ;
-        cts:cdiscDefinition           "Denotes a person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White. (FDA)" ;
-        cts:cdiscSubmissionValue      "WHITE" ;
-        cts:cdiscSynonyms             "NA" ;
-        mms:nciDomain                 "C74457.C41261" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "WHITE"^^xsd:string ;
-        skos:inScheme                 code:race ;
-        skos:prefLabel                "WHITE"^^xsd:string ;
-        skos:topConceptOf             code:race .
+code:race-WHITE  a                code:Race , skos:Concept ;
+        cts:cdiscDefinition       "Denotes a person with European, Middle Eastern, or North African ancestral origin who identifies, or is identified, as White. (FDA)" ;
+        cts:cdiscSubmissionValue  "WHITE" ;
+        cts:cdiscSynonyms         "NA" ;
+        mms:nciDomain             "C74457.C41261" ;
+        skos:inScheme             code:race ;
+        skos:prefLabel            "WHITE"^^xsd:string ;
+        skos:topConceptOf         code:race .
 
-rrdfqbcrnd0:ADSL_WEIGHTBL
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_WEIGHTBL> .
-
-code:factor-AGE  a                    code:Factor , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ    rrdfqbcrnd0:ADSL_AGE ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "AGE"^^xsd:string ;
-        skos:inScheme                 code:factor ;
-        skos:prefLabel                "AGE"^^xsd:string ;
-        skos:topConceptOf             code:factor .
+code:factor-AGE  a         code:Factor , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "AGE"^^xsd:string ;
+        skos:topConceptOf  code:factor .
 
 code:sex-_NONMISS_  a      code:Sex , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:sex ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:sex .
@@ -266,15 +244,11 @@ ds:obs29  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "76"^^xsd:double .
 
-code:procedure-mean  a                code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics mean"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "mean"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     mean(x, na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "mean"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+code:procedure-mean  a     code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics mean"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "mean"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 code:Sex  a              rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the sex for each observation"@en ;
@@ -325,14 +299,11 @@ ds:obs23  a                         qb:Observation ;
         crnd-measure:measure        "9.30232558139535"^^xsd:double .
 
 code:factor-proportion
-        a                             code:Factor , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "proportion"^^xsd:string ;
-        skos:inScheme                 code:factor ;
-        skos:prefLabel                "proportion"^^xsd:string ;
-        skos:topConceptOf             code:factor .
+        a                  code:Factor , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "proportion"^^xsd:string ;
+        skos:topConceptOf  code:factor .
 
 ds:obs64  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -348,6 +319,12 @@ ds:obs64  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "0"^^xsd:double .
 
+crnd-dimension:procedure
+        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
+        rdfs:label   "Statistical Procedure" ;
+        rdfs:range   code:Procedure ;
+        qb:codeList  code:procedure .
+
 ds:obs36  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "36"^^xsd:string ;
@@ -362,28 +339,14 @@ ds:obs36  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "44"^^xsd:double .
 
-crnd-dimension:procedure
-        a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
-        rdfs:label   "Statistical Procedure" ;
-        rdfs:range   code:Procedure ;
-        qb:codeList  code:procedure .
-
-rrdfqbcrnd0:ADSL_SEX  rrdfqbcrnd0:D2RQ-DataSetName
-                "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_SEX> .
-
-code:sex-F  a                         code:Sex , skos:Concept ;
-        cts:cdiscDefinition           "A person who belongs to the sex that normally produces ova. The term is used to indicate biological sex distinctions, or cultural gender role distinctions, or both. (NCI)" ;
-        cts:cdiscSubmissionValue      "F" ;
-        cts:cdiscSynonyms             "Female" ;
-        mms:nciDomain                 "C66731.C16576" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "F"^^xsd:string ;
-        skos:inScheme                 code:sex ;
-        skos:prefLabel                "F"^^xsd:string ;
-        skos:topConceptOf             code:sex .
+code:sex-F  a                     code:Sex , skos:Concept ;
+        cts:cdiscDefinition       "A person who belongs to the sex that normally produces ova. The term is used to indicate biological sex distinctions, or cultural gender role distinctions, or both. (NCI)" ;
+        cts:cdiscSubmissionValue  "F" ;
+        cts:cdiscSynonyms         "Female" ;
+        mms:nciDomain             "C66731.C16576" ;
+        skos:inScheme             code:sex ;
+        skos:prefLabel            "F"^^xsd:string ;
+        skos:topConceptOf         code:sex .
 
 ds:obs08  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -418,16 +381,13 @@ crnd-dimension:sex  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty ;
         rdfs:range   code:Sex ;
         qb:codeList  code:sex .
 
-code:sex  a                         skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: sex"@en ;
-        mms:inValueDomain           "C66731"^^xsd:string ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_SEX ;
-        rrdfqbcrnd0:R-columnname    "sex"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "SDTM"^^xsd:string ;
-        skos:hasTopConcept          code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
-        skos:notation               "CL_SEX" ;
-        skos:note                   "Specifies the sex for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: sex"@en .
+code:sex  a                 skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: sex"@en ;
+        mms:inValueDomain   "C66731"^^xsd:string ;
+        skos:hasTopConcept  code:sex-U , code:sex-_NONMISS_ , code:sex-M , code:sex-UN , code:sex-_ALL_ , code:sex-F ;
+        skos:notation       "CL_SEX" ;
+        skos:note           "Specifies the sex for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: sex"@en .
 
 ds:obs30  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -485,11 +445,6 @@ ds:obs15  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "33"^^xsd:double .
 
-rrdfqbcrnd0:ADSL_AGE  rrdfqbcrnd0:D2RQ-DataSetName
-                "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_AGE> .
-
 code:saffl-_ALL_  a        code:Saffl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
         skos:inScheme      code:saffl ;
@@ -524,21 +479,19 @@ ds:obs28  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_High_Dose ;
         crnd-measure:measure        "74.3809523809524"^^xsd:double .
 
-rrdfqbcrnd0:ADSL_SAFFL
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_SAFFL> .
+code:race  a                skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: race"@en ;
+        mms:inValueDomain   "C74457"^^xsd:string ;
+        skos:hasTopConcept  code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
+        skos:notation       "CL_RACE" ;
+        skos:note           "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: race"@en .
 
-code:race  a                        skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: race"@en ;
-        mms:inValueDomain           "C74457"^^xsd:string ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_RACE ;
-        rrdfqbcrnd0:R-columnname    "race"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "SDTM"^^xsd:string ;
-        skos:hasTopConcept          code:race-_NONMISS_ , code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER , code:race-ASIAN , code:race-_ALL_ , code:race-WHITE , code:race-BLACK_OR_AFRICAN_AMERICAN , code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE ;
-        skos:notation               "CL_RACE" ;
-        skos:note                   "Specifies the race for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: race"@en .
+code:race-_NONMISS_  a     code:Race , skos:Concept ;
+        rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
+        skos:inScheme      code:race ;
+        skos:prefLabel     "_NONMISS_"^^xsd:string ;
+        skos:topConceptOf  code:race .
 
 ds:obs50  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -553,19 +506,6 @@ ds:obs50  a                         qb:Observation ;
         crnd-dimension:sex          code:sex-_ALL_ ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "77.5"^^xsd:double .
-
-code:race-_NONMISS_  a     code:Race , skos:Concept ;
-        rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
-        skos:inScheme      code:race ;
-        skos:prefLabel     "_NONMISS_"^^xsd:string ;
-        skos:topConceptOf  code:race .
-
-rrdfqbcrnd0:ADSL_RACE
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_RACE> .
 
 ds:dsd-DM  a          qb:DataStructureDefinition ;
         qb:component  dccs:sex , dccs:trt01a , dccs:saffl , dccs:factor , dccs:race , dccs:denominator , dccs:measure , dccs:procedure , dccs:unit .
@@ -632,15 +572,11 @@ ds:obs07  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "75.2093023255814"^^xsd:double .
 
-code:procedure-count  a               code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics count"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "count"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     length(x) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "count"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+code:procedure-count  a    code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics count"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "count"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 crnd-measure:measure  a  rdf:Property , qb:MeasureProperty ;
         rdfs:label  "Value of the statistical measure" .
@@ -660,15 +596,11 @@ ds:obs48  a                         qb:Observation ;
         crnd-measure:measure        "88"^^xsd:double .
 
 code:procedure-median
-        a                             code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics median"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "median"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     median(x, na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "median"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+        a                  code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics median"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "median"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 ds:obs01  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -690,15 +622,11 @@ code:Trt01a  a           rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:trt01a ;
         rdfs:subClassOf  skos:Concept .
 
-code:procedure-stdev  a               code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics stdev"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "stdev"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     sd(x, na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "stdev"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+code:procedure-stdev  a    code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics stdev"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "stdev"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 ds:obs42  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -745,8 +673,6 @@ ds:obs55  a                         qb:Observation ;
 code:trt01a-_NONMISS_
         a                  code:Trt01a , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:trt01a ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:trt01a .
@@ -780,40 +706,31 @@ ds:obs68  a                         qb:Observation ;
         crnd-measure:measure        "78"^^xsd:double .
 
 code:trt01a-Xanomeline_High_Dose
-        a                             code:Trt01a , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Xanomeline High Dose"^^xsd:string ;
-        skos:inScheme                 code:trt01a ;
-        skos:prefLabel                "Xanomeline High Dose"^^xsd:string ;
-        skos:topConceptOf             code:trt01a .
+        a                  code:Trt01a , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:trt01a ;
+        skos:prefLabel     "Xanomeline High Dose"^^xsd:string ;
+        skos:topConceptOf  code:trt01a .
 
 code:race-NATIVE_HAWAIIAN_OR_OTHER_PACIFIC_ISLANDER
-        a                             code:Race , skos:Concept ;
-        cts:cdiscDefinition           "Denotes a person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. The term covers particularly people who identify themselves as part-Hawaiian, Native Hawaiian, Guamanian or Chamorro, Carolinian, Samoan, Chuu. (FDA)" ;
-        cts:cdiscSubmissionValue      "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ;
-        cts:cdiscSynonyms             "NA" ;
-        mms:nciDomain                 "C74457.C41219" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"^^xsd:string ;
-        skos:inScheme                 code:race ;
-        skos:prefLabel                "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"^^xsd:string ;
-        skos:topConceptOf             code:race .
+        a                         code:Race , skos:Concept ;
+        cts:cdiscDefinition       "Denotes a person having origins in any of the original peoples of Hawaii, Guam, Samoa, or other Pacific Islands. The term covers particularly people who identify themselves as part-Hawaiian, Native Hawaiian, Guamanian or Chamorro, Carolinian, Samoan, Chuu. (FDA)" ;
+        cts:cdiscSubmissionValue  "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER" ;
+        cts:cdiscSynonyms         "NA" ;
+        mms:nciDomain             "C74457.C41219" ;
+        skos:inScheme             code:race ;
+        skos:prefLabel            "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER"^^xsd:string ;
+        skos:topConceptOf         code:race .
 
 code:race-BLACK_OR_AFRICAN_AMERICAN
-        a                             code:Race , skos:Concept ;
-        cts:cdiscDefinition           "A person having origins in any of the black racial groups of Africa. Terms such as \"Haitian\" or \"Negro\" can be used in addition to \"Black or African American.\" (FDA)" ;
-        cts:cdiscSubmissionValue      "BLACK OR AFRICAN AMERICAN" ;
-        cts:cdiscSynonyms             "NA" ;
-        mms:nciDomain                 "C74457.C16352" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "BLACK OR AFRICAN AMERICAN"^^xsd:string ;
-        skos:inScheme                 code:race ;
-        skos:prefLabel                "BLACK OR AFRICAN AMERICAN"^^xsd:string ;
-        skos:topConceptOf             code:race .
+        a                         code:Race , skos:Concept ;
+        cts:cdiscDefinition       "A person having origins in any of the black racial groups of Africa. Terms such as \"Haitian\" or \"Negro\" can be used in addition to \"Black or African American.\" (FDA)" ;
+        cts:cdiscSubmissionValue  "BLACK OR AFRICAN AMERICAN" ;
+        cts:cdiscSynonyms         "NA" ;
+        mms:nciDomain             "C74457.C16352" ;
+        skos:inScheme             code:race ;
+        skos:prefLabel            "BLACK OR AFRICAN AMERICAN"^^xsd:string ;
+        skos:topConceptOf         code:race .
 
 crnd-attribute:unit  a  rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Unit of measure" .
@@ -837,15 +754,11 @@ dccs:procedure  a     qb:ComponentSpecification ;
         qb:dimension  crnd-dimension:procedure .
 
 code:procedure-percent
-        a                             code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics percent"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "percent"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     -1 }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "percent"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+        a                  code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics percent"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "percent"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 ds:obs62  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -889,45 +802,33 @@ ds:obs06  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "89"^^xsd:double .
 
-code:saffl-Y  a                       code:Saffl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Y"^^xsd:string ;
-        skos:inScheme                 code:saffl ;
-        skos:prefLabel                "Y"^^xsd:string ;
-        skos:topConceptOf             code:saffl .
+code:saffl-Y  a            code:Saffl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:saffl ;
+        skos:prefLabel     "Y"^^xsd:string ;
+        skos:topConceptOf  code:saffl .
 
-code:sex-U  a                         skos:Concept , code:Sex ;
-        cts:cdiscDefinition           "Not known, not observed, not recorded, or refused. (NCI)" ;
-        cts:cdiscSubmissionValue      "U" ;
-        cts:cdiscSynonyms             "U; Unknown" ;
-        mms:nciDomain                 "C66731.C17998" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "U"^^xsd:string ;
-        skos:inScheme                 code:sex ;
-        skos:prefLabel                "U"^^xsd:string ;
-        skos:topConceptOf             code:sex .
+code:sex-U  a                     code:Sex , skos:Concept ;
+        cts:cdiscDefinition       "Not known, not observed, not recorded, or refused. (NCI)" ;
+        cts:cdiscSubmissionValue  "U" ;
+        cts:cdiscSynonyms         "U; Unknown" ;
+        mms:nciDomain             "C66731.C17998" ;
+        skos:inScheme             code:sex ;
+        skos:prefLabel            "U"^^xsd:string ;
+        skos:topConceptOf         code:sex .
 
 code:trt01a-Xanomeline_Low_Dose
-        a                             code:Trt01a , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Xanomeline Low Dose"^^xsd:string ;
-        skos:inScheme                 code:trt01a ;
-        skos:prefLabel                "Xanomeline Low Dose"^^xsd:string ;
-        skos:topConceptOf             code:trt01a .
+        a                  code:Trt01a , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:trt01a ;
+        skos:prefLabel     "Xanomeline Low Dose"^^xsd:string ;
+        skos:topConceptOf  code:trt01a .
 
-code:trt01a-Placebo  a                code:Trt01a , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Placebo"^^xsd:string ;
-        skos:inScheme                 code:trt01a ;
-        skos:prefLabel                "Placebo"^^xsd:string ;
-        skos:topConceptOf             code:trt01a .
+code:trt01a-Placebo  a     code:Trt01a , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:trt01a ;
+        skos:prefLabel     "Placebo"^^xsd:string ;
+        skos:topConceptOf  code:trt01a .
 
 ds:obs47  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -970,8 +871,6 @@ crnd-dimension:trt01a
 code:factor-_NONMISS_
         a                  code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:factor ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:factor .
@@ -1003,17 +902,14 @@ code:race-_ALL_  a         code:Race , skos:Concept ;
         skos:topConceptOf  code:race .
 
 code:race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
-        a                             code:Race , skos:Concept ;
-        cts:cdiscDefinition           "A person having origins in any of the original peoples of North and South America (including Central America), and who maintains tribal affiliation or community attachment. (FDA)" ;
-        cts:cdiscSubmissionValue      "AMERICAN INDIAN OR ALASKA NATIVE" ;
-        cts:cdiscSynonyms             "NA" ;
-        mms:nciDomain                 "C74457.C41259" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "AMERICAN INDIAN OR ALASKA NATIVE"^^xsd:string ;
-        skos:inScheme                 code:race ;
-        skos:prefLabel                "AMERICAN INDIAN OR ALASKA NATIVE"^^xsd:string ;
-        skos:topConceptOf             code:race .
+        a                         code:Race , skos:Concept ;
+        cts:cdiscDefinition       "A person having origins in any of the original peoples of North and South America (including Central America), and who maintains tribal affiliation or community attachment. (FDA)" ;
+        cts:cdiscSubmissionValue  "AMERICAN INDIAN OR ALASKA NATIVE" ;
+        cts:cdiscSynonyms         "NA" ;
+        mms:nciDomain             "C74457.C41259" ;
+        skos:inScheme             code:race ;
+        skos:prefLabel            "AMERICAN INDIAN OR ALASKA NATIVE"^^xsd:string ;
+        skos:topConceptOf         code:race .
 
 ds:obs13  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1113,27 +1009,20 @@ ds:obs20  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "12.7715435329253"^^xsd:double .
 
-code:factor-WEIGHTBL  a               code:Factor , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ    rrdfqbcrnd0:ADSL_WEIGHTBL ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "WEIGHTBL"^^xsd:string ;
-        skos:inScheme                 code:factor ;
-        skos:prefLabel                "WEIGHTBL"^^xsd:string ;
-        skos:topConceptOf             code:factor .
+code:factor-WEIGHTBL  a    code:Factor , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "WEIGHTBL"^^xsd:string ;
+        skos:topConceptOf  code:factor .
 
-code:sex-UN  a                        code:Sex , skos:Concept ;
-        cts:cdiscDefinition           "A person (one of unisexual specimens) who is born with genitalia and/or secondary sexual characteristics of indeterminate sex, or which combine features of both sexes. (NCI)" ;
-        cts:cdiscSubmissionValue      "UN" ;
-        cts:cdiscSynonyms             "Undifferentiated" ;
-        mms:nciDomain                 "C66731.C45908" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "UN"^^xsd:string ;
-        skos:inScheme                 code:sex ;
-        skos:prefLabel                "UN"^^xsd:string ;
-        skos:topConceptOf             code:sex .
+code:sex-UN  a                    code:Sex , skos:Concept ;
+        cts:cdiscDefinition       "A person (one of unisexual specimens) who is born with genitalia and/or secondary sexual characteristics of indeterminate sex, or which combine features of both sexes. (NCI)" ;
+        cts:cdiscSubmissionValue  "UN" ;
+        cts:cdiscSynonyms         "Undifferentiated" ;
+        mms:nciDomain             "C66731.C45908" ;
+        skos:inScheme             code:sex ;
+        skos:prefLabel            "UN"^^xsd:string ;
+        skos:topConceptOf         code:sex .
 
 dccs:denominator  a   qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:denominator .
@@ -1180,11 +1069,6 @@ ds:obs05  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-_ALL_ ;
         crnd-measure:measure        "230"^^xsd:double .
 
-rrdfqbcrnd0:ADSL_TRT01A
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_TRT01A> .
-
 ds:obs46  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "46"^^xsd:string ;
@@ -1219,15 +1103,11 @@ ds:obs18  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "60.55"^^xsd:double .
 
-code:procedure-max  a                 code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics max"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "max"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     max(x, na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "max"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+code:procedure-max  a      code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics max"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "max"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 ds:obs59  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1249,15 +1129,12 @@ code:Saffl  a            rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:saffl ;
         rdfs:subClassOf  skos:Concept .
 
-code:saffl  a                       skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: saffl"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_SAFFL ;
-        rrdfqbcrnd0:R-columnname    "saffl"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:saffl-_ALL_ , code:saffl-Y , code:saffl-_NONMISS_ ;
-        skos:notation               "CL_SAFFL" ;
-        skos:note                   "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: saffl"@en .
+code:saffl  a               skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: saffl"@en ;
+        skos:hasTopConcept  code:saffl-_ALL_ , code:saffl-_NONMISS_ , code:saffl-Y ;
+        skos:notation       "CL_SAFFL" ;
+        skos:note           "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: saffl"@en .
 
 ds:obs40  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1337,26 +1214,20 @@ ds:obs66  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "6"^^xsd:double .
 
-code:factor-quantity  a               code:Factor , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "quantity"^^xsd:string ;
-        skos:inScheme                 code:factor ;
-        skos:prefLabel                "quantity"^^xsd:string ;
-        skos:topConceptOf             code:factor .
+code:factor-quantity  a    code:Factor , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "quantity"^^xsd:string ;
+        skos:topConceptOf  code:factor .
 
-code:race-ASIAN  a                    skos:Concept , code:Race ;
-        cts:cdiscDefinition           "A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (FDA)" ;
-        cts:cdiscSubmissionValue      "ASIAN" ;
-        cts:cdiscSynonyms             "NA" ;
-        mms:nciDomain                 "C74457.C41260" ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "ASIAN"^^xsd:string ;
-        skos:inScheme                 code:race ;
-        skos:prefLabel                "ASIAN"^^xsd:string ;
-        skos:topConceptOf             code:race .
+code:race-ASIAN  a                code:Race , skos:Concept ;
+        cts:cdiscDefinition       "A person having origins in any of the original peoples of the Far East, Southeast Asia, or the Indian subcontinent including, for example, Cambodia, China, India, Japan, Korea, Malaysia, Pakistan, the Philippine Islands, Thailand, and Vietnam. (FDA)" ;
+        cts:cdiscSubmissionValue  "ASIAN" ;
+        cts:cdiscSynonyms         "NA" ;
+        mms:nciDomain             "C74457.C41260" ;
+        skos:inScheme             code:race ;
+        skos:prefLabel            "ASIAN"^^xsd:string ;
+        skos:topConceptOf         code:race .
 
 ds:obs38  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1382,19 +1253,18 @@ code:factor-_ALL_  a       code:Factor , skos:Concept ;
         skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:factor .
 
-ds:dataset-DM  a                      qb:DataSet ;
-        rdfs:comment                  "Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a"@en ;
-        rdfs:label                    "Demographics results data set."@en ;
-        dct:description               "Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)"@en ;
-        dct:title                     "Demographics Analysis Results"^^xsd:string ;
-        qb:structure                  ds:dsd-DM ;
-        pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-04-29T19:10:35+02:00"^^xsd:dateTime ;
-        pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
-        pav:version                   "0.0.0"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        dcat:distribution             "DC-DM-R-V-0-5-2.ttl" ;
-        prov:wasDerivedFrom           "dm.AR.csv"^^xsd:string .
+ds:dataset-DM  a             qb:DataSet ;
+        rdfs:comment         "Example Demographics data supplied by Ian Fleming via R.. All dimensions have a Codelist and Range specified. Attributes applied from source data. Attributes as VALUES instead of URIs. Changes in current version:  codelists for factor, procedure, saffl, trt01a"@en ;
+        rdfs:label           "Demographics results data set."@en ;
+        dct:description      "Cube with 6 Dimensions (factor, procedure, race, saffl, sex, trt01a), 2 Attributes (denominator, unit) and 1 measure (measure)"@en ;
+        dct:title            "Demographics Analysis Results"^^xsd:string ;
+        qb:structure         ds:dsd-DM ;
+        pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
+        pav:createdOn        "2016-05-15T19:05:34+02:00"^^xsd:dateTime ;
+        pav:createdWith      "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
+        pav:version          "0.0.0"^^xsd:string ;
+        dcat:distribution    "DC-DM-R-V-0-5-2.ttl" ;
+        prov:wasDerivedFrom  "dm.AR.csv"^^xsd:string .
 
 code:sex-_ALL_  a          code:Sex , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
@@ -1402,15 +1272,11 @@ code:sex-_ALL_  a          code:Sex , skos:Concept ;
         skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:sex .
 
-code:procedure-min  a                 code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics min"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "min"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     min(x, na.rm = TRUE) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "min"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+code:procedure-min  a      code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics min"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "min"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 ds:obs60  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1426,14 +1292,12 @@ ds:obs60  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Xanomeline_Low_Dose ;
         crnd-measure:measure        "64.9"^^xsd:double .
 
-code:factor  a                    skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: factor"@en ;
-        rrdfqbcrnd0:R-columnname  "factor"^^xsd:string ;
-        rrdfqbcrnd0:codeType      "DATA"^^xsd:string ;
-        skos:hasTopConcept        code:factor-_ALL_ , code:factor-proportion , code:factor-WEIGHTBL , code:factor-_NONMISS_ , code:factor-quantity , code:factor-AGE ;
-        skos:notation             "CL_FACTOR" ;
-        skos:note                 "Specifies the factor for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: factor"@en .
+code:factor  a              skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: factor"@en ;
+        skos:hasTopConcept  code:factor-_ALL_ , code:factor-proportion , code:factor-WEIGHTBL , code:factor-_NONMISS_ , code:factor-quantity , code:factor-AGE ;
+        skos:notation       "CL_FACTOR" ;
+        skos:note           "Specifies the factor for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: factor"@en .
 
 ds:obs32  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1500,14 +1364,12 @@ ds:obs17  a                         qb:Observation ;
         crnd-dimension:trt01a       code:trt01a-Placebo ;
         crnd-measure:measure        "62.7593023255814"^^xsd:double .
 
-code:procedure  a                 skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: procedure"@en ;
-        rrdfqbcrnd0:R-columnname  "procedure"^^xsd:string ;
-        rrdfqbcrnd0:codeType      "DATA"^^xsd:string ;
-        skos:hasTopConcept        code:procedure-stdev , code:procedure-max , code:procedure-mean , code:procedure-min , code:procedure-percent , code:procedure-count , code:procedure-median ;
-        skos:notation             "CL_PROCEDURE" ;
-        skos:note                 "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: procedure"@en .
+code:procedure  a           skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: procedure"@en ;
+        skos:hasTopConcept  code:procedure-stdev , code:procedure-max , code:procedure-mean , code:procedure-min , code:procedure-percent , code:procedure-count , code:procedure-median ;
+        skos:notation       "CL_PROCEDURE" ;
+        skos:note           "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: procedure"@en .
 
 ds:obs58  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;

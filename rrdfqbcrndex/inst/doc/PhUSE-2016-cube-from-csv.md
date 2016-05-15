@@ -61,7 +61,7 @@ tab1x01.cube.fn<- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )
 cat("TAB1X01 cube stored as ", normalizePath(tab1x01.cube.fn), "\n")
 ```
 
-    ## TAB1X01 cube stored as  /tmp/RtmpADOzEl/DC-TAB1X01-R-V-0-0-0.ttl
+    ## TAB1X01 cube stored as  /tmp/Rtmp4yMKXK/DC-TAB1X01-R-V-0-0-0.ttl
 
 ``` r
 targetFile<- file.path(targetDir,"CDISC-pilot-TAB1X01.ttl")
@@ -93,7 +93,7 @@ temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= checkCube)
 summarize.rdf(checkCube)
 ```
 
-    ## [1] "Number of triples: 1442"
+    ## [1] "Number of triples: 1368"
 
 Get the values in the cube
 --------------------------
@@ -524,9 +524,9 @@ sessionInfo()
     ## [1] methods   stats     graphics  grDevices utils     datasets  base     
     ## 
     ## other attached packages:
-    ##  [1] rrdfqbcrndex_0.2.3  rrdfqbcrnd0_0.2.3   rrdfqb_0.2.3       
+    ##  [1] rrdfqbcrndex_0.2.3  rrdfqbcrnd0_0.2.3   rrdfqb_0.3.1       
     ##  [4] xlsx_0.5.7          xlsxjars_0.6.1      rrdfcdisc_0.2.3    
-    ##  [7] devtools_1.11.0     RCurl_1.95-4.8      bitops_1.0-6       
+    ##  [7] devtools_1.11.1     RCurl_1.95-4.8      bitops_1.0-6       
     ## [10] rrdfancillary_0.2.3 rrdf_2.1.2          rrdflibs_1.4.0     
     ## [13] rJava_0.9-8        
     ## 

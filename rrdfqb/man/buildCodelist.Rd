@@ -5,13 +5,10 @@
 \title{Add RDF data cube codelist to RDF store}
 \usage{
 buildCodelist(store, prefixlist, obsData, codeType, nciDomainValue, dimName,
-  underlDataSetName = NULL, remote.endpoint = NULL)
+  underlDataSetName = NULL, remote.endpoint = NULL,
+  extension.rrdfqbcrnd0 = FALSE)
 }
 \arguments{
-\item{store}{The name for the rrdf store}
-
-\item{prefixlist}{R list of the prefixes}
-
 \item{obsData}{Data Frame with the data for which the code list is to be generated}
 
 \item{codeType}{Character "DATA" or "SDTM".
@@ -25,6 +22,8 @@ buildCodelist(store, prefixlist, obsData, codeType, nciDomainValue, dimName,
 \item{underlDataSetName}{underlying data set name. Used for finding name for D2RQ propertybridge. If NULL then not used.}
 
 \item{remote.endpoint}{Used when codetype="SDTM" to give the URL for the remote endpoint. If NULL then the local rdf.cdisc.store from the environment is used.}
+
+\item{extension.rrdfqbcrnd0}{If TRUE then rrdfqbcrnd0 specific values will be added to the generated cube}
 }
 \value{
 Alway TRUE - to be corrected

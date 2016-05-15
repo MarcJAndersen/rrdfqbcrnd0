@@ -21,6 +21,7 @@ BuildCubeFromDataFrames<- function(cubeMetadata, obsData, common.prefixes=NULL, 
     domainName<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="domainName",defaultValue="notgiven" )
     obsFile<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="obsFileName",defaultValue="notgiven" )
     obsURL<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="obsURL",defaultValue="notgiven" )
+    extension.rrdfqbcrnd0.ch<- GetValueFromMetadata(cubeMetadata,compType="metadata",compName="extension.rrdfqbcrnd0",defaultValue="FALSE" )
     obsDataSetName<- toupper(tools::file_path_sans_ext(basename(obsURL)))
     
     ## Output file format: DC-<domain>-R-Vn-n-(n).TTL . Also used in dcat:distribution
@@ -74,10 +75,11 @@ BuildCubeFromDataFrames<- function(cubeMetadata, obsData, common.prefixes=NULL, 
                                pavVersion="0.0.0",
                                createdWith=paste0("R Version ", R.version$major, ".", R.version$minor,
                                                   " Platform:", R.version$platform, " rrdfqbrnd0 package and dependencies"),
-                               providedBy="PhUSE Results Metadata Working Group"
+                               providedBy="PhUSE Analysis Results and Metadata Working Group"
                            )
                            ),
-                remote.endpoint=endpoint
+                remote.endpoint=endpoint,
+                extension.rrdfqbcrnd0= (extension.rrdfqbcrnd0.ch=="TRUE")
                 ##            codelist.source=sdtm.terminology
                 )
 

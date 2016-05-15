@@ -66,14 +66,11 @@ ds:obs22  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_Low_Dose ;
         crnd-measure:measure        "3.5714285714"^^xsd:double .
 
-code:trt01p-  a                       code:Trt01p , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  ""^^xsd:string ;
-        skos:inScheme                 code:trt01p ;
-        skos:prefLabel                ""^^xsd:string ;
-        skos:topConceptOf             code:trt01p .
+code:trt01p-  a            code:Trt01p , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:trt01p ;
+        skos:prefLabel     ""^^xsd:string ;
+        skos:topConceptOf  code:trt01p .
 
 ds:obs63  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -123,19 +120,14 @@ ds:obs07  a                         qb:Observation ;
         crnd-dimension:trt01p       code: ;
         crnd-measure:measure        "254"^^xsd:double .
 
-code:efffl-Y  a                       code:Efffl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Y"^^xsd:string ;
-        skos:inScheme                 code:efffl ;
-        skos:prefLabel                "Y"^^xsd:string ;
-        skos:topConceptOf             code:efffl .
+code:efffl-Y  a            code:Efffl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:efffl ;
+        skos:prefLabel     "Y"^^xsd:string ;
+        skos:topConceptOf  code:efffl .
 
 code:saffl-_NONMISS_  a    code:Saffl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:saffl ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:saffl .
@@ -239,11 +231,6 @@ ds:obs27  a                         qb:Observation ;
 dccs:unit  a          qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:unit .
 
-rrdfqbcrnd0:ADSL_TRT01P
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_TRT01P> .
-
 dccs:efffl  a         qb:ComponentSpecification ;
         rdfs:label    "efffl" ;
         qb:dimension  crnd-dimension:efffl .
@@ -330,14 +317,11 @@ ds:obs06  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_Low_Dose ;
         crnd-measure:measure        "100"^^xsd:double .
 
-code:trt01p-Placebo  a                code:Trt01p , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Placebo"^^xsd:string ;
-        skos:inScheme                 code:trt01p ;
-        skos:prefLabel                "Placebo"^^xsd:string ;
-        skos:topConceptOf             code:trt01p .
+code:trt01p-Placebo  a     code:Trt01p , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:trt01p ;
+        skos:prefLabel     "Placebo"^^xsd:string ;
+        skos:topConceptOf  code:trt01p .
 
 ds:obs47  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -356,14 +340,11 @@ ds:obs47  a                         qb:Observation ;
         crnd-measure:measure        "118"^^xsd:double .
 
 code:factor-proportion
-        a                             code:Factor , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "proportion"^^xsd:string ;
-        skos:inScheme                 code:factor ;
-        skos:prefLabel                "proportion"^^xsd:string ;
-        skos:topConceptOf             code:factor .
+        a                  code:Factor , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "proportion"^^xsd:string ;
+        skos:topConceptOf  code:factor .
 
 ds:obs19  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -403,19 +384,18 @@ ds:obs41  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_High_Dose ;
         crnd-measure:measure        "30"^^xsd:double .
 
-ds:dataset-TAB1X01  a                 qb:DataSet ;
-        rdfs:comment                  ""@en ;
-        rdfs:label                    "Table 14-1.01 Summary of Populations"@en ;
-        dct:description               "Data from adsl1.sas program"@en ;
-        dct:title                     "Demographics Analysis Results"^^xsd:string ;
-        qb:structure                  ds:dsd-TAB1X01 ;
-        pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-04-29T19:11:07+02:00"^^xsd:dateTime ;
-        pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
-        pav:version                   "0.0.0"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        dcat:distribution             "DC-TAB1X01-R-V-0-0-0.ttl" ;
-        prov:wasDerivedFrom           "tab1x01.csv"^^xsd:string .
+ds:dataset-TAB1X01  a        qb:DataSet ;
+        rdfs:comment         ""@en ;
+        rdfs:label           "Table 14-1.01 Summary of Populations"@en ;
+        dct:description      "Data from adsl1.sas program"@en ;
+        dct:title            "Demographics Analysis Results"^^xsd:string ;
+        qb:structure         ds:dsd-TAB1X01 ;
+        pav:createdBy        "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
+        pav:createdOn        "2016-05-15T18:52:52+02:00"^^xsd:dateTime ;
+        pav:createdWith      "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
+        pav:version          "0.0.0"^^xsd:string ;
+        dcat:distribution    "DC-TAB1X01-R-V-0-0-0.ttl" ;
+        prov:wasDerivedFrom  "tab1x01.csv"^^xsd:string .
 
 ds:obs13  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -497,11 +477,6 @@ code:saffl-_ALL_  a        code:Saffl , skos:Concept ;
         skos:prefLabel     "_ALL_"^^xsd:string ;
         skos:topConceptOf  code:saffl .
 
-rrdfqbcrnd0:ADSL_SAFFL
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_SAFFL> .
-
 ds:obs20  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "20"^^xsd:string ;
@@ -566,24 +541,18 @@ ds:obs05  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_Low_Dose ;
         crnd-measure:measure        "84"^^xsd:double .
 
-code:ittfl-Y  a                       code:Ittfl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Y"^^xsd:string ;
-        skos:inScheme                 code:ittfl ;
-        skos:prefLabel                "Y"^^xsd:string ;
-        skos:topConceptOf             code:ittfl .
+code:ittfl-Y  a            code:Ittfl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:ittfl ;
+        skos:prefLabel     "Y"^^xsd:string ;
+        skos:topConceptOf  code:ittfl .
 
-code:trt01p  a                      skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: trt01p"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_TRT01P ;
-        rrdfqbcrnd0:R-columnname    "trt01p"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:trt01p-Xanomeline_High_Dose , code:trt01p-Placebo , code:trt01p- , code:trt01p-Xanomeline_Low_Dose , code:trt01p-_ALL_ , code:trt01p-_NONMISS_ ;
-        skos:notation               "CL_TRT01P" ;
-        skos:note                   "Specifies the trt01p for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: trt01p"@en .
+code:trt01p  a              skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: trt01p"@en ;
+        skos:hasTopConcept  code:trt01p-Xanomeline_High_Dose , code:trt01p-Placebo , code:trt01p- , code:trt01p-Xanomeline_Low_Dose , code:trt01p-_ALL_ , code:trt01p-_NONMISS_ ;
+        skos:notation       "CL_TRT01P" ;
+        skos:note           "Specifies the trt01p for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: trt01p"@en .
 
 ds:obs46  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -623,11 +592,6 @@ ds:obs18  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Placebo ;
         crnd-measure:measure        "8.1395348837"^^xsd:double .
 
-rrdfqbcrnd0:ADSL_DISCONFL
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_DISCONFL> .
-
 ds:obs59  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "59"^^xsd:string ;
@@ -644,15 +608,12 @@ ds:obs59  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_Low_Dose ;
         crnd-measure:measure        "59"^^xsd:double .
 
-code:comp24fl  a                    skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: comp24fl"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_COMP24FL ;
-        rrdfqbcrnd0:R-columnname    "comp24fl"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:comp24fl-Y , code:comp24fl-_NONMISS_ , code:comp24fl-N , code:comp24fl-_ALL_ ;
-        skos:notation               "CL_COMP24FL" ;
-        skos:note                   "Specifies the comp24fl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: comp24fl"@en .
+code:comp24fl  a            skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: comp24fl"@en ;
+        skos:hasTopConcept  code:comp24fl-_NONMISS_ , code:comp24fl-Y , code:comp24fl-N , code:comp24fl-_ALL_ ;
+        skos:notation       "CL_COMP24FL" ;
+        skos:note           "Specifies the comp24fl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: comp24fl"@en .
 
 code:Ittfl  a            rdfs:Class , owl:Class ;
         rdfs:comment     "Specifies the ittfl for each observation"@en ;
@@ -660,47 +621,34 @@ code:Ittfl  a            rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:ittfl ;
         rdfs:subClassOf  skos:Concept .
 
-code:procedure-count  a               code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics count"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "count"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     length(x) }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "count"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+code:procedure-count  a    code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics count"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "count"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 crnd-measure:measure  a  rdf:Property , qb:MeasureProperty ;
         rdfs:label  "Value of the statistical measure" .
 
-code:comp24fl-N  a                    code:Comp24fl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "N"^^xsd:string ;
-        skos:inScheme                 code:comp24fl ;
-        skos:prefLabel                "N"^^xsd:string ;
-        skos:topConceptOf             code:comp24fl .
+code:comp24fl-N  a         code:Comp24fl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:comp24fl ;
+        skos:prefLabel     "N"^^xsd:string ;
+        skos:topConceptOf  code:comp24fl .
 
-code:efffl  a                       skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: efffl"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_EFFFL ;
-        rrdfqbcrnd0:R-columnname    "efffl"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:efffl-_NONMISS_ , code:efffl-N , code:efffl-Y , code:efffl-_ALL_ ;
-        skos:notation               "CL_EFFFL" ;
-        skos:note                   "Specifies the efffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: efffl"@en .
+code:efffl  a               skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: efffl"@en ;
+        skos:hasTopConcept  code:efffl-_NONMISS_ , code:efffl-Y , code:efffl-N , code:efffl-_ALL_ ;
+        skos:notation       "CL_EFFFL" ;
+        skos:note           "Specifies the efffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: efffl"@en .
 
-code:ittfl  a                       skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: ittfl"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_ITTFL ;
-        rrdfqbcrnd0:R-columnname    "ittfl"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:ittfl-_ALL_ , code:ittfl-Y , code:ittfl-_NONMISS_ ;
-        skos:notation               "CL_ITTFL" ;
-        skos:note                   "Specifies the ittfl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: ittfl"@en .
+code:ittfl  a               skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: ittfl"@en ;
+        skos:hasTopConcept  code:ittfl-_NONMISS_ , code:ittfl-_ALL_ , code:ittfl-Y ;
+        skos:notation       "CL_ITTFL" ;
+        skos:note           "Specifies the ittfl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: ittfl"@en .
 
 ds:obs40  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -778,8 +726,6 @@ dccs:trt01p  a        qb:ComponentSpecification ;
 
 code:efffl-_NONMISS_  a    code:Efffl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:efffl ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:efffl .
@@ -800,14 +746,11 @@ ds:obs38  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_Low_Dose ;
         crnd-measure:measure        "66.666666667"^^xsd:double .
 
-code:comp24fl-Y  a                    code:Comp24fl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Y"^^xsd:string ;
-        skos:inScheme                 code:comp24fl ;
-        skos:prefLabel                "Y"^^xsd:string ;
-        skos:topConceptOf             code:comp24fl .
+code:comp24fl-Y  a         code:Comp24fl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:comp24fl ;
+        skos:prefLabel     "Y"^^xsd:string ;
+        skos:topConceptOf  code:comp24fl .
 
 ds:obs60  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -849,8 +792,6 @@ crnd-dimension:efffl  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty 
 code:comp24fl-_NONMISS_
         a                  code:Comp24fl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:comp24fl ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:comp24fl .
@@ -873,8 +814,6 @@ ds:obs04  a                         qb:Observation ;
 
 code:ittfl-_NONMISS_  a    code:Ittfl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:ittfl ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:ittfl .
@@ -914,15 +853,11 @@ ds:obs45  a                         qb:Observation ;
         crnd-measure:measure        "136"^^xsd:double .
 
 code:procedure-percent
-        a                             code:Procedure , skos:Concept ;
-        rdfs:comment                  "Descriptive statistics percent"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "percent"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     -1 }" ;
-        skos:inScheme                 code:procedure ;
-        skos:prefLabel                "percent"^^xsd:string ;
-        skos:topConceptOf             code:procedure .
+        a                  code:Procedure , skos:Concept ;
+        rdfs:comment       "Descriptive statistics percent"@en ;
+        skos:inScheme      code:procedure ;
+        skos:prefLabel     "percent"^^xsd:string ;
+        skos:topConceptOf  code:procedure .
 
 ds:obs17  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -956,14 +891,11 @@ ds:obs58  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_High_Dose ;
         crnd-measure:measure        "67.857142857"^^xsd:double .
 
-code:saffl-Y  a                       code:Saffl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Y"^^xsd:string ;
-        skos:inScheme                 code:saffl ;
-        skos:prefLabel                "Y"^^xsd:string ;
-        skos:topConceptOf             code:saffl .
+code:saffl-Y  a            code:Saffl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:saffl ;
+        skos:prefLabel     "Y"^^xsd:string ;
+        skos:topConceptOf  code:saffl .
 
 ds:obs11  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1000,8 +932,6 @@ ds:obs52  a                         qb:Observation ;
 code:factor-_NONMISS_
         a                  code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:factor ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:factor .
@@ -1078,30 +1008,20 @@ code:Procedure  a        rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:procedure ;
         rdfs:subClassOf  skos:Concept .
 
-rrdfqbcrnd0:ADSL_COMP24FL
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_COMP24FL> .
-
 dccs:measure  a     qb:ComponentSpecification ;
         rdfs:label  "Value of the statistical measure" ;
         qb:measure  crnd-measure:measure .
 
 code:trt01p-Xanomeline_High_Dose
-        a                             code:Trt01p , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Xanomeline High Dose"^^xsd:string ;
-        skos:inScheme                 code:trt01p ;
-        skos:prefLabel                "Xanomeline High Dose"^^xsd:string ;
-        skos:topConceptOf             code:trt01p .
+        a                  code:Trt01p , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:trt01p ;
+        skos:prefLabel     "Xanomeline High Dose"^^xsd:string ;
+        skos:topConceptOf  code:trt01p .
 
 code:trt01p-_NONMISS_
         a                  code:Trt01p , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:trt01p ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:trt01p .
@@ -1183,8 +1103,6 @@ ds:obs16  a                         qb:Observation ;
 code:disconfl-_NONMISS_
         a                  code:Disconfl , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents the non-missing codelist categories. Does not include missing values."@en ;
-        rrdfqbcrnd0:R-selectionfunction
-                "is.na"^^xsd:string ;
         skos:inScheme      code:disconfl ;
         skos:prefLabel     "_NONMISS_"^^xsd:string ;
         skos:topConceptOf  code:disconfl .
@@ -1262,14 +1180,11 @@ ds:obs10  a                         qb:Observation ;
         crnd-measure:measure        "100"^^xsd:double .
 
 code:trt01p-Xanomeline_Low_Dose
-        a                             code:Trt01p , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Xanomeline Low Dose"^^xsd:string ;
-        skos:inScheme                 code:trt01p ;
-        skos:prefLabel                "Xanomeline Low Dose"^^xsd:string ;
-        skos:topConceptOf             code:trt01p .
+        a                  code:Trt01p , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:trt01p ;
+        skos:prefLabel     "Xanomeline Low Dose"^^xsd:string ;
+        skos:topConceptOf  code:trt01p .
 
 ds:obs51  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1309,15 +1224,12 @@ code:Trt01p  a           rdfs:Class , owl:Class ;
         rdfs:seeAlso     code:trt01p ;
         rdfs:subClassOf  skos:Concept .
 
-code:saffl  a                       skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: saffl"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_SAFFL ;
-        rrdfqbcrnd0:R-columnname    "saffl"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:saffl-_ALL_ , code:saffl-Y , code:saffl-_NONMISS_ ;
-        skos:notation               "CL_SAFFL" ;
-        skos:note                   "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: saffl"@en .
+code:saffl  a               skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: saffl"@en ;
+        skos:hasTopConcept  code:saffl-_NONMISS_ , code:saffl-Y , code:saffl-_ALL_ ;
+        skos:notation       "CL_SAFFL" ;
+        skos:note           "Specifies the saffl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: saffl"@en .
 
 ds:obs64  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1387,14 +1299,11 @@ crnd-attribute:denominator
         a           rdf:Property , qb:AttributeProperty ;
         rdfs:label  "Denominator for a proportion (oskr) subset on which a statistic is based" .
 
-code:factor-quantity  a               code:Factor , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "quantity"^^xsd:string ;
-        skos:inScheme                 code:factor ;
-        skos:prefLabel                "quantity"^^xsd:string ;
-        skos:topConceptOf             code:factor .
+code:factor-quantity  a    code:Factor , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:factor ;
+        skos:prefLabel     "quantity"^^xsd:string ;
+        skos:topConceptOf  code:factor .
 
 ds:obs30  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1415,14 +1324,11 @@ ds:obs30  a                         qb:Observation ;
 dccs:denominator  a   qb:ComponentSpecification ;
         qb:attribute  crnd-attribute:denominator .
 
-code:disconfl-Y  a                    code:Disconfl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "Y"^^xsd:string ;
-        skos:inScheme                 code:disconfl ;
-        skos:prefLabel                "Y"^^xsd:string ;
-        skos:topConceptOf             code:disconfl .
+code:disconfl-Y  a         code:Disconfl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:disconfl ;
+        skos:prefLabel     "Y"^^xsd:string ;
+        skos:topConceptOf  code:disconfl .
 
 code:factor-_ALL_  a       code:Factor , skos:Concept ;
         rdfs:comment       "NON-CDISC: Represents all codelist categories."@en ;
@@ -1462,22 +1368,6 @@ ds:obs43  a                         qb:Observation ;
         crnd-dimension:trt01p       code:trt01p-Xanomeline_Low_Dose ;
         crnd-measure:measure        "28"^^xsd:double .
 
-ds:obs56  a                         qb:Observation ;
-        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
-        rdfs:label                  "56"^^xsd:string ;
-        qb:dataSet                  ds:dataset-TAB1X01 ;
-        crnd-attribute:denominator  "disconfl" ;
-        crnd-attribute:unit         "NA"^^xsd:string ;
-        crnd-dimension:comp24fl     code:comp24fl-_ALL_ ;
-        crnd-dimension:disconfl     code:disconfl-Y ;
-        crnd-dimension:efffl        code:efffl-_ALL_ ;
-        crnd-dimension:factor       code:factor-proportion ;
-        crnd-dimension:ittfl        code:ittfl-_ALL_ ;
-        crnd-dimension:procedure    code:procedure-percent ;
-        crnd-dimension:saffl        code:saffl-_ALL_ ;
-        crnd-dimension:trt01p       code:trt01p-Placebo ;
-        crnd-measure:measure        "32.558139535"^^xsd:double .
-
 ds:obs15  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
         rdfs:label                  "15"^^xsd:string ;
@@ -1497,19 +1387,28 @@ ds:obs15  a                         qb:Observation ;
 ds:dsd-TAB1X01  a     qb:DataStructureDefinition ;
         qb:component  dccs:saffl , dccs:unit , dccs:ittfl , dccs:factor , dccs:measure , dccs:denominator , dccs:efffl , dccs:comp24fl , dccs:procedure , dccs:disconfl , dccs:trt01p .
 
-code:factor  a                    skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: factor"@en ;
-        rrdfqbcrnd0:R-columnname  "factor"^^xsd:string ;
-        rrdfqbcrnd0:codeType      "DATA"^^xsd:string ;
-        skos:hasTopConcept        code:factor-_ALL_ , code:factor-proportion , code:factor-_NONMISS_ , code:factor-quantity ;
-        skos:notation             "CL_FACTOR" ;
-        skos:note                 "Specifies the factor for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: factor"@en .
+ds:obs56  a                         qb:Observation ;
+        rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
+        rdfs:label                  "56"^^xsd:string ;
+        qb:dataSet                  ds:dataset-TAB1X01 ;
+        crnd-attribute:denominator  "disconfl" ;
+        crnd-attribute:unit         "NA"^^xsd:string ;
+        crnd-dimension:comp24fl     code:comp24fl-_ALL_ ;
+        crnd-dimension:disconfl     code:disconfl-Y ;
+        crnd-dimension:efffl        code:efffl-_ALL_ ;
+        crnd-dimension:factor       code:factor-proportion ;
+        crnd-dimension:ittfl        code:ittfl-_ALL_ ;
+        crnd-dimension:procedure    code:procedure-percent ;
+        crnd-dimension:saffl        code:saffl-_ALL_ ;
+        crnd-dimension:trt01p       code:trt01p-Placebo ;
+        crnd-measure:measure        "32.558139535"^^xsd:double .
 
-rrdfqbcrnd0:ADSL_EFFFL
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_EFFFL> .
+code:factor  a              skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: factor"@en ;
+        skos:hasTopConcept  code:factor-_ALL_ , code:factor-_NONMISS_ , code:factor-proportion , code:factor-quantity ;
+        skos:notation       "CL_FACTOR" ;
+        skos:note           "Specifies the factor for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: factor"@en .
 
 ds:obs28  a                         qb:Observation ;
         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
@@ -1532,38 +1431,25 @@ crnd-dimension:saffl  a  rdf:Property , qb:CodedProperty , qb:DimensionProperty 
         rdfs:range   code:Saffl ;
         qb:codeList  code:saffl .
 
-code:disconfl  a                    skos:ConceptScheme ;
-        rdfs:label                  "Codelist scheme: disconfl"@en ;
-        rrdfqbcrnd0:DataSetRefD2RQ  rrdfqbcrnd0:ADSL_DISCONFL ;
-        rrdfqbcrnd0:R-columnname    "disconfl"^^xsd:string ;
-        rrdfqbcrnd0:codeType        "DATA"^^xsd:string ;
-        skos:hasTopConcept          code:disconfl-_NONMISS_ , code:disconfl-Y , code:disconfl-_ALL_ ;
-        skos:notation               "CL_DISCONFL" ;
-        skos:note                   "Specifies the disconfl for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel              "Codelist scheme: disconfl"@en .
+code:disconfl  a            skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: disconfl"@en ;
+        skos:hasTopConcept  code:disconfl-_NONMISS_ , code:disconfl-Y , code:disconfl-_ALL_ ;
+        skos:notation       "CL_DISCONFL" ;
+        skos:note           "Specifies the disconfl for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: disconfl"@en .
 
-rrdfqbcrnd0:ADSL_ITTFL
-        rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
-        rrdfqbcrnd0:D2RQ-PropertyBridge
-                <http://www.example.org/datasets/vocab/ADSL_ITTFL> .
+code:efffl-N  a            code:Efffl , skos:Concept ;
+        rdfs:comment       "Coded values from data source. No reconciliation against another source"@en ;
+        skos:inScheme      code:efffl ;
+        skos:prefLabel     "N"^^xsd:string ;
+        skos:topConceptOf  code:efffl .
 
-code:efffl-N  a                       code:Efffl , skos:Concept ;
-        rdfs:comment                  "Coded values from data source. No reconciliation against another source"@en ;
-        rrdfqbcrnd0:R-selectionoperator
-                "=="^^xsd:string ;
-        rrdfqbcrnd0:R-selectionvalue  "N"^^xsd:string ;
-        skos:inScheme                 code:efffl ;
-        skos:prefLabel                "N"^^xsd:string ;
-        skos:topConceptOf             code:efffl .
-
-code:procedure  a                 skos:ConceptScheme ;
-        rdfs:label                "Codelist scheme: procedure"@en ;
-        rrdfqbcrnd0:R-columnname  "procedure"^^xsd:string ;
-        rrdfqbcrnd0:codeType      "DATA"^^xsd:string ;
-        skos:hasTopConcept        code:procedure-percent , code:procedure-count ;
-        skos:notation             "CL_PROCEDURE" ;
-        skos:note                 "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
-        skos:prefLabel            "Codelist scheme: procedure"@en .
+code:procedure  a           skos:ConceptScheme ;
+        rdfs:label          "Codelist scheme: procedure"@en ;
+        skos:hasTopConcept  code:procedure-percent , code:procedure-count ;
+        skos:notation       "CL_PROCEDURE" ;
+        skos:note           "Specifies the procedure for each observation, group of obs. or all categories (_ALL_)label "@en ;
+        skos:prefLabel      "Codelist scheme: procedure"@en .
 
 crnd-dimension:trt01p
         a            rdf:Property , qb:CodedProperty , qb:DimensionProperty ;

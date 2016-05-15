@@ -7,8 +7,9 @@
 ##' @param dsdURIwoprefix DSD URI
 ##' @param dsdName DSD name
 ##' @param extra A list with member names: description, comment, label , distribution, obsfilename, title, PAVnodes, obsDataSetName
-##' @param remote.endpoint Remote endpoint, if NULL use local version of CDISC RDF standards
 ##' @return Always TRUE
+##' @author Tim Williams, Marc Andersen
+##  @inheritParams buildCodelist.R
 ##' @export qb.buildDSD
 qb.buildDSD<- function(store,
   prefixlist,
@@ -36,7 +37,8 @@ qb.buildDSD<- function(store,
       providedBy="PhUSE Results Metadata Working Group"
       )
   ),
-remote.endpoint=NULL
+  remote.endpoint=NULL, 
+  extension.rrdfqbcrnd0=FALSE 
 #  codelist.source
 ) {
 # -------------  DSD Component ------------------------------------------------
@@ -136,13 +138,14 @@ add.data.triple(store,
                 "string"
                 )  # The source .CSV data file
 
-add.data.triple(store,
+        if (extension.rrdfqbcrnd0) {
+            add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixRRDFQBCRND0, "D2RQ-DataSetName"),
                 extra$obsDataSetName,
                 "string"
                 )  # D2RQ DataSetName
-    
+        }    
 for (i in 1:nrow(skeletonSource)){
     if (skeletonSource[i,"compType"]=="dimension") {
 
@@ -159,7 +162,8 @@ for (i in 1:nrow(skeletonSource)){
                 nciDomainValue=skeletonSource[i,"nciDomainValue"],
                 dimName=skeletonSource[i,"compName"],
                 underlDataSetName=extra$obsDataSetName,
-                remote.endpoint=remote.endpoint                
+                remote.endpoint=remote.endpoint,
+                extension.rrdfqbcrnd0=extension.rrdfqbcrnd0
 #                codelist.source=codelist.source
                 )
   }

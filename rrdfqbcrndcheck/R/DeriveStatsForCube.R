@@ -37,16 +37,15 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
 
   Ndiff<-0
   
-  ##  print(cube.codelists$prefLabel)
-  codelist.all<- cube.codelists[ cube.codelists$prefLabel=="_ALL_",]
-  ##  print(codelist.all)
+  ##  print(cube.codelists$clprefLabel)
+  codelist.all<- cube.codelists[ cube.codelists$clprefLabel=="_ALL_",]
   subsetting.dimensions<- list();
 
   ## TODO(mja): the variable name/column name in the data frame should be part of the datacube.
   ## This would remove the need for the workaround below using gsub
   for (i in 1:nrow(codelist.all))
     {
-      codeName<- gsub("[^:]*:","", codelist.all[i,"p"])
+        codeName<- gsub("[^:]*:","", codelist.all[i,"dimension"])
       if (! (codeName %in% c("factor", "procedure")) ) {
         ## TODO(mja): when denominator also becomes a dimension, then include in list
         ##        cat("codeName: ", codeName, "\n" )
@@ -80,42 +79,52 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
   }
 
     
-  ##  cat("Subsetting dimensions: ", paste0(names(subsetting.dimensions),sep=", "),"\n")
+   cat("Subsetting dimensions: ", paste0(names(subsetting.dimensions), collapse=", "),"\n")
     
     results<- new.rdf(ontology=FALSE)
-    
+
     for (r in  1:nrow(observations )  ) {
-    ##    cat("Cube observation sequence number ", r,  ".\n" )
+      cat("Cube observation sequence number ", r,  ".\n" )
     thisobs<-  observations[r,]
-    ##    cat("   Derive results for procedure ", as.character(thisobs["procedure"]),
-    ##        "factor", as.character(thisobs["factor"]), "\n")
+        cat("   Derive results for procedure ", as.character(thisobs["procedure"]),
+            "factor", as.character(thisobs["factor"]), "\n")
 
     ## TODO(mja): handle _NONMISS_, see GetSQLFromCube.R for approach
     data.subset.logical<- rep(TRUE, nrow(dataSet))
-    logicalExpr<- ""
+        logicalExpr<- ""
     for (v in names(subsetting.dimensions)) {
-      if ( thisobs[v ] != subsetting.dimensions[[ v ]] ) {
-        logicalExpr<- paste0( logicalExpr, paste0(toupper(v), "==", as.character(thisobs[ paste0(v,"value") ])), sept=" & " )
-        data.subset.logical<- data.subset.logical & ( dataSet[,toupper(v)] == as.character(thisobs[ paste0(v,"value") ]) )
+        if ( thisobs[v ] != subsetting.dimensions[[ v ]] ) {
+            if (as.character(thisobs[ paste0(v,"value") ]) == "_NONMISS_") {
+                logicalExpr<- paste0( logicalExpr, paste0(toupper(v), "!=", "NA"), collapse=" & " )
+                data.subset.logical<- data.subset.logical & ( !is.na(dataSet[,toupper(v)]) ) 
+            } else {
+                logicalExpr<- paste( logicalExpr, paste0(toupper(v), "==", as.character(thisobs[ paste0(v,"value") ])), sep=" & " )
+                data.subset.logical<- data.subset.logical & ( dataSet[,toupper(v)] == as.character(thisobs[ paste0(v,"value") ]) )
+            }
       }
     }
 
-    ##    cat("   ", "Data subsetting expression ", logicalExpr, ".\n",
-    ##        "   Data set row contributing ", sum(data.subset.logical), "\n")
-    
+    cat("   ", "Data subsetting expression ", logicalExpr, ".\n",
+           "   Data set row contributing ", sum(data.subset.logical), "\n")
+
     has.calculated.result<- FALSE
+        result<- NULL
 
     if (thisobs["procedure"] %in% names(proc) ) {
-      forthis<- proc[[ as.character(thisobs["procedure" ]) ]]
-      if (forthis$univfunc=="univfunc1")  {
-        AOD<- as.vector(dataSet[data.subset.logical, as.character(thisobs["factorvalue"])])
+        forthis<- proc[[ as.character(thisobs["procedure" ]) ]]
+        if (forthis$univfunc=="univfunc1")  {
+            print(as.character(thisobs["factorvalue"]))
+          AOD<- as.vector(dataSet[data.subset.logical, toupper(as.character(thisobs["factorvalue"]))])
+          print(AOD)
         result<- (forthis$fun)(AOD)
-        has.calculated.result<- TRUE
+            has.calculated.result<- TRUE
         ##   print(paste("AOD number of observations", nrow(AOD)))
       } else if (forthis$univfunc=="univfunc2") {
         ## Here the result must be a vector
         ## TODO(mja): USUBJID should not be hardcoded, but change to be a parameter 
-        AOD<- dataSet$USUBJID[data.subset.logical]
+          AOD<- dataSet$USUBJID[data.subset.logical]
+          print(data.subset.logical)
+          print(AOD)
         result<- (forthis$fun)(AOD)
         has.calculated.result<- TRUE
       } else if (forthis$univfunc=="univfunc3" & thisobs["factor"]== "code:factor-proportion") {
@@ -140,9 +149,9 @@ DeriveStatsForCube<- function(store, forsparqlprefix, domainName, dsdName, dataS
       }
 
       if (has.calculated.result) {
-        ##      cat("   ", paste("result", result, " in cube ", thisobs["measure"], sep=" "), "\n" )
-        if (result != thisobs["measure"]) {
-             message(paste("difference result", result, " in cube ", thisobs["measure"], sep=" "), "\n" )
+        cat("   ", paste("result", result," in cube observation ", thisobs["s"]," value ", thisobs["measure"], sep=" "), "\n" )
+        if (is.null(result) | is.na(result) | result != thisobs["measure"]) {
+             message(paste("difference result", as.character(result), " in cube observation ", thisobs["s"], " value ", thisobs["measure"], sep=" "), "\n" )
           Ndiff<- Ndiff+1
         }
         if (! checkOnly ) {

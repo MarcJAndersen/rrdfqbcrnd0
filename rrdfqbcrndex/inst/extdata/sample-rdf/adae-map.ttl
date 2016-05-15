@@ -10,7 +10,7 @@
 map:database a d2rq:Database;
 	d2rq:jdbcDriver "org.hsqldb.jdbc.JDBCDriver";
 	d2rq:jdbcDSN "jdbc:hsqldb:mem:temp";
-	d2rq:startupSQLScript <file:/tmp/RtmpiBLsOC/file2d2a6b3d2a32>;
+	d2rq:startupSQLScript <file:/tmp/RtmpUkgzQX/file4786114bd08b>;
 	.
 
 # Table ADAE

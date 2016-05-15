@@ -22,7 +22,8 @@ qb.buildDSD(store, prefixlist, obsData, skeletonSource,
   "0.0.0", createdWith = paste0("R Version ", R.version$major, ".",
   R.version$minor, " Platform:", R.version$platform,
   " rrdfqbrnd0 package and dependencies"), providedBy =
-  "PhUSE Results Metadata Working Group")), remote.endpoint = NULL)
+  "PhUSE Results Metadata Working Group")), remote.endpoint = NULL,
+  extension.rrdfqbcrnd0 = FALSE)
 }
 \arguments{
 \item{store}{RRDF store}
@@ -36,13 +37,14 @@ qb.buildDSD(store, prefixlist, obsData, skeletonSource,
 \item{dsdName}{DSD name}
 
 \item{extra}{A list with member names: description, comment, label , distribution, obsfilename, title, PAVnodes, obsDataSetName}
-
-\item{remote.endpoint}{Remote endpoint, if NULL use local version of CDISC RDF standards}
 }
 \value{
 Always TRUE
 }
 \description{
 Add RDF Data Set Specification (DSD) to the rrdf store
+}
+\author{
+Tim Williams, Marc Andersen
 }
 

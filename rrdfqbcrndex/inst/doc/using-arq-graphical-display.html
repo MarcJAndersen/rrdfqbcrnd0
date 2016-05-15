@@ -11,7 +11,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-04-29" />
+<meta name="date" content="2016-05-15" />
 
 <title>Graphical display of SPARQL queries with arq, rapper and graphviz</title>
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
 
 <h1 class="title">Graphical display of SPARQL queries with arq, rapper and graphviz</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-04-29</em></h4>
+<h4 class="date"><em>2016-05-15</em></h4>
 
 </div>
 
@@ -138,51 +138,51 @@ cat fordot.ttl
 rapper -i turtle -o dot fordot.ttl &gt; fordot.dot
 dot -x -Tpdf -ograph.pdf fordot.dot</code></pre>
 <pre><code>## @prefix dccs:  &lt;http://www.example.org/dc/demo/dccs/&gt; .
-## @prefix code:  &lt;http://www.example.org/dc/code/&gt; .
 ## @prefix sdtms-1-3: &lt;http://rdf.cdisc.org/sdtm-1-3/schema#&gt; .
+## @prefix code:  &lt;http://www.example.org/dc/code/&gt; .
 ## @prefix adam-2-1: &lt;http://rdf.cdisc.org/std/adam-2-1#&gt; .
 ## @prefix owl:   &lt;http://www.w3.org/2002/07/owl#&gt; .
 ## @prefix xsd:   &lt;http://www.w3.org/2001/XMLSchema#&gt; .
-## @prefix sdtm-1-3: &lt;http://rdf.cdisc.org/std/sdtm-1-3#&gt; .
-## @prefix cdash-1-1: &lt;http://rdf.cdisc.org/std/cdash-1-1#&gt; .
 ## @prefix skos:  &lt;http://www.w3.org/2004/02/skos/core#&gt; .
+## @prefix cdash-1-1: &lt;http://rdf.cdisc.org/std/cdash-1-1#&gt; .
+## @prefix sdtm-1-3: &lt;http://rdf.cdisc.org/std/sdtm-1-3#&gt; .
 ## @prefix rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
 ## @prefix adamvr-1-2: &lt;http://rdf.cdisc.org/std/adamvr-1-2#&gt; .
 ## @prefix crnd-attribute: &lt;http://www.example.org/dc/attribute#&gt; .
 ## @prefix sdtm-1-2: &lt;http://rdf.cdisc.org/std/sdtm-1-2#&gt; .
-## @prefix ds:    &lt;http://www.example.org/dc/demo/ds/&gt; .
 ## @prefix sdtmct: &lt;http://rdf.cdisc.org/sdtm-terminology#&gt; .
+## @prefix ds:    &lt;http://www.example.org/dc/demo/ds/&gt; .
 ## @prefix qb:    &lt;http://purl.org/linked-data/cube#&gt; .
 ## @prefix mms:   &lt;http://rdf.cdisc.org/mms#&gt; .
 ## @prefix crnd-dimension: &lt;http://www.example.org/dc/dimension#&gt; .
 ## @prefix dct:   &lt;http://purl.org/dc/terms/&gt; .
 ## @prefix cdiscs: &lt;http://rdf.cdisc.org/std/schema#&gt; .
-## @prefix cdashct: &lt;http://rdf.cdisc.org/cdash-terminology#&gt; .
 ## @prefix dcat:  &lt;http://www.w3.org/ns/dcat#&gt; .
+## @prefix cdashct: &lt;http://rdf.cdisc.org/cdash-terminology#&gt; .
 ## @prefix prov:  &lt;http://www.w3.org/ns/prov#&gt; .
 ## @prefix sdtmig-3-1-3: &lt;http://rdf.cdisc.org/std/sdtmig-3-1-3#&gt; .
-## @prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt; .
 ## @prefix adamig-1-0: &lt;http://rdf.cdisc.org/std/adamig-1-0#&gt; .
+## @prefix crnd-measure: &lt;http://www.example.org/dc/measure#&gt; .
 ## @prefix cts:   &lt;http://rdf.cdisc.org/ct/schema#&gt; .
 ## @prefix pav:   &lt;http://purl.org/pav&gt; .
 ## @prefix sdtmig-3-1-2: &lt;http://rdf.cdisc.org/std/sdtmig-3-1-2#&gt; .
 ## @prefix sendig-3-0: &lt;http://rdf.cdisc.org/std/sendig-3-0#&gt; .
-## @prefix adamct: &lt;http://rdf.cdisc.org/adam-terminology#&gt; .
 ## @prefix rdf:   &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+## @prefix adamct: &lt;http://rdf.cdisc.org/adam-terminology#&gt; .
 ## @prefix sendct: &lt;http://rdf.cdisc.org/send-terminology#&gt; .
 ## @prefix rrdfqbcrnd0: &lt;http://www.example.org/rrdfqbcrnd0/&gt; .
 ## @prefix dc:    &lt;http://purl.org/dc/elements/1.1/&gt; .
 ## 
 ## ds:obs014  a                        qb:Observation ;
 ##         rdfs:comment                &quot;Statistic for number of records/Statistics for factor with the dimensions XX&quot;@en ;
-##         rdfs:label                  &quot;14&quot; ;
+##         rdfs:label                  &quot;14&quot;^^xsd:string ;
 ##         qb:dataSet                  ds:dataset-DEMO ;
-##         crnd-attribute:cellpartno   &quot;1&quot; ;
-##         crnd-attribute:colno        &quot;2&quot; ;
+##         crnd-attribute:cellpartno   &quot;1&quot;^^xsd:string ;
+##         crnd-attribute:colno        &quot;2&quot;^^xsd:string ;
 ##         crnd-attribute:denominator  &quot;&quot; ;
-##         crnd-attribute:measurefmt   &quot;%6.0f&quot; ;
-##         crnd-attribute:rowno        &quot;3&quot; ;
-##         crnd-attribute:unit         &quot;NA&quot; ;
+##         crnd-attribute:measurefmt   &quot;%6.0f&quot;^^xsd:string ;
+##         crnd-attribute:rowno        &quot;3&quot;^^xsd:string ;
+##         crnd-attribute:unit         &quot;NA&quot;^^xsd:string ;
 ##         crnd-dimension:agegr1       code:agegr1-_ALL_ ;
 ##         crnd-dimension:ethnic       code:ethnic-_ALL_ ;
 ##         crnd-dimension:factor       code:factor-quantity ;

@@ -11,7 +11,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-04-29" />
+<meta name="date" content="2016-05-15" />
 
 <title>Create CDISC pilot tables</title>
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
 
 <h1 class="title">Create CDISC pilot tables</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-04-29</em></h4>
+<h4 class="date"><em>2016-05-15</em></h4>
 
 </div>
 
@@ -189,7 +189,7 @@ tab1x01.cube.fn&lt;- BuildCubeFromDataFrames(tab1x01MetaData, tab1x01ObsData )</
 ## !!!!!!!!!
 ## !!!!!!!!!</code></pre>
 <pre class="r"><code>cat(&quot;TAB1X01 cube stored as &quot;, normalizePath(tab1x01.cube.fn), &quot;\n&quot;)</code></pre>
-<pre><code>## TAB1X01 cube stored as  /tmp/RtmpADOzEl/DC-TAB1X01-R-V-0-0-0.ttl</code></pre>
+<pre><code>## TAB1X01 cube stored as  /tmp/Rtmp4yMKXK/DC-TAB1X01-R-V-0-0-0.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;CDISC-pilot-TAB1X01.ttl&quot;)
 
 if (file.copy( tab1x01.cube.fn, targetFile, overwrite=TRUE)) {
@@ -204,7 +204,7 @@ cat(&quot;Loading RDF data cube from &quot;, normalizePath(dataCubeFile), &quot;
 <pre><code>## Loading RDF data cube from  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf/CDISC-pilot-TAB1X01.ttl</code></pre>
 <pre class="r"><code>temp&lt;- load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= checkCube)
 summarize.rdf(checkCube)</code></pre>
-<pre><code>## [1] &quot;Number of triples: 1442&quot;</code></pre>
+<pre><code>## [1] &quot;Number of triples: 1368&quot;</code></pre>
 <div id="get-the-values-in-the-cube" class="section level2">
 <h2>Get the values in the cube</h2>
 <p>First set values for accessing the cube.</p>
@@ -1372,9 +1372,9 @@ knitr::kable(metadataX)</code></pre>
 ## [1] methods   stats     graphics  grDevices utils     datasets  base     
 ## 
 ## other attached packages:
-##  [1] rrdfqbcrndex_0.2.3  rrdfqbcrnd0_0.2.3   rrdfqb_0.2.3       
+##  [1] rrdfqbcrndex_0.2.3  rrdfqbcrnd0_0.2.3   rrdfqb_0.3.1       
 ##  [4] xlsx_0.5.7          xlsxjars_0.6.1      rrdfcdisc_0.2.3    
-##  [7] devtools_1.11.0     RCurl_1.95-4.8      bitops_1.0-6       
+##  [7] devtools_1.11.1     RCurl_1.95-4.8      bitops_1.0-6       
 ## [10] rrdfancillary_0.2.3 rrdf_2.1.2          rrdflibs_1.4.0     
 ## [13] rJava_0.9-8        
 ## 

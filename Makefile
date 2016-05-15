@@ -22,25 +22,25 @@ install-from-ReleasePackages:
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("ReleasePackages/rrdfqbpresent_${PACKAGEVERSION}.tar.gz")'
 
 install-rrdfancillary-from-dir:
-	(cd rrdfancillary; make install-rpackage-from-dir)
+	cd rrdfancillary; make install-rpackage-from-dir
 
 install-rrdfcdisc-from-dir:
-	(cd rrdfcdisc; make install-rpackage-from-dir)
+	cd rrdfcdisc; make install-rpackage-from-dir
 
 install-rrdfqb-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqb_${PACKAGEVERSION}.tar.gz")'       
+	cd rrdfancillary; make install-rpackage-from-dir
 
 install-rrdfqbcrnd0-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrnd0_${PACKAGEVERSION}.tar.gz")'  
+	cd rrdfqbcrnd0; make install-rpackage-from-dir
 
 install-rrdfqbcrndex-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrndex_${PACKAGEVERSION}.tar.gz")'
+	cd rrdfqbcrndex; make install-rpackage-from-dir
 
 install-rrdfqbcrndcheck-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbcrndcheck_${PACKAGEVERSION}.tar.gz")'
+	cd rrdfqbcrndcheck; make install-rpackage-from-dir
 
 install-rrdfqbpresent-from-dir:
-	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("rrdfqbpresent_${PACKAGEVERSION}.tar.gz")'
+	cd rrdfqbpresent; make install-rpackage-from-dir
 
 ################################################################
 
@@ -71,12 +71,13 @@ install-rrdfcdisc-from-ReleasePackages:
 	cd rrdfqbcrndex; make
 	cd rrdfqbcrndex; make install-rpackage-from-dir
 
-6 mk-rrdfqbpresent:
+6 mk-rrdfqbcrndcheck:
+	cd rrdfqbcrndcheck; make
+	cd rrdfqbcrndcheck; make install-rpackage-from-dir
+
+7 mk-rrdfqbpresent:
 	cd rrdfqbpresent; make
 	cd rrdfqbpresent; make install-rpackage-from-dir
-
-mk-rrdfqbcrndcheck:
-	cd rrdfqbcrndcheck; make
 
 doc-which-packages:
 	@echo "|Package            |Description|"
