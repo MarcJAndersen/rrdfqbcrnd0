@@ -25,10 +25,11 @@ RKNIT2MD=$(R_HOME)/bin/Rscript -e "knitr::knit('$<')"
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 
 
-all: ${TARGETS}
+all: ${TARGETS} 
 
 clean: 
 	rm -f ${TARGETS}
+	cd ../doc; rm -f ${FORDOC}
 
 installDoc:
 #	mkdir -p ../doc/figure

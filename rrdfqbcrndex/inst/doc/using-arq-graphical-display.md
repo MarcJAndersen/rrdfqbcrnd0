@@ -23,51 +23,51 @@ dot -x -Tpdf -ograph.pdf fordot.dot
 ```
 
     ## @prefix dccs:  <http://www.example.org/dc/demo/dccs/> .
-    ## @prefix sdtms-1-3: <http://rdf.cdisc.org/sdtm-1-3/schema#> .
     ## @prefix code:  <http://www.example.org/dc/code/> .
+    ## @prefix sdtms-1-3: <http://rdf.cdisc.org/sdtm-1-3/schema#> .
     ## @prefix adam-2-1: <http://rdf.cdisc.org/std/adam-2-1#> .
     ## @prefix owl:   <http://www.w3.org/2002/07/owl#> .
     ## @prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
-    ## @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
-    ## @prefix cdash-1-1: <http://rdf.cdisc.org/std/cdash-1-1#> .
     ## @prefix sdtm-1-3: <http://rdf.cdisc.org/std/sdtm-1-3#> .
+    ## @prefix cdash-1-1: <http://rdf.cdisc.org/std/cdash-1-1#> .
+    ## @prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
     ## @prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
     ## @prefix adamvr-1-2: <http://rdf.cdisc.org/std/adamvr-1-2#> .
     ## @prefix crnd-attribute: <http://www.example.org/dc/attribute#> .
     ## @prefix sdtm-1-2: <http://rdf.cdisc.org/std/sdtm-1-2#> .
-    ## @prefix sdtmct: <http://rdf.cdisc.org/sdtm-terminology#> .
     ## @prefix ds:    <http://www.example.org/dc/demo/ds/> .
+    ## @prefix sdtmct: <http://rdf.cdisc.org/sdtm-terminology#> .
     ## @prefix qb:    <http://purl.org/linked-data/cube#> .
     ## @prefix mms:   <http://rdf.cdisc.org/mms#> .
     ## @prefix crnd-dimension: <http://www.example.org/dc/dimension#> .
     ## @prefix dct:   <http://purl.org/dc/terms/> .
     ## @prefix cdiscs: <http://rdf.cdisc.org/std/schema#> .
-    ## @prefix dcat:  <http://www.w3.org/ns/dcat#> .
     ## @prefix cdashct: <http://rdf.cdisc.org/cdash-terminology#> .
+    ## @prefix dcat:  <http://www.w3.org/ns/dcat#> .
     ## @prefix prov:  <http://www.w3.org/ns/prov#> .
     ## @prefix sdtmig-3-1-3: <http://rdf.cdisc.org/std/sdtmig-3-1-3#> .
-    ## @prefix adamig-1-0: <http://rdf.cdisc.org/std/adamig-1-0#> .
     ## @prefix crnd-measure: <http://www.example.org/dc/measure#> .
+    ## @prefix adamig-1-0: <http://rdf.cdisc.org/std/adamig-1-0#> .
     ## @prefix cts:   <http://rdf.cdisc.org/ct/schema#> .
     ## @prefix pav:   <http://purl.org/pav> .
     ## @prefix sdtmig-3-1-2: <http://rdf.cdisc.org/std/sdtmig-3-1-2#> .
     ## @prefix sendig-3-0: <http://rdf.cdisc.org/std/sendig-3-0#> .
-    ## @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     ## @prefix adamct: <http://rdf.cdisc.org/adam-terminology#> .
+    ## @prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
     ## @prefix sendct: <http://rdf.cdisc.org/send-terminology#> .
     ## @prefix rrdfqbcrnd0: <http://www.example.org/rrdfqbcrnd0/> .
     ## @prefix dc:    <http://purl.org/dc/elements/1.1/> .
     ## 
     ## ds:obs014  a                        qb:Observation ;
     ##         rdfs:comment                "Statistic for number of records/Statistics for factor with the dimensions XX"@en ;
-    ##         rdfs:label                  "14"^^xsd:string ;
+    ##         rdfs:label                  "14" ;
     ##         qb:dataSet                  ds:dataset-DEMO ;
-    ##         crnd-attribute:cellpartno   "1"^^xsd:string ;
-    ##         crnd-attribute:colno        "2"^^xsd:string ;
+    ##         crnd-attribute:cellpartno   "1" ;
+    ##         crnd-attribute:colno        "2" ;
     ##         crnd-attribute:denominator  "" ;
-    ##         crnd-attribute:measurefmt   "%6.0f"^^xsd:string ;
-    ##         crnd-attribute:rowno        "3"^^xsd:string ;
-    ##         crnd-attribute:unit         "NA"^^xsd:string ;
+    ##         crnd-attribute:measurefmt   "%6.0f" ;
+    ##         crnd-attribute:rowno        "3" ;
+    ##         crnd-attribute:unit         "NA" ;
     ##         crnd-dimension:agegr1       code:agegr1-_ALL_ ;
     ##         crnd-dimension:ethnic       code:ethnic-_ALL_ ;
     ##         crnd-dimension:factor       code:factor-quantity ;

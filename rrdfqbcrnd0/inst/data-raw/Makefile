@@ -21,8 +21,8 @@ RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 all: ${TARGETS}
 
 clean: 
-	rm -f ${TARGETS}
-	(cd ../doc; rm -f ${TARGETS})
+	rm -f ${TARGETS} 
+	cd ../doc; rm -f ${FORDOC}
 
 installDoc:
 	mkdir -p ../doc/figure

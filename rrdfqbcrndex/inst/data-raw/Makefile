@@ -26,21 +26,28 @@ TTLS=${ADSLTTL} ${ADAETTL} ${QBTTLS}
 ADAEXPT=../extdata/sample-xpt/adae.xpt
 ADSLXPT=../extdata/sample-xpt/adsl.xpt
 
+CSVAE=../extdata/sample-cfg/ae.aedecod.AR.csv ../extdata/sample-cfg/ae.aesoc.AR.csv ../extdata/sample-cfg/ae.AR.csv
+CSVDM=../extdata/sample-cfg/dm.AR.csv
+CSVDEMO=../extdata/sample-cfg/demo.AR.csv ../extdata/sample-cfg/DEMO-Components.csv
+
 XPTS= ${ADAEXPT} ${ADDMXPT}
+
+# ${CSVDEMO} is created by a SAS program outside the makefile
 
 CSVS= ${CSVAE} ${CSVDM} 
 
 
 FORDOC= ${HTMLS} ${MDS} ${PDFS}
 
-TARGETS=${XPTS} ${TTLS}  ${FORDOC}
+TARGETS=${XPTS} ${TTLS} ${CSVS} ${FORDOC} 
 
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 
-all: ${TARGETS} cleantemp
+all: ${TARGETS} ${FORDOC} cleantemp
 
 clean: 
-	rm -f ${TARGETS} highlight.css
+	rm -f ${TARGETS} highlight.css;
+	cd ../doc; rm -rf ${FORDOC} 
 
 cleantemp:
 	rm -f ../extdata/sample-rdf/fordot.ttl ../extdata/sample-rdf/fordot.dot
@@ -69,6 +76,8 @@ ${CSVAE} create-ae-table-as-csv.html create-ae-table-as-csv.pdf create-ae-table-
 
 ${CSVDM} create-dm-table-as-csv.html create-dm-table-as-csv.pdf create-dm-table-as-csv.md: create-dm-table-as-csv.Rmd
 	${RMD2HTML}
+
+${CSVDEMO}:
 
 ${QBTTLS} create-qb-examples-as-ttl.html create-qb-examples-as-ttl.pdf create-qb-examples-as-ttl.md: create-qb-examples-as-ttl.Rmd ${CSVAE} ${CSVDM} ${CSVDEMO}
 	${RMD2HTML}
