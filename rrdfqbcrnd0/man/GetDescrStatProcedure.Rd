@@ -10,6 +10,8 @@ GetDescrStatProcedure()
 List providing function for each descriptive statistics
 }
 \description{
-Get list of Descriptive statistics
+For q1 and q3 type=2 is used, as it gives same results as SAS. However,
+the R help on quantile states type=3 gives same result as SAS.
+TODO(MJA): investigate which definition is the preferable.
 }
 

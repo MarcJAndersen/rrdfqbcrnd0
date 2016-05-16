@@ -207,20 +207,20 @@ cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure.rq 
 ```
 
-    ## -----------------------------------------------------------------------------------------------------------------------
-    ## | procedure              | prefLabel             | functiondef                                                        |
-    ## =======================================================================================================================
-    ## | code:procedure-max     | "max"^^xsd:string     | "function (x)  {     max(x, na.rm = TRUE) }"                       |
-    ## | code:procedure-std     | "std"^^xsd:string     | "function (x)  {     sd(x, na.rm = TRUE) }"                        |
-    ## | code:procedure-mean    | "mean"^^xsd:string    | "function (x)  {     mean(x, na.rm = TRUE) }"                      |
-    ## | code:procedure-min     | "min"^^xsd:string     | "function (x)  {     min(x, na.rm = TRUE) }"                       |
-    ## | code:procedure-percent | "percent"^^xsd:string | "function (x)  {     -1 }"                                         |
-    ## | code:procedure-count   | "count"^^xsd:string   | "function (x)  {     length(x) }"                                  |
-    ## | code:procedure-q3      | "q3"^^xsd:string      | "function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }" |
-    ## | code:procedure-n       | "n"^^xsd:string       | "function (x)  {     length(x[!is.na(x)]) }"                       |
-    ## | code:procedure-median  | "median"^^xsd:string  | "function (x)  {     median(x, na.rm = TRUE) }"                    |
-    ## | code:procedure-q1      | "q1"^^xsd:string      | "function (x)  {     quantile(x, probs = c(0.25), na.rm = TRUE) }" |
-    ## -----------------------------------------------------------------------------------------------------------------------
+    ## ---------------------------------------------------------------------------------------------------------------------------------
+    ## | procedure              | prefLabel             | functiondef                                                                  |
+    ## =================================================================================================================================
+    ## | code:procedure-max     | "max"^^xsd:string     | "function (x)  {     max(x, na.rm = TRUE) }"                                 |
+    ## | code:procedure-std     | "std"^^xsd:string     | "function (x)  {     sd(x, na.rm = TRUE) }"                                  |
+    ## | code:procedure-mean    | "mean"^^xsd:string    | "function (x)  {     mean(x, na.rm = TRUE) }"                                |
+    ## | code:procedure-min     | "min"^^xsd:string     | "function (x)  {     min(x, na.rm = TRUE) }"                                 |
+    ## | code:procedure-percent | "percent"^^xsd:string | "function (x)  {     -1 }"                                                   |
+    ## | code:procedure-count   | "count"^^xsd:string   | "function (x)  {     length(x) }"                                            |
+    ## | code:procedure-q3      | "q3"^^xsd:string      | "function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }" |
+    ## | code:procedure-n       | "n"^^xsd:string       | "function (x)  {     length(x[!is.na(x)]) }"                                 |
+    ## | code:procedure-median  | "median"^^xsd:string  | "function (x)  {     median(x, na.rm = TRUE) }"                              |
+    ## | code:procedure-q1      | "q1"^^xsd:string      | "function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }" |
+    ## ---------------------------------------------------------------------------------------------------------------------------------
 
 Get the codelists
 -----------------
@@ -290,100 +290,100 @@ cd ../extdata/sample-rdf
 arq --data DC-DEMO-sample.ttl --query DEMOprocedure-codelist.rq 
 ```
 
-    ## ---------------------------------------------------------------------------------------------------------------------------------
-    ## | s                      | p                               | o                                                                  |
-    ## =================================================================================================================================
-    ## | code:procedure-min     | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-min     | skos:prefLabel                  | "min"^^xsd:string                                                  |
-    ## | code:procedure-min     | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-min     | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     min(x, na.rm = TRUE) }"                       |
-    ## | code:procedure-min     | rrdfqbcrnd0:R-selectionvalue    | "min"^^xsd:string                                                  |
-    ## | code:procedure-min     | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-min     | rdfs:comment                    | "Descriptive statistics min"@en                                    |
-    ## | code:procedure-min     | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-min     | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-std     | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-std     | skos:prefLabel                  | "std"^^xsd:string                                                  |
-    ## | code:procedure-std     | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-std     | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     sd(x, na.rm = TRUE) }"                        |
-    ## | code:procedure-std     | rrdfqbcrnd0:R-selectionvalue    | "std"^^xsd:string                                                  |
-    ## | code:procedure-std     | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-std     | rdfs:comment                    | "Descriptive statistics std"@en                                    |
-    ## | code:procedure-std     | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-std     | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-q3      | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-q3      | skos:prefLabel                  | "q3"^^xsd:string                                                   |
-    ## | code:procedure-q3      | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-q3      | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }" |
-    ## | code:procedure-q3      | rrdfqbcrnd0:R-selectionvalue    | "q3"^^xsd:string                                                   |
-    ## | code:procedure-q3      | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-q3      | rdfs:comment                    | "Descriptive statistics q3"@en                                     |
-    ## | code:procedure-q3      | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-q3      | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-median  | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-median  | skos:prefLabel                  | "median"^^xsd:string                                               |
-    ## | code:procedure-median  | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-median  | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     median(x, na.rm = TRUE) }"                    |
-    ## | code:procedure-median  | rrdfqbcrnd0:R-selectionvalue    | "median"^^xsd:string                                               |
-    ## | code:procedure-median  | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-median  | rdfs:comment                    | "Descriptive statistics median"@en                                 |
-    ## | code:procedure-median  | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-median  | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-count   | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-count   | skos:prefLabel                  | "count"^^xsd:string                                                |
-    ## | code:procedure-count   | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-count   | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     length(x) }"                                  |
-    ## | code:procedure-count   | rrdfqbcrnd0:R-selectionvalue    | "count"^^xsd:string                                                |
-    ## | code:procedure-count   | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-count   | rdfs:comment                    | "Descriptive statistics count"@en                                  |
-    ## | code:procedure-count   | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-count   | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-max     | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-max     | skos:prefLabel                  | "max"^^xsd:string                                                  |
-    ## | code:procedure-max     | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-max     | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     max(x, na.rm = TRUE) }"                       |
-    ## | code:procedure-max     | rrdfqbcrnd0:R-selectionvalue    | "max"^^xsd:string                                                  |
-    ## | code:procedure-max     | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-max     | rdfs:comment                    | "Descriptive statistics max"@en                                    |
-    ## | code:procedure-max     | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-max     | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-mean    | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-mean    | skos:prefLabel                  | "mean"^^xsd:string                                                 |
-    ## | code:procedure-mean    | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-mean    | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     mean(x, na.rm = TRUE) }"                      |
-    ## | code:procedure-mean    | rrdfqbcrnd0:R-selectionvalue    | "mean"^^xsd:string                                                 |
-    ## | code:procedure-mean    | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-mean    | rdfs:comment                    | "Descriptive statistics mean"@en                                   |
-    ## | code:procedure-mean    | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-mean    | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-q1      | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-q1      | skos:prefLabel                  | "q1"^^xsd:string                                                   |
-    ## | code:procedure-q1      | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-q1      | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     quantile(x, probs = c(0.25), na.rm = TRUE) }" |
-    ## | code:procedure-q1      | rrdfqbcrnd0:R-selectionvalue    | "q1"^^xsd:string                                                   |
-    ## | code:procedure-q1      | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-q1      | rdfs:comment                    | "Descriptive statistics q1"@en                                     |
-    ## | code:procedure-q1      | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-q1      | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-n       | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-n       | skos:prefLabel                  | "n"^^xsd:string                                                    |
-    ## | code:procedure-n       | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-n       | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     length(x[!is.na(x)]) }"                       |
-    ## | code:procedure-n       | rrdfqbcrnd0:R-selectionvalue    | "n"^^xsd:string                                                    |
-    ## | code:procedure-n       | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-n       | rdfs:comment                    | "Descriptive statistics n"@en                                      |
-    ## | code:procedure-n       | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-n       | rdf:type                        | code:Procedure                                                     |
-    ## | code:procedure-percent | skos:topConceptOf               | code:procedure                                                     |
-    ## | code:procedure-percent | skos:prefLabel                  | "percent"^^xsd:string                                              |
-    ## | code:procedure-percent | skos:inScheme                   | code:procedure                                                     |
-    ## | code:procedure-percent | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     -1 }"                                         |
-    ## | code:procedure-percent | rrdfqbcrnd0:R-selectionvalue    | "percent"^^xsd:string                                              |
-    ## | code:procedure-percent | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                   |
-    ## | code:procedure-percent | rdfs:comment                    | "Descriptive statistics percent"@en                                |
-    ## | code:procedure-percent | rdf:type                        | skos:Concept                                                       |
-    ## | code:procedure-percent | rdf:type                        | code:Procedure                                                     |
-    ## ---------------------------------------------------------------------------------------------------------------------------------
+    ## -------------------------------------------------------------------------------------------------------------------------------------------
+    ## | s                      | p                               | o                                                                            |
+    ## ===========================================================================================================================================
+    ## | code:procedure-min     | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-min     | skos:prefLabel                  | "min"^^xsd:string                                                            |
+    ## | code:procedure-min     | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-min     | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     min(x, na.rm = TRUE) }"                                 |
+    ## | code:procedure-min     | rrdfqbcrnd0:R-selectionvalue    | "min"^^xsd:string                                                            |
+    ## | code:procedure-min     | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-min     | rdfs:comment                    | "Descriptive statistics min"@en                                              |
+    ## | code:procedure-min     | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-min     | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-std     | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-std     | skos:prefLabel                  | "std"^^xsd:string                                                            |
+    ## | code:procedure-std     | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-std     | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     sd(x, na.rm = TRUE) }"                                  |
+    ## | code:procedure-std     | rrdfqbcrnd0:R-selectionvalue    | "std"^^xsd:string                                                            |
+    ## | code:procedure-std     | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-std     | rdfs:comment                    | "Descriptive statistics std"@en                                              |
+    ## | code:procedure-std     | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-std     | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-q3      | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-q3      | skos:prefLabel                  | "q3"^^xsd:string                                                             |
+    ## | code:procedure-q3      | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-q3      | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }" |
+    ## | code:procedure-q3      | rrdfqbcrnd0:R-selectionvalue    | "q3"^^xsd:string                                                             |
+    ## | code:procedure-q3      | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-q3      | rdfs:comment                    | "Descriptive statistics q3"@en                                               |
+    ## | code:procedure-q3      | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-q3      | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-median  | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-median  | skos:prefLabel                  | "median"^^xsd:string                                                         |
+    ## | code:procedure-median  | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-median  | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     median(x, na.rm = TRUE) }"                              |
+    ## | code:procedure-median  | rrdfqbcrnd0:R-selectionvalue    | "median"^^xsd:string                                                         |
+    ## | code:procedure-median  | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-median  | rdfs:comment                    | "Descriptive statistics median"@en                                           |
+    ## | code:procedure-median  | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-median  | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-count   | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-count   | skos:prefLabel                  | "count"^^xsd:string                                                          |
+    ## | code:procedure-count   | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-count   | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     length(x) }"                                            |
+    ## | code:procedure-count   | rrdfqbcrnd0:R-selectionvalue    | "count"^^xsd:string                                                          |
+    ## | code:procedure-count   | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-count   | rdfs:comment                    | "Descriptive statistics count"@en                                            |
+    ## | code:procedure-count   | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-count   | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-max     | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-max     | skos:prefLabel                  | "max"^^xsd:string                                                            |
+    ## | code:procedure-max     | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-max     | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     max(x, na.rm = TRUE) }"                                 |
+    ## | code:procedure-max     | rrdfqbcrnd0:R-selectionvalue    | "max"^^xsd:string                                                            |
+    ## | code:procedure-max     | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-max     | rdfs:comment                    | "Descriptive statistics max"@en                                              |
+    ## | code:procedure-max     | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-max     | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-mean    | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-mean    | skos:prefLabel                  | "mean"^^xsd:string                                                           |
+    ## | code:procedure-mean    | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-mean    | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     mean(x, na.rm = TRUE) }"                                |
+    ## | code:procedure-mean    | rrdfqbcrnd0:R-selectionvalue    | "mean"^^xsd:string                                                           |
+    ## | code:procedure-mean    | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-mean    | rdfs:comment                    | "Descriptive statistics mean"@en                                             |
+    ## | code:procedure-mean    | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-mean    | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-q1      | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-q1      | skos:prefLabel                  | "q1"^^xsd:string                                                             |
+    ## | code:procedure-q1      | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-q1      | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }" |
+    ## | code:procedure-q1      | rrdfqbcrnd0:R-selectionvalue    | "q1"^^xsd:string                                                             |
+    ## | code:procedure-q1      | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-q1      | rdfs:comment                    | "Descriptive statistics q1"@en                                               |
+    ## | code:procedure-q1      | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-q1      | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-n       | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-n       | skos:prefLabel                  | "n"^^xsd:string                                                              |
+    ## | code:procedure-n       | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-n       | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     length(x[!is.na(x)]) }"                                 |
+    ## | code:procedure-n       | rrdfqbcrnd0:R-selectionvalue    | "n"^^xsd:string                                                              |
+    ## | code:procedure-n       | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-n       | rdfs:comment                    | "Descriptive statistics n"@en                                                |
+    ## | code:procedure-n       | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-n       | rdf:type                        | code:Procedure                                                               |
+    ## | code:procedure-percent | skos:topConceptOf               | code:procedure                                                               |
+    ## | code:procedure-percent | skos:prefLabel                  | "percent"^^xsd:string                                                        |
+    ## | code:procedure-percent | skos:inScheme                   | code:procedure                                                               |
+    ## | code:procedure-percent | rrdfqbcrnd0:RdescStatDefFun     | "function (x)  {     -1 }"                                                   |
+    ## | code:procedure-percent | rrdfqbcrnd0:R-selectionvalue    | "percent"^^xsd:string                                                        |
+    ## | code:procedure-percent | rrdfqbcrnd0:R-selectionoperator | "=="^^xsd:string                                                             |
+    ## | code:procedure-percent | rdfs:comment                    | "Descriptive statistics percent"@en                                          |
+    ## | code:procedure-percent | rdf:type                        | skos:Concept                                                                 |
+    ## | code:procedure-percent | rdf:type                        | code:Procedure                                                               |
+    ## -------------------------------------------------------------------------------------------------------------------------------------------
 
 Get definition for all variables used for descriptive statistics - class `code:factor`
 --------------------------------------------------------------------------------------

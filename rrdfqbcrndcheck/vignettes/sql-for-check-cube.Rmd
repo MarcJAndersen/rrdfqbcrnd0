@@ -39,29 +39,30 @@ The conversion to character can be avoided by using
 ## Load the RDF data cube
 The RDF data cube is loaded.
 ```{r}
-dataCubeFile<- system.file("extdata/sample-rdf", "DC-DM-sample.ttl", package="rrdfqbcrndex")
+dataCubeFile<- system.file("extdata/sample-rdf", "DC-DEMO-sample.ttl", package="rrdfqbcrndex")
 store <- new.rdf()  # Initialize
 cat("Reading turtle definition from ", dataCubeFile, "\n")
 temp<- load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
 ```
 
-The mean values for the `WEIGHTBL` variable in RDF data cube is:
+With a SPARQL query the mean values for the `WEIGHTBL` variable in RDF data cube the are extracted.
 ```{r}
 rq<-'
 prefix crnd-measure: <http://www.example.org/dc/measure#> 
 prefix code:  <http://www.example.org/dc/code/> 
 prefix crnd-attribute: <http://www.example.org/dc/attribute#> 
-prefix ds:    <http://www.example.org/dc/dm/ds/> 
+prefix ds:    <http://www.example.org/dc/demo/ds/> 
 prefix qb:    <http://purl.org/linked-data/cube#> 
 prefix crnd-dimension: <http://www.example.org/dc/dimension#> 
 select * where {
 ?obs  a                         qb:Observation ;
-    qb:dataSet                  ds:dataset-DM ;
-        crnd-dimension:factor       code:factor-WEIGHTBL ;
+    qb:dataSet                  ds:dataset-DEMO ;
+        crnd-dimension:agegr1       code:agegr1-_ALL_ ;
+        crnd-dimension:ethnic       code:ethnic-_ALL_ ;
+        crnd-dimension:factor       code:factor-weightbl ;
         crnd-dimension:procedure    code:procedure-mean ;
         crnd-dimension:race         code:race-_ALL_ ;
-        crnd-dimension:saffl        code:saffl-Y ;
         crnd-dimension:sex          code:sex-_ALL_ ;
         crnd-dimension:trt01a       ?trt01a ;
     crnd-measure:measure        ?measure .
@@ -69,16 +70,25 @@ select * where {
 '
 knitr::kable(data.frame(sparql.rdf( store, rq)))
 ```
+
 The SPARQL query about can be made more generic. 
+
 ## Generate SQL statements
 From the RDF data cube loading in the store, the function `GetSQLFromCube` generates the SQL statements for reproducing the data cube.
 Only the first two select statements are shown.
+
 ```{r}
 stmtSQL<- GetSQLFromCube( store, srcDsName="adsl" )
 cat(paste(unlist(strsplit(stmtSQL$summStatSQL,split="\n"))[1:3],collapse="\n"),"\n")
 ```
 
 ## Derive the descriptive statistics
+
+To show the full SQL expression use
+
+```{r,eval=FALSE}
+cat(stmtSQL$summStatSQL)
+```
 
 ```{r}
 library(sqldf)

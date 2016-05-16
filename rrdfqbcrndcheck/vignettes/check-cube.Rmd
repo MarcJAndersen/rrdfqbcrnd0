@@ -75,7 +75,5 @@ print(res)
 
 ```
 
-TODO(mja): naming of parameters to function _DeriveStatsForCube_ to be updated.
-
 
 End of file.

@@ -10,7 +10,7 @@
 map:database a d2rq:Database;
 	d2rq:jdbcDriver "org.hsqldb.jdbc.JDBCDriver";
 	d2rq:jdbcDSN "jdbc:hsqldb:mem:temp";
-	d2rq:startupSQLScript <file:/tmp/RtmpgwUgO5/file46de261b7350>;
+	d2rq:startupSQLScript <file:/tmp/RtmpvuC3xd/file1b7e3a973303>;
 	.
 
 # Table ADSL

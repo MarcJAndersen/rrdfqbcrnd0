@@ -6,7 +6,7 @@
 \usage{
 DeriveStatsForCube(store, forsparqlprefix, domainName, dsdName, dataSet,
   deriveMeasureList = NULL, checkOnly = TRUE, validation.measure = NULL,
-  myprefixes = NULL, filterexpr = NULL)
+  myprefixes = NULL, filterexpr = NULL, verbose = FALSE)
 }
 \arguments{
 \item{store}{a RRDF store containing one or more date cubes}

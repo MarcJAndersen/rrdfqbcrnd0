@@ -955,7 +955,7 @@ code:procedure-q3  a                  code:Procedure , skos:Concept ;
         rrdfqbcrnd0:R-selectionoperator
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "q3"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     quantile(x, probs = c(0.75), na.rm = TRUE) }" ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }" ;
         skos:inScheme                 code:procedure ;
         skos:prefLabel                "q3"^^xsd:string ;
         skos:topConceptOf             code:procedure .
@@ -1729,7 +1729,7 @@ code:procedure-q1  a                  code:Procedure , skos:Concept ;
         rrdfqbcrnd0:R-selectionoperator
                 "=="^^xsd:string ;
         rrdfqbcrnd0:R-selectionvalue  "q1"^^xsd:string ;
-        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     quantile(x, probs = c(0.25), na.rm = TRUE) }" ;
+        rrdfqbcrnd0:RdescStatDefFun   "function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }" ;
         skos:inScheme                 code:procedure ;
         skos:prefLabel                "q1"^^xsd:string ;
         skos:topConceptOf             code:procedure .
@@ -1741,7 +1741,7 @@ ds:dataset-DEMO  a                    qb:DataSet ;
         dct:title                     "Demographics Analysis Results"^^xsd:string ;
         qb:structure                  ds:dsd-DEMO ;
         pav:createdBy                 "username or session name"^^xsd:string , "username or session name"^^xsd:string ;
-        pav:createdOn                 "2016-05-15T19:05:37+02:00"^^xsd:dateTime ;
+        pav:createdOn                 "2016-05-16T12:10:54+02:00"^^xsd:dateTime ;
         pav:createdWith               "R Version 3.2.3 Platform:x86_64-redhat-linux-gnu rrdfqbrnd0 package and dependencies"^^xsd:string ;
         pav:version                   "0.0.0"^^xsd:string ;
         rrdfqbcrnd0:D2RQ-DataSetName  "ADSL"^^xsd:string ;
