@@ -51,18 +51,28 @@ GetSQLFromCube<- function( store, dsdName=NULL, srcDsName="adsl"  ) {
     ## if (!(x["factorvalue"] %in% c("quantity","proportion"))) {
     ##   SQLexpr<- c(SQLexpr, tolower(x["factorvalue"]))
     ##   }
+    
     if ( x["procedurevalue"] %in% c("percent")) {
       derivExpr<- paste0("100*avg","(",
                          "a.", toupper(tolower(x["denominator"])), "=",
                          "b.", toupper(tolower(x["denominator"])),
                          ")")
-    } else if ( x["procedurevalue"] %in% c("count")) {
-      derivExpr<- paste0(x["procedurevalue"],"(", "*", ")")
+    } else if ( x["procedurevalue"] %in% c("count", "n")) {
+      derivExpr<- paste0("CAST( count","(", "*", ") AS REAL)")
     } else if ( x["procedurevalue"] %in% c("mean")) {
-      derivExpr<- paste0("avg","(", toupper(tolower(x["factorvalue"])),")" )
+        derivExpr<- paste0("avg","(", toupper(tolower(x["factorvalue"])),")" )
+    } else if ( x["procedurevalue"] %in% c("q1")) {
+        derivExpr<- paste0("lower_quartile","(", toupper(tolower(x["factorvalue"])),")" )
+    } else if ( x["procedurevalue"] %in% c("q3")) {
+        derivExpr<- paste0("upper_quartile","(", toupper(tolower(x["factorvalue"])),")" )
+    } else if ( x["procedurevalue"] %in% c("min", "max", "std", "median")) {
+        derivExpr<- paste0("upper_quartile","(", toupper(tolower(x["factorvalue"])),")" )
     } else  {
-      derivExpr<- paste0(x["procedurevalue"],"(", toupper(tolower(x["factorvalue"])),")" )
+      message("Aggregate funtion ", x["procedurevalue"], " can not be handled - no derivation")
+##      derivExpr<- paste0(x["procedurevalue"],"(", toupper(tolower(x["factorvalue"])),")" )
+        derivExpr<- "Null"
     }
+
     paste("SELECT",
           paste(
             paste0(selectExpr, collapse=", "),
