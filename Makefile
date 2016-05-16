@@ -6,7 +6,7 @@ all: mk-rrdfancillary  mk-rrdfcdisc mk-rrdfqb  mk-rrdfqbcrnd0 \
 # Would be better to have the different version numbers, and extract the version number from
 # the description file.
 
-PACKAGEVERSION=0.2.3
+PACKAGEVERSION=0.2.4
 
 install-from-dir: install-rrdfancillary-from-dir install-rrdfcdisc-from-dir install-rrdfqb-from-dir \
     install-rrdfqbcrnd0-from-dir install-rrdfqbcrndex-from-dir install-rrdfqbcrndcheck-from-dir \
