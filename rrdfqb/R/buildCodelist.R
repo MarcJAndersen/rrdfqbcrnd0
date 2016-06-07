@@ -96,7 +96,12 @@ cat("!!!!!!!!!\n")
              paste0(prefixlist$prefixCODE, capDimName),
              paste0(prefixlist$prefixRDFS, "seeAlso"),
              paste0(prefixlist$prefixCODE, dimName))
-  add.data.triple(store,
+  add.triple(store,
+             paste0(prefixlist$prefixCODE, DimName),
+             paste0(prefixlist$prefixRDFS, "seeAlso"),
+             paste0(prefixlist$prefixCODE, capDimName))
+
+    add.data.triple(store,
                   paste0(prefixlist$prefixCODE, capDimName),
                   paste0(prefixlist$prefixRDFS,"label"),
                   paste0("Class for code list: ", dimName),
