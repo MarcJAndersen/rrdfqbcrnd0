@@ -97,7 +97,7 @@ cat("!!!!!!!!!\n")
              paste0(prefixlist$prefixRDFS, "seeAlso"),
              paste0(prefixlist$prefixCODE, dimName))
   add.triple(store,
-             paste0(prefixlist$prefixCODE, DimName),
+             paste0(prefixlist$prefixCODE, dimName),
              paste0(prefixlist$prefixRDFS, "seeAlso"),
              paste0(prefixlist$prefixCODE, capDimName))
 
