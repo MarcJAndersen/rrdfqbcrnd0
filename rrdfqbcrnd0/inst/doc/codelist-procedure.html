@@ -11,7 +11,7 @@
 
 <meta name="author" content="PhuseSubTeamAnalysisResults@example.org" />
 
-<meta name="date" content="2016-05-16" />
+<meta name="date" content="2016-06-07" />
 
 <title>Show the procedure codelist</title>
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
 
 <h1 class="title">Show the procedure codelist</h1>
 <h4 class="author"><em><a href="mailto:PhuseSubTeamAnalysisResults@example.org">PhuseSubTeamAnalysisResults@example.org</a></em></h4>
-<h4 class="date"><em>2016-05-16</em></h4>
+<h4 class="date"><em>2016-06-07</em></h4>
 
 </div>
 
@@ -389,7 +389,7 @@ knitr::kable(cubeMetadata)</code></pre>
 <p>This shows a simple use of the BuildCubeFromDataFrames function. The warning message from log4j can be ignored.</p>
 <p>The RDF data cube is serialized in turtle format and stored as a text file in</p>
 <pre class="r"><code>cat(normalizePath(outcube),&quot;\n&quot;)</code></pre>
-<pre><code>## /tmp/RtmpHZuaDT/DC-EXAMPLE-R-V-0-0-0.ttl</code></pre>
+<pre><code>## /tmp/RtmpH4HGxk/DC-EXAMPLE-R-V-0-0-0.ttl</code></pre>
 </div>
 </div>
 <div id="query-the-cube-using-sparql" class="section level1">
@@ -400,7 +400,7 @@ knitr::kable(cubeMetadata)</code></pre>
 <pre class="r"><code>cube &lt;- new.rdf()  # Initialize
 temp&lt;-load.rdf(dataCubeFile, format=&quot;TURTLE&quot;, appendTo= cube)
 summarize.rdf(cube)</code></pre>
-<pre><code>## [1] &quot;Number of triples: 367&quot;</code></pre>
+<pre><code>## [1] &quot;Number of triples: 370&quot;</code></pre>
 <p>The next statements are needed for the current implementation of the cube, and may change in future versions.</p>
 <pre class="r"><code>## TODO: reconsider the use of domain specific prefixes
 dsdName&lt;- GetDsdNameFromCube( cube )

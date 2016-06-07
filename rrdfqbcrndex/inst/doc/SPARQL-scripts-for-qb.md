@@ -60,7 +60,7 @@ temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= store)
 summarize.rdf(store)
 ```
 
-    ## [1] "Number of triples: 3088"
+    ## [1] "Number of triples: 3095"
 
 For the functions in the package the datasets definition in the cube is needed.
 

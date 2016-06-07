@@ -11,7 +11,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-05-16" />
+<meta name="date" content="2016-06-07" />
 
 <title>Create ADAE as TTL file</title>
 
@@ -111,7 +111,7 @@ $(document).ready(function () {
 
 <h1 class="title">Create ADAE as TTL file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-05-16</em></h4>
+<h4 class="date"><em>2016-06-07</em></h4>
 
 </div>
 
@@ -171,11 +171,11 @@ dbWriteTable(con, &quot;adae&quot;, adae)</code></pre>
 <pre class="r"><code>dbDisconnect(con)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>cat(&quot;SQLite database stored as &quot;, tfile, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database stored as  /tmp/Rtmpg78Pi4/file6e793cad3d8</code></pre>
+<pre><code>## SQLite database stored as  /tmp/RtmpJ5BU3w/file21561089fc01</code></pre>
 <pre class="r"><code>dumpFn&lt;- tempfile()
 system(paste(&quot;sqlite3&quot;, tfile, &quot;.dump &gt;&quot;, dumpFn, sep=&quot; &quot;))
 cat(&quot;SQLite database dump in &quot;, dumpFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump in  /tmp/Rtmpg78Pi4/file6e7974aa8b28</code></pre>
+<pre><code>## SQLite database dump in  /tmp/RtmpJ5BU3w/file215631c33b3b</code></pre>
 <p>Next step is to process the dump, so the SQL can be used as input to d2rq. The changes applied are: * change TEXT to VARCHAR(1000) * remove top 2 lines with PRAGMA * in insert statements replace “adae” with adae * after “AOCC01FL” TEXT add a comma (“,”) and a new line with PRIMARY KEY (USUBJID,AESEQ)</p>
 <p>This could maybe be simplified using RSQlite on dbSendQuery-methods, see (<a href="https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html" class="uri">https://stat.ethz.ch/pipermail/r-sig-db/2010q1/000813.html</a>). For d2rq documentation see (<a href="file:///opt/d2rq-0.8.1/doc/dump-rdf.html" class="uri">file:///opt/d2rq-0.8.1/doc/dump-rdf.html</a>).</p>
 <pre class="r"><code>dumpAfterSedFn &lt;- tempfile()
@@ -184,7 +184,7 @@ sedCmd&lt;- paste(&quot;sed&quot;,
                dumpFn, &quot;&gt;&quot;, dumpAfterSedFn, sep=&quot; &quot;)
 system(sedCmd)
 cat(&quot;SQLite database dump modified stored as &quot;, dumpAfterSedFn, &quot;\n&quot;)</code></pre>
-<pre><code>## SQLite database dump modified stored as  /tmp/Rtmpg78Pi4/file6e7940a06fc</code></pre>
+<pre><code>## SQLite database dump modified stored as  /tmp/RtmpJ5BU3w/file215617435c4a</code></pre>
 <pre class="r"><code>## Check only expected changes were applied
 ## not run due to large output
 ## system(paste(&quot;diff&quot;, dumpFn, dumpAfterSedFn, sep=&quot; &quot;))
@@ -215,11 +215,11 @@ targetDir&lt;- system.file(&quot;extdata/sample-rdf&quot;, package=&quot;rrdfqbc
 if (file.copy(adaemapttlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adaemapttlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/Rtmpg78Pi4/adae-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/RtmpJ5BU3w/adae-map.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>if (file.copy(adaettlFn, targetDir, overwrite = TRUE)) {
 cat( &quot;File &quot;, adaettlFn, &quot; copied to directory &quot;, targetDir, &quot;\n&quot;)
 }</code></pre>
-<pre><code>## File  /tmp/Rtmpg78Pi4/adae.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
+<pre><code>## File  /tmp/RtmpJ5BU3w/adae.ttl  copied to directory  /home/ma/projects/rrdfqbcrnd0/rrdfqbcrndex/inst/extdata/sample-rdf</code></pre>
 <pre class="r"><code>### This could maybe also work ..
 ## m &lt;- dbDriver(&quot;SQLite&quot;)
 ## tfile &lt;- tempfile()

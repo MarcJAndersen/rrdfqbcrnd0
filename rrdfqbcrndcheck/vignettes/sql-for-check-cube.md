@@ -1,7 +1,7 @@
 ---
 title: "SQL code for verifying results in RDF data cube"
 author: "mja@statgroup.dk"
-date: "2016-05-16"
+date: "2016-06-07"
 vignette: >
   %\VignetteIndexEntry{SQL code for verifying results in RDF data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -116,7 +116,7 @@ summarize.rdf(store)
 ```
 
 ```
-## [1] "Number of triples: 3088"
+## [1] "Number of triples: 3095"
 ```
 
 With a SPARQL query the mean values for the `WEIGHTBL` variable in RDF data cube the are extracted.

@@ -105,7 +105,7 @@ The RDF data cube is serialized in turtle format and stored as a text file in
 cat(normalizePath(outcube),"\n")
 ```
 
-    ## /tmp/RtmpHZuaDT/DC-EXAMPLE-R-V-0-0-0.ttl
+    ## /tmp/RtmpH4HGxk/DC-EXAMPLE-R-V-0-0-0.ttl
 
 Query the cube using SPARQL
 ===========================
@@ -124,7 +124,7 @@ temp<-load.rdf(dataCubeFile, format="TURTLE", appendTo= cube)
 summarize.rdf(cube)
 ```
 
-    ## [1] "Number of triples: 367"
+    ## [1] "Number of triples: 370"
 
 The next statements are needed for the current implementation of the cube, and may change in future versions.
 

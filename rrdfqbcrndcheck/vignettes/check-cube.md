@@ -1,7 +1,7 @@
 ---
 title: "Derive results in RDF data cube and compare with results in data cube"
 author: "mja@statgroup.dk"
-date: "2016-05-16"
+date: "2016-06-07"
 vignette: >
   %\VignetteIndexEntry{Derive results in RDF data cube and compare with results in data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -112,7 +112,7 @@ summarize.rdf(store)
 ```
 
 ```
-## [1] "Number of triples: 3088"
+## [1] "Number of triples: 3095"
 ```
 
 ```r
