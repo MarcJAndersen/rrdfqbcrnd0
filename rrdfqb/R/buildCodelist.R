@@ -296,8 +296,8 @@ cat("!!!!!!!!!\n")
     if (codeType=="SDTM"){
       add.data.triple(store,
                       codeSubj,
-                      paste0(prefixlist$prefixCTS,"cdiscSynonyms"),
-                      paste0(codeSource[i,"cdiscSynonyms"]))
+                      paste0(prefixlist$prefixCTS,"cdiscSynonym"),
+                      paste0(codeSource[i,"cdiscSynonym"]))
 
       ## Remove the prefix colon to specify the value directly (without prefix)
       nciDomain<-gsub("sdtmct:","",codeSource[i,"nciDomain"])
