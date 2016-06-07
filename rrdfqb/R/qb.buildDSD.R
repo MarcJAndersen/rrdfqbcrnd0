@@ -107,11 +107,6 @@ add.data.triple(store,
                 extra$PAVnodes$createdOn,
                 "dateTime")
 
-add.data.triple(store,
-                paste0(prefixlist$prefixDS, dsdURIwoprefix),
-                paste0(prefixlist$prefixPAV, "createdBy"),
-                extra$PAVnodes$createdBy,
-                "string")
 
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
@@ -129,7 +124,7 @@ add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
                 paste0(prefixlist$prefixPAV, "createdBy"),
                 extra$PAVnodes$createdBy,
-                "string"  )
+                "string")
 
 add.data.triple(store,
                 paste0(prefixlist$prefixDS, dsdURIwoprefix),
