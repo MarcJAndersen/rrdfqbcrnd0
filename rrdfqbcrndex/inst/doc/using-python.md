@@ -25,13 +25,13 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
-    ## http://www.example.org/dc/dimension#ethnic
-    ## http://www.example.org/dc/dimension#factor
-    ## http://www.example.org/dc/dimension#sex
-    ## http://www.example.org/dc/dimension#race
     ## http://www.example.org/dc/dimension#trt01a
-    ## http://www.example.org/dc/dimension#procedure
     ## http://www.example.org/dc/dimension#agegr1
+    ## http://www.example.org/dc/dimension#race
+    ## http://www.example.org/dc/dimension#sex
+    ## http://www.example.org/dc/dimension#factor
+    ## http://www.example.org/dc/dimension#ethnic
+    ## http://www.example.org/dc/dimension#procedure
 
 Get attributes
 --------------
@@ -48,12 +48,12 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
-    ## http://www.example.org/dc/attribute#denominator
-    ## http://www.example.org/dc/attribute#rowno
     ## http://www.example.org/dc/attribute#measurefmt
     ## http://www.example.org/dc/attribute#colno
     ## http://www.example.org/dc/attribute#unit
+    ## http://www.example.org/dc/attribute#rowno
     ## http://www.example.org/dc/attribute#cellpartno
+    ## http://www.example.org/dc/attribute#denominator
 
 Get observations
 ----------------
@@ -77,2907 +77,2907 @@ for row in qres:
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
     ## 
+    ## _NONMISS_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 1
-    ## _NONMISS_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs001
+    ## 1
     ## http://www.example.org/dc/code/sex-_NONMISS_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 86.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _NONMISS_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 1
-    ## _NONMISS_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs002
+    ## 1
     ## http://www.example.org/dc/code/sex-_NONMISS_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _NONMISS_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 1
-    ## _NONMISS_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs003
+    ## 1
     ## http://www.example.org/dc/code/sex-_NONMISS_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## sex
+    ## _NONMISS_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 1
-    ## _NONMISS_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs004
+    ## 2
     ## http://www.example.org/dc/code/sex-_NONMISS_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## sex
+    ## _NONMISS_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 1
-    ## _NONMISS_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs005
+    ## 2
     ## http://www.example.org/dc/code/sex-_NONMISS_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## sex
+    ## _NONMISS_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 1
-    ## _NONMISS_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs006
+    ## 2
     ## http://www.example.org/dc/code/sex-_NONMISS_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## F
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 2
-    ## F
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs007
+    ## 1
     ## http://www.example.org/dc/code/sex-F
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 53.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## F
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 2
-    ## F
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs008
+    ## 1
     ## http://www.example.org/dc/code/sex-F
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 50.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## F
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 2
-    ## F
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs009
+    ## 1
     ## http://www.example.org/dc/code/sex-F
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 40.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## sex
+    ## F
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 2
-    ## F
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs010
+    ## 2
     ## http://www.example.org/dc/code/sex-F
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 61.627906977
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## sex
+    ## F
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 2
-    ## F
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs011
+    ## 2
     ## http://www.example.org/dc/code/sex-F
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 59.523809524
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## sex
-    ## http://www.example.org/dc/code/agegr1-_ALL_
-    ## 2
     ## F
+    ## http://www.example.org/dc/code/agegr1-_ALL_
+    ## 2
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs012
+    ## 2
     ## http://www.example.org/dc/code/sex-F
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 47.619047619
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## M
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 3
-    ## M
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs013
+    ## 1
     ## http://www.example.org/dc/code/sex-M
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 33.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## M
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 3
-    ## M
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs014
+    ## 1
     ## http://www.example.org/dc/code/sex-M
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 34.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## M
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 3
-    ## M
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs015
+    ## 1
     ## http://www.example.org/dc/code/sex-M
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 44.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## sex
+    ## M
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 3
-    ## M
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs016
+    ## 2
     ## http://www.example.org/dc/code/sex-M
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 38.372093023
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## sex
+    ## M
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 3
-    ## M
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs017
+    ## 2
     ## http://www.example.org/dc/code/sex-M
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 40.476190476
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## sex
-    ## http://www.example.org/dc/code/agegr1-_ALL_
-    ## 3
     ## M
+    ## http://www.example.org/dc/code/agegr1-_ALL_
+    ## 3
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs018
+    ## 2
     ## http://www.example.org/dc/code/sex-M
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 52.380952381
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 4
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-std
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs019
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 8.5901671271
-    ## std
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## std
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 4
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-std
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs020
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 8.2860505995
-    ## std
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## std
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 4
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-std
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs021
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 7.8860938487
-    ## std
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## std
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 5
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-n
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs022
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.0f
+    ## age
     ## 86.0
-    ## n
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## n
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 5
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-n
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs023
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.0f
+    ## age
     ## 84.0
-    ## n
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## n
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 5
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-n
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs024
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.0f
+    ## age
     ## 84.0
-    ## n
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## n
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 6
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-median
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs025
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 76.0
-    ## median
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## median
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 6
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-median
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs026
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 77.5
-    ## median
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## median
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 6
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-median
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs027
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 76.0
-    ## median
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## median
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 7
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-mean
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs028
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 75.209302326
-    ## mean
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## mean
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 7
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-mean
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs029
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 75.666666667
-    ## mean
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## mean
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 7
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-mean
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs030
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 74.380952381
-    ## mean
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## mean
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 8
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q3
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs031
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 82.0
-    ## q3
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## q3
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 8
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q3
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs032
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 82.0
-    ## q3
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## q3
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 8
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q3
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs033
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 80.0
-    ## q3
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## q3
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 9
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q1
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs034
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 69.0
-    ## q1
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## q1
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 9
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q1
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs035
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 71.0
-    ## q1
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## q1
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 9
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q1
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs036
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 70.5
-    ## q1
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## q1
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 10
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-max
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs037
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 89.0
-    ## max
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## max
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 10
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-max
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs038
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 88.0
-    ## max
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## max
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 10
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-max
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs039
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 88.0
-    ## max
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## max
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 11
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-min
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs040
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 52.0
-    ## min
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## min
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 11
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-min
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs041
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
     ## NA
-    ## %6.1f
+    ## age
     ## 51.0
-    ## min
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## min
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 11
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-min
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs042
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## age
-    ## NA
-    ## %6.1f
-    ## 56.0
-    ## min
-    ## Xanomeline High Dose
     ## _ALL_
+    ## %6.1f
+    ## http://www.example.org/dc/demo/ds/obs042
+    ## 1
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## age
+    ## 56.0
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## min
     ## _ALL_
     ## http://www.example.org/dc/code/factor-age
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_NONMISS_
     ## 18
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _NONMISS_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _NONMISS_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs043
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 86.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_NONMISS_
     ## 18
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _NONMISS_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _NONMISS_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs044
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_NONMISS_
     ## 18
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _NONMISS_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _NONMISS_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs045
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_NONMISS_
     ## 18
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _NONMISS_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _NONMISS_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs046
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_NONMISS_
     ## 18
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _NONMISS_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _NONMISS_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs047
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_NONMISS_
     ## 18
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _NONMISS_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _NONMISS_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs048
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_65
     ## 19
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## <65
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## <65
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs049
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 14.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_65
     ## 19
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## <65
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## <65
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs050
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 8.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_65
     ## 19
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## <65
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## <65
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs051
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 11.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_65
     ## 19
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## <65
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## <65
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs052
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 16.279069767
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_65
     ## 19
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## <65
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## <65
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs053
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 9.5238095238
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_65
     ## 19
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
+    ## http://www.example.org/dc/code/procedure-percent
     ## <65
-    ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs054
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 13.095238095
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-65-80
     ## 20
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## 65-80
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## 65-80
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs055
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 42.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-65-80
     ## 20
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## 65-80
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## 65-80
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs056
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 47.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-65-80
     ## 20
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## 65-80
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## 65-80
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs057
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 55.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-65-80
     ## 20
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## 65-80
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## 65-80
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs058
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 48.837209302
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-65-80
     ## 20
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## 65-80
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## 65-80
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs059
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 55.952380952
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-65-80
     ## 20
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
+    ## http://www.example.org/dc/code/procedure-percent
     ## 65-80
-    ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs060
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 65.476190476
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_80
     ## 21
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## >80
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## >80
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs061
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 30.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_80
     ## 21
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## >80
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## >80
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs062
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 29.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_80
     ## 21
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## >80
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## >80
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs063
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 18.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_80
     ## 21
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## >80
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## >80
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs064
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 34.88372093
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_80
     ## 21
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## >80
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## >80
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs065
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 34.523809524
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## agegr1
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_80
     ## 21
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
+    ## http://www.example.org/dc/code/procedure-percent
     ## >80
-    ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs066
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 21.428571429
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 22
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs067
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 86.0
-    ## count
-    ## Placebo
     ## _NONMISS_
+    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 22
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs068
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline Low Dose
     ## _NONMISS_
+    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 22
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs069
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline High Dose
     ## _NONMISS_
+    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 22
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs070
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Placebo
     ## _NONMISS_
+    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 22
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs071
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Xanomeline Low Dose
     ## _NONMISS_
+    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 22
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs072
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Xanomeline High Dose
     ## _NONMISS_
+    ## http://www.example.org/dc/code/race-_NONMISS_
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 23
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-WHITE
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs073
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 78.0
-    ## count
-    ## Placebo
     ## WHITE
+    ## http://www.example.org/dc/code/race-WHITE
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 23
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-WHITE
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs074
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 78.0
-    ## count
-    ## Xanomeline Low Dose
     ## WHITE
+    ## http://www.example.org/dc/code/race-WHITE
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 23
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-WHITE
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs075
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 74.0
-    ## count
-    ## Xanomeline High Dose
     ## WHITE
+    ## http://www.example.org/dc/code/race-WHITE
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 23
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-WHITE
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs076
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 90.697674419
-    ## percent
-    ## Placebo
     ## WHITE
+    ## http://www.example.org/dc/code/race-WHITE
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 23
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-WHITE
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs077
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 92.857142857
-    ## percent
-    ## Xanomeline Low Dose
     ## WHITE
+    ## http://www.example.org/dc/code/race-WHITE
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 23
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-WHITE
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs078
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 88.095238095
-    ## percent
-    ## Xanomeline High Dose
     ## WHITE
+    ## http://www.example.org/dc/code/race-WHITE
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 24
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs079
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 8.0
-    ## count
-    ## Placebo
     ## BLACK OR AFRICAN AMERICAN
+    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 24
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs080
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 6.0
-    ## count
-    ## Xanomeline Low Dose
     ## BLACK OR AFRICAN AMERICAN
+    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 24
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs081
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 9.0
-    ## count
-    ## Xanomeline High Dose
     ## BLACK OR AFRICAN AMERICAN
+    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 24
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs082
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 9.3023255814
-    ## percent
-    ## Placebo
     ## BLACK OR AFRICAN AMERICAN
+    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 24
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs083
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 7.1428571429
-    ## percent
-    ## Xanomeline Low Dose
     ## BLACK OR AFRICAN AMERICAN
+    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 24
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs084
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 10.714285714
-    ## percent
-    ## Xanomeline High Dose
     ## BLACK OR AFRICAN AMERICAN
+    ## http://www.example.org/dc/code/race-BLACK_OR_AFRICAN_AMERICAN
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 25
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs085
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 0.0
-    ## count
-    ## Placebo
     ## AMERICAN INDIAN OR ALASKA NATIVE
+    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## Placebo
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 25
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs086
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 0.0
-    ## count
-    ## Xanomeline Low Dose
     ## AMERICAN INDIAN OR ALASKA NATIVE
+    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## Xanomeline Low Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 25
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs087
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 1.0
-    ## count
-    ## Xanomeline High Dose
     ## AMERICAN INDIAN OR ALASKA NATIVE
+    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## Xanomeline High Dose
+    ## count
     ## _ALL_
     ## http://www.example.org/dc/code/factor-quantity
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 25
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs088
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 0.0
-    ## percent
-    ## Placebo
     ## AMERICAN INDIAN OR ALASKA NATIVE
+    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## Placebo
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 25
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs089
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 0.0
-    ## percent
-    ## Xanomeline Low Dose
     ## AMERICAN INDIAN OR ALASKA NATIVE
+    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## Xanomeline Low Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## race
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 25
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs090
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 1.1904761905
-    ## percent
-    ## Xanomeline High Dose
     ## AMERICAN INDIAN OR ALASKA NATIVE
+    ## http://www.example.org/dc/code/race-AMERICAN_INDIAN_OR_ALASKA_NATIVE
+    ## Xanomeline High Dose
+    ## percent
     ## _ALL_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 26
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-std
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs091
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 12.771543533
-    ## std
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## std
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 26
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-std
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs092
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 14.123598649
-    ## std
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## std
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 26
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-std
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs093
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 14.653433372
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
     ## std
-    ## Xanomeline High Dose
-    ## _ALL_
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 27
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-n
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs094
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.0f
+    ## weightbl
     ## 86.0
-    ## n
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## n
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 27
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-n
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs095
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.0f
+    ## weightbl
     ## 83.0
-    ## n
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## n
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 27
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-n
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs096
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.0f
+    ## weightbl
     ## 84.0
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
     ## n
-    ## Xanomeline High Dose
-    ## _ALL_
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 28
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-median
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs097
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 60.55
-    ## median
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## median
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 28
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-median
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs098
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 64.9
-    ## median
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## median
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 28
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-median
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs099
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 69.2
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
     ## median
-    ## Xanomeline High Dose
-    ## _ALL_
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 29
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-mean
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs100
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 62.759302326
-    ## mean
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## mean
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 29
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-mean
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs101
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 67.279518072
-    ## mean
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## mean
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 29
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-mean
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs102
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 70.004761905
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
     ## mean
-    ## Xanomeline High Dose
-    ## _ALL_
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 30
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q3
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs103
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 74.4
-    ## q3
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## q3
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 30
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q3
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs104
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 77.8
-    ## q3
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## q3
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 30
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q3
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs105
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 80.3
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
     ## q3
-    ## Xanomeline High Dose
-    ## _ALL_
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 31
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q1
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs106
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 53.5
-    ## q1
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## q1
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 31
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q1
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs107
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 55.8
-    ## q1
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## q1
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 31
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-q1
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs108
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 56.75
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
     ## q1
-    ## Xanomeline High Dose
-    ## _ALL_
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 32
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-max
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs109
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 86.2
-    ## max
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## max
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 32
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-max
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs110
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 106.1
-    ## max
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## max
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 32
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-max
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs111
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 108.0
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
     ## max
-    ## Xanomeline High Dose
-    ## _ALL_
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 33
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-min
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs112
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 34.0
-    ## min
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## min
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 33
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-min
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs113
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
     ## NA
-    ## %6.1f
+    ## weightbl
     ## 45.4
-    ## min
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## min
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 33
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_ALL_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-min
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs114
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## weightbl
-    ## NA
-    ## %6.1f
-    ## 41.7
-    ## min
-    ## Xanomeline High Dose
     ## _ALL_
+    ## %6.1f
+    ## http://www.example.org/dc/demo/ds/obs114
+    ## 1
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## weightbl
+    ## 41.7
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## min
     ## _ALL_
     ## http://www.example.org/dc/code/factor-weightbl
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 36
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_NONMISS_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs115
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 86.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## _NONMISS_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 36
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_NONMISS_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs116
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## _NONMISS_
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 36
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_NONMISS_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs117
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 84.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## _NONMISS_
     ## http://www.example.org/dc/code/factor-quantity
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 36
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_NONMISS_
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs118
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## _NONMISS_
     ## http://www.example.org/dc/code/factor-proportion
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 36
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_NONMISS_
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs119
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 100.0
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## _NONMISS_
     ## http://www.example.org/dc/code/factor-proportion
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 36
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-_NONMISS_
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs120
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
-    ## NA
-    ## %6.1f
-    ## 100.0
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## %6.1f
+    ## http://www.example.org/dc/demo/ds/obs120
+    ## 2
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## proportion
+    ## 100.0
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## _NONMISS_
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 38
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-NOT_HISPANIC_OR_LATINO
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs121
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 83.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## NOT HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 38
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-NOT_HISPANIC_OR_LATINO
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs122
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 78.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## NOT HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 38
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-NOT_HISPANIC_OR_LATINO
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs123
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 81.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## NOT HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-quantity
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 38
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-NOT_HISPANIC_OR_LATINO
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs124
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 96.511627907
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## NOT HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-proportion
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 38
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-NOT_HISPANIC_OR_LATINO
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.1f
     ## http://www.example.org/dc/demo/ds/obs125
+    ## 2
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
     ## NA
-    ## %6.1f
+    ## proportion
     ## 92.857142857
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## NOT HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-proportion
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 38
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-NOT_HISPANIC_OR_LATINO
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs126
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
-    ## NA
-    ## %6.1f
-    ## 96.428571429
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## %6.1f
+    ## http://www.example.org/dc/demo/ds/obs126
+    ## 2
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## proportion
+    ## 96.428571429
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## NOT HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-proportion
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 40
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-HISPANIC_OR_LATINO
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
+    ## _ALL_
+    ## %6.0f
     ## http://www.example.org/dc/demo/ds/obs127
+    ## 1
     ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
     ## NA
-    ## %6.0f
+    ## quantity
     ## 3.0
-    ## count
-    ## Placebo
     ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## count
     ## HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 40
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-HISPANIC_OR_LATINO
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs128
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
-    ## NA
-    ## %6.0f
-    ## 6.0
-    ## count
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## %6.0f
+    ## http://www.example.org/dc/demo/ds/obs128
+    ## 1
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## quantity
+    ## 6.0
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## count
     ## HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-quantity
     ## 
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 40
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-HISPANIC_OR_LATINO
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-count
-    ## 1
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs129
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## quantity
-    ## NA
-    ## %6.0f
-    ## 3.0
-    ## count
-    ## Xanomeline High Dose
     ## _ALL_
+    ## %6.0f
+    ## http://www.example.org/dc/demo/ds/obs129
+    ## 1
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## quantity
+    ## 3.0
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## count
     ## HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-quantity
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 40
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-HISPANIC_OR_LATINO
     ## 1
     ## http://www.example.org/dc/code/trt01a-Placebo
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs130
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
-    ## NA
-    ## %6.1f
-    ## 3.488372093
-    ## percent
-    ## Placebo
     ## _ALL_
+    ## %6.1f
+    ## http://www.example.org/dc/demo/ds/obs130
+    ## 2
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## proportion
+    ## 3.488372093
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Placebo
+    ## percent
     ## HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-proportion
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 40
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-HISPANIC_OR_LATINO
     ## 2
     ## http://www.example.org/dc/code/trt01a-Xanomeline_Low_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs131
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
-    ## NA
-    ## %6.1f
-    ## 7.1428571429
-    ## percent
-    ## Xanomeline Low Dose
     ## _ALL_
+    ## %6.1f
+    ## http://www.example.org/dc/demo/ds/obs131
+    ## 2
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## proportion
+    ## 7.1428571429
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline Low Dose
+    ## percent
     ## HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-proportion
     ## ethnic
+    ## _ALL_
     ## http://www.example.org/dc/code/agegr1-_ALL_
     ## 40
-    ## _ALL_
     ## http://www.example.org/dc/code/ethnic-HISPANIC_OR_LATINO
     ## 3
     ## http://www.example.org/dc/code/trt01a-Xanomeline_High_Dose
-    ## _ALL_
     ## http://www.example.org/dc/code/procedure-percent
-    ## 2
-    ## http://www.example.org/dc/code/race-_ALL_
-    ## http://www.example.org/dc/demo/ds/obs132
-    ## http://www.example.org/dc/code/sex-_ALL_
-    ## proportion
-    ## NA
-    ## %6.1f
-    ## 3.5714285714
-    ## percent
-    ## Xanomeline High Dose
     ## _ALL_
+    ## %6.1f
+    ## http://www.example.org/dc/demo/ds/obs132
+    ## 2
+    ## http://www.example.org/dc/code/sex-_ALL_
+    ## NA
+    ## proportion
+    ## 3.5714285714
+    ## _ALL_
+    ## http://www.example.org/dc/code/race-_ALL_
+    ## Xanomeline High Dose
+    ## percent
     ## HISPANIC OR LATINO
     ## http://www.example.org/dc/code/factor-proportion
 
@@ -2999,15 +2999,15 @@ for row in qres:
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
     ## http://www.example.org/dc/code/procedure-median| median| function (x)  {     median(x, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-min| min| function (x)  {     min(x, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-count| count| function (x)  {     length(x) }
+    ## http://www.example.org/dc/code/procedure-percent| percent| function (x)  {     -1 }
     ## http://www.example.org/dc/code/procedure-q1| q1| function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-max| max| function (x)  {     max(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-min| min| function (x)  {     min(x, na.rm = TRUE) }
     ## http://www.example.org/dc/code/procedure-mean| mean| function (x)  {     mean(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-max| max| function (x)  {     max(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-count| count| function (x)  {     length(x) }
+    ## http://www.example.org/dc/code/procedure-q3| q3| function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }
     ## http://www.example.org/dc/code/procedure-std| std| function (x)  {     sd(x, na.rm = TRUE) }
     ## http://www.example.org/dc/code/procedure-n| n| function (x)  {     length(x[!is.na(x)]) }
-    ## http://www.example.org/dc/code/procedure-q3| q3| function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-percent| percent| function (x)  {     -1 }
 
 Get definition for descriptive statistics median
 ------------------------------------------------
@@ -3026,15 +3026,15 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#topConceptOf| http://www.example.org/dc/code/procedure
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.example.org/dc/code/Procedure
     ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionvalue| median
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#inScheme| http://www.example.org/dc/code/procedure
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.w3.org/2004/02/skos/core#Concept
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#prefLabel| median
     ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/RdescStatDefFun| function (x)  {     median(x, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionoperator| ==
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.example.org/dc/code/Procedure
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#prefLabel| median
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.w3.org/2004/02/skos/core#Concept
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#inScheme| http://www.example.org/dc/code/procedure
     ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2000/01/rdf-schema#comment| Descriptive statistics median
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#topConceptOf| http://www.example.org/dc/code/procedure
+    ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionoperator| ==
 
 Get information for selection of data
 -------------------------------------
@@ -3053,6 +3053,6 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
-    ## http://www.example.org/dc/demo/ds/obs056| agegr1| ==| 65-80
-    ## http://www.example.org/dc/demo/ds/obs027| trt01a| ==| Xanomeline High Dose
     ## http://www.example.org/dc/demo/ds/obs056| trt01a| ==| Xanomeline Low Dose
+    ## http://www.example.org/dc/demo/ds/obs027| trt01a| ==| Xanomeline High Dose
+    ## http://www.example.org/dc/demo/ds/obs056| agegr1| ==| 65-80

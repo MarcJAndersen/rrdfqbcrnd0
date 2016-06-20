@@ -1,7 +1,7 @@
 ---
 title: "SQL code for verifying results in RDF data cube"
 author: "mja@statgroup.dk"
-date: "2016-06-07"
+date: "2016-06-19"
 vignette: >
   %\VignetteIndexEntry{SQL code for verifying results in RDF data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -107,7 +107,7 @@ cat("Reading turtle definition from ", dataCubeFile, "\n")
 ```
 
 ```
-## Reading turtle definition from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.2/rrdfqbcrndex/extdata/sample-rdf/DC-DEMO-sample.ttl
+## Reading turtle definition from  /home/ma/R/x86_64-redhat-linux-gnu-library/3.3/rrdfqbcrndex/extdata/sample-rdf/DC-DEMO-sample.ttl
 ```
 
 ```r

@@ -6,7 +6,7 @@ JAVATARGETS=
 VIGNETTETARGETS=
 TARGETS=../${RPACKAGE} ${JAVATARGETS} ${VIGNETTETARGETS}
 
-all: createRD data-raw rbuildforce rbuild 
+all: createRD data-raw rbuildforce install-rpackage-from-dir rbuild 
 
 clean:
 	(cd inst/data-raw; make clean)
@@ -16,13 +16,13 @@ clean:
 cleantempemacs:
 	rm -v -f .#* */.#* */*/.#* */#*# */*/*/.#* */*/*/#*#
 
-install-rpackage-from-dir: ${RPACKAGE}
+install-rpackage-from-dir: 
 	$(R_HOME)/bin/Rscript -e 'library(devtools); install_local("../${RPACKAGE}")'
 
 rbuildforce: 
 	cd ..; R CMD build --force --no-build-vignettes  ${PACKAGENAME}
 
-rbuildforce: ${RPACKAGE}
+# rbuildforce: ${RPACKAGE}
 
 
 # checking package
@@ -35,7 +35,7 @@ rcheck:
 rbuild: 
 	cd ..; R CMD build  ${PACKAGENAME}
 
-${RPACKAGE}:
+../${RPACKAGE}:
 	cd ..; R CMD build --force ${PACKAGENAME}
 
 createRD:

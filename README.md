@@ -54,6 +54,11 @@ packageVersion("rrdf")
 install.packages("knitr") # if not present already
 ```
 
+## Third - Optional dependencies for development
+
+See below for packages needed for development.
+
+
 ## Installation approaches
 The R-packages are made using a modular approach. After having a monolithic package that just grew and grew, it was decided to break it up into smaller packages as shown below.
 
@@ -176,7 +181,12 @@ github page for [devtools](https://github.com/hadley/devtools).
 You will need to install some packages for development
 
 ```r
-install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "shiny" ) )
+
+for (checkPackage in  c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "shiny" ) ) {
+if (!require(checkPackage, character.only = TRUE)) {install.packages(checkPackage)  }
+if (!require(checkPackage, character.only = TRUE)) { stop("needs ", checkPackage) }
+}
+
 ```
 
 These packages are mentioned under Imports: section in the DESCRIPTION file.
@@ -186,14 +196,22 @@ These packages are mentioned under Imports: section in the DESCRIPTION file.
 For using and developing the rrdfqbcrnd0 package these packages must be installed:
 
 ```r
-install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
+for (checkPackage in  c( "RCurl", "rJava", "xlsx", "XML" ) ) {
+if (!require(checkPackage, character.only = TRUE)) {install.packages(checkPackage)  }
+if (!require(checkPackage, character.only = TRUE)) { stop("needs ", checkPackage) }
+}
+    
 ```
 
-### Packages used for generating the data
+### Packages used for generating the data and data documentation (data-raw directories)
 The scripts in inst/data-raw generates the data that are part of the packages.
 These scripts uses the following packages:
 ```r
-install.packages( c( "foreign", "sqldf" ) )
+for (checkPackage in c( "foreign", "sqldf", "RSQLite", "igraph", "visNetwork", "DiagrammeR", "webshot" ) ) {
+if (!require(checkPackage, character.only = TRUE)) {install.packages(checkPackage)  }
+if (!require(checkPackage, character.only = TRUE)) { stop("needs ", checkPackage) }
+}
+
 ```
 
 

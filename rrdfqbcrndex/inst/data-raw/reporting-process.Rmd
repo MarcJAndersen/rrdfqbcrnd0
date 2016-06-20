@@ -7,12 +7,10 @@ output:
   html_document:
     toc: true
     theme: united
-  pdf_document:
-    toc: true
-    highlight: zenburn
   md_document:
     variant: markdown_github
 ---
+
 
 # Introduction
 

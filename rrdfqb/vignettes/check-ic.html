@@ -7,11 +7,11 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-06-07" />
+<meta name="date" content="2016-06-19" />
 
 <title>Execute SPARQL integrity constraints on a data cube</title>
 
@@ -40,25 +40,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
-
-</head>
-
-<body>
-
 <style type="text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
 h1 {
   font-size: 34px;
 }
@@ -79,6 +61,30 @@ h5 {
 }
 h6 {
   font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -109,9 +115,10 @@ $(document).ready(function () {
 <div class="fluid-row" id="header">
 
 
-<h1 class="title">Execute SPARQL integrity constraints on a data cube</h1>
+
+<h1 class="title toc-ignore">Execute SPARQL integrity constraints on a data cube</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-06-07</em></h4>
+<h4 class="date"><em>2016-06-19</em></h4>
 
 </div>
 
@@ -133,9 +140,6 @@ $(document).ready(function () {
 ## 
 ##     clone</code></pre>
 <pre><code>## Loading required package: rrdfancillary</code></pre>
-<pre class="r"><code>library(rrdfqbcrnd0)</code></pre>
-<pre><code>## Loading required package: rrdfcdisc</code></pre>
-<pre><code>## Loading required package: devtools</code></pre>
 <pre class="r"><code>cube.vocabulary.ttl &lt;- file.path(system.file(&quot;extdata/cube-vocabulary-rdf&quot;, &quot;cube.ttl&quot;, package=&quot;rrdfqb&quot;) )
 cubevoc&lt;- load.rdf( cube.vocabulary.ttl, format=&quot;TURTLE&quot; )
 
@@ -143,7 +147,36 @@ qbfile1&lt;- system.file(&quot;extdata/sample-rdf&quot;, &quot;example.ttl&quot;
 cube1&lt;- load.rdf( qbfile1, format=&quot;TURTLE&quot;)
 
 cubeData1&lt;- combine.rdf( cube1, cubevoc)
-forsparqlprefix&lt;- GetForSparqlPrefix()
+forsparqlprefix&lt;-'
+prefix rdf:            &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+prefix rdfs:           &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+prefix owl:            &lt;http://www.w3.org/2002/07/owl#&gt;
+prefix xsd:            &lt;http://www.w3.org/2001/XMLSchema#&gt;
+prefix skos:           &lt;http://www.w3.org/2004/02/skos/core#&gt;
+prefix foaf:           &lt;http://xmlns.com/foaf/0.1/&gt;
+prefix scovo:          &lt;http://purl.org/NET/scovo#&gt;
+prefix void:           &lt;http://rdfs.org/ns/void#&gt;
+prefix qb:             &lt;http://purl.org/linked-data/cube#&gt;
+prefix dcterms:        &lt;http://purl.org/dc/terms/&gt;
+
+prefix void:     &lt;http://rdfs.org/ns/void#&gt;
+prefix dct:      &lt;http://purl.org/dc/terms/&gt;
+prefix org:      &lt;http://www.w3.org/ns/org#&gt;
+prefix admingeo: &lt;http://data.ordnancesurvey.co.uk/ontology/admingeo/&gt;
+prefix interval: &lt;http://reference.data.gov.uk/def/intervals/&gt;
+
+
+prefix sdmx-concept:    &lt;http://purl.org/linked-data/sdmx/2009/concept#&gt;
+prefix sdmx-dimension:  &lt;http://purl.org/linked-data/sdmx/2009/dimension#&gt;
+prefix sdmx-attribute:  &lt;http://purl.org/linked-data/sdmx/2009/attribute#&gt;
+prefix sdmx-measure:    &lt;http://purl.org/linked-data/sdmx/2009/measure#&gt;
+prefix sdmx-metadata:   &lt;http://purl.org/linked-data/sdmx/2009/metadata#&gt;
+prefix sdmx-code:       &lt;http://purl.org/linked-data/sdmx/2009/code#&gt;
+prefix sdmx-subject:    &lt;http://purl.org/linked-data/sdmx/2009/subject#&gt;
+
+prefix ex-geo:   &lt;http://example.org/geo#&gt;
+prefix eg:       &lt;http://example.org/ns#&gt;
+'
 
 icres1&lt;- RunQbIC( cubeData1, forsparqlprefix )</code></pre>
 <pre><code>## Executing IC-1.  Unique DataSet</code></pre>
