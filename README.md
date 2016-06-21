@@ -29,17 +29,17 @@ with a Apache Jena triple store.  The packages must be installed
 accoding to the instructions on the packages github page: 
 
 ```r
-if (!require("rJava")) { install.packages("rJava")  }
-if (!require("rJava")) { stop("needs rJava") }
+if (!require("rJava", character.only = TRUE)) { install.packages("rJava")  }
+if (!require("rJava", character.only = TRUE)) { stop("needs rJava") }
 
-if (!require("devtools")) {install.packages("devtools")  }
-if (!require("devtools")) { stop("needs devtools") }
+if (!require("devtools", character.only = TRUE)) {install.packages("devtools")  }
+if (!require("devtools", character.only = TRUE)) { stop("needs devtools") }
 
-if (!require("rrdflibs") ) {install_github("egonw/rrdf", subdir="rrdflibs") }
-if (!require("rrdflibs") ) { stop("needs rrdflibs") }
+if (!require("rrdflibs", character.only = TRUE) ) {install_github("egonw/rrdf", subdir="rrdflibs") }
+if (!require("rrdflibs", character.only = TRUE) ) { stop("needs rrdflibs") }
 
-if (!require("rrdf") ) { install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE) }
-if (!require("rrdf") ) { stop("needs rrdf") }
+if (!require("rrdf", character.only = TRUE) ) { install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE) }
+if (!require("rrdf", character.only = TRUE) ) { stop("needs rrdf") }
 ```
 
 To check if the installation was successfull use:
@@ -136,7 +136,7 @@ GitHub
 
 Extract the zip file to a directory of your choosing. 
 
-Open the extracted directory. Change to rrdfqbcrnd0 subdirectory and open the rrdfqbcrnd0.Rproj file.
+Open the extracted directory. 
 
 ### Clone from GitHub and start using Rstudio
 
