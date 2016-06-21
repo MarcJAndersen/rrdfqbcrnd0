@@ -61,9 +61,23 @@ forsparqlprefix<- GetForSparqlPrefix( domainName )
 ```{r, eval=TRUE}
 
 rqfile<- system.file("extdata/sample-rdf", "OneQBobservationWithClasses.rq", package="rrdfqbcrndex")
+
+# begin: Not used
 oneQBobservationrq<- paste0(readLines(rqfile),collapse="\n")
 oneQBobservationrq
 oneobsStore<- construct.rdf(store, oneQBobservationrq)
+# End: not used
+```
+
+# Showing the RDF data cube observations
+
+Note: This code just work - can be made simpler and easier to read/use.
+Clean up - bad practice to reuse variables without at least setting to NULL.
+
+## Showing one RDF data cube observation
+
+```{r, eval=TRUE}
+
 rqnodes<-  paste( forsparqlprefix,
 'select distinct ?id (if(isiri(?id),?id,substr(str(?id),1,10)) as ?label) (?id as ?title) ("box" as ?shape)
  ?group
@@ -75,7 +89,76 @@ where {
  FILTER (?sc!= rdfs:Resource && ?sc!=qb:Attachable &&
          ?sc!=owl:Class && ?sc!=rdfs:Class)
 }
-values (?s) { (ds:obs014) (ds:obs015) }
+# values (?s) { (ds:obs014) (ds:obs015) }
+values (?s) { (ds:obs015) }
+}
+UNION
+{select distinct (?o as ?id) (if(isLITERAL(?o), "literal", ?so) as ?group) where {?s ?p ?o. optional{?o a ?so. ?so a rdfs:Class.}
+ FILTER ( (?so = skos:Concept || isLITERAL(?o))
+         && ?p != crnd-attribute:unit
+         && ?p != crnd-attribute:denominator
+         && ?p != crnd-attribute:rowno
+         && ?p != crnd-attribute:colno
+         && ?p != crnd-attribute:cellpartno
+         && ?p != rdfs:label
+         && ?p != crnd-attribute:measurefmt
+         )
+  } 
+# values (?s) { (ds:obs014) (ds:obs015) }
+values (?s) { (ds:obs015) }
+ }
+UNION
+{select distinct (?so as ?id) (if(isLITERAL(?o), "literal", ?so) as ?group) where {?s qb:dataSet ?so.
+# values (?s) { (ds:obs014) (ds:obs015) }
+values (?s) { (ds:obs015) }
+ }
+}
+}
+order by ?group
+',
+"\n"                               
+)
+nodes<- data.frame(sparql.rdf( store, rqnodes ))
+knitr::kable(nodes)
+
+
+rqedges<-  paste( forsparqlprefix,
+'select distinct (?s as ?from) (?o as ?to) (?p as ?label)
+where
+{ ?s ?p ?o
+# values (?s) { (ds:obs014) (ds:obs015) }
+values (?s) { (ds:obs015) }
+}
+',
+"\n"                               
+)
+edges<- data.frame(sparql.rdf( store, rqedges ))
+knitr::kable(edges)
+
+visNetwork(nodes, edges, height = "1000px", width = "100%") 
+# visNetwork(nodes, edges, height = "1000px", width = "100%") %>% visIgraphLayout(layout = "layout_as_tree")
+
+   
+``` 
+
+
+## Showing two RDF data cube observation
+
+```{r, eval=TRUE}
+
+rqnodes<-  paste( forsparqlprefix,
+'select distinct ?id (if(isiri(?id),?id,substr(str(?id),1,10)) as ?label) (?id as ?title) ("box" as ?shape)
+ ?group
+where {
+{select distinct (?s as ?id) (?sc as ?group)
+ where
+ {?s ?p ?o.
+ optional{?s a ?sc}
+ FILTER (?sc!= rdfs:Resource && ?sc!=qb:Attachable &&
+         ?sc!=owl:Class && ?sc!=rdfs:Class)
+}
+# values (?s) { (ds:obs014) (ds:obs015) }
+values (?s) { (ds:obs015) }
 }
 UNION
 {select distinct (?o as ?id) (if(isLITERAL(?o), "literal", ?so) as ?group) where {?s ?p ?o. optional{?o a ?so. ?so a rdfs:Class.}
@@ -123,3 +206,69 @@ visNetwork(nodes, edges, height = "1000px", width = "100%")
    
 ``` 
 
+## Showing all RDF data cube observation
+
+```{r, eval=TRUE}
+
+rqnodes<-  paste( forsparqlprefix, '
+select distinct ?id (if(isiri(?id),?id,substr(str(?id),1,10)) as ?label) (?id as ?title) ("box" as ?shape)
+ ?group
+where {
+{select distinct (?s as ?id) (?sc as ?group)
+ where
+ {?s ?p ?o.
+?s a qb:Observation.
+ optional{?s a ?sc}
+ FILTER (?sc!= rdfs:Resource && ?sc!=qb:Attachable &&
+         ?sc!=owl:Class && ?sc!=rdfs:Class)
+ }
+}
+UNION
+{select distinct (?o as ?id) (if(isLITERAL(?o), "literal", ?so) as ?group) where {?s ?p ?o. 
+?s a qb:Observation.
+
+optional{?o a ?so. ?so a rdfs:Class.}
+ FILTER ( (?so = skos:Concept || isLITERAL(?o))
+         && ?p != crnd-attribute:unit
+         && ?p != crnd-attribute:denominator
+         && ?p != crnd-attribute:rowno
+         && ?p != crnd-attribute:colno
+         && ?p != crnd-attribute:cellpartno
+         && ?p != rdfs:label
+         && ?p != crnd-attribute:measurefmt
+         )
+  } 
+ }
+UNION
+{select distinct (?so as ?id) (if(isLITERAL(?o), "literal", ?so) as ?group) where {?s qb:dataSet ?so.
+ ?s a qb:Observation.
+ }
+}
+}
+order by ?group
+',
+"\n"                               
+)
+nodes<- NULL
+nodes<- data.frame(sparql.rdf( store, rqnodes ))
+knitr::kable(nodes)
+
+
+rqedges<-  paste( forsparqlprefix,
+'select distinct (?s as ?from) (?o as ?to) (?p as ?label)
+where
+{ ?s ?p ?o .
+ ?s a qb:Observation .
+}
+',
+"\n"                               
+)
+edges<- NULL
+edges<- data.frame(sparql.rdf( store, rqedges ))
+knitr::kable(edges)
+
+visNetwork(nodes, edges, height = "1000px", width = "100%") 
+# visNetwork(nodes, edges, height = "1000px", width = "100%") %>% visIgraphLayout(layout = "layout_as_tree")
+
+   
+``` 
