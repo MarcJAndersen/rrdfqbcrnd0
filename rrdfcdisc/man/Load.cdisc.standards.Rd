@@ -6,7 +6,7 @@
 \usage{
 
   Load.cdisc.standards(cdisc.load.zip = file.path(system.file("extdata/CDISC-standards-rdf",
-  package = "rrdfqbcrnd0"), "cdisc-rdf.zip"),
+  package = "rrdfcdisc"), "cdisc-rdf.zip"),
   cdisc.load.ttl = file.path(tempdir(), "cdisc-rdf.ttl"),
   remove.cdisc.load.ttl = TRUE)
 }

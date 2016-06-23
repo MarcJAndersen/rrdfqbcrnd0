@@ -1,7 +1,7 @@
 ---
 title: "Execute SPARQL integrity constraints on a data cube"
 author: "mja@statgroup.dk"
-date: "2016-05-16"
+date: "2016-06-19"
 vignette: >
   %\VignetteIndexEntry{Execute SPARQL integrity constraints on a data cube}
   %\VignetteEngine{knitr::rmarkdown}
@@ -64,18 +64,6 @@ library(rrdfqb)
 ```
 
 ```r
-library(rrdfqbcrnd0)
-```
-
-```
-## Loading required package: rrdfcdisc
-```
-
-```
-## Loading required package: devtools
-```
-
-```r
 cube.vocabulary.ttl <- file.path(system.file("extdata/cube-vocabulary-rdf", "cube.ttl", package="rrdfqb") )
 cubevoc<- load.rdf( cube.vocabulary.ttl, format="TURTLE" )
 
@@ -83,7 +71,36 @@ qbfile1<- system.file("extdata/sample-rdf", "example.ttl", package="rrdfqb")
 cube1<- load.rdf( qbfile1, format="TURTLE")
 
 cubeData1<- combine.rdf( cube1, cubevoc)
-forsparqlprefix<- GetForSparqlPrefix()
+forsparqlprefix<-'
+prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#>
+prefix owl:            <http://www.w3.org/2002/07/owl#>
+prefix xsd:            <http://www.w3.org/2001/XMLSchema#>
+prefix skos:           <http://www.w3.org/2004/02/skos/core#>
+prefix foaf:           <http://xmlns.com/foaf/0.1/>
+prefix scovo:          <http://purl.org/NET/scovo#>
+prefix void:           <http://rdfs.org/ns/void#>
+prefix qb:             <http://purl.org/linked-data/cube#>
+prefix dcterms:        <http://purl.org/dc/terms/>
+
+prefix void:     <http://rdfs.org/ns/void#>
+prefix dct:      <http://purl.org/dc/terms/>
+prefix org:      <http://www.w3.org/ns/org#>
+prefix admingeo: <http://data.ordnancesurvey.co.uk/ontology/admingeo/>
+prefix interval: <http://reference.data.gov.uk/def/intervals/>
+
+
+prefix sdmx-concept:    <http://purl.org/linked-data/sdmx/2009/concept#>
+prefix sdmx-dimension:  <http://purl.org/linked-data/sdmx/2009/dimension#>
+prefix sdmx-attribute:  <http://purl.org/linked-data/sdmx/2009/attribute#>
+prefix sdmx-measure:    <http://purl.org/linked-data/sdmx/2009/measure#>
+prefix sdmx-metadata:   <http://purl.org/linked-data/sdmx/2009/metadata#>
+prefix sdmx-code:       <http://purl.org/linked-data/sdmx/2009/code#>
+prefix sdmx-subject:    <http://purl.org/linked-data/sdmx/2009/subject#>
+
+prefix ex-geo:   <http://example.org/geo#>
+prefix eg:       <http://example.org/ns#>
+'
 
 icres1<- RunQbIC( cubeData1, forsparqlprefix )
 ```

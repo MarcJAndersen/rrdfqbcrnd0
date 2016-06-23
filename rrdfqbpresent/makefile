@@ -6,7 +6,7 @@ JAVATARGETS=
 VIGNETTETARGETS=./vignettes/vignette-two-dim-representation-of-cube.md ./vignettes/vignette-two-dim-representation-of-cube.html
 TARGETS=../${RPACKAGE} ${JAVATARGETS} ${VIGNETTETARGETS}
 
-all: createRD  data-raw rbuildforce rbuild vignettedoc
+all: createRD  data-raw rbuildforce rbuild install-rpackage-from-dir vignettedoc
 
 clean:
 	(cd inst/data-raw; make clean)

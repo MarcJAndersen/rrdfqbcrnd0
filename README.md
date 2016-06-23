@@ -29,17 +29,17 @@ with a Apache Jena triple store.  The packages must be installed
 accoding to the instructions on the packages github page: 
 
 ```r
-if (!require("rJava")) { install.packages("rJava")  }
-if (!require("rJava")) { stop("needs rJava") }
+if (!require("rJava", character.only = TRUE)) { install.packages("rJava")  }
+if (!require("rJava", character.only = TRUE)) { stop("needs rJava") }
 
-if (!require("devtools")) {install.packages("devtools")  }
-if (!require("devtools")) { stop("needs devtools") }
+if (!require("devtools", character.only = TRUE)) {install.packages("devtools")  }
+if (!require("devtools", character.only = TRUE)) { stop("needs devtools") }
 
-if (!require("rrdflibs") ) {install_github("egonw/rrdf", subdir="rrdflibs") }
-if (!require("rrdflibs") ) { stop("needs rrdflibs") }
+if (!require("rrdflibs", character.only = TRUE) ) {install_github("egonw/rrdf", subdir="rrdflibs") }
+if (!require("rrdflibs", character.only = TRUE) ) { stop("needs rrdflibs") }
 
-if (!require("rrdf") ) { install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE) }
-if (!require("rrdf") ) { stop("needs rrdf") }
+if (!require("rrdf", character.only = TRUE) ) { install_github("egonw/rrdf", subdir="rrdf", build_vignettes = FALSE) }
+if (!require("rrdf", character.only = TRUE) ) { stop("needs rrdf") }
 ```
 
 To check if the installation was successfull use:
@@ -53,6 +53,11 @@ packageVersion("rrdf")
 ```r
 install.packages("knitr") # if not present already
 ```
+
+## Third - Optional dependencies for development
+
+See below for packages needed for development.
+
 
 ## Installation approaches
 The R-packages are made using a modular approach. After having a monolithic package that just grew and grew, it was decided to break it up into smaller packages as shown below.
@@ -97,13 +102,13 @@ Tip for Rstudio: use the file explore window to navigate to the directory, then 
 In R issue
 ```r
 library(devtools)
-install_local("rrdfancillary_0.2.2.tar.gz")
-install_local("rrdfcdisc_0.2.2.tar.gz")    
-install_local("rrdfqb_0.2.2.tar.gz")       
-install_local("rrdfqbcrnd0_0.2.2.tar.gz")  
-install_local("rrdfqbcrndex_0.2.2.tar.gz")
-install_local("rrdfqbcrndcheck_0.2.2.tar.gz")
-install_local("rrdfqbpresent_0.2.2.tar.gz")
+install_local("rrdfancillary_0.2.4.tar.gz")
+install_local("rrdfcdisc_0.2.4.tar.gz")    
+install_local("rrdfqb_0.2.4.tar.gz")       
+install_local("rrdfqbcrnd0_0.2.4.tar.gz")  
+install_local("rrdfqbcrndex_0.2.4.tar.gz")
+install_local("rrdfqbcrndcheck_0.2.4.tar.gz")
+install_local("rrdfqbpresent_0.2.4.tar.gz")
 ```
 
 Note: the package `rrdfqbcrnd0` may not be able to install using "install.packages" in Rstudio due to "rrdf(>= 2.0.4)".
@@ -131,7 +136,7 @@ GitHub
 
 Extract the zip file to a directory of your choosing. 
 
-Open the extracted directory. Change to rrdfqbcrnd0 subdirectory and open the rrdfqbcrnd0.Rproj file.
+Open the extracted directory. 
 
 ### Clone from GitHub and start using Rstudio
 
@@ -176,7 +181,12 @@ github page for [devtools](https://github.com/hadley/devtools).
 You will need to install some packages for development
 
 ```r
-install.packages( c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "shiny" ) )
+
+for (checkPackage in  c("devtools", "roxygen2", "testthat", "knitr", "rmarkdown", "shiny" ) ) {
+if (!require(checkPackage, character.only = TRUE)) {install.packages(checkPackage)  }
+if (!require(checkPackage, character.only = TRUE)) { stop("needs ", checkPackage) }
+}
+
 ```
 
 These packages are mentioned under Imports: section in the DESCRIPTION file.
@@ -186,14 +196,22 @@ These packages are mentioned under Imports: section in the DESCRIPTION file.
 For using and developing the rrdfqbcrnd0 package these packages must be installed:
 
 ```r
-install.packages( c( "RCurl", "rJava", "xlsx", "XML" ) )
+for (checkPackage in  c( "RCurl", "rJava", "xlsx", "XML" ) ) {
+if (!require(checkPackage, character.only = TRUE)) {install.packages(checkPackage)  }
+if (!require(checkPackage, character.only = TRUE)) { stop("needs ", checkPackage) }
+}
+    
 ```
 
-### Packages used for generating the data
+### Packages used for generating the data and data documentation (data-raw directories)
 The scripts in inst/data-raw generates the data that are part of the packages.
 These scripts uses the following packages:
 ```r
-install.packages( c( "foreign", "sqldf" ) )
+for (checkPackage in c( "foreign", "sqldf", "RSQLite", "igraph", "visNetwork", "DiagrammeR", "webshot" ) ) {
+if (!require(checkPackage, character.only = TRUE)) {install.packages(checkPackage)  }
+if (!require(checkPackage, character.only = TRUE)) { stop("needs ", checkPackage) }
+}
+
 ```
 
 

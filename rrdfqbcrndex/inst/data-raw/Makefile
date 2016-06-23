@@ -3,19 +3,19 @@ create-ae-table-as-csv.Rmd  create-dm-table-as-csv.Rmd \
 create-qb-examples-as-ttl.Rmd \
 use-demo-ttl.Rmd  \
 using-arq.Rmd using-arq-graphical-display.Rmd using-arq-qb.Rmd \
-reporting-process.Rmd \
 rdf-gotchas.Rmd \
 SPARQL-scripts-for-qb.Rmd \
 using-python.Rmd \
 overview-prefixes-for-SPARQL.Rmd
 
 
-# does not work package-overview.html
+# does not work package-overview.Rmd
+# does not work reporting-process.Rmd 
 
 # List of files with .md extension
-MDS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.md/g" )
+MDS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.md/g" ) 
 PDFS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.pdf/g" )
-HTMLS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.html/g" )
+HTMLS= $(shell echo "${RMDS}" | sed -e "s/\.Rmd/\.html/g" ) reporting-process.html
 
 ADSLTTL=../extdata/sample-rdf/adsl-map.ttl ../extdata/sample-rdf/adsl.ttl
 ADAETTL=../extdata/sample-rdf/adae-map.ttl ../extdata/sample-rdf/adae.ttl
@@ -38,7 +38,7 @@ CSVS= ${CSVAE} ${CSVDM}
 
 
 FORDOC= ${HTMLS} ${MDS} ${PDFS}
-
+$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
 TARGETS=${XPTS} ${TTLS} ${CSVS} ${FORDOC} 
 
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
@@ -98,8 +98,12 @@ using-arq-qb.html using-arq-qb.pdf using-arq-qb.md: using-arq-qb.Rmd
 using-python.html using-python.pdf using-python.md: using-python.Rmd
 	${RMD2HTML}
 
-reporting-process.html reporting-process.pdf reporting-process.md: reporting-process.Rmd
-	${RMD2HTML}
+# no pdf
+reporting-process.pdf:
+
+reporting-process.html  reporting-process.md: reporting-process.Rmd
+#	${RMD2HTML}
+	$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<')"
 
 package-overview.html package-overview.pdf package-overview.md: package-overview.Rmd
 	${RMD2HTML}
@@ -114,5 +118,8 @@ things-to-note.html: things-to-note.Rmd
 	${RMD2HTML}
 
 overview-prefixes-for-SPARQL.html: overview-prefixes-for-SPARQL.Rmd
+	${RMD2HTML}
+
+using-visNetwork.html: using-visNetwork.Rmd
 	${RMD2HTML}
 

@@ -27,7 +27,7 @@ First load the packages.
 ```{r, eval=TRUE}
 library(rrdfqb)
 library(rrdfqbcrnd0)
-library(rrdfqbcrndex)
+devtools::load_all(pkg="../..")
 ```
 
 # Prefixes in `rrdfqb`, `rrdfqbcrnd0`, `rrdfqbcrndex`

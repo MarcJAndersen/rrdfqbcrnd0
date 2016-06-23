@@ -7,11 +7,11 @@
 <meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-05-16" />
+<meta name="date" content="2016-06-19" />
 
 <title>Reporting process</title>
 
@@ -48,25 +48,7 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 
 
 
-
-</head>
-
-<body>
-
 <style type="text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
 h1 {
   font-size: 34px;
 }
@@ -87,6 +69,30 @@ h5 {
 }
 h6 {
   font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type="text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -117,9 +123,10 @@ $(document).ready(function () {
 <div class="fluid-row" id="header">
 
 
-<h1 class="title">Reporting process</h1>
+
+<h1 class="title toc-ignore">Reporting process</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-05-16</em></h4>
+<h4 class="date"><em>2016-06-19</em></h4>
 
 </div>
 
@@ -450,8 +457,8 @@ cat(mermaid.commands,&quot;\n&quot;)</code></pre>
 ## </code></pre>
 <p>Then display the graph.</p>
 <pre class="r"><code>DiagrammeR( mermaid.commands )</code></pre>
-<p><div id="htmlwidget-7157" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-7157">{"x":{"diagram":"graph TB \nrepr:r01(SDTM Datasets) \nrepr:r02(Create Analysis Datasets) \nrepr:r03(ADaM Datasets) \nrepr:r04(Analysis Programs) \nrepr:r05(Tables, Listings, Graphs) \nrepr:r06(Dataset specs) \nrepr:r07(Codelist specs) \nrepr:r08(Report specs) \nrepr:r09(Prepare submission data & docs) \nrepr:r10(Selected code) \nrepr:r11(Submission.xpt) \nrepr:r12(Define.xml) \nrepr:r13(Data Guide) \nrepr:r09-->repr:r12 \nrepr:r07-->repr:r04 \nrepr:r02-->repr:r03 \nrepr:r04-->repr:r05 \nrepr:r09-->repr:r11 \nrepr:r08-->repr:r04 \nrepr:r09-->repr:r10 \nrepr:r08-->repr:r09 \nrepr:r06-->repr:r09 \nrepr:r07-->repr:r09 \nrepr:r01-->repr:r02 \nrepr:r03-->repr:r04 \nrepr:r06-->repr:r02 \nrepr:r09-->repr:r13 \n\n"},"evals":[],"jsHooks":[]}</script></p>
+<div id="htmlwidget-8618" style="width:672px;height:480px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8618">{"x":{"diagram":"graph TB \nrepr:r01(SDTM Datasets) \nrepr:r02(Create Analysis Datasets) \nrepr:r03(ADaM Datasets) \nrepr:r04(Analysis Programs) \nrepr:r05(Tables, Listings, Graphs) \nrepr:r06(Dataset specs) \nrepr:r07(Codelist specs) \nrepr:r08(Report specs) \nrepr:r09(Prepare submission data & docs) \nrepr:r10(Selected code) \nrepr:r11(Submission.xpt) \nrepr:r12(Define.xml) \nrepr:r13(Data Guide) \nrepr:r09-->repr:r12 \nrepr:r07-->repr:r04 \nrepr:r02-->repr:r03 \nrepr:r04-->repr:r05 \nrepr:r09-->repr:r11 \nrepr:r08-->repr:r04 \nrepr:r09-->repr:r10 \nrepr:r08-->repr:r09 \nrepr:r06-->repr:r09 \nrepr:r07-->repr:r09 \nrepr:r01-->repr:r02 \nrepr:r03-->repr:r04 \nrepr:r06-->repr:r02 \nrepr:r09-->repr:r13 \n\n"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <div id="grid-for-diagram-of-the-sw-initiatives" class="section level1">

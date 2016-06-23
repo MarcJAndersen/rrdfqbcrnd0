@@ -7,7 +7,7 @@ VIGNETTETARGETS=./vignettes/cube-from-workbook.md
 TARGETS=../${RPACKAGE} ${JAVATARGETS} ${VIGNETTETARGETS}
 
 
-all: createRD data-raw rbuildforce rbuild vignettedoc
+all: createRD data-raw rbuildforce rbuild install-rpackage-from-dir vignettedoc
 
 clean:
 	(cd inst/data-raw; make clean)

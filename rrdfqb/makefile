@@ -9,7 +9,7 @@ VIGNETTETARGETS= \
 ./vignettes/qb-sparql-queries.html ./vignettes/qb-sparql-queries.md
 TARGETS=../${RPACKAGE} ${JAVATARGETS} ${VIGNETTETARGETS}
 
-all: createRD data-raw rbuildforce rbuild vignettedoc
+all: createRD data-raw rbuildforce install-rpackage-from-dir rbuild vignettedoc
 
 clean:
 	(cd inst/data-raw; make clean)

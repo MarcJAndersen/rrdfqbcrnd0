@@ -15,8 +15,10 @@ First load the packages.
 ``` r
 library(rrdfqb)
 library(rrdfqbcrnd0)
-library(rrdfqbcrndex)
+devtools::load_all(pkg="../..")
 ```
+
+    ## Loading rrdfqbcrndex
 
 Prefixes in `rrdfqb`, `rrdfqbcrnd0`, `rrdfqbcrndex`
 ===================================================

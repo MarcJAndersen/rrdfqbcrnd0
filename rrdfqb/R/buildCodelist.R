@@ -96,7 +96,12 @@ cat("!!!!!!!!!\n")
              paste0(prefixlist$prefixCODE, capDimName),
              paste0(prefixlist$prefixRDFS, "seeAlso"),
              paste0(prefixlist$prefixCODE, dimName))
-  add.data.triple(store,
+  add.triple(store,
+             paste0(prefixlist$prefixCODE, dimName),
+             paste0(prefixlist$prefixRDFS, "seeAlso"),
+             paste0(prefixlist$prefixCODE, capDimName))
+
+    add.data.triple(store,
                   paste0(prefixlist$prefixCODE, capDimName),
                   paste0(prefixlist$prefixRDFS,"label"),
                   paste0("Class for code list: ", dimName),
@@ -296,8 +301,8 @@ cat("!!!!!!!!!\n")
     if (codeType=="SDTM"){
       add.data.triple(store,
                       codeSubj,
-                      paste0(prefixlist$prefixCTS,"cdiscSynonyms"),
-                      paste0(codeSource[i,"cdiscSynonyms"]))
+                      paste0(prefixlist$prefixCTS,"cdiscSynonym"),
+                      paste0(codeSource[i,"cdiscSynonym"]))
 
       ## Remove the prefix colon to specify the value directly (without prefix)
       nciDomain<-gsub("sdtmct:","",codeSource[i,"nciDomain"])

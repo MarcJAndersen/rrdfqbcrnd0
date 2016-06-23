@@ -18,7 +18,7 @@ This vignette shows how to
 
 ```{r, results='asis', eval=TRUE}
 library(rrdfancillary)
-require("rrdfcdisc")
+library(rrdfcdisc)
 ```
 
 ### Loading using Load.cdisc.standards 

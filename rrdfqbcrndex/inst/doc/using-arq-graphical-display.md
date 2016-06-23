@@ -133,10 +133,7 @@ digraph {
 }
 ```
 
-<img src="using-arq-graphical-display_files/figure-markdown_github/dot-ex-1.png" alt="SPARQL query"  />
-<p class="caption">
-SPARQL query
-</p>
+![SPARQL query](using-arq-graphical-display_files/figure-markdown_github/dot-ex-1.png)
 
 <!-- ```{r cache=FALSE} -->
 <!-- knitr::read_chunk("../extdata/sample-rdf/fordot.dot") -->
