@@ -38,7 +38,7 @@ CSVS= ${CSVAE} ${CSVDM}
 
 
 FORDOC= ${HTMLS} ${MDS} ${PDFS}
-$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
+
 TARGETS=${XPTS} ${TTLS} ${CSVS} ${FORDOC} 
 
 RMD2HTML=$(R_HOME)/bin/Rscript -e "rmarkdown::render('$<','all')"
