@@ -1,6 +1,6 @@
 Package: rrdfqbpresent
 Title: Present RDF data cube as two dimensional table
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") )
     )

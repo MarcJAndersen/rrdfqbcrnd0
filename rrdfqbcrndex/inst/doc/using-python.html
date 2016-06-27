@@ -11,7 +11,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-06-19" />
+<meta name="date" content="2016-06-27" />
 
 <title>Using Python to make SPARQL queries</title>
 
@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Using Python to make SPARQL queries</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-06-19</em></h4>
+<h4 class="date"><em>2016-06-27</em></h4>
 
 </div>
 
@@ -155,13 +155,13 @@ qres = g.query(dimensionsQuery)
 for row in qres:
     print(&quot;%s&quot; %row)</code></pre>
 <pre><code>## INFO:rdflib:RDFLib Version: 4.2.0
-## http://www.example.org/dc/dimension#trt01a
-## http://www.example.org/dc/dimension#ethnic
 ## http://www.example.org/dc/dimension#sex
 ## http://www.example.org/dc/dimension#race
-## http://www.example.org/dc/dimension#factor
+## http://www.example.org/dc/dimension#agegr1
+## http://www.example.org/dc/dimension#trt01a
 ## http://www.example.org/dc/dimension#procedure
-## http://www.example.org/dc/dimension#agegr1</code></pre>
+## http://www.example.org/dc/dimension#ethnic
+## http://www.example.org/dc/dimension#factor</code></pre>
 </div>
 <div id="get-attributes" class="section level2">
 <h2>Get attributes</h2>
@@ -175,11 +175,11 @@ for row in qres:
     print(&quot;%s&quot; %row)</code></pre>
 <pre><code>## INFO:rdflib:RDFLib Version: 4.2.0
 ## http://www.example.org/dc/attribute#colno
-## http://www.example.org/dc/attribute#unit
+## http://www.example.org/dc/attribute#rowno
 ## http://www.example.org/dc/attribute#denominator
-## http://www.example.org/dc/attribute#measurefmt
+## http://www.example.org/dc/attribute#unit
 ## http://www.example.org/dc/attribute#cellpartno
-## http://www.example.org/dc/attribute#rowno</code></pre>
+## http://www.example.org/dc/attribute#measurefmt</code></pre>
 </div>
 <div id="get-observations" class="section level2">
 <h2>Get observations</h2>
@@ -3115,15 +3115,15 @@ for row in qres:
      print(&quot;%s| %s| %s&quot; %row)
 </code></pre>
 <pre><code>## INFO:rdflib:RDFLib Version: 4.2.0
-## http://www.example.org/dc/code/procedure-max| max| function (x)  {     max(x, na.rm = TRUE) }
+## http://www.example.org/dc/code/procedure-min| min| function (x)  {     min(x, na.rm = TRUE) }
+## http://www.example.org/dc/code/procedure-std| std| function (x)  {     sd(x, na.rm = TRUE) }
+## http://www.example.org/dc/code/procedure-q1| q1| function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }
 ## http://www.example.org/dc/code/procedure-n| n| function (x)  {     length(x[!is.na(x)]) }
-## http://www.example.org/dc/code/procedure-percent| percent| function (x)  {     -1 }
 ## http://www.example.org/dc/code/procedure-mean| mean| function (x)  {     mean(x, na.rm = TRUE) }
 ## http://www.example.org/dc/code/procedure-q3| q3| function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }
-## http://www.example.org/dc/code/procedure-q1| q1| function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }
-## http://www.example.org/dc/code/procedure-std| std| function (x)  {     sd(x, na.rm = TRUE) }
-## http://www.example.org/dc/code/procedure-min| min| function (x)  {     min(x, na.rm = TRUE) }
 ## http://www.example.org/dc/code/procedure-count| count| function (x)  {     length(x) }
+## http://www.example.org/dc/code/procedure-max| max| function (x)  {     max(x, na.rm = TRUE) }
+## http://www.example.org/dc/code/procedure-percent| percent| function (x)  {     -1 }
 ## http://www.example.org/dc/code/procedure-median| median| function (x)  {     median(x, na.rm = TRUE) }</code></pre>
 </div>
 <div id="get-definition-for-descriptive-statistics-median" class="section level2">
@@ -3141,13 +3141,13 @@ for row in qres:
 <pre><code>## INFO:rdflib:RDFLib Version: 4.2.0
 ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.example.org/dc/code/Procedure
 ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#prefLabel| median
-## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionoperator| ==
 ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2000/01/rdf-schema#comment| Descriptive statistics median
 ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.w3.org/2004/02/skos/core#Concept
 ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#topConceptOf| http://www.example.org/dc/code/procedure
+## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionvalue| median
 ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#inScheme| http://www.example.org/dc/code/procedure
 ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/RdescStatDefFun| function (x)  {     median(x, na.rm = TRUE) }
-## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionvalue| median</code></pre>
+## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionoperator| ==</code></pre>
 </div>
 <div id="get-information-for-selection-of-data" class="section level2">
 <h2>Get information for selection of data</h2>

@@ -1,6 +1,6 @@
 Package: rrdfqbspec
 Title: Plot subgraphs in the AR&M RDF Data qube Tech Spec documentation
-Version: 0.0.0.1
+Version: 0.0.1
 Authors@R: person("Tim", "Williams", email = "Tim.Williams@ucb.com", role = c("aut", "cre"))
 Description: Plot the indivdual subgraphs for use in the Tech Spec documentatio.
 Depends:

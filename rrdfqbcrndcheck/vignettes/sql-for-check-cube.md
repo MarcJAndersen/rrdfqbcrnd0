@@ -1,7 +1,7 @@
 ---
 title: "SQL code for verifying results in RDF data cube"
 author: "mja@statgroup.dk"
-date: "2016-06-19"
+date: "2016-06-27"
 vignette: >
   %\VignetteIndexEntry{SQL code for verifying results in RDF data cube}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,6 +1,6 @@
 Package: rrdfqbcrnd0
 Title: R-RDF Data Cube for Clinical Research & Development
-Version: 0.2.4
+Version: 0.2.5
 Authors@R: c(
     person("Marc", "Andersen", email="mja@statgroup.dk", role=c("aut", "cre") ),
     person("Tim", "Williams", email="tim.williams@ucb.com", role=c("aut", "cre") )
