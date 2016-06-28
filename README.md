@@ -51,7 +51,8 @@ packageVersion("rrdf")
 
 ## Second - The knitr package
 ```r
-install.packages("knitr") # if not present already
+if (!require("knitr", character.only = TRUE) ) {install.packages("knitr")}
+if (!require("knitr", character.only = TRUE) ) { stop("needs rrdf") }
 ```
 
 ## Third - Optional dependencies for development

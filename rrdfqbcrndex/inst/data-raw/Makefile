@@ -6,7 +6,8 @@ using-arq.Rmd using-arq-graphical-display.Rmd using-arq-qb.Rmd \
 rdf-gotchas.Rmd \
 SPARQL-scripts-for-qb.Rmd \
 using-python.Rmd \
-overview-prefixes-for-SPARQL.Rmd
+overview-prefixes-for-SPARQL.Rmd \
+using-NoSPA-RDF-Data-Cube-Validator.Rmd
 
 
 # does not work package-overview.Rmd
@@ -121,5 +122,8 @@ overview-prefixes-for-SPARQL.html: overview-prefixes-for-SPARQL.Rmd
 	${RMD2HTML}
 
 using-visNetwork.html: using-visNetwork.Rmd
+	${RMD2HTML}
+
+using-NoSPA-RDF-Data-Cube-Validator.html: using-NoSPA-RDF-Data-Cube-Validator.Rmd
 	${RMD2HTML}
 
