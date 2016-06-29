@@ -11,7 +11,7 @@
 
 <meta name="author" content="mja@statgroup.dk" />
 
-<meta name="date" content="2016-06-27" />
+<meta name="date" content="2016-06-29" />
 
 <title>Create DEMO table as csv file</title>
 
@@ -118,7 +118,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Create DEMO table as csv file</h1>
 <h4 class="author"><em><a href="mailto:mja@statgroup.dk">mja@statgroup.dk</a></em></h4>
-<h4 class="date"><em>2016-06-27</em></h4>
+<h4 class="date"><em>2016-06-29</em></h4>
 
 </div>
 
@@ -169,13 +169,13 @@ devtools::load_all(pkg=&quot;../..&quot;)</code></pre>
 <pre><code>## !!!!!!!!!
 ## !!!!!!!!!</code></pre>
 <pre><code>## Start loading rdf.cdisc.org contents from /home/ma/R/x86_64-redhat-linux-gnu-library/3.3/rrdfcdisc/extdata/CDISC-standards-rdf/cdisc-rdf.zip</code></pre>
-<pre><code>## Done loading rdf.cdisc.org contents, number of triples: 165379</code></pre>
+<pre><code>## Done loading rdf.cdisc.org contents, number of triples: 165404</code></pre>
 <pre><code>## !!!!!!!!!
 ## !!!!!!!!!
 ## !!!!!!!!!
 ## !!!!!!!!!</code></pre>
 <pre class="r"><code>cat(&quot;DM cube stored as &quot;, dm.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## DM cube stored as  /tmp/Rtmpo5lkOs/DC-DM-R-V-0-5-2.ttl</code></pre>
+<pre><code>## DM cube stored as  /tmp/RtmpKXx98H/DC-DM-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DM-sample.ttl&quot;)
 
 if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
@@ -191,7 +191,7 @@ if (file.copy( dm.cube.fn, targetFile, overwrite=TRUE)) {
 ## !!!!!!!!!
 ## !!!!!!!!!</code></pre>
 <pre class="r"><code>cat(&quot;AE cube stored as &quot;, ae.cube.fn, &quot;\n&quot;)</code></pre>
-<pre><code>## AE cube stored as  /tmp/Rtmpo5lkOs/DC-AE-R-V-0-5-2.ttl</code></pre>
+<pre><code>## AE cube stored as  /tmp/RtmpKXx98H/DC-AE-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-AE-sample.ttl&quot;)
 if (file.copy( ae.cube.fn, targetFile, overwrite=TRUE)) {
   cat(&quot;AE cube copied to &quot;, normalizePath(targetFile), &quot;\n&quot;)
@@ -223,7 +223,7 @@ demo.cube.fn&lt;- BuildCubeFromDataFrames(demoMetaData, demoObsData )</code></pr
 ## !!!!!!!!!
 ## !!!!!!!!!</code></pre>
 <pre class="r"><code>cat(&quot;DEMO cube stored as &quot;, normalizePath(demo.cube.fn), &quot;\n&quot;)</code></pre>
-<pre><code>## DEMO cube stored as  /tmp/Rtmpo5lkOs/DC-DEMO-R-V-0-5-2.ttl</code></pre>
+<pre><code>## DEMO cube stored as  /tmp/RtmpKXx98H/DC-DEMO-R-V-0-5-2.ttl</code></pre>
 <pre class="r"><code>targetFile&lt;- file.path(targetDir,&quot;DC-DEMO-sample.ttl&quot;)
 
 if (file.copy( demo.cube.fn, targetFile, overwrite=TRUE)) {

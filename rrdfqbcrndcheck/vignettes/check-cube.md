@@ -1,7 +1,7 @@
 ---
 title: "Derive results in RDF data cube and compare with results in data cube"
 author: "mja@statgroup.dk"
-date: "2016-06-27"
+date: "2016-06-29"
 vignette: >
   %\VignetteIndexEntry{Derive results in RDF data cube and compare with results in data cube}
   %\VignetteEngine{knitr::rmarkdown}

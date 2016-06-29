@@ -25,13 +25,13 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
-    ## http://www.example.org/dc/dimension#race
-    ## http://www.example.org/dc/dimension#agegr1
-    ## http://www.example.org/dc/dimension#factor
-    ## http://www.example.org/dc/dimension#procedure
     ## http://www.example.org/dc/dimension#ethnic
-    ## http://www.example.org/dc/dimension#sex
+    ## http://www.example.org/dc/dimension#procedure
     ## http://www.example.org/dc/dimension#trt01a
+    ## http://www.example.org/dc/dimension#factor
+    ## http://www.example.org/dc/dimension#sex
+    ## http://www.example.org/dc/dimension#agegr1
+    ## http://www.example.org/dc/dimension#race
 
 Get attributes
 --------------
@@ -50,8 +50,8 @@ for row in qres:
     ## INFO:rdflib:RDFLib Version: 4.2.0
     ## http://www.example.org/dc/attribute#colno
     ## http://www.example.org/dc/attribute#measurefmt
-    ## http://www.example.org/dc/attribute#rowno
     ## http://www.example.org/dc/attribute#denominator
+    ## http://www.example.org/dc/attribute#rowno
     ## http://www.example.org/dc/attribute#cellpartno
     ## http://www.example.org/dc/attribute#unit
 
@@ -2998,16 +2998,16 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
-    ## http://www.example.org/dc/code/procedure-min| min| function (x)  {     min(x, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-n| n| function (x)  {     length(x[!is.na(x)]) }
+    ## http://www.example.org/dc/code/procedure-std| std| function (x)  {     sd(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-count| count| function (x)  {     length(x) }
+    ## http://www.example.org/dc/code/procedure-median| median| function (x)  {     median(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-q3| q3| function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }
     ## http://www.example.org/dc/code/procedure-max| max| function (x)  {     max(x, na.rm = TRUE) }
     ## http://www.example.org/dc/code/procedure-mean| mean| function (x)  {     mean(x, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-median| median| function (x)  {     median(x, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-count| count| function (x)  {     length(x) }
-    ## http://www.example.org/dc/code/procedure-q3| q3| function (x)  {     quantile(x, probs = c(0.75), type = 2, na.rm = TRUE) }
-    ## http://www.example.org/dc/code/procedure-q1| q1| function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-n| n| function (x)  {     length(x[!is.na(x)]) }
     ## http://www.example.org/dc/code/procedure-percent| percent| function (x)  {     -1 }
-    ## http://www.example.org/dc/code/procedure-std| std| function (x)  {     sd(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-q1| q1| function (x)  {     quantile(x, probs = c(0.25), type = 2, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-min| min| function (x)  {     min(x, na.rm = TRUE) }
 
 Get definition for descriptive statistics median
 ------------------------------------------------
@@ -3026,15 +3026,15 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
+    ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/RdescStatDefFun| function (x)  {     median(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2000/01/rdf-schema#comment| Descriptive statistics median
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#prefLabel| median
     ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionoperator| ==
     ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.w3.org/2004/02/skos/core#Concept
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#prefLabel| median
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#topConceptOf| http://www.example.org/dc/code/procedure
     ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/R-selectionvalue| median
     ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#inScheme| http://www.example.org/dc/code/procedure
     ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/1999/02/22-rdf-syntax-ns#type| http://www.example.org/dc/code/Procedure
-    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2000/01/rdf-schema#comment| Descriptive statistics median
-    ## http://www.example.org/dc/code/procedure-median| http://www.example.org/rrdfqbcrnd0/RdescStatDefFun| function (x)  {     median(x, na.rm = TRUE) }
+    ## http://www.example.org/dc/code/procedure-median| http://www.w3.org/2004/02/skos/core#topConceptOf| http://www.example.org/dc/code/procedure
 
 Get information for selection of data
 -------------------------------------
@@ -3053,6 +3053,6 @@ for row in qres:
 ```
 
     ## INFO:rdflib:RDFLib Version: 4.2.0
-    ## http://www.example.org/dc/demo/ds/obs056| agegr1| ==| 65-80
-    ## http://www.example.org/dc/demo/ds/obs056| trt01a| ==| Xanomeline Low Dose
     ## http://www.example.org/dc/demo/ds/obs027| trt01a| ==| Xanomeline High Dose
+    ## http://www.example.org/dc/demo/ds/obs056| trt01a| ==| Xanomeline Low Dose
+    ## http://www.example.org/dc/demo/ds/obs056| agegr1| ==| 65-80

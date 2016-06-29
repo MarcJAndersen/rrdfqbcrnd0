@@ -162,23 +162,23 @@ knitr::kable(result)
 
 |dataset                           |dsd                           |component                        |componentPropery       |componentReference                                          |
 |:---------------------------------|:-----------------------------|:--------------------------------|:----------------------|:-----------------------------------------------------------|
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |501b36fa83594953e4af696b1a6cb4c5 |qb:order               |1                                                           |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |501b36fa83594953e4af696b1a6cb4c5 |qb:dimension           |http://example.org/ns#refArea                               |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |501b36fa83594953e4af696b1a6cb4c5 |qb:componentProperty   |http://example.org/ns#refArea                               |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8ade64febf6bd7733b195a7f26edbfb4 |qb:order               |2                                                           |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8ade64febf6bd7733b195a7f26edbfb4 |qb:dimension           |http://example.org/ns#refPeriod                             |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8ade64febf6bd7733b195a7f26edbfb4 |qb:componentProperty   |http://example.org/ns#refPeriod                             |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8ade64febf6bd7733b195a7f26edbfb4 |qb:componentAttachment |qb:Slice                                                    |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |a988104057149dd985730d50b1de63ae |qb:order               |3                                                           |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |a988104057149dd985730d50b1de63ae |qb:dimension           |http://purl.org/linked-data/sdmx/2009/dimension#sex         |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |a988104057149dd985730d50b1de63ae |qb:componentProperty   |http://purl.org/linked-data/sdmx/2009/dimension#sex         |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |a988104057149dd985730d50b1de63ae |qb:componentAttachment |qb:Slice                                                    |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |d41b94aedc7cbfb14f09268d231c1ca9 |qb:measure             |http://example.org/ns#lifeExpectancy                        |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |d41b94aedc7cbfb14f09268d231c1ca9 |qb:componentProperty   |http://example.org/ns#lifeExpectancy                        |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |dd8ab574f650affec59f760d92b10e87 |qb:componentRequired   |true                                                        |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |dd8ab574f650affec59f760d92b10e87 |qb:componentProperty   |http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |dd8ab574f650affec59f760d92b10e87 |qb:componentAttachment |qb:DataSet                                                  |
-|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |dd8ab574f650affec59f760d92b10e87 |qb:attribute           |http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |6533b738d5a568e0761ea0380f083d29 |qb:order               |1                                                           |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |6533b738d5a568e0761ea0380f083d29 |qb:dimension           |http://example.org/ns#refArea                               |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |6533b738d5a568e0761ea0380f083d29 |qb:componentProperty   |http://example.org/ns#refArea                               |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |1357660f7fb3cc55769e7a2f6c539285 |qb:order               |2                                                           |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |1357660f7fb3cc55769e7a2f6c539285 |qb:dimension           |http://example.org/ns#refPeriod                             |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |1357660f7fb3cc55769e7a2f6c539285 |qb:componentProperty   |http://example.org/ns#refPeriod                             |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |1357660f7fb3cc55769e7a2f6c539285 |qb:componentAttachment |qb:Slice                                                    |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |531a16261a192fca34d222ed8e7e8f28 |qb:order               |3                                                           |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |531a16261a192fca34d222ed8e7e8f28 |qb:dimension           |http://purl.org/linked-data/sdmx/2009/dimension#sex         |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |531a16261a192fca34d222ed8e7e8f28 |qb:componentProperty   |http://purl.org/linked-data/sdmx/2009/dimension#sex         |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |531a16261a192fca34d222ed8e7e8f28 |qb:componentAttachment |qb:Slice                                                    |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |125916225cac7c189063f1056445ac91 |qb:measure             |http://example.org/ns#lifeExpectancy                        |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |125916225cac7c189063f1056445ac91 |qb:componentProperty   |http://example.org/ns#lifeExpectancy                        |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8eb7e43387f4f503366718c89afe1a3c |qb:componentRequired   |true                                                        |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8eb7e43387f4f503366718c89afe1a3c |qb:componentProperty   |http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8eb7e43387f4f503366718c89afe1a3c |qb:componentAttachment |qb:DataSet                                                  |
+|http://example.org/ns#dataset-le3 |http://example.org/ns#dsd-le3 |8eb7e43387f4f503366718c89afe1a3c |qb:attribute           |http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure |
 
 # Get the dimension, measures and attributes
 
@@ -221,11 +221,11 @@ knitr::kable(result)
 
 |dataset                           |component                        |isblankcomponent |componentProperty |componentReference                                          |ordercp |order |label            |
 |:---------------------------------|:--------------------------------|:----------------|:-----------------|:-----------------------------------------------------------|:-------|:-----|:----------------|
-|http://example.org/ns#dataset-le3 |501b36fa83594953e4af696b1a6cb4c5 |true             |qb:dimension      |http://example.org/ns#refArea                               |1001    |1     |reference area   |
-|http://example.org/ns#dataset-le3 |8ade64febf6bd7733b195a7f26edbfb4 |true             |qb:dimension      |http://example.org/ns#refPeriod                             |1001    |2     |reference period |
-|http://example.org/ns#dataset-le3 |a988104057149dd985730d50b1de63ae |true             |qb:dimension      |http://purl.org/linked-data/sdmx/2009/dimension#sex         |1001    |3     |                 |
-|http://example.org/ns#dataset-le3 |d41b94aedc7cbfb14f09268d231c1ca9 |true             |qb:measure        |http://example.org/ns#lifeExpectancy                        |2001    |0     |life expectancy  |
-|http://example.org/ns#dataset-le3 |dd8ab574f650affec59f760d92b10e87 |true             |qb:attribute      |http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure |3001    |0     |                 |
+|http://example.org/ns#dataset-le3 |6533b738d5a568e0761ea0380f083d29 |true             |qb:dimension      |http://example.org/ns#refArea                               |1001    |1     |reference area   |
+|http://example.org/ns#dataset-le3 |1357660f7fb3cc55769e7a2f6c539285 |true             |qb:dimension      |http://example.org/ns#refPeriod                             |1001    |2     |reference period |
+|http://example.org/ns#dataset-le3 |531a16261a192fca34d222ed8e7e8f28 |true             |qb:dimension      |http://purl.org/linked-data/sdmx/2009/dimension#sex         |1001    |3     |                 |
+|http://example.org/ns#dataset-le3 |125916225cac7c189063f1056445ac91 |true             |qb:measure        |http://example.org/ns#lifeExpectancy                        |2001    |0     |life expectancy  |
+|http://example.org/ns#dataset-le3 |8eb7e43387f4f503366718c89afe1a3c |true             |qb:attribute      |http://purl.org/linked-data/sdmx/2009/attribute#unitMeasure |3001    |0     |                 |
 
 Add CONSTRUCT query that defines the cube from the SPARQL results above.
 
