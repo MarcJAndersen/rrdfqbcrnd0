@@ -23,8 +23,7 @@ This script explores the RDF data cube vocabulary.
 
 ## Setup 
 ```{r}
-library(rrdfancillary)
-library(rrdfqb)
+library(rrdf)
 library("DiagrammeR")
 ```
 
@@ -40,23 +39,37 @@ graph TB
 DiagrammeR( mermaid.commands )
 ```
 
-# Load the vocabulary
+# Load the result of log scanning
 
-The vocabulary is loaded in to a `rrdf` store with support for inferencing (`ontology=TRUE`).
-Enabeling the inferencing is an advantage when loading an ontology/vocabulary like the RRDF data cube, as the vocabulary may be made expecting inferencing being used.
 
 ```{r, results='asis', eval=TRUE}
-qb.fn <- file.path(system.file("extdata/cube-vocabulary-rdf", package="rrdfqb"), "cube.ttl" )
-empty.rdf <- new.rdf(ontology=TRUE)
-cat("Loading from ", normalizePath(qb.fn), "\n" )
-qb.rdf<- load.rdf(qb.fn,"TURTLE",empty.rdf)
-dump.qb.rq<- paste(
+logscan.fn <- "testreal.ttl" 
+empty.rdf <- new.rdf(ontology=FALSE)
+cat("Loading from ", normalizePath(logscan.fn), "\n" )
+logscan.rdf<- load.rdf(logscan.fn,"TURTLE",empty.rdf)
+```
+
+```{r, results='asis', eval=TRUE}
+dump.logscan.rq<- paste(
   "SELECT  ?s ?p ?o ",
   "WHERE { ?s ?p ?o }", sep="\n", collapse="\n"
 )
-cat(dump.qb.rq,"\n")
-cube.triples<- data.frame(sparql.rdf(qb.rdf, dump.qb.rq ), stringsAsFactors=FALSE)
-knitr::kable(cube.triples)
+cat(dump.logscan.rq,"\n")
+logscan.df<- data.frame(sparql.rdf(logscan.rdf, dump.logscan.rq ), stringsAsFactors=FALSE)
+knitr::kable(logscan.df)
+```
+## Properties
+
+```{r, results='asis', eval=TRUE}
+dump.properties.rq<- paste(
+  "SELECT DISTINCT ?p count(*) as ?N ",
+  "WHERE { ?s ?p ?o }",
+  "GROUP BY ?p",
+  sep="\n", collapse="\n"
+)
+cat(dump.properties.rq,"\n")
+properties.df <- data.frame(sparql.rdf(logscan.rdf, dump.properties.rq ), stringsAsFactors=FALSE)
+knitr::kable(properties.df)
 ```
 
 ### Classes
@@ -65,8 +78,8 @@ First the data are loaded into a `rrdf` store. The code below uses `ontology=FAL
 
 ```{r, results='asis', eval=TRUE}
 empty.rdf <- new.rdf(ontology=FALSE)
-qb.rdf<- load.rdf(qb.fn,"TURTLE",empty.rdf)
-qb.prefix<- '
+logscan.rdf<- load.rdf(logscan.fn,"TURTLE",empty.rdf)
+logscan.prefix<- '
 PREFIX rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
 PREFIX rdfs:           <http://www.w3.org/2000/01/rdf-schema#> 
 PREFIX owl:            <http://www.w3.org/2002/07/owl#> 
@@ -92,7 +105,7 @@ WHERE
 }
 '
 cat(dump.classes.all.rq,"\n")
-classes.all.df<- data.frame(sparql.rdf(qb.rdf, paste( qb.prefix, dump.classes.all.rq, sep="\n" )), stringsAsFactors=FALSE)
+classes.all.df<- data.frame(sparql.rdf(logscan.rdf, paste( logscan.prefix, dump.classes.all.rq, sep="\n" )), stringsAsFactors=FALSE)
 knitr::kable(classes.all.df)
 ```
 
@@ -108,7 +121,7 @@ WHERE
 }
 '
 cat(dump.classes.distinct.rq,"\n")
-classes.distinct.df<- data.frame(sparql.rdf(qb.rdf, paste( qb.prefix, dump.classes.distinct.rq, sep="\n" )), stringsAsFactors=FALSE)
+classes.distinct.df<- data.frame(sparql.rdf(logscan.rdf, paste( logscan.prefix, dump.classes.distinct.rq, sep="\n" )), stringsAsFactors=FALSE)
 knitr::kable(classes.distinct.df)
 ```
 
@@ -124,7 +137,7 @@ FILTER ( ?subClassOf != rdf:Property )
 }
 '
 cat(dump.classes.subClassOf.rq,"\n")
-classes.subClassOf.df<- data.frame(sparql.rdf(qb.rdf, paste( qb.prefix, dump.classes.subClassOf.rq, sep="\n" )), stringsAsFactors=FALSE)
+classes.subClassOf.df<- data.frame(sparql.rdf(logscan.rdf, paste( logscan.prefix, dump.classes.subClassOf.rq, sep="\n" )), stringsAsFactors=FALSE)
 knitr::kable(classes.subClassOf.df)
 ```
 
